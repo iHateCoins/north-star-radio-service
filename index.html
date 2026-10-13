@@ -76,7 +76,7 @@
 .build-watermark small{display:block;margin-top:3px;font:400 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.02em;color:#d8cbc3;opacity:.92}
 @media(max-width:680px){.build-watermark{right:8px;bottom:8px;padding:7px 9px;font-size:10px}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.17.0</title><meta name="nsrs-build" content="v0.17.0">
+<title>North Star Radio Service — PT-44 v0.18.0</title><meta name="nsrs-build" content="v0.18.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -256,7 +256,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.17.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.18.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -2045,6 +2045,84 @@ function pt44BenchReferenceHTML(stage, esc){
   return `<h3>Philco factory voltage &amp; alignment references <small style="font-size:11px;color:#775c3b">v0.17</small></h3>${overview}${table}${detector}${audit}<p class="sl-footnote">Values copied from Philco’s published labels. The factory sheet does not establish the meter loading, test setup or voltage return for our simulator. <b>No simulator pass/fail is calculated from these figures.</b> This does not add or certify external electrical wires.</p>`;
 }
 
+
+// ===== v0.18 · source-limited conductor / passive continuity reasoning =====
+// Classify what the PARTIAL factory ledger actually supports, NOT measured chassis continuity.
+const PT44_CONTINUITY_V1 = Object.freeze({"schema":"PT44_DOCUMENTED_CONTINUITY_V1","version":"0.18.0","model":"Philco PT-44","status":"PARTIAL_FACTORY_GRAPH_ONLY_NOT_A_COMPLETE_RADIO_OR_MEASUREMENT","philco_source":"https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf","rider_crosscheck":"https://www.amplifiedparts.com/schematics/philco-radio-television-corp/pt-44","factory_page":38,"evidence_policy":"All results are limited to already sourced partial wire groups, component construction and published part values. An UNTRACED result means NO DOCUMENTED PATH IN OUR CURRENT PARTIAL GRAPH, not measured open circuit, factory isolation, or fault. Model solver ground != metal chassis.","domain_labels":{"B_MINUS":"F_BMINUS","CHASSIS":"__CHASSIS__"},"known_passive_edges":[{"id":"FIELD_28_DC","factory_part":"28","from":"28:a","to":"28:b","kind":"field_coil_dc","ohms":500,"evidence":"Philco 1941 RMS p.38 part #28, field coil listed 500 ohms (L unknown)"},{"id":"R30_40","factory_part":"30","from":"30:endA","to":"30:tap","kind":"tapped_resistor","ohms":40,"evidence":"Philco 1941 RMS p.38 part #30, 40-ohm pilot-lamp section"},{"id":"R30_80","factory_part":"30","from":"30:tap","to":"30:endB","kind":"tapped_resistor","ohms":80,"evidence":"Philco 1941 RMS p.38 part #30, 80-ohm remaining section"},{"id":"LAMP_32","factory_part":"32","from":"32:a","to":"32:b","kind":"incandescent_lamp","ohms":null,"evidence":"Philco 1941 RMS p.38 part #32, lamp filament resistance not specified"}],"component_resistances":[["7",4700000],["9",22000],["13",27000],["17",4700000],["19",4700000],["21",470000],["23",470000],["24",130]],"analysis_cases":[{"id":"C01","stage":"POWER","a":"29A:b","b":"29B:b","expect":"same_wire_net","reason":"Both electrolytic negatives currently occupy the documented partial B− net."},{"id":"C02","stage":"POWER","a":"28:a","b":"29A:a","expect":"same_wire_net","reason":"Rectifier-side field lead and first filter positive in current factory subgraph."},{"id":"C03","stage":"POWER","a":"29A:a","b":"29B:a","expect":"component_path","expected_component":"FIELD_28_DC","nominal_path_ohms":500,"reason":"Through speaker field winding #28; value is only winding DC resistance, not total radio input impedance."},{"id":"C04","stage":"POWER","a":"30:endA","b":"30:tap","expect":"component_path","expected_component":"R30_40","nominal_path_ohms":40,"reason":"Lamp #32 is in parallel; 40 Ω is the branch value, not the equivalent measured resistance."},{"id":"C05","stage":"POWER","a":"30:tap","b":"30:endB","expect":"component_path","expected_component":"R30_80","nominal_path_ohms":80,"reason":"The other part of the factory tapped resistor assembly."},{"id":"C06","stage":"POWER","a":"32:a","b":"32:b","expect":"component_path","expected_component":"R30_40","nominal_path_ohms":40,"reason":"The lamp connection is shunted by the known 40 Ω resistance section; filament itself has unknown resistance."},{"id":"C07","stage":"IF","a":"12:pPlate","b":"12:pSupply","expect":"component_path","expected_component":"12:primary","nominal_path_ohms":null,"reason":"A single transformer winding conducts DC with unspecified winding resistance."},{"id":"C08","stage":"IF","a":"12:pPlate","b":"12:sGrid","expect":"untraced","reason":"Primary and secondary are distinct windings; no complete receiver-wide return path has been certified."},{"id":"C09","stage":"IF","a":"14:pPlate","b":"14:sDetector","expect":"untraced","reason":"Second IF primary to secondary is magnetic coupling, not a source-traced metallic bridge."},{"id":"C10","stage":"DETECTOR","a":"14:sDetector","b":"V3:5","expect":"untraced","reason":"Detector-side external diode wire still awaiting source review."},{"id":"C11","stage":"DETECTOR","a":"V3:5","b":"V3:6","expect":"untraced","reason":"Separate 7C6 diode plates; their external connections are not yet transcribed."},{"id":"C12","stage":"AUDIO","a":"26:a","b":"26:sA","expect":"untraced","reason":"Output transformer primary and secondary have distinct electrical windings."},{"id":"C13","stage":"POWER","a":"29A:b","b":"__CHASSIS__","expect":"untraced","reason":"B− is NOT automatically chassis metal: any physical bond or capacitive coupling requires its own sourced record."},{"id":"C14","stage":"POWER","a":"29A:a","b":"29A:b","expect":"untraced","reason":"Filter capacitor blocks DC in the declared passive graph; incomplete circuit can contain further paths."}],"acceptance":{"copper_nets_validated":true,"winding_primary_secondary_not_conflated":true,"unknowns_never_reported_as_real_open":true,"actual_chassis_bond_transcribed":false,"detector_external_wiring_transcribed":false,"full_rf_if_traced":false,"full_spice_simulation":false,"benchmark_ready":false},"limitations":["A path means only a selected path, not total equivalent resistance (especially with parallel loads).","An untraced path is NOT an ohmmeter-open diagnosis.","Inductances and transformer coupling unknown.","Current playable repair solver still reduced order.","Source location in historic schematic is not a physical chassis route."]});
+function pt44ContinuityBuild(g=PT44_FACTORY_V3, passive=PT44_PASSIVE_V1, spec=PT44_CONTINUITY_V1){
+  const terminalToWire = new Map(), groups=new Map(), warnings=[];
+  const declared=new Set(['__CHASSIS__']);
+  for(const [id,p] of Object.entries(g.factory_components))for(const t of p.terminals)declared.add(id+':'+t);
+  for(const [id,p] of Object.entries(PT44_TUBE_REVIEW.tube_pinouts))for(const t of Object.keys(p.pin_roles))declared.add(id+':'+t);
+  for(const net of g.factory_nets){
+    groups.set(net.id,net.factory_members.slice());
+    for(const terminal of net.factory_members){
+      if(!declared.has(terminal))warnings.push(net.id+': undeclared terminal '+terminal);
+      if(terminalToWire.has(terminal)&&terminalToWire.get(terminal)!==net.id)warnings.push(terminal+': bridged two source wire-nets');
+      terminalToWire.set(terminal,net.id);
+    }
+  }
+  const nodeFor=t=>terminalToWire.get(t)||('UNTRACED:'+t);
+  const edges=[];
+  const add=(id,a,b,kind,ohms,evidence)=>{
+    if(!declared.has(a)||!declared.has(b))warnings.push(id+': unknown component terminal');
+    if(a===b||nodeFor(a)===nodeFor(b))warnings.push(id+': component electrically bypassed in sourced wire ledger');
+    edges.push({id,a,b,na:nodeFor(a),nb:nodeFor(b),kind,ohms,evidence});
+  };
+  for(const e of spec.known_passive_edges)add(e.id,e.from,e.to,e.kind,e.ohms,e.evidence);
+  for(const [part,ohms] of spec.component_resistances)add('R'+part,part+':a',part+':b','fixed_resistor',ohms,'Philco RMS p.38 factory value #'+part);
+  for(const [part,dev] of Object.entries(passive.devices))if(dev.windings){
+    for(const w of dev.windings)add(part+':'+w.id,w.endpoints[0],w.endpoints[1],'transformer_winding',w.dc_resistance_ohms,'Windings distinct; measured DC resistance unknown');
+  }
+  return {terminalToWire,groups,edges,warnings,declared,nodeFor};
+}
+function pt44ContinuityQuery(a,b,g=pt44ContinuityBuild()){
+  if(!g.declared.has(a)||!g.declared.has(b))return {kind:'invalid',path:[],reason:'Unknown factory terminal'};
+  const start=g.nodeFor(a),target=g.nodeFor(b);
+  if(start===target)return {kind:'same_wire_net',path:[],nodes:[start],net:start,ohms:0};
+  // First a conductor net, then components that connect their ends. No capacitors or magnetic coupling as DC wire edges.
+  const todo=[{node:start,path:[],nodes:[start],knownSum:0}];const seen=new Set([start]);
+  while(todo.length){
+    const s=todo.shift();
+    for(const e of g.edges){
+      const next=e.na===s.node?e.nb:e.nb===s.node?e.na:null;
+      if(next===null||seen.has(next))continue;
+      const q={node:next,path:[...s.path,e],nodes:[...s.nodes,next],knownSum:s.knownSum+(typeof e.ohms==='number'?e.ohms:0)};
+      if(next===target)return {kind:'component_path',path:q.path,nodes:q.nodes,net:null,ohms:q.path.some(e=>e.ohms===null)?null:q.knownSum};
+      seen.add(next);todo.push(q);
+    }
+  }
+  return {kind:'untraced',path:[],nodes:[start],net:null,ohms:null};
+}
+function pt44ContinuityAudit(spec=PT44_CONTINUITY_V1){
+  const g=pt44ContinuityBuild(),issues=g.warnings.slice();let passed=0;
+  if(PT44_FACTORY_V3.factory_nets.length<18)issues.push('Fewer than 18 baseline source nets');
+  if(g.groups.get('F_BMINUS')?.includes('__CHASSIS__'))issues.push('Metal chassis fused with B−');
+  for(const c of spec.analysis_cases){
+    const result=pt44ContinuityQuery(c.a,c.b,g);
+    if(result.kind!==c.expect)issues.push(c.id+': expected '+c.expect+' but got '+result.kind);
+    else if(c.expected_component&&!result.path.some(p=>p.id===c.expected_component))issues.push(c.id+': missing required '+c.expected_component);
+    else if(c.nominal_path_ohms!==undefined&&c.nominal_path_ohms!==null&&result.ohms!==c.nominal_path_ohms)issues.push(c.id+': wrong selected branch value');
+    else passed++;
+  }
+  if(spec.analysis_cases.some(c=>c.expect==='isolated'||c.expect==='open'||c.expect==='factory_verified_open'))issues.push('Do not claim an ohmmeter open from a partial graph');
+  if(spec.acceptance.benchmark_ready||spec.acceptance.actual_chassis_bond_transcribed||spec.acceptance.detector_external_wiring_transcribed)issues.push('Unfinished factory circuit cannot be certified');
+  return {ok:issues.length===0,issues,passed,total:spec.analysis_cases.length,wireGroups:g.groups.size,sourceTerminals:g.terminalToWire.size,deviceEdges:g.edges.length,untraced:spec.analysis_cases.filter(c=>c.expect==='untraced').length};
+}
+function pt44ContinuityHTML(stage,esc){
+  const spec=PT44_CONTINUITY_V1,a=pt44ContinuityAudit(),g=pt44ContinuityBuild();
+  const tests=spec.analysis_cases.filter(c=>stage==='ALL'||c.stage===stage);
+  const name={same_wire_net:'DIRECT COPPER',component_path:'THROUGH COMPONENT',untraced:'NOT YET TRACED'};
+  return `<h3>Continuity workbench <small style="font:11px monospace">v0.18 · partial-source reasoning</small></h3>
+    <p>This view tests the <b>factory-traced conductor groups</b> separately from <b>electrical components</b>. A connection marked <b>NOT YET TRACED</b> is not a confirmed open circuit or measured fault. The game's simplified ground is <b>not</b> a certified chassis connection.</p>
+    <div class="sl-alert" style="background:${a.ok?'#dfe9d5':'#f1cdc7'}"><b>CONTINUITY AUDIT ${a.ok?'PASS':'FAIL'}</b> · ${a.passed}/${a.total} source-limited cases · ${a.wireGroups} wire nets · ${a.sourceTerminals} referenced terminals · ${a.deviceEdges} internal conductor/resistance elements${a.issues.length?' · '+a.issues.map(esc).join('; '):''}</div>
+    <table class="sl-table sl-continuity"><thead><tr><th>Case / stage</th><th>Terminals</th><th>Source-limited result</th></tr></thead><tbody>${tests.map(c=>{
+      const q=pt44ContinuityQuery(c.a,c.b,g),through=q.path.map(p=>p.id).join(' → ');
+      return `<tr><td><b>${esc(c.id)}</b><small style="display:block">${esc(c.stage)}</small></td><td>${esc(c.a)} ↔ ${esc(c.b)}</td><td><b>${name[q.kind]||esc(q.kind)}</b>${through?`<small style="display:block">${esc(through)}${q.ohms!==null?' · selected series path '+q.ohms+' Ω':''}</small>`:''}<small style="display:block">${esc(c.reason)}</small></td></tr>`;
+    }).join('')}</tbody></table>
+    <p class="sl-footnote">Published Philco 1941 RMS, p.38; cross-refer against Rider/PT-44. A winding's unknown DC resistance is not zero; transformer windings have <b>magnetic coupling, not a copper junction</b>. The resistor branch values are <b>not equivalent measured resistance</b> if parallel paths exist. No speculative edges enter SPICE or 3D routing.</p>`;
+}
+
 function renderFactoryLedger(box){
   const g=PT44_FACTORY_V3,a=factoryV3Audit();
   const all=['ALL',...g.subcircuits.map(s=>s.id)];
@@ -2057,7 +2135,7 @@ function renderFactoryLedger(box){
   const candidates = Object.fromEntries(Object.entries(PT44_FACTORY_SUBGRAPH.factory_part_register).map(([n,p])=>[n,p.game_slot||'—']));
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
-   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.17.0</div>
+   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.18.0</div>
    <h2>Factory circuit transcription</h2>
    <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. The current 3D and simplified receiver solver remain provisional.</p>
    <div class="sl-kpi"><div><strong>${a.parts}/33</strong><span>Factory part records</span></div><div><strong>${a.sourceNets}</strong><span>Partial traced networks</span></div><div><strong>${a.tracedTerminals}</strong><span>Terminal references</span></div><div><strong>${a.unknownConnections.length}</strong><span>Open Phase-1 blockers</span></div></div>
@@ -2073,6 +2151,7 @@ function renderFactoryLedger(box){
    ${pt44PinReviewHTML(choice,escapeHTML)}
    ${pt44PassiveTopologyHTML(choice,escapeHTML)}
    ${pt44BenchReferenceHTML(choice,escapeHTML)}
+   ${pt44ContinuityHTML(choice,escapeHTML)}
    <h3>Outstanding acceptance work</h3><div class="sl-issues">${g.open_issues.filter(x=>x.severity==='blocker'&&(!sub||x.stage===choice||x.stage==='ALL')).map(x=>`<div><b>${escapeHTML(x.id)}</b> ${escapeHTML(x.description)}</div>`).join('')}</div>
    <div class="sl-toolbar"><button class="sl-btn sl-export" id="bExportFactoryV3">Export factory graph JSON</button><a href="${g.source}" target="_blank" rel="noopener noreferrer">Original 1941 service document ↗</a></div>
    <p class="sl-footnote">Engineering principle: 3D routing can only be certified after all electrical nets have documented pin membership. A plausible physical wire path is not a factory schematic connection.</p>
