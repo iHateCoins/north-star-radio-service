@@ -1,0 +1,23 @@
+name: PT-44 electrical engineering checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  factory-model-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate factory measurement and 7C6 detector ledger
+        run: node tests/test_bench_v17.js
+      - name: Regression-test passive devices and existing factory nets
+        run: node tests/test_passive_devices_v16.js
