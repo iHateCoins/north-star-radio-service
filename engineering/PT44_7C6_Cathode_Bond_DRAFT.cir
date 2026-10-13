@@ -1,0 +1,7 @@
+* Philco PT-44 v0.19 — 7C6 cathode dual contact; Sylvania 7C6 original tube reference.
+* V3_K4 / V3_K7 are distinct physical socket terminals on SAME cathode within the 7C6.
+* Zero-voltage source makes their potentials identical in an ngspice-compatible subcircuit.
+* This does NOT add any external factory wiring or model actual diode/triode I-V characteristics.
+.subckt PT44_7C6_INTERNAL_CATHODE V3_K4 V3_K7
+V7C6_CATHODE_BOND V3_K4 V3_K7 DC 0
+.ends PT44_7C6_INTERNAL_CATHODE
