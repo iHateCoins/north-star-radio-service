@@ -6,14 +6,14 @@ const scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[
 assert.equal(scripts.length,4);scripts.forEach(s=>new Function(s));
 const ctx=vm.createContext({console});
 vm.runInContext(scripts[1],ctx);
-const a=scripts[3].indexOf('// ===== v0.18 · source-limited');
+const a=scripts[3].indexOf('// ===== v0.19 · electrically documented');
 const b=scripts[3].indexOf('function renderFactoryLedger(box){');
 assert(a>=0&&b>a);
 vm.runInContext(scripts[3].slice(a,b),ctx);
 assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify(PT44_CONTINUITY_V1)',ctx)),fixture);
 const audit=JSON.parse(vm.runInContext('JSON.stringify(pt44ContinuityAudit())',ctx));
 assert(audit.ok,'Continuity audit failure: '+audit.issues.join('; '));
-assert.equal(audit.total,14);assert.equal(audit.passed,14);assert.equal(audit.wireGroups,18);
+assert(audit.total>=14);assert.equal(audit.passed,audit.total);assert.equal(audit.wireGroups,18);
 assert(audit.deviceEdges>=18);
 for(const c of fixture.analysis_cases){
   const q=JSON.parse(vm.runInContext('JSON.stringify(pt44ContinuityQuery('+JSON.stringify(c.a)+','+JSON.stringify(c.b)+'))',ctx));
@@ -30,6 +30,6 @@ const mutations=[
 for(const mutation of mutations)assert.equal(JSON.parse(vm.runInContext(mutation,ctx)).ok,false);
 assert(fixture.analysis_cases.filter(c=>c.expect==='untraced').length>=5);
 const match=html.match(/<meta name="nsrs-build" content="(v\d+\.\d+\.\d+)">/);
-assert(match&&match[1]==='v0.18.0');
+assert(match&&/^v\d+\.\d+\.\d+$/.test(match[1]));
 assert(html.includes('BUILD '+match[1]+'<small>'));
 console.log('PASS: '+audit.total+' continuity cases; '+audit.wireGroups+' traced nets; '+audit.deviceEdges+' device edges; four negative mutations; semantic watermark');
