@@ -1,10 +1,19 @@
 # North Star Radio Service
 
-A browser-based 1950s electronics repair-shop prototype. **Current version: v0.14 — PT-44 engineering preview.**
+A browser-based 1950s electronics repair-shop prototype. **Current version: v0.15 — PT-44 engineering preview.**
 
 **[Play the game](https://ihatecoins.github.io/north-star-radio-service/)** *(works after this repository is published with GitHub Pages)*
 
 The historical reference radio is the **1941 Philco PT-44**. Its factory circuit transcription and 3D wiring are **work in progress**. The current playable electrical solver is reduced-order, **not** full SPICE; do not treat in-game wiring or readings as a validated restoration guide.
+
+## v0.15 — Tube terminal engineering audit
+
+- Added datasheet-based, eight-position electrode maps for the 7A8, 7B7, 7C6, 50L6GT, and 35Z3 (40 socket positions).
+- The **Factory ledger** now displays a tube-pin cross-check and 22 outstanding RF/IF, detector, audio, and power connection-review tasks, filterable by stage.
+- Added `engineering/PT44_Tube_Terminals_Review_V1.json`, a machine-readable list of terminal roles and unresolved circuit transcription work.
+- Verified against the 16 previously traced/partial factory networks; no new schematic edges have been certified. The existing reduced-order solver and draft passive SPICE netlist are unchanged.
+- Regression testing: HTML syntax, five stage filters, 33 factory component rows, healthy checkout, 30 numerical healthy samples, and negative checks for invalid or prematurely certified tube pins.
+- **Not engineering complete.** Receiver wiring still requires high-resolution Philco schematic review; datasheet pin identities do not establish real-world wire connectivity.
 
 ## Playing
 
