@@ -16,7 +16,7 @@ assert.equal(graph.factory_nets.length,18);assert.equal(Object.keys(graph.factor
 assert.equal(graph.checks.benchmark_ready,false);assert.equal(passive.acceptance.spice_ready,false);
 const n=JSON.parse(vm.runInContext(`(()=>{let d=PT44_PASSIVE_V1.devices['12'];let w=d.windings[1],old=w.endpoints[0];w.endpoints[0]=d.windings[0].endpoints[0];let short=!pt44PassiveAudit().ok;w.endpoints[0]=old;let r=PT44_PASSIVE_V1.devices['30'],a=r.sections[0].ohms;r.sections[0].ohms=41;let wrong=!pt44PassiveAudit().ok;r.sections[0].ohms=a;return JSON.stringify({short,wrong});})()`,ctx));
 assert(n.short&&n.wrong);
-assert(html.includes('BUILD v0.16.0'));
+const currentBuild=html.match(/<meta name="nsrs-build" content="(v\d+\.\d+\.\d+)">/); assert(currentBuild,'Missing semantic build metadata'); assert(html.includes('BUILD '+currentBuild[1]),'Version watermark does not match build metadata');
 const cir=fs.readFileSync(path.join(root,'engineering/PT44_Factory_Passive_Subcircuit_DRAFT.cir'),'utf8');
 assert(cir.includes('R30_40 R30_END_A R30_TAP 40')&&cir.includes('R30_80 R30_TAP R30_END_B 80'));
 console.log('PASS v0.16: 18 partial nets, 33 parts, 6 windings, lamp shunt, build watermark; negative checks');
