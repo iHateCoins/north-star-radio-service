@@ -1,42 +1,15 @@
-# North Star Radio Service
+# North Star Radio Service — v0.16.0 PT-44 engineering chunk
 
-A browser-based 1950s electronics repair-shop prototype. **Current version: v0.15 — PT-44 engineering preview.**
+The playable browser build is `index.html` and includes a **fixed bottom-right BUILD v0.16.0 watermark**.
 
-**[Play the game](https://ihatecoins.github.io/north-star-radio-service/)** *(works after this repository is published with GitHub Pages)*
+### Changes
+- Factory #30 is now modeled as separate series **40 Ω and 80 Ω sections**, with a physical tap. The #32 pilot lamp is connected across the 40 Ω section by two *source-traced partial external nets*. The full AC line and rectifier wiring are not resolved.
+- First/second IF transformers (#12, #14) and output transformer (#26) have two explicit, mutually isolated winding pairs each. **No L, DCR, coupling k, or trimmer capacitance is asserted.**
+- New Factory ledger device topology view under IF/AUDIO/POWER stages; power view includes a 40/80 Ω lamp-shunt diagram.
+- The SPICE draft adds a standalone resistor-assembly subcircuit, and explicitly omits any guessed incandescent lamp I–V or complete mains supply.
+- Regression testing includes winding isolation, current factory part/pin integrity, resistor tap, lamp shunt, user-facing watermark and working game checkout.
 
-The historical reference radio is the **1941 Philco PT-44**. Its factory circuit transcription and 3D wiring are **work in progress**. The current playable electrical solver is reduced-order, **not** full SPICE; do not treat in-game wiring or readings as a validated restoration guide.
+### Engineering status
+Phase 1 remains incomplete. There are 18 partial factory wire-junction records; the new pair are for the pilot lamp. This is neither a validated 3D route nor a complete factory netlist. The source is Philco 1941 RMS Year Book, p.38: https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf
 
-## v0.15 — Tube terminal engineering audit
-
-- Added datasheet-based, eight-position electrode maps for the 7A8, 7B7, 7C6, 50L6GT, and 35Z3 (40 socket positions).
-- The **Factory ledger** now displays a tube-pin cross-check and 22 outstanding RF/IF, detector, audio, and power connection-review tasks, filterable by stage.
-- Added `engineering/PT44_Tube_Terminals_Review_V1.json`, a machine-readable list of terminal roles and unresolved circuit transcription work.
-- Verified against the 16 previously traced/partial factory networks; no new schematic edges have been certified. The existing reduced-order solver and draft passive SPICE netlist are unchanged.
-- Regression testing: HTML syntax, five stage filters, 33 factory component rows, healthy checkout, 30 numerical healthy samples, and negative checks for invalid or prematurely certified tube pins.
-- **Heater rating clarification (v0.15.1):** Three early 7-series Loktals have historical 7 V nominal type naming but 6.3 V / 150 mA operating references. A simple series estimate gives 103.9 V, **not** a certified PT-44 mains/dropper circuit.
-- **Not engineering complete.** Receiver wiring still requires high-resolution Philco schematic review; datasheet pin identities do not establish real-world wire connectivity.
-
-## Playing
-
-Open `index.html` in a modern desktop browser or play via GitHub Pages. Internet access is needed for Three.js r128 from CDNJS and optional web fonts. A 2D fallback is available if WebGL or the library fails to load.
-
-Saves use browser storage; saves on a prior `file://` copy generally **do not automatically transfer** to the GitHub Pages origin. Keep your previous file/save until you confirm your progress on the site.
-
-## Source
-
-- `index.html`: playable browser prototype (currently a single-file app)
-- `engineering/PT44_Factory_Transcription_V3.json`: factory parts and traced electrical-network ledger
-- `engineering/PT44_Factory_Passive_Subcircuit_DRAFT.cir`: incomplete, **non-runnable** passive SPICE preparation
-- `engineering/PT44_Spice_Subset_Audit.json`: audit results for the draft
-- `tests/`: development checks
-- `scripts/`: build helpers
-
-For the full technical status and known limitations, see the v0.14 source package and the comments in the relevant files. This is an in-development experimental game and not electrical safety advice.
-
-## GitHub Pages setup
-
-In this repository, go to **Settings → Pages → Build and deployment**. Choose **Deploy from a branch**, with **main** and **/(root)**, then save. The public site will be served at:
-
-`https://ihatecoins.github.io/north-star-radio-service/`
-
-You may need to wait a few minutes after enabling Pages before it is live. Subsequent commits to `main` automatically update the hosted build.
+The application loads Three.js r128 from an external CDN (2D fallback when unavailable). Browser save data remains local to the GitHub Pages origin.
