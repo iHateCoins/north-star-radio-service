@@ -1,6 +1,6 @@
 {
   "schema": "PT44_DOCUMENTED_CONTINUITY_V1",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "model": "Philco PT-44",
   "status": "PARTIAL_FACTORY_GRAPH_ONLY_NOT_A_COMPLETE_RADIO_OR_MEASUREMENT",
   "philco_source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
@@ -205,6 +205,32 @@
       "b": "29A:b",
       "expect": "untraced",
       "reason": "Filter capacitor blocks DC in the declared passive graph; incomplete circuit can contain further paths."
+    },
+    {
+      "id": "C15",
+      "stage": "DETECTOR",
+      "a": "V3:4",
+      "b": "V3:7",
+      "expect": "tube_internal_connection",
+      "expected_component": "V3:CATHODE_BOND",
+      "nominal_path_ohms": 0,
+      "reason": "Sylvania explicitly identifies both 7C6 cathode contacts as the same internal cathode. Not an under-chassis wire."
+    },
+    {
+      "id": "C16",
+      "stage": "DETECTOR",
+      "a": "V3:7",
+      "b": "V3:5",
+      "expect": "untraced",
+      "reason": "The diode conduction is nonlinear, not a metallic short from anode to common cathode. External detector wiring untraced."
+    },
+    {
+      "id": "C17",
+      "stage": "DETECTOR",
+      "a": "V3:7",
+      "b": "__CHASSIS__",
+      "expect": "untraced",
+      "reason": "Common cathode inside tube does not prove its physical external chassis connection."
     }
   ],
   "acceptance": {
@@ -215,13 +241,15 @@
     "detector_external_wiring_transcribed": false,
     "full_rf_if_traced": false,
     "full_spice_simulation": false,
-    "benchmark_ready": false
+    "benchmark_ready": false,
+    "7c6_common_internal_cathode_confirmed": true
   },
   "limitations": [
     "A path means only a selected path, not total equivalent resistance (especially with parallel loads).",
     "An untraced path is NOT an ohmmeter-open diagnosis.",
     "Inductances and transformer coupling unknown.",
     "Current playable repair solver still reduced order.",
-    "Source location in historic schematic is not a physical chassis route."
+    "Source location in historic schematic is not a physical chassis route.",
+    "7C6 pins 4/7 internally common from Sylvania: this is a device-internal bond, not a documented chassis wire."
   ]
 }
