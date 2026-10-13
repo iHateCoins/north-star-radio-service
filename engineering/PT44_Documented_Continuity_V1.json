@@ -1,0 +1,227 @@
+{
+  "schema": "PT44_DOCUMENTED_CONTINUITY_V1",
+  "version": "0.18.0",
+  "model": "Philco PT-44",
+  "status": "PARTIAL_FACTORY_GRAPH_ONLY_NOT_A_COMPLETE_RADIO_OR_MEASUREMENT",
+  "philco_source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+  "rider_crosscheck": "https://www.amplifiedparts.com/schematics/philco-radio-television-corp/pt-44",
+  "factory_page": 38,
+  "evidence_policy": "All results are limited to already sourced partial wire groups, component construction and published part values. An UNTRACED result means NO DOCUMENTED PATH IN OUR CURRENT PARTIAL GRAPH, not measured open circuit, factory isolation, or fault. Model solver ground != metal chassis.",
+  "domain_labels": {
+    "B_MINUS": "F_BMINUS",
+    "CHASSIS": "__CHASSIS__"
+  },
+  "known_passive_edges": [
+    {
+      "id": "FIELD_28_DC",
+      "factory_part": "28",
+      "from": "28:a",
+      "to": "28:b",
+      "kind": "field_coil_dc",
+      "ohms": 500,
+      "evidence": "Philco 1941 RMS p.38 part #28, field coil listed 500 ohms (L unknown)"
+    },
+    {
+      "id": "R30_40",
+      "factory_part": "30",
+      "from": "30:endA",
+      "to": "30:tap",
+      "kind": "tapped_resistor",
+      "ohms": 40,
+      "evidence": "Philco 1941 RMS p.38 part #30, 40-ohm pilot-lamp section"
+    },
+    {
+      "id": "R30_80",
+      "factory_part": "30",
+      "from": "30:tap",
+      "to": "30:endB",
+      "kind": "tapped_resistor",
+      "ohms": 80,
+      "evidence": "Philco 1941 RMS p.38 part #30, 80-ohm remaining section"
+    },
+    {
+      "id": "LAMP_32",
+      "factory_part": "32",
+      "from": "32:a",
+      "to": "32:b",
+      "kind": "incandescent_lamp",
+      "ohms": null,
+      "evidence": "Philco 1941 RMS p.38 part #32, lamp filament resistance not specified"
+    }
+  ],
+  "component_resistances": [
+    [
+      "7",
+      4700000
+    ],
+    [
+      "9",
+      22000
+    ],
+    [
+      "13",
+      27000
+    ],
+    [
+      "17",
+      4700000
+    ],
+    [
+      "19",
+      4700000
+    ],
+    [
+      "21",
+      470000
+    ],
+    [
+      "23",
+      470000
+    ],
+    [
+      "24",
+      130
+    ]
+  ],
+  "analysis_cases": [
+    {
+      "id": "C01",
+      "stage": "POWER",
+      "a": "29A:b",
+      "b": "29B:b",
+      "expect": "same_wire_net",
+      "reason": "Both electrolytic negatives currently occupy the documented partial B− net."
+    },
+    {
+      "id": "C02",
+      "stage": "POWER",
+      "a": "28:a",
+      "b": "29A:a",
+      "expect": "same_wire_net",
+      "reason": "Rectifier-side field lead and first filter positive in current factory subgraph."
+    },
+    {
+      "id": "C03",
+      "stage": "POWER",
+      "a": "29A:a",
+      "b": "29B:a",
+      "expect": "component_path",
+      "expected_component": "FIELD_28_DC",
+      "nominal_path_ohms": 500,
+      "reason": "Through speaker field winding #28; value is only winding DC resistance, not total radio input impedance."
+    },
+    {
+      "id": "C04",
+      "stage": "POWER",
+      "a": "30:endA",
+      "b": "30:tap",
+      "expect": "component_path",
+      "expected_component": "R30_40",
+      "nominal_path_ohms": 40,
+      "reason": "Lamp #32 is in parallel; 40 Ω is the branch value, not the equivalent measured resistance."
+    },
+    {
+      "id": "C05",
+      "stage": "POWER",
+      "a": "30:tap",
+      "b": "30:endB",
+      "expect": "component_path",
+      "expected_component": "R30_80",
+      "nominal_path_ohms": 80,
+      "reason": "The other part of the factory tapped resistor assembly."
+    },
+    {
+      "id": "C06",
+      "stage": "POWER",
+      "a": "32:a",
+      "b": "32:b",
+      "expect": "component_path",
+      "expected_component": "R30_40",
+      "nominal_path_ohms": 40,
+      "reason": "The lamp connection is shunted by the known 40 Ω resistance section; filament itself has unknown resistance."
+    },
+    {
+      "id": "C07",
+      "stage": "IF",
+      "a": "12:pPlate",
+      "b": "12:pSupply",
+      "expect": "component_path",
+      "expected_component": "12:primary",
+      "nominal_path_ohms": null,
+      "reason": "A single transformer winding conducts DC with unspecified winding resistance."
+    },
+    {
+      "id": "C08",
+      "stage": "IF",
+      "a": "12:pPlate",
+      "b": "12:sGrid",
+      "expect": "untraced",
+      "reason": "Primary and secondary are distinct windings; no complete receiver-wide return path has been certified."
+    },
+    {
+      "id": "C09",
+      "stage": "IF",
+      "a": "14:pPlate",
+      "b": "14:sDetector",
+      "expect": "untraced",
+      "reason": "Second IF primary to secondary is magnetic coupling, not a source-traced metallic bridge."
+    },
+    {
+      "id": "C10",
+      "stage": "DETECTOR",
+      "a": "14:sDetector",
+      "b": "V3:5",
+      "expect": "untraced",
+      "reason": "Detector-side external diode wire still awaiting source review."
+    },
+    {
+      "id": "C11",
+      "stage": "DETECTOR",
+      "a": "V3:5",
+      "b": "V3:6",
+      "expect": "untraced",
+      "reason": "Separate 7C6 diode plates; their external connections are not yet transcribed."
+    },
+    {
+      "id": "C12",
+      "stage": "AUDIO",
+      "a": "26:a",
+      "b": "26:sA",
+      "expect": "untraced",
+      "reason": "Output transformer primary and secondary have distinct electrical windings."
+    },
+    {
+      "id": "C13",
+      "stage": "POWER",
+      "a": "29A:b",
+      "b": "__CHASSIS__",
+      "expect": "untraced",
+      "reason": "B− is NOT automatically chassis metal: any physical bond or capacitive coupling requires its own sourced record."
+    },
+    {
+      "id": "C14",
+      "stage": "POWER",
+      "a": "29A:a",
+      "b": "29A:b",
+      "expect": "untraced",
+      "reason": "Filter capacitor blocks DC in the declared passive graph; incomplete circuit can contain further paths."
+    }
+  ],
+  "acceptance": {
+    "copper_nets_validated": true,
+    "winding_primary_secondary_not_conflated": true,
+    "unknowns_never_reported_as_real_open": true,
+    "actual_chassis_bond_transcribed": false,
+    "detector_external_wiring_transcribed": false,
+    "full_rf_if_traced": false,
+    "full_spice_simulation": false,
+    "benchmark_ready": false
+  },
+  "limitations": [
+    "A path means only a selected path, not total equivalent resistance (especially with parallel loads).",
+    "An untraced path is NOT an ohmmeter-open diagnosis.",
+    "Inductances and transformer coupling unknown.",
+    "Current playable repair solver still reduced order.",
+    "Source location in historic schematic is not a physical chassis route."
+  ]
+}
