@@ -1,1 +1,22 @@
-The requested file reference is not currently visible. Use files.search or files.list to rediscover the file, then retry with a returned ref_id or file_id.
+const fs=require('fs'),assert=require('node:assert/strict'),vm=require('node:vm');
+const path=require('path');const root=path.join(__dirname,'..');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const graph=JSON.parse(fs.readFileSync(path.join(root,'engineering/PT44_Factory_Transcription_V3.json'),'utf8'));
+const passive=JSON.parse(fs.readFileSync(path.join(root,'engineering/PT44_Passive_Device_Topology_V1.json'),'utf8'));
+const blocks=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
+assert.equal(blocks.length,4);blocks.forEach(s=>new Function(s));
+const ctx=vm.createContext({console,module:{exports:{}}});vm.runInContext(blocks[1],ctx);
+assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify(PT44_FACTORY_V3)',ctx)),graph);
+assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify(PT44_PASSIVE_V1)',ctx)),passive);
+const i=blocks[3].indexOf('function pt44TubePinAudit()'), j=blocks[3].indexOf('// ===== v0.13 · Philco factory transcription / provenance gate =====');
+assert(i>=0&&j>i);vm.runInContext(blocks[3].slice(i,j),ctx);
+const result=JSON.parse(vm.runInContext('JSON.stringify(pt44PassiveAudit())',ctx));assert(result.ok,result.issues.join('; '));
+assert.equal(result.transformerWindings,6);assert.equal(result.nominalSeriesResistanceOhms,120);assert.equal(result.lampShuntedOhms,40);
+assert.equal(graph.factory_nets.length,18);assert.equal(Object.keys(graph.factory_components).length,33);
+assert.equal(graph.checks.benchmark_ready,false);assert.equal(passive.acceptance.spice_ready,false);
+const n=JSON.parse(vm.runInContext(`(()=>{let d=PT44_PASSIVE_V1.devices['12'];let w=d.windings[1],old=w.endpoints[0];w.endpoints[0]=d.windings[0].endpoints[0];let short=!pt44PassiveAudit().ok;w.endpoints[0]=old;let r=PT44_PASSIVE_V1.devices['30'],a=r.sections[0].ohms;r.sections[0].ohms=41;let wrong=!pt44PassiveAudit().ok;r.sections[0].ohms=a;return JSON.stringify({short,wrong});})()`,ctx));
+assert(n.short&&n.wrong);
+assert(html.includes('BUILD v0.16.0'));
+const cir=fs.readFileSync(path.join(root,'engineering/PT44_Factory_Passive_Subcircuit_DRAFT.cir'),'utf8');
+assert(cir.includes('R30_40 R30_END_A R30_TAP 40')&&cir.includes('R30_80 R30_TAP R30_END_B 80'));
+console.log('PASS v0.16: 18 partial nets, 33 parts, 6 windings, lamp shunt, build watermark; negative checks');
