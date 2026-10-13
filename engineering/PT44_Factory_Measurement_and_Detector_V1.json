@@ -1,6 +1,6 @@
 {
   "schema": "PT44_FACTORY_MEASUREMENT_AND_DETECTOR_V1",
-  "version": "0.17.0",
+  "version": "0.19.0",
   "model": "Philco PT-44",
   "source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "source_pages": {
@@ -123,29 +123,30 @@
       "section_D1": {
         "anode_pin": "V3:5",
         "role": "diode plate 2",
-        "cathode_terminal_mapping": null,
+        "cathode_terminal_mapping": "V3:7",
         "external_net_id": null,
         "diode_iv_model": null
       },
       "section_D2": {
         "anode_pin": "V3:6",
         "role": "diode plate 1",
-        "cathode_terminal_mapping": null,
+        "cathode_terminal_mapping": "V3:7",
         "external_net_id": null,
         "diode_iv_model": null
       },
       "triode": {
         "plate_pin": "V3:2",
         "grid_pin": "V3:3",
-        "cathode_pin_mapping": null,
+        "cathode_pin_mapping": "V3:7",
         "triode_iv_model": null
       },
       "cathode_sockets": [
         "V3:4",
         "V3:7"
       ],
-      "cathode_pin_internal_equivalence_source_confirmed": false,
-      "status": "pin_roles_grounded_from_tube_datasheet_external_receiver_net_pending"
+      "cathode_pin_internal_equivalence_source_confirmed": true,
+      "status": "internal_common_cathode_verified_external_detector_wiring_pending",
+      "internal_cathode_evidence": "Sylvania 1953 7C6 continuation; cathode contacts 4 and 7 internally common"
     }
   },
   "phase_1_blockers": [
@@ -156,7 +157,7 @@
     },
     {
       "id": "DET-RETURN",
-      "description": "Trace common diode and triode cathode returns; determine V3 pins 4 and 7 physical connectivity",
+      "description": "Tube-internal cathode pins 4/7 are confirmed common; factory external cathode return to B-minus or chassis still requires transcription.",
       "verified": false
     },
     {
