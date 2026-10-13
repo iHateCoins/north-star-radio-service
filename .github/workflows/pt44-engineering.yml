@@ -21,3 +21,5 @@ jobs:
         run: node tests/test_bench_v17.js
       - name: Regression-test passive devices and existing factory nets
         run: node tests/test_passive_devices_v16.js
+      - name: Audit source-traced wire continuity, transformer windings and chassis return
+        run: node tests/test_continuity_v18.js
