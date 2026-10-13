@@ -25,6 +25,7 @@ invalid('(()=>{const x=PT44_BENCH_V1.detector_subdevices.V3.section_D1,old=x.ext
 invalid('(()=>{const x=PT44_BENCH_V1.detector_subdevices["16"].resistive_track,old=x.wiper;x.wiper="16:switch_a";const invalid=!pt44BenchAudit().ok;x.wiper=old;return JSON.stringify({invalid});})()');
 invalid('(()=>{const x=PT44_BENCH_V1.voltage_compare_policy,old=x.use_for_pass_fail;x.use_for_pass_fail=true;const invalid=!pt44BenchAudit().ok;x.use_for_pass_fail=old;return JSON.stringify({invalid});})()');
 assert(JSON.parse(vm.runInContext('JSON.stringify(pt44BenchAudit())',ctx)).ok);
-assert(html.includes('BUILD v0.17.0<small>'));
-assert(html.includes('<meta name="nsrs-build" content="v0.17.0">'));
-console.log('PASS: factory 6 volt labels, 7C6 separate diodes, #16 pot/switch, 5 negative mutation checks and v0.17.0 watermark');
+const build=html.match(/<meta name="nsrs-build" content="(v\d+\.\d+\.\d+)">/);
+assert(build,'Missing semantic build version');
+assert(html.includes('BUILD '+build[1]+'<small>'),'Watermark differs from build metadata');
+console.log('PASS: factory 6 volt labels, 7C6 separate diodes, #16 pot/switch, 5 negative mutation checks and current-version watermark');
