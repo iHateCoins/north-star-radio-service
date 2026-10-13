@@ -1,6 +1,6 @@
 {
   "schema": "PT44_TUBE_TERMINALS_V1",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "status": "COMPONENT_PIN_IDENTITIES_VERIFIED_RECEIVER_CONNECTIONS_PENDING",
   "factory_reference": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "factory_reference_page": 38,
@@ -289,38 +289,50 @@
     "tubes": [
       {
         "tube": "V5",
-        "nominal_volts": 35,
-        "nominal_current_amps": 0.15
+        "operating_volts": 35,
+        "operating_current_amps": 0.15,
+        "historic_type_nominal_volts": null
       },
       {
         "tube": "V4",
-        "nominal_volts": 50,
-        "nominal_current_amps": 0.15
+        "operating_volts": 50,
+        "operating_current_amps": 0.15,
+        "historic_type_nominal_volts": null
       },
       {
         "tube": "V1",
-        "nominal_volts": 7,
-        "nominal_current_amps": 0.15
+        "operating_volts": 6.3,
+        "operating_current_amps": 0.15,
+        "historic_type_nominal_volts": 7
       },
       {
         "tube": "V2",
-        "nominal_volts": 7,
-        "nominal_current_amps": 0.15
+        "operating_volts": 6.3,
+        "operating_current_amps": 0.15,
+        "historic_type_nominal_volts": 7
       },
       {
         "tube": "V3",
-        "nominal_volts": 7,
-        "nominal_current_amps": 0.15
+        "operating_volts": 6.3,
+        "operating_current_amps": 0.15,
+        "historic_type_nominal_volts": 7
       }
     ],
-    "total_nominal_volts": 106,
-    "design_line_volts": 117,
-    "suggested_series_resistance_at_nominal_current_ohms": 73.33333333333333,
+    "total_operating_reference_volts": 103.9,
+    "total_historic_type_designation_volts": 106,
+    "illustrative_line_volts": 117,
+    "idealized_series_resistance_for_nominal_current_ohms": 87.3333333333333,
     "factory_part_30_nominal_resistance_range_ohms": [
       40,
       80
     ],
-    "status": "arithmetic plausibility only; lamp/current topology and voltage across rectifier/heater depend on actual factory wiring and AC operating point"
+    "status": "Operating reference 6.3 V at 0.15 A for each 7-series Loktal; old nomenclature used nominal 7.0 V. Pure resistor calculation ignores rectifier loading, lamp branch and specific dropper wiring; 87.3 ohms is not a factory resistor claim.",
+    "evidence": [
+      "https://www.worldradiohistory.com/BOOKSHELF-ARH/Technology/Technology-General/Sylvania-Technical-Manual-Tubes-1953-9th-Edition.pdf",
+      "https://www.r-type.org/exhib/aaq0192.htm",
+      "https://www.r-type.org/exhib/aaa1058.htm",
+      "https://www.r-type.org/exhib/aah0008.htm"
+    ]
   },
   "required_factory_net_status": "PINOUT VALIDATION DOES NOT CERTIFY FACTORY WIRING. Proposed terminal trace tasks are not electrical edges and do not enter SPICE.",
   "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity."
