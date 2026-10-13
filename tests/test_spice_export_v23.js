@@ -7,7 +7,7 @@ const a=scripts[3].indexOf('function pt44BenchAudit()'),b=scripts[3].indexOf('fu
 const read=e=>JSON.parse(vm.runInContext('JSON.stringify('+e+')',ctx));
 assert.deepEqual(read('PT44_SPICE_EXPORT_V1'),spec);
 const report=read('pt44SpiceExportAudit()');assert(report.ok,JSON.stringify(report.issues));
-const deck=report.deck,instances=deck.trim().split('\n').filter(x=>/^[CR]\d+\s|^R28_DCR\s|^R30_/.test(x));
+const deck=report.deck; assert.equal(deck,fs.readFileSync(path.join(root,'engineering/PT44_Factory_Generated_Spice_v23.cir'),'utf8'),'Checked-in SPICE draft differs from game-generated source deck'); const instances=deck.trim().split('\n').filter(x=>/^[CR]\d+\s|^R28_DCR\s|^R30_/.test(x));
 assert.equal(instances.length,6);
 for(const [part,first] of [['C15','N_IF2_SECONDARY_VOL_TOP'],['C18','N_VOL_WIPER_C18'],['R19','N_7C6_AUDIO_GRID']]){
  const line=instances.find(x=>x.startsWith(part+' '));assert(line&&line.split(' ')[1]===first);
