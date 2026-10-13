@@ -23,3 +23,5 @@ jobs:
         run: node tests/test_passive_devices_v16.js
       - name: Audit source-traced wire continuity, transformer windings and chassis return
         run: node tests/test_continuity_v18.js
+      - name: Validate 7C6 tube-internal cathode and reject invented detector/chassis connections
+        run: node tests/test_tube_internal_v19.js
