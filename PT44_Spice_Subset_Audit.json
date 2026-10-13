@@ -1,0 +1,31 @@
+{
+  "source": "Philco RMS 1941 p.38",
+  "status": "non-operational topology subset",
+  "spice_parts": [
+    "R28_DC_ONLY",
+    "C29A",
+    "C29B",
+    "C20",
+    "R21",
+    "R23",
+    "R24"
+  ],
+  "factory_part_numbers": [
+    "29A",
+    "29B",
+    "20",
+    "21",
+    "23",
+    "24",
+    "28"
+  ],
+  "all_terminal_pairs_traceable": true,
+  "source_wiring_complete": false,
+  "missing": [
+    "IF, RF and oscillator",
+    "7C6 detector/AVC",
+    "tube and rectifier models",
+    "coil and transformer inductances",
+    "AC mains and return isolation"
+  ]
+}

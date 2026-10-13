@@ -1,0 +1,28 @@
+* Philco PT-44 — factory-source passive topology subset (not a complete radio)
+* Based on Philco 1941 RMS Year Book p.38 (Models PT-42/PT-44).
+* Document reference: https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf
+* This is a partial connectivity export for engineering validation, NOT an operational radio.
+* Field coil #28 appears as a 500-ohm RESISTANCE PLACEHOLDER; inductance unverified.
+* IF transformers, RF/oscillator, 7C6 detector, rectifier and output transformer omitted.
+* BMINUS represents circuit common only; NOT asserted to be metal chassis.
+.subckt PT44_FACTORY_PASSIVE BPLUS_RECT BPLUS_FILT AUDIO_PLATE OUTPUT_GRID OUTPUT_CATH BMINUS
+* #28 500 Ω DC equivalent for speaker field coil, NOT AC-accurate
+R28_DC_ONLY BPLUS_RECT BPLUS_FILT 500
+* #29A 20 µF electrolytic
+C29A BPLUS_RECT BMINUS 20u
+* #29B 20 µF electrolytic
+C29B BPLUS_FILT BMINUS 20u
+* #20 0.01 µF coupling capacitor
+C20 AUDIO_PLATE OUTPUT_GRID 10n
+* #21 470 kΩ plate load
+R21 BPLUS_FILT AUDIO_PLATE 470k
+* #23 470 kΩ output grid return
+R23 OUTPUT_GRID BMINUS 470k
+* #24 130 Ω output cathode bias
+R24 OUTPUT_CATH BMINUS 130
+.ends PT44_FACTORY_PASSIVE
+
+* TODO: replace R28_DC_ONLY with measured/modelled field-coil R+L.
+* TODO: add magnetically coupled transformer windings and authentic tube models.
+* TODO: complete remaining source networks before using as the game simulator.
+.end
