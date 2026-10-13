@@ -1,0 +1,53 @@
+{
+  "schema": "PT44_ISOLATED_RC_FAULTS_V1",
+  "version": "0.22.0",
+  "factory_source": "PT44_Isolated_Passive_MNA_V1.json, Philco RMS 1941 p.38 verified #18/#19 wire junctions",
+  "factory_part_ids": [
+    "18",
+    "19"
+  ],
+  "scenarios": [
+    {
+      "id": "healthy",
+      "label": "Healthy source-value #18 / #19",
+      "action": "healthy",
+      "example_ohms": null
+    },
+    {
+      "id": "open18",
+      "label": "#18 0.01 µF capacitor OPEN",
+      "action": "open_capacitor",
+      "example_ohms": null
+    },
+    {
+      "id": "short18",
+      "label": "#18 capacitor SHORT, ~0.01 Ω",
+      "action": "short_capacitor",
+      "example_ohms": 0.01
+    },
+    {
+      "id": "leak18",
+      "label": "#18 LEAKY, 100 kΩ insulation",
+      "action": "leaky_capacitor",
+      "example_ohms": 100000
+    },
+    {
+      "id": "drift19",
+      "label": "#19 drifted from 4.7 MΩ to 470 kΩ",
+      "action": "drift_resistor",
+      "example_ohms": 470000
+    }
+  ],
+  "calibration": "Factory component values are sourced; failure resistance and open/short conditions are intentionally illustrative, not Philco field-service data.",
+  "test_source": "Independent 1 V ideal sinusoidal wiper source; hypothetical coupling circuit only.",
+  "frequencies_hz": [
+    0,
+    1,
+    10,
+    1000
+  ],
+  "is_factory_failure_measurement": false,
+  "full_receiver_fault_validated": false,
+  "complete_spice_model": false,
+  "benchmark_ready": false
+}

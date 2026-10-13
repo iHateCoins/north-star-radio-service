@@ -76,7 +76,7 @@
 .build-watermark small{display:block;margin-top:3px;font:400 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.02em;color:#d8cbc3;opacity:.92}
 @media(max-width:680px){.build-watermark{right:8px;bottom:8px;padding:7px 9px;font-size:10px}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.21.0</title><meta name="nsrs-build" content="v0.21.0">
+<title>North Star Radio Service — PT-44 v0.22.0</title><meta name="nsrs-build" content="v0.22.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -256,7 +256,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.21.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.22.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -2141,7 +2141,7 @@ function pt44ContinuityHTML(stage,esc){
   const spec=PT44_CONTINUITY_V1,a=pt44ContinuityAudit(),g=pt44ContinuityBuild();
   const tests=spec.analysis_cases.filter(c=>stage==='ALL'||c.stage===stage);
   const name={same_wire_net:'DIRECT COPPER',component_path:'THROUGH COMPONENT',tube_internal_connection:'INSIDE TUBE · COMMON CATHODE',untraced:'NOT YET TRACED'};
-  return `<h3>Continuity workbench <small style="font:11px monospace">v0.21 · source-traced detector audio + isolated AC solver</small></h3>
+  return `<h3>Continuity workbench <small style="font:11px monospace">v0.22 · source-traced audio + isolated RC fault lab</small></h3>
     <p>This view tests the <b>factory-traced conductor groups</b> separately from <b>electrical components</b>. A connection marked <b>NOT YET TRACED</b> is not a confirmed open circuit or measured fault. The game's simplified ground is <b>not</b> a certified chassis connection.</p>
     <div class="sl-alert" style="background:${a.ok?'#dfe9d5':'#f1cdc7'}"><b>CONTINUITY AUDIT ${a.ok?'PASS':'FAIL'}</b> · ${a.passed}/${a.total} source-limited cases · ${a.wireGroups} wire nets · ${a.sourceTerminals} referenced terminals · ${a.deviceEdges} internal conductor/resistance elements${a.issues.length?' · '+a.issues.map(esc).join('; '):''}</div>
     <table class="sl-table sl-continuity"><thead><tr><th>Case / stage</th><th>Terminals</th><th>Source-limited result</th></tr></thead><tbody>${tests.map(c=>{
@@ -2296,6 +2296,68 @@ function pt44PassiveStudyHTML(stage,esc){
  <p class="sl-footnote">AC-source and missing-volume-track boundary conditions are illustrative. No 7C6 diode or triode conduction, winding reactance, AVC feedback, coil Q, speaker behavior, line voltage or complete ngspice model is simulated here. B− is not assumed to be chassis.</p>`;
 }
 
+const PT44_PASSIVE_FAULTS_V1 = Object.freeze({"schema":"PT44_ISOLATED_RC_FAULTS_V1","version":"0.22.0","factory_source":"PT44_Isolated_Passive_MNA_V1.json, Philco RMS 1941 p.38 verified #18/#19 wire junctions","factory_part_ids":["18","19"],"scenarios":[{"id":"healthy","label":"Healthy source-value #18 / #19","action":"healthy","example_ohms":null},{"id":"open18","label":"#18 0.01 µF capacitor OPEN","action":"open_capacitor","example_ohms":null},{"id":"short18","label":"#18 capacitor SHORT, ~0.01 Ω","action":"short_capacitor","example_ohms":0.01},{"id":"leak18","label":"#18 LEAKY, 100 kΩ insulation","action":"leaky_capacitor","example_ohms":100000},{"id":"drift19","label":"#19 drifted from 4.7 MΩ to 470 kΩ","action":"drift_resistor","example_ohms":470000}],"calibration":"Factory component values are sourced; failure resistance and open/short conditions are intentionally illustrative, not Philco field-service data.","test_source":"Independent 1 V ideal sinusoidal wiper source; hypothetical coupling circuit only.","frequencies_hz":[0,1,10,1000],"is_factory_failure_measurement":false,"full_receiver_fault_validated":false,"complete_spice_model":false,"benchmark_ready":false});
+// v0.22: physically calculated defects in the *isolated* Philco #18/#19 RC
+// testbench; these are not wired into the provisional 3D game or full receiver.
+function pt44FaultNetwork(scenario){
+ const known=PT44_PASSIVE_FAULTS_V1.scenarios.find(x=>x.id===scenario);
+ if(!known)throw Error('Unknown isolated RC failure scenario');
+ const e=pt44PassiveComponents(),base=[e.find(x=>x.name==='Philco #18'),e.find(x=>x.name==='Philco #19')].map(x=>({...x}));
+ if(base.some(x=>!x))throw Error('Required factory passive model absent');
+ const cap=base[0],res=base[1];
+ switch(known.action){
+  case 'healthy':break;
+  case 'open_capacitor':return [res]; // capacitor becomes nonconducting, source remains unconnected
+  case 'short_capacitor':cap.type='R';cap.value=known.example_ohms;break;
+  case 'leaky_capacitor':return [cap,res,{name:'Illustrative insulation leakage across Philco #18',type:'R',value:known.example_ohms,a:cap.a,b:cap.b}];
+  case 'drift_resistor':res.value=known.example_ohms;break;
+  default:throw Error('Unsupported fault type in source-limited testbench');
+ }
+ return base;
+}
+function pt44FaultProbe(scenario,frequencyHz){
+ const model=pt44FaultNetwork(scenario);
+ const output=pt44SolvePassiveNetwork(model,frequencyHz,{
+  F_VOL_WIPER_C18:1,F_DET_PASSIVE_RETURN:0
+ });
+ const node=output.voltages.F_7C6_AUDIO_GRID;
+ if(!node)throw Error('Isolated grid node was lost');
+ return {scenario,frequencyHz,amplitude:pt44PassiveAbs(node),phaseRadians:Math.atan2(node.im,node.re),gridVoltage:node,kclResidualAmps:output.kclResidualAmps,model};
+}
+function pt44FaultStudyAudit(){
+ const f=PT44_PASSIVE_FAULTS_V1,issues=[];let results=null;
+ try{
+  if(f.factory_part_ids.join(',')!=='18,19')issues.push('Fault testbench may only alter source-traced #18/#19');
+  const expected=[['healthy','healthy',null],['open18','open_capacitor',null],['short18','short_capacitor',0.01],['leak18','leaky_capacitor',100000],['drift19','drift_resistor',470000]];
+  if(f.scenarios.length!==expected.length)issues.push('Unexpected fault scenario list');
+  for(const [id,action,ohms] of expected){const s=f.scenarios.find(x=>x.id===id);
+   if(!s||s.action!==action||s.example_ohms!==ohms)issues.push('Unsupported/mutated fault fixture: '+id);
+  }
+  if(f.is_factory_failure_measurement||f.full_receiver_fault_validated||f.complete_spice_model)issues.push('Hypothetical faults must not be treated as historical evidence or completed SPICE');
+  if(PT44_BENCH_V1.detector_subdevices.V3.section_D1.external_net_id!==null || PT44_BENCH_V1.detector_subdevices.V3.section_D2.external_net_id!==null)issues.push('Detector diode connection guessed');
+  results=Object.fromEntries(f.scenarios.map(s=>[s.id, Object.fromEntries([0,1,10,1000].map(hz=>[hz,pt44FaultProbe(s.id,hz)]))]));
+  const at=(id,hz)=>results[id][hz].amplitude;
+  if(at('healthy',0)>1e-12 || at('open18',1000)>1e-12)issues.push('DC-block or open-capacitor behavior inconsistent');
+  if(at('short18',0)<0.999999 || at('leak18',0)<0.95)issues.push('Ohmic failure behavior inconsistent');
+  if(at('drift19',10)>=at('healthy',10))issues.push('Grid resistance drift should increase highpass cutoff');
+  if(at('healthy',1000)<=0.999 || at('open18',0)>1e-12)issues.push('Source-driven high-frequency behavior inconsistent');
+  for(const s of f.scenarios)for(const hz of [0,1,10,1000])if(results[s.id][hz].kclResidualAmps>1e-10)issues.push('KCL mismatch '+s.id+' @ '+hz+' Hz');
+ }catch(e){issues.push(String(e.message||e));}
+ return {ok:issues.length===0,issues,results};
+}
+function pt44FaultStudyHTML(stage,esc){
+ if(!['ALL','DETECTOR'].includes(stage))return '';
+ const audit=pt44FaultStudyAudit();let table='';
+ if(audit.results){const fmt=(v)=>`${(v*100).toFixed(2)}%`;
+  table=`<table class="sl-table sl-fault-study"><thead><tr><th>Isolated fault condition</th><th>0 Hz (DC)</th><th>10 Hz</th><th>1 kHz</th></tr></thead><tbody>${PT44_PASSIVE_FAULTS_V1.scenarios.map(s=>`<tr><td>${esc(s.label)}</td><td>${fmt(audit.results[s.id][0].amplitude)}</td><td>${fmt(audit.results[s.id][10].amplitude)}</td><td>${fmt(audit.results[s.id][1000].amplitude)}</td></tr>`).join('')}</tbody></table>`;
+ }
+ return `<h3>Component fault laboratory — source-wired #18/#19 <small style="font:11px monospace">v0.22</small></h3>
+ <div class="sl-alert" style="background:${audit.ok?'#dfe9d5':'#f1cdc7'}"><b>ISOLATED FAULT AUDIT: ${audit.ok?'PASS':'FAIL'}</b>${audit.issues.length?' · '+audit.issues.map(esc).join('; '):' · 5 fault scenarios solved using complex nodal analysis'}</div>
+ <p>Comparing a <b>factory-value healthy RC coupling section</b> with <b>illustrative</b> component faults. Output is the AC grid voltage as a fraction of an <b>ideal 1 V signal applied to the volume wiper</b>. No tube, pot, AVC, IF transformer or chassis source is included.</p>
+ ${table}
+ <p class="sl-footnote">Fault assumptions (not factory measurements): a short is approximated by 0.01 Ω, leakage by 100 kΩ across #18, and #19 drift by 470 kΩ instead of the factory 4.7 MΩ. These are isolated network calculations; they do not yet drive the playable radio or indicate the actual sound/voltages of a damaged PT-44.</p>`;
+}
+
 function renderFactoryLedger(box){
   const g=PT44_FACTORY_V3,a=factoryV3Audit();
   const all=['ALL',...g.subcircuits.map(s=>s.id)];
@@ -2308,7 +2370,7 @@ function renderFactoryLedger(box){
   const candidates = Object.fromEntries(Object.entries(PT44_FACTORY_SUBGRAPH.factory_part_register).map(([n,p])=>[n,p.game_slot||'—']));
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
-   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.21.0</div>
+   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.22.0</div>
    <h2>Factory circuit transcription</h2>
    <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. The current 3D and simplified receiver solver remain provisional.</p>
    <div class="sl-kpi"><div><strong>${a.parts}/33</strong><span>Factory part records</span></div><div><strong>${a.sourceNets}</strong><span>Partial traced networks</span></div><div><strong>${a.tracedTerminals}</strong><span>Terminal references</span></div><div><strong>${a.unknownConnections.length}</strong><span>Open Phase-1 blockers</span></div></div>
@@ -2328,6 +2390,7 @@ function renderFactoryLedger(box){
    ${pt44ContinuityHTML(choice,escapeHTML)}
    ${pt44DetectorTraceHTML(choice,escapeHTML)}
    ${pt44PassiveStudyHTML(choice,escapeHTML)}
+   ${pt44FaultStudyHTML(choice,escapeHTML)}
    <h3>Outstanding acceptance work</h3><div class="sl-issues">${g.open_issues.filter(x=>x.severity==='blocker'&&(!sub||x.stage===choice||x.stage==='ALL')).map(x=>`<div><b>${escapeHTML(x.id)}</b> ${escapeHTML(x.description)}</div>`).join('')}</div>
    <div class="sl-toolbar"><button class="sl-btn sl-export" id="bExportFactoryV3">Export factory graph JSON</button><a href="${g.source}" target="_blank" rel="noopener noreferrer">Original 1941 service document ↗</a></div>
    <p class="sl-footnote">Engineering principle: 3D routing can only be certified after all electrical nets have documented pin membership. A plausible physical wire path is not a factory schematic connection.</p>

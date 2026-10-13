@@ -27,5 +27,5 @@ for(const [i,e] of cases.entries())assert.equal(vm.runInContext(e,ctx),true,'Mis
 assert.equal(vm.runInContext('Object.isFrozen(PT44_PASSIVE_STUDY_V1)',ctx),true);
 for(const invalid of ['NaN','Infinity','-1'])assert.throws(()=>vm.runInContext('pt44SolvePassiveNetwork(pt44PassiveComponents(),'+invalid+',{"F_DET_PASSIVE_RETURN":0})',ctx),/Frequency must be nonnegative/);
 assert.throws(()=>vm.runInContext('pt44SolvePassiveNetwork([{type:"R",a:"A",b:"B",value:100}],0,{"GROUND":0})',ctx),/singular/i);
-assert(html.includes('BUILD v0.21.0<small>')&&html.includes('<meta name="nsrs-build" content="v0.21.0">'));
+const build=html.match(/<meta name="nsrs-build" content="(v\d+\.\d+\.\d+)">/); assert(build&&html.includes('BUILD '+build[1]+'<small>'));
 console.log('PASS v0.21: 11 complex AC results, KCL, 4 mutation checks, invalid frequencies and source-parity watermark');

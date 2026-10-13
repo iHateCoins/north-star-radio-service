@@ -29,3 +29,5 @@ jobs:
         run: node tests/test_detector_trace_v20.js
       - name: Check isolated factory-sourced RC complex nodal model
         run: node tests/test_passive_mna_v21.js
+      - name: Audit factory-traced RC component faults with independent circuit calculations
+        run: node tests/test_fault_study_v22.js
