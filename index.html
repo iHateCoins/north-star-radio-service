@@ -76,7 +76,7 @@
 .build-watermark small{display:block;margin-top:3px;font:400 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.02em;color:#d8cbc3;opacity:.92}
 @media(max-width:680px){.build-watermark{right:8px;bottom:8px;padding:7px 9px;font-size:10px}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.22.0</title><meta name="nsrs-build" content="v0.22.0">
+<title>North Star Radio Service — PT-44 v0.23.0</title><meta name="nsrs-build" content="v0.23.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -256,7 +256,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.22.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.23.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -2141,7 +2141,7 @@ function pt44ContinuityHTML(stage,esc){
   const spec=PT44_CONTINUITY_V1,a=pt44ContinuityAudit(),g=pt44ContinuityBuild();
   const tests=spec.analysis_cases.filter(c=>stage==='ALL'||c.stage===stage);
   const name={same_wire_net:'DIRECT COPPER',component_path:'THROUGH COMPONENT',tube_internal_connection:'INSIDE TUBE · COMMON CATHODE',untraced:'NOT YET TRACED'};
-  return `<h3>Continuity workbench <small style="font:11px monospace">v0.22 · source-traced audio + isolated RC fault lab</small></h3>
+  return `<h3>Continuity workbench <small style="font:11px monospace">v0.23 · isolated RC + factory-driven SPICE draft</small></h3>
     <p>This view tests the <b>factory-traced conductor groups</b> separately from <b>electrical components</b>. A connection marked <b>NOT YET TRACED</b> is not a confirmed open circuit or measured fault. The game's simplified ground is <b>not</b> a certified chassis connection.</p>
     <div class="sl-alert" style="background:${a.ok?'#dfe9d5':'#f1cdc7'}"><b>CONTINUITY AUDIT ${a.ok?'PASS':'FAIL'}</b> · ${a.passed}/${a.total} source-limited cases · ${a.wireGroups} wire nets · ${a.sourceTerminals} referenced terminals · ${a.deviceEdges} internal conductor/resistance elements${a.issues.length?' · '+a.issues.map(esc).join('; '):''}</div>
     <table class="sl-table sl-continuity"><thead><tr><th>Case / stage</th><th>Terminals</th><th>Source-limited result</th></tr></thead><tbody>${tests.map(c=>{
@@ -2358,6 +2358,95 @@ function pt44FaultStudyHTML(stage,esc){
  <p class="sl-footnote">Fault assumptions (not factory measurements): a short is approximated by 0.01 Ω, leakage by 100 kΩ across #18, and #19 drift by 470 kΩ instead of the factory 4.7 MΩ. These are isolated network calculations; they do not yet drive the playable radio or indicate the actual sound/voltages of a damaged PT-44.</p>`;
 }
 
+const PT44_SPICE_EXPORT_V1 = Object.freeze({"schema":"PT44_SPICE_FROM_FACTORY_V1","version":"0.23.0","source":"Philco RMS 1941 p.38, original scan; PT44_FACTORY_V3 and PT44_PASSIVE_V1 authoritative partial device graph","detector_parts":["15","18","19"],"detector_ports":["F_IF2_SECONDARY_VOL_TOP","F_VOL_WIPER_C18","F_7C6_AUDIO_GRID","F_DET_PASSIVE_RETURN"],"field_coil_dcr_ohms":500,"tapped_section_values_ohms":[40,80],"isolation_and_unknowns":{"pilot_lamp_I_V":"unknown, excluded","IF_L_and_k":"unknown, excluded","7C6_diodes":"external nets unresolved; excluded","return_node":"independent testbench B minus, not chassis","SPICE_execution":"not tested by ngspice","potentiometer":"value and sweep unspecified; wiper driven by ideal 1 VAC"},"factory_wiring_complete":false,"spice_engine_validated":false,"unknown_tube_models_filled":false,"benchmark_ready":false});
+// v0.23: factory-graph -> SPICE-compatible passive subcircuit compiler.
+// This emits source-traced passive nodes only; no tube/diode/transformer reactance
+// is implied, and the deck has NOT been validated in an ngspice executable yet.
+function pt44SpiceNode(net){
+ if(!/^F_[A-Z0-9_]+$/.test(net))throw Error('Unapproved factory SPICE node: '+net);
+ return 'N_'+net.substring(2);
+}
+function pt44SpiceSI(x,kind){
+ if(!Number.isFinite(x)||!(x>0))throw Error('Nonpositive/nonfinite SPICE component value');
+ for(const [scale,suffix] of (kind==='C'?[[1e-6,'u'],[1e-9,'n'],[1e-12,'p']]:[[1e6,'Meg'],[1e3,'k']])){
+  if(x>=scale*0.999999){return Number((x/scale).toPrecision(10)).toString()+suffix;}
+ }
+ return Number(x.toPrecision(10)).toString();
+}
+function pt44SpicePassiveDeck(){
+ const policy=PT44_SPICE_EXPORT_V1;
+ const source=pt44PassiveComponents();
+ const wanted=policy.detector_parts;
+ if(source.length!==wanted.length||source.some(e=>!wanted.includes(e.name.split('#')[1])))throw Error('Detector device set mismatch');
+ const columns=policy.detector_ports.map(pt44SpiceNode);
+ if(columns.length!==4||new Set(columns).size!==4)throw Error('Missing unique source-traced subcircuit terminals');
+ const lines=['PT-44 factory-derived passive subcircuits — v0.23.0',
+  '* Philco 1941 RMS p.38: only documented passives #15 #18 #19 and #28/#30 resistor structures.',
+  '* ISOLATED MODEL, NOT COMPLETE PT-44. 7C6 diodes, IF transformer L/K, AVR/AVC and pilot lamp I-V UNMODELED.',
+  '* N_RETURN is an isolated testbench return. NEVER assume factory B-minus equals physical chassis.',
+  '.subckt NSRS_PT44_DET_PASSIVE '+columns.join(' ')];
+ const seen=new Set();for(const e of source){
+  const num=e.name.split('#')[1];if(seen.has(num))throw Error('Duplicate source factory part');seen.add(num);
+  if(!columns.includes(pt44SpiceNode(e.a))||!columns.includes(pt44SpiceNode(e.b)))throw Error('Passive terminal not in declared subcircuit ports');
+  lines.push((e.type==='C'?'C':'R')+num+' '+pt44SpiceNode(e.a)+' '+pt44SpiceNode(e.b)+' '+pt44SpiceSI(e.value,e.type));
+ }
+ lines.push('.ends NSRS_PT44_DET_PASSIVE','','* Speaker #28 coil: ONLY its documented 500-ohm DC resistance, not magnetic inductance.');
+ const coil=PT44_FACTORY_V3.factory_components['28'];
+ if(!coil||coil.category!=='field_coil'||coil.terminals.join(',')!=='a,b')throw Error('Unknown #28 field-coil terminal type');
+ const fields=PT44_FACTORY_V3.factory_nets.filter(n=>n.factory_members.some(x=>x==='28:a'||x==='28:b'));
+ const n1=fields.find(n=>n.factory_members.includes('28:a')),n2=fields.find(n=>n.factory_members.includes('28:b'));
+ if(!n1||!n2||n1.id===n2.id)throw Error('Unverified field coil net endpoints');
+ const ci=PT44_SPICE_EXPORT_V1.field_coil_dcr_ohms;
+ if(ci!==500)throw Error('Factory field-coil resistance mismatch');
+ lines.push('.subckt NSRS_PT44_FIELD_DCR N_FIELD_A N_FIELD_B','R28_DCR N_FIELD_A N_FIELD_B '+pt44SpiceSI(ci,'R'),'.ends NSRS_PT44_FIELD_DCR','',
+  '* #30: 40 + 80 ohm INTERNAL sections; #32 lamp is shunted across the 40-ohm section but is NOT modeled.');
+ const tap=PT44_PASSIVE_V1.devices['30'];
+ if(tap.kind!=='tapped_power_resistor'||tap.sections.length!==2)throw Error('Factory #30 section topology missing');
+ if(tap.sections[0].ohms!==40||tap.sections[1].ohms!==80||tap.lamp_shunt.parallel_to_section!=='R30_40')throw Error('Factory tapped heater resistor #30 mismatch');
+ const port=['30:endA','30:tap','30:endB'];
+ if(tap.terminals.join('|')!==port.join('|'))throw Error('Factory #30 tap port order changed');
+ lines.push('.subckt NSRS_PT44_LINE_R30 N_R30_ENDA N_R30_TAP N_R30_ENDB');
+ for(const x of tap.sections){const local=t=>t==='30:endA'?'N_R30_ENDA':t==='30:tap'?'N_R30_TAP':t==='30:endB'?'N_R30_ENDB':null;
+  const p=x.endpoints.map(local);if(p.some(v=>!v))throw Error('Unknown tapped resistor endpoint');
+  lines.push(x.id+' '+p.join(' ')+' '+pt44SpiceSI(x.ohms,'R'));
+ }
+ lines.push('.ends NSRS_PT44_LINE_R30','',
+  '* ISOLATED AC bench: wiper is an artificial AC 1 V source; diode conduction is not included.',
+  'XDET '+columns.join(' ')+' NSRS_PT44_DET_PASSIVE',
+  'VRETURN '+pt44SpiceNode('F_DET_PASSIVE_RETURN')+' 0 DC 0',
+  'VIF2 '+pt44SpiceNode('F_IF2_SECONDARY_VOL_TOP')+' '+pt44SpiceNode('F_DET_PASSIVE_RETURN')+' DC 0 AC 0',
+  'VWIPER '+pt44SpiceNode('F_VOL_WIPER_C18')+' '+pt44SpiceNode('F_DET_PASSIVE_RETURN')+' DC 0 AC 1',
+  '.ac dec 60 0.1 1000000','.end');
+ return lines.join('\n')+'\n';
+}
+function pt44SpiceExportAudit(){
+ const issues=[];let deck='';
+ try{
+  deck=pt44SpicePassiveDeck();const x=PT44_SPICE_EXPORT_V1;
+  if(x.detector_parts.join('|')!=='15|18|19')issues.push('Wrong source part scope');
+  if(x.detector_ports.join('|')!=='F_IF2_SECONDARY_VOL_TOP|F_VOL_WIPER_C18|F_7C6_AUDIO_GRID|F_DET_PASSIVE_RETURN')issues.push('Source port configuration is not factory verified');
+  if(x.factory_wiring_complete||x.spice_engine_validated||x.unknown_tube_models_filled||x.benchmark_ready)issues.push('Incomplete source declared ready');
+  for(const required of ['C15 N_IF2_SECONDARY_VOL_TOP N_DET_PASSIVE_RETURN 250p',
+    'C18 N_VOL_WIPER_C18 N_7C6_AUDIO_GRID 10n',
+    'R19 N_7C6_AUDIO_GRID N_DET_PASSIVE_RETURN 4.7Meg',
+    'R28_DCR N_FIELD_A N_FIELD_B 500','R30_40 N_R30_ENDA N_R30_TAP 40','R30_80 N_R30_TAP N_R30_ENDB 80']){
+   if(!deck.includes(required))issues.push('Exported deck failed source element parity: '+required);
+  }
+  if(deck.includes('V3_DIODE')||deck.includes('CHASSIS_BONDED')||deck.includes('L_IF2'))issues.push('Unverified electrical element in SPICE deck');
+ }catch(e){issues.push(String(e.message||e));}
+ return {ok:!issues.length,issues,lines:deck.split('\n').length,deck};
+}
+function pt44SpiceExportHTML(stage,esc){
+ if(stage!=='ALL' && stage!=='DETECTOR' && stage!=='POWER')return '';
+ const audit=pt44SpiceExportAudit();
+ return `<h3>Factory-driven SPICE draft export <small style="font:11px monospace">v0.23</small></h3>
+ <div class="sl-alert" style="background:${audit.ok?'#dfe9d5':'#f1cdc7'}"><b>SPICE SOURCE PARITY: ${audit.ok?'PASS':'FAIL'}</b>${audit.issues.length?' · '+audit.issues.map(esc).join('; '):' · generated from the same documented factory net memberships as the bench'}</div>
+ <p>Export an <b>incomplete, SPICE-compatible</b> passive circuit deck for the three detector components, field coil's known DC resistance, and tapped #30 resistor. It also includes an <b>isolated ideal 1 V AC test source</b>; it is not the PT-44 receiver simulation.</p>
+ <button class="sl-btn" type="button" id="bSpiceExportV23" ${audit.ok?'':'disabled'}>Download source-generated .cir file</button>
+ <pre style="max-height:130px;overflow:auto;background:#1c231f;color:#f0d79b;border-radius:4px;font:10px/1.4 monospace;padding:9px;white-space:pre-wrap">${esc(audit.deck.split('\n').slice(0,11).join('\n'))}</pre>
+ <p class="sl-footnote">This is a source-parity and netlist syntax preparation milestone. It has <b>not been executed against ngspice</b>; tube models, IF winding L/K and lamp behavior remain unknown. Current gameplay still uses the old reduced-order solver.</p>`;
+}
+
 function renderFactoryLedger(box){
   const g=PT44_FACTORY_V3,a=factoryV3Audit();
   const all=['ALL',...g.subcircuits.map(s=>s.id)];
@@ -2370,7 +2459,7 @@ function renderFactoryLedger(box){
   const candidates = Object.fromEntries(Object.entries(PT44_FACTORY_SUBGRAPH.factory_part_register).map(([n,p])=>[n,p.game_slot||'—']));
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
-   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.22.0</div>
+   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.23.0</div>
    <h2>Factory circuit transcription</h2>
    <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. The current 3D and simplified receiver solver remain provisional.</p>
    <div class="sl-kpi"><div><strong>${a.parts}/33</strong><span>Factory part records</span></div><div><strong>${a.sourceNets}</strong><span>Partial traced networks</span></div><div><strong>${a.tracedTerminals}</strong><span>Terminal references</span></div><div><strong>${a.unknownConnections.length}</strong><span>Open Phase-1 blockers</span></div></div>
@@ -2391,11 +2480,18 @@ function renderFactoryLedger(box){
    ${pt44DetectorTraceHTML(choice,escapeHTML)}
    ${pt44PassiveStudyHTML(choice,escapeHTML)}
    ${pt44FaultStudyHTML(choice,escapeHTML)}
+   ${pt44SpiceExportHTML(choice,escapeHTML)}
    <h3>Outstanding acceptance work</h3><div class="sl-issues">${g.open_issues.filter(x=>x.severity==='blocker'&&(!sub||x.stage===choice||x.stage==='ALL')).map(x=>`<div><b>${escapeHTML(x.id)}</b> ${escapeHTML(x.description)}</div>`).join('')}</div>
    <div class="sl-toolbar"><button class="sl-btn sl-export" id="bExportFactoryV3">Export factory graph JSON</button><a href="${g.source}" target="_blank" rel="noopener noreferrer">Original 1941 service document ↗</a></div>
    <p class="sl-footnote">Engineering principle: 3D routing can only be certified after all electrical nets have documented pin membership. A plausible physical wire path is not a factory schematic connection.</p>
   </section>`;
   box.querySelectorAll('[data-stage]').forEach(b=>b.onclick=()=>{R.factoryStage=b.dataset.stage;renderViews();});
+  const sp=box.querySelector('#bSpiceExportV23');if(sp)sp.onclick=()=>{
+    const result=pt44SpiceExportAudit();if(!result.ok)return;
+    const blob=new Blob([result.deck],{type:'text/plain'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='PT44_Factory_Passive_DRAFT_v0_23.cir';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
   const exp=box.querySelector('#bExportFactoryV3');if(exp)exp.onclick=()=>{
     const blob=new Blob([JSON.stringify(g,null,2)+'\n'],{type:'application/json'});
     const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='PT44_Factory_Transcription_V3.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);

@@ -31,3 +31,5 @@ jobs:
         run: node tests/test_passive_mna_v21.js
       - name: Audit factory-traced RC component faults with independent circuit calculations
         run: node tests/test_fault_study_v22.js
+      - name: Confirm SPICE export is derived only from factory-certified passive nodes
+        run: node tests/test_spice_export_v23.js

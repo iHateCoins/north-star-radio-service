@@ -30,5 +30,5 @@ for(const [label,code] of [
 assert.equal(vm.runInContext('Object.isFrozen(PT44_PASSIVE_FAULTS_V1)',ctx),true);
 assert.throws(()=>vm.runInContext('pt44FaultProbe("unlisted",1000)',ctx),/Unknown isolated RC failure scenario/);
 assert(!fixture.full_receiver_fault_validated&&!fixture.is_factory_failure_measurement&&!fixture.complete_spice_model);
-assert(html.includes('BUILD v0.22.0<small>')&&html.includes('<meta name="nsrs-build" content="v0.22.0">'));
+const build=html.match(/<meta name="nsrs-build" content="(v\d+\.\d+\.\d+)">/);assert(build&&html.includes('BUILD '+build[1]+'<small>'));
 console.log('PASS v0.22: five physical RC conditions, 20 AC/DC independent comparisons, KCL, three negative source mutations and watermark');

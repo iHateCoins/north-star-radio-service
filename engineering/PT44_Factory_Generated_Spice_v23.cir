@@ -1,0 +1,28 @@
+PT-44 factory-derived passive subcircuits — v0.23.0
+* Philco 1941 RMS p.38: only documented passives #15 #18 #19 and #28/#30 resistor structures.
+* ISOLATED MODEL, NOT COMPLETE PT-44. 7C6 diodes, IF transformer L/K, AVR/AVC and pilot lamp I-V UNMODELED.
+* N_RETURN is an isolated testbench return. NEVER assume factory B-minus equals physical chassis.
+.subckt NSRS_PT44_DET_PASSIVE N_IF2_SECONDARY_VOL_TOP N_VOL_WIPER_C18 N_7C6_AUDIO_GRID N_DET_PASSIVE_RETURN
+C15 N_IF2_SECONDARY_VOL_TOP N_DET_PASSIVE_RETURN 250p
+C18 N_VOL_WIPER_C18 N_7C6_AUDIO_GRID 10n
+R19 N_7C6_AUDIO_GRID N_DET_PASSIVE_RETURN 4.7Meg
+.ends NSRS_PT44_DET_PASSIVE
+
+* Speaker #28 coil: ONLY its documented 500-ohm DC resistance, not magnetic inductance.
+.subckt NSRS_PT44_FIELD_DCR N_FIELD_A N_FIELD_B
+R28_DCR N_FIELD_A N_FIELD_B 500
+.ends NSRS_PT44_FIELD_DCR
+
+* #30: 40 + 80 ohm INTERNAL sections; #32 lamp is shunted across the 40-ohm section but is NOT modeled.
+.subckt NSRS_PT44_LINE_R30 N_R30_ENDA N_R30_TAP N_R30_ENDB
+R30_40 N_R30_ENDA N_R30_TAP 40
+R30_80 N_R30_TAP N_R30_ENDB 80
+.ends NSRS_PT44_LINE_R30
+
+* ISOLATED AC bench: wiper is an artificial AC 1 V source; diode conduction is not included.
+XDET N_IF2_SECONDARY_VOL_TOP N_VOL_WIPER_C18 N_7C6_AUDIO_GRID N_DET_PASSIVE_RETURN NSRS_PT44_DET_PASSIVE
+VRETURN N_DET_PASSIVE_RETURN 0 DC 0
+VIF2 N_IF2_SECONDARY_VOL_TOP N_DET_PASSIVE_RETURN DC 0 AC 0
+VWIPER N_VOL_WIPER_C18 N_DET_PASSIVE_RETURN DC 0 AC 1
+.ac dec 60 0.1 1000000
+.end
