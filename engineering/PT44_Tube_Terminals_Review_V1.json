@@ -1,0 +1,327 @@
+{
+  "schema": "PT44_TUBE_TERMINALS_V1",
+  "version": "0.15.0",
+  "status": "COMPONENT_PIN_IDENTITIES_VERIFIED_RECEIVER_CONNECTIONS_PENDING",
+  "factory_reference": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+  "factory_reference_page": 38,
+  "tube_pinouts": {
+    "V1": {
+      "type": "7A8",
+      "base": "Loktal B8B",
+      "reference": "https://www.r-type.org/exhib/aaq0192.htm",
+      "reference_scope": "Tube electrode identity only; NOT a claim about Philco chassis wiring.",
+      "pin_roles": {
+        "1": "heater",
+        "2": "plate",
+        "3": "screen grid g2",
+        "4": "oscillator grid g1",
+        "5": "suppressor grids g3,g5",
+        "6": "oscillator anode grid g4",
+        "7": "cathode and g6",
+        "8": "heater"
+      }
+    },
+    "V2": {
+      "type": "7B7",
+      "base": "Loktal B8B",
+      "reference": "https://r-type.org/exhib/aaa1058.htm",
+      "reference_scope": "Tube electrode identity only; NOT a claim about Philco chassis wiring.",
+      "pin_roles": {
+        "1": "heater",
+        "2": "plate",
+        "3": "screen grid g2",
+        "4": "suppressor grid g3",
+        "5": "internal shield",
+        "6": "control grid g1",
+        "7": "cathode",
+        "8": "heater"
+      }
+    },
+    "V3": {
+      "type": "7C6",
+      "base": "Loktal B8B",
+      "reference": "https://www.r-type.org/exhib/aah0008.htm",
+      "reference_scope": "Tube electrode identity only; NOT a claim about Philco chassis wiring.",
+      "pin_roles": {
+        "1": "heater",
+        "2": "triode plate",
+        "3": "triode control grid",
+        "4": "cathode",
+        "5": "diode plate 2",
+        "6": "diode plate 1",
+        "7": "cathode",
+        "8": "heater"
+      }
+    },
+    "V4": {
+      "type": "50L6GT",
+      "base": "Octal",
+      "reference": "https://www.r-type.org/exhib/abo0129.htm",
+      "reference_scope": "Tube electrode identity only; NOT a claim about Philco chassis wiring.",
+      "pin_roles": {
+        "1": "shell / no circuit connection (glass variant)",
+        "2": "heater",
+        "3": "plate",
+        "4": "screen grid g2",
+        "5": "control grid g1",
+        "6": "no connection",
+        "7": "heater",
+        "8": "cathode and beam plates"
+      }
+    },
+    "V5": {
+      "type": "35Z3",
+      "base": "Loktal B8B",
+      "reference": "https://frank.pocnet.net/other/RCA/RC-Series/RCA_RC17.pdf",
+      "reference_scope": "Tube electrode identity only; NOT a claim about Philco chassis wiring.",
+      "pin_roles": {
+        "1": "heater",
+        "2": "rectifier plate",
+        "3": "no connection",
+        "4": "no connection",
+        "5": "no connection",
+        "6": "no connection",
+        "7": "rectifier cathode",
+        "8": "heater"
+      }
+    }
+  },
+  "review_tasks": [
+    {
+      "id": "RF-01",
+      "stage": "RF",
+      "terminal": "V1:4",
+      "task": "Trace 7A8 signal-input grid to aerial transformer, tuning capacitor, and any loop/mains isolation path.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "RF-02",
+      "stage": "RF",
+      "terminal": "V1:6",
+      "task": "Trace 7A8 oscillator anode grid through factory oscillator transformer #10.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "RF-03",
+      "stage": "RF",
+      "terminal": "V1:7",
+      "task": "Trace 7A8 cathode and suppression grid return (do not assume chassis = B−).",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "RF-04",
+      "stage": "RF",
+      "terminal": "V1:3",
+      "task": "Trace screen grid supply, bypass and #9 resistor / #6 assembly.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "RF-05",
+      "stage": "RF",
+      "terminal": "4:rf_stator",
+      "task": "Trace RF tuning gang rotor/stator independently from oscillator gang.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "RF-06",
+      "stage": "RF",
+      "terminal": "10:primary_a",
+      "task": "Determine coil winding ends, taps, and compensators from source image.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "IF-01",
+      "stage": "IF",
+      "terminal": "12:pSupply",
+      "task": "Trace first IF primary supply return and screen supply separately.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "IF-02",
+      "stage": "IF",
+      "terminal": "12:sReturn",
+      "task": "Trace first IF secondary cold end into AVC/return distribution.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "IF-03",
+      "stage": "IF",
+      "terminal": "V2:3",
+      "task": "Trace 7B7 screen grid supply and decoupling (do not assume same DC node as plate).",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "IF-04",
+      "stage": "IF",
+      "terminal": "V2:7",
+      "task": "Trace IF cathode bias and suppression grid connections.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "IF-05",
+      "stage": "IF",
+      "terminal": "14:pSupply",
+      "task": "Trace second IF primary B+ end and alignment capacitor connections.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "IF-06",
+      "stage": "IF",
+      "terminal": "14:sDetector",
+      "task": "Trace second IF detector winding to 7C6 diode plate(s).",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "DET-01",
+      "stage": "DETECTOR",
+      "terminal": "V3:5",
+      "task": "Determine which 7C6 diode plate is used for audio detection and AVC.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "DET-02",
+      "stage": "DETECTOR",
+      "terminal": "V3:6",
+      "task": "Determine second 7C6 diode plate connections from actual schematic.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "DET-03",
+      "stage": "DETECTOR",
+      "terminal": "V3:3",
+      "task": "Trace triode grid connection to #16 volume wiper and signal coupling.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "DET-04",
+      "stage": "DETECTOR",
+      "terminal": "V3:4",
+      "task": "Trace common diode/triode cathode return, checking tube pin 7 separately.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "DET-05",
+      "stage": "DETECTOR",
+      "terminal": "16:wiper",
+      "task": "Trace both resistance track ends and switch terminals independently.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "DET-06",
+      "stage": "DETECTOR",
+      "terminal": "15:a",
+      "task": "Resolve detector filtering #15–#19 and AVC junction topology.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "AUDIO-01",
+      "stage": "AUDIO",
+      "terminal": "V4:4",
+      "task": "Trace 50L6 screen-grid B+ connection and bypass capacitor.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "AUDIO-02",
+      "stage": "AUDIO",
+      "terminal": "25:a",
+      "task": "Trace #25 output-stage bypass/feedback capacitor to actual endpoints.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "POWER-01",
+      "stage": "POWER",
+      "terminal": "V5:2",
+      "task": "Trace 35Z3 anode to AC line, pilot lamp, #30 resistor taps and line switch.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    },
+    {
+      "id": "POWER-02",
+      "stage": "POWER",
+      "terminal": "30:endA",
+      "task": "Resolve #30 separate 40 Ω/80 Ω sections and exact pilot lamp bypass.",
+      "status": "source_trace_required",
+      "factory_net_claim": false
+    }
+  ],
+  "stage_tubes": {
+    "RF": [
+      "V1"
+    ],
+    "IF": [
+      "V1",
+      "V2"
+    ],
+    "DETECTOR": [
+      "V2",
+      "V3"
+    ],
+    "AUDIO": [
+      "V3",
+      "V4"
+    ],
+    "POWER": [
+      "V4",
+      "V5"
+    ]
+  },
+  "heater_check": {
+    "tubes": [
+      {
+        "tube": "V5",
+        "nominal_volts": 35,
+        "nominal_current_amps": 0.15
+      },
+      {
+        "tube": "V4",
+        "nominal_volts": 50,
+        "nominal_current_amps": 0.15
+      },
+      {
+        "tube": "V1",
+        "nominal_volts": 7,
+        "nominal_current_amps": 0.15
+      },
+      {
+        "tube": "V2",
+        "nominal_volts": 7,
+        "nominal_current_amps": 0.15
+      },
+      {
+        "tube": "V3",
+        "nominal_volts": 7,
+        "nominal_current_amps": 0.15
+      }
+    ],
+    "total_nominal_volts": 106,
+    "design_line_volts": 117,
+    "suggested_series_resistance_at_nominal_current_ohms": 73.33333333333333,
+    "factory_part_30_nominal_resistance_range_ohms": [
+      40,
+      80
+    ],
+    "status": "arithmetic plausibility only; lamp/current topology and voltage across rectifier/heater depend on actual factory wiring and AC operating point"
+  },
+  "required_factory_net_status": "PINOUT VALIDATION DOES NOT CERTIFY FACTORY WIRING. Proposed terminal trace tasks are not electrical edges and do not enter SPICE.",
+  "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity."
+}
