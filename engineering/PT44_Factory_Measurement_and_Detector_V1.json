@@ -1,0 +1,191 @@
+{
+  "schema": "PT44_FACTORY_MEASUREMENT_AND_DETECTOR_V1",
+  "version": "0.17.0",
+  "model": "Philco PT-44",
+  "source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+  "source_pages": {
+    "operating_voltage_figures": 38,
+    "specifications": 36
+  },
+  "source_policy": "Factory drawing labeled voltages are documented reference targets. Test conditions, tolerance, chassis/B− meter return and applicability to the provisional solver are unverified. Tube pin identities from historical tube data sheets; circuit external wiring remains unresolved.",
+  "factory_specifications": {
+    "if_center_hz": 455000,
+    "tuning_range_hz": [
+      540000,
+      1600000
+    ],
+    "line_voltage_ac_or_dc_volts": 115,
+    "source_reference": "Philco RMS Year Book p.36; PT-30/PT-42/PT-44/PT-49 models"
+  },
+  "factory_voltage_labels": [
+    {
+      "id": "FV_7A8_PLATE",
+      "stage": "RF",
+      "tube": "V1",
+      "tube_type": "7A8",
+      "terminal": "V1:2",
+      "role": "plate",
+      "volts": 95,
+      "location": "upper left, 7A8 plate electrode"
+    },
+    {
+      "id": "FV_7A8_SCREEN",
+      "stage": "RF",
+      "tube": "V1",
+      "tube_type": "7A8",
+      "terminal": "V1:3",
+      "role": "screen grid",
+      "volts": 45,
+      "location": "upper left, 7A8 screen electrode"
+    },
+    {
+      "id": "FV_7B7_PLATE",
+      "stage": "IF",
+      "tube": "V2",
+      "tube_type": "7B7",
+      "terminal": "V2:2",
+      "role": "plate",
+      "volts": 95,
+      "location": "upper center, 7B7 plate electrode"
+    },
+    {
+      "id": "FV_7B7_SCREEN",
+      "stage": "IF",
+      "tube": "V2",
+      "tube_type": "7B7",
+      "terminal": "V2:3",
+      "role": "screen grid",
+      "volts": 45,
+      "location": "upper center, 7B7 screen electrode"
+    },
+    {
+      "id": "FV_7C6_TRIODE_PLATE",
+      "stage": "DETECTOR",
+      "tube": "V3",
+      "tube_type": "7C6",
+      "terminal": "V3:2",
+      "role": "triode plate",
+      "volts": 30,
+      "location": "upper right-center, 7C6 triode plate electrode"
+    },
+    {
+      "id": "FV_50L6GT_PLATE",
+      "stage": "AUDIO",
+      "tube": "V4",
+      "tube_type": "50L6GT",
+      "terminal": "V4:3",
+      "role": "plate",
+      "volts": 85,
+      "location": "upper right, 50L6GT plate electrode"
+    }
+  ],
+  "voltage_compare_policy": {
+    "test_type": "source_label_reference_only",
+    "voltage_reference_return": null,
+    "instrument_loading_ohms_per_volt": null,
+    "source_operating_conditions": null,
+    "pass_tolerance_pct": null,
+    "solver_node_equivalence_verified": false,
+    "use_for_pass_fail": false,
+    "note": "Never treat these historical voltage labels as directly comparable with the simplified DC model until return reference and service measurement conditions are validated."
+  },
+  "detector_subdevices": {
+    "14": {
+      "type": "second_if_transformer_detector_output",
+      "winding_secondary": [
+        "14:sDetector",
+        "14:sReturn"
+      ],
+      "detector_diode_terminal": null,
+      "avc_routing_verified": false,
+      "status": "internal_second_IF_winding_only; diode-side external wire still untraced"
+    },
+    "16": {
+      "type": "combined_volume_potentiometer_and_on_off_switch",
+      "resistive_track": {
+        "end_A": "16:a",
+        "wiper": "16:wiper",
+        "end_B": "16:b",
+        "full_resistance_ohms": null,
+        "taper": null
+      },
+      "separate_switch": {
+        "contact_A": "16:switch_a",
+        "contact_B": "16:switch_b",
+        "contact_state_controlled_by_volume": true,
+        "load_routing": null
+      },
+      "wiper_connectivity_status": "untraced",
+      "switch_connectivity_status": "untraced"
+    },
+    "V3": {
+      "type": "7C6_dual_diode_triode",
+      "section_D1": {
+        "anode_pin": "V3:5",
+        "role": "diode plate 2",
+        "cathode_terminal_mapping": null,
+        "external_net_id": null,
+        "diode_iv_model": null
+      },
+      "section_D2": {
+        "anode_pin": "V3:6",
+        "role": "diode plate 1",
+        "cathode_terminal_mapping": null,
+        "external_net_id": null,
+        "diode_iv_model": null
+      },
+      "triode": {
+        "plate_pin": "V3:2",
+        "grid_pin": "V3:3",
+        "cathode_pin_mapping": null,
+        "triode_iv_model": null
+      },
+      "cathode_sockets": [
+        "V3:4",
+        "V3:7"
+      ],
+      "cathode_pin_internal_equivalence_source_confirmed": false,
+      "status": "pin_roles_grounded_from_tube_datasheet_external_receiver_net_pending"
+    }
+  },
+  "phase_1_blockers": [
+    {
+      "id": "DET-IF-EXT",
+      "description": "Trace second IF secondary to 7C6 diode terminal(s) from legible factory artwork",
+      "verified": false
+    },
+    {
+      "id": "DET-RETURN",
+      "description": "Trace common diode and triode cathode returns; determine V3 pins 4 and 7 physical connectivity",
+      "verified": false
+    },
+    {
+      "id": "DET-AVC",
+      "description": "Trace #15,#17,#18,#19 filter/AVC network and volume control #16 ends/wiper",
+      "verified": false
+    },
+    {
+      "id": "DET-SWITCH",
+      "description": "Trace combined #16 mains switch and B− return topology separately",
+      "verified": false
+    },
+    {
+      "id": "RF-SUPPLY",
+      "description": "Complete converter screen, oscillator and antenna network physical terminal nets",
+      "verified": false
+    },
+    {
+      "id": "IF-TERMS",
+      "description": "Trace both IF transformer DC supply and secondary cold ends",
+      "verified": false
+    }
+  ],
+  "acceptance": {
+    "factory_schematic_fully_transcribed": false,
+    "measurement_instrument_conditions_verified": false,
+    "detector_external_wiring_verified": false,
+    "model_matches_factory": false,
+    "spice_validated": false,
+    "benchmark_ready": false
+  }
+}
