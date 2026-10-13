@@ -1,1 +1,159 @@
-The requested file reference is not currently visible. Use files.search or files.list to rediscover the file, then retry with a returned ref_id or file_id.
+{
+  "schema": "PT44_PASSIVE_DEVICE_TOPOLOGY_V1",
+  "version": "0.16.0",
+  "model": "Philco PT-44",
+  "factory_source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+  "printed_page": 38,
+  "scope": "FACTORY_COMPONENT_INTERNAL_STRUCTURE_AND_TWO_PILOT_SHUNT_EDGES_ONLY",
+  "source_status": "Parts and winding symbols traced. Winding inductance, mutual coupling, winding DCR, lamp hot/cold behavior and line switch remain unknown. No additions to RF/IF external electrical nets.",
+  "devices": {
+    "12": {
+      "kind": "magnetically_coupled_transformer",
+      "stage": "IF",
+      "factory_part": "12",
+      "windings": [
+        {
+          "id": "primary",
+          "endpoints": [
+            "12:pPlate",
+            "12:pSupply"
+          ],
+          "inductance_henries": null,
+          "dc_resistance_ohms": null
+        },
+        {
+          "id": "secondary",
+          "endpoints": [
+            "12:sGrid",
+            "12:sReturn"
+          ],
+          "inductance_henries": null,
+          "dc_resistance_ohms": null
+        }
+      ],
+      "mutual_coupling_k": null,
+      "capacitive_tuning_values": null,
+      "external_pin_routing_status": "partial"
+    },
+    "14": {
+      "kind": "magnetically_coupled_transformer",
+      "stage": "IF",
+      "factory_part": "14",
+      "windings": [
+        {
+          "id": "primary",
+          "endpoints": [
+            "14:pPlate",
+            "14:pSupply"
+          ],
+          "inductance_henries": null,
+          "dc_resistance_ohms": null
+        },
+        {
+          "id": "secondary",
+          "endpoints": [
+            "14:sDetector",
+            "14:sReturn"
+          ],
+          "inductance_henries": null,
+          "dc_resistance_ohms": null
+        }
+      ],
+      "mutual_coupling_k": null,
+      "capacitive_tuning_values": null,
+      "external_pin_routing_status": "partial"
+    },
+    "26": {
+      "kind": "magnetically_coupled_transformer",
+      "stage": "AUDIO",
+      "factory_part": "26",
+      "windings": [
+        {
+          "id": "primary",
+          "endpoints": [
+            "26:a",
+            "26:b"
+          ],
+          "inductance_henries": null,
+          "dc_resistance_ohms": null
+        },
+        {
+          "id": "secondary",
+          "endpoints": [
+            "26:sA",
+            "26:sB"
+          ],
+          "inductance_henries": null,
+          "dc_resistance_ohms": null
+        }
+      ],
+      "mutual_coupling_k": null,
+      "capacitive_tuning_values": null,
+      "external_pin_routing_status": "partial"
+    },
+    "30": {
+      "kind": "tapped_power_resistor",
+      "stage": "POWER",
+      "factory_part": "30",
+      "terminals": [
+        "30:endA",
+        "30:tap",
+        "30:endB"
+      ],
+      "sections": [
+        {
+          "id": "R30_40",
+          "endpoints": [
+            "30:endA",
+            "30:tap"
+          ],
+          "ohms": 40
+        },
+        {
+          "id": "R30_80",
+          "endpoints": [
+            "30:tap",
+            "30:endB"
+          ],
+          "ohms": 80
+        }
+      ],
+      "end_to_end_nominal_ohms": 120,
+      "lamp_shunt": {
+        "factory_part": "32",
+        "parallel_to_section": "R30_40",
+        "connection_nets": [
+          "F_30_40_LAMP_A",
+          "F_30_40_LAMP_B"
+        ],
+        "connection_status": "sourced_to_schematic_lamp_branch_only"
+      },
+      "external_line_and_tube_routing": "not_transcribed",
+      "special_note": "Do not substitute 120 Ω as a simple heater-series load: the lamp bypass and rectifier current topology must be solved."
+    },
+    "32": {
+      "kind": "incandescent_pilot_lamp",
+      "stage": "POWER",
+      "factory_part": "32",
+      "terminals": [
+        "32:a",
+        "32:b"
+      ],
+      "across": "R30_40",
+      "operating_voltage_volts": null,
+      "cold_resistance_ohms": null,
+      "hot_resistance_ohms": null,
+      "status": "external connections established only through factory-lamp shunt branch"
+    }
+  },
+  "acceptance": {
+    "all_device_terminals_declared": true,
+    "primary_secondary_mutually_isolated_at_dc": true,
+    "resistance_sections_identified": true,
+    "pilot_shunt_topology_traced": true,
+    "full_ac_supply_verified": false,
+    "if_inductance_and_coupling_validated": false,
+    "spice_ready": false,
+    "benchmark_ready": false
+  }
+}
