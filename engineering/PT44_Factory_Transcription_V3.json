@@ -1,1 +1,1143 @@
-The requested file reference is not currently visible. Use files.search or files.list to rediscover the file, then retry with a returned ref_id or file_id.
+{
+  "schema": "PT44_FACTORY_TRANSCRIPTION_V3",
+  "model": "Philco PT-44",
+  "year": 1941,
+  "source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+  "source_page": 38,
+  "status": "PARTIAL_FACTORY_TRANSCRIPTION_SOURCE_PARTS_RECORDED_NOT_SPICE_READY",
+  "evidence_policy": "The published source is a schematic and parts diagram. Device terminal naming is provisional where exact pins/winding contacts have not been read from the drawing. 3D lead dress is not documented wire-for-wire.",
+  "factory_components": {
+    "1": {
+      "description": "0.0015 µF / 200 V capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #1",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "2": {
+      "description": "Aerial transformer",
+      "category": "aerial_transformer",
+      "terminals": [
+        "primary_a",
+        "primary_b",
+        "secondary_a",
+        "secondary_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #2",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "3": {
+      "description": "Built-in loop aerial",
+      "category": "loop_aerial",
+      "terminals": [
+        "loop_a",
+        "loop_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #3",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "4": {
+      "description": "Two-gang tuning capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "rf_stator",
+        "osc_stator",
+        "rotor"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #4",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "5": {
+      "description": "Aerial compensator",
+      "category": "tuning_assembly",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #5",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "6": {
+      "description": "Condenser and choke assembly",
+      "category": "capacitor",
+      "terminals": [
+        "cap_a",
+        "cap_b",
+        "choke_a",
+        "choke_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #6",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "7": {
+      "description": "4.7 MΩ resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #7",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "8": {
+      "description": "0.1 µF / 200 V capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #8",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "9": {
+      "description": "22 kΩ resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #9",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "10": {
+      "description": "Oscillator transformer",
+      "category": "oscillator_transformer",
+      "terminals": [
+        "primary_a",
+        "primary_b",
+        "secondary_a",
+        "secondary_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #10",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "11": {
+      "description": "0.05 µF capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #11",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "12": {
+      "description": "First IF transformer",
+      "category": "if_transformer",
+      "terminals": [
+        "pPlate",
+        "pSupply",
+        "sGrid",
+        "sReturn"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #12",
+      "source_page": 38,
+      "model_slots": [
+        "T2"
+      ],
+      "connectivity": "partial",
+      "geometry_certified": false
+    },
+    "13": {
+      "description": "27 kΩ resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #13",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "14": {
+      "description": "Second IF transformer",
+      "category": "if_transformer",
+      "terminals": [
+        "pPlate",
+        "pSupply",
+        "sDetector",
+        "sReturn"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #14",
+      "source_page": 38,
+      "model_slots": [
+        "T3"
+      ],
+      "connectivity": "partial",
+      "geometry_certified": false
+    },
+    "15": {
+      "description": "250 pF capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #15",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "16": {
+      "description": "Volume control",
+      "category": "potentiometer",
+      "terminals": [
+        "a",
+        "wiper",
+        "b",
+        "switch_a",
+        "switch_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #16",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "17": {
+      "description": "4.7 MΩ resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #17",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "18": {
+      "description": "0.01 µF / 400 V capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #18",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "19": {
+      "description": "4.7 MΩ resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #19",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "20": {
+      "description": "0.01 µF / 400 V capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #20",
+      "source_page": 38,
+      "model_slots": [
+        "C3"
+      ],
+      "connectivity": "traced_subset",
+      "geometry_certified": false
+    },
+    "21": {
+      "description": "470 kΩ resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #21",
+      "source_page": 38,
+      "model_slots": [
+        "R4"
+      ],
+      "connectivity": "traced_subset",
+      "geometry_certified": false
+    },
+    "22": {
+      "description": "250 pF mica capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #22",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "23": {
+      "description": "470 kΩ resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #23",
+      "source_page": 38,
+      "model_slots": [
+        "R3"
+      ],
+      "connectivity": "traced_subset",
+      "geometry_certified": false
+    },
+    "24": {
+      "description": "130 Ω resistor",
+      "category": "resistor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #24",
+      "source_page": 38,
+      "model_slots": [
+        "R2"
+      ],
+      "connectivity": "traced_subset",
+      "geometry_certified": false
+    },
+    "25": {
+      "description": "0.02 µF / 400 V capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #25",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "26": {
+      "description": "Output transformer",
+      "category": "output_transformer",
+      "terminals": [
+        "a",
+        "b",
+        "sA",
+        "sB"
+      ],
+      "terminal_definition_status": "functional_only",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #26",
+      "source_page": 38,
+      "model_slots": [
+        "T1"
+      ],
+      "connectivity": "partial",
+      "geometry_certified": false
+    },
+    "27": {
+      "description": "Speaker cone / voice coil",
+      "category": "speaker",
+      "terminals": [
+        "voiceA",
+        "voiceB"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #27",
+      "source_page": 38,
+      "model_slots": [
+        "SP1"
+      ],
+      "connectivity": "partial",
+      "geometry_certified": false
+    },
+    "28": {
+      "description": "500 Ω field coil",
+      "category": "field_coil",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #28",
+      "source_page": 38,
+      "model_slots": [
+        "R1"
+      ],
+      "connectivity": "partial",
+      "geometry_certified": false
+    },
+    "30": {
+      "description": "40 Ω + 80 Ω tapped line resistance assembly (#30)",
+      "category": "resistor",
+      "terminals": [
+        "endA",
+        "tap",
+        "endB"
+      ],
+      "terminal_definition_status": "factory_two_section_resistor_terminals",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #30",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "partial_lamp_shunt_only_mains_endpoints_unverified",
+      "geometry_certified": false
+    },
+    "31": {
+      "description": "0.04 µF / 400 V capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #31",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
+    },
+    "32": {
+      "description": "Pilot lamp",
+      "category": "lamp",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #32",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "partial_lamp_shunt_only_mains_endpoints_unverified",
+      "geometry_certified": false
+    },
+    "29A": {
+      "description": "20 µF electrolytic",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #29A",
+      "source_page": 38,
+      "model_slots": [
+        "C1"
+      ],
+      "connectivity": "traced_subset",
+      "geometry_certified": false
+    },
+    "29B": {
+      "description": "20 µF electrolytic",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #29B",
+      "source_page": 38,
+      "model_slots": [
+        "C2"
+      ],
+      "connectivity": "traced_subset",
+      "geometry_certified": false
+    }
+  },
+  "tube_pin_reference": {
+    "V1": {
+      "type": "7A8",
+      "heater": [
+        "1",
+        "8"
+      ],
+      "role": "converter"
+    },
+    "V2": {
+      "type": "7B7",
+      "heater": [
+        "1",
+        "8"
+      ],
+      "role": "IF amplifier"
+    },
+    "V3": {
+      "type": "7C6",
+      "heater": [
+        "1",
+        "8"
+      ],
+      "role": "detector, AVC, first audio"
+    },
+    "V4": {
+      "type": "50L6GT",
+      "heater": [
+        "2",
+        "7"
+      ],
+      "role": "output pentode"
+    },
+    "V5": {
+      "type": "35Z3",
+      "heater": [
+        "1",
+        "8"
+      ],
+      "role": "rectifier"
+    }
+  },
+  "factory_nets": [
+    {
+      "id": "F_BPLUS_RECT",
+      "title": "Rectified B+ / first filter",
+      "stage": "Power",
+      "model": "B1",
+      "description": "35Z3 cathode to first electrolytic, 500 Ω field winding input and output-transformer primary supply.",
+      "source": "Philco 1941 RMS, p.38 — #26, #28, #29A and 35Z3",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V5:7",
+        "28:a",
+        "29A:a",
+        "26:a"
+      ],
+      "prototype_member_crosswalk": [
+        "V5:7",
+        "R1:a",
+        "C1:a",
+        "T1:a"
+      ]
+    },
+    {
+      "id": "F_BPLUS_FILT",
+      "title": "Filtered B+ / second filter",
+      "stage": "Power",
+      "model": "B2",
+      "description": "Speaker field winding output feeds second 20 µF electrolytic and the 7C6 plate-load resistor.",
+      "source": "Philco 1941 RMS, p.38 — #21, #28, #29B",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "28:b",
+        "29B:a",
+        "21:a"
+      ],
+      "prototype_member_crosswalk": [
+        "R1:b",
+        "C2:a",
+        "R4:a"
+      ]
+    },
+    {
+      "id": "F_7C6_PLATE",
+      "title": "7C6 audio plate",
+      "stage": "Audio",
+      "model": "P6",
+      "description": "7C6 triode plate, #21 plate load, and #20 output-stage coupling capacitor.",
+      "source": "Philco 1941 RMS, p.38 — 7C6, #20, #21",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V3:2",
+        "21:b",
+        "20:a"
+      ],
+      "prototype_member_crosswalk": [
+        "V3:2",
+        "R4:b",
+        "C3:a"
+      ]
+    },
+    {
+      "id": "F_50L6_GRID",
+      "title": "50L6GT control grid",
+      "stage": "Audio",
+      "model": "G5",
+      "description": "#20 coupling capacitor output joins 50L6GT control grid and #23 grid-return resistor.",
+      "source": "Philco 1941 RMS, p.38 — 50L6GT, #20, #23",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V4:5",
+        "20:b",
+        "23:a"
+      ],
+      "prototype_member_crosswalk": [
+        "V4:5",
+        "C3:b",
+        "R3:a"
+      ]
+    },
+    {
+      "id": "F_50L6_CATH",
+      "title": "50L6GT cathode bias",
+      "stage": "Audio",
+      "model": "K5",
+      "description": "Output cathode current flows through #24 130 Ω resistor.",
+      "source": "Philco 1941 RMS, p.38 — 50L6GT and #24",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V4:8",
+        "24:a"
+      ],
+      "prototype_member_crosswalk": [
+        "V4:8",
+        "R2:a"
+      ]
+    },
+    {
+      "id": "F_OUTPUT_PLATE",
+      "title": "50L6GT plate / transformer",
+      "stage": "Output",
+      "model": "P5",
+      "description": "50L6GT plate joins output-transformer primary, #26.",
+      "source": "Philco 1941 RMS, p.38 — 50L6GT and #26",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V4:3",
+        "26:b"
+      ],
+      "prototype_member_crosswalk": [
+        "V4:3",
+        "T1:b"
+      ]
+    },
+    {
+      "id": "F_BMINUS",
+      "title": "Common B− return (partial)",
+      "stage": "Return",
+      "model": "GND",
+      "description": "Return for the filter capacitors and output-stage bias and grid resistors; not automatically the metal chassis.",
+      "source": "Philco 1941 RMS, p.38 — #23, #24, #29A/B",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "29A:b",
+        "29B:b",
+        "23:b",
+        "24:b"
+      ],
+      "prototype_member_crosswalk": [
+        "C1:b",
+        "C2:b",
+        "R3:b",
+        "R2:b"
+      ]
+    },
+    {
+      "id": "F_VOICE_SEC_A",
+      "title": "Output transformer secondary (A)",
+      "stage": "Output",
+      "model": null,
+      "description": "One side of #26 secondary to #27 voice coil. Does not exist in simplified solver yet.",
+      "source": "Philco 1941 RMS, p.38 — #26 and #27",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "26:sA",
+        "27:voiceA"
+      ],
+      "prototype_member_crosswalk": [
+        "T1:sA",
+        "SP1:voiceA"
+      ]
+    },
+    {
+      "id": "F_VOICE_SEC_B",
+      "title": "Output transformer secondary (B)",
+      "stage": "Output",
+      "model": null,
+      "description": "Other side of #26 secondary to #27 voice coil. Does not exist in simplified solver yet.",
+      "source": "Philco 1941 RMS, p.38 — #26 and #27",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "26:sB",
+        "27:voiceB"
+      ],
+      "prototype_member_crosswalk": [
+        "T1:sB",
+        "SP1:voiceB"
+      ]
+    },
+    {
+      "id": "F_HT_35Z3_50L6",
+      "title": "35Z3 to 50L6GT heater junction",
+      "stage": "Heaters",
+      "model": null,
+      "description": "Documented series-heater connection. Heater supply, line resistance, and pilot lamp are not yet simulated pin-by-pin.",
+      "source": "Philco 1941 RMS, p.38 — heater chain and #30",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V5:8",
+        "V4:2"
+      ],
+      "prototype_member_crosswalk": [
+        "V5:8",
+        "V4:2"
+      ]
+    },
+    {
+      "id": "F_HT_50L6_7A8",
+      "title": "50L6GT to 7A8 heater junction",
+      "stage": "Heaters",
+      "model": null,
+      "description": "Documented series-heater connection. Heater supply, line resistance, and pilot lamp are not yet simulated pin-by-pin.",
+      "source": "Philco 1941 RMS, p.38 — heater chain and #30",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V4:7",
+        "V1:1"
+      ],
+      "prototype_member_crosswalk": [
+        "V4:7",
+        "V1:1"
+      ]
+    },
+    {
+      "id": "F_HT_7A8_7B7",
+      "title": "7A8 to 7B7 heater junction",
+      "stage": "Heaters",
+      "model": null,
+      "description": "Documented series-heater connection. Heater supply, line resistance, and pilot lamp are not yet simulated pin-by-pin.",
+      "source": "Philco 1941 RMS, p.38 — heater chain and #30",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V1:8",
+        "V2:1"
+      ],
+      "prototype_member_crosswalk": [
+        "V1:8",
+        "V2:1"
+      ]
+    },
+    {
+      "id": "F_HT_7B7_7C6",
+      "title": "7B7 to 7C6 heater junction",
+      "stage": "Heaters",
+      "model": null,
+      "description": "Documented series-heater connection. Heater supply, line resistance, and pilot lamp are not yet simulated pin-by-pin.",
+      "source": "Philco 1941 RMS, p.38 — heater chain and #30",
+      "stage_status": "traced_limited",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V2:8",
+        "V3:1"
+      ],
+      "prototype_member_crosswalk": [
+        "V2:8",
+        "V3:1"
+      ]
+    },
+    {
+      "id": "F_IF1_PLATE",
+      "title": "7A8 plate to first IF primary",
+      "stage": "IF (partial)",
+      "model": null,
+      "description": "First IF primary lead from converter plate; primary supply end remains to be separately traced.",
+      "source": "Philco 1941 RMS, p.38 — #12, #14 and tube symbols",
+      "stage_status": "partial_signal_side_only",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V1:2",
+        "12:pPlate"
+      ],
+      "prototype_member_crosswalk": [
+        "V1:2",
+        "T2:pPlate"
+      ]
+    },
+    {
+      "id": "F_IF1_GRID",
+      "title": "First IF secondary to 7B7 control grid",
+      "stage": "IF (partial)",
+      "model": null,
+      "description": "First IF secondary signal goes to the IF amplifier control grid; secondary return and AVC are not modeled.",
+      "source": "Philco 1941 RMS, p.38 — #12, #14 and tube symbols",
+      "stage_status": "partial_signal_side_only",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "12:sGrid",
+        "V2:6"
+      ],
+      "prototype_member_crosswalk": [
+        "T2:sGrid",
+        "V2:6"
+      ]
+    },
+    {
+      "id": "F_IF2_PLATE",
+      "title": "7B7 plate to second IF primary",
+      "stage": "IF (partial)",
+      "model": null,
+      "description": "Second IF primary lead from IF amplifier plate; primary supply and secondary detector network incomplete.",
+      "source": "Philco 1941 RMS, p.38 — #12, #14 and tube symbols",
+      "stage_status": "partial_signal_side_only",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+      },
+      "factory_members": [
+        "V2:2",
+        "14:pPlate"
+      ],
+      "prototype_member_crosswalk": [
+        "V2:2",
+        "T3:pPlate"
+      ]
+    },
+    {
+      "id": "F_30_40_LAMP_A",
+      "title": "Pilot lamp / 40 Ω resistor — line side",
+      "stage": "Power",
+      "model": null,
+      "description": "One side of the dial lamp #32 across the 40 Ω section of resistance assembly #30.",
+      "source": "Philco 1941 RMS Year Book p.38, bottom-left AC supply, parts #30 and #32",
+      "stage_status": "factory_component_branch_traced_external_line_undetermined",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic — line resistance and pilot lamp, lower edge",
+        "verification": "visual trace: lamp is across 40 Ω resistor section; line-switch/rectifier terminal routing remains unverified"
+      },
+      "factory_members": [
+        "30:endA",
+        "32:a"
+      ],
+      "prototype_member_crosswalk": []
+    },
+    {
+      "id": "F_30_40_LAMP_B",
+      "title": "Pilot lamp / 40 Ω resistor — tap side",
+      "stage": "Power",
+      "model": null,
+      "description": "Other side of the dial lamp #32 across the 40 Ω section of resistance assembly #30.",
+      "source": "Philco 1941 RMS Year Book p.38, bottom-left AC supply, parts #30 and #32",
+      "stage_status": "factory_component_branch_traced_external_line_undetermined",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic — line resistance and pilot lamp, lower edge",
+        "verification": "visual trace: lamp is across 40 Ω resistor section; line-switch/rectifier terminal routing remains unverified"
+      },
+      "factory_members": [
+        "30:tap",
+        "32:b"
+      ],
+      "prototype_member_crosswalk": []
+    }
+  ],
+  "subcircuits": [
+    {
+      "id": "RF",
+      "name": "Loop aerial and converter input",
+      "parts": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "status": "not_fully_transcribed",
+      "unverified": "RF coil, tuning condenser, 7A8 grid/screen nodes"
+    },
+    {
+      "id": "IF",
+      "name": "455-kHz IF amplifier and transformers",
+      "parts": [
+        "12",
+        "13",
+        "14"
+      ],
+      "status": "partial",
+      "unverified": "Both complete winding pairs, supply, detector side, trimmer capacitors"
+    },
+    {
+      "id": "DETECTOR",
+      "name": "7C6 detection, AVC and volume",
+      "parts": [
+        "15",
+        "16",
+        "17",
+        "18",
+        "19"
+      ],
+      "status": "not_fully_transcribed",
+      "unverified": "All diode load/AVC/filter junctions and volume control pot tracks"
+    },
+    {
+      "id": "AUDIO",
+      "name": "7C6 / 50L6GT and speaker",
+      "parts": [
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27"
+      ],
+      "status": "partial",
+      "unverified": "#22 and #25 return paths, transformer/speaker winding characteristics"
+    },
+    {
+      "id": "POWER",
+      "name": "Rectifier, field-coil filter and AC line",
+      "parts": [
+        "28",
+        "29A",
+        "29B",
+        "30",
+        "31",
+        "32"
+      ],
+      "status": "partial",
+      "unverified": "Line dropper taps, pilot-lamp branch, B- vs metal chassis isolation, field-coil inductance"
+    }
+  ],
+  "verified_part_ledger": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29A",
+    "29B",
+    "30",
+    "31",
+    "32"
+  ],
+  "open_issues": [
+    {
+      "id": "P1-RF",
+      "severity": "blocker",
+      "stage": "RF",
+      "description": "Transcribe all aerial, tuning, oscillator and 7A8 connections from p.38; do not infer winding returns from component proximity."
+    },
+    {
+      "id": "P1-IF",
+      "severity": "blocker",
+      "stage": "IF",
+      "description": "Trace #12/#14 primary and secondary winding terminals, trimmers, 7B7 screen and AVC connections."
+    },
+    {
+      "id": "P1-DET",
+      "severity": "blocker",
+      "stage": "DETECTOR",
+      "description": "Trace 7C6 diode pins and all #15–#19 passive connections; distinguish detector return, AVC and audio grid."
+    },
+    {
+      "id": "P1-OUTPUT",
+      "severity": "blocker",
+      "stage": "AUDIO",
+      "description": "Verify #22 and #25 routes; trace full output-transformer primary and secondary plus voice coil."
+    },
+    {
+      "id": "P1-AC",
+      "severity": "blocker",
+      "stage": "POWER",
+      "description": "#30 contains documented 40 Ω + 80 Ω sections and #32 lamp shunts 40 Ω. Still trace the line switch, both mains paths, 35Z3 anode, heater return, and #31 line capacitor before claiming a complete AC network."
+    },
+    {
+      "id": "P1-SOURCE",
+      "severity": "blocker",
+      "stage": "ALL",
+      "description": "Independently recheck every connection on a legible high-resolution factory scan and record confidence for all net memberships."
+    },
+    {
+      "id": "P2-SPICE",
+      "severity": "later",
+      "stage": "ALL",
+      "description": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
+    }
+  ],
+  "checks": {
+    "factory_register_count": 33,
+    "traced_network_count": 16,
+    "factory_terminals_on_traced_nets": 39,
+    "unresolved_graph_errors": [],
+    "factory_wiring_fully_transcribed": false,
+    "simulator_matches_factory": false,
+    "chassis_lead_dress_factory_verified": false,
+    "benchmark_ready": false
+  },
+  "version": "0.16.0"
+}
