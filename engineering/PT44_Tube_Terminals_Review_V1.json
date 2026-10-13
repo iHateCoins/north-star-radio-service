@@ -1,6 +1,6 @@
 {
   "schema": "PT44_TUBE_TERMINALS_V1",
-  "version": "0.15.1",
+  "version": "0.19.0",
   "status": "COMPONENT_PIN_IDENTITIES_VERIFIED_RECEIVER_CONNECTIONS_PENDING",
   "factory_reference": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "factory_reference_page": 38,
@@ -211,7 +211,7 @@
       "id": "DET-04",
       "stage": "DETECTOR",
       "terminal": "V3:4",
-      "task": "Trace common diode/triode cathode return, checking tube pin 7 separately.",
+      "task": "7C6 pins 4 and 7 are internally common by Sylvania; trace the actual external return wiring of either socket terminal without assuming chassis = B-minus.",
       "status": "source_trace_required",
       "factory_net_claim": false
     },
