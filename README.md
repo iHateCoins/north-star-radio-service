@@ -1,9 +1,9 @@
-# North Star Radio Service — v0.20.0 Philco original-scan wiring
+# North Star Radio Service — v0.21.0 passive circuit milestone
 
-**Factory source:** user-supplied original Philco 1941 RMS Year Book PDF, printed p.38, original 300 dpi scan (2022x2587 pixels); see `engineering/PT44_Detector_Audio_Trace_Evidence_V1.json` for source SHA-256 and precise image review region.
+[Play current game](https://ihatecoins.github.io/north-star-radio-service/)
 
-Four new *source-traced copper conductor groups* around the second IF low end, volume wiper, 7C6 audio grid and passive return. Includes nine new source-limited continuity examples. Two 7C6 diode pins, #17 resistor junction and AVC branching remain unresolved. DO NOT equate passive return with chassis or claim full SPICE. Not engineering complete.
+This release adds genuine **complex nodal (frequency-domain) passive circuit analysis** with a generic linear R/C solver, using only the source-traced Philco #15, #18, and #19 junctions. It calculates the isolated #18/#19 high-pass bench at 1 V ideal AC source (0, 1, 10, 1000 and 455000 Hz) and #15 capacitive reactance at 455 kHz. These are **isolated model results, not actual PT-44 signal gain**. All source fields live in `engineering/PT44_Isolated_Passive_MNA_V1.json` and the solver source is `engineering/pt44_passive_ac_solver_v1.js`.
 
-The live browser game retains the v0.19 reduced-order checkout and illustrative 3D wire harness. `index.html` has watermark `BUILD v0.20.0`. All canonical new data is mirrored as separate JSON. The passive SPICE fragment includes only #15 250pF, #18 10nF and #19 4.7MΩ with no unverified diode simulation.
+No unverified diode/AVC wiring, coil inductances, speaker or tube models are added. The factory graph remains at 22 traced networks; this is **not** a complete factory circuit nor SPICE integration. The previously shipped playable shop stays on its simplified solver. `BUILD v0.21.0` watermark.
 
-Testing: `node tests/test_detector_trace_v20.js`, plus the existing v0.19, v0.18, v0.17 and v0.16 regression scripts. Prove no new speculative diode edge and no false ohmmeter-open claims.
+Run tests: `node tests/test_passive_mna_v21.js` plus existing `tests/test_detector_trace_v20.js`, `tests/test_tube_internal_v19.js`, `tests/test_continuity_v18.js`, `tests/test_bench_v17.js`, `tests/test_passive_devices_v16.js`. The new tests inject bad factory values, bad graph junctions, nonfinite frequency and a singular bench circuit to ensure errors are detected.

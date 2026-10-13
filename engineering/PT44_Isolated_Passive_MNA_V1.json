@@ -1,0 +1,86 @@
+{
+  "schema": "PT44_ISOLATED_PASSIVE_MNA_V1",
+  "version": "0.21.0",
+  "source": "Philco 1941 RMS Year Book printed p.38, original user-supplied 300dpi factory scan; verified nets in PT44_FACTORY_V3",
+  "elements": [
+    {
+      "factory_part": "15",
+      "factory_category": "capacitor",
+      "kind": "C",
+      "value_si": 2.5e-10,
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "expected_nets": [
+        "F_IF2_SECONDARY_VOL_TOP",
+        "F_DET_PASSIVE_RETURN"
+      ],
+      "factory_document": "Philco 1941 RMS p.38; component #15 250 pF"
+    },
+    {
+      "factory_part": "18",
+      "factory_category": "capacitor",
+      "kind": "C",
+      "value_si": 1e-8,
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "expected_nets": [
+        "F_VOL_WIPER_C18",
+        "F_7C6_AUDIO_GRID"
+      ],
+      "factory_document": "Philco 1941 RMS p.38; component #18 0.01 uF"
+    },
+    {
+      "factory_part": "19",
+      "factory_category": "resistor",
+      "kind": "R",
+      "value_si": 4700000,
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "expected_nets": [
+        "F_7C6_AUDIO_GRID",
+        "F_DET_PASSIVE_RETURN"
+      ],
+      "factory_document": "Philco 1941 RMS p.38; component #19 4.7 MΩ"
+    }
+  ],
+  "isolated_bench": {
+    "source_ac_rms_volts": 1,
+    "source_plus": "F_VOL_WIPER_C18",
+    "source_minus": "F_DET_PASSIVE_RETURN",
+    "node_measured": "F_7C6_AUDIO_GRID",
+    "included_component_parts": [
+      "18",
+      "19"
+    ],
+    "shunt_capacitor_test_part": "15",
+    "frequencies_hz": [
+      0,
+      1,
+      10,
+      1000,
+      455000
+    ]
+  },
+  "limits": {
+    "volume_control_track": "unknown, omitted",
+    "7C6_detector_diode_wiring": "unresolved",
+    "IF_transformer_inductance": "unknown",
+    "isolation": "only source traced passive circuit; not actual receiver performance",
+    "DC_field_coil_ohms": 500,
+    "line_resistance_sections_ohms": [
+      40,
+      80
+    ],
+    "line_pilot_lamp_bypass": "unmodeled; cannot equate complete resistor and installed network"
+  },
+  "is_complete_receiver_model": false,
+  "detector_diode_model_verified": false,
+  "spice_validated": false,
+  "benchmark_ready": false
+}

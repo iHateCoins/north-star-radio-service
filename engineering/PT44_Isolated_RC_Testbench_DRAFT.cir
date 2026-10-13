@@ -1,0 +1,12 @@
+* PT-44 isolated audio RC testbench. NOT the complete PT-44, nor ngspice-validated yet.
+* #18 and #19 are from native Philco 1941 RMS p.38. 7C6 and AVC are excluded.
+* Wiper source is a hypothetical ideal 1 V AC test voltage, NOT an antenna or tube gain.
+Vin WIPER 0 AC 1
+C18 WIPER AUDIO_GRID 10n
+R19 AUDIO_GRID 0 4.7Meg
+.ac dec 100 0.1 1000000
+.control
+run
+print vm(AUDIO_GRID)
+.endc
+.end

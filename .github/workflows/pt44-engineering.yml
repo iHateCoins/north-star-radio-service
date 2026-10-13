@@ -27,3 +27,5 @@ jobs:
         run: node tests/test_tube_internal_v19.js
       - name: Verify 300-dpi Philco factory detector wiring and unknown diode isolation
         run: node tests/test_detector_trace_v20.js
+      - name: Check isolated factory-sourced RC complex nodal model
+        run: node tests/test_passive_mna_v21.js
