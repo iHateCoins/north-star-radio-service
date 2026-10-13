@@ -1,0 +1,30 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const root=path.join(__dirname,'..');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const fixture=JSON.parse(fs.readFileSync(path.join(root,'engineering/PT44_Factory_Measurement_and_Detector_V1.json'),'utf8'));
+const blocks=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
+assert.equal(blocks.length,4);blocks.forEach(s=>new Function(s));
+const ctx=vm.createContext({console});vm.runInContext(blocks[1],ctx);
+assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify(PT44_BENCH_V1)',ctx)),fixture);
+const start=blocks[3].indexOf('function pt44BenchAudit()'),end=blocks[3].indexOf('function renderFactoryLedger(box)');
+assert(start>=0&&end>start);
+vm.runInContext(blocks[3].slice(start,end),ctx);
+let a=JSON.parse(vm.runInContext('JSON.stringify(pt44BenchAudit())',ctx));
+assert(a.ok,JSON.stringify(a.errors));
+assert.equal(a.voltagePoints,6);assert.equal(a.subdevices,3);assert.equal(a.referenceOnly,true);
+assert.deepEqual(fixture.factory_voltage_labels.map(v=>[v.terminal,v.volts]),[['V1:2',95],['V1:3',45],['V2:2',95],['V2:3',45],['V3:2',30],['V4:3',85]]);
+assert.equal(fixture.factory_specifications.if_center_hz,455000);
+assert.equal(fixture.factory_specifications.line_voltage_ac_or_dc_volts,115);
+function invalid(mutation){
+ const result=JSON.parse(vm.runInContext(mutation,ctx));
+ assert.equal(result.invalid,true,result.reason||'Mutated graph not rejected');
+}
+invalid('(()=>{const x=PT44_BENCH_V1.factory_voltage_labels[0],old=x.terminal;x.terminal="V1:8";const invalid=!pt44BenchAudit().ok;x.terminal=old;return JSON.stringify({invalid});})()');
+invalid('(()=>{const x=PT44_BENCH_V1.detector_subdevices.V3.section_D2,old=x.anode_pin;x.anode_pin="V3:5";const invalid=!pt44BenchAudit().ok;x.anode_pin=old;return JSON.stringify({invalid});})()');
+invalid('(()=>{const x=PT44_BENCH_V1.detector_subdevices.V3.section_D1,old=x.external_net_id;x.external_net_id="F_GUESSED";const invalid=!pt44BenchAudit().ok;x.external_net_id=old;return JSON.stringify({invalid});})()');
+invalid('(()=>{const x=PT44_BENCH_V1.detector_subdevices["16"].resistive_track,old=x.wiper;x.wiper="16:switch_a";const invalid=!pt44BenchAudit().ok;x.wiper=old;return JSON.stringify({invalid});})()');
+invalid('(()=>{const x=PT44_BENCH_V1.voltage_compare_policy,old=x.use_for_pass_fail;x.use_for_pass_fail=true;const invalid=!pt44BenchAudit().ok;x.use_for_pass_fail=old;return JSON.stringify({invalid});})()');
+assert(JSON.parse(vm.runInContext('JSON.stringify(pt44BenchAudit())',ctx)).ok);
+assert(html.includes('BUILD v0.17.0<small>'));
+assert(html.includes('<meta name="nsrs-build" content="v0.17.0">'));
+console.log('PASS: factory 6 volt labels, 7C6 separate diodes, #16 pot/switch, 5 negative mutation checks and v0.17.0 watermark');
