@@ -1,39 +1,39 @@
-# North Star Radio Service — PT-44 v0.18.0 engineering preview
+# North Star Radio Service — PT-44 v0.19.0
 
-**[Play the game](https://ihatecoins.github.io/north-star-radio-service/)** · [GitHub source](https://github.com/iHateCoins/north-star-radio-service)
+**Play:** https://ihatecoins.github.io/north-star-radio-service/
 
-The bottom-right watermark and `<meta name="nsrs-build" content="v0.18.0">` identify this release. GitHub Pages updates after the repository changes. Three.js loads from CDNJS; if unavailable, a 2D fallback is used. Browser saves do not automatically follow across origins.
+This is a working game prototype, **NOT a factory-complete or SPICE-validated receiver model**. The game uses the existing reduced-order simulator, and its drawn under-chassis wires are not verified original Philco harness routes.
 
-## v0.18.0: Source-limited continuity workbench
+## v0.19.0 — Authenticated 7C6 internal cathode connection
 
-Under **Factory ledger**, a new **Continuity workbench** distinguishes three very different observations:
+- Incorporated an independently documented **device-internal electrical connection**: the 7C6's cathode is accessible at **socket pins 4 and 7**, which are internally at the same potential. **This does not add or certify a wire between physical chassis terminals.**
+- Modeled both 7C6 detector diode plates (pins 5 and 6), triode grid (pin 3), plate (pin 2) and **shared internal cathode** separately. A vacuum diode is not a metallic wire or unconditional DC short.
+- Updated the Factory ledger and continuity workbench to classify a **tube-internal bond** separately from direct copper, passive component paths, and untraced circuitry.
+- 17 source-limited continuity cases now explicitly test cathode internal continuity, diode non-equivalence, and non-assumed chassis ground. Seven deliberate data corruptions are rejected in the v0.19 tests.
+- Added `engineering/PT44_Tube_Internal_Topology_V1.json`, versioned independent source data and a **SPICE-compatible zero-voltage source subcircuit** for the *internal cathode bond only* in `engineering/PT44_7C6_Cathode_Bond_DRAFT.cir`. It does not contain tube I–V behavior or the PT-44's external detector and AVC network.
+- Updated watermark and HTML document title to `v0.19.0`. All existing source-graph (18 partial traced networks), 33-part register, and healthy radio gameplay remain intact.
 
-1. **DIRECT COPPER** — terminals explicitly grouped on an already transcribed factory wire net.
-2. **THROUGH COMPONENT** — a path through documented internal passive elements such as the 500 Ω speaker field coil (#28), 40 Ω/80 Ω resistor sections (#30), individual transformer windings (#12, #14, #26), or identified factory resistors. A displayed numerical result is the selected path's sum of nominal DC resistance, **not the receiver's measured or equivalent resistance** when parallel paths exist.
-3. **NOT YET TRACED** — no path in our partial documented graph. **Never interpret this as a confirmed open circuit, coil isolation, or wiring fault.** Other source circuits are still missing.
+## Evidence and limits
 
-The current dataset contains **14 targeted reasoning cases**, **18 partial factory wire groups**, and **18 internal device edges**. It explicitly refuses to equate the circuit's **B− return** with the metal **chassis** without source evidence; both detector-diode external connections also remain unverified.
+- **Sylvania Technical Manual, 9th edition (1953), 7C6 continuation:** explicitly says the cathode reaches pins 4 and 7; pin 4 is a cathode mount support and the contacts are electrically at the same potential. https://www.worldradiohistory.com/BOOKSHELF-ARH/Technology/Technology-General/Sylvania-Technical-Manual-Tubes-1953-9th-Edition.pdf
+- **RCA Receiving Tube Manual:** describes the 7C6's two diode units with their common cathode sleeve shared with the triode. https://gbppr.net/RCA_Receiving_Tube_Manual.pdf
+- **Philco 1941 RMS Year Book p.38:** the authoritative PT-42/PT-44 *external wiring* source; **RF/IF, detector and AVC connections are not fully transcribed**. https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf
+- The downloaded Rider drawings (uploaded by the project owner) are cross-checks, not permission to invent ambiguous junctions.
 
-New standalone source: `engineering/PT44_Documented_Continuity_V1.json`. Results are computed by the same JS engine displayed in the factory ledger. The derived logic can be reused when adding further radio definitions.
+## Tests
 
-### Run tests
+- `node tests/test_tube_internal_v19.js`
+- `node tests/test_continuity_v18.js`
+- `node tests/test_bench_v17.js`
+- `node tests/test_passive_devices_v16.js`
+- `python tests/test_browser_v19.py` (requires Playwright Chromium)
 
-```
-node tests/test_continuity_v18.js
-node tests/test_bench_v17.js
-node tests/test_passive_devices_v16.js
-python3 tests/test_browser_v18.py
-```
+The JavaScript tests enforce no imaginary cathode/chassis connection, missing external diode net, or hard conductive connection between active tube electrodes.
 
-The browser test requires Playwright and Chromium and tests the 2D fallback, watermark, stage filtering, service checkout and JavaScript errors. CI runs Node electrical tests on every push.
+## Remaining benchmark gates
 
-## Reference provenance
-
-- Philco 1941 RMS Year Book, **PT-42/PT-44 schematic, parts list, chassis layout, printed page 38**: https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf
-- John F. Rider Philco PT-42/PT-44 service page 12-45 (secondary scan): https://www.amplifiedparts.com/schematics/philco-radio-television-corp/pt-44
-
-## Still outstanding
-
-**Phase 1 is not complete.** Exact full factory RF / oscillator / two IF primary-and-secondary / detector / AVC / audio / AC line wiring needs a legible pin-by-pin trace, second-reader cross-check, and resolution of all unknowns. Individual component values do not prove chassis wiring. The 3D chassis and displayed schematic remain illustrative where unverified. The existing playable solver is a *reduced-order approximation*, not ngspice. Real transformer coupling, field-coil inductance, line and speaker models, SPICE calibration, and test equipment parity are future acceptance gates.
-
-**Safety:** This is entertainment and engineering research, not a safe restoration guide. Real AC/DC vacuum tube radios can have lethal voltages and energized metal chassis.
+1. Complete actual pin-by-pin Philco RF, oscillator, both IF, detector, AVC and line wiring, with source-image evidence for each connection.
+2. Validate component/coil values, winding taps, pilot lamp circuit, mains B-minus/chassis isolation and factory voltage test conditions.
+3. Install and validate meaningful nonlinear 7A8/7B7/7C6/50L6GT/35Z3 + transformer/SPICE equivalents.
+4. Generate factory schematic and physical chassis from the same netlist and verify every chassis conductor.
+5. Pass healthy and faulty performance tests and a second-radio reuse validation.
