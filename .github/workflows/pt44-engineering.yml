@@ -25,3 +25,5 @@ jobs:
         run: node tests/test_continuity_v18.js
       - name: Validate 7C6 tube-internal cathode and reject invented detector/chassis connections
         run: node tests/test_tube_internal_v19.js
+      - name: Verify 300-dpi Philco factory detector wiring and unknown diode isolation
+        run: node tests/test_detector_trace_v20.js

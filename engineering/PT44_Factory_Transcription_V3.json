@@ -215,8 +215,9 @@
       "model_slots": [
         "T3"
       ],
-      "connectivity": "partial",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "15": {
       "description": "250 pF capacitor",
@@ -229,8 +230,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #15",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "16": {
       "description": "Volume control",
@@ -246,8 +248,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #16",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "17": {
       "description": "4.7 MΩ resistor",
@@ -274,8 +277,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #18",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "19": {
       "description": "4.7 MΩ resistor",
@@ -288,8 +292,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #19",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "20": {
       "description": "0.01 µF / 400 V capacitor",
@@ -973,6 +978,93 @@
         "32:b"
       ],
       "prototype_member_crosswalk": []
+    },
+    {
+      "id": "F_IF2_SECONDARY_VOL_TOP",
+      "title": "Second IF secondary low to volume control top",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: secondary lower terminal descends to #16 track upper lug and #15 250 pF upper side.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "factory_members": [
+        "14:sReturn",
+        "16:a",
+        "15:a"
+      ],
+      "prototype_member_crosswalk": []
+    },
+    {
+      "id": "F_VOL_WIPER_C18",
+      "title": "Volume-control wiper to coupling capacitor",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: wiper arrow terminates at left side of #18 0.01 µF; crossing vertical lines do not have junction dots.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "factory_members": [
+        "16:wiper",
+        "18:a"
+      ],
+      "prototype_member_crosswalk": []
+    },
+    {
+      "id": "F_7C6_AUDIO_GRID",
+      "title": "7C6 triode grid and grid leak",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: right side of #18 and upper end #19 connect to 7C6 triode grid lead.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "factory_members": [
+        "18:b",
+        "19:a",
+        "V3:3"
+      ],
+      "prototype_member_crosswalk": []
+    },
+    {
+      "id": "F_DET_PASSIVE_RETURN",
+      "title": "Detector audio passive common return",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: the bottom ends of #15, #16, and #19 share the same horizontal return line. This does not establish chassis bond.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "factory_members": [
+        "15:b",
+        "16:b",
+        "19:b"
+      ],
+      "prototype_member_crosswalk": []
     }
   ],
   "subcircuits": [
@@ -1102,7 +1194,7 @@
       "id": "P1-DET",
       "severity": "blocker",
       "stage": "DETECTOR",
-      "description": "Trace 7C6 diode pins and all #15–#19 passive connections; distinguish detector return, AVC and audio grid."
+      "description": "Four passive audio detector conductor groups are newly source-traced (second IF cold, volume wiper, triode grid and passive return). Still trace diode/AVC #17 branch, tube returns, and full automatic volume control."
     },
     {
       "id": "P1-OUTPUT",
@@ -1120,7 +1212,7 @@
       "id": "P1-SOURCE",
       "severity": "blocker",
       "stage": "ALL",
-      "description": "Independently recheck every connection on a legible high-resolution factory scan and record confidence for all net memberships."
+      "description": "Original 300 dpi Philco image now reviewed for four detector/audio conductor groups. Independently verify other factory net memberships, ambiguous diode/IF taps and exact 7C6 socket wiring."
     },
     {
       "id": "P2-SPICE",
@@ -1131,13 +1223,13 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 16,
-    "factory_terminals_on_traced_nets": 39,
+    "traced_network_count": 22,
+    "factory_terminals_on_traced_nets": 54,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.16.0"
+  "version": "0.20.0"
 }

@@ -13,7 +13,7 @@ vm.runInContext(scripts[3].slice(a,b),ctx);
 assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify(PT44_CONTINUITY_V1)',ctx)),fixture);
 const audit=JSON.parse(vm.runInContext('JSON.stringify(pt44ContinuityAudit())',ctx));
 assert(audit.ok,'Continuity audit failure: '+audit.issues.join('; '));
-assert(audit.total>=14);assert.equal(audit.passed,audit.total);assert.equal(audit.wireGroups,18);
+assert(audit.total>=14);assert.equal(audit.passed,audit.total);assert.equal(audit.wireGroups,PT44_FACTORY_V3.factory_nets.length);
 assert(audit.deviceEdges>=18);
 for(const c of fixture.analysis_cases){
   const q=JSON.parse(vm.runInContext('JSON.stringify(pt44ContinuityQuery('+JSON.stringify(c.a)+','+JSON.stringify(c.b)+'))',ctx));

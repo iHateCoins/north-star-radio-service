@@ -1,0 +1,119 @@
+{
+  "schema": "PT44_DETECTOR_AUDIO_TRACES_V1",
+  "version": "0.20.0",
+  "factory_document": "Philco 1941 RMS Year Book, printed page 38, schematic diagram for PT-42/PT-44",
+  "source_scan": {
+    "native_image_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382",
+    "pixel_dimensions": [
+      2022,
+      2587
+    ],
+    "resolution_dpi": 300,
+    "page_index_zero_based": 2,
+    "review_region": {
+      "native_width_px": 2022,
+      "native_height_px": 2587,
+      "dpi": 300,
+      "bbox_left_top_right_bottom_px": [
+        750,
+        265,
+        1400,
+        810
+      ]
+    }
+  },
+  "verified_external_conductor_groups": [
+    {
+      "net_id": "F_IF2_SECONDARY_VOL_TOP",
+      "title": "Second IF secondary low to volume control top",
+      "terminals": [
+        "14:sReturn",
+        "16:a",
+        "15:a"
+      ],
+      "basis": "Factory page 38: secondary lower terminal descends to #16 track upper lug and #15 250 pF upper side.",
+      "source_box": {
+        "native_width_px": 2022,
+        "native_height_px": 2587,
+        "dpi": 300,
+        "bbox_left_top_right_bottom_px": [
+          750,
+          265,
+          1400,
+          810
+        ]
+      }
+    },
+    {
+      "net_id": "F_VOL_WIPER_C18",
+      "title": "Volume-control wiper to coupling capacitor",
+      "terminals": [
+        "16:wiper",
+        "18:a"
+      ],
+      "basis": "Factory page 38: wiper arrow terminates at left side of #18 0.01 µF; crossing vertical lines do not have junction dots.",
+      "source_box": {
+        "native_width_px": 2022,
+        "native_height_px": 2587,
+        "dpi": 300,
+        "bbox_left_top_right_bottom_px": [
+          750,
+          265,
+          1400,
+          810
+        ]
+      }
+    },
+    {
+      "net_id": "F_7C6_AUDIO_GRID",
+      "title": "7C6 triode grid and grid leak",
+      "terminals": [
+        "18:b",
+        "19:a",
+        "V3:3"
+      ],
+      "basis": "Factory page 38: right side of #18 and upper end #19 connect to 7C6 triode grid lead.",
+      "source_box": {
+        "native_width_px": 2022,
+        "native_height_px": 2587,
+        "dpi": 300,
+        "bbox_left_top_right_bottom_px": [
+          750,
+          265,
+          1400,
+          810
+        ]
+      }
+    },
+    {
+      "net_id": "F_DET_PASSIVE_RETURN",
+      "title": "Detector audio passive common return",
+      "terminals": [
+        "15:b",
+        "16:b",
+        "19:b"
+      ],
+      "basis": "Factory page 38: the bottom ends of #15, #16, and #19 share the same horizontal return line. This does not establish chassis bond.",
+      "source_box": {
+        "native_width_px": 2022,
+        "native_height_px": 2587,
+        "dpi": 300,
+        "bbox_left_top_right_bottom_px": [
+          750,
+          265,
+          1400,
+          810
+        ]
+      }
+    }
+  ],
+  "unresolved": [
+    "Which 7C6 detector diode plate(s) connect to the upper end of #14 second IF secondary",
+    "Routing from #17 detector/AVC resistor and remaining detector loading back to antenna/IF bias",
+    "Specific metal-chassis-to-B-minus connection and any line-bypass wiring",
+    "Potentiometer #16 full resistance, taper, and any factory production options"
+  ],
+  "model_parity": "These are manufacturer-wiring graph memberships only. No 3D route or reduced-order solver equivalence is asserted.",
+  "spice_limit": "SPICE draft can include #15/#18/#19 passive devices but does not infer a valid detector or automatic volume control behavior.",
+  "benchmark_ready": false
+}

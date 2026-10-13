@@ -1,6 +1,6 @@
 {
   "schema": "PT44_DOCUMENTED_CONTINUITY_V1",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "model": "Philco PT-44",
   "status": "PARTIAL_FACTORY_GRAPH_ONLY_NOT_A_COMPLETE_RADIO_OR_MEASUREMENT",
   "philco_source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
@@ -231,6 +231,78 @@
       "b": "__CHASSIS__",
       "expect": "untraced",
       "reason": "Common cathode inside tube does not prove its physical external chassis connection."
+    },
+    {
+      "id": "C18",
+      "stage": "DETECTOR",
+      "a": "14:sReturn",
+      "b": "16:a",
+      "expect": "same_wire_net",
+      "reason": "300dpi Philco p.38, second IF secondary cold to volume upper"
+    },
+    {
+      "id": "C19",
+      "stage": "DETECTOR",
+      "a": "15:a",
+      "b": "16:a",
+      "expect": "same_wire_net",
+      "reason": "250 pF cap #15 high side bypasses volume top"
+    },
+    {
+      "id": "C20",
+      "stage": "DETECTOR",
+      "a": "16:wiper",
+      "b": "18:a",
+      "expect": "same_wire_net",
+      "reason": "Volume slider feeds #18 audio coupling cap"
+    },
+    {
+      "id": "C21",
+      "stage": "DETECTOR",
+      "a": "18:b",
+      "b": "V3:3",
+      "expect": "same_wire_net",
+      "reason": "Audio coupling cap reaches 7C6 triode grid"
+    },
+    {
+      "id": "C22",
+      "stage": "DETECTOR",
+      "a": "19:a",
+      "b": "V3:3",
+      "expect": "same_wire_net",
+      "reason": "4.7 MΩ grid leak tied to 7C6 triode grid"
+    },
+    {
+      "id": "C23",
+      "stage": "DETECTOR",
+      "a": "15:b",
+      "b": "19:b",
+      "expect": "same_wire_net",
+      "reason": "Passive return shared by 250 pF bypass and grid return"
+    },
+    {
+      "id": "C24",
+      "stage": "DETECTOR",
+      "a": "16:a",
+      "b": "16:wiper",
+      "expect": "untraced",
+      "reason": "The moving volume potentiometer is an internal variable-resistance element; its resistance is not factory documented."
+    },
+    {
+      "id": "C25",
+      "stage": "DETECTOR",
+      "a": "18:a",
+      "b": "18:b",
+      "expect": "untraced",
+      "reason": "Capacitor #18 couples audio AC but does not create DC continuity."
+    },
+    {
+      "id": "C26",
+      "stage": "DETECTOR",
+      "a": "V3:3",
+      "b": "V3:7",
+      "expect": "untraced",
+      "reason": "Triode control grid and internal cathode are not shorted inside the vacuum tube."
     }
   ],
   "acceptance": {
@@ -250,6 +322,7 @@
     "Inductances and transformer coupling unknown.",
     "Current playable repair solver still reduced order.",
     "Source location in historic schematic is not a physical chassis route.",
-    "7C6 pins 4/7 internally common from Sylvania: this is a device-internal bond, not a documented chassis wire."
+    "7C6 pins 4/7 internally common from Sylvania: this is a device-internal bond, not a documented chassis wire.",
+    "v0.20 four 300dpi-traced passive junction groups are not proof of complete detector or SPICE-equivalent topology."
   ]
 }

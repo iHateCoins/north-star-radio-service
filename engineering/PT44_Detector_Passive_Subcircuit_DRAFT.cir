@@ -1,0 +1,9 @@
+* Philco PT-44 p.38 — 300 dpi verified passive audio couplings only (NOT a runnable receiver).
+* This is NOT an AVC model, and the rest of the 7C6 diode/winding connections remain untraced.
+* Port VOL_TOP also reaches lower secondary of second IF winding; source terminal #14:sReturn.
+* Volume pot resistance and control taper are not known; WIPER not internally tied here.
+.subckt PT44_DETECTOR_AUDIO_PASSIVES VOL_TOP WIPER AUDIO_GRID PASSIVE_RETURN
+C15_BYPASS VOL_TOP PASSIVE_RETURN 250p
+C18_AUDIO WIPER AUDIO_GRID 10n
+R19_GRID_LEAK AUDIO_GRID PASSIVE_RETURN 4.7Meg
+.ends PT44_DETECTOR_AUDIO_PASSIVES
