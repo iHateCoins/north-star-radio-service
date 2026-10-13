@@ -13,6 +13,7 @@ The historical reference radio is the **1941 Philco PT-44**. Its factory circuit
 - Added `engineering/PT44_Tube_Terminals_Review_V1.json`, a machine-readable list of terminal roles and unresolved circuit transcription work.
 - Verified against the 16 previously traced/partial factory networks; no new schematic edges have been certified. The existing reduced-order solver and draft passive SPICE netlist are unchanged.
 - Regression testing: HTML syntax, five stage filters, 33 factory component rows, healthy checkout, 30 numerical healthy samples, and negative checks for invalid or prematurely certified tube pins.
+- **Heater rating clarification (v0.15.1):** Three early 7-series Loktals have historical 7 V nominal type naming but 6.3 V / 150 mA operating references. A simple series estimate gives 103.9 V, **not** a certified PT-44 mains/dropper circuit.
 - **Not engineering complete.** Receiver wiring still requires high-resolution Philco schematic review; datasheet pin identities do not establish real-world wire connectivity.
 
 ## Playing
