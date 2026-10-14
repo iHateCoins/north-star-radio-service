@@ -55,7 +55,7 @@ function pt44SpicePassiveDeck(){
   'VRETURN '+pt44SpiceNode('F_DET_PASSIVE_RETURN')+' 0 DC 0',
   'VIF2 '+pt44SpiceNode('F_IF2_SECONDARY_VOL_TOP')+' '+pt44SpiceNode('F_DET_PASSIVE_RETURN')+' DC 0 AC 0',
   'VWIPER '+pt44SpiceNode('F_VOL_WIPER_C18')+' '+pt44SpiceNode('F_DET_PASSIVE_RETURN')+' DC 0 AC 1',
-  '.ac dec 60 0.1 1000000','.end');
+  '.ac dec 60 0.1 1000000','.print ac vm(N_7C6_AUDIO_GRID)','.end');
  return lines.join('\n')+'\n';
 }
 function pt44SpiceExportAudit(){
