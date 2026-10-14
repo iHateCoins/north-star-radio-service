@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SPICE_FROM_FACTORY_V1",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "source": "Philco RMS 1941 p.38, original scan; PT44_FACTORY_V3 and PT44_PASSIVE_V1 authoritative partial device graph",
   "detector_parts": [
     "15",
@@ -23,7 +23,8 @@
     "IF_L_and_k": "unknown, excluded",
     "7C6_diodes": "external nets unresolved; excluded",
     "return_node": "independent testbench B minus, not chassis",
-    "SPICE_execution": "not tested by ngspice",
+    "SPICE_execution": "isolated passive deck passed ngspice CI; full receiver not validated",
+    "passive_deck_ngspice_validated": true,
     "potentiometer": "value and sweep unspecified; wiper driven by ideal 1 VAC"
   },
   "factory_wiring_complete": false,
