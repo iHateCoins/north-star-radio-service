@@ -10,7 +10,7 @@ assert(Math.abs(model.source_line_voltage_v-heaterV-model.derived_nominal_target
 assert(Math.abs((model.source_line_voltage_v-heaterV)/model.heater_reference_current_a-model.derived_nominal_targets.equivalent_drop_at_reference_current_ohm)<1e-9);
 assert.equal(model.heaters.length,5);assert.equal(model.factory_dropper.sections_ohm[0]+model.factory_dropper.sections_ohm[1],120);
 assert.equal(model.factory_dropper.lamp_shunts_section_ohm,40);assert.equal(model.factory_dropper.lamp_iv_model,null);
-assert.equal(model.validation_status.full_receiver_behavior_validated,false);assert.equal(model.validation_status.benchmark_ready,false);
+assert.equal(model.validation_status.spice_execution_validated,true);assert.equal(model.validation_status.full_receiver_behavior_validated,false);assert.equal(model.validation_status.benchmark_ready,false);
 for(const term of ['VOPEN NOSRC 0 DC 115','R30_OPEN_40 NOSRC NOTAP 40','R30_OPEN_80 NOTAP NOHEATER 80','R30_SHORT_40 NBSRC NBTAP 40','VLAMP_IDEAL_SHORT NBSRC NBTAP DC 0','R30_SHORT_80 NBTAP NBHEATER 80','R35Z3_OPEN NOHEATER NO50 233.33333333333334','R50L6_OPEN NO50 NO7A8 333.3333333333333','R7A8_OPEN NO7A8 NO7B7 42','R7B7_OPEN NO7B7 NO7C6 42','R7C6_OPEN NO7C6 0 42','.control','op','print -i(VOPEN)','print v(NOHEATER)','print -i(VSHORT)','print v(NBHEATER)'])assert(deck.includes(term),term);
 for(const s of model.spice_scenarios){
  const current=model.source_line_voltage_v/(heaterOhms+s.effective_part_30_ohm);

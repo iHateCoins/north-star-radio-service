@@ -91,6 +91,6 @@
     "spice_execution_required": true,
     "full_receiver_behavior_validated": false,
     "benchmark_ready": false,
-    "spice_execution_validated": false
+    "spice_execution_validated": true
   }
 }

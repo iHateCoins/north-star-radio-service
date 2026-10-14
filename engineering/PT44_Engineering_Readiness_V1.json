@@ -18,7 +18,7 @@
       "isolated_ngspice_testbench_validated": true,
       "full_receiver_spice_validated": false,
       "nominal_heater_sanity_scenarios": 2,
-      "nominal_heater_sanity_spice_validated": false
+      "nominal_heater_sanity_spice_validated": true
     },
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
@@ -33,7 +33,7 @@
     "service_alignment_steps_transcribed": 3,
     "heater_model_scenarios": 2,
     "heater_nominal_sum_volts": 103.9,
-    "heater_string_sanity_spice_validated": false
+    "heater_string_sanity_spice_validated": true
   },
   "open_items": [
     {
