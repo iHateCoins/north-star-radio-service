@@ -2168,7 +2168,7 @@ function pt44DetectorTraceAudit(){
  if(e.benchmark_ready||PT44_FACTORY_V3.checks.benchmark_ready)errs.push('Incomplete detector must not be benchmark certified');
  const d=PT44_BENCH_V1.detector_subdevices.V3;
  if(d.section_D1.external_net_id!==null||d.section_D2.external_net_id!==null)errs.push('Unverified detector diode-to-IF wire was invented');
- return {ok:!errs.length,errors:errs,tracedGroups:e.verified_external_conductor_groups.length,certifiedTerminals:seen.size};
+ return {ok:!errs.length,errors:errs,tracedGroups:e.verified_external_conductor_groups.length,certifiedTerminals:seen.size,symbolTraces:syms.length};
 }
 function pt44DetectorTraceHTML(stage,esc){
  if(stage!=='ALL' && stage!=='DETECTOR' && stage!=='IF')return '';
