@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.28.0",
+  "version": "0.33.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -19,8 +19,12 @@
       "full_receiver_spice_validated": false
     },
     "power_filter_audit_findings": 3,
-    "power_filter_verified_memberships": 10,
-    "power_filter_unreviewed_memberships": 1
+    "power_filter_verified_memberships": 11,
+    "power_filter_unreviewed_memberships": 0,
+    "source_review_milestones": 5,
+    "source_reviewed_graph_groups": 22,
+    "source_reviewed_terminal_memberships": 54,
+    "rf_net_groups_added": 0
   },
   "open_items": [
     {
@@ -28,49 +32,49 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Trace the aerial, tuning capacitor, oscillator and 7A8 connections from the factory schematic; do not infer winding returns from proximity."
+      "gap": "Review of the p.38 RF/converter region is recorded, but no new RF memberships were added. Source-to-functional-terminal mapping for the 7A8, aerial/loop/oscillator windings, tuning gangs and compensators remains open."
     },
     {
       "id": "P1-IF",
       "area": "IF",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Trace both #12/#14 transformer windings, trimmers, 7B7 screen and AVC connections."
+      "gap": "The three currently represented #12/#14 plate/grid groups were source-checked. Complete winding endpoints, 7B7 screen/cathode, trimmers and AVC connections remain open."
     },
     {
       "id": "P1-DET",
       "area": "Detector / AVC",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The four passive audio groups are traced, but the diode pin assignment, #17 lower branch, tube returns and full AVC network remain open."
+      "gap": "The four detector/audio groups and upper-diode symbol-level link were rechecked. The diode glyph is still not assigned to a socket pin; #17 lower branch, 7C6 external cathode return and full AVC routing remain open."
     },
     {
       "id": "P1-OUTPUT",
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Verify #22/#25 routing, output transformer primary and secondary, speaker voice coil and return paths."
+      "gap": "The 7C6 plate, 50L6 grid/cathode, #26 primary and #26/#27 secondary memberships are source-checked. #22/#25 routes, winding characteristics and speaker/model correlation remain open."
     },
     {
       "id": "P1-AC",
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Trace the volume switch, both mains paths, 35Z3 anode, heater return and #31 line capacitor."
+      "gap": "The filter/return groups, four internal heater-chain links and #30 40 Ω/lamp shunt groups were source-checked. Trace both mains paths, #16 switch, 35Z3 anode, #31 line capacitor and the complete heater endpoints before claiming a complete AC network."
     },
     {
       "id": "P1-SOURCE",
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Only the four detector/audio conductor groups received the native 300-dpi review. Independently verify remaining factory net memberships, ambiguous taps and pin wiring."
+      "gap": "The 22 currently represented net groups and 54 listed terminal memberships received a native 300-dpi page-38 cross-check. RF has no transcribed net groups; socket/winding crosswalks and unrepresented factory connections remain open."
     },
     {
       "id": "P2-SPICE",
       "area": "Full receiver simulation",
       "severity": "later",
       "status": "NOT STARTED",
-      "gap": "The validated ngspice run covers an isolated passive deck only; tube, transformer and complete receiver behavior are not modeled or validated."
+      "gap": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
     }
   ],
   "completion_gates": [
@@ -112,5 +116,5 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "Native 300-dpi audit of the 35Z3/#28/#29A/#29B power-filter slice; F_BPLUS_RECT remains partial because #26:a is unreviewed."
+  "latest_evidence_update": "Five v0.29–v0.33 source-review milestones checked all 22 currently represented graph groups (54 listed memberships) against the Philco page-38 scan; v0.29 confirms #26:a. RF memberships and several endpoint/pin crosswalks remain open."
 }

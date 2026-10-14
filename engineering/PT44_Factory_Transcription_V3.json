@@ -569,7 +569,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "v0.28 native 300-dpi source review: verified members are limited to the listed subset; #26:a remains unreviewed."
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V5:7",
@@ -594,6 +594,29 @@
           "26:a"
         ],
         "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V5:7",
+          "28:a",
+          "29A:a",
+          "26:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_29_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "V5:7",
+          "28:a",
+          "29A:a",
+          "26:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
       }
     },
     {
@@ -608,7 +631,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "v0.28 native 300-dpi source review: listed terminals verified for this power-filter slice only."
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "28:b",
@@ -629,6 +652,27 @@
         ],
         "unreviewed_members": [],
         "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "28:b",
+          "29B:a",
+          "21:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_29_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "28:b",
+          "29B:a",
+          "21:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
       }
     },
     {
@@ -643,7 +687,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V3:2",
@@ -654,7 +698,18 @@
         "V3:2",
         "R4:b",
         "C3:a"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V3:2",
+          "21:b",
+          "20:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_50L6_GRID",
@@ -668,7 +723,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:5",
@@ -679,7 +734,18 @@
         "V4:5",
         "C3:b",
         "R3:a"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:5",
+          "20:b",
+          "23:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_50L6_CATH",
@@ -693,7 +759,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:8",
@@ -702,7 +768,17 @@
       "prototype_member_crosswalk": [
         "V4:8",
         "R2:a"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:8",
+          "24:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_OUTPUT_PLATE",
@@ -716,7 +792,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:3",
@@ -725,7 +801,17 @@
       "prototype_member_crosswalk": [
         "V4:3",
         "T1:b"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:3",
+          "26:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_BMINUS",
@@ -739,7 +825,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "v0.28 native 300-dpi source review: listed terminals verified for this power-filter slice only."
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "29A:b",
@@ -763,6 +849,29 @@
         ],
         "unreviewed_members": [],
         "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "29A:b",
+          "29B:b",
+          "23:b",
+          "24:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_29_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "29A:b",
+          "29B:b",
+          "23:b",
+          "24:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
       }
     },
     {
@@ -777,7 +886,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "26:sA",
@@ -786,7 +895,17 @@
       "prototype_member_crosswalk": [
         "T1:sA",
         "SP1:voiceA"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "26:sA",
+          "27:voiceA"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_VOICE_SEC_B",
@@ -800,7 +919,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "26:sB",
@@ -809,7 +928,17 @@
       "prototype_member_crosswalk": [
         "T1:sB",
         "SP1:voiceB"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "26:sB",
+          "27:voiceB"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_HT_35Z3_50L6",
@@ -823,7 +952,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V5:8",
@@ -832,7 +961,17 @@
       "prototype_member_crosswalk": [
         "V5:8",
         "V4:2"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V5:8",
+          "V4:2"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_HT_50L6_7A8",
@@ -846,7 +985,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:7",
@@ -855,7 +994,17 @@
       "prototype_member_crosswalk": [
         "V4:7",
         "V1:1"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:7",
+          "V1:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_HT_7A8_7B7",
@@ -869,7 +1018,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V1:8",
@@ -878,7 +1027,17 @@
       "prototype_member_crosswalk": [
         "V1:8",
         "V2:1"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V1:8",
+          "V2:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_HT_7B7_7C6",
@@ -892,7 +1051,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V2:8",
@@ -901,7 +1060,17 @@
       "prototype_member_crosswalk": [
         "V2:8",
         "V3:1"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V2:8",
+          "V3:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_IF1_PLATE",
@@ -915,7 +1084,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V1:2",
@@ -924,7 +1093,17 @@
       "prototype_member_crosswalk": [
         "V1:2",
         "T2:pPlate"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.32.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V1:2",
+          "12:pPlate"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_IF1_GRID",
@@ -938,7 +1117,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "12:sGrid",
@@ -947,7 +1126,17 @@
       "prototype_member_crosswalk": [
         "T2:sGrid",
         "V2:6"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.32.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "12:sGrid",
+          "V2:6"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_IF2_PLATE",
@@ -961,7 +1150,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V2:2",
@@ -970,7 +1159,17 @@
       "prototype_member_crosswalk": [
         "V2:2",
         "T3:pPlate"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.32.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V2:2",
+          "14:pPlate"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_30_40_LAMP_A",
@@ -984,13 +1183,23 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "PT-42/PT-44 schematic — line resistance and pilot lamp, lower edge",
-        "verification": "visual trace: lamp is across 40 Ω resistor section; line-switch/rectifier terminal routing remains unverified"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "30:endA",
         "32:a"
       ],
-      "prototype_member_crosswalk": []
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "30:endA",
+          "32:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_30_40_LAMP_B",
@@ -1004,13 +1213,23 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "PT-42/PT-44 schematic — line resistance and pilot lamp, lower edge",
-        "verification": "visual trace: lamp is across 40 Ω resistor section; line-switch/rectifier terminal routing remains unverified"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "30:tap",
         "32:b"
       ],
-      "prototype_member_crosswalk": []
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "30:tap",
+          "32:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_IF2_SECONDARY_VOL_TOP",
@@ -1024,7 +1243,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "PT-42/PT-44 schematic; detector and audio passives",
-        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
         "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
       },
       "factory_members": [
@@ -1032,7 +1251,18 @@
         "16:a",
         "15:a"
       ],
-      "prototype_member_crosswalk": []
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "14:sReturn",
+          "16:a",
+          "15:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_VOL_WIPER_C18",
@@ -1046,14 +1276,24 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "PT-42/PT-44 schematic; detector and audio passives",
-        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
         "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
       },
       "factory_members": [
         "16:wiper",
         "18:a"
       ],
-      "prototype_member_crosswalk": []
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "16:wiper",
+          "18:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_7C6_AUDIO_GRID",
@@ -1067,7 +1307,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "PT-42/PT-44 schematic; detector and audio passives",
-        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
         "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
       },
       "factory_members": [
@@ -1075,7 +1315,18 @@
         "19:a",
         "V3:3"
       ],
-      "prototype_member_crosswalk": []
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "18:b",
+          "19:a",
+          "V3:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     },
     {
       "id": "F_DET_PASSIVE_RETURN",
@@ -1089,7 +1340,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "PT-42/PT-44 schematic; detector and audio passives",
-        "verification": "native 300dpi image reviewed; only shared wire junctions added",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
         "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
       },
       "factory_members": [
@@ -1097,7 +1348,18 @@
         "16:b",
         "19:b"
       ],
-      "prototype_member_crosswalk": []
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "15:b",
+          "16:b",
+          "19:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
     }
   ],
   "subcircuits": [
@@ -1118,7 +1380,7 @@
         "11"
       ],
       "status": "not_fully_transcribed",
-      "unverified": "RF coil, tuning condenser, 7A8 grid/screen nodes"
+      "unverified": "Source-reviewed; no terminal nets promoted pending 7A8/winding/tuning crosswalk."
     },
     {
       "id": "IF",
@@ -1129,7 +1391,7 @@
         "14"
       ],
       "status": "partial",
-      "unverified": "Both complete winding pairs, supply, detector side, trimmer capacitors"
+      "unverified": "Three listed groups source-checked; winding, screen, trimmer and AVC connectivity remains partial."
     },
     {
       "id": "DETECTOR",
@@ -1142,7 +1404,7 @@
         "19"
       ],
       "status": "not_fully_transcribed",
-      "unverified": "All diode load/AVC/filter junctions and volume control pot tracks"
+      "unverified": "Four passive groups and one unnumbered diode-symbol connection reviewed; AVC and socket-pin assignments remain open."
     },
     {
       "id": "AUDIO",
@@ -1158,7 +1420,7 @@
         "27"
       ],
       "status": "partial",
-      "unverified": "#22 and #25 return paths, transformer/speaker winding characteristics"
+      "unverified": "Listed plate/grid/cathode/transformer/speaker groups source-checked; #22/#25 and models remain open."
     },
     {
       "id": "POWER",
@@ -1172,7 +1434,7 @@
         "32"
       ],
       "status": "partial",
-      "unverified": "Line dropper taps, pilot-lamp branch, B- vs metal chassis isolation, field-coil inductance"
+      "unverified": "Filter, B−, heater interconnects and #30 lamp shunt reviewed; AC/heater endpoints remain open."
     }
   ],
   "verified_part_ledger": [
@@ -1215,37 +1477,37 @@
       "id": "P1-RF",
       "severity": "blocker",
       "stage": "RF",
-      "description": "Transcribe all aerial, tuning, oscillator and 7A8 connections from p.38; do not infer winding returns from component proximity."
+      "description": "Review of the p.38 RF/converter region is recorded, but no new RF memberships were added. Source-to-functional-terminal mapping for the 7A8, aerial/loop/oscillator windings, tuning gangs and compensators remains open."
     },
     {
       "id": "P1-IF",
       "severity": "blocker",
       "stage": "IF",
-      "description": "Trace #12/#14 primary and secondary winding terminals, trimmers, 7B7 screen and AVC connections."
+      "description": "The three currently represented #12/#14 plate/grid groups were source-checked. Complete winding endpoints, 7B7 screen/cathode, trimmers and AVC connections remain open."
     },
     {
       "id": "P1-DET",
       "severity": "blocker",
       "stage": "DETECTOR",
-      "description": "Four passive audio detector conductor groups are newly source-traced (second IF cold, volume wiper, triode grid and passive return). Still trace diode/AVC #17 branch, tube returns, and full automatic volume control."
+      "description": "The four detector/audio groups and upper-diode symbol-level link were rechecked. The diode glyph is still not assigned to a socket pin; #17 lower branch, 7C6 external cathode return and full AVC routing remain open."
     },
     {
       "id": "P1-OUTPUT",
       "severity": "blocker",
       "stage": "AUDIO",
-      "description": "Verify #22 and #25 routes; trace full output-transformer primary and secondary plus voice coil."
+      "description": "The 7C6 plate, 50L6 grid/cathode, #26 primary and #26/#27 secondary memberships are source-checked. #22/#25 routes, winding characteristics and speaker/model correlation remain open."
     },
     {
       "id": "P1-AC",
       "severity": "blocker",
       "stage": "POWER",
-      "description": "#30 contains documented 40 Ω + 80 Ω sections and #32 lamp shunts 40 Ω. Still trace the line switch, both mains paths, 35Z3 anode, heater return, and #31 line capacitor before claiming a complete AC network."
+      "description": "The filter/return groups, four internal heater-chain links and #30 40 Ω/lamp shunt groups were source-checked. Trace both mains paths, #16 switch, 35Z3 anode, #31 line capacitor and the complete heater endpoints before claiming a complete AC network."
     },
     {
       "id": "P1-SOURCE",
       "severity": "blocker",
       "stage": "ALL",
-      "description": "Original 300 dpi Philco image now reviewed for four detector/audio conductor groups. Independently verify other factory net memberships, ambiguous diode/IF taps and exact 7C6 socket wiring."
+      "description": "The 22 currently represented net groups and 54 listed terminal memberships received a native 300-dpi page-38 cross-check. RF has no transcribed net groups; socket/winding crosswalks and unrepresented factory connections remain open."
     },
     {
       "id": "P2-SPICE",
