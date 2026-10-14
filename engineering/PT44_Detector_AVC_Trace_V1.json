@@ -1,0 +1,86 @@
+{
+  "schema": "PT44_DETECTOR_AVC_TRACE_V1",
+  "version": "0.39.0",
+  "model": "Philco PT-44",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "traced_component_endpoints": [
+    {
+      "terminal": "14:sDetector",
+      "net_id": "F_IF2_AVC_FEED",
+      "joined_factory_member": "17:a",
+      "symbol_connection": "V3:UPPER_DIODE_PLATE_GLYPH",
+      "socket_pin_number": null,
+      "source_box_px": [
+        750,
+        265,
+        1400,
+        810
+      ]
+    },
+    {
+      "terminal": "17:a",
+      "net_id": "F_IF2_AVC_FEED",
+      "joined_factory_member": "14:sDetector",
+      "symbol_connection": "V3:UPPER_DIODE_PLATE_GLYPH",
+      "socket_pin_number": null,
+      "source_box_px": [
+        750,
+        265,
+        1400,
+        810
+      ]
+    },
+    {
+      "terminal": "17:b",
+      "net_id": "F_DET_PASSIVE_RETURN",
+      "joined_factory_member": "15:b / 16:b / 19:b",
+      "interpretation": "Lower #17 terminal joins shared detector return; this does not prove chassis bond.",
+      "source_box_px": [
+        750,
+        265,
+        1400,
+        810
+      ]
+    }
+  ],
+  "verified_symbol_connections": [
+    {
+      "symbol_terminal": "V3:UPPER_DIODE_PLATE_GLYPH",
+      "net_id": "F_IF2_AVC_FEED",
+      "basis": "Upper #14 secondary end, upper diode glyph lead, and #17 upper terminal share the source-drawn conductor.",
+      "socket_pin_number": null,
+      "source_box_px": [
+        750,
+        265,
+        1400,
+        810
+      ]
+    }
+  ],
+  "closure": {
+    "resistor_17_both_terminals_traced": true,
+    "upper_diode_symbol_link_traced": true,
+    "numbered_7C6_diode_pin_resolved": false,
+    "complete_avc_route_resolved": false,
+    "benchmark_ready": false
+  },
+  "unresolved": [
+    "Upper 7C6 diode glyph to pin 5 or 6",
+    "External 7C6 cathode pin and chassis/B− routing",
+    "Volume-control switch lugs",
+    "Complete AVC route and operating behavior"
+  ]
+}

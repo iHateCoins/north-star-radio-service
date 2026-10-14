@@ -39,3 +39,13 @@ jobs:
         run: node tests/test_heater_model_v35.js
       - name: Verify v0.36 #22 cathode-bypass source trace and AC study fixture
         run: node tests/test_output_bypass_v36.js
+      - name: Validate PT-44 scope denominator and trace-ledger reconciliation
+        run: node tests/test_scope_audit_v1.js
+      - name: Verify v0.37 source-traced power and AC-line topology
+        run: node tests/test_power_line_trace_v37.js
+
+      - name: Verify v0.39 #17 AVC load and detector return source trace
+        run: node tests/test_detector_avc_v39.js
+
+      - name: Verify v0.40 first IF secondary return and #13 resistor trace
+        run: node tests/test_if1_secondary_v40.js

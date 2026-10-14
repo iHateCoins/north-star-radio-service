@@ -1,0 +1,74 @@
+{
+  "schema": "PT44_IF1_SECONDARY_RETURN_TRACE_V1",
+  "version": "0.40.0",
+  "model": "Philco PT-44",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "terminal_conventions": {
+    "resistor_13": "a/b are endpoint aliases. a is the IF-grid side and b the B− return side as drawn; no resistor polarity is implied.",
+    "transformer_12": "sReturn denotes the lower secondary terminal on the native schematic; winding polarity and electrical parameters are not inferred."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "12:sReturn",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "13:b",
+      "interpretation": "The lower terminal of first IF secondary #12 returns to B−.",
+      "source_box_px": [
+        540,
+        245,
+        1070,
+        930
+      ]
+    },
+    {
+      "terminal": "13:a",
+      "net_id": "F_IF1_GRID",
+      "joined_factory_member": "V2:6",
+      "interpretation": "One #13 27 kΩ lead joins the #12 secondary/control-grid node.",
+      "source_box_px": [
+        540,
+        245,
+        1070,
+        930
+      ]
+    },
+    {
+      "terminal": "13:b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "12:sReturn",
+      "interpretation": "The other #13 27 kΩ lead joins the B− return bus.",
+      "source_box_px": [
+        540,
+        245,
+        1070,
+        930
+      ]
+    }
+  ],
+  "closure": {
+    "first_if_transformer_all_four_component_ends_source_traced": true,
+    "component_13_both_ends_source_traced": true,
+    "v2_socket_pin_crosswalk_complete": false,
+    "transformer_parameters_complete": false,
+    "benchmark_ready": false
+  },
+  "unresolved": [
+    "7B7 screen/cathode pin wiring and external terminal crosswalks",
+    "IF transformer inductance, resistance, coupling and alignment-capacitor values",
+    "Remaining AVC and detector diode socket-pin assignments",
+    "Full receiver behavior correlation"
+  ]
+}

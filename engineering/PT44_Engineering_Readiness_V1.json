@@ -1,16 +1,16 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.36.0",
+  "version": "0.40.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
-    "partial_traced_networks": 22,
-    "terminal_memberships_on_partial_graph": 56,
+    "partial_traced_networks": 23,
+    "terminal_memberships_on_partial_graph": 66,
     "native_schematic_scan_dpi": 300,
-    "newly_audited_detector_audio_conductor_groups": 4,
-    "memberships_in_those_groups": 11,
+    "newly_audited_detector_audio_conductor_groups": 5,
+    "memberships_in_those_groups": 14,
     "detector_symbol_level_traces": 1,
     "detector_symbol_traces_assigned_to_socket_pin": 0,
     "spice": {
@@ -24,9 +24,9 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 5,
-    "source_reviewed_graph_groups": 22,
-    "source_reviewed_terminal_memberships": 54,
+    "source_review_milestones": 10,
+    "source_reviewed_graph_groups": 23,
+    "source_reviewed_terminal_memberships": 66,
     "rf_net_groups_added": 0,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
@@ -37,7 +37,14 @@
     "heater_string_sanity_spice_validated": true,
     "output_cathode_bypass_net_groups": 2,
     "output_cathode_bypass_memberships": 2,
-    "output_cathode_bypass_calculated_corner_hz": 4897075.172058318
+    "output_cathode_bypass_calculated_corner_hz": 4897075.172058318,
+    "power_line_trace_conductor_groups": 9,
+    "power_line_component_endpoints_traced": 5,
+    "power_line_tube_symbol_terminals_traced": 11,
+    "power_line_source_level_closed": true,
+    "power_line_pin_level_closed": false,
+    "output_if_supply_memberships_added": 4,
+    "output_screen_symbol_connections": 3
   },
   "open_items": [
     {
@@ -52,35 +59,35 @@
       "area": "IF",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The three currently represented #12/#14 plate/grid groups were source-checked. Complete winding endpoints, 7B7 screen/cathode, trimmers and AVC connections remain open."
+      "gap": "Both #12 primary/secondary ends, both #14 primary/secondary ends, and #13 grid-return resistor are now source-traced. 7B7 screen/cathode pin wiring, transformer parameters/trimmers, AVC, and full IF behavior remain open."
     },
     {
       "id": "P1-DET",
       "area": "Detector / AVC",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The four detector/audio groups and upper-diode symbol-level link were rechecked. The diode glyph is still not assigned to a socket pin; #17 lower branch, 7C6 external cathode return and full AVC routing remain open."
+      "gap": "The upper #14 secondary/#17 terminal/upper 7C6 diode glyph link and #17 return are source-traced. The diode glyph is not assigned to pin 5 or 6; external cathode routing, #16 switch contacts, remaining AVC topology, and behavior remain open."
     },
     {
       "id": "P1-OUTPUT",
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The #22 250 pF cathode-bypass route is source-traced across #24 and B−. #25, winding characteristics, and speaker/model correlation remain open."
+      "gap": "Factory #25 is source-traced across filtered B+ and B−, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The filter/return groups, four internal heater-chain links and #30 40 Ω/lamp shunt groups were source-checked. Trace both mains paths, #16 switch, 35Z3 anode, #31 line capacitor and the complete heater endpoints before claiming a complete AC network."
+      "gap": "The complete AC/line topology is now source-traced at schematic-symbol level: plug conductors, #16 switch, #31 across the plug, #30 40/80-ohm branches, #32 shunt, 35Z3 plate feed, B-minus return, and all five series heaters. Numbered tube-socket heater crosswalk, physical switch-lug crosswalk, and chassis isolation/bond evidence remain open."
     },
     {
       "id": "P1-SOURCE",
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The 22 currently represented net groups and 54 listed terminal memberships received a native 300-dpi page-38 cross-check. RF has no transcribed net groups; socket/winding crosswalks and unrepresented factory connections remain open."
+      "gap": "The 22 graph groups and 60 graph memberships now have source-review records. v0.38 adds #25 endpoints and #12/#14 primary supply ends. RF/converter remains untranscribed; socket-pin, winding, chassis and remaining component connections remain open."
     },
     {
       "id": "P2-SPICE",
@@ -131,5 +138,5 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.36 source-traces the 250 pF #22 capacitor across the 50L6 cathode-bias resistor #24 and B−, adds two verified terminal memberships, and validates an isolated cathode-bypass AC study. #25, RF/IF/detector/AVC, complete AC wiring, chassis lead dress, and full-receiver SPICE remain open; PT-44 is not engineering complete."
+  "latest_evidence_update": "v0.40 traces both #12 secondary endpoints and both #13 resistor endpoints, building on the v0.39 #14 secondary/#17 AVC branch. RF/converter remains untraced; IF pin crosswalks and winding models remain open."
 }

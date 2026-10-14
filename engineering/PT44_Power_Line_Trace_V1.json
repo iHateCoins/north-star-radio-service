@@ -1,0 +1,245 @@
+{
+  "schema": "PT44_POWER_LINE_TRACE_V1",
+  "version": "0.37.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_AT_SCHEMATIC_SYMBOL_LEVEL_PIN_CROSSWALK_OPEN",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram \u2014 PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    },
+    "source_box_px": [
+      300,
+      650,
+      1700,
+      1120
+    ],
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf"
+  },
+  "terminal_conventions": {
+    "plug_terminals": "AC plug contacts are labeled A/B only; the schematic does not key polarity, hot/neutral, or orientation.",
+    "switch_terminals": "#16 switch contacts are labeled side_a/side_b as unordered mechanical terminals; the schematic does not assign a physical switch lug number.",
+    "tube_symbol_terminals": "H1/H2 identify the left/right heater leads as drawn in the series-string figure; PLATE identifies a schematic symbol electrode. These are not socket pin numbers.",
+    "component_terminal_aliases": "Two-terminal passive aliases are unordered unless the factory source gives polarity. #30 endA/tap/endB follow its 40-ohm and 80-ohm sections."
+  },
+  "conductor_groups": [
+    {
+      "id": "AC_PLUG_A_PRE_SWITCH",
+      "members": [
+        "AC_PLUG:A",
+        "31:a",
+        "16:switch_a"
+      ],
+      "source_observation": "One plug conductor reaches one #16 switch contact; #31 is connected across the two plug conductors ahead of the switch.",
+      "pin_or_lug_crosswalk": "The physical switch lug is not numbered."
+    },
+    {
+      "id": "AC_SWITCHED_RETURN_BMINUS",
+      "members": [
+        "16:switch_b",
+        "29A:b",
+        "29B:b",
+        "23:b",
+        "24:b",
+        "V3:heater_symbol_H2",
+        "22:b"
+      ],
+      "source_observation": "The other #16 contact joins the drawn B-minus return rail. The 7C6 heater-string end also joins that rail. The return is a mains-referenced conductor through the switch; it is not a chassis bond.",
+      "pin_or_lug_crosswalk": "The drawing identifies the switch contact and heater symbol endpoint, not a switch lug number or tube socket pin."
+    },
+    {
+      "id": "AC_PLUG_B_UNSWITCHED",
+      "members": [
+        "AC_PLUG:B",
+        "31:b",
+        "30:endA",
+        "32:a"
+      ],
+      "source_observation": "The other plug conductor joins #30's 40-ohm section endpoint and one side of pilot lamp #32. #31 spans this conductor and plug conductor A.",
+      "pin_or_lug_crosswalk": "Plug-contact orientation and #31 terminal polarity are not specified."
+    },
+    {
+      "id": "AC_RECTIFIER_PLATE_AND_DROPper_TAP",
+      "members": [
+        "30:tap",
+        "V5:PLATE_110V",
+        "32:b"
+      ],
+      "source_observation": "The #30 tap joins the 35Z3 schematic plate lead labeled 110 V. This conductor crosses the switched B-minus return rail without a junction dot in the native schematic.",
+      "pin_or_lug_crosswalk": "35Z3 pin 2 is the plate by the separate tube pinout reference; the Philco drawing itself does not print socket pin numbers."
+    },
+    {
+      "id": "HT_DROPPER_TO_35Z3",
+      "members": [
+        "30:endB",
+        "V5:heater_symbol_H1"
+      ],
+      "source_observation": "The #30 80-ohm section ends at the first heater symbol, the 35Z3.",
+      "pin_or_lug_crosswalk": "The source identifies the tube symbol and heater lead, not the numbered socket contact."
+    },
+    {
+      "id": "HT_35Z3_TO_50L6",
+      "members": [
+        "V5:heater_symbol_H2",
+        "V4:heater_symbol_H1"
+      ],
+      "source_observation": "The first and second heater symbols are consecutive in the drawn series string.",
+      "pin_or_lug_crosswalk": "Symbol endpoints are not numbered."
+    },
+    {
+      "id": "HT_50L6_TO_7A8",
+      "members": [
+        "V4:heater_symbol_H2",
+        "V1:heater_symbol_H1"
+      ],
+      "source_observation": "The second and third heater symbols are consecutive in the drawn series string.",
+      "pin_or_lug_crosswalk": "Symbol endpoints are not numbered."
+    },
+    {
+      "id": "HT_7A8_TO_7B7",
+      "members": [
+        "V1:heater_symbol_H2",
+        "V2:heater_symbol_H1"
+      ],
+      "source_observation": "The third and fourth heater symbols are consecutive in the drawn series string.",
+      "pin_or_lug_crosswalk": "Symbol endpoints are not numbered."
+    },
+    {
+      "id": "HT_7B7_TO_7C6",
+      "members": [
+        "V2:heater_symbol_H2",
+        "V3:heater_symbol_H1"
+      ],
+      "source_observation": "The fourth and fifth heater symbols are consecutive in the drawn series string.",
+      "pin_or_lug_crosswalk": "Symbol endpoints are not numbered."
+    }
+  ],
+  "component_paths": [
+    {
+      "id": "LINE_SWITCH_TO_BMINUS_RETURN",
+      "path": [
+        "AC_PLUG:A",
+        "16:switch",
+        "AC_SWITCHED_RETURN_BMINUS"
+      ],
+      "source_status": "VERIFIED_SCHEMATIC_SYMBOL_LEVEL"
+    },
+    {
+      "id": "LINE_SUPPRESSION_CAPACITOR",
+      "source_status": "VERIFIED_ACROSS_PLUG_CONDUCTORS_AHEAD_OF_SWITCH",
+      "terminal_connections": [
+        {
+          "terminal": "31:a",
+          "conductor": "AC_PLUG:A"
+        },
+        {
+          "terminal": "31:b",
+          "conductor": "AC_PLUG:B"
+        }
+      ]
+    },
+    {
+      "id": "RECTIFIER_PLATE_FEED",
+      "path": [
+        "AC_PLUG:B",
+        "30:40_ohm_section",
+        "30:tap",
+        "V5:PLATE_110V"
+      ],
+      "source_status": "VERIFIED_SCHEMATIC_SYMBOL_LEVEL"
+    },
+    {
+      "id": "PILOT_LAMP_SHUNT",
+      "path": [
+        "30:endA",
+        "32:lamp",
+        "30:tap"
+      ],
+      "parallel_to": "30:40_ohm_section",
+      "source_status": "VERIFIED"
+    },
+    {
+      "id": "SERIES_HEATER_PATH",
+      "path": [
+        "30:tap",
+        "30:80_ohm_section",
+        "V5:heater",
+        "V4:heater",
+        "V1:heater",
+        "V2:heater",
+        "V3:heater",
+        "AC_SWITCHED_RETURN_BMINUS"
+      ],
+      "source_status": "VERIFIED_SCHEMATIC_SYMBOL_LEVEL",
+      "tube_order": [
+        "V5:35Z3",
+        "V4:50L6GT",
+        "V1:7A8",
+        "V2:7B7",
+        "V3:7C6"
+      ]
+    }
+  ],
+  "inventory_reconciliation": {
+    "component_endpoints_traced_by_this_artifact": [
+      "16:switch_a",
+      "16:switch_b",
+      "30:endB",
+      "31:a",
+      "31:b"
+    ],
+    "component_endpoint_interpretations": {
+      "16:switch_a": "AC_PLUG:A contact; unordered contact alias",
+      "16:switch_b": "AC_SWITCHED_RETURN_BMINUS contact; unordered contact alias",
+      "30:endB": "Feeds first 35Z3 heater symbol through #30 80-ohm section",
+      "31:a": "AC_PLUG:A; alias orientation arbitrary",
+      "31:b": "AC_PLUG:B; alias orientation arbitrary"
+    },
+    "tube_symbol_terminals_traced": [
+      "V5:PLATE_110V",
+      "V5:heater_symbol_H1",
+      "V5:heater_symbol_H2",
+      "V4:heater_symbol_H1",
+      "V4:heater_symbol_H2",
+      "V1:heater_symbol_H1",
+      "V1:heater_symbol_H2",
+      "V2:heater_symbol_H1",
+      "V2:heater_symbol_H2",
+      "V3:heater_symbol_H1",
+      "V3:heater_symbol_H2"
+    ],
+    "source_level_closure": true,
+    "factory_pin_level_closure": false
+  },
+  "unresolved": [
+    {
+      "id": "POWER-PIN-CROSSWALK",
+      "status": "OPEN",
+      "gap": "Philco p.38 gives heater order and electrical junctions but does not number the tube symbol terminals. Preserve the tube socket pinout as a separate identity reference; confirm physical socket pin-to-symbol mapping before certifying a pin-level netlist."
+    },
+    {
+      "id": "POWER-SWITCH-LUG-CROSSWALK",
+      "status": "OPEN",
+      "gap": "The schematic shows a single-pole switch mechanically linked to the volume control but does not identify physical lug numbers or switch orientation."
+    },
+    {
+      "id": "POWER-CHASSIS-ISOLATION",
+      "status": "OPEN",
+      "gap": "The diagram places the B-minus return on a switched mains conductor. It does not establish chassis bonding or an isolation transformer in the receiver."
+    }
+  ],
+  "scope_exclusions": [
+    "Mains polarity and physical plug orientation are not specified.",
+    "No conductor is labeled chassis ground; no B-minus-to-chassis connection is inferred.",
+    "No gameplay, reduced-order model, or SPICE behavior is certified by this schematic trace.",
+    "The heater chain is source-closed at schematic-symbol level, not numbered-socket-pin level."
+  ],
+  "benchmark_ready": false
+}

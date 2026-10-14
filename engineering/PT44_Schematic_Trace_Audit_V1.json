@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.33.0",
+  "version": "0.40.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -78,6 +78,53 @@
         "F_DET_PASSIVE_RETURN"
       ],
       "summary": "Rechecked four detector/audio conductor groups and the existing upper-diode symbol-level link. #17 lower branch, diode socket-pin assignment and full AVC/return routing remain open."
+    },
+    {
+      "version": "0.36.0",
+      "title": "50L6 cathode-bypass trace reconciliation",
+      "status": "SOURCE_CHECKED_ADDITIONAL_MEMBERS",
+      "net_ids": [
+        "F_50L6_CATH",
+        "F_BMINUS"
+      ],
+      "summary": "Added capacitor #22 terminals to the cathode and B− net review from the dedicated v0.36 native-scan trace. The output transformer, #25 route, and full output model remain open."
+    },
+    {
+      "version": "0.37.0",
+      "title": "Power and AC-line symbol-level closure",
+      "status": "SOURCE_TRACED_SYMBOL_LEVEL_PIN_CROSSWALK_OPEN",
+      "net_ids": [],
+      "summary": "Traced plug conductors, #16 switch, #31 line capacitor, #30 40/80-ohm sections, #32 pilot-lamp shunt, 35Z3 plate feed, B-minus return, and all five heaters. Pin/lug crosswalks remain open; no factory graph memberships were added."
+    },
+    {
+      "version": "0.38.0",
+      "title": "Output bypass and IF primary supply-end trace",
+      "status": "SOURCE_CHECKED_ADDITIONAL_MEMBERS",
+      "net_ids": [
+        "F_BPLUS_FILT",
+        "F_BMINUS"
+      ],
+      "summary": "Source-traced #25 across filtered B+ and B−, and #12/#14 primary supply ends to filtered B+. Screen-glyph routing is recorded without assigning socket pins; other IF/AVC/output model gaps remain open."
+    },
+    {
+      "version": "0.39.0",
+      "title": "Second IF AVC load and detector return trace",
+      "status": "SOURCE_CHECKED_ADDITIONAL_MEMBERS_SYMBOL_PIN_OPEN",
+      "net_ids": [
+        "F_IF2_AVC_FEED",
+        "F_DET_PASSIVE_RETURN"
+      ],
+      "summary": "Added upper #14 secondary/#17 upper endpoint group and #17 lower return endpoint from the native page-38 scan. The linked upper 7C6 diode remains an unnumbered glyph; full AVC and socket crosswalk remain open."
+    },
+    {
+      "version": "0.40.0",
+      "title": "First IF secondary return and grid-return resistor trace",
+      "status": "SOURCE_CHECKED_ADDITIONAL_MEMBERS_PIN_AND_MODEL_OPEN",
+      "net_ids": [
+        "F_IF1_GRID",
+        "F_BMINUS"
+      ],
+      "summary": "Traced #12 secondary return to B− and both #13 grid-return resistor ends to the #12 secondary/grid node and B−. Pin/winding crosswalks and IF model parameters remain open."
     }
   ],
   "reviewed_net_memberships": [
@@ -458,11 +505,28 @@
         1580,
         850
       ],
-      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "basis": "Philco p.38 detector/audio section: the v0.33 review covers #15, #16, and #19 return terminals; #17:b is reconciled by a dedicated v0.39 membership update.",
       "reviewed_members": [
         "15:b",
         "16:b",
         "19:b"
+      ]
+    },
+    {
+      "net_id": "F_IF2_AVC_FEED",
+      "milestone_version": "0.39.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        750,
+        265,
+        1400,
+        810
+      ],
+      "basis": "Philco 1941 RMS p.38 native scan: upper #14 secondary, upper 7C6 diode glyph, and #17 upper terminal share a conductor. The schematic does not number the diode socket pin.",
+      "reviewed_members": [
+        "14:sDetector",
+        "17:a"
       ]
     }
   ],
@@ -493,22 +557,136 @@
       "note": "The drawing region was reviewed. No RF terminal memberships were added where the source-to-functional-terminal crosswalk was not sufficiently established."
     },
     {
-      "milestone_version": "0.33.0",
-      "area": "Detector / AVC residual",
-      "status": "OPEN_SYMBOL_LEVEL_ONLY",
+      "milestone_version": "0.37.0",
+      "area": "Power / AC line residual",
+      "status": "SYMBOL_LEVEL_CLOSED_PIN_AND_LUG_CROSSWALK_OPEN",
       "unresolved": [
-        "Which numbered 7C6 diode plate is the upper unnumbered factory glyph",
-        " #17 lower terminal and remaining AVC loading/return route",
-        "External 7C6 cathode return and #16 on/off switch contacts"
+        "Numbered tube-socket heater and rectifier-plate crosswalk",
+        "Physical #16 volume-control switch lug crosswalk",
+        "Chassis isolation or B-minus bond evidence"
       ],
-      "note": "The upper diode connection remains a symbol-level observation; it is not assigned to V3:5 or V3:6."
+      "note": "The dedicated power-line trace closes the schematic topology and explicitly labels plug, switch, and tube-symbol terminals. No pin/lug aliases were promoted into the factory net graph."
+    },
+    {
+      "milestone_version": "0.39.0",
+      "area": "Detector / AVC residual",
+      "status": "PARTIALLY_CLOSED_SYMBOL_LEVEL",
+      "unresolved": [
+        "Which numbered 7C6 diode plate pin (#5/#6) is the upper glyph",
+        "External 7C6 cathode return and #16 switch lugs",
+        "Remaining AVC route, loading and relationship to aerial return"
+      ],
+      "note": "#17 upper/lower terminals and upper #14 secondary-to-diode-glyph conductor are source-traced; no socket-pin assignment or complete AVC behavior is asserted."
     }
   ],
   "scope_limits": [
-    "This audit verifies only the 22 net groups already represented in the partial factory graph; it does not claim that all PT-44 connections are transcribed.",
+    "This audit verifies the currently represented partial graph and its cited terminal additions; it does not claim that all PT-44 connections are transcribed.",
     "No chassis bond, line-side path, undocumented winding tap, or simulator behavior is inferred.",
-    "All five milestones remain partial source reviews; benchmark readiness remains false.",
-    "A source check of listed partial groups is not an independent certification of every tube symbol-to-socket pin crosswalk."
+    "All source-review milestones remain partial; benchmark readiness remains false.",
+    "Source-reviewed graph memberships remain a partial graph. Schematic-symbol and component-terminal traces do not close numbered socket-pin, winding-parameter, or chassis crosswalks."
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "reviewed_terminal_membership_updates": [
+    {
+      "net_id": "F_50L6_CATH",
+      "milestone_version": "0.36.0",
+      "reviewed_members": [
+        "22:a"
+      ],
+      "source_artifact": "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
+      "source_artifact_version": "0.36.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco 1941 RMS Year Book p.38 native 300-dpi scan. Capacitor #22 lead joins the top of #24 on the 50L6 cathode net."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.36.0",
+      "reviewed_members": [
+        "22:b"
+      ],
+      "source_artifact": "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
+      "source_artifact_version": "0.36.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco 1941 RMS Year Book p.38 native 300-dpi scan. The opposite #22 lead joins the bottom of #24 on the source-traced B− return."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "25:a"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: #25 lead joins the filtered 95 V bus at #21:a."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "25:b"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: opposite #25 lead joins B− at the #23:b return rail."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "12:pSupply"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: first IF transformer #12 primary supply end joins the 95 V filtered B+ bus."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "14:pSupply"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: second IF transformer #14 primary supply end joins the 95 V filtered B+ bus."
+    },
+    {
+      "net_id": "F_DET_PASSIVE_RETURN",
+      "milestone_version": "0.39.0",
+      "reviewed_members": [
+        "17:b"
+      ],
+      "source_artifact": "engineering/PT44_Detector_AVC_Trace_V1.json",
+      "source_artifact_version": "0.39.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: lower #17 terminal joins #15/#16/#19 return; no chassis bond inferred."
+    },
+    {
+      "net_id": "F_IF1_GRID",
+      "milestone_version": "0.40.0",
+      "reviewed_members": [
+        "13:a"
+      ],
+      "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "source_artifact_version": "0.40.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: #13 upper terminal joins #12 secondary/grid node at V2 control-grid lead."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.40.0",
+      "reviewed_members": [
+        "12:sReturn",
+        "13:b"
+      ],
+      "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "source_artifact_version": "0.40.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: #12 secondary lower end and #13 lower end join the B− return bus."
+    }
+  ],
+  "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json"
 }

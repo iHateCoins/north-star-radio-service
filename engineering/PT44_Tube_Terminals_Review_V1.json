@@ -1,6 +1,6 @@
 {
   "schema": "PT44_TUBE_TERMINALS_V1",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "status": "COMPONENT_PIN_IDENTITIES_VERIFIED_RECEIVER_CONNECTIONS_PENDING",
   "factory_reference": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "factory_reference_page": 38,
@@ -13,11 +13,11 @@
       "pin_roles": {
         "1": "heater",
         "2": "plate",
-        "3": "screen grid g2",
+        "3": "oscillator anode grid g2",
         "4": "oscillator grid g1",
-        "5": "suppressor grids g3,g5",
-        "6": "oscillator anode grid g4",
-        "7": "cathode and g6",
+        "5": "screen grids g3,g5",
+        "6": "signal input grid g4",
+        "7": "cathode and suppressor grid g6",
         "8": "heater"
       }
     },
@@ -90,16 +90,18 @@
     {
       "id": "RF-01",
       "stage": "RF",
-      "terminal": "V1:4",
-      "task": "Trace 7A8 signal-input grid to aerial transformer, tuning capacitor, and any loop/mains isolation path.",
+      "terminal": "V1:6",
+      "task": "Trace 7A8 signal-input grid G4 (socket pin 6) to the aerial transformer, RF tuning gang, and loop/mains-isolation path.",
       "status": "source_trace_required",
-      "factory_net_claim": false
+      "factory_net_claim": false,
+      "pinout_reference": "https://bms.isjtr.ro/sheets/108/7/7A8.pdf",
+      "pinout_basis": "Sylvania identifies Grid 4 as the signal input; its B8B pinout maps G4 to socket pin 6. Philco receiver wiring still requires direct schematic tracing."
     },
     {
       "id": "RF-02",
       "stage": "RF",
-      "terminal": "V1:6",
-      "task": "Trace 7A8 oscillator anode grid through factory oscillator transformer #10.",
+      "terminal": "V1:3",
+      "task": "Trace 7A8 oscillator-anode grid G2 (socket pin 3) through the oscillator circuit and #10 transformer.",
       "status": "source_trace_required",
       "factory_net_claim": false
     },
@@ -107,15 +109,15 @@
       "id": "RF-03",
       "stage": "RF",
       "terminal": "V1:7",
-      "task": "Trace 7A8 cathode and suppression grid return (do not assume chassis = B−).",
+      "task": "Trace the 7A8 cathode and suppressor grid G6 return (do not assume chassis = B−).",
       "status": "source_trace_required",
       "factory_net_claim": false
     },
     {
       "id": "RF-04",
       "stage": "RF",
-      "terminal": "V1:3",
-      "task": "Trace screen grid supply, bypass and #9 resistor / #6 assembly.",
+      "terminal": "V1:5",
+      "task": "Trace 7A8 screen grids G3/G5 (socket pin 5), including the 45 V feed and #9/#6 branches.",
       "status": "source_trace_required",
       "factory_net_claim": false
     },

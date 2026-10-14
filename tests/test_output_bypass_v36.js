@@ -17,16 +17,16 @@ assert.deepEqual(read('PT44_FACTORY_V3'),graph);assert.deepEqual(read('PT44_OUTP
 const audit=read('pt44OutputBypassAudit()');
 assert(audit.ok,JSON.stringify(audit.errors));
 assert.equal(evidence.verified_endpoints.length,2);assert.equal(audit.verifiedMemberships,2);assert.equal(audit.netGroups,2);
-assert.equal(graph.checks.traced_network_count,22);assert.equal(graph.checks.factory_terminals_on_traced_nets,56);assert.equal(legacyGraph.checks.factory_terminals_on_traced_nets,41);assert(legacyGraph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members.includes('22:a'));assert(legacyGraph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members.includes('22:b'));
+assert.equal(graph.checks.traced_network_count,23);assert.equal(graph.checks.factory_terminals_on_traced_nets,66);assert.equal(legacyGraph.checks.factory_terminals_on_traced_nets,41);assert(legacyGraph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members.includes('22:a'));assert(legacyGraph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members.includes('22:b'));
 assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members,['V4:8','24:a','22:a']);
-assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members,['29A:b','29B:b','23:b','24:b','22:b']);
-assert.equal(readiness.version,'0.36.0');assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph,56);
+assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members,['29A:b','29B:b','23:b','24:b','22:b','25:b','12:sReturn','13:b']);
+assert.equal(readiness.version,'0.40.0');assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph,66);
 assert.equal(readiness.evidence_snapshot.output_cathode_bypass_memberships,2);assert.equal(readiness.evidence_snapshot.spice.full_receiver_spice_validated,false);
 assert.equal(readiness.benchmark_ready,false);assert.equal(graph.checks.benchmark_ready,false);assert.equal(evidence.acceptance.benchmark_ready,false);
 assert.equal(passive.devices['22'].connection_nets.join('|'),'F_50L6_CATH|F_BMINUS');assert.equal(passive.devices['22'].parallel_with_factory_part,'24');
 assert(deck.includes('VTEST SOURCE 0 AC 1'));assert(deck.includes('RSOURCE SOURCE K_CATH 1000'));assert(deck.includes('R24 K_CATH 0 130'));assert(deck.includes('C22 K_CATH 0 250p'));assert(deck.includes('.ac lin 455 1000 455000'));assert(deck.includes('.print ac vm(K_CATH)'));
 const tau=130*250e-12,fc=1/(2*Math.PI*tau);assert(Math.abs(fc-evidence.derived_branch.corner_frequency_hz)<1e-6);assert(Math.abs(fc-4897075.172058318)<1e-6);
-const htmlPanel=read('pt44OutputBypassHTML(x=>x)');assert(htmlPanel.includes('#22, 250 pF'));assert(htmlPanel.includes('4.897 MHz'));assert(htmlPanel.includes('#25 and full output model remain open'));
+const htmlPanel=read('pt44OutputBypassHTML(x=>x)');assert(htmlPanel.includes('#22, 250 pF'));assert(htmlPanel.includes('4.897 MHz'));assert(htmlPanel.includes('#25 route is traced in v0.38; full output model remains open'));
 const mutation=vm.runInContext(`(()=>{const n=PT44_FACTORY_V3.factory_nets.find(x=>x.id==='F_50L6_CATH'),v=n.factory_members.pop();const bad=!pt44OutputBypassAudit().ok;n.factory_members.push(v);return bad;})()`,ctx);assert(mutation,'bypass audit must reject a missing #22 endpoint');
 if(process.argv.includes('--ngspice')){
  const run=spawnSync('ngspice',['--batch',path.join(root,'engineering/PT44_Cathode_Bypass_AC_v36.cir')],{encoding:'utf8'});

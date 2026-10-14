@@ -1,11 +1,11 @@
 {
   "schema": "PT44_PASSIVE_DEVICE_TOPOLOGY_V1",
-  "version": "0.36.0",
+  "version": "0.40.0",
   "model": "Philco PT-44",
   "factory_source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "printed_page": 38,
   "scope": "FACTORY_COMPONENT_INTERNAL_STRUCTURE_AND_TWO_PILOT_SHUNT_EDGES_ONLY",
-  "source_status": "Parts and winding symbols traced. Winding inductance, mutual coupling, winding DCR, lamp hot/cold behavior and line switch remain unknown. No additions to RF/IF external electrical nets. v0.36 adds the source-traced #22 cathode-bypass capacitor across #24; #25 and external line routing remain open.",
+  "source_status": "v0.40 traces #12 secondary return and #13 grid-return resistor ends; #14 and #17 traces from v0.39 remain source-reviewed. RF/converter and receiver models remain open.",
   "devices": {
     "12": {
       "kind": "magnetically_coupled_transformer",
@@ -33,7 +33,7 @@
       ],
       "mutual_coupling_k": null,
       "capacitive_tuning_values": null,
-      "external_pin_routing_status": "partial"
+      "external_pin_routing_status": "all_component_endpoints_source_traced_pin_and_model_crosswalk_open"
     },
     "14": {
       "kind": "magnetically_coupled_transformer",
@@ -61,7 +61,7 @@
       ],
       "mutual_coupling_k": null,
       "capacitive_tuning_values": null,
-      "external_pin_routing_status": "partial"
+      "external_pin_routing_status": "supply_endpoint_traced_other_winding_endpoints_open"
     },
     "26": {
       "kind": "magnetically_coupled_transformer",
@@ -161,6 +161,57 @@
       "parallel_with_factory_part": "24",
       "connection_status": "SOURCE_TRACED_P38_NATIVE_300DPI",
       "terminal_alias_note": "The mica capacitor is non-polarized; a/b are arbitrary endpoint aliases and only the unordered net pair is asserted."
+    },
+    "25": {
+      "kind": "capacitor",
+      "stage": "AUDIO",
+      "factory_part": "25",
+      "terminals": [
+        "25:a",
+        "25:b"
+      ],
+      "capacitance_farad": 2e-08,
+      "connection_nets": [
+        "F_BPLUS_FILT",
+        "F_BMINUS"
+      ],
+      "terminal_alias_note": "Non-polarized; a/b are arbitrary aliases and only the unordered endpoint set is asserted.",
+      "connection_status": "SOURCE_TRACED_P38_NATIVE_300DPI",
+      "parallel_with": "50L6 screen supply-to-B-minus bypass"
+    },
+    "17": {
+      "kind": "resistor",
+      "stage": "DETECTOR",
+      "factory_part": "17",
+      "resistance_ohms": 4700000,
+      "terminals": [
+        "17:a",
+        "17:b"
+      ],
+      "connection_nets": [
+        "F_IF2_AVC_FEED",
+        "F_DET_PASSIVE_RETURN"
+      ],
+      "connection_status": "both_component_endpoints_source_traced_v0.39",
+      "source_artifact": "engineering/PT44_Detector_AVC_Trace_V1.json",
+      "model_validation_status": "not_validated_in_full_receiver"
+    },
+    "13": {
+      "kind": "resistor",
+      "stage": "IF",
+      "factory_part": "13",
+      "resistance_ohms": 27000,
+      "terminals": [
+        "13:a",
+        "13:b"
+      ],
+      "connection_nets": [
+        "F_IF1_GRID",
+        "F_BMINUS"
+      ],
+      "connection_status": "both_component_endpoints_source_traced_v0.40",
+      "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "model_validation_status": "not_validated_in_full_receiver"
     }
   },
   "acceptance": {

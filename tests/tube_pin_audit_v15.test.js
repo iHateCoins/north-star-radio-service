@@ -21,9 +21,18 @@ assert.equal(result.tubes,5);
 assert.equal(result.reviewTasks,22);
 assert(Math.abs(result.heaterOperatingVolts - 103.9) < 1e-8);
 assert.equal(Object.values(report.tube_pinouts).reduce((sum,x)=>sum+Object.keys(x.pin_roles).length,0),40);
-assert.equal(vm.runInContext('PT44_FACTORY_V3.factory_nets.length',context),22);
+assert.equal(vm.runInContext('PT44_FACTORY_V3.factory_nets.length',context),23);
 assert.equal(vm.runInContext('PT44_FACTORY_V3.checks.benchmark_ready',context),false);
 assert(report.review_tasks.every(x=>x.factory_net_claim===false));
+const rfInput=report.review_tasks.find(x=>x.id==='RF-01');
+assert.equal(rfInput.terminal,'V1:6');
+assert.equal(report.tube_pinouts.V1.pin_roles['3'],'oscillator anode grid g2');
+assert.equal(report.tube_pinouts.V1.pin_roles['4'],'oscillator grid g1');
+assert.equal(report.tube_pinouts.V1.pin_roles['5'],'screen grids g3,g5');
+assert.equal(report.tube_pinouts.V1.pin_roles['6'],'signal input grid g4');
+assert.equal(report.tube_pinouts.V1.pin_roles['4'],'oscillator grid g1');
+assert(rfInput.pinout_basis.includes('pin 6'));
+
 const negative = vm.runInContext(`(()=>{
  const members=PT44_FACTORY_V3.factory_nets[0].factory_members;
  const original=members[0];members[0]='V5:4';

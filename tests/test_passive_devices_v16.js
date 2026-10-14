@@ -19,4 +19,5 @@ assert(n.short&&n.wrong);
 const currentBuild=html.match(/<meta name="nsrs-build" content="(v\d+\.\d+\.\d+)">/); assert(currentBuild,'Missing semantic build metadata'); assert(html.includes('BUILD '+currentBuild[1]),'Version watermark does not match build metadata');
 const cir=fs.readFileSync(path.join(root,'engineering/PT44_Factory_Passive_Subcircuit_DRAFT.cir'),'utf8');
 assert(cir.includes('R30_40 R30_END_A R30_TAP 40')&&cir.includes('R30_80 R30_TAP R30_END_B 80'));
-console.log('PASS v0.36: source-traced #22 cathode bypass plus passive-device, lamp-shunt, winding, and readiness audits');
+assert.equal(passive.version,'0.40.0');assert.deepEqual(passive.devices['25'].connection_nets,['F_BPLUS_FILT','F_BMINUS']);assert.equal(passive.devices['12'].external_pin_routing_status,'all_component_endpoints_source_traced_pin_and_model_crosswalk_open');
+console.log('PASS v0.39: source-traced #22 cathode bypass plus passive-device, lamp-shunt, winding, and readiness audits');

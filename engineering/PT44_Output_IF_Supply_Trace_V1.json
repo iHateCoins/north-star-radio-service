@@ -1,0 +1,130 @@
+{
+  "schema": "PT44_OUTPUT_IF_SUPPLY_TRACE_V1",
+  "version": "0.38.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_COMPONENT_ENDPOINTS_SYMBOL_CROSSWALKS_OPEN",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "terminal_conventions": {
+    "capacitor_25": "Non-polarized; a/b are arbitrary aliases. Only the unordered pair of net endpoints is asserted.",
+    "if_transformers": "pSupply denotes the factory terminal defined by the component topology ledger as the B+ supply end; the source schematic does not identify winding polarity or turns.",
+    "tube_symbol": "V4:SCREEN_GRID_GLYPH is a visual electrode symbol on the factory drawing and is not a numbered socket pin."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "25:a",
+      "net_id": "F_BPLUS_FILT",
+      "joined_factory_member": "21:a",
+      "interpretation": "One #25 lead joins the filtered 95 V supply rail; its other lead is on B−. Alias a is arbitrary.",
+      "source_box_px": [
+        1270,
+        430,
+        1660,
+        700
+      ]
+    },
+    {
+      "terminal": "25:b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "23:b",
+      "interpretation": "The opposite #25 lead joins the B− return rail. Alias b is arbitrary.",
+      "source_box_px": [
+        1270,
+        430,
+        1660,
+        700
+      ]
+    },
+    {
+      "terminal": "12:pSupply",
+      "net_id": "F_BPLUS_FILT",
+      "joined_factory_member": "28:b",
+      "interpretation": "The supply end of first IF transformer #12 primary reaches the 95 V filtered B+ bus.",
+      "source_box_px": [
+        450,
+        150,
+        950,
+        600
+      ]
+    },
+    {
+      "terminal": "14:pSupply",
+      "net_id": "F_BPLUS_FILT",
+      "joined_factory_member": "28:b",
+      "interpretation": "The supply end of second IF transformer #14 primary reaches the 95 V filtered B+ bus.",
+      "source_box_px": [
+        900,
+        150,
+        1420,
+        600
+      ]
+    }
+  ],
+  "verified_symbol_connections": [
+    {
+      "id": "V4_SCREEN_TO_BPLUS_FILTERED",
+      "symbol_terminal": "V4:SCREEN_GRID_GLYPH",
+      "net_id": "F_BPLUS_FILT",
+      "basis": "The 50L6 screen-grid glyph lead joins the 95 V bus, which also feeds the #25 bypass capacitor. The factory drawing does not print socket-pin numbers.",
+      "socket_pin_number": null,
+      "source_box_px": [
+        1270,
+        170,
+        1660,
+        700
+      ]
+    },
+    {
+      "id": "V1_SCREEN_TO_BPLUS_FILTERED",
+      "symbol_terminal": "V1:SCREEN_GRID_GLYPH",
+      "net_id": "F_BPLUS_FILT",
+      "basis": "The 7A8 screen-grid glyph is drawn on the 95 V bus. No numbered socket pin is assigned by this schematic trace.",
+      "socket_pin_number": null,
+      "source_box_px": [
+        400,
+        150,
+        950,
+        610
+      ]
+    },
+    {
+      "id": "V2_SCREEN_TO_BPLUS_FILTERED",
+      "symbol_terminal": "V2:SCREEN_GRID_GLYPH",
+      "net_id": "F_BPLUS_FILT",
+      "basis": "The 7B7 screen-grid glyph is drawn on the 95 V bus. No numbered socket pin is assigned by this schematic trace.",
+      "socket_pin_number": null,
+      "source_box_px": [
+        800,
+        150,
+        1390,
+        610
+      ]
+    }
+  ],
+  "source_level_closure": {
+    "output_screen_bypass_component_25": true,
+    "if_primary_supply_ends": true,
+    "tube_socket_pin_crosswalk": false,
+    "winding_parameters": false
+  },
+  "unresolved": [
+    "Numbered socket-pin crosswalk for V4/V1/V2 screen glyphs",
+    "IF transformer winding inductance, resistance, polarity and coupling",
+    "Remaining IF secondary and AVC connections",
+    "Output-transformer and speaker electrical characterization",
+    "Full receiver behavior correlation"
+  ],
+  "benchmark_ready": false
+}
