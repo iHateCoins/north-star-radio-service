@@ -183,8 +183,9 @@
       "model_slots": [
         "T2"
       ],
-      "connectivity": "partial",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco p.38 native 300-dpi scan; v0.40 trace reconciles the first IF secondary return and #13 grid-return resistor endpoints."
     },
     "13": {
       "description": "27 kΩ resistor",
@@ -197,8 +198,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #13",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco p.38 native 300-dpi scan; v0.40 trace reconciles the first IF secondary return and #13 grid-return resistor endpoints."
     },
     "14": {
       "description": "Second IF transformer",
@@ -217,7 +219,7 @@
       ],
       "connectivity": "source_traced_subset_300dpi",
       "geometry_certified": false,
-      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
+      "evidence_note": "Philco native 300-dpi page 38; v0.38 supply-end trace PT44_Output_IF_Supply_Trace_V1; winding and detector crosswalks unresolved."
     },
     "15": {
       "description": "250 pF capacitor",
@@ -250,7 +252,7 @@
       "model_slots": [],
       "connectivity": "source_traced_subset_300dpi",
       "geometry_certified": false,
-      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
+      "evidence_note": "Philco native 300dpi page 38; source locators PT44_DETECTOR_AUDIO_TRACES_V1 and PT44_POWER_LINE_TRACE_V1; potentiometer track and switch trace are separate terminal groups; physical switch-lug crosswalk remains open."
     },
     "17": {
       "description": "4.7 MΩ resistor",
@@ -263,8 +265,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #17",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco p.38 native 300-dpi scan; v0.39 traces both #17 endpoints. Upper diode remains an unnumbered symbol glyph."
     },
     "18": {
       "description": "0.01 µF / 400 V capacitor",
@@ -386,8 +389,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #25",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300-dpi page 38; v0.38 source trace PT44_Output_IF_Supply_Trace_V1."
     },
     "26": {
       "description": "Output transformer",
@@ -451,8 +455,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #30",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "partial_lamp_shunt_only_mains_endpoints_unverified",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open."
     },
     "31": {
       "description": "0.04 µF / 400 V capacitor",
@@ -465,8 +470,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #31",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open."
     },
     "32": {
       "description": "Pilot lamp",
@@ -479,8 +485,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #32",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "partial_lamp_shunt_only_mains_endpoints_unverified",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open."
     },
     "29A": {
       "description": "20 µF electrolytic",
@@ -637,7 +644,10 @@
       "factory_members": [
         "28:b",
         "29B:a",
-        "21:a"
+        "21:a",
+        "25:a",
+        "12:pSupply",
+        "14:pSupply"
       ],
       "prototype_member_crosswalk": [
         "R1:b",
@@ -674,6 +684,16 @@
         ],
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_38_source_trace": {
+        "status": "SOURCE_TRACED",
+        "members": [
+          "12:pSupply",
+          "14:pSupply",
+          "25:a"
+        ],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
       }
     },
     {
@@ -840,7 +860,10 @@
         "29B:b",
         "23:b",
         "24:b",
-        "22:b"
+        "22:b",
+        "25:b",
+        "12:sReturn",
+        "13:b"
       ],
       "prototype_member_crosswalk": [
         "C1:b",
@@ -887,6 +910,14 @@
         "status": "SOURCE_CHECKED_LISTED_MEMBER",
         "reviewed_member": "22:b",
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_38_source_trace": {
+        "status": "SOURCE_TRACED",
+        "members": [
+          "25:b"
+        ],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
       }
     },
     {
@@ -1136,7 +1167,8 @@
       },
       "factory_members": [
         "12:sGrid",
-        "V2:6"
+        "V2:6",
+        "13:a"
       ],
       "prototype_member_crosswalk": [
         "T2:sGrid",
@@ -1348,7 +1380,7 @@
       "title": "Detector audio passive common return",
       "stage": "Detector",
       "model": null,
-      "description": "Factory page 38: the bottom ends of #15, #16, and #19 share the same horizontal return line. This does not establish chassis bond.",
+      "description": "Factory page 38: #15, #16, #17 and #19 lower ends share the detector return rail; this does not establish a chassis bond.",
       "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
       "stage_status": "source_traced_300dpi_external_wires",
       "evidence": {
@@ -1361,7 +1393,8 @@
       "factory_members": [
         "15:b",
         "16:b",
-        "19:b"
+        "19:b",
+        "17:b"
       ],
       "prototype_member_crosswalk": [],
       "v0_33_source_review": {
@@ -1371,6 +1404,37 @@
           "15:b",
           "16:b",
           "19:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      }
+    },
+    {
+      "id": "F_IF2_AVC_FEED",
+      "title": "Second IF upper secondary to AVC diode glyph and #17 load",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: upper #14 secondary end, upper 7C6 diode plate glyph lead, and #17 upper end share a conductor; the diode socket pin is not printed.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_symbol_crosswalk_open",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; second IF and detector",
+        "verification": "v0.39 native page-38 scan: upper #14 secondary, upper 7C6 diode glyph, and #17 upper terminal share a conductor.",
+        "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "factory_members": [
+        "14:sDetector",
+        "17:a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_39_source_review": {
+        "milestone_version": "0.39.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "14:sDetector",
+          "17:a"
         ],
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
@@ -1498,19 +1562,19 @@
       "id": "P1-IF",
       "severity": "blocker",
       "stage": "IF",
-      "description": "The three currently represented #12/#14 plate/grid groups were source-checked. Complete winding endpoints, 7B7 screen/cathode, trimmers and AVC connections remain open."
+      "description": "The #12/#14 primary supply ends are source-traced to filtered B+. IF secondary returns, 7B7 screen/cathode crosswalks, trimmers, and AVC connections remain open."
     },
     {
       "id": "P1-DET",
       "severity": "blocker",
       "stage": "DETECTOR",
-      "description": "The four detector/audio groups and upper-diode symbol-level link were rechecked. The diode glyph is still not assigned to a socket pin; #17 lower branch, 7C6 external cathode return and full AVC routing remain open."
+      "description": "The four detector/audio conductor groups and upper diode glyph link are source-checked. The diode glyph pin mapping, #17 lower branch, 7C6 external cathode return, and full AVC routing remain open."
     },
     {
       "id": "P1-OUTPUT",
       "severity": "blocker",
       "stage": "AUDIO",
-      "description": "The #22 250 pF cathode-bypass route is source-traced across #24 and B−. Verify #25 route, winding characteristics, speaker/model correlation, and remaining output-stage terminal mapping."
+      "description": "Capacitors #22 and #25 are source-traced, including #25 from filtered B+ to B−. Output-transformer winding parameters, speaker/model correlation, and full output behavior remain open."
     },
     {
       "id": "P1-AC",
@@ -1522,7 +1586,7 @@
       "id": "P1-SOURCE",
       "severity": "blocker",
       "stage": "ALL",
-      "description": "The 22 currently represented net groups and 54 listed terminal memberships received a native 300-dpi page-38 cross-check. RF has no transcribed net groups; socket/winding crosswalks and unrepresented factory connections remain open."
+      "description": "The 22 current graph groups and 60 listed terminal memberships have source-review records. RF/converter remains untranscribed; socket-pin, winding, chassis, and remaining component connections remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1533,8 +1597,8 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 22,
-    "factory_terminals_on_traced_nets": 56,
+    "traced_network_count": 23,
+    "factory_terminals_on_traced_nets": 66,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,

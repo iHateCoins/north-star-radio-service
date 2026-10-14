@@ -334,9 +334,8 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #22",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_subset_300dpi",
-      "geometry_certified": false,
-      "evidence_note": "Philco native 300-dpi page 38; v0.36 trace audit PT44_OUTPUT_CATHODE_BYPASS_V1."
+      "connectivity": "not_transcribed",
+      "geometry_certified": false
     },
     "23": {
       "description": "470 kΩ resistor",
@@ -1071,7 +1070,7 @@
       "id": "P1-OUTPUT",
       "severity": "blocker",
       "stage": "AUDIO",
-      "description": "The #22 250 pF cathode-bypass route is source-traced across #24 and B−. Verify #25 route, winding characteristics, speaker/model correlation, and remaining output-stage terminal mapping."
+      "description": "Verify #22 and #25 routes; trace full output-transformer primary and secondary plus voice coil."
     },
     {
       "id": "P1-AC",

@@ -21,7 +21,7 @@ assert.equal(result.tubes,5);
 assert.equal(result.reviewTasks,22);
 assert(Math.abs(result.heaterOperatingVolts - 103.9) < 1e-8);
 assert.equal(Object.values(report.tube_pinouts).reduce((sum,x)=>sum+Object.keys(x.pin_roles).length,0),40);
-assert.equal(vm.runInContext('PT44_FACTORY_V3.factory_nets.length',context),22);
+assert.equal(vm.runInContext('PT44_FACTORY_V3.factory_nets.length',context),23);
 assert.equal(vm.runInContext('PT44_FACTORY_V3.checks.benchmark_ready',context),false);
 assert(report.review_tasks.every(x=>x.factory_net_claim===false));
 const negative = vm.runInContext(`(()=>{

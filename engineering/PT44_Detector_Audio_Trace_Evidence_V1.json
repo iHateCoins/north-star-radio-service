@@ -1,6 +1,6 @@
 {
   "schema": "PT44_DETECTOR_AUDIO_TRACES_V1",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "factory_document": "Philco 1941 RMS Year Book, printed page 38, schematic diagram for PT-42/PT-44",
   "source_scan": {
     "native_image_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382",
@@ -91,9 +91,30 @@
       "terminals": [
         "15:b",
         "16:b",
-        "19:b"
+        "19:b",
+        "17:b"
       ],
-      "basis": "Factory page 38: the bottom ends of #15, #16, and #19 share the same horizontal return line. This does not establish chassis bond.",
+      "basis": "Factory page 38: #15, #16, #17 and #19 lower terminals share detector return; this does not establish a chassis bond.",
+      "source_box": {
+        "native_width_px": 2022,
+        "native_height_px": 2587,
+        "dpi": 300,
+        "bbox_left_top_right_bottom_px": [
+          750,
+          265,
+          1400,
+          810
+        ]
+      }
+    },
+    {
+      "net_id": "F_IF2_AVC_FEED",
+      "title": "Upper second-IF secondary and AVC load",
+      "terminals": [
+        "14:sDetector",
+        "17:a"
+      ],
+      "basis": "Factory page 38: upper #14 secondary joins the upper 7C6 diode glyph lead and #17 upper terminal. The glyph is not assigned to pin 5 or 6.",
       "source_box": {
         "native_width_px": 2022,
         "native_height_px": 2587,
@@ -108,10 +129,11 @@
     }
   ],
   "unresolved": [
-    "Which numbered 7C6 diode plate pin (#5 or #6) corresponds to the unnumbered upper diode symbol in the factory schematic",
-    "Routing from #17 lower terminal and remaining AVC loading back to antenna / IF bias",
+    "Which numbered 7C6 diode plate pin (#5 or #6) corresponds to the upper diode glyph",
+    "External 7C6 cathode return and #16 on/off switch contacts",
+    "Remaining AVC route, loading and relationship to aerial return",
     "Specific metal-chassis-to-B-minus connection and any line-bypass wiring",
-    "Potentiometer #16 full resistance, taper, and any factory production options"
+    "Potentiometer #16 full resistance, taper, and production options"
   ],
   "model_parity": "These are manufacturer-wiring graph memberships only. No 3D route or reduced-order solver equivalence is asserted.",
   "spice_limit": "SPICE draft can include #15/#18/#19 passive devices but does not infer a valid detector or automatic volume control behavior.",
