@@ -464,3 +464,892 @@
         "4:rotor"
       ],
       "terminals_not_yet_referenced_in_partial_graph": [
+        "4:osc_stator"
+      ],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "4:rf_stator",
+        "4:rotor"
+      ],
+      "terminals_not_in_partial_graph": [
+        "4:osc_stator"
+      ]
+    },
+    {
+      "factory_part": "5",
+      "description": "Aerial compensator",
+      "category": "tuning_assembly",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "5:a",
+        "5:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "5:a",
+        "5:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "6",
+      "description": "Condenser and choke assembly",
+      "category": "capacitor",
+      "declared_terminals": [
+        "cap_a",
+        "cap_b",
+        "choke_a",
+        "choke_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "connectivity_status": "not_transcribed",
+      "terminals_referenced_in_partial_graph": [],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "6:cap_a",
+        "6:cap_b",
+        "6:choke_a",
+        "6:choke_b"
+      ],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [],
+      "terminals_not_in_partial_graph": [
+        "6:cap_a",
+        "6:cap_b",
+        "6:choke_a",
+        "6:choke_b"
+      ]
+    },
+    {
+      "factory_part": "7",
+      "description": "4.7 M\u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "not_transcribed",
+      "terminals_referenced_in_partial_graph": [],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "7:a",
+        "7:b"
+      ],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [],
+      "terminals_not_in_partial_graph": [
+        "7:a",
+        "7:b"
+      ]
+    },
+    {
+      "factory_part": "8",
+      "description": "0.1 \u00b5F / 200 V capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "not_transcribed",
+      "terminals_referenced_in_partial_graph": [],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "8:a",
+        "8:b"
+      ],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [],
+      "terminals_not_in_partial_graph": [
+        "8:a",
+        "8:b"
+      ]
+    },
+    {
+      "factory_part": "9",
+      "description": "22 k\u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_partial_endpoint_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "9:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "9:a"
+      ],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "9:b"
+      ],
+      "terminals_not_in_partial_graph": [
+        "9:a"
+      ]
+    },
+    {
+      "factory_part": "10",
+      "description": "Oscillator transformer",
+      "category": "oscillator_transformer",
+      "declared_terminals": [
+        "primary_a",
+        "primary_b",
+        "secondary_a",
+        "secondary_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "connectivity_status": "not_transcribed",
+      "terminals_referenced_in_partial_graph": [],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "10:primary_a",
+        "10:primary_b",
+        "10:secondary_a",
+        "10:secondary_b"
+      ],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [],
+      "terminals_not_in_partial_graph": [
+        "10:primary_a",
+        "10:primary_b",
+        "10:secondary_a",
+        "10:secondary_b"
+      ]
+    },
+    {
+      "factory_part": "11",
+      "description": "0.05 \u00b5F capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_partial_endpoint_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "11:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "11:a"
+      ],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "11:b"
+      ],
+      "terminals_not_in_partial_graph": [
+        "11:a"
+      ]
+    },
+    {
+      "factory_part": "12",
+      "description": "First IF transformer",
+      "category": "if_transformer",
+      "declared_terminals": [
+        "pPlate",
+        "pSupply",
+        "sGrid",
+        "sReturn"
+      ],
+      "terminal_definition_status": "functional_only",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "12:pPlate",
+        "12:pSupply",
+        "12:sGrid",
+        "12:sReturn"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "12:pPlate",
+        "12:pSupply",
+        "12:sGrid",
+        "12:sReturn"
+      ],
+      "terminals_not_in_partial_graph": [],
+      "transcription_status": "partial_supply_endpoint_source_traced",
+      "source_trace_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
+    },
+    {
+      "factory_part": "13",
+      "description": "27 k\u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "13:a",
+        "13:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "13:a",
+        "13:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "14",
+      "description": "Second IF transformer",
+      "category": "if_transformer",
+      "declared_terminals": [
+        "pPlate",
+        "pSupply",
+        "sDetector",
+        "sReturn"
+      ],
+      "terminal_definition_status": "functional_only",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "14:pPlate",
+        "14:pSupply",
+        "14:sDetector",
+        "14:sReturn"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "14:pPlate",
+        "14:pSupply",
+        "14:sDetector",
+        "14:sReturn"
+      ],
+      "terminals_not_in_partial_graph": [],
+      "transcription_status": "partial_supply_endpoint_source_traced",
+      "source_trace_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
+    },
+    {
+      "factory_part": "15",
+      "description": "250 pF capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "15:a",
+        "15:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "15:a",
+        "15:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "16",
+      "description": "Volume control",
+      "category": "potentiometer",
+      "declared_terminals": [
+        "a",
+        "wiper",
+        "b",
+        "switch_a",
+        "switch_b"
+      ],
+      "terminal_definition_status": "functional_only",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "16:a",
+        "16:b",
+        "16:wiper"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "16:switch_a",
+        "16:switch_b"
+      ],
+      "geometry_certified": false,
+      "source_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
+      "source_trace_status": "schematic_symbol_level_traced_pin_or_lug_crosswalk_open",
+      "terminals_in_partial_graph": [
+        "16:a",
+        "16:b",
+        "16:wiper"
+      ],
+      "terminals_not_in_partial_graph": [
+        "16:switch_a",
+        "16:switch_b"
+      ]
+    },
+    {
+      "factory_part": "17",
+      "description": "4.7 M\u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "17:a",
+        "17:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "17:a",
+        "17:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "18",
+      "description": "0.01 \u00b5F / 400 V capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "18:a",
+        "18:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "18:a",
+        "18:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "19",
+      "description": "4.7 M\u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "19:a",
+        "19:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "19:a",
+        "19:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "20",
+      "description": "0.01 \u00b5F / 400 V capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "traced_subset",
+      "terminals_referenced_in_partial_graph": [
+        "20:a",
+        "20:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "20:a",
+        "20:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "21",
+      "description": "470 k\u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "traced_subset",
+      "terminals_referenced_in_partial_graph": [
+        "21:a",
+        "21:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "21:a",
+        "21:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "22",
+      "description": "250 pF mica capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "22:a",
+        "22:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "22:a",
+        "22:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "23",
+      "description": "470 k\u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "traced_subset",
+      "terminals_referenced_in_partial_graph": [
+        "23:a",
+        "23:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "23:a",
+        "23:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "24",
+      "description": "130 \u03a9 resistor",
+      "category": "resistor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "traced_subset",
+      "terminals_referenced_in_partial_graph": [
+        "24:a",
+        "24:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "24:a",
+        "24:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "25",
+      "description": "0.02 \u00b5F / 400 V capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
+        "25:a",
+        "25:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "25:a",
+        "25:b"
+      ],
+      "terminals_not_in_partial_graph": [],
+      "transcription_status": "source_traced_both_component_endpoints",
+      "source_trace_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
+    },
+    {
+      "factory_part": "26",
+      "description": "Output transformer",
+      "category": "output_transformer",
+      "declared_terminals": [
+        "a",
+        "b",
+        "sA",
+        "sB"
+      ],
+      "terminal_definition_status": "functional_only",
+      "connectivity_status": "partial",
+      "terminals_referenced_in_partial_graph": [
+        "26:a",
+        "26:b",
+        "26:sA",
+        "26:sB"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "26:a",
+        "26:b",
+        "26:sA",
+        "26:sB"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "27",
+      "description": "Speaker cone / voice coil",
+      "category": "speaker",
+      "declared_terminals": [
+        "voiceA",
+        "voiceB"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "partial",
+      "terminals_referenced_in_partial_graph": [
+        "27:voiceA",
+        "27:voiceB"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "27:voiceA",
+        "27:voiceB"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "28",
+      "description": "500 \u03a9 field coil",
+      "category": "field_coil",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "partial",
+      "terminals_referenced_in_partial_graph": [
+        "28:a",
+        "28:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "28:a",
+        "28:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "30",
+      "description": "40 \u03a9 + 80 \u03a9 tapped line resistance assembly (#30)",
+      "category": "resistor",
+      "declared_terminals": [
+        "endA",
+        "tap",
+        "endB"
+      ],
+      "terminal_definition_status": "factory_two_section_resistor_terminals",
+      "connectivity_status": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "terminals_referenced_in_partial_graph": [
+        "30:endA",
+        "30:tap"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "30:endB"
+      ],
+      "geometry_certified": false,
+      "source_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
+      "source_trace_status": "schematic_symbol_level_traced_pin_or_lug_crosswalk_open",
+      "terminals_in_partial_graph": [
+        "30:endA",
+        "30:tap"
+      ],
+      "terminals_not_in_partial_graph": [
+        "30:endB"
+      ]
+    },
+    {
+      "factory_part": "31",
+      "description": "0.04 \u00b5F / 400 V capacitor",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "terminals_referenced_in_partial_graph": [],
+      "terminals_not_yet_referenced_in_partial_graph": [
+        "31:a",
+        "31:b"
+      ],
+      "geometry_certified": false,
+      "source_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
+      "source_trace_status": "schematic_symbol_level_traced_pin_or_lug_crosswalk_open",
+      "terminals_in_partial_graph": [],
+      "terminals_not_in_partial_graph": [
+        "31:a",
+        "31:b"
+      ]
+    },
+    {
+      "factory_part": "32",
+      "description": "Pilot lamp",
+      "category": "lamp",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "terminals_referenced_in_partial_graph": [
+        "32:a",
+        "32:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "source_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
+      "source_trace_status": "schematic_symbol_level_traced_pin_or_lug_crosswalk_open",
+      "terminals_in_partial_graph": [
+        "32:a",
+        "32:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "29A",
+      "description": "20 \u00b5F electrolytic",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "traced_subset",
+      "terminals_referenced_in_partial_graph": [
+        "29A:a",
+        "29A:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "29A:a",
+        "29A:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    },
+    {
+      "factory_part": "29B",
+      "description": "20 \u00b5F electrolytic",
+      "category": "capacitor",
+      "declared_terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "connectivity_status": "traced_subset",
+      "terminals_referenced_in_partial_graph": [
+        "29B:a",
+        "29B:b"
+      ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
+      "geometry_certified": false,
+      "terminals_in_partial_graph": [
+        "29B:a",
+        "29B:b"
+      ],
+      "terminals_not_in_partial_graph": []
+    }
+  ],
+  "other_scope_evidence": {
+    "chassis": {
+      "numbered_callouts": 26,
+      "components_located_in_figure": 27,
+      "components_not_shown": 6,
+      "physical_geometry_certified": false,
+      "wiring_certified": false,
+      "benchmark_ready": false
+    },
+    "service_reference": {
+      "alignment_steps_transcribed": 3,
+      "conditions_not_stated": [
+        "Signal-generator amplitude",
+        "Supply voltage during alignment",
+        "Meter input impedance",
+        "Voltage tolerances",
+        "Alignment output target"
+      ],
+      "benchmark_ready": false
+    },
+    "simulation": {
+      "source_generated_passive_instances": 6,
+      "isolated_ngspice_testbench_validated": true,
+      "full_receiver_spice_validated": false,
+      "nominal_heater_sanity_scenarios": 2,
+      "nominal_heater_sanity_spice_validated": true,
+      "isolated_output_bypass_ac_study_validated": true
+    },
+    "model_equivalence": {
+      "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
+      "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",
+      "engineering_effect": "Supports use of the shared factory schematic and locator for PT-44; the equivalence review itself does not establish untraced terminals or close a benchmark gate."
+    }
+  },
+  "completion_gates": [
+    {
+      "id": "GATE-NETLIST",
+      "title": "Complete source-traced, pin-level PT-44 netlist",
+      "status": "NOT MET",
+      "acceptance": "Every factory component, external tube terminal, winding end, switch contact and return has a source-backed connection or an explicit manufacturer option."
+    },
+    {
+      "id": "GATE-CHASSIS",
+      "title": "Schematic-to-chassis crosswalk",
+      "status": "NOT MET",
+      "acceptance": "Physical component locations and lead dress are cross-checked against adequate chassis evidence; electrical membership remains the authority.",
+      "evidence_to_date": "The 1941 p.38 underside position figure now locates 27/33 factory component records by 26 numbered callouts. Six components are not shown; the drawing does not define exact 3D coordinates, lead dress, or wire routes."
+    },
+    {
+      "id": "GATE-REFERENCE",
+      "title": "Service measurements have defined test conditions",
+      "status": "NOT MET",
+      "acceptance": "Return reference, instrument loading, operating state and tolerances are verified before factory voltages are used as pass/fail targets.",
+      "evidence_to_date": "The 1941 p.36 alignment hookup, controls, frequencies, and adjustment order are transcribed. Meter loading, generator level, supply condition during alignment, and voltage tolerances remain unstated."
+    },
+    {
+      "id": "GATE-MODEL",
+      "title": "Full receiver behavior correlates to source data",
+      "status": "NOT MET",
+      "acceptance": "Power, heater, RF, IF, detector, AVC and audio operating behavior is validated against service references and independent calculations."
+    },
+    {
+      "id": "GATE-SPICE",
+      "title": "Full SPICE model is validated",
+      "status": "NOT MET",
+      "acceptance": "Sourced tube and transformer models, passive values and operating states reproduce documented circuit behavior; the isolated RC deck alone does not satisfy this gate."
+    },
+    {
+      "id": "GATE-REPAIRS",
+      "title": "Repair and fault regressions remain stable",
+      "status": "NOT MET",
+      "acceptance": "Known fault cases remain diagnosable and repairable through the shop workflow after the engineering model is connected to gameplay."
+    }
+  ],
+  "open_items": [
+    {
+      "id": "P1-RF",
+      "area": "RF / converter",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "The v0.41/v0.42 loop and aerial-transformer interfaces are traced, and v0.43 connects the lower #9/#11 terminals to B\u2212. The #4 oscillator gang, #6\u2013#10 connections, upper #9/#11 ends, remaining 7A8 socket pins, and RF/receiver behavior remain open."
+    },
+    {
+      "id": "P1-IF",
+      "area": "IF",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "Both #12 primary/secondary ends, both #14 primary/secondary ends, and #13 grid-return resistor are now source-traced. 7B7 screen/cathode pin wiring, transformer parameters/trimmers, AVC, and full IF behavior remain open."
+    },
+    {
+      "id": "P1-DET",
+      "area": "Detector / AVC",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "The upper #14 secondary/#17 terminal/upper 7C6 diode glyph link and #17 return are source-traced. The diode glyph is not assigned to pin 5 or 6; external cathode routing, #16 switch contacts, remaining AVC topology, and behavior remain open."
+    },
+    {
+      "id": "P1-OUTPUT",
+      "area": "Audio output",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "Factory #25 is source-traced across filtered B+ and B\u2212, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+    },
+    {
+      "id": "P1-AC",
+      "area": "Power / line",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "The complete AC/line topology is now source-traced at schematic-symbol level: plug conductors, #16 switch, #31 across the plug, #30 40/80-ohm branches, #32 shunt, 35Z3 plate feed, B-minus return, and all five series heaters. Numbered tube-socket heater crosswalk, physical switch-lug crosswalk, and chassis isolation/bond evidence remain open."
+    },
+    {
+      "id": "P1-SOURCE",
+      "area": "Source cross-check",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "All 28 represented graph groups and 81 component-terminal memberships reconcile to source-review records through v0.43. Only the lower #9/#11 oscillator return endpoints are traced; the rest of the oscillator/converter, pin crosswalks, transformer parameters and receiver behavior remain open."
+    },
+    {
+      "id": "P2-SPICE",
+      "area": "Full receiver simulation",
+      "severity": "later",
+      "status": "NOT STARTED",
+      "gap": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
+    }
+  ],
+  "benchmark_ready": false,
+  "audit_findings": [
+    "The partial graph references 63 of 83 declared factory component terminals (75.9%); 20 component terminals are not yet represented. This is reference coverage, not circuit closure.",
+    "The 81 graph membership entries comprise 63 component-terminal references and 18 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes, while all 22 receiver-connection review tasks remain open.",
+    "The schematic trace audit reconciles all 81 current graph memberships. v0.36 through v0.43 added 27 source-verified memberships across #22, #25, #12, #13, #14, #17, #1, #2, #3, #4, #5, V1:6, #9 and #11 evidence updates.",
+    "All 28 graph groups are partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
+    "Component endpoint reference coverage is not electrical closure: transformer windings, tuning assemblies, tube electrodes, switch contacts, chassis return and circuit behavior require separate evidence.",
+    "The v0.37 power/line trace source-closes mains, switch, #31, #30/#32, rectifier plate feed, B-minus rail and heater-string topology at schematic-symbol level; it adds zero socket-pin memberships to the partial graph.",
+    "The v0.42 trace resolves the loop return and external antenna/aerial-transformer interface; v0.43 traces lower #9/#11 oscillator-network endpoints to B\u2212. Transformer parameters, remaining oscillator/converter connections and receiver behavior remain incomplete."
+  ],
+  "next_audit_actions": [
+    "Resolve symbol-to-socket pin and #16 switch-lug crosswalks before promoting any power-line pin memberships.",
+    "Trace remaining subsystem endpoints and source-to-functional-terminal mappings; label evidence at symbol, component, or pin level without mixing them.",
+    "Recompute graph denominator and source-ledger reconciliation after any pin-level membership update.",
+    "Trace the opposite #9/#11 ends, #4 oscillator gang and #6\u2013#10 network while keeping symbol-level leads separate from confirmed 7A8 socket pins."
+  ],
+  "tube_pin_reference_artifact": "engineering/PT44_Tube_Terminals_Review_V1.json",
+  "power_line_source_trace": {
+    "artifact": "engineering/PT44_Power_Line_Trace_V1.json",
+    "conductor_groups": 9,
+    "component_endpoints_addressed": [
+      "16:switch_a",
+      "16:switch_b",
+      "30:endB",
+      "31:a",
+      "31:b"
+    ],
+    "tube_symbol_terminals_addressed": [
+      "V5:PLATE_110V",
+      "V5:heater_symbol_H1",
+      "V5:heater_symbol_H2",
+      "V4:heater_symbol_H1",
+      "V4:heater_symbol_H2",
+      "V1:heater_symbol_H1",
+      "V1:heater_symbol_H2",
+      "V2:heater_symbol_H1",
+      "V2:heater_symbol_H2",
+      "V3:heater_symbol_H1",
+      "V3:heater_symbol_H2"
+    ],
+    "source_level_topology_closed": true,
+    "pin_level_netlist_closed": false,
+    "unresolved_ids": [
+      "POWER-PIN-CROSSWALK",
+      "POWER-SWITCH-LUG-CROSSWALK",
+      "POWER-CHASSIS-ISOLATION"
+    ]
+  },
+  "rf_input_trace_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+}
