@@ -1,0 +1,67 @@
+{
+  "schema": "PT44_OSCILLATOR_RETURN_TRACE_V1",
+  "version": "0.43.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_OSCILLATOR_RETURN_ENDPOINTS_PARTIAL",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "terminal_conventions": {
+    "part_9": "Terminal b is the lower drawn end of the #9 22 kΩ resistor; terminal a is the upper drawn end. This is a diagram orientation convention, not polarity.",
+    "part_11": "Terminal b is the lower drawn end of the #11 0.05 µF capacitor; terminal a is the upper drawn end. This is a diagram orientation convention, not polarity."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "9:b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "horizontal B− return rail",
+      "interpretation": "The lower terminal of the #9 22 kΩ resistor lands on the horizontal B− return rail in the native schematic.",
+      "source_box_px": [
+        340,
+        360,
+        900,
+        1000
+      ]
+    },
+    {
+      "terminal": "11:b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "horizontal B− return rail",
+      "interpretation": "The lower terminal of the #11 0.05 µF capacitor lands on the same horizontal B− return rail.",
+      "source_box_px": [
+        340,
+        360,
+        900,
+        1000
+      ]
+    }
+  ],
+  "source_level_closure": {
+    "part_9_lower_to_bminus": true,
+    "part_11_lower_to_bminus": true,
+    "remaining_oscillator_component_endpoints_traced": false,
+    "7a8_socket_pin_crosswalk_complete": false,
+    "oscillator_transformer_winding_roles_or_polarity_verified": false,
+    "rf_and_oscillator_complete": false,
+    "benchmark_ready": false
+  },
+  "unresolved": [
+    "The upper terminal of #9 and #11 and its relationship to #10 oscillator-transformer windings remain to be source-traced.",
+    "#4 oscillator gang stator/rotor crosswalk and #6 condenser/choke internal/receiver connections remain open.",
+    "#7/#8 network and all remaining 7A8 electrode-to-socket connections are not promoted from the schematic symbol to socket pins.",
+    "Oscillator transformer winding identity, polarity, inductance and coupling are not stated by this trace.",
+    "Oscillator start-up, tracking and receiver-level behavior remain unvalidated."
+  ],
+  "benchmark_ready": false
+}

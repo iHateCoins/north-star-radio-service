@@ -17,10 +17,10 @@ assert.deepEqual(read('PT44_FACTORY_V3'),graph);assert.deepEqual(read('PT44_OUTP
 const audit=read('pt44OutputBypassAudit()');
 assert(audit.ok,JSON.stringify(audit.errors));
 assert.equal(evidence.verified_endpoints.length,2);assert.equal(audit.verifiedMemberships,2);assert.equal(audit.netGroups,2);
-assert.equal(graph.checks.traced_network_count,28);assert.equal(graph.checks.factory_terminals_on_traced_nets,79);assert.equal(legacyGraph.checks.factory_terminals_on_traced_nets,41);assert(legacyGraph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members.includes('22:a'));assert(legacyGraph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members.includes('22:b'));
+assert.equal(graph.checks.traced_network_count,28);assert.equal(graph.checks.factory_terminals_on_traced_nets,81);assert.equal(legacyGraph.checks.factory_terminals_on_traced_nets,41);assert(legacyGraph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members.includes('22:a'));assert(legacyGraph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members.includes('22:b'));
 assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members,['V4:8','24:a','22:a']);
-assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members,['29A:b','29B:b','23:b','24:b','22:b','25:b','12:sReturn','13:b','2:secondary_b']);
-assert.equal(readiness.version,'0.42.0');assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph,79);
+assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members,['29A:b','29B:b','23:b','24:b','22:b','25:b','12:sReturn','13:b','2:secondary_b','9:b','11:b']);
+assert.equal(readiness.version,'0.43.0');assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph,81);
 assert.equal(readiness.evidence_snapshot.output_cathode_bypass_memberships,2);assert.equal(readiness.evidence_snapshot.spice.full_receiver_spice_validated,false);
 assert.equal(readiness.benchmark_ready,false);assert.equal(graph.checks.benchmark_ready,false);assert.equal(evidence.acceptance.benchmark_ready,false);
 assert.equal(passive.devices['22'].connection_nets.join('|'),'F_50L6_CATH|F_BMINUS');assert.equal(passive.devices['22'].parallel_with_factory_part,'24');
