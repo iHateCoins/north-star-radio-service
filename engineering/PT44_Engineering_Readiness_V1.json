@@ -1,13 +1,13 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.43.0",
+  "version": "0.44.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
-    "partial_traced_networks": 28,
-    "terminal_memberships_on_partial_graph": 81,
+    "partial_traced_networks": 29,
+    "terminal_memberships_on_partial_graph": 83,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 5,
     "memberships_in_those_groups": 14,
@@ -24,9 +24,9 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 13,
-    "source_reviewed_graph_groups": 28,
-    "source_reviewed_terminal_memberships": 81,
+    "source_review_milestones": 14,
+    "source_reviewed_graph_groups": 29,
+    "source_reviewed_terminal_memberships": 83,
     "rf_net_groups_added": 5,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
@@ -51,7 +51,11 @@
     "rf_input_tube_pin_connections_source_traced": 1,
     "rf_aerial_transformer_terminals_source_traced": 4,
     "external_antenna_symbol_connections_traced": 1,
-    "oscillator_return_endpoints_source_traced": 2
+    "oscillator_return_endpoints_source_traced": 2,
+    "screen_bias_pin_connections_source_traced": 2,
+    "unique_tube_pin_terminals_referenced": 20,
+    "component_terminal_memberships_in_partial_graph": 63,
+    "component_terminal_reference_coverage_percent": 75.9
   },
   "open_items": [
     {
@@ -59,14 +63,14 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The loop-to-#2 aerial-transformer interface and #1 bypass are source-traced. v0.43 traces the lower #9 22 kΩ resistor and #11 0.05 µF capacitor terminals to B−. Their opposite ends, #4 oscillator gang, #6–#8 network, #10 oscillator transformer, remaining 7A8 pins, RF behavior and receiver validation remain open."
+      "gap": "The loop/#2 aerial interface and lower #9/#11 returns are source-traced. v0.44 traces the shared 45 V lead between 7A8 screen pin 5 and 7B7 screen pin 3. The upstream screen feed, #4 gang, #6\u2013#10 oscillator connections, remaining 7A8 pins, winding parameters and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
       "area": "IF",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Both #12 primary/secondary ends, both #14 primary/secondary ends, and #13 grid-return resistor are now source-traced. 7B7 screen/cathode pin wiring, transformer parameters/trimmers, AVC, and full IF behavior remain open."
+      "gap": "Both IF transformer primary/secondary component endpoints and #13 grid return are source-traced. v0.44 maps the shared 45 V screen lead to 7B7 pin 3; 7B7 cathode wiring, screen-feed origin, transformer parameters/trimmers, AVC and full IF behavior remain open."
     },
     {
       "id": "P1-DET",
@@ -80,7 +84,7 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Factory #25 is source-traced across filtered B+ and B−, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+      "gap": "Factory #25 is source-traced across filtered B+ and B\u2212, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
@@ -94,7 +98,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "All 28 represented graph groups and 81 component-terminal memberships reconcile to source-review records through v0.43. The lower #9/#11 oscillator return endpoints are recorded; their opposite ends, #4 gang, #6–#10 converter topology, socket crosswalks, winding parameters and receiver behavior remain open."
+      "gap": "All 29 represented graph groups and 83 component/tube terminal memberships reconcile to source-review evidence through v0.44. The shared 45 V screen conductor is closed at pin level; its supply origin, oscillator/converter topology, remaining socket crosswalks, winding parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -145,7 +149,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.43 traces the lower ends of the #9 22 kΩ resistor and #11 0.05 µF capacitor to the B− rail. Their upper ends, the rest of the #6–#10 oscillator network, 7A8 socket-pin crosswalk and receiver behavior remain open.",
+  "latest_evidence_update": "v0.44 traces the shared 45 V screen conductor between 7A8 pin 5 (G3/G5) and 7B7 pin 3 (G2). Its upstream supply, operating measurement conditions, 7A8 oscillator wiring and receiver behavior remain open.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

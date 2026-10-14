@@ -31,5 +31,5 @@ const badAdjust=vm.runInContext(`(()=>{const a=PT44_ALIGNMENT_REFERENCE_V1.align
 assert(badAdjust,'alignment audit must reject changed factory adjustment sequence');
 const rendered=read('pt44ChassisAlignmentHTML(x=>x)');
 assert(rendered.includes('2D parts locator'));assert(rendered.includes('455 kHz'));assert(rendered.includes('does not establish that chassis and B-minus are the same node'));
-assert(html.includes('BUILD v0.43.0<small>'));
+assert(html.includes('BUILD v0.44.0<small>'));
 console.log('PASS v0.34: 33-part source-position crosswalk, 26 location callouts, three sourced alignment steps, limits and mutation checks');

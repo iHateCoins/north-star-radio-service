@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.43.0",
+  "version": "0.44.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -158,6 +158,12 @@
         "F_BMINUS"
       ],
       "summary": "Traced lower #9 resistor and #11 capacitor endpoints to the B− return rail. Their opposite ends, #4 gang, #6–#10 network and 7A8 socket-pin crosswalk remain open."
+    },
+    {
+      "version": "0.44.0",
+      "status": "SOURCE_TRACED_SHARED_45V_SCREEN_LEAD_PIN_CROSSWALK",
+      "artifact": "engineering/PT44_7A8_Screen_Trace_V1.json",
+      "summary": "Traced the shared screen lead between V1:5 (7A8 G3/G5) and V2:3 (7B7 G2). Upstream supply and measurement conditions remain open."
     }
   ],
   "reviewed_net_memberships": [
@@ -652,13 +658,31 @@
         "1:a"
       ],
       "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+    },
+    {
+      "net_id": "F_SCREEN_45V",
+      "milestone_version": "0.44.0",
+      "status": "SOURCE_CHECKED_SHARED_SCREEN_LEAD_PIN_CROSSWALK",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        260,
+        1350,
+        800
+      ],
+      "basis": "Philco p.38 native 300-dpi scan shows one continuous annotated 45 V screen conductor between the 7A8 and 7B7 screen glyphs; Sylvania pin data maps them to V1:5 and V2:3. Upstream supply remains untraced.",
+      "reviewed_members": [
+        "V1:5",
+        "V2:3"
+      ],
+      "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
     }
   ],
   "reviewed_open_areas": [
     {
       "milestone_version": "0.43.0",
       "area": "RF / converter",
-      "status": "PARTIAL_LOOP_ANTENNA_AND_OSCILLATOR_RETURN_TRACED",
+      "status": "PARTIAL_LOOP_ANTENNA_SCREEN_AND_OSCILLATOR_RETURN_TRACED",
       "parts": [
         "1",
         "2",
@@ -678,9 +702,10 @@
         "RF tracking, oscillator behavior, sensitivity/selectivity and receiver-level validation.",
         "Chassis-to-B− relationship beyond explicitly traced nets.",
         "The upper #9 and #11 endpoints and their oscillator-network crosswalk remain open.",
-        "7A8 socket-pin assignments, #4 oscillator gang and #6–#10 converter wiring remain open."
+        "7A8 socket-pin assignments, #4 oscillator gang and #6–#10 converter wiring remain open.",
+        "The upstream source of the shared 45 V screen lead and its operating measurement conditions remain open."
       ],
-      "note": "v0.41/v0.42 trace the loop and external ANT/aerial-transformer interface. v0.43 traces only the lower #9/#11 endpoints to B−. No oscillator behavior, pin crosswalk or transformer parameter is certified."
+      "note": "v0.44 traces the shared 45 V screen conductor between V1:5 and V2:3. The supply origin is still open; no oscillator behavior or remaining 7A8 pin crosswalk is certified."
     },
     {
       "milestone_version": "0.37.0",
@@ -709,7 +734,8 @@
     "This audit verifies the currently represented partial graph and its cited terminal additions; it does not claim that all PT-44 connections are transcribed.",
     "No chassis bond, line-side path, undocumented winding tap, or simulator behavior is inferred.",
     "All source-review milestones remain partial; benchmark readiness remains false.",
-    "Source-reviewed graph memberships remain a partial graph. Schematic-symbol and component-terminal traces do not close numbered socket-pin, winding-parameter, or chassis crosswalks."
+    "Source-reviewed graph memberships remain a partial graph. Schematic-symbol and component-terminal traces do not close numbered socket-pin, winding-parameter, or chassis crosswalks.",
+    "The v0.44 45 V label is a schematic annotation, not a validated voltage target; measurement reference, operating state and tolerance are unresolved."
   ],
   "benchmark_ready": false,
   "reviewed_terminal_membership_updates": [

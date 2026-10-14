@@ -1,0 +1,23 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path'),vm=require('node:vm');
+const root=path.join(__dirname,'..'),read=n=>JSON.parse(fs.readFileSync(path.join(root,'engineering',n),'utf8'));
+const trace=read('PT44_7A8_Screen_Trace_V1.json'),graph=read('PT44_Factory_Transcription_V3.json'),scope=read('PT44_Scope_Audit_V1.json'),ready=read('PT44_Engineering_Readiness_V1.json'),audit=read('PT44_Schematic_Trace_Audit_V1.json'),tube=read('PT44_Tube_Terminals_Review_V1.json');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
+assert.equal(trace.version,'0.44.0');assert.equal(trace.status,'SOURCE_TRACED_SHARED_45V_SCREEN_LEAD_SUPPLY_PATH_OPEN');assert.equal(trace.verified_endpoints.length,2);assert.equal(trace.benchmark_ready,false);
+assert.deepEqual(trace.traced_net.members,['V1:5','V2:3']);assert.equal(trace.pin_identity_sources['V1:5'].url,'https://bms.isjtr.ro/sheets/108/7/7A8.pdf');assert.equal(trace.pin_identity_sources['V2:3'].url,'https://archives.doctsf.com/documents/afficher_document.php?num_doc=83300&num_fic=1');assert.equal(trace.source_level_closure.shared_v1_v2_screen_conductor,true);assert.equal(trace.source_level_closure.upstream_45v_supply_path_traced,false);assert.equal(trace.source_level_closure['45v_annotation_is_not_measurement_target'],true);
+const screen=graph.factory_nets.find(n=>n.id==='F_SCREEN_45V'),chassis=graph.factory_nets.find(n=>n.id==='F_RF_CHASSIS'),bminus=graph.factory_nets.find(n=>n.id==='F_BMINUS');
+assert.deepEqual(screen.factory_members,['V1:5','V2:3']);assert(!chassis.factory_members.includes('V1:5')&&!chassis.factory_members.includes('V2:3'));assert(!bminus.factory_members.includes('V1:5')&&!bminus.factory_members.includes('V2:3'));
+assert.equal(graph.version,'0.44.0');assert.equal(graph.factory_nets.length,29);assert.equal(graph.checks.traced_network_count,29);assert.equal(graph.checks.factory_terminals_on_traced_nets,83);assert.equal(graph.checks.benchmark_ready,false);
+assert.equal(scope.snapshot_build_version,'0.44.0');assert.equal(scope.baseline.component_terminal_reference_coverage_percent,75.9);assert.equal(scope.baseline.tube_pin_memberships_in_partial_graph,20);assert.equal(scope.baseline.tube_receiver_connection_review_tasks_open,20);assert.equal(scope.benchmark_ready,false);
+assert.equal(ready.version,'0.44.0');assert.equal(ready.evidence_snapshot.source_reviewed_terminal_memberships,83);assert.equal(ready.evidence_snapshot.screen_bias_pin_connections_source_traced,2);assert.equal(ready.benchmark_ready,false);
+assert(audit.milestones.some(m=>m.version==='0.44.0'&&m.status==='SOURCE_TRACED_SHARED_45V_SCREEN_LEAD_PIN_CROSSWALK'));
+assert.equal(tube.review_tasks.find(x=>x.id==='RF-04').status,'source_traced_shared_45v_screen_conductor');assert.equal(tube.review_tasks.find(x=>x.id==='IF-03').status,'source_traced_shared_45v_screen_conductor');
+assert(html.includes('<title>North Star Radio Service — PT-44 v0.44.0</title>'));assert(html.includes('BUILD v0.44.0<small>'));
+const ctx=vm.createContext({console});vm.runInContext(scripts[1],ctx);const a=scripts[3].indexOf('function pt44BenchAudit()'),z=scripts[3].indexOf('function renderFactoryLedger(box){');assert(a>=0&&z>a);vm.runInContext(scripts[3].slice(a,z),ctx);
+const inspect=e=>JSON.parse(vm.runInContext('JSON.stringify('+e+')',ctx));
+assert.equal(inspect('pt44SevenA8ScreenTraceAudit().ok'),true,JSON.stringify(inspect('pt44SevenA8ScreenTraceAudit()')));assert.equal(inspect('pt44SchematicTraceAudit().ok'),true,JSON.stringify(inspect('pt44SchematicTraceAudit()')));
+for(const [label,expr] of [
+ ['screen pin omitted',`(()=>{const n=PT44_FACTORY_V3.factory_nets.find(x=>x.id==='F_SCREEN_45V');const v=n.factory_members.pop();const bad=!pt44SevenA8ScreenTraceAudit().ok;n.factory_members.push(v);return bad;})()`],
+ ['screen incorrectly called measured',`(()=>{PT44_7A8_SCREEN_TRACE_V1.source_level_closure['45v_annotation_is_not_measurement_target']=false;const bad=!pt44SevenA8ScreenTraceAudit().ok;PT44_7A8_SCREEN_TRACE_V1.source_level_closure['45v_annotation_is_not_measurement_target']=true;return bad;})()`],
+ ['premature supply closure',`(()=>{PT44_7A8_SCREEN_TRACE_V1.source_level_closure.upstream_45v_supply_path_traced=true;const bad=!pt44SevenA8ScreenTraceAudit().ok;PT44_7A8_SCREEN_TRACE_V1.source_level_closure.upstream_45v_supply_path_traced=false;return bad;})()`]
+])assert.equal(vm.runInContext(expr,ctx),true,label);
+console.log('PASS v0.44: 7A8/7B7 shared screen lead pin crosswalk; supply path and PT-44 completion remain open');

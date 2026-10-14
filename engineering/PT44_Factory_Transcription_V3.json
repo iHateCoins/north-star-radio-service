@@ -1635,6 +1635,38 @@
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
       }
+    },
+    {
+      "id": "F_SCREEN_45V",
+      "title": "Shared 45 V screen lead (upstream source unresolved)",
+      "stage": "RF/IF",
+      "model": null,
+      "description": "The factory schematic shows a continuous conductor from the 7A8 screen-grid glyph to the 7B7 screen-grid glyph, with 45 V marked at both tube branches. Sylvania pin data maps those screen electrodes to V1:5 (7A8 G3/G5) and V2:3 (7B7 G2). This records only the shared tube-side conductor; it does not identify a regulator, dropping element, source impedance, or complete supply path.",
+      "source": "Philco 1941 RMS, p.38 — 7A8/7B7 screen-grid branches; Sylvania Type 7A8 and 7B7 pin data",
+      "stage_status": "source_traced_shared_screen_lead_upstream_open",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.44 traces the shared annotated 45 V screen conductor at symbol level, then maps both screen glyphs to socket pins with manufacturer tube pin data. The supply source/path and test conditions remain open.",
+        "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
+      },
+      "factory_members": [
+        "V1:5",
+        "V2:3"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_44_source_review": {
+        "milestone_version": "0.44.0",
+        "status": "SOURCE_CHECKED_SHARED_SCREEN_LEAD_PIN_CROSSWALK",
+        "reviewed_members": [
+          "V1:5",
+          "V2:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
+      }
     }
   ],
   "subcircuits": [
@@ -1814,13 +1846,13 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 28,
-    "factory_terminals_on_traced_nets": 81,
+    "traced_network_count": 29,
+    "factory_terminals_on_traced_nets": 83,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.42.0"
+  "version": "0.44.0"
 }
