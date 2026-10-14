@@ -1,0 +1,138 @@
+{
+  "schema": "PT44_AERIAL_TRANSFORMER_TRACE_V1",
+  "version": "0.42.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_LOOP_AND_AERIAL_TRANSFORMER_ENDPOINTS_PARTIAL",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "terminal_conventions": {
+    "transformer_2": "primary_a/b identify the 38-turn winding shown connected to ANT and #1; secondary_a/b identify the 11-turn winding shown connected to #3 and B−. These labels identify circuit role only; winding polarity, inductance and coupling are not shown.",
+    "loop_3": "loop_a remains the upper signal-input lead traced in v0.41; loop_b is the lower lead traced here to the upper terminal of the #2 11-turn winding. No polarity or inductance is implied.",
+    "capacitor_1": "a is the terminal connected to the lower end of the #2 38-turn winding; b is the terminal on the explicit RF ground symbol. Philco labels the relevant grounds chassis for loop operation; no B− bond is inferred."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "3:loop_b",
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "joined_factory_member": "2:secondary_a",
+      "interpretation": "The lower built-in-loop lead joins the upper terminal of the #2 11-turn winding.",
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1110
+      ]
+    },
+    {
+      "terminal": "2:secondary_a",
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "joined_factory_member": "3:loop_b",
+      "interpretation": "Upper terminal of the #2 11-turn winding joins the lower built-in-loop lead.",
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1110
+      ]
+    },
+    {
+      "terminal": "2:secondary_b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "B− return bus",
+      "interpretation": "Lower terminal of the #2 11-turn winding joins the horizontal B− return rail.",
+      "source_box_px": [
+        75,
+        450,
+        620,
+        1200
+      ]
+    },
+    {
+      "terminal": "2:primary_a",
+      "net_id": "F_RF_EXTERNAL_ANTENNA",
+      "joined_factory_member": "ANT external port",
+      "interpretation": "Upper terminal of the #2 38-turn winding joins the open external ANT symbol.",
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1110
+      ]
+    },
+    {
+      "terminal": "2:primary_b",
+      "net_id": "F_RF_ANTENNA_BYPASS",
+      "joined_factory_member": "1:a",
+      "interpretation": "Lower terminal of the #2 38-turn winding joins the upper terminal of capacitor #1.",
+      "source_box_px": [
+        75,
+        520,
+        620,
+        1250
+      ]
+    },
+    {
+      "terminal": "1:a",
+      "net_id": "F_RF_ANTENNA_BYPASS",
+      "joined_factory_member": "2:primary_b",
+      "interpretation": "Upper terminal of #1 joins the lower terminal of the #2 38-turn winding.",
+      "source_box_px": [
+        75,
+        650,
+        620,
+        1330
+      ]
+    },
+    {
+      "terminal": "1:b",
+      "net_id": "F_RF_CHASSIS",
+      "joined_factory_member": "explicit chassis ground reference for loop operation",
+      "interpretation": "The lower terminal of #1 ends at the RF ground symbol; the source note identifies loop-operation grounds as chassis. It is not joined to B−.",
+      "source_box_px": [
+        75,
+        650,
+        620,
+        1330
+      ]
+    }
+  ],
+  "external_ports": [
+    {
+      "port": "ANT_EYELET",
+      "source_symbol": "Open terminal labeled ANT",
+      "connected_factory_terminal": "2:primary_a",
+      "represented_in_component_terminal_graph": false,
+      "note": "External interface is retained in this trace and excluded from the 33 numbered-part / 83 component-terminal denominator."
+    }
+  ],
+  "source_level_closure": {
+    "loop_lower_to_aerial_transformer_11_turn_winding": true,
+    "aerial_transformer_11_turn_return_to_bminus": true,
+    "external_antenna_to_38_turn_winding": true,
+    "38_turn_winding_to_1_bypass_capacitor": true,
+    "bypass_capacitor_ground_reference_identified_as_loop_mode_chassis": true,
+    "transformer_winding_polarity_or_inductance_verified": false,
+    "rf_and_oscillator_complete": false,
+    "benchmark_ready": false
+  },
+  "unresolved": [
+    "Aerial transformer #2 winding inductance, coupling, polarity and production tolerances.",
+    "External ANT interface physical lug/eyelet mapping to the game chassis.",
+    "7A8 remaining electrode/pin connections and complete #6 condenser/choke, #7 resistor, #8 capacitor, #9 resistor, #10 oscillator transformer, #11 capacitor and #4 oscillator-gang traces.",
+    "RF tracking, oscillator behavior, sensitivity/selectivity and receiver-level validation.",
+    "Chassis-to-B− relationship beyond explicitly traced nets."
+  ],
+  "benchmark_ready": false
+}

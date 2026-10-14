@@ -1,7 +1,7 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.41.0",
+  "snapshot_build_version": "0.42.0",
   "factory_transcription_artifact_version": "0.20.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
@@ -15,12 +15,12 @@
   "baseline": {
     "factory_component_records": 33,
     "declared_factory_component_terminals": 83,
-    "current_partial_graph_net_groups": 25,
-    "current_partial_graph_membership_entries": 72,
-    "unique_partial_graph_memberships": 72,
-    "component_terminal_memberships_in_partial_graph": 54,
-    "declared_component_terminals_not_in_partial_graph": 29,
-    "component_terminal_reference_coverage_percent": 65.1,
+    "current_partial_graph_net_groups": 28,
+    "current_partial_graph_membership_entries": 79,
+    "unique_partial_graph_memberships": 79,
+    "component_terminal_memberships_in_partial_graph": 61,
+    "declared_component_terminals_not_in_partial_graph": 22,
+    "component_terminal_reference_coverage_percent": 73.5,
     "tube_pin_memberships_in_partial_graph": 18,
     "unique_tube_pin_terminals_referenced": [
       "V1:1",
@@ -77,9 +77,9 @@
     "tube_pinout_scope_note": "Electrode identities/base pin roles are inventoried for all five tubes. This is not a receiver-specific connection map; all review tasks remain source-trace tasks."
   },
   "source_review_reconciliation": {
-    "schematic_audit_net_groups": 25,
-    "schematic_audit_membership_entries": 72,
-    "unique_schematic_audit_memberships": 72,
+    "schematic_audit_net_groups": 28,
+    "schematic_audit_membership_entries": 79,
+    "unique_schematic_audit_memberships": 79,
     "current_graph_memberships_missing_from_schematic_audit": [],
     "schematic_audit_memberships_absent_from_current_graph": [],
     "reconciliation_record": {
@@ -93,11 +93,18 @@
         "14:sDetector",
         "17:a",
         "17:b",
+        "1:a",
+        "1:b",
         "22:a",
         "22:b",
         "25:a",
         "25:b",
+        "2:primary_a",
+        "2:primary_b",
+        "2:secondary_a",
+        "2:secondary_b",
         "3:loop_a",
+        "3:loop_b",
         "4:rf_stator",
         "4:rotor",
         "5:a",
@@ -105,16 +112,17 @@
         "V1:6"
       ],
       "initial_count_difference": 2,
-      "status": "RESOLVED_IN_V0.41",
+      "status": "RESOLVED_IN_V0.42",
       "evidence_artifacts": [
         "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
         "engineering/PT44_Output_IF_Supply_Trace_V1.json",
         "engineering/PT44_Detector_AVC_Trace_V1.json",
         "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
-        "engineering/PT44_RF_Input_Trace_V1.json"
+        "engineering/PT44_RF_Input_Trace_V1.json",
+        "engineering/PT44_Aerial_Transformer_Trace_V1.json"
       ]
     },
-    "milestone_record_note": "All 72 current graph memberships are reconciled to source-review rows through v0.41; the RF input branch is partially traced while converter, winding, receiver pin/model gaps remain open."
+    "milestone_record_note": "All 79 current graph memberships reconcile to source-review rows through v0.42. The lower loop, external ANT and #2 aerial-transformer interface are source-traced; oscillator, converter, receiver pin/model gaps remain open."
   },
   "subsystems": [
     {
@@ -133,12 +141,19 @@
         "10",
         "11"
       ],
-      "status_in_transcription": "partial_input_branch_traced",
+      "status_in_transcription": "partial_loop_and_antenna_coupling_traced",
       "declared_component_terminals": 29,
-      "terminals_referenced_in_partial_graph": 5,
-      "terminals_not_yet_referenced_in_partial_graph": 24,
+      "terminals_referenced_in_partial_graph": 12,
+      "terminals_not_yet_referenced_in_partial_graph": 17,
       "represented_terminals": [
+        "1:a",
+        "1:b",
+        "2:primary_a",
+        "2:primary_b",
+        "2:secondary_a",
+        "2:secondary_b",
         "3:loop_a",
+        "3:loop_b",
         "4:rf_stator",
         "4:rotor",
         "5:a",
@@ -151,13 +166,6 @@
         "10:secondary_b",
         "11:a",
         "11:b",
-        "1:a",
-        "1:b",
-        "2:primary_a",
-        "2:primary_b",
-        "2:secondary_a",
-        "2:secondary_b",
-        "3:loop_b",
         "4:osc_stator",
         "6:cap_a",
         "6:cap_b",
@@ -172,9 +180,16 @@
       ],
       "graph_net_groups": [
         "F_RF_INPUT",
-        "F_RF_CHASSIS"
+        "F_RF_CHASSIS",
+        "F_RF_LOOP_SECONDARY",
+        "F_RF_EXTERNAL_ANTENNA",
+        "F_RF_ANTENNA_BYPASS"
       ],
-      "transcription_note": "Input branch and explicit loop-mode tuning grounds are traced; lower loop/#2 transformer, oscillator network, remaining 7A8 pins, RF behavior and full subsystem remain open. Chassis ground is not equated with B-minus."
+      "transcription_note": "Signal input, both loop endpoints, both aerial-transformer windings, external ANT port association, #1 bypass return and the explicitly noted loop-mode chassis ground are source-traced. Winding parameters, oscillator/remaining converter pins and receiver behavior remain open; B− is kept a distinct reviewed net.",
+      "source_trace_artifacts": [
+        "engineering/PT44_RF_Input_Trace_V1.json",
+        "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+      ]
     },
     {
       "id": "IF",
@@ -1263,7 +1278,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "All 25 represented graph groups and 72 terminal memberships reconcile to source-review records through v0.41. The RF input branch is partially traced; remaining converter/winding connections, receiver pin crosswalks, chassis relationships, and full receiver behavior remain open."
+      "gap": "All 28 represented graph groups and 79 terminal memberships reconcile to source-review records through v0.42. The RF loop and antenna interface are partially traced; oscillator/converter connections, receiver pin crosswalks, and full receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1275,13 +1290,13 @@
   ],
   "benchmark_ready": false,
   "audit_findings": [
-    "The partial graph references 54 of 83 declared factory component terminals (65.1%); 29 component terminals are not yet represented in the graph. This is reference coverage, not circuit closure.",
+    "The partial graph references 61 of 83 declared factory component terminals (73.5%); 22 component terminals are not yet represented in the graph. This is reference coverage, not circuit closure.",
     "The 72 graph membership entries comprise 54 component terminal references and 18 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes, while all 22 receiver-connection review tasks remain open.",
-    "The schematic trace audit reconciles all 72 current graph memberships. v0.36 through v0.41 added 18 source-verified memberships across the #22, #25, #12, #13, #14, #17, #3, #4, #5 and V1:6 evidence updates.",
-    "All 25 graph groups are partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
+    "The schematic trace audit reconciles all 79 current graph memberships. v0.36 through v0.42 added 25 source-verified memberships across the #22, #25, #12, #13, #14, #17, #1, #2, #3, #4, #5 and V1:6 evidence updates.",
+    "All 28 graph groups are partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
     "Component endpoint reference coverage is not electrical closure: transformer windings, tuning assemblies, tube electrodes, switch contacts, chassis return and circuit behavior require separate evidence.",
     "The v0.37 power/line trace source-closes mains, switch, #31, #30/#32, rectifier plate feed, B-minus rail and heater-string topology at schematic-symbol level; it adds zero socket-pin memberships to the partial graph.",
-    "The v0.41 RF input trace resolves only the signal-input conductor and loop-mode chassis grounds; it does not close the aerial transformer, oscillator or converter subsystem."
+    "The v0.42 trace resolves the loop return and external antenna/aerial-transformer interface while leaving transformer parameters, oscillator and converter subsystem incomplete."
   ],
   "next_audit_actions": [
     "Resolve symbol-to-socket pin and #16 switch-lug crosswalks before promoting any power-line pin memberships.",

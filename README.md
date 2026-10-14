@@ -1,9 +1,7 @@
-# North Star Radio Service — v0.41.0 PT-44 engineering update
+# North Star Radio Service — v0.42.0 PT-44 engineering update
 
-The v0.41 source trace resolves the PT-44 RF input branch from the 7A8 signal-input grid (V1:6) through the upper built-in loop lead and RF tuning gang, with the aerial compensator on the same conductor. It also records the two explicit chassis grounds for loop operation without joining chassis to B−. The remaining loop lead and aerial-transformer winding crosswalk are still open.
+The v0.42 source trace closes the next RF interface slice from the built-in loop through the aerial transformer: the lower #3 loop lead maps to the #2 11-turn winding, the #2 38-turn winding maps to the external ANT symbol and #1 bypass capacitor, the opposite winding terminal joins B−, and the #1 return uses the explicit loop-mode chassis ground. No chassis-to-B− bond is inferred. The trace records seven newly connected component terminals and three new partial graph groups.
 
-The partial factory graph now contains 25 groups and 72 source-reviewed terminal memberships. The PT-42 identity review and chassis-photo position crosswalk are retained in the same engineering snapshot. These findings improve source coverage, but do not establish complete RF/converter behavior or a complete PT-44 model.
+The combined partial graph now has 28 groups and 79 component-terminal memberships. PT-44 remains incomplete: #2 winding polarity/inductance/coupling, the rest of the 7A8 converter and oscillator, #4 oscillator gang, #6–#11 connections, receiver behavior, full SPICE validation and physical pin/chassis crosswalks remain open. This is a source-coverage milestone, not an engineering-complete benchmark.
 
-Work Package #2 remains in progress. Open work includes the aerial and oscillator winding endpoints, the remaining 7A8 and IF/AVC pin crosswalks, transformer parameters, measurement conditions, receiver-level simulation and repair regressions. PT-44 is not certified as the engineering-complete benchmark.
-
-Watermark: `BUILD v0.41.0`.
+Watermark: `BUILD v0.42.0`.
