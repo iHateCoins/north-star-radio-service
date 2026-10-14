@@ -1,26 +1,26 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.45.0",
-  "factory_transcription_artifact_version": "0.45.0",
+  "snapshot_build_version": "0.47.0",
+  "factory_transcription_artifact_version": "0.47.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "purpose": "Establish a denominator-based scope baseline for engineering-complete PT-44; terminal references in this audit are coverage counts only and do not assert circuit completeness, electrical behavior, or chassis routing.",
   "count_definitions": {
     "declared_component_terminal": "A named endpoint declared in the current engineering factory component register. Functional-only transformer/tuning terminal names still need source-to-pin resolution.",
-    "partial_graph_terminal_membership": "A component or tube terminal listed as a member of one of the 29 current partial graph nets. Presence does not mean its component is fully wired or its entire net is closed.",
+    "partial_graph_terminal_membership": "A component or tube terminal listed as a member of one of the 30 current partial graph nets. Presence does not mean its component is fully wired or its entire net is closed.",
     "source_audit_membership": "A terminal listed in PT44_Schematic_Trace_Audit_V1.json. Memberships in separate trace artifacts count as source evidence but are not part of that audit ledger until reconciled.",
     "unrepresented_terminal": "A declared component endpoint not yet referenced by any current partial graph net; this is not itself an asserted open-circuit diagnosis."
   },
   "baseline": {
     "factory_component_records": 33,
     "declared_factory_component_terminals": 83,
-    "current_partial_graph_net_groups": 29,
-    "current_partial_graph_membership_entries": 84,
-    "unique_partial_graph_memberships": 84,
-    "component_terminal_memberships_in_partial_graph": 63,
-    "declared_component_terminals_not_in_partial_graph": 20,
-    "component_terminal_reference_coverage_percent": 75.9,
+    "current_partial_graph_net_groups": 30,
+    "current_partial_graph_membership_entries": 88,
+    "unique_partial_graph_memberships": 88,
+    "component_terminal_memberships_in_partial_graph": 67,
+    "declared_component_terminals_not_in_partial_graph": 16,
+    "component_terminal_reference_coverage_percent": 80.7,
     "tube_pin_memberships_in_partial_graph": 21,
     "unique_tube_pin_terminals_referenced": [
       "V1:1",
@@ -77,9 +77,9 @@
     "tube_pinout_scope_note": "Electrode identities/base pin roles are inventoried for all five tubes. This is not a receiver-specific connection map; all review tasks remain source-trace tasks."
   },
   "source_review_reconciliation": {
-    "schematic_audit_net_groups": 29,
-    "schematic_audit_membership_entries": 84,
-    "unique_schematic_audit_memberships": 84,
+    "schematic_audit_net_groups": 30,
+    "schematic_audit_membership_entries": 88,
+    "unique_schematic_audit_memberships": 88,
     "current_graph_memberships_missing_from_schematic_audit": [],
     "schematic_audit_memberships_absent_from_current_graph": [],
     "reconciliation_record": {
@@ -110,6 +110,10 @@
         "4:rotor",
         "5:a",
         "5:b",
+        "6:cap_a",
+        "6:cap_b",
+        "6:choke_a",
+        "6:choke_b",
         "9:b",
         "V1:5",
         "V1:6",
@@ -117,19 +121,19 @@
         "V4:4"
       ],
       "initial_count_difference": 2,
-      "status": "RESOLVED_IN_V0.45",
+      "status": "RESOLVED_IN_V0.47",
       "evidence_artifacts": [
-        "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
-        "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+        "engineering/PT44_7A8_Screen_Trace_V1.json",
+        "engineering/PT44_Aerial_Transformer_Trace_V1.json",
         "engineering/PT44_Detector_AVC_Trace_V1.json",
         "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
-        "engineering/PT44_RF_Input_Trace_V1.json",
-        "engineering/PT44_Aerial_Transformer_Trace_V1.json",
         "engineering/PT44_Oscillator_Return_Trace_V1.json",
-        "engineering/PT44_7A8_Screen_Trace_V1.json"
+        "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
+        "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+        "engineering/PT44_RF_Input_Trace_V1.json"
       ]
     },
-    "milestone_record_note": "All 84 current graph memberships reconcile to source-review rows through v0.45; V4:4 closes the 50L6 screen pin on filtered B+. The shared V1:5/V2:3 45 V lead still lacks upstream source and test conditions."
+    "milestone_record_note": "All 88 current graph memberships reconcile to source-review rows through v0.47; the new group and two endpoint additions close the #6 component trace, not the converter."
   },
   "subsystems": [
     {
@@ -148,10 +152,10 @@
         "10",
         "11"
       ],
-      "status_in_transcription": "partial_loop_antenna_shared_screen_and_oscillator_return_traced",
+      "status_in_transcription": "partial_rf_input_and_oscillator_return_traced_6_series_trap_added",
       "declared_component_terminals": 29,
-      "terminals_referenced_in_partial_graph": 14,
-      "terminals_not_yet_referenced_in_partial_graph": 15,
+      "terminals_referenced_in_partial_graph": 18,
+      "terminals_not_yet_referenced_in_partial_graph": 11,
       "represented_terminals": [
         "11:b",
         "1:a",
@@ -166,6 +170,10 @@
         "4:rotor",
         "5:a",
         "5:b",
+        "6:cap_a",
+        "6:cap_b",
+        "6:choke_a",
+        "6:choke_b",
         "9:b"
       ],
       "unrepresented_terminals": [
@@ -175,10 +183,6 @@
         "10:secondary_b",
         "11:a",
         "4:osc_stator",
-        "6:cap_a",
-        "6:cap_b",
-        "6:choke_a",
-        "6:choke_b",
         "7:a",
         "7:b",
         "8:a",
@@ -186,20 +190,20 @@
         "9:a"
       ],
       "graph_net_groups": [
-        "F_RF_INPUT",
-        "F_RF_CHASSIS",
-        "F_RF_LOOP_SECONDARY",
-        "F_RF_EXTERNAL_ANTENNA",
-        "F_RF_ANTENNA_BYPASS",
         "F_BMINUS",
-        "F_SCREEN_45V"
+        "F_RF_ANTENNA_BYPASS",
+        "F_RF_CHASSIS",
+        "F_RF_EXTERNAL_ANTENNA",
+        "F_RF_INPUT",
+        "F_RF_INPUT_TRAP_JUNCTION",
+        "F_RF_LOOP_SECONDARY"
       ],
-      "transcription_note": "Signal input, loop/aerial interface, loop-mode chassis reference, oscillator lower B− endpoints, and shared 45 V screen lead are traced. Oscillator node closure, remaining converter pins, 45 V source path, winding parameters and receiver behavior remain open.",
+      "transcription_note": "Signal input, #2 loop/aerial interface, loop-mode chassis reference, lower #9/#11 returns, and all four #6 series condenser/choke endpoints are source-traced. #4 oscillator gang, #7–#10 converter topology, remaining 7A8 pins, 45 V source, transformer parameters and receiver behavior remain open.",
       "source_trace_artifacts": [
-        "engineering/PT44_RF_Input_Trace_V1.json",
+        "engineering/PT44_7A8_Screen_Trace_V1.json",
         "engineering/PT44_Aerial_Transformer_Trace_V1.json",
         "engineering/PT44_Oscillator_Return_Trace_V1.json",
-        "engineering/PT44_7A8_Screen_Trace_V1.json"
+        "engineering/PT44_RF_Input_Trace_V1.json"
       ]
     },
     {
@@ -384,18 +388,18 @@
         "b"
       ],
       "terminal_definition_status": "two_terminal_physical_structure",
-      "connectivity_status": "not_transcribed",
-      "terminals_referenced_in_partial_graph": [],
-      "terminals_not_yet_referenced_in_partial_graph": [
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
         "1:a",
         "1:b"
       ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
       "geometry_certified": false,
-      "terminals_in_partial_graph": [],
-      "terminals_not_in_partial_graph": [
+      "terminals_in_partial_graph": [
         "1:a",
         "1:b"
-      ]
+      ],
+      "terminals_not_in_partial_graph": []
     },
     {
       "factory_part": "2",
@@ -407,23 +411,23 @@
         "secondary_a",
         "secondary_b"
       ],
-      "terminal_definition_status": "functional_only",
-      "connectivity_status": "not_transcribed",
-      "terminals_referenced_in_partial_graph": [],
-      "terminals_not_yet_referenced_in_partial_graph": [
+      "terminal_definition_status": "functional_roles_source_crosswalked_partial",
+      "connectivity_status": "source_traced_subset_300dpi",
+      "terminals_referenced_in_partial_graph": [
         "2:primary_a",
         "2:primary_b",
         "2:secondary_a",
         "2:secondary_b"
       ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
       "geometry_certified": false,
-      "terminals_in_partial_graph": [],
-      "terminals_not_in_partial_graph": [
+      "terminals_in_partial_graph": [
         "2:primary_a",
         "2:primary_b",
         "2:secondary_a",
         "2:secondary_b"
-      ]
+      ],
+      "terminals_not_in_partial_graph": []
     },
     {
       "factory_part": "3",
@@ -433,21 +437,19 @@
         "loop_a",
         "loop_b"
       ],
-      "terminal_definition_status": "functional_only",
+      "terminal_definition_status": "functional_roles_source_crosswalked_partial",
       "connectivity_status": "source_traced_subset_300dpi",
       "terminals_referenced_in_partial_graph": [
-        "3:loop_a"
-      ],
-      "terminals_not_yet_referenced_in_partial_graph": [
+        "3:loop_a",
         "3:loop_b"
       ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
       "geometry_certified": false,
       "terminals_in_partial_graph": [
-        "3:loop_a"
-      ],
-      "terminals_not_in_partial_graph": [
+        "3:loop_a",
         "3:loop_b"
-      ]
+      ],
+      "terminals_not_in_partial_graph": []
     },
     {
       "factory_part": "4",
@@ -508,23 +510,23 @@
         "choke_a",
         "choke_b"
       ],
-      "terminal_definition_status": "functional_only",
-      "connectivity_status": "not_transcribed",
-      "terminals_referenced_in_partial_graph": [],
-      "terminals_not_yet_referenced_in_partial_graph": [
+      "terminal_definition_status": "four_terminal_series_capacitor_choke_assembly",
+      "connectivity_status": "source_traced_all_four_endpoints_400dpi",
+      "terminals_referenced_in_partial_graph": [
         "6:cap_a",
         "6:cap_b",
         "6:choke_a",
         "6:choke_b"
       ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
       "geometry_certified": false,
-      "terminals_in_partial_graph": [],
-      "terminals_not_in_partial_graph": [
+      "terminals_in_partial_graph": [
         "6:cap_a",
         "6:cap_b",
         "6:choke_a",
         "6:choke_b"
-      ]
+      ],
+      "terminals_not_in_partial_graph": []
     },
     {
       "factory_part": "7",
@@ -1259,7 +1261,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The v0.41/v0.42 loop and aerial-transformer interfaces are traced, and v0.43 connects the lower #9/#11 terminals to B−. The #4 oscillator gang, #6–#10 connections, upper #9/#11 ends, remaining 7A8 socket pins, and RF/receiver behavior remain open."
+      "gap": "v0.47 traces all four endpoints of #6 from the 7A8 signal-input net through its series junction to explicit loop-mode chassis ground. The #4 oscillator gang, #7–#10 network, remaining 7A8 pins and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -1294,7 +1296,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "All 28 represented graph groups and 81 component-terminal memberships reconcile to source-review records through v0.43. Only the lower #9/#11 oscillator return endpoints are traced; the rest of the oscillator/converter, pin crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "30 partial graph groups and 88 component/tube endpoint memberships reconcile to source reviews through v0.47. Component #6 is traced end-to-end; #4 oscillator gang, #7–#10 converter topology, remaining pin crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1306,19 +1308,19 @@
   ],
   "benchmark_ready": false,
   "audit_findings": [
-    "The partial graph references 63 of 83 declared factory component terminals (75.9%); 20 component terminals are not yet represented. This is reference coverage, not circuit closure.",
-    "The 81 graph membership entries comprise 63 component-terminal references and 18 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes, while all 22 receiver-connection review tasks remain open.",
-    "The schematic trace audit reconciles all 81 current graph memberships. v0.36 through v0.43 added 27 source-verified memberships across #22, #25, #12, #13, #14, #17, #1, #2, #3, #4, #5, V1:6, #9 and #11 evidence updates.",
-    "All 28 graph groups are partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
+    "The partial graph references 67 of 83 declared factory component terminals (80.7%); 16 component terminals are not yet represented. This is reference coverage, not circuit closure.",
+    "The 88 graph membership entries comprise 67 component-terminal references and 21 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes; receiver-connection tasks remain open.",
+    "The schematic trace audit reconciles all 88 current graph memberships. v0.47 adds four source-verified memberships for component #6 across RF input, its internal series junction, and loop-mode chassis ground.",
+    "All 30 graph groups remain partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
     "Component endpoint reference coverage is not electrical closure: transformer windings, tuning assemblies, tube electrodes, switch contacts, chassis return and circuit behavior require separate evidence.",
-    "The v0.37 power/line trace source-closes mains, switch, #31, #30/#32, rectifier plate feed, B-minus rail and heater-string topology at schematic-symbol level; it adds zero socket-pin memberships to the partial graph.",
-    "The v0.42 trace resolves the loop return and external antenna/aerial-transformer interface; v0.43 traces lower #9/#11 oscillator-network endpoints to B−. Transformer parameters, remaining oscillator/converter connections and receiver behavior remain incomplete."
+    "The v0.37 power/line trace source-closes mains, switch, #31, #30/#32, rectifier plate feed, B-minus rail and heater-string topology at schematic-symbol level; socket-pin crosswalks and chassis isolation remain open.",
+    "The RF input and loop/aerial interfaces are partly traced. v0.47 closes component #6's series condenser/choke topology while #4 oscillator gang, #7–#10 converter routing, remaining socket pins, winding behavior and receiver performance remain open."
   ],
   "next_audit_actions": [
     "Resolve symbol-to-socket pin and #16 switch-lug crosswalks before promoting any power-line pin memberships.",
     "Trace remaining subsystem endpoints and source-to-functional-terminal mappings; label evidence at symbol, component, or pin level without mixing them.",
     "Recompute graph denominator and source-ledger reconciliation after any pin-level membership update.",
-    "Trace the opposite #9/#11 ends, #4 oscillator gang and #6–#10 network while keeping symbol-level leads separate from confirmed 7A8 socket pins."
+    "Trace #4 oscillator gang and #7–#10 converter connections while keeping symbol-level leads separate from confirmed 7A8 socket pins; #6 is already traced end-to-end."
   ],
   "tube_pin_reference_artifact": "engineering/PT44_Tube_Terminals_Review_V1.json",
   "power_line_source_trace": {

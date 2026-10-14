@@ -106,12 +106,20 @@
         "choke_a",
         "choke_b"
       ],
-      "terminal_definition_status": "functional_only",
+      "terminal_definition_status": "four_terminal_series_capacitor_choke_assembly",
       "factory_schematic_position": "1941 RMS p.38; numeric callout #6",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_all_four_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.47 traces the 2 mmf condenser from the 7A8 signal-input net through the assembly junction to the series choke, whose lower terminal ends at the explicit loop-operation chassis ground. The source does not equate this chassis ground with B−.",
+      "source_terminal_crosswalk": {
+        "cap_a": "upper condenser terminal connected to F_RF_INPUT",
+        "cap_b": "lower condenser terminal connected by a drawn wire to choke_a",
+        "choke_a": "upper choke terminal connected by a drawn wire to cap_b",
+        "choke_b": "lower choke terminal connected to the explicit chassis-ground symbol for loop operation",
+        "limits": "The drawing supports the external series topology only; no RF impedance, component tolerance, or chassis-to-B− bond is inferred."
+      }
     },
     "7": {
       "description": "4.7 MΩ resistor",
@@ -1489,7 +1497,7 @@
       "title": "7A8 signal input / loop and RF tuning branch",
       "stage": "RF",
       "model": null,
-      "description": "Partial factory conductor: 7A8 signal input, upper #3 loop terminal, RF gang #4, and #5 aerial compensator. The lower loop/#2 transformer route remains open.",
+      "description": "Partial 7A8 signal-input conductor: upper #3 loop terminal, RF gang #4, #5 aerial compensator, and #6 condenser input; #7A8 input grid is V1:6.",
       "source": "Philco 1941 RMS p.38 — PT-42/PT-44 RF input; native 300-dpi scan",
       "stage_status": "source_traced_partial_rf_input",
       "evidence": {
@@ -1503,7 +1511,8 @@
         "V1:6",
         "3:loop_a",
         "4:rf_stator",
-        "5:a"
+        "5:a",
+        "6:cap_a"
       ],
       "prototype_member_crosswalk": [],
       "v0_41_source_review": {
@@ -1525,7 +1534,7 @@
       "title": "RF input tuning grounds / chassis in loop mode",
       "stage": "RF",
       "model": null,
-      "description": "The grounded ends of #1 bypass capacitor, RF gang #4 and aerial compensator #5 meet the explicit chassis ground reference noted for loop operation. This does not establish a B-minus bond.",
+      "description": "The grounded ends of #1 bypass capacitor, RF gang #4 and aerial compensator #5 meet the explicit chassis ground reference noted for loop operation. This does not establish a B-minus bond. The lower terminal of the #6 series choke also ends at the explicit loop-operation chassis reference; no B− bond is inferred.",
       "source": "Philco 1941 RMS p.38 — note: ground to chassis for loop operation",
       "stage_status": "source_traced_component_ground_endpoints",
       "evidence": {
@@ -1538,7 +1547,8 @@
       "factory_members": [
         "4:rotor",
         "5:b",
-        "1:b"
+        "1:b",
+        "6:choke_b"
       ],
       "prototype_member_crosswalk": [],
       "v0_41_source_review": {
@@ -1678,6 +1688,37 @@
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
       }
+    },
+    {
+      "id": "F_RF_INPUT_TRAP_JUNCTION",
+      "title": "#6 condenser-to-choke series junction",
+      "stage": "RF",
+      "model": "unassigned",
+      "description": "The lower terminal of the #6 2 mmf condenser is wired directly to the upper terminal of its series choke; this internal assembly junction is not a chassis or B− connection.",
+      "source": "Philco 1941 RMS p.38 — schematic component #6",
+      "stage_status": "source_traced_component_internal_junction",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.47 high-resolution source review of the factory-drawn #6 condenser/choke series connection."
+      },
+      "factory_members": [
+        "6:cap_b",
+        "6:choke_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_47_source_review": {
+        "milestone_version": "0.47.0",
+        "status": "SOURCE_CHECKED_COMPONENT_INTERNAL_SERIES_JUNCTION",
+        "reviewed_members": [
+          "6:cap_b",
+          "6:choke_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      }
     }
   ],
   "subcircuits": [
@@ -1697,8 +1738,8 @@
         "10",
         "11"
       ],
-      "status": "partial_loop_and_antenna_coupling_traced",
-      "unverified": "Loop-to-#2 winding and ANT primary endpoints source-traced; oscillator, #6-#11, remaining 7A8 pins, transformer parameters and receiver behavior remain open."
+      "status": "partial_loop_antenna_input_trap_traced",
+      "unverified": "#4 oscillator-gang connection; #7–#10 converter endpoints; remaining 7A8 pins; winding parameters; and receiver behavior remain open. Loop/#2 coupling, ANT primary and the complete #6 series input trap are source-traced."
     },
     {
       "id": "IF",
@@ -1795,10 +1836,10 @@
       "id": "P1-RF",
       "severity": "blocker",
       "stage": "RF",
-      "description": "The 7A8 signal-input and lower-loop branch, both #2 winding endpoints, external ANT interface, #1 bypass and its loop-mode chassis ground are source-traced. Winding parameters, remaining 7A8 connections, oscillator section and RF behavior remain open.",
+      "description": "The loop/#2 aerial interface, complete #6 RF input trap, and lower #9/#11 returns are source-traced. The #4 oscillator gang, #7–#10 converter connections, remaining 7A8 pins, winding parameters and RF behavior remain open.",
       "area": "RF / converter",
       "status": "OPEN",
-      "gap": "The v0.41/v0.42 loop and aerial-transformer interfaces are traced; v0.43 maps the lower #9/#11 terminals to B−. The #4 oscillator gang, #6–#10 connections, opposite #9/#11 ends, remaining 7A8 pins, winding parameters and receiver behavior remain open."
+      "gap": "v0.47 completes all four external/internal endpoints of the #6 series condenser/choke assembly from F_RF_INPUT to the explicit loop-mode chassis ground. The #4 oscillator gang, #7/#8 network, #9 upper end, #10 windings, remaining 7A8 pin crosswalks, and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -1840,10 +1881,10 @@
       "id": "P1-SOURCE",
       "severity": "blocker",
       "stage": "ALL",
-      "description": "All 28 represented graph groups and 79 terminal memberships reconcile to source-review records through v0.42. RF loop and antenna coupling is partially traced; oscillator/converter connections, receiver pin crosswalks and complete behavior remain open.",
+      "description": "All 30 represented graph groups and 88 component/tube terminal memberships reconcile to source-review evidence through v0.47. The #6 series trap is traced end-to-end; the oscillator/converter topology and full receiver behavior remain open.",
       "area": "Source cross-check",
       "status": "OPEN",
-      "gap": "All 28 represented graph groups and 81 component-terminal memberships reconcile to source-review evidence through v0.43. Oscillator lower return terminals are traced; the remaining oscillator/converter circuit and full receiver model remain open."
+      "gap": "The source-reviewed graph is a partial network with 30 groups and 88 memberships. #6 RF trap topology is now checked; the oscillator gang, #7–#10 endpoints, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1857,13 +1898,14 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 29,
-    "factory_terminals_on_traced_nets": 84,
+    "traced_network_count": 30,
+    "factory_terminals_on_traced_nets": 88,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.45.0"
+  "version": "0.47.0",
+  "source_pages_reviewed": "Philco p.38, PT-42/PT-44 shared schematic; the #6 trace was independently reviewed against a 400 dpi rendering of the official scan."
 }

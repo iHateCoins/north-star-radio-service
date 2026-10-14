@@ -95,7 +95,9 @@
       "status": "source_trace_required",
       "factory_net_claim": false,
       "pinout_reference": "https://bms.isjtr.ro/sheets/108/7/7A8.pdf",
-      "pinout_basis": "Sylvania identifies Grid 4 as the signal input; its B8B pinout maps G4 to socket pin 6. Philco receiver wiring still requires direct schematic tracing."
+      "pinout_basis": "Sylvania identifies Grid 4 as the signal input; its B8B pinout maps G4 to socket pin 6. Philco receiver wiring still requires direct schematic tracing.",
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "review_result": "The V1:6 signal-input branch now includes the #6 series condenser/choke trap to the explicit loop-mode chassis ground. The broader converter route, #4 oscillator gang, 7A8 pin crosswalks and mains-isolation relationship remain open."
     },
     {
       "id": "RF-02",
@@ -349,5 +351,5 @@
     ]
   },
   "required_factory_net_status": "PINOUT VALIDATION DOES NOT CERTIFY FACTORY WIRING. Proposed terminal trace tasks are not electrical edges and do not enter SPICE.",
-  "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity. v0.45 completes the wired 50L6 screen pin crosswalk (V4:4) and corrects the older 7A8/7B7 screen-to-B+ glyph claims; the shared 45 V feed source remains open."
+  "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity. v0.45 completes the wired 50L6 screen pin crosswalk (V4:4) and corrects the older 7A8/7B7 screen-to-B+ glyph claims; v0.47 completes factory component #6 from the signal-input conductor through its series condenser/choke to loop-mode chassis ground. The remaining 7A8 oscillator and pin crosswalk work remains open."
 }

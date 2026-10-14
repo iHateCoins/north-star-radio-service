@@ -1,27 +1,55 @@
 {
   "schema": "PT44_SERVICE_ALIGNMENT_REFERENCE_V1",
-  "version": "0.34.0",
+  "version": "0.46.0",
   "model": "Philco PT-44",
   "source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "source_pdf_sha256": "8a7e016b0814584a31f5c113dec7d1605712b3f163980584acd89c5b347f1a09",
-  "source_pages": {"specifications_and_alignment": 36, "schematic_and_parts_locations": 38},
+  "source_pages": {
+    "specifications_and_alignment": 36,
+    "schematic_and_parts_locations": 38
+  },
   "source_policy": "Transcribes Philco's stated alignment procedure and published receiver targets. No unstated tolerance, generator level, supply test voltage, instrument impedance, or circuit terminal mapping is added.",
   "receiver_targets": {
     "if_center_hz": 455000,
-    "broadcast_range_hz": [540000, 1600000],
+    "broadcast_range_hz": [
+      540000,
+      1600000
+    ],
     "nominal_supply_volts": 115,
-    "supply_types": ["AC", "DC"],
+    "supply_types": [
+      "AC",
+      "DC"
+    ],
     "alignment_supply_condition_specified": false
   },
   "equipment": [
-    {"item": "Signal generator", "requirement": "Covers the receiver frequency range; Philco cites models 077 or 177."},
-    {"item": "Alignment indicator", "options": ["Vacuum-tube voltmeter", "Audio output meter"], "model_reference": "Philco models 027 and 028 circuit testers included both meters."},
-    {"item": "Adjustment tool", "requirement": "Philco fiber screwdriver, part 45-2610."}
+    {
+      "item": "Signal generator",
+      "requirement": "Covers the receiver frequency range; Philco cites models 077 or 177."
+    },
+    {
+      "item": "Alignment indicator",
+      "options": [
+        "Vacuum-tube voltmeter",
+        "Audio output meter"
+      ],
+      "model_reference": "Philco models 027 and 028 circuit testers included both meters."
+    },
+    {
+      "item": "Adjustment tool",
+      "requirement": "Philco fiber screwdriver, part 45-2610."
+    }
   ],
   "indicator_connections": {
     "audio_output_meter": {
-      "connection_options": ["Speaker voice-coil terminals", "50L6GT plate to chassis"],
-      "scale_volts": [0, 10]
+      "connection_options": [
+        "Speaker voice-coil terminals",
+        "50L6GT plate to chassis"
+      ],
+      "scale_volts": [
+        0,
+        10
+      ]
     },
     "vacuum_tube_voltmeter": {
       "negative_lead": "Any circuit point where AVC voltage can be obtained.",
@@ -47,33 +75,96 @@
       "generator_hz": 455000,
       "receiver_dial_hz": 540000,
       "tuning_condenser": "Closed; plates fully meshed.",
-      "controls": {"volume": "maximum", "range": "broadcast"},
-      "adjust_in_order": ["12A", "12B", "14A"]
+      "controls": {
+        "volume": "maximum",
+        "range": "broadcast"
+      },
+      "adjust_in_order": [
+        "12A",
+        "12B",
+        "14A"
+      ]
     },
     {
       "order": 2,
       "stage": "RF",
       "generator_hz": 1600000,
       "receiver_dial_hz": 1600000,
-      "controls": {"volume": "maximum", "range": "broadcast"},
-      "adjust_in_order": ["4A"]
+      "controls": {
+        "volume": "maximum",
+        "range": "broadcast"
+      },
+      "adjust_in_order": [
+        "4A"
+      ]
     },
     {
       "order": 3,
       "stage": "RF",
       "generator_hz": 1500000,
       "receiver_dial_hz": 1500000,
-      "controls": {"volume": "maximum", "range": "broadcast"},
-      "adjust_in_order": ["5"]
+      "controls": {
+        "volume": "maximum",
+        "range": "broadcast"
+      },
+      "adjust_in_order": [
+        "5"
+      ]
     }
   ],
   "dial_calibration": "With the tuning condenser at maximum capacity (plates fully meshed), set the pointer on the small dial dot below 550 kHz.",
-  "source_conditions_not_stated": ["Signal-generator amplitude", "Supply voltage during alignment", "Meter input impedance", "Voltage tolerances", "Alignment output target"],
+  "source_conditions_not_stated": [
+    "Signal-generator amplitude",
+    "Supply voltage during alignment",
+    "Meter input impedance",
+    "Voltage tolerances",
+    "Alignment output target"
+  ],
   "limitations": [
     "The source's chassis-referenced VTVM alignment hookup does not establish that chassis and B-minus are the same node.",
     "The stated AVC measurement point is not mapped to a numbered socket terminal in this record.",
     "Factory voltage labels remain reference data only until their own measurement conditions and return reference are verified.",
     "Alignment instructions do not supply the IF transformer inductance, capacitance, Q, coupling, or RF tuning-gang values required for a full receiver model."
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "cross_validation": {
+    "document": "Complete Instructions for Adjusting All Philco Receivers, Volume 2",
+    "publisher": "Philco Radio Historical Society library scan of Philco service instructions",
+    "url": "https://philcoradio.com/library/wp-content/uploads/2023/06/Complete-Instructions-for-Adjusting-All-Philco-Receivers-Vol.-2.pdf",
+    "printed_pages": {
+      "general_alignment_notes": "xiii",
+      "pt42_pt44_alignment": "133"
+    },
+    "verified_facts": {
+      "warm_up_before_alignment_minutes_approximately": 15,
+      "if_generator_hz": 455000,
+      "oscillator_adjustment": {
+        "trimmer_number": "4",
+        "stage_label": "OSC",
+        "generator_hz": 1600000,
+        "receiver_dial_hz": 1600000
+      },
+      "antenna_adjustment": {
+        "trimmer_number": "5",
+        "stage_label": "ANT",
+        "generator_hz": 1500000,
+        "receiver_dial_hz": 1500000
+      }
+    },
+    "source_level_closure": {
+      "independent_alignment_sequence_corroborated": true,
+      "warm_up_condition_sourced": true,
+      "oscillator_gang_alignment_role_corroborated": true,
+      "oscillator_circuit_connections_traced": false,
+      "seven_a_eight_socket_pin_crosswalk_complete": false,
+      "oscillator_transformer_winding_roles_or_polarity_verified": false,
+      "receiver_behavior_validated": false,
+      "benchmark_ready": false
+    },
+    "limits": [
+      "The alignment procedure identifies the high-end oscillator adjustment by trimmer number and frequency; it does not trace the oscillator gang stator, remaining #7–#11 connections, or 7A8 socket pins.",
+      "The approximately 15-minute warm-up instruction is a service procedure condition, not a measured PT-44 electrical acceptance limit.",
+      "Generator amplitude, operating supply during alignment, meter loading, and voltage tolerances remain unspecified in the available reference."
+    ]
+  }
 }

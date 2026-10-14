@@ -1,13 +1,13 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.45.0",
+  "version": "0.47.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
-    "partial_traced_networks": 29,
-    "terminal_memberships_on_partial_graph": 84,
+    "partial_traced_networks": 30,
+    "terminal_memberships_on_partial_graph": 88,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 5,
     "memberships_in_those_groups": 14,
@@ -24,9 +24,9 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 15,
-    "source_reviewed_graph_groups": 29,
-    "source_reviewed_terminal_memberships": 84,
+    "source_review_milestones": 17,
+    "source_reviewed_graph_groups": 30,
+    "source_reviewed_terminal_memberships": 88,
     "rf_net_groups_added": 5,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
@@ -54,10 +54,15 @@
     "oscillator_return_endpoints_source_traced": 2,
     "screen_bias_pin_connections_source_traced": 2,
     "unique_tube_pin_terminals_referenced": 21,
-    "component_terminal_memberships_in_partial_graph": 63,
-    "component_terminal_reference_coverage_percent": 75.9,
+    "component_terminal_memberships_in_partial_graph": 67,
+    "component_terminal_reference_coverage_percent": 80.7,
     "output_screen_socket_pin_crosswalks_completed": 1,
-    "retired_v038_screen_to_bplus_claims": 2
+    "retired_v038_screen_to_bplus_claims": 2,
+    "alignment_reference_crosschecks": 1,
+    "oscillator_alignment_role_corroborated": true,
+    "oscillator_network_source_traced": false,
+    "rf_input_trap_component_endpoints_source_traced": 4,
+    "rf_input_trap_internal_junction_groups_added": 1
   },
   "open_items": [
     {
@@ -65,7 +70,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The loop/#2 aerial interface and lower #9/#11 returns are source-traced. v0.44 traces the shared annotated 45 V lead between 7A8 screen pin 5 and 7B7 screen pin 3; v0.45 corrects the earlier screen-to-B+ glyph claims. The upstream screen feed, #4 gang, #6–#10 oscillator connections, remaining 7A8 pins, winding parameters and receiver behavior remain open."
+      "gap": "The loop/#2 aerial interface and #9/#11 lower returns are source-traced; v0.47 completes #6 from RF input through its series choke to loop-mode chassis. The #4 oscillator gang, #7–#10 converter network, remaining 7A8 pin crosswalks, winding parameters and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -100,7 +105,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "All 29 represented graph groups and 84 component/tube terminal memberships reconcile to source-review evidence through v0.45. The shared 45 V screen conductor is closed at pin level; its supply origin, oscillator/converter topology, remaining socket crosswalks, winding parameters and receiver behavior remain open."
+      "gap": "30 partial graph groups and 88 component/tube endpoint memberships reconcile to source reviews through v0.47. #6 is traced end-to-end; full oscillator/converter topology, remaining socket crosswalks, winding parameters, detector/AVC and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -151,7 +156,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.45 closes the 50L6 screen socket-pin crosswalk (V4:4 to filtered B+) and corrects two earlier v0.38 7A8/7B7 screen-glyph claims. The 7A8/7B7 screen pins remain on the shared annotated 45 V conductor; its supply source and operating measurement conditions remain open.",
+  "latest_evidence_update": "v0.47 traces all four endpoints of factory component #6, the 2 mmf condenser-and-choke series assembly: RF input, internal series junction and explicit loop-mode chassis ground. The graph advances from 29 groups/84 memberships to 30/88 and component-terminal reference coverage from 75.9% to 80.7%. The #4 oscillator gang and remaining converter wiring remain open; no chassis/B− bond or receiver behavior is inferred.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

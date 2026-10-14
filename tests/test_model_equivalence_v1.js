@@ -17,6 +17,6 @@ assert.ok(review.sources.some(s => s.id === 'rider_volume_12_index' && s.finding
 assert.ok(review.model_specific_limits.some(s => s.includes('exact replacement part numbers')));
 assert.ok(review.model_specific_limits.some(s => s.includes('No RF net memberships')));
 assert.ok(factory.factory_components['1'] && factory.factory_components['2'] && factory.factory_components['3']);
-assert.equal(factory.subcircuits.find(s => s.id === 'RF').status, 'partial_loop_and_antenna_coupling_traced');
+assert.equal(factory.subcircuits.find(s => s.id === 'RF').status, 'partial_loop_antenna_input_trap_traced');
 
 console.log('PT-42/PT-44 source equivalence scope checks passed');
