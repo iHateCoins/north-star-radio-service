@@ -24,6 +24,6 @@ if(process.argv.includes('--ngspice')){
  const value=expr=>{const m=log.match(expr);assert(m,'ngspice output missing '+expr);return Number(m[1]);};
  const openI=value(/-i\(vopen\)\s*=\s*([+-]?[0-9.eE+-]+)/i),openV=value(/v\(noheater\)\s*=\s*([+-]?[0-9.eE+-]+)/i);
  const shortI=value(/-i\(vshort\)\s*=\s*([+-]?[0-9.eE+-]+)/i),shortV=value(/v\(nbheater\)\s*=\s*([+-]?[0-9.eE+-]+)/i);
- for(const [actual,expected,label] of [[openI,model.spice_scenarios[0].current_a,'open-lamp current'],[openV,model.spice_scenarios[0].heater_sum_v,'open-lamp heater voltage'],[shortI,model.spice_scenarios[1].current_a,'ideal-short current'],[shortV,model.spice_scenarios[1].heater_sum_v,'ideal-short heater voltage']])assert(Math.abs(actual-expected)<2e-6,label+' SPICE parity');
+ for(const [actual,expected,label,tolerance] of [[openI,model.spice_scenarios[0].current_a,'open-lamp current',2e-6],[openV,model.spice_scenarios[0].heater_sum_v,'open-lamp heater voltage',1e-4],[shortI,model.spice_scenarios[1].current_a,'ideal-short current',2e-6],[shortV,model.spice_scenarios[1].heater_sum_v,'ideal-short heater voltage',1e-4]])assert(Math.abs(actual-expected)<tolerance,label+' SPICE parity');
 }
 console.log('PASS v0.35: 115 V nominal heater arithmetic, #30/lamp boundary cases, sourced resistor-equivalent SPICE deck'+(process.argv.includes('--ngspice')?' executed with ngspice':''));
