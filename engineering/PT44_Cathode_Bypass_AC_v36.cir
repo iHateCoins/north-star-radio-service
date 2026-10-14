@@ -1,0 +1,10 @@
+* PT-44 source-traced 50L6 cathode-bypass branch — v0.36.0
+* Philco 1941 RMS p.38: #22 250 pF is across #24 130 ohm cathode resistor.
+* Isolated branch only; this is not an output-stage or receiver model.
+VTEST K_CATH 0 AC 1
+R24 K_CATH 0 130
+C22 K_CATH 0 250p
+.ac lin 2 1000 455000
+.measure ac I_1K FIND mag(i(VTEST)) AT=1000
+.measure ac I_455K FIND mag(i(VTEST)) AT=455000
+.end

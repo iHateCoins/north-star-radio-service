@@ -8,6 +8,7 @@ on:
       - "engineering/**"
       - "tests/test_spice_export_v23.js"
       - "tests/test_heater_model_v35.js"
+      - "tests/test_output_bypass_v36.js"
       - ".github/workflows/pt44-spice-execution.yml"
   pull_request:
     paths:
@@ -16,6 +17,7 @@ on:
       - "engineering/**"
       - "tests/test_spice_export_v23.js"
       - "tests/test_heater_model_v35.js"
+      - "tests/test_output_bypass_v36.js"
       - ".github/workflows/pt44-spice-execution.yml"
   workflow_dispatch:
 
@@ -55,3 +57,5 @@ jobs:
           ' /tmp/pt44-spice.log
       - name: Execute heater-string boundary scenarios and check parity
         run: node tests/test_heater_model_v35.js --ngspice
+      - name: Execute isolated cathode-bypass AC branch study
+        run: node tests/test_output_bypass_v36.js --ngspice

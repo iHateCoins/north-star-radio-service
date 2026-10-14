@@ -334,8 +334,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #22",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300-dpi page 38; v0.36 trace audit PT44_OUTPUT_CATHODE_BYPASS_V1."
     },
     "23": {
       "description": "470 kΩ resistor",
@@ -670,7 +671,8 @@
       },
       "factory_members": [
         "V4:8",
-        "24:a"
+        "24:a",
+        "22:a"
       ],
       "prototype_member_crosswalk": [
         "V4:8",
@@ -718,7 +720,8 @@
         "29A:b",
         "29B:b",
         "23:b",
-        "24:b"
+        "24:b",
+        "22:b"
       ],
       "prototype_member_crosswalk": [
         "C1:b",
@@ -1068,7 +1071,7 @@
       "id": "P1-OUTPUT",
       "severity": "blocker",
       "stage": "AUDIO",
-      "description": "Verify #22 and #25 routes; trace full output-transformer primary and secondary plus voice coil."
+      "description": "The #22 250 pF cathode-bypass route is source-traced across #24 and B−. Verify #25 route, winding characteristics, speaker/model correlation, and remaining output-stage terminal mapping."
     },
     {
       "id": "P1-AC",
@@ -1092,7 +1095,7 @@
   "checks": {
     "factory_register_count": 33,
     "traced_network_count": 16,
-    "factory_terminals_on_traced_nets": 39,
+    "factory_terminals_on_traced_nets": 41,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,

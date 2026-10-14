@@ -1,11 +1,11 @@
 {
   "schema": "PT44_PASSIVE_DEVICE_TOPOLOGY_V1",
-  "version": "0.16.0",
+  "version": "0.36.0",
   "model": "Philco PT-44",
   "factory_source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "printed_page": 38,
   "scope": "FACTORY_COMPONENT_INTERNAL_STRUCTURE_AND_TWO_PILOT_SHUNT_EDGES_ONLY",
-  "source_status": "Parts and winding symbols traced. Winding inductance, mutual coupling, winding DCR, lamp hot/cold behavior and line switch remain unknown. No additions to RF/IF external electrical nets.",
+  "source_status": "Parts and winding symbols traced. Winding inductance, mutual coupling, winding DCR, lamp hot/cold behavior and line switch remain unknown. No additions to RF/IF external electrical nets. v0.36 adds the source-traced #22 cathode-bypass capacitor across #24; #25 and external line routing remain open.",
   "devices": {
     "12": {
       "kind": "magnetically_coupled_transformer",
@@ -144,6 +144,23 @@
       "cold_resistance_ohms": null,
       "hot_resistance_ohms": null,
       "status": "external connections established only through factory-lamp shunt branch"
+    },
+    "22": {
+      "kind": "capacitor",
+      "stage": "AUDIO",
+      "factory_part": "22",
+      "terminals": [
+        "22:a",
+        "22:b"
+      ],
+      "capacitance_farad": 2.5e-10,
+      "connection_nets": [
+        "F_50L6_CATH",
+        "F_BMINUS"
+      ],
+      "parallel_with_factory_part": "24",
+      "connection_status": "SOURCE_TRACED_P38_NATIVE_300DPI",
+      "terminal_alias_note": "The mica capacitor is non-polarized; a/b are arbitrary endpoint aliases and only the unordered net pair is asserted."
     }
   },
   "acceptance": {
@@ -154,6 +171,7 @@
     "full_ac_supply_verified": false,
     "if_inductance_and_coupling_validated": false,
     "spice_ready": false,
-    "benchmark_ready": false
+    "benchmark_ready": false,
+    "output_cathode_bypass_traced": true
   }
 }

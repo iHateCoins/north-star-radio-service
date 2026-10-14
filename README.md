@@ -1,4 +1,4 @@
-# North Star Radio Service — v0.35.0 PT-44 engineering update
+# North Star Radio Service — v0.36.0 PT-44 engineering update
 
 [Play game](https://ihatecoins.github.io/north-star-radio-service/)
 
@@ -8,6 +8,8 @@ The v0.35 heater-string fixture compares published nominal heater ratings with t
 
 Existing passive SPICE export remains generated from the game's partial factory graph. It includes six factory-driven passive instances and an isolated AC testbench; the existing workflow checks its ngspice response. Neither SPICE fixture validates complete PT-44 behavior.
 
-The engineering ledger remains explicitly **NOT ENGINEERING COMPLETE**: 33 component records, 22 partial net groups, 54 listed terminal memberships, seven open items, six unmet benchmark gates, and zero RF/converter net groups added. Pin-level net tracing is still needed for RF, IF winding ends, detector/AVC, output transformer, and power/line paths. The chassis locator and service procedure are useful references, but do not close those electrical gaps or certify the simulator as a restoration benchmark.
+The engineering ledger remains explicitly **NOT ENGINEERING COMPLETE**: 33 component records, 22 partial net groups, 56 listed terminal memberships, seven open items, six unmet benchmark gates, and zero RF/converter net groups added. Pin-level net tracing is still needed for RF, IF winding ends, detector/AVC, output transformer, and power/line paths. The chassis locator and service procedure are useful references, but do not close those electrical gaps or certify the simulator as a restoration benchmark.
 
-Watermark: `BUILD v0.35.0`.
+Watermark: `BUILD v0.36.0`.
+
+The v0.36 output-stage trace adds factory capacitor #22 (250 pF) to the existing 50L6 cathode and B− nets, source-tracing it across #24 (130 Ω). An isolated ngspice AC deck characterizes this branch at 1 kHz and 455 kHz and checks its calculated 4.897 MHz RC corner. The trace adds two memberships, bringing the partial graph from 54 to 56. Capacitor #25, transformer behavior, complete output-stage behavior, and the full receiver remain unverified; PT-44 is still not engineering complete.
