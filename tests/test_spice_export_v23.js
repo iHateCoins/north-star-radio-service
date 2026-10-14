@@ -15,7 +15,7 @@ for(const [part,first] of [['C15','N_IF2_SECONDARY_VOL_TOP'],['C18','N_VOL_WIPER
 for(const line of ['C15 N_IF2_SECONDARY_VOL_TOP N_DET_PASSIVE_RETURN 250p','C18 N_VOL_WIPER_C18 N_7C6_AUDIO_GRID 10n','R19 N_7C6_AUDIO_GRID N_DET_PASSIVE_RETURN 4.7Meg','R28_DCR N_FIELD_A N_FIELD_B 500','R30_40 N_R30_ENDA N_R30_TAP 40','R30_80 N_R30_TAP N_R30_ENDB 80','VRETURN N_DET_PASSIVE_RETURN 0 DC 0','VWIPER N_VOL_WIPER_C18 N_DET_PASSIVE_RETURN DC 0 AC 1']){
  assert(deck.includes(line),line);
 }
-assert(deck.endsWith('.end\n')&&deck.includes('.ac dec 60 0.1 1000000'));
+assert(deck.endsWith('.end\n')&&deck.includes('.ac dec 60 0.1 1000000')&&deck.includes('.print ac vm(N_7C6_AUDIO_GRID)'));
 assert.equal(spec.spice_engine_validated,false);assert.equal(spec.benchmark_ready,false);
 for(const [label,expr] of [
  ['wrong #15 capacitance','(()=>{const x=PT44_PASSIVE_STUDY_V1.elements[0],v=x.value_si;x.value_si=100e-12;const bad=!pt44SpiceExportAudit().ok;x.value_si=v;return bad;})()'],
