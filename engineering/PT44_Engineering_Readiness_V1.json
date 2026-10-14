@@ -1,13 +1,13 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.41.0",
+  "version": "0.42.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
-    "partial_traced_networks": 25,
-    "terminal_memberships_on_partial_graph": 72,
+    "partial_traced_networks": 28,
+    "terminal_memberships_on_partial_graph": 79,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 5,
     "memberships_in_those_groups": 14,
@@ -24,10 +24,10 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 11,
-    "source_reviewed_graph_groups": 25,
-    "source_reviewed_terminal_memberships": 72,
-    "rf_net_groups_added": 2,
+    "source_review_milestones": 12,
+    "source_reviewed_graph_groups": 28,
+    "source_reviewed_terminal_memberships": 79,
+    "rf_net_groups_added": 5,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
     "chassis_position_components_not_shown": 6,
@@ -47,8 +47,10 @@
     "output_screen_symbol_connections": 3,
     "pt42_shared_chassis_source_confirmed": true,
     "pt42_pt44_shared_factory_diagram_source": true,
-    "rf_verified_endpoints_added": 6,
-    "rf_input_tube_pin_connections_source_traced": 1
+    "rf_verified_endpoints_added": 13,
+    "rf_input_tube_pin_connections_source_traced": 1,
+    "rf_aerial_transformer_terminals_source_traced": 4,
+    "external_antenna_symbol_connections_traced": 1
   },
   "open_items": [
     {
@@ -56,7 +58,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The 7A8 signal input V1:6, upper #3 loop terminal, RF gang #4 input and #5 compensator branch, plus explicit loop-mode chassis grounds are traced. The lower loop/#2 transformer winding, external antenna, oscillator section, remaining 7A8 connections, and RF behavior remain open."
+      "gap": "The loop-to-#2 aerial-transformer winding, external ANT input, #1 bypass path and its loop-mode chassis ground are now source-traced. Winding parameters/polarity, remaining 7A8 electrodes, #4 oscillator gang, #6–#11 oscillator/decoupling endpoints, RF behavior and receiver validation remain open."
     },
     {
       "id": "P1-IF",
@@ -91,7 +93,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "All 25 represented graph groups and 72 terminal memberships reconcile to source-review records through v0.41. The RF input branch is partially traced; remaining converter/winding connections, receiver pin crosswalks, chassis relationships, and full receiver behavior remain open."
+      "gap": "All 28 represented graph groups and 79 component-terminal memberships reconcile to source-review records through v0.42. Loop/external-antenna coupling is now partially traced; oscillator, pin crosswalks, winding parameters, chassis relationships and full receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -142,7 +144,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.41 source-traces the 7A8 signal-input conductor to the upper #3 loop lead, RF tuning gang #4 and aerial compensator #5, and records the explicit loop-operation chassis grounds without joining them to B-minus. The lower loop/#2 transformer path, oscillator subsystem and remaining RF/converter model remain open.",
+  "latest_evidence_update": "v0.42 traces the lower built-in loop lead to the #2 11-turn winding, the external ANT symbol and #2 38-turn winding, the opposite winding ends through #1 bypass and to B−, and #1 chassis ground for loop operation. Aerial-transformer parameters, oscillator/converter completion and receiver behavior remain open.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

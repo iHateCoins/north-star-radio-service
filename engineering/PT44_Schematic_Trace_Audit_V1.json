@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.41.0",
+  "version": "0.42.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -15,7 +15,8 @@
       "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
-    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf"
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "version": "0.42.0"
   },
   "milestones": [
     {
@@ -135,6 +136,19 @@
         "F_RF_CHASSIS"
       ],
       "summary": "Added the source-traced 7A8 signal-input conductor through the upper #3 loop terminal, RF gang #4 and aerial compensator #5, plus their explicit loop-mode chassis grounds. The lower loop/#2 winding map and rest of the converter remain open."
+    },
+    {
+      "version": "0.42.0",
+      "title": "Built-in loop and aerial-transformer interface trace",
+      "status": "SOURCE_CHECKED_LOOP_AND_EXTERNAL_ANTENNA_PATH_PARTIAL",
+      "net_ids": [
+        "F_RF_LOOP_SECONDARY",
+        "F_RF_EXTERNAL_ANTENNA",
+        "F_RF_ANTENNA_BYPASS",
+        "F_RF_CHASSIS",
+        "F_BMINUS"
+      ],
+      "summary": "Traced both #2 winding endpoints, the lower #3 loop connection, external ANT input, #1 bypass path and its loop-mode chassis ground. Transformer parameters and the rest of the converter remain open."
     }
   ],
   "reviewed_net_memberships": [
@@ -576,13 +590,66 @@
         "5:b"
       ],
       "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "milestone_version": "0.42.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1330
+      ],
+      "basis": "The lower built-in loop lead joins the upper end of the #2 11-turn winding. Winding polarity and inductive parameters remain unspecified. Checked against the native 300-dpi p.38 scan; unresolved winding parameters and external port remain outside the component graph.",
+      "reviewed_members": [
+        "3:loop_b",
+        "2:secondary_a"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_EXTERNAL_ANTENNA",
+      "milestone_version": "0.42.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1330
+      ],
+      "basis": "The external ANT symbol connects to the upper end of the 38-turn #2 winding. The external port is documented by the trace artifact but is outside the numbered factory-component graph. Checked against the native 300-dpi p.38 scan; unresolved winding parameters and external port remain outside the component graph.",
+      "reviewed_members": [
+        "2:primary_a"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_ANTENNA_BYPASS",
+      "milestone_version": "0.42.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1330
+      ],
+      "basis": "The lower end of the #2 38-turn winding joins #1:a. The opposite #1 terminal carries the explicit RF ground symbol identified by Philco for loop operation. Checked against the native 300-dpi p.38 scan; unresolved winding parameters and external port remain outside the component graph.",
+      "reviewed_members": [
+        "2:primary_b",
+        "1:a"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
     }
   ],
   "reviewed_open_areas": [
     {
-      "milestone_version": "0.41.0",
+      "milestone_version": "0.42.0",
       "area": "RF / converter",
-      "status": "PARTIAL_INPUT_BRANCH_TRACED_COMPONENT_CROSSWALKS_OPEN",
+      "status": "PARTIAL_LOOP_AND_EXTERNAL_ANTENNA_PATH_TRACED",
       "parts": [
         "1",
         "2",
@@ -597,13 +664,13 @@
         "11"
       ],
       "unresolved": [
-        "Built-in loop lower terminal and #2 aerial-transformer winding-end crosswalk",
-        "External antenna eyelet and transformer winding mapping",
-        "Oscillator transformer #10 and tuning-gang #4 oscillator section",
-        "Remaining 7A8 socket pin/wiring crosswalk and #6/#7/#8/#9 endpoints",
-        "RF/oscillator behavior and source-based performance validation"
+        "Aerial transformer #2 winding inductance, coupling, polarity and production tolerances.",
+        "External ANT interface physical lug/eyelet mapping to the game chassis.",
+        "7A8 remaining electrode/pin connections and complete #6 condenser/choke, #7 resistor, #8 capacitor, #9 resistor, #10 oscillator transformer, #11 capacitor and #4 oscillator-gang traces.",
+        "RF tracking, oscillator behavior, sensitivity/selectivity and receiver-level validation.",
+        "Chassis-to-B− relationship beyond explicitly traced nets."
       ],
-      "note": "The signal input V1:6, upper #3 loop terminal, RF gang input terminal and #5 compensator terminal are source-traced; the two explicitly grounded tuning terminals are source-traced to chassis only for loop operation. No complete RF or converter topology is asserted."
+      "note": "The v0.41 loop upper/input branch is now paired with a source-traced lower loop-to-#2 secondary connection, the 38-turn external ANT winding, #1 bypass and chassis-referenced return, and the #2 lower winding connection to B−. No RF behavior or transformer parameters are certified."
     },
     {
       "milestone_version": "0.37.0",
@@ -735,6 +802,28 @@
       "source_artifact_version": "0.40.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "basis": "Philco p.38 native scan: #12 secondary lower end and #13 lower end join the B− return bus."
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.42.0",
+      "reviewed_members": [
+        "1:b"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json",
+      "source_artifact_version": "0.42.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 RF note identifies the #1 lower terminal ground symbol as chassis for loop operation; no connection to B− is inferred."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.42.0",
+      "reviewed_members": [
+        "2:secondary_b"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json",
+      "source_artifact_version": "0.42.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: lower terminal of the #2 11-turn aerial-transformer winding joins the horizontal B− return rail."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json"
