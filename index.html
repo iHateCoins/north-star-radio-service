@@ -2383,7 +2383,7 @@ function pt44SpicePassiveDeck(){
  if(source.length!==wanted.length||source.some(e=>!wanted.includes(e.name.split('#')[1])))throw Error('Detector device set mismatch');
  const columns=policy.detector_ports.map(pt44SpiceNode);
  if(columns.length!==4||new Set(columns).size!==4)throw Error('Missing unique source-traced subcircuit terminals');
- const lines=['PT-44 factory-derived passive subcircuits — v0.23.0',
+ const lines=['PT-44 factory-derived passive subcircuits — v0.24.0',
   '* Philco 1941 RMS p.38: only documented passives #15 #18 #19 and #28/#30 resistor structures.',
   '* ISOLATED MODEL, NOT COMPLETE PT-44. 7C6 diodes, IF transformer L/K, AVR/AVC and pilot lamp I-V UNMODELED.',
   '* N_RETURN is an isolated testbench return. NEVER assume factory B-minus equals physical chassis.',
