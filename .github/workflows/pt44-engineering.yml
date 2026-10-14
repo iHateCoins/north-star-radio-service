@@ -57,5 +57,7 @@ jobs:
         run: node tests/test_rf_input_trace_v41.js
       - name: Verify v0.42 aerial transformer and loop return trace
         run: node tests/test_aerial_transformer_trace_v42.js
+      - name: Verify v0.43 oscillator return endpoints and preserve open pin crosswalk
+        run: node tests/test_oscillator_return_trace_v43.js
       - name: Verify PT-42/PT-44 source equivalence scope
         run: node tests/test_model_equivalence_v1.js

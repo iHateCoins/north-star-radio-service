@@ -13,6 +13,7 @@ const detectorAvcTrace = read('engineering/PT44_Detector_AVC_Trace_V1.json');
 const if1Trace = read('engineering/PT44_IF1_Secondary_Return_Trace_V1.json');
 const rfTrace = read('engineering/PT44_RF_Input_Trace_V1.json');
 const aerialTrace = read('engineering/PT44_Aerial_Transformer_Trace_V1.json');
+const oscillatorTrace = read('engineering/PT44_Oscillator_Return_Trace_V1.json');
 const powerLineTrace = read('engineering/PT44_Power_Line_Trace_V1.json');
 const tubeReview = read('engineering/PT44_Tube_Terminals_Review_V1.json');
 const audit = read('engineering/PT44_Scope_Audit_V1.json');
@@ -49,8 +50,8 @@ assert.equal(readiness.evidence_snapshot.partial_traced_networks, audit.baseline
 assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph, audit.baseline.current_partial_graph_membership_entries);
 assert.equal(readiness.evidence_snapshot.source_reviewed_graph_groups, audit.source_review_reconciliation.schematic_audit_net_groups);
 assert.equal(readiness.evidence_snapshot.source_reviewed_terminal_memberships, audit.source_review_reconciliation.schematic_audit_membership_entries);
-assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph, 61);
-assert.equal(audit.baseline.component_terminal_reference_coverage_percent, 73.5);
+assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph, 63);
+assert.equal(audit.baseline.component_terminal_reference_coverage_percent, 75.9);
 assert.equal(audit.baseline.tube_pin_memberships_in_partial_graph, 18);
 assert.equal(audit.baseline.unique_partial_graph_memberships, memberSet.size);
 assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph,
@@ -79,8 +80,8 @@ assert.deepEqual(audit.source_review_reconciliation.schematic_audit_memberships_
   traceAuditNotInGraph);
 assert.deepEqual(graphNotInTraceAudit, []);
 assert.deepEqual(audit.source_review_reconciliation.reconciliation_record.added_and_source_verified_memberships,
-  [...outputTrace.verified_endpoints, ...outputIfTrace.verified_endpoints, ...detectorAvcTrace.traced_component_endpoints, ...if1Trace.verified_endpoints, ...rfTrace.verified_endpoints, ...aerialTrace.verified_endpoints].map(endpoint => endpoint.terminal).sort());
-assert.equal(audit.source_review_reconciliation.reconciliation_record.status, 'RESOLVED_IN_V0.42');
+  [...outputTrace.verified_endpoints, ...outputIfTrace.verified_endpoints, ...detectorAvcTrace.traced_component_endpoints, ...if1Trace.verified_endpoints, ...rfTrace.verified_endpoints, ...aerialTrace.verified_endpoints, ...oscillatorTrace.verified_endpoints].map(endpoint => endpoint.terminal).sort());
+assert.equal(audit.source_review_reconciliation.reconciliation_record.status, 'RESOLVED_IN_V0.43');
 assert.equal(powerLineTrace.inventory_reconciliation.source_level_closure, true);
 assert.equal(powerLineTrace.inventory_reconciliation.factory_pin_level_closure, false);
 assert.equal(powerLineTrace.benchmark_ready, false);

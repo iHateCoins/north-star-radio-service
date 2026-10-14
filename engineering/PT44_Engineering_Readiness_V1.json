@@ -1,13 +1,13 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.42.0",
+  "version": "0.43.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
     "partial_traced_networks": 28,
-    "terminal_memberships_on_partial_graph": 79,
+    "terminal_memberships_on_partial_graph": 81,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 5,
     "memberships_in_those_groups": 14,
@@ -24,9 +24,9 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 12,
+    "source_review_milestones": 13,
     "source_reviewed_graph_groups": 28,
-    "source_reviewed_terminal_memberships": 79,
+    "source_reviewed_terminal_memberships": 81,
     "rf_net_groups_added": 5,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
@@ -50,7 +50,8 @@
     "rf_verified_endpoints_added": 13,
     "rf_input_tube_pin_connections_source_traced": 1,
     "rf_aerial_transformer_terminals_source_traced": 4,
-    "external_antenna_symbol_connections_traced": 1
+    "external_antenna_symbol_connections_traced": 1,
+    "oscillator_return_endpoints_source_traced": 2
   },
   "open_items": [
     {
@@ -58,7 +59,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The loop-to-#2 aerial-transformer winding, external ANT input, #1 bypass path and its loop-mode chassis ground are now source-traced. Winding parameters/polarity, remaining 7A8 electrodes, #4 oscillator gang, #6–#11 oscillator/decoupling endpoints, RF behavior and receiver validation remain open."
+      "gap": "The loop-to-#2 aerial-transformer interface and #1 bypass are source-traced. v0.43 traces the lower #9 22 kΩ resistor and #11 0.05 µF capacitor terminals to B−. Their opposite ends, #4 oscillator gang, #6–#8 network, #10 oscillator transformer, remaining 7A8 pins, RF behavior and receiver validation remain open."
     },
     {
       "id": "P1-IF",
@@ -93,7 +94,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "All 28 represented graph groups and 79 component-terminal memberships reconcile to source-review records through v0.42. Loop/external-antenna coupling is now partially traced; oscillator, pin crosswalks, winding parameters, chassis relationships and full receiver behavior remain open."
+      "gap": "All 28 represented graph groups and 81 component-terminal memberships reconcile to source-review records through v0.43. The lower #9/#11 oscillator return endpoints are recorded; their opposite ends, #4 gang, #6–#10 converter topology, socket crosswalks, winding parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -144,7 +145,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.42 traces the lower built-in loop lead to the #2 11-turn winding, the external ANT symbol and #2 38-turn winding, the opposite winding ends through #1 bypass and to B−, and #1 chassis ground for loop operation. Aerial-transformer parameters, oscillator/converter completion and receiver behavior remain open.",
+  "latest_evidence_update": "v0.43 traces the lower ends of the #9 22 kΩ resistor and #11 0.05 µF capacitor to the B− rail. Their upper ends, the rest of the #6–#10 oscillator network, 7A8 socket-pin crosswalk and receiver behavior remain open.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

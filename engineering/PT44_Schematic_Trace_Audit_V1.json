@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.42.0",
+  "version": "0.43.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -16,7 +16,7 @@
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
-    "version": "0.42.0"
+    "version": "0.43.0"
   },
   "milestones": [
     {
@@ -149,6 +149,15 @@
         "F_BMINUS"
       ],
       "summary": "Traced both #2 winding endpoints, the lower #3 loop connection, external ANT input, #1 bypass path and its loop-mode chassis ground. Transformer parameters and the rest of the converter remain open."
+    },
+    {
+      "version": "0.43.0",
+      "title": "7A8 oscillator return endpoint trace",
+      "status": "SOURCE_CHECKED_OSCILLATOR_RETURN_PARTIAL",
+      "net_ids": [
+        "F_BMINUS"
+      ],
+      "summary": "Traced lower #9 resistor and #11 capacitor endpoints to the B− return rail. Their opposite ends, #4 gang, #6–#10 network and 7A8 socket-pin crosswalk remain open."
     }
   ],
   "reviewed_net_memberships": [
@@ -647,9 +656,9 @@
   ],
   "reviewed_open_areas": [
     {
-      "milestone_version": "0.42.0",
+      "milestone_version": "0.43.0",
       "area": "RF / converter",
-      "status": "PARTIAL_LOOP_AND_EXTERNAL_ANTENNA_PATH_TRACED",
+      "status": "PARTIAL_LOOP_ANTENNA_AND_OSCILLATOR_RETURN_TRACED",
       "parts": [
         "1",
         "2",
@@ -666,11 +675,12 @@
       "unresolved": [
         "Aerial transformer #2 winding inductance, coupling, polarity and production tolerances.",
         "External ANT interface physical lug/eyelet mapping to the game chassis.",
-        "7A8 remaining electrode/pin connections and complete #6 condenser/choke, #7 resistor, #8 capacitor, #9 resistor, #10 oscillator transformer, #11 capacitor and #4 oscillator-gang traces.",
         "RF tracking, oscillator behavior, sensitivity/selectivity and receiver-level validation.",
-        "Chassis-to-B− relationship beyond explicitly traced nets."
+        "Chassis-to-B− relationship beyond explicitly traced nets.",
+        "The upper #9 and #11 endpoints and their oscillator-network crosswalk remain open.",
+        "7A8 socket-pin assignments, #4 oscillator gang and #6–#10 converter wiring remain open."
       ],
-      "note": "The v0.41 loop upper/input branch is now paired with a source-traced lower loop-to-#2 secondary connection, the 38-turn external ANT winding, #1 bypass and chassis-referenced return, and the #2 lower winding connection to B−. No RF behavior or transformer parameters are certified."
+      "note": "v0.41/v0.42 trace the loop and external ANT/aerial-transformer interface. v0.43 traces only the lower #9/#11 endpoints to B−. No oscillator behavior, pin crosswalk or transformer parameter is certified."
     },
     {
       "milestone_version": "0.37.0",
@@ -824,6 +834,18 @@
       "source_artifact_version": "0.42.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "basis": "Philco p.38 native scan: lower terminal of the #2 11-turn aerial-transformer winding joins the horizontal B− return rail."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.43.0",
+      "reviewed_members": [
+        "9:b",
+        "11:b"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Return_Trace_V1.json",
+      "source_artifact_version": "0.43.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: lower terminals of #9 22 kΩ and #11 0.05 µF meet the horizontal B− return rail."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json"
