@@ -12,7 +12,7 @@ vm.runInContext(blocks[3].slice(start,end),ctx);
 let a=JSON.parse(vm.runInContext('JSON.stringify(pt44BenchAudit())',ctx));
 assert(a.ok,JSON.stringify(a.errors));
 assert.equal(a.voltagePoints,6);assert.equal(a.subdevices,3);assert.equal(a.referenceOnly,true);
-assert.deepEqual(fixture.factory_voltage_labels.map(v=>[v.terminal,v.volts]),[['V1:2',95],['V1:3',45],['V2:2',95],['V2:3',45],['V3:2',30],['V4:3',85]]);
+assert.deepEqual(fixture.factory_voltage_labels.map(v=>[v.terminal,v.volts]),[['V1:2',95],['V1:5',45],['V2:2',95],['V2:3',45],['V3:2',30],['V4:3',85]]);
 assert.equal(fixture.factory_specifications.if_center_hz,455000);
 assert.equal(fixture.factory_specifications.line_voltage_ac_or_dc_volts,115);
 function invalid(mutation){

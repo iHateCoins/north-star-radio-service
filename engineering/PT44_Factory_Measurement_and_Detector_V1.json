@@ -1,6 +1,6 @@
 {
   "schema": "PT44_FACTORY_MEASUREMENT_AND_DETECTOR_V1",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "model": "Philco PT-44",
   "source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "source_pages": {
@@ -33,10 +33,10 @@
       "stage": "RF",
       "tube": "V1",
       "tube_type": "7A8",
-      "terminal": "V1:3",
+      "terminal": "V1:5",
       "role": "screen grid",
       "volts": 45,
-      "location": "upper left, 7A8 screen electrode"
+      "location": "upper left, 7A8 screen-grid electrode"
     },
     {
       "id": "FV_7B7_PLATE",
