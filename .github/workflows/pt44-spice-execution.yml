@@ -4,12 +4,14 @@ on:
   push:
     paths:
       - "index.html"
+      - "README.md"
       - "engineering/**"
       - "tests/test_spice_export_v23.js"
       - ".github/workflows/pt44-spice-execution.yml"
   pull_request:
     paths:
       - "index.html"
+      - "README.md"
       - "engineering/**"
       - "tests/test_spice_export_v23.js"
       - ".github/workflows/pt44-spice-execution.yml"
