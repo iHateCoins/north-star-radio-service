@@ -1,0 +1,514 @@
+{
+  "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
+  "version": "0.33.0",
+  "model": "Philco PT-44",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco factory schematic; source document remains the wiring authority",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
+    },
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf"
+  },
+  "milestones": [
+    {
+      "version": "0.29.0",
+      "title": "Power and heater source review",
+      "status": "SOURCE_CHECKED_PARTIAL",
+      "net_ids": [
+        "F_BPLUS_RECT",
+        "F_BPLUS_FILT",
+        "F_BMINUS",
+        "F_HT_35Z3_50L6",
+        "F_HT_50L6_7A8",
+        "F_HT_7A8_7B7",
+        "F_HT_7B7_7C6",
+        "F_30_40_LAMP_A",
+        "F_30_40_LAMP_B"
+      ],
+      "summary": "Cross-checked three filter/return groups, four documented heater interconnections and two #30 40 Ω/lamp shunt groups; confirmed #26:a on the first B+ group. AC endpoints, rectifier anode and complete line/heater path remain open."
+    },
+    {
+      "version": "0.30.0",
+      "title": "Output-stage source review",
+      "status": "SOURCE_CHECKED_PARTIAL",
+      "net_ids": [
+        "F_7C6_PLATE",
+        "F_50L6_GRID",
+        "F_50L6_CATH",
+        "F_OUTPUT_PLATE",
+        "F_VOICE_SEC_A",
+        "F_VOICE_SEC_B"
+      ],
+      "summary": "Cross-checked the 7C6 plate, 50L6 grid/cathode, output-transformer primary and both speaker-secondary groups. #22/#25 routes and electrical transformer/speaker models remain open."
+    },
+    {
+      "version": "0.31.0",
+      "title": "RF and converter source review",
+      "status": "SOURCE_REVIEWED_OPEN",
+      "net_ids": [],
+      "summary": "Reviewed the p.38 antenna, loop, tuning, oscillator and 7A8 region. No new RF net was promoted: the 7A8 symbol-to-socket crosswalk and winding/gang terminal assignments need stronger source confirmation."
+    },
+    {
+      "version": "0.32.0",
+      "title": "IF source review",
+      "status": "SOURCE_CHECKED_PARTIAL",
+      "net_ids": [
+        "F_IF1_PLATE",
+        "F_IF1_GRID",
+        "F_IF2_PLATE"
+      ],
+      "summary": "Cross-checked the three existing #12/#14 plate/grid memberships. Complete winding endpoints, 7B7 screen/cathode, trimmer and AVC routes remain open."
+    },
+    {
+      "version": "0.33.0",
+      "title": "Detector/AVC and netlist integration review",
+      "status": "SOURCE_CHECKED_PARTIAL",
+      "net_ids": [
+        "F_IF2_SECONDARY_VOL_TOP",
+        "F_VOL_WIPER_C18",
+        "F_7C6_AUDIO_GRID",
+        "F_DET_PASSIVE_RETURN"
+      ],
+      "summary": "Rechecked four detector/audio conductor groups and the existing upper-diode symbol-level link. #17 lower branch, diode socket-pin assignment and full AVC/return routing remain open."
+    }
+  ],
+  "reviewed_net_memberships": [
+    {
+      "net_id": "F_BPLUS_RECT",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V5:7",
+        "28:a",
+        "29A:a",
+        "26:a"
+      ]
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "28:b",
+        "29B:a",
+        "21:a"
+      ]
+    },
+    {
+      "net_id": "F_7C6_PLATE",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V3:2",
+        "21:b",
+        "20:a"
+      ]
+    },
+    {
+      "net_id": "F_50L6_GRID",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V4:5",
+        "20:b",
+        "23:a"
+      ]
+    },
+    {
+      "net_id": "F_50L6_CATH",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V4:8",
+        "24:a"
+      ]
+    },
+    {
+      "net_id": "F_OUTPUT_PLATE",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V4:3",
+        "26:b"
+      ]
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "29A:b",
+        "29B:b",
+        "23:b",
+        "24:b"
+      ]
+    },
+    {
+      "net_id": "F_VOICE_SEC_A",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "26:sA",
+        "27:voiceA"
+      ]
+    },
+    {
+      "net_id": "F_VOICE_SEC_B",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "26:sB",
+        "27:voiceB"
+      ]
+    },
+    {
+      "net_id": "F_HT_35Z3_50L6",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V5:8",
+        "V4:2"
+      ]
+    },
+    {
+      "net_id": "F_HT_50L6_7A8",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V4:7",
+        "V1:1"
+      ]
+    },
+    {
+      "net_id": "F_HT_7A8_7B7",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V1:8",
+        "V2:1"
+      ]
+    },
+    {
+      "net_id": "F_HT_7B7_7C6",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V2:8",
+        "V3:1"
+      ]
+    },
+    {
+      "net_id": "F_IF1_PLATE",
+      "milestone_version": "0.32.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        520,
+        170,
+        1490,
+        840
+      ],
+      "basis": "Philco p.38 IF section: listed plate/grid/secondary members match drawn conductors; unlisted winding ends, screens, trimmers and AVC branches remain open.",
+      "reviewed_members": [
+        "V1:2",
+        "12:pPlate"
+      ]
+    },
+    {
+      "net_id": "F_IF1_GRID",
+      "milestone_version": "0.32.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        520,
+        170,
+        1490,
+        840
+      ],
+      "basis": "Philco p.38 IF section: listed plate/grid/secondary members match drawn conductors; unlisted winding ends, screens, trimmers and AVC branches remain open.",
+      "reviewed_members": [
+        "12:sGrid",
+        "V2:6"
+      ]
+    },
+    {
+      "net_id": "F_IF2_PLATE",
+      "milestone_version": "0.32.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        520,
+        170,
+        1490,
+        840
+      ],
+      "basis": "Philco p.38 IF section: listed plate/grid/secondary members match drawn conductors; unlisted winding ends, screens, trimmers and AVC branches remain open.",
+      "reviewed_members": [
+        "V2:2",
+        "14:pPlate"
+      ]
+    },
+    {
+      "net_id": "F_30_40_LAMP_A",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "30:endA",
+        "32:a"
+      ]
+    },
+    {
+      "net_id": "F_30_40_LAMP_B",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "30:tap",
+        "32:b"
+      ]
+    },
+    {
+      "net_id": "F_IF2_SECONDARY_VOL_TOP",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "reviewed_members": [
+        "14:sReturn",
+        "16:a",
+        "15:a"
+      ]
+    },
+    {
+      "net_id": "F_VOL_WIPER_C18",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "reviewed_members": [
+        "16:wiper",
+        "18:a"
+      ]
+    },
+    {
+      "net_id": "F_7C6_AUDIO_GRID",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "reviewed_members": [
+        "18:b",
+        "19:a",
+        "V3:3"
+      ]
+    },
+    {
+      "net_id": "F_DET_PASSIVE_RETURN",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "reviewed_members": [
+        "15:b",
+        "16:b",
+        "19:b"
+      ]
+    }
+  ],
+  "reviewed_open_areas": [
+    {
+      "milestone_version": "0.31.0",
+      "area": "RF / converter",
+      "status": "OPEN_NO_NETS_ADDED",
+      "parts": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "unresolved": [
+        "7A8 symbol electrodes to pin-level receiver terminals",
+        "Aerial/loop/oscillator transformer winding end and tap mapping",
+        "RF and oscillator tuning-gang and compensator terminal memberships",
+        "Tube-symbol-to-numbered-socket-pin mapping for several RF nodes"
+      ],
+      "note": "The drawing region was reviewed. No RF terminal memberships were added where the source-to-functional-terminal crosswalk was not sufficiently established."
+    },
+    {
+      "milestone_version": "0.33.0",
+      "area": "Detector / AVC residual",
+      "status": "OPEN_SYMBOL_LEVEL_ONLY",
+      "unresolved": [
+        "Which numbered 7C6 diode plate is the upper unnumbered factory glyph",
+        " #17 lower terminal and remaining AVC loading/return route",
+        "External 7C6 cathode return and #16 on/off switch contacts"
+      ],
+      "note": "The upper diode connection remains a symbol-level observation; it is not assigned to V3:5 or V3:6."
+    }
+  ],
+  "scope_limits": [
+    "This audit verifies only the 22 net groups already represented in the partial factory graph; it does not claim that all PT-44 connections are transcribed.",
+    "No chassis bond, line-side path, undocumented winding tap, or simulator behavior is inferred.",
+    "All five milestones remain partial source reviews; benchmark readiness remains false.",
+    "A source check of listed partial groups is not an independent certification of every tube symbol-to-socket pin crosswalk."
+  ],
+  "benchmark_ready": false
+}
