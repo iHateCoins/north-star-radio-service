@@ -25,5 +25,5 @@ for(const [label,expr] of [
  ['untraced field-coil endpoint','(()=>{const x=PT44_FACTORY_V3.factory_nets.find(n=>n.id==="F_BPLUS_RECT"),i=x.factory_members.indexOf("28:a"),v=x.factory_members[i];x.factory_members[i]="28:b";const bad=!pt44SpiceExportAudit().ok;x.factory_members[i]=v;return bad;})()'],
  ['incorrect lamp shunt','(()=>{const x=PT44_PASSIVE_V1.devices["30"].lamp_shunt,v=x.parallel_to_section;x.parallel_to_section="R30_80";const bad=!pt44SpiceExportAudit().ok;x.parallel_to_section=v;return bad;})()']
 ])assert.equal(vm.runInContext(expr,ctx),true,label);
-assert(html.includes('BUILD v0.25.0<small>'));
-console.log('PASS v0.25: 6 factory-driven SPICE passives, isolated AC deck, 4 unsafe source mutation checks, watermark');
+assert(html.includes('BUILD v0.26.0<small>'));
+console.log('PASS v0.26: 6 factory-driven SPICE passives, isolated AC deck, 4 unsafe source mutation checks, watermark');
