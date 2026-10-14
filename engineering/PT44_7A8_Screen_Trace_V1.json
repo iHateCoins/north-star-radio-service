@@ -1,0 +1,95 @@
+{
+  "schema": "PT44_7A8_SCREEN_TRACE_V1",
+  "version": "0.44.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_SHARED_45V_SCREEN_LEAD_SUPPLY_PATH_OPEN",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram \u2014 PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "traced_net": {
+    "id": "F_SCREEN_45V",
+    "title": "Shared 45 V screen lead (upstream source unresolved)",
+    "description": "The factory schematic shows a continuous conductor from the 7A8 screen-grid glyph to the 7B7 screen-grid glyph, with 45 V marked at both tube branches. Sylvania pin data maps those screen electrodes to V1:5 (7A8 G3/G5) and V2:3 (7B7 G2). This records only the shared tube-side conductor; it does not identify a regulator, dropping element, source impedance, or complete supply path.",
+    "members": [
+      "V1:5",
+      "V2:3"
+    ],
+    "source_box_px": [
+      300,
+      260,
+      1350,
+      800
+    ]
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "V1:5",
+      "net_id": "F_SCREEN_45V",
+      "joined_factory_member": "V2:3",
+      "interpretation": "7A8 screen grids G3/G5 map to socket pin 5; the p.38 screen glyph lead joins the same annotated 45 V conductor as the 7B7 screen branch.",
+      "source_box_px": [
+        300,
+        260,
+        1350,
+        800
+      ]
+    },
+    {
+      "terminal": "V2:3",
+      "net_id": "F_SCREEN_45V",
+      "joined_factory_member": "V1:5",
+      "interpretation": "7B7 screen grid G2 maps to socket pin 3; the p.38 screen glyph lead joins the same annotated 45 V conductor as the 7A8 screen branch.",
+      "source_box_px": [
+        300,
+        260,
+        1350,
+        800
+      ]
+    }
+  ],
+  "source_level_closure": {
+    "shared_v1_v2_screen_conductor": true,
+    "screen_electrode_socket_pin_crosswalk": true,
+    "annotated_voltage_is_operating_measurement": false,
+    "upstream_45v_supply_path_traced": false,
+    "7a8_oscillator_network_complete": false,
+    "if_stage_complete": false,
+    "benchmark_ready": false,
+    "45v_annotation_is_not_measurement_target": true
+  },
+  "limits": [
+    "The \u201c45 V\u201d callout is transcribed as a schematic annotation; no meter reference, operating condition or tolerance is asserted by this trace.",
+    "The upstream feed to this shared screen conductor is not source-traced here.",
+    "This trace does not close the 7A8 oscillator, 7A8 cathode, 7B7 cathode, IF transformers or receiver behavior."
+  ],
+  "unresolved": [
+    "Upstream source and any intervening impedance for the shared 45 V lead.",
+    "7A8 oscillator wiring and #4, #6\u2013#11 endpoints.",
+    "7A8 cathode/suppressor external connection and 7B7 cathode/suppressor connections.",
+    "Full receiver and full-receiver SPICE validation."
+  ],
+  "benchmark_ready": false,
+  "pin_identity_sources": {
+    "V1:5": {
+      "document": "Sylvania Type 7A8 manufacturer datasheet",
+      "url": "https://bms.isjtr.ro/sheets/108/7/7A8.pdf",
+      "scope": "Manufacturer basing data maps screen grids G3/G5 to socket pin 5; it does not document PT-44 wiring."
+    },
+    "V2:3": {
+      "document": "Sylvania Type 7B7 manufacturer datasheet, continuation sheet",
+      "url": "https://archives.doctsf.com/documents/afficher_document.php?num_doc=83300&num_fic=1",
+      "scope": "Manufacturer basing data maps screen grid G2 to socket pin 3; it does not document PT-44 wiring."
+    }
+  }
+}

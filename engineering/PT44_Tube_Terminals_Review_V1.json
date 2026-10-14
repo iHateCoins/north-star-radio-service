@@ -8,7 +8,7 @@
     "V1": {
       "type": "7A8",
       "base": "Loktal B8B",
-      "reference": "https://www.r-type.org/exhib/aaq0192.htm",
+      "reference": "https://bms.isjtr.ro/sheets/108/7/7A8.pdf",
       "reference_scope": "Tube electrode identity only; NOT a claim about Philco chassis wiring.",
       "pin_roles": {
         "1": "heater",
@@ -24,7 +24,7 @@
     "V2": {
       "type": "7B7",
       "base": "Loktal B8B",
-      "reference": "https://r-type.org/exhib/aaa1058.htm",
+      "reference": "https://archives.doctsf.com/documents/afficher_document.php?num_doc=83300&num_fic=1",
       "reference_scope": "Tube electrode identity only; NOT a claim about Philco chassis wiring.",
       "pin_roles": {
         "1": "heater",
@@ -109,7 +109,7 @@
       "id": "RF-03",
       "stage": "RF",
       "terminal": "V1:7",
-      "task": "Trace the 7A8 cathode and suppressor grid G6 return (do not assume chassis = B−).",
+      "task": "Trace the 7A8 cathode and suppressor grid G6 return (do not assume chassis = B\u2212).",
       "status": "source_trace_required",
       "factory_net_claim": false
     },
@@ -118,8 +118,12 @@
       "stage": "RF",
       "terminal": "V1:5",
       "task": "Trace 7A8 screen grids G3/G5 (socket pin 5), including the 45 V feed and #9/#6 branches.",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "status": "source_traced_shared_45v_screen_conductor",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json",
+      "review_result": "The pin-to-glyph mapping and shared conductor are verified; the upstream 45 V supply path and operating measurement conditions are still open.",
+      "pinout_reference": "https://bms.isjtr.ro/sheets/108/7/7A8.pdf",
+      "pinout_basis": "Sylvania manufacturer basing data establishes the screen electrode socket pin; Philco p.38 establishes the receiver conductor."
     },
     {
       "id": "RF-05",
@@ -158,8 +162,12 @@
       "stage": "IF",
       "terminal": "V2:3",
       "task": "Trace 7B7 screen grid supply and decoupling (do not assume same DC node as plate).",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "status": "source_traced_shared_45v_screen_conductor",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json",
+      "review_result": "The pin-to-glyph mapping and shared conductor are verified; the upstream 45 V supply path and operating measurement conditions are still open.",
+      "pinout_reference": "https://archives.doctsf.com/documents/afficher_document.php?num_doc=83300&num_fic=1",
+      "pinout_basis": "Sylvania manufacturer basing data establishes the screen electrode socket pin; Philco p.38 establishes the receiver conductor."
     },
     {
       "id": "IF-04",
@@ -229,7 +237,7 @@
       "id": "DET-06",
       "stage": "DETECTOR",
       "terminal": "15:a",
-      "task": "Resolve detector filtering #15–#19 and AVC junction topology.",
+      "task": "Resolve detector filtering #15\u2013#19 and AVC junction topology.",
       "status": "source_trace_required",
       "factory_net_claim": false
     },
@@ -261,7 +269,7 @@
       "id": "POWER-02",
       "stage": "POWER",
       "terminal": "30:endA",
-      "task": "Resolve #30 separate 40 Ω/80 Ω sections and exact pilot lamp bypass.",
+      "task": "Resolve #30 separate 40 \u03a9/80 \u03a9 sections and exact pilot lamp bypass.",
       "status": "source_trace_required",
       "factory_net_claim": false
     }
@@ -337,5 +345,5 @@
     ]
   },
   "required_factory_net_status": "PINOUT VALIDATION DOES NOT CERTIFY FACTORY WIRING. Proposed terminal trace tasks are not electrical edges and do not enter SPICE.",
-  "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity."
+  "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity. v0.44 closes only the source-backed shared screen conductor and the V1:5/V2:3 pin crosswalk; it does not trace the 45 V supply origin."
 }
