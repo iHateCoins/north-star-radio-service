@@ -33,5 +33,17 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes ngspice
-      - name: Run SPICE AC analysis
-        run: ngspice --batch engineering/PT44_Factory_Generated_Spice_v23.cir
+      - name: Run SPICE AC analysis and check response
+        run: |
+          ngspice --batch engineering/PT44_Factory_Generated_Spice_v23.cir > /tmp/pt44-spice.log
+          awk '
+            $1 == "0" && $2 == "1.000000e-01" { low = $3 }
+            $1 == "420" && $2 == "1.000000e+06" { high = $3 }
+            END {
+              if (low < 0.028 || low > 0.031 || high < 0.999 || high > 1.001) {
+                printf "FAIL: 0.1 Hz=%s, 1 MHz=%s\\n", low, high
+                exit 1
+              }
+              printf "PASS: 0.1 Hz=%s, 1 MHz=%s\\n", low, high
+            }
+          ' /tmp/pt44-spice.log
