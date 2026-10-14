@@ -37,3 +37,5 @@ jobs:
         run: node tests/test_chassis_alignment_v34.js
       - name: Check nominal heater-string arithmetic and SPICE deck structure
         run: node tests/test_heater_model_v35.js
+      - name: Verify v0.36 #22 cathode-bypass source trace and AC study fixture
+        run: node tests/test_output_bypass_v36.js

@@ -1,13 +1,13 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.35.0",
+  "version": "0.36.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
     "partial_traced_networks": 22,
-    "terminal_memberships_on_partial_graph": 54,
+    "terminal_memberships_on_partial_graph": 56,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 4,
     "memberships_in_those_groups": 11,
@@ -18,7 +18,8 @@
       "isolated_ngspice_testbench_validated": true,
       "full_receiver_spice_validated": false,
       "nominal_heater_sanity_scenarios": 2,
-      "nominal_heater_sanity_spice_validated": true
+      "nominal_heater_sanity_spice_validated": true,
+      "isolated_output_bypass_ac_study_validated": true
     },
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
@@ -33,7 +34,10 @@
     "service_alignment_steps_transcribed": 3,
     "heater_model_scenarios": 2,
     "heater_nominal_sum_volts": 103.9,
-    "heater_string_sanity_spice_validated": true
+    "heater_string_sanity_spice_validated": true,
+    "output_cathode_bypass_net_groups": 2,
+    "output_cathode_bypass_memberships": 2,
+    "output_cathode_bypass_calculated_corner_hz": 4897075.172058318
   },
   "open_items": [
     {
@@ -62,7 +66,7 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The 7C6 plate, 50L6 grid/cathode, #26 primary and #26/#27 secondary memberships are source-checked. #22/#25 routes, winding characteristics and speaker/model correlation remain open."
+      "gap": "The #22 250 pF cathode-bypass route is source-traced across #24 and B−. #25, winding characteristics, and speaker/model correlation remain open."
     },
     {
       "id": "P1-AC",
@@ -127,5 +131,5 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.34 transcribes Philco p.36 alignment conditions and p.38 underside position callouts. v0.35 adds a two-bound nominal heater-string SPICE sanity fixture using hot-equivalent heater resistors and #30/lamp limiting cases. The electrical graph remains 22 partial nets/54 memberships; no unresolved RF, AVC, line, chassis, or full-receiver model edge is promoted."
+  "latest_evidence_update": "v0.36 source-traces the 250 pF #22 capacitor across the 50L6 cathode-bias resistor #24 and B−, adds two verified terminal memberships, and validates an isolated cathode-bypass AC study. #25, RF/IF/detector/AVC, complete AC wiring, chassis lead dress, and full-receiver SPICE remain open; PT-44 is not engineering complete."
 }

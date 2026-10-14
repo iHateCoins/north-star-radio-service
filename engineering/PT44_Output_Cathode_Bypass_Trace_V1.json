@@ -1,0 +1,58 @@
+{
+  "schema": "PT44_OUTPUT_CATHODE_BYPASS_TRACE_V1",
+  "version": "0.36.0",
+  "model": "Philco PT-44",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "scope": "Trace only factory capacitor #22 and its two source-visible conductor endpoints in the 50L6 cathode-bias branch.",
+  "component": {
+    "factory_part": "22",
+    "description": "250 pF mica capacitor",
+    "value_farad": 2.5e-10,
+    "polarized": false
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "22:a",
+      "net_id": "F_50L6_CATH",
+      "joined_factory_member": "24:a",
+      "interpretation": "The capacitor lead joins the top of the #24 130 Ω cathode-bias resistor and 50L6 cathode net."
+    },
+    {
+      "terminal": "22:b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "24:b",
+      "interpretation": "The opposite capacitor lead joins the bottom of #24 and the source-traced B− return."
+    }
+  ],
+  "terminal_alias_note": "The capacitor is non-polarized; a/b labels are arbitrary aliases. The verified claim is the unordered endpoint set {F_50L6_CATH, F_BMINUS}.",
+  "derived_branch": {
+    "parallel_factory_part": "24",
+    "resistance_ohm": 130,
+    "time_constant_seconds": 3.25e-08,
+    "corner_frequency_hz": 4897075.172058318,
+    "interpretation": "Isolated linear RC corner calculation; it does not predict receiver response or establish the role of unresolved #25."
+  },
+  "unresolved": [
+    "Factory capacitor #25 route",
+    "Output-transformer inductance, coupling, and winding resistance",
+    "Full receiver AC behavior and speaker correlation"
+  ],
+  "acceptance": {
+    "two_memberships_added": true,
+    "full_output_stage_traced": false,
+    "full_receiver_spice_validated": false,
+    "benchmark_ready": false
+  }
+}

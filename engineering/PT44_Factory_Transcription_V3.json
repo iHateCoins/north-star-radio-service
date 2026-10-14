@@ -339,8 +339,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #22",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300-dpi page 38; v0.36 trace audit PT44_OUTPUT_CATHODE_BYPASS_V1."
     },
     "23": {
       "description": "470 kΩ resistor",
@@ -763,7 +764,8 @@
       },
       "factory_members": [
         "V4:8",
-        "24:a"
+        "24:a",
+        "22:a"
       ],
       "prototype_member_crosswalk": [
         "V4:8",
@@ -777,6 +779,12 @@
           "24:a"
         ],
         "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_36_source_review": {
+        "milestone_version": "0.36.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBER",
+        "reviewed_member": "22:a",
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
       }
     },
@@ -831,7 +839,8 @@
         "29A:b",
         "29B:b",
         "23:b",
-        "24:b"
+        "24:b",
+        "22:b"
       ],
       "prototype_member_crosswalk": [
         "C1:b",
@@ -871,6 +880,12 @@
           "24:b"
         ],
         "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_36_source_review": {
+        "milestone_version": "0.36.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBER",
+        "reviewed_member": "22:b",
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
       }
     },
@@ -1495,7 +1510,7 @@
       "id": "P1-OUTPUT",
       "severity": "blocker",
       "stage": "AUDIO",
-      "description": "The 7C6 plate, 50L6 grid/cathode, #26 primary and #26/#27 secondary memberships are source-checked. #22/#25 routes, winding characteristics and speaker/model correlation remain open."
+      "description": "The #22 250 pF cathode-bypass route is source-traced across #24 and B−. Verify #25 route, winding characteristics, speaker/model correlation, and remaining output-stage terminal mapping."
     },
     {
       "id": "P1-AC",
@@ -1519,7 +1534,7 @@
   "checks": {
     "factory_register_count": 33,
     "traced_network_count": 22,
-    "factory_terminals_on_traced_nets": 54,
+    "factory_terminals_on_traced_nets": 56,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
