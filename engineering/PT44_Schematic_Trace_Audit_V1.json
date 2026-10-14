@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.40.0",
+  "version": "0.41.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -125,6 +125,16 @@
         "F_BMINUS"
       ],
       "summary": "Traced #12 secondary return to B− and both #13 grid-return resistor ends to the #12 secondary/grid node and B−. Pin/winding crosswalks and IF model parameters remain open."
+    },
+    {
+      "version": "0.41.0",
+      "title": "RF input and loop-operation ground trace",
+      "status": "SOURCE_CHECKED_PARTIAL_RF_INPUT",
+      "net_ids": [
+        "F_RF_INPUT",
+        "F_RF_CHASSIS"
+      ],
+      "summary": "Added the source-traced 7A8 signal-input conductor through the upper #3 loop terminal, RF gang #4 and aerial compensator #5, plus their explicit loop-mode chassis grounds. The lower loop/#2 winding map and rest of the converter remain open."
     }
   ],
   "reviewed_net_memberships": [
@@ -528,13 +538,51 @@
         "14:sDetector",
         "17:a"
       ]
+    },
+    {
+      "net_id": "F_RF_INPUT",
+      "milestone_version": "0.41.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ],
+      "basis": "Philco p.38 native 300-dpi scan: input symbol maps to V1:6 and shares a conductor with the upper #3 loop terminal, RF gang #4 terminal and #5 aerial compensator terminal.",
+      "reviewed_members": [
+        "V1:6",
+        "3:loop_a",
+        "4:rf_stator",
+        "5:a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.41.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ],
+      "basis": "Philco p.38 explicitly says grounds are to chassis for loop operation; only the grounded ends of the RF gang and aerial compensator are included. No B-minus bond is inferred.",
+      "reviewed_members": [
+        "4:rotor",
+        "5:b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
     }
   ],
   "reviewed_open_areas": [
     {
-      "milestone_version": "0.31.0",
+      "milestone_version": "0.41.0",
       "area": "RF / converter",
-      "status": "OPEN_NO_NETS_ADDED",
+      "status": "PARTIAL_INPUT_BRANCH_TRACED_COMPONENT_CROSSWALKS_OPEN",
       "parts": [
         "1",
         "2",
@@ -549,12 +597,13 @@
         "11"
       ],
       "unresolved": [
-        "7A8 symbol electrodes to pin-level receiver terminals",
-        "Aerial/loop/oscillator transformer winding end and tap mapping",
-        "RF and oscillator tuning-gang and compensator terminal memberships",
-        "Tube-symbol-to-numbered-socket-pin mapping for several RF nodes"
+        "Built-in loop lower terminal and #2 aerial-transformer winding-end crosswalk",
+        "External antenna eyelet and transformer winding mapping",
+        "Oscillator transformer #10 and tuning-gang #4 oscillator section",
+        "Remaining 7A8 socket pin/wiring crosswalk and #6/#7/#8/#9 endpoints",
+        "RF/oscillator behavior and source-based performance validation"
       ],
-      "note": "The drawing region was reviewed. No RF terminal memberships were added where the source-to-functional-terminal crosswalk was not sufficiently established."
+      "note": "The signal input V1:6, upper #3 loop terminal, RF gang input terminal and #5 compensator terminal are source-traced; the two explicitly grounded tuning terminals are source-traced to chassis only for loop operation. No complete RF or converter topology is asserted."
     },
     {
       "milestone_version": "0.37.0",

@@ -1,0 +1,66 @@
+{
+  "schema": "PT44_MODEL_EQUIVALENCE_REVIEW_V1",
+  "model": "Philco PT-44",
+  "comparison_model": "Philco PT-42",
+  "review_date": "2026-10-14",
+  "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",
+  "sources": [
+    {
+      "id": "philco_1941_gallery",
+      "title": "1941 Philco Radio Gallery — PT-42 and PT-44",
+      "url": "https://philcoradio.com/gallery2/1941a/",
+      "source_type": "Philco Radio Historical Society model history",
+      "finding": "The PT-44 entry states that its chassis is identical to the PT-42 chassis.",
+      "authority_note": "Direct model-specific historical statement; the society is a retrospective source, not the factory document itself."
+    },
+    {
+      "id": "philco_1941_rms_yearbook",
+      "title": "Philco 1941 RMS Year Book",
+      "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+      "printed_pages": [
+        36,
+        38
+      ],
+      "finding": "The factory service material explicitly labels the p.38 schematic and underside parts locator for PT-42 and PT-44 together.",
+      "authority_note": "Primary factory service source; preferred authority for circuit and part-callout evidence."
+    },
+    {
+      "id": "philco_1941_sales_folder",
+      "title": "Philco Transitone Compact Radios sales folder (RR0153, 1941)",
+      "url": "https://philcoradio.com/library/wp-content/uploads/2024/02/RR0153-1941-Philco-Transitone-Compact-Radios.pdf",
+      "finding": "Both entries describe a five-tube set with built-in loop aerial; the PT-44 entry promotes its walnut cabinet, while the PT-42 entry describes an inlaid walnut cabinet.",
+      "authority_note": "Contemporary manufacturer promotional material; useful for product identity and cabinet scope, not wiring."
+    },
+    {
+      "id": "philco_bulletin_index_437",
+      "title": "Philco Service Bulletin index, Bulletin 437 / 365",
+      "url": "https://philcoradio.com/library/index.php/service-info/philco-service-bulletins/",
+      "finding": "The August 1940 index entry lists PT-30, PT-42, PT-44, PT-49, and PT-87.",
+      "availability": "The online index entry has no image or PDF link for Bulletin 437.",
+      "authority_note": "Index metadata only; no technical content from the unlinked bulletin is inferred."
+    },
+    {
+      "id": "rider_volume_12_index",
+      "title": "Rider Volume 12 index for PT-42 / PT-44",
+      "url": "https://www.worldradiohistory.com/Archive-Rider/INDEX/Index-11-13.pdf",
+      "finding": "The index lists schematic, socket, trimmers, and chassis information for PT-42/PT-44 at page 12-45.",
+      "availability": "The full volume endpoint was inaccessible during this review; the index is a retrieval lead, not a reviewed circuit source."
+    }
+  ],
+  "transferable_evidence": [
+    "The PT-42/PT-44-labeled factory p.38 schematic may be used for PT-44 electrical tracing.",
+    "The PT-42/PT-44-labeled factory p.38 underside parts locator may be used for qualitative PT-44 component location.",
+    "The PT-42/PT-44-labeled factory alignment information may be used within its printed operating and measurement limits."
+  ],
+  "model_specific_limits": [
+    "The chassis identity statement does not establish that the cabinets, trim, external aerial hardware, exact replacement part numbers, or every speaker assembly detail are identical.",
+    "The sales folder establishes that the PT-42 and PT-44 both have a built-in loop aerial, but does not prove identical loop part numbers, winding parameters, terminals, or mounting details.",
+    "No RF net memberships, winding endpoint assignments, 7A8 socket-pin assignments, or physical game coordinates are added by this review."
+  ],
+  "engineering_consequence": {
+    "source_applicability": "PT42_SHARED_CHASSIS_CONFIRMED_FOR_FACTORY_SHARED_CIRCUIT_AND_LOCATOR",
+    "netlist_change": false,
+    "completion_gate_change": false,
+    "next_step": "Continue tracing the lower loop and #2 aerial-transformer winding, external antenna contact, #4 oscillator gang and #10 oscillator transformer. The v0.41 input trace resolves only the signal-side branch and explicit loop-mode grounds; promote further memberships only when directly source-backed."
+  }
+}

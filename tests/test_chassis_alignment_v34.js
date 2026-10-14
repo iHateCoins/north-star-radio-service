@@ -20,6 +20,10 @@ assert.equal(alignment.alignment_steps[2].adjust_in_order.join(','),'5');
 assert.equal(alignment.indicator_connections.vacuum_tube_voltmeter.avc_test_point_terminal_mapping,null);
 assert.equal(alignment.receiver_targets.alignment_supply_condition_specified,false);
 assert.equal(chassis.game_crosswalk.status,'NOT_ESTABLISHED');
+assert.equal(chassis.photo_evidence.images.length,2);
+assert.deepEqual(chassis.photo_evidence.observations.map(x=>x.factory_component),['3','4','27']);
+assert.equal(chassis.photo_evidence.evidence_level,'SUPPLEMENTAL_PHYSICAL_VISUAL_LOCATION_ONLY');
+assert(chassis.photo_evidence.not_established.includes('Exact component terminals, electrical connectivity, lead dress, dimensional chassis coordinates, individual oscillator/aerial coil identities, and exact game-object placement.'));
 assert.equal(chassis.acceptance.physical_geometry_certified,false);
 const badCallout=vm.runInContext(`(()=>{const v=PT44_CHASSIS_CROSSWALK_V1.position_callouts.pop();const bad=!pt44ChassisCrosswalkAudit().ok;PT44_CHASSIS_CROSSWALK_V1.position_callouts.push(v);return bad;})()`,ctx);
 assert(badCallout,'crosswalk audit must reject missing position callout');
@@ -27,5 +31,5 @@ const badAdjust=vm.runInContext(`(()=>{const a=PT44_ALIGNMENT_REFERENCE_V1.align
 assert(badAdjust,'alignment audit must reject changed factory adjustment sequence');
 const rendered=read('pt44ChassisAlignmentHTML(x=>x)');
 assert(rendered.includes('2D parts locator'));assert(rendered.includes('455 kHz'));assert(rendered.includes('does not establish that chassis and B-minus are the same node'));
-assert(html.includes('BUILD v0.40.0<small>'));
+assert(html.includes('BUILD v0.41.0<small>'));
 console.log('PASS v0.34: 33-part source-position crosswalk, 26 location callouts, three sourced alignment steps, limits and mutation checks');

@@ -36,7 +36,55 @@
     {"callout": "9", "component_ids": ["9"], "figure_zone": "lower edge"}
   ],
   "not_shown_in_underside_figure": ["3", "4", "5", "27", "28", "32"],
-  "not_shown_policy": "These parts remain in the 33-part factory register. The p.38 underside position figure does not provide a numbered location for them; no cabinet, speaker, or top-side location is inferred.",
+  "not_shown_policy": "These parts remain in the 33-part factory register. The p.38 underside position figure does not provide a numbered location for them; supplemental PT-44 photographs provide qualitative location evidence for #3, #4, and #27 only, without establishing wiring, lead dress, scale, or game coordinates.",
+  "photo_evidence": {
+    "review_date": "2026-10-14",
+    "source": "Two user-supplied photographs identified as Philco PT-44; image files are referenced by content hash and are not copied into this repository.",
+    "images": [
+      {
+        "filename": "image(20261014-164748).png",
+        "sha256": "350461a1bbc86b787247410aeaece10d1fed7f50ae1bad1f3691666286c82b44",
+        "dimensions_px": [
+          960,
+          720
+        ],
+        "view": "top-side chassis installed in cabinet"
+      },
+      {
+        "filename": "image(20261014-164818).png",
+        "sha256": "772e982d5337f7d2c4678532ebe4c021e340ec1f3359c7f3e8b36eac886f2467",
+        "dimensions_px": [
+          960,
+          720
+        ],
+        "view": "underside chassis with controls and wiring"
+      }
+    ],
+    "observations": [
+      {
+        "factory_component": "3",
+        "finding": "A multi-turn loop aerial is visible mounted on the inside rear of the cabinet, consistent with the factory built-in loop aerial.",
+        "confidence": "high_for_location",
+        "limitations": "The photograph has no part label or terminal detail."
+      },
+      {
+        "factory_component": "4",
+        "finding": "A two-section variable tuning capacitor is visible on the chassis top side and mechanically linked to the tuning control.",
+        "confidence": "high_for_location",
+        "limitations": "The photograph does not expose gang terminal identities or wiring."
+      },
+      {
+        "factory_component": "27",
+        "finding": "The speaker assembly is visible mounted inside the cabinet.",
+        "confidence": "high_for_location",
+        "limitations": "Speaker model and the separate #28 field-coil electrical parameters are not established by this view."
+      }
+    ],
+    "not_established": [
+      "Exact component terminals, electrical connectivity, lead dress, dimensional chassis coordinates, individual oscillator/aerial coil identities, and exact game-object placement."
+    ],
+    "evidence_level": "SUPPLEMENTAL_PHYSICAL_VISUAL_LOCATION_ONLY"
+  },
   "game_crosswalk": {
     "status": "NOT_ESTABLISHED",
     "note": "Existing game slots identify prototype components; the parts-location drawing does not provide a scale, coordinate frame, lead dress, or one-to-one 3D placement correspondence."

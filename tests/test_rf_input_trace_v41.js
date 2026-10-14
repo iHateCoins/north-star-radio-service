@@ -1,0 +1,13 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path'),vm=require('node:vm');
+const root=path.join(__dirname,'..'),read=n=>JSON.parse(fs.readFileSync(path.join(root,'engineering',n),'utf8')),html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const trace=read('PT44_RF_Input_Trace_V1.json'),graph=read('PT44_Factory_Transcription_V3.json'),audit=read('PT44_Schematic_Trace_Audit_V1.json'),scope=read('PT44_Scope_Audit_V1.json'),readiness=read('PT44_Engineering_Readiness_V1.json');
+const net=id=>graph.factory_nets.find(n=>n.id===id);
+const scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(x=>x[1]);assert.equal(scripts.length,4);
+assert.equal(trace.version,'0.41.0');assert.equal(trace.verified_endpoints.length,6);
+assert.deepEqual(net('F_RF_INPUT').factory_members,['V1:6','3:loop_a','4:rf_stator','5:a']);assert.deepEqual(net('F_RF_CHASSIS').factory_members,['4:rotor','5:b']);
+assert.equal(trace.source_level_closure.signal_input_to_loop_upper_endpoint,true);assert.equal(trace.source_level_closure.loop_opposite_end_and_aerial_transformer_winding_crosswalk,false);assert.equal(trace.source_level_closure.benchmark_ready,false);
+assert(audit.reviewed_net_memberships.some(x=>x.net_id==='F_RF_INPUT'&&x.milestone_version==='0.41.0'));assert(audit.reviewed_net_memberships.some(x=>x.net_id==='F_RF_CHASSIS'));
+assert.equal(scope.baseline.current_partial_graph_net_groups,25);assert.equal(scope.baseline.current_partial_graph_membership_entries,72);assert.equal(scope.subsystems.find(x=>x.id==='RF').terminals_referenced_in_partial_graph,5);
+assert.equal(readiness.evidence_snapshot.rf_net_groups_added,2);assert.equal(readiness.evidence_snapshot.rf_verified_endpoints_added,6);assert.equal(readiness.benchmark_ready,false);
+const ctx=vm.createContext({console});vm.runInContext(scripts[1],ctx);ctx.PT44_OUTPUT_IF_SUPPLY_TRACE_V1=read('PT44_Output_IF_Supply_Trace_V1.json');const a=scripts[3].indexOf('function pt44BenchAudit()'),b=scripts[3].indexOf('function renderFactoryLedger(box){');assert(a>=0&&b>a);vm.runInContext(scripts[3].slice(a,b),ctx);assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify(PT44_RF_INPUT_TRACE_V1)',ctx)),trace);const result=vm.runInContext('pt44RfInputTraceAudit()',ctx);assert.equal(result.ok,true,JSON.stringify(result.errors));const ledger=vm.runInContext('pt44SchematicTraceAudit()',ctx);assert.equal(ledger.ok,true,JSON.stringify(ledger.errors));assert.equal(ledger.rfGroupsAdded,2);
+console.log('PASS v0.41: RF signal-input branch and loop-mode chassis references source-traced; converter remains explicitly partial');

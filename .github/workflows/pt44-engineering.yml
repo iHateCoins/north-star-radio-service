@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: pt44-engineering-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   factory-model-audit:
     runs-on: ubuntu-latest
@@ -49,3 +53,7 @@ jobs:
 
       - name: Verify v0.40 first IF secondary return and #13 resistor trace
         run: node tests/test_if1_secondary_v40.js
+      - name: Verify v0.41 RF input branch and chassis references
+        run: node tests/test_rf_input_trace_v41.js
+      - name: Verify PT-42/PT-44 source equivalence scope
+        run: node tests/test_model_equivalence_v1.js

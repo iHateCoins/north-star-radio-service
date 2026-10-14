@@ -11,6 +11,7 @@ const outputTrace = read('engineering/PT44_Output_Cathode_Bypass_Trace_V1.json')
 const outputIfTrace = read('engineering/PT44_Output_IF_Supply_Trace_V1.json');
 const detectorAvcTrace = read('engineering/PT44_Detector_AVC_Trace_V1.json');
 const if1Trace = read('engineering/PT44_IF1_Secondary_Return_Trace_V1.json');
+const rfTrace = read('engineering/PT44_RF_Input_Trace_V1.json');
 const powerLineTrace = read('engineering/PT44_Power_Line_Trace_V1.json');
 const tubeReview = read('engineering/PT44_Tube_Terminals_Review_V1.json');
 const audit = read('engineering/PT44_Scope_Audit_V1.json');
@@ -38,10 +39,18 @@ assert.deepEqual(audit.power_line_source_trace.component_endpoints_addressed, po
 assert.deepEqual(audit.power_line_source_trace.tube_symbol_terminals_addressed, powerLineTrace.inventory_reconciliation.tube_symbol_terminals_traced);
 assert.equal(audit.subsystems.find(x => x.id === 'POWER').source_trace_artifact, 'engineering/PT44_Power_Line_Trace_V1.json');
 assert.equal(audit.benchmark_ready, false);
+assert.equal(audit.other_scope_evidence.model_equivalence.artifact, 'engineering/PT44_Model_Equivalence_Review_V1.json');
 assert.equal(audit.baseline.factory_component_records, Object.keys(graph.factory_components).length);
 assert.equal(audit.baseline.declared_factory_component_terminals, componentTerminals.length);
 assert.equal(audit.baseline.current_partial_graph_net_groups, graph.factory_nets.length);
 assert.equal(audit.baseline.current_partial_graph_membership_entries, members.length);
+assert.equal(readiness.evidence_snapshot.partial_traced_networks, audit.baseline.current_partial_graph_net_groups);
+assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph, audit.baseline.current_partial_graph_membership_entries);
+assert.equal(readiness.evidence_snapshot.source_reviewed_graph_groups, audit.source_review_reconciliation.schematic_audit_net_groups);
+assert.equal(readiness.evidence_snapshot.source_reviewed_terminal_memberships, audit.source_review_reconciliation.schematic_audit_membership_entries);
+assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph, 54);
+assert.equal(audit.baseline.component_terminal_reference_coverage_percent, 65.1);
+assert.equal(audit.baseline.tube_pin_memberships_in_partial_graph, 18);
 assert.equal(audit.baseline.unique_partial_graph_memberships, memberSet.size);
 assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph,
   [...memberSet].filter(member => componentTerminalSet.has(member)).length);
@@ -69,8 +78,8 @@ assert.deepEqual(audit.source_review_reconciliation.schematic_audit_memberships_
   traceAuditNotInGraph);
 assert.deepEqual(graphNotInTraceAudit, []);
 assert.deepEqual(audit.source_review_reconciliation.reconciliation_record.added_and_source_verified_memberships,
-  [...outputTrace.verified_endpoints, ...outputIfTrace.verified_endpoints, ...detectorAvcTrace.traced_component_endpoints, ...if1Trace.verified_endpoints].map(endpoint => endpoint.terminal).sort());
-assert.equal(audit.source_review_reconciliation.reconciliation_record.status, 'RESOLVED_IN_V0.40');
+  [...outputTrace.verified_endpoints, ...outputIfTrace.verified_endpoints, ...detectorAvcTrace.traced_component_endpoints, ...if1Trace.verified_endpoints, ...rfTrace.verified_endpoints].map(endpoint => endpoint.terminal).sort());
+assert.equal(audit.source_review_reconciliation.reconciliation_record.status, 'RESOLVED_IN_V0.41');
 assert.equal(powerLineTrace.inventory_reconciliation.source_level_closure, true);
 assert.equal(powerLineTrace.inventory_reconciliation.factory_pin_level_closure, false);
 assert.equal(powerLineTrace.benchmark_ready, false);
