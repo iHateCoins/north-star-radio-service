@@ -1,0 +1,96 @@
+{
+  "schema": "PT44_HEATER_STRING_NOMINAL_MODEL_V1",
+  "version": "0.35.0",
+  "model": "Philco PT-44",
+  "sources": [
+    {
+      "description": "Philco PT-44 supply and heater wiring, parts #30/#32, printed p.38; receiver nominal supply p.36.",
+      "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf"
+    },
+    {
+      "description": "35Z3/50L6GT heater ratings and terminal data.",
+      "url": "https://www.g8wrb.co.uk/data/RCA/RC-14-Receiving-Tube-Manual.pdf"
+    },
+    {
+      "description": "7A8, 7B7, and 7C6 heater references used in the existing tube review.",
+      "url": "https://www.worldradiohistory.com/BOOKSHELF-ARH/Technology/Technology-General/Sylvania-Technical-Manual-Tubes-1953-9th-Edition.pdf"
+    }
+  ],
+  "model_scope": "A nominal steady-state heater-load sanity fixture. It does not include the rectifier's plate current, tube warm-up, source impedance, mains waveform, or the pilot lamp's nonlinear I-V behavior. It is not the full PT-44 receiver model.",
+  "source_line_voltage_v": 115,
+  "heater_reference_current_a": 0.15,
+  "heaters": [
+    {
+      "tube": "35Z3",
+      "voltage_v": 35,
+      "current_a": 0.15,
+      "equivalent_hot_resistance_ohm": 233.33333333333334
+    },
+    {
+      "tube": "50L6GT",
+      "voltage_v": 50,
+      "current_a": 0.15,
+      "equivalent_hot_resistance_ohm": 333.3333333333333
+    },
+    {
+      "tube": "7A8",
+      "voltage_v": 6.3,
+      "current_a": 0.15,
+      "equivalent_hot_resistance_ohm": 42
+    },
+    {
+      "tube": "7B7",
+      "voltage_v": 6.3,
+      "current_a": 0.15,
+      "equivalent_hot_resistance_ohm": 42
+    },
+    {
+      "tube": "7C6",
+      "voltage_v": 6.3,
+      "current_a": 0.15,
+      "equivalent_hot_resistance_ohm": 42
+    }
+  ],
+  "derived_nominal_targets": {
+    "heater_sum_v": 103.9,
+    "line_minus_heater_sum_v": 11.1,
+    "equivalent_drop_at_reference_current_ohm": 74,
+    "heater_equivalent_resistance_ohm": 692.6666666666667,
+    "formula_note": "Each heater is represented by V/I at its nominal operating point; this is not its cold resistance or a tube I-V model."
+  },
+  "factory_dropper": {
+    "part": "#30",
+    "sections_ohm": [
+      40,
+      80
+    ],
+    "pilot_lamp_part": "#32",
+    "lamp_shunts_section_ohm": 40,
+    "lamp_iv_model": null,
+    "source_topology_status": "#32 shunt across the 40-ohm section is source-checked; complete mains/rectifier routing remains open."
+  },
+  "spice_scenarios": [
+    {
+      "id": "LAMP_OPEN_BOUND",
+      "effective_part_30_ohm": 120,
+      "current_a": 0.14150943396226415,
+      "heater_sum_v": 98.01886792452831,
+      "meaning": "Idealized open-lamp endpoint; not a measured lamp condition."
+    },
+    {
+      "id": "LAMP_IDEAL_SHORT_BOUND",
+      "effective_part_30_ohm": 80,
+      "current_a": 0.14883520276100085,
+      "heater_sum_v": 103.09318377911993,
+      "meaning": "Mathematical zero-ohm lamp endpoint; not a lamp model or a factory operating claim."
+    }
+  ],
+  "spice_artifact": "engineering/PT44_Heater_String_Nominal_Sanity_v35.cir",
+  "validation_status": {
+    "analytical_parity_required": true,
+    "spice_execution_required": true,
+    "full_receiver_behavior_validated": false,
+    "benchmark_ready": false,
+    "spice_execution_validated": false
+  }
+}

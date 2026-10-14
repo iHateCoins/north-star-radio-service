@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.33.0",
+  "version": "0.35.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -16,7 +16,9 @@
     "spice": {
       "source_generated_passive_instances": 6,
       "isolated_ngspice_testbench_validated": true,
-      "full_receiver_spice_validated": false
+      "full_receiver_spice_validated": false,
+      "nominal_heater_sanity_scenarios": 2,
+      "nominal_heater_sanity_spice_validated": false
     },
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
@@ -24,7 +26,14 @@
     "source_review_milestones": 5,
     "source_reviewed_graph_groups": 22,
     "source_reviewed_terminal_memberships": 54,
-    "rf_net_groups_added": 0
+    "rf_net_groups_added": 0,
+    "chassis_position_callouts": 26,
+    "chassis_position_components_located": 27,
+    "chassis_position_components_not_shown": 6,
+    "service_alignment_steps_transcribed": 3,
+    "heater_model_scenarios": 2,
+    "heater_nominal_sum_volts": 103.9,
+    "heater_string_sanity_spice_validated": false
   },
   "open_items": [
     {
@@ -88,13 +97,15 @@
       "id": "GATE-CHASSIS",
       "title": "Schematic-to-chassis crosswalk",
       "status": "NOT MET",
-      "acceptance": "Physical component locations and lead dress are cross-checked against adequate chassis evidence; electrical membership remains the authority."
+      "acceptance": "Physical component locations and lead dress are cross-checked against adequate chassis evidence; electrical membership remains the authority.",
+      "evidence_to_date": "The 1941 p.38 underside position figure now locates 27/33 factory component records by 26 numbered callouts. Six components are not shown; the drawing does not define exact 3D coordinates, lead dress, or wire routes."
     },
     {
       "id": "GATE-REFERENCE",
       "title": "Service measurements have defined test conditions",
       "status": "NOT MET",
-      "acceptance": "Return reference, instrument loading, operating state and tolerances are verified before factory voltages are used as pass/fail targets."
+      "acceptance": "Return reference, instrument loading, operating state and tolerances are verified before factory voltages are used as pass/fail targets.",
+      "evidence_to_date": "The 1941 p.36 alignment hookup, controls, frequencies, and adjustment order are transcribed. Meter loading, generator level, supply condition during alignment, and voltage tolerances remain unstated."
     },
     {
       "id": "GATE-MODEL",
@@ -116,5 +127,5 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "Five v0.29–v0.33 source-review milestones checked all 22 currently represented graph groups (54 listed memberships) against the Philco page-38 scan; v0.29 confirms #26:a. RF memberships and several endpoint/pin crosswalks remain open."
+  "latest_evidence_update": "v0.34 transcribes Philco p.36 alignment conditions and p.38 underside position callouts. v0.35 adds a two-bound nominal heater-string SPICE sanity fixture using hot-equivalent heater resistors and #30/lamp limiting cases. The electrical graph remains 22 partial nets/54 memberships; no unresolved RF, AVC, line, chassis, or full-receiver model edge is promoted."
 }
