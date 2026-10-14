@@ -16,12 +16,12 @@ for(const line of ['C15 N_IF2_SECONDARY_VOL_TOP N_DET_PASSIVE_RETURN 250p','C18 
  assert(deck.includes(line),line);
 }
 assert(deck.endsWith('.end\n')&&deck.includes('.ac dec 60 0.1 1000000')&&deck.includes('.print ac vm(N_7C6_AUDIO_GRID)'));
-assert.equal(spec.spice_engine_validated,false);assert.equal(spec.benchmark_ready,false);
+assert.equal(spec.passive_deck_ngspice_validated,true);assert.equal(spec.spice_engine_validated,false);assert.equal(spec.benchmark_ready,false);
 for(const [label,expr] of [
  ['wrong #15 capacitance','(()=>{const x=PT44_PASSIVE_STUDY_V1.elements[0],v=x.value_si;x.value_si=100e-12;const bad=!pt44SpiceExportAudit().ok;x.value_si=v;return bad;})()'],
  ['crossed factory grid wire','(()=>{const x=PT44_FACTORY_V3.factory_nets.find(n=>n.id==="F_7C6_AUDIO_GRID"),v=x.factory_members[0];x.factory_members[0]="V3:5";const bad=!pt44SpiceExportAudit().ok;x.factory_members[0]=v;return bad;})()'],
  ['untraced field-coil endpoint','(()=>{const x=PT44_FACTORY_V3.factory_nets.find(n=>n.id==="F_BPLUS_RECT"),i=x.factory_members.indexOf("28:a"),v=x.factory_members[i];x.factory_members[i]="28:b";const bad=!pt44SpiceExportAudit().ok;x.factory_members[i]=v;return bad;})()'],
  ['incorrect lamp shunt','(()=>{const x=PT44_PASSIVE_V1.devices["30"].lamp_shunt,v=x.parallel_to_section;x.parallel_to_section="R30_80";const bad=!pt44SpiceExportAudit().ok;x.parallel_to_section=v;return bad;})()']
 ])assert.equal(vm.runInContext(expr,ctx),true,label);
-assert(html.includes('BUILD v0.23.0<small>'));
-console.log('PASS v0.23: 6 factory-driven SPICE passives, isolated AC deck, 4 unsafe source mutation checks, watermark');
+assert(html.includes('BUILD v0.24.0<small>'));
+console.log('PASS v0.24: 6 factory-driven SPICE passives, isolated AC deck, 4 unsafe source mutation checks, watermark');
