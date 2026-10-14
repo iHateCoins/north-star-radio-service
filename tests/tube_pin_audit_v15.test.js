@@ -23,7 +23,7 @@ assert(Math.abs(result.heaterOperatingVolts - 103.9) < 1e-8);
 assert.equal(Object.values(report.tube_pinouts).reduce((sum,x)=>sum+Object.keys(x.pin_roles).length,0),40);
 assert.equal(vm.runInContext('PT44_FACTORY_V3.factory_nets.length',context),29);
 assert.equal(vm.runInContext('PT44_FACTORY_V3.checks.benchmark_ready',context),false);
-assert(report.review_tasks.filter(x=>!['RF-04','IF-03'].includes(x.id)).every(x=>x.factory_net_claim===false));assert(report.review_tasks.find(x=>x.id==='RF-04').source_artifact==='engineering/PT44_7A8_Screen_Trace_V1.json');assert(report.review_tasks.find(x=>x.id==='IF-03').source_artifact==='engineering/PT44_7A8_Screen_Trace_V1.json');
+assert(report.review_tasks.filter(x=>!['RF-04','IF-03','AUDIO-01'].includes(x.id)).every(x=>x.factory_net_claim===false));assert(report.review_tasks.find(x=>x.id==='RF-04').source_artifact==='engineering/PT44_7A8_Screen_Trace_V1.json');assert(report.review_tasks.find(x=>x.id==='IF-03').source_artifact==='engineering/PT44_7A8_Screen_Trace_V1.json');
 const rfInput=report.review_tasks.find(x=>x.id==='RF-01');
 assert.equal(rfInput.terminal,'V1:6');
 assert.equal(report.tube_pinouts.V1.pin_roles['3'],'oscillator anode grid g2');
@@ -41,4 +41,4 @@ const negative = vm.runInContext(`(()=>{
  const fakeVerified=!pt44TubePinAudit().ok;task.factory_net_claim=false;
  return JSON.stringify({badPin,fakeVerified});})()`,context);
 assert.deepEqual(JSON.parse(negative),{badPin:true,fakeVerified:true});
-console.log('PASS: 5 tubes, 40 pins, 20 unresolved tasks, 29 existing nets; invalid and prematurely certified connections rejected.');
+console.log('PASS: 5 tubes, 40 pins, 19 unresolved tasks, 29 existing nets; invalid and prematurely certified connections rejected.');

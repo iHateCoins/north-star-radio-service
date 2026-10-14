@@ -1,8 +1,8 @@
 {
   "schema": "PT44_OUTPUT_IF_SUPPLY_TRACE_V1",
-  "version": "0.38.0",
+  "version": "0.45.0",
   "model": "Philco PT-44",
-  "status": "SOURCE_TRACED_COMPONENT_ENDPOINTS_SYMBOL_CROSSWALKS_OPEN",
+  "status": "SOURCE_TRACED_50L6_SCREEN_PIN_CROSSWALK_WITH_PRIOR_GRID_IDENTITIES_CORRECTED",
   "source": {
     "document": "Philco 1941 RMS Year Book",
     "printed_page": 38,
@@ -70,6 +70,18 @@
         1420,
         600
       ]
+    },
+    {
+      "terminal": "V4:4",
+      "net_id": "F_BPLUS_FILT",
+      "joined_factory_member": "25:a",
+      "interpretation": "The 50L6 screen-grid glyph joins the filtered B+ rail and #25 bypass branch; RCA basing data identifies the screen grid as socket pin 4.",
+      "source_box_px": [
+        1270,
+        170,
+        1660,
+        700
+      ]
     }
   ],
   "verified_symbol_connections": [
@@ -77,39 +89,14 @@
       "id": "V4_SCREEN_TO_BPLUS_FILTERED",
       "symbol_terminal": "V4:SCREEN_GRID_GLYPH",
       "net_id": "F_BPLUS_FILT",
-      "basis": "The 50L6 screen-grid glyph lead joins the 95 V bus, which also feeds the #25 bypass capacitor. The factory drawing does not print socket-pin numbers.",
-      "socket_pin_number": null,
+      "basis": "The 50L6 screen-grid glyph joins the 95 V filtered bus shared with #25; RCA 50L6-GT manufacturer basing data maps the screen to socket pin 4.",
+      "socket_pin_number": 4,
+      "pin_terminal": "V4:4",
       "source_box_px": [
         1270,
         170,
         1660,
         700
-      ]
-    },
-    {
-      "id": "V1_SCREEN_TO_BPLUS_FILTERED",
-      "symbol_terminal": "V1:SCREEN_GRID_GLYPH",
-      "net_id": "F_BPLUS_FILT",
-      "basis": "The 7A8 screen-grid glyph is drawn on the 95 V bus. No numbered socket pin is assigned by this schematic trace.",
-      "socket_pin_number": null,
-      "source_box_px": [
-        400,
-        150,
-        950,
-        610
-      ]
-    },
-    {
-      "id": "V2_SCREEN_TO_BPLUS_FILTERED",
-      "symbol_terminal": "V2:SCREEN_GRID_GLYPH",
-      "net_id": "F_BPLUS_FILT",
-      "basis": "The 7B7 screen-grid glyph is drawn on the 95 V bus. No numbered socket pin is assigned by this schematic trace.",
-      "socket_pin_number": null,
-      "source_box_px": [
-        800,
-        150,
-        1390,
-        610
       ]
     }
   ],
@@ -117,14 +104,45 @@
     "output_screen_bypass_component_25": true,
     "if_primary_supply_ends": true,
     "tube_socket_pin_crosswalk": false,
-    "winding_parameters": false
+    "winding_parameters": false,
+    "v4_screen_socket_pin_crosswalk": true,
+    "v1_v2_screen_to_bplus_claims_retired": true,
+    "all_receiver_tube_pin_crosswalks_complete": false
   },
   "unresolved": [
-    "Numbered socket-pin crosswalk for V4/V1/V2 screen glyphs",
-    "IF transformer winding inductance, resistance, polarity and coupling",
-    "Remaining IF secondary and AVC connections",
-    "Output-transformer and speaker electrical characterization",
-    "Full receiver behavior correlation"
+    "7A8/7B7 shared 45 V lead upstream source and measurement conditions.",
+    "The 7A8 oscillator network, remaining 7A8 and 7B7 receiver pin connections, and IF transformer parameters.",
+    "Remaining detector, AVC, output-transformer and speaker connections and behavior.",
+    "Full-receiver SPICE correlation and chassis pin/lug crosswalks."
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "scope": "Retain #25 and IF-primary supply endpoints; verify the 50L6 screen pin connection and reconcile the earlier 7A8/7B7 screen-glyph identity claims against the 45 V pin crosswalk.",
+  "correction_record": {
+    "corrected_in": "0.45.0",
+    "retired_claims": [
+      "V1_SCREEN_TO_BPLUS_FILTERED",
+      "V2_SCREEN_TO_BPLUS_FILTERED"
+    ],
+    "reason": "The p.38 factory symbols show the 7A8 and 7B7 grid branches on the shared annotated 45 V conductor, not the 95 V filtered B+ bus. The earlier v0.38 glyph labels misidentified those electrodes as screens on B+; manufacturer pin data and the v0.44 source trace establish V1:5 and V2:3 on F_SCREEN_45V.",
+    "replacement_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json",
+    "replacement_net": "F_SCREEN_45V",
+    "scope_note": "This correction does not identify the upstream source or measurement conditions for the 45 V annotation."
+  },
+  "pin_identity_sources": {
+    "V4:4": {
+      "document": "RCA 50L6-GT manufacturer data sheet",
+      "url": "https://www.r-type.org/pdfs/50l6gt.pdf",
+      "scope": "Manufacturer basing data maps the screen grid to socket pin 4; it does not document Philco receiver wiring."
+    }
+  },
+  "verified_pin_connections": [
+    {
+      "terminal": "V4:4",
+      "net_id": "F_BPLUS_FILT",
+      "pin_role": "screen grid G2",
+      "pinout_source": "RCA 50L6-GT manufacturer data sheet",
+      "schematic_source": "Philco 1941 RMS p.38",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  ]
 }

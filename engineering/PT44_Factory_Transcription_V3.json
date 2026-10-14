@@ -651,7 +651,7 @@
       "title": "Filtered B+ / second filter",
       "stage": "Power",
       "model": "B2",
-      "description": "Speaker field winding output feeds second 20 µF electrolytic and the 7C6 plate-load resistor.",
+      "description": "Speaker field winding output feeds second 20 µF electrolytic, 7C6 plate-load resistor, IF primary supply ends and the 50L6 screen grid (V4:4).",
       "source": "Philco 1941 RMS, p.38 — #21, #28, #29B",
       "stage_status": "traced_limited",
       "evidence": {
@@ -666,7 +666,8 @@
         "21:a",
         "25:a",
         "12:pSupply",
-        "14:pSupply"
+        "14:pSupply",
+        "V4:4"
       ],
       "prototype_member_crosswalk": [
         "R1:b",
@@ -711,6 +712,16 @@
           "14:pSupply",
           "25:a"
         ],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
+      },
+      "v0_45_source_review": {
+        "milestone_version": "0.45.0",
+        "status": "SOURCE_CHECKED_50L6_SCREEN_PIN_CROSSWALK",
+        "reviewed_members": [
+          "V4:4"
+        ],
+        "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
       }
@@ -1847,12 +1858,12 @@
   "checks": {
     "factory_register_count": 33,
     "traced_network_count": 29,
-    "factory_terminals_on_traced_nets": 83,
+    "factory_terminals_on_traced_nets": 84,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.44.0"
+  "version": "0.45.0"
 }

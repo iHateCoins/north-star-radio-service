@@ -1,7 +1,9 @@
-# North Star Radio Service — v0.44.0 PT-44 engineering update
+# North Star Radio Service — v0.45.0 PT-44 engineering update
 
-v0.44 adds a source-backed 7A8/7B7 pin-level crosswalk for their shared schematic-annotated 45 V screen lead: 7A8 screen grids G3/G5 map to V1:5 and the 7B7 screen grid G2 maps to V2:3. The schematic conductor is now represented as one partial graph net. The upstream supply path and voltage measurement conditions remain unresolved.
+v0.45 completes the 50L6 screen-grid socket crosswalk: RCA basing data maps the screen electrode to V4:4, and Philco p.38 places that lead on filtered B+ alongside the #25 bypass branch. This closes the last wired 50L6 pin connection in the partial graph.
 
-The partial graph now contains 29 groups and 83 memberships, with 63 of 83 declared factory component terminals referenced (75.9% inventory coverage); 20 of 40 inventoried tube pins now appear in the partial graph. This is not an engineering-completion score. The #4 oscillator gang, #6–#10 oscillator wiring, remaining 7A8/7B7 pin connections, transformer parameters, receiver behavior, full SPICE validation, and physical pin/chassis crosswalks remain open. The PT-44 benchmark is not engineering complete.
+This release also corrects two v0.38 glyph assignments: the 7A8 and 7B7 screen connections are on the separate shared, schematic-annotated 45 V lead, represented by V1:5 and V2:3 in v0.44. The upstream source and operating measurement conditions for that lead remain open.
 
-Watermark: `BUILD v0.44.0`.
+The partial graph has 29 groups and 84 memberships. It references 63 of 83 declared component terminals (75.9% inventory coverage) and 21 of 40 inventoried tube pins. These are coverage measures, not an engineering-completion score. The PT-44 benchmark remains incomplete.
+
+Watermark: `BUILD v0.45.0`.
