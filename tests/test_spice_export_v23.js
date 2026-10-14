@@ -5,6 +5,8 @@ const scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(x=>x[
 const ctx=vm.createContext({console});vm.runInContext(scripts[1],ctx);
 const a=scripts[3].indexOf('function pt44BenchAudit()'),b=scripts[3].indexOf('function renderFactoryLedger(box){');assert(a>=0&&b>a);vm.runInContext(scripts[3].slice(a,b),ctx);
 const read=e=>JSON.parse(vm.runInContext('JSON.stringify('+e+')',ctx));
+const traceAt=scripts[3].indexOf('const PT44_DETECTOR_TRACE_V1 = Object.freeze('),traceStart=scripts[3].indexOf('(',traceAt)+1,traceEnd=scripts[3].indexOf(');',traceStart);const detectorTrace=JSON.parse(scripts[3].slice(traceStart,traceEnd));
+assert.equal(detectorTrace.verified_schematic_symbol_connections[0].socket_pin_number,null);assert.deepEqual(detectorTrace.verified_schematic_symbol_connections[0].source_terminals,['14:sDetector','17:a']);assert(detectorTrace.unresolved.some(x=>x.includes('pin (#5 or #6)')));
 assert.deepEqual(read('PT44_SPICE_EXPORT_V1'),spec);
 const report=read('pt44SpiceExportAudit()');assert(report.ok,JSON.stringify(report.issues));
 const deck=report.deck; assert.equal(deck,fs.readFileSync(path.join(root,'engineering/PT44_Factory_Generated_Spice_v23.cir'),'utf8'),'Checked-in SPICE draft differs from game-generated source deck'); const instances=deck.trim().split('\n').filter(x=>/^[CR]\d+\s|^R28_DCR\s|^R30_/.test(x));
@@ -23,5 +25,5 @@ for(const [label,expr] of [
  ['untraced field-coil endpoint','(()=>{const x=PT44_FACTORY_V3.factory_nets.find(n=>n.id==="F_BPLUS_RECT"),i=x.factory_members.indexOf("28:a"),v=x.factory_members[i];x.factory_members[i]="28:b";const bad=!pt44SpiceExportAudit().ok;x.factory_members[i]=v;return bad;})()'],
  ['incorrect lamp shunt','(()=>{const x=PT44_PASSIVE_V1.devices["30"].lamp_shunt,v=x.parallel_to_section;x.parallel_to_section="R30_80";const bad=!pt44SpiceExportAudit().ok;x.parallel_to_section=v;return bad;})()']
 ])assert.equal(vm.runInContext(expr,ctx),true,label);
-assert(html.includes('BUILD v0.24.0<small>'));
-console.log('PASS v0.24: 6 factory-driven SPICE passives, isolated AC deck, 4 unsafe source mutation checks, watermark');
+assert(html.includes('BUILD v0.25.0<small>'));
+console.log('PASS v0.25: 6 factory-driven SPICE passives, isolated AC deck, 4 unsafe source mutation checks, watermark');
