@@ -76,7 +76,7 @@
 .build-watermark small{display:block;margin-top:3px;font:400 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.02em;color:#d8cbc3;opacity:.92}
 @media(max-width:680px){.build-watermark{right:8px;bottom:8px;padding:7px 9px;font-size:10px}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.23.0</title><meta name="nsrs-build" content="v0.23.0">
+<title>North Star Radio Service — PT-44 v0.24.0</title><meta name="nsrs-build" content="v0.24.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -256,7 +256,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.23.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.24.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -2358,10 +2358,10 @@ function pt44FaultStudyHTML(stage,esc){
  <p class="sl-footnote">Fault assumptions (not factory measurements): a short is approximated by 0.01 Ω, leakage by 100 kΩ across #18, and #19 drift by 470 kΩ instead of the factory 4.7 MΩ. These are isolated network calculations; they do not yet drive the playable radio or indicate the actual sound/voltages of a damaged PT-44.</p>`;
 }
 
-const PT44_SPICE_EXPORT_V1 = Object.freeze({"schema":"PT44_SPICE_FROM_FACTORY_V1","version":"0.23.0","source":"Philco RMS 1941 p.38, original scan; PT44_FACTORY_V3 and PT44_PASSIVE_V1 authoritative partial device graph","detector_parts":["15","18","19"],"detector_ports":["F_IF2_SECONDARY_VOL_TOP","F_VOL_WIPER_C18","F_7C6_AUDIO_GRID","F_DET_PASSIVE_RETURN"],"field_coil_dcr_ohms":500,"tapped_section_values_ohms":[40,80],"isolation_and_unknowns":{"pilot_lamp_I_V":"unknown, excluded","IF_L_and_k":"unknown, excluded","7C6_diodes":"external nets unresolved; excluded","return_node":"independent testbench B minus, not chassis","SPICE_execution":"not tested by ngspice","potentiometer":"value and sweep unspecified; wiper driven by ideal 1 VAC"},"factory_wiring_complete":false,"spice_engine_validated":false,"unknown_tube_models_filled":false,"benchmark_ready":false});
-// v0.23: factory-graph -> SPICE-compatible passive subcircuit compiler.
+const PT44_SPICE_EXPORT_V1 = Object.freeze({"schema":"PT44_SPICE_FROM_FACTORY_V1","version":"0.24.0","source":"Philco RMS 1941 p.38, original scan; PT44_FACTORY_V3 and PT44_PASSIVE_V1 authoritative partial device graph","detector_parts":["15","18","19"],"detector_ports":["F_IF2_SECONDARY_VOL_TOP","F_VOL_WIPER_C18","F_7C6_AUDIO_GRID","F_DET_PASSIVE_RETURN"],"field_coil_dcr_ohms":500,"tapped_section_values_ohms":[40,80],"isolation_and_unknowns":{"pilot_lamp_I_V":"unknown, excluded","IF_L_and_k":"unknown, excluded","7C6_diodes":"external nets unresolved; excluded","return_node":"independent testbench B minus, not chassis","SPICE_execution":"isolated passive deck passed ngspice CI; full receiver not validated","passive_deck_ngspice_validated":true,"potentiometer":"value and sweep unspecified; wiper driven by ideal 1 VAC"},"factory_wiring_complete":false,"spice_engine_validated":false,"unknown_tube_models_filled":false,"benchmark_ready":false});
+// v0.24: factory-graph -> SPICE-compatible passive subcircuit compiler with CI execution gate.
 // This emits source-traced passive nodes only; no tube/diode/transformer reactance
-// is implied, and the deck has NOT been validated in an ngspice executable yet.
+// is implied; CI executes this isolated passive deck in ngspice, not a complete receiver.
 function pt44SpiceNode(net){
  if(!/^F_[A-Z0-9_]+$/.test(net))throw Error('Unapproved factory SPICE node: '+net);
  return 'N_'+net.substring(2);
