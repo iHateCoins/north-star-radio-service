@@ -18,7 +18,7 @@ for(const line of ['C15 N_IF2_SECONDARY_VOL_TOP N_DET_PASSIVE_RETURN 250p','C18 
  assert(deck.includes(line),line);
 }
 assert(deck.endsWith('.end\n')&&deck.includes('.ac dec 60 0.1 1000000')&&deck.includes('.print ac vm(N_7C6_AUDIO_GRID)'));
-assert.equal(spec.passive_deck_ngspice_validated,true);assert.equal(spec.spice_engine_validated,false);assert.equal(spec.benchmark_ready,false);
+assert.equal(spec.isolation_and_unknowns.passive_deck_ngspice_validated,true);assert.equal(spec.spice_engine_validated,false);assert.equal(spec.benchmark_ready,false);
 for(const [label,expr] of [
  ['wrong #15 capacitance','(()=>{const x=PT44_PASSIVE_STUDY_V1.elements[0],v=x.value_si;x.value_si=100e-12;const bad=!pt44SpiceExportAudit().ok;x.value_si=v;return bad;})()'],
  ['crossed factory grid wire','(()=>{const x=PT44_FACTORY_V3.factory_nets.find(n=>n.id==="F_7C6_AUDIO_GRID"),v=x.factory_members[0];x.factory_members[0]="V3:5";const bad=!pt44SpiceExportAudit().ok;x.factory_members[0]=v;return bad;})()'],
