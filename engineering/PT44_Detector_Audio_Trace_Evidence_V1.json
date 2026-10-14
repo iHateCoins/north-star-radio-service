@@ -136,7 +136,10 @@
           1400,
           810
         ]
-      }
+      },
+      "source_label": "Upper #14 secondary and upper #17 terminal",
+      "symbol_label": "Upper 7C6 diode glyph",
+      "pin_status": "Not numbered on source schematic"
     }
   ]
 }
