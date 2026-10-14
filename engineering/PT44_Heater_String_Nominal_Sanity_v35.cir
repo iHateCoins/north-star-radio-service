@@ -1,0 +1,39 @@
+* PT-44 nominal heater-string sensitivity fixture — v0.35.0
+* Source: Philco 1941 RMS p.36/p.38; tube heater ratings from RCA/Sylvania references.
+* This is NOT a full receiver deck. Tube heaters use V/I hot-equivalent resistors.
+* Rectifier plate load, warm-up, mains waveform and real #32 lamp I-V are omitted.
+* The two #30 cases are limiting comparisons: lamp open (120 ohms) and ideal
+* zero-volt lamp shunt across the 40-ohm section (80 ohms effective).
+* The ideal shunt is a mathematical boundary, not a physical lamp model.
+
+VOPEN NOSRC 0 DC 115
+R30_OPEN_40 NOSRC NOTAP 40
+R30_OPEN_80 NOTAP NOHEATER 80
+R35Z3_OPEN NOHEATER NO50 233.33333333333334
+R50L6_OPEN NO50 NO7A8 333.3333333333333
+R7A8_OPEN NO7A8 NO7B7 42
+R7B7_OPEN NO7B7 NO7C6 42
+R7C6_OPEN NO7C6 0 42
+
+VSHORT NBSRC 0 DC 115
+R30_SHORT_40 NBSRC NBTAP 40
+VLAMP_IDEAL_SHORT NBSRC NBTAP DC 0
+R30_SHORT_80 NBTAP NBHEATER 80
+R35Z3_SHORT NBHEATER NB50 233.33333333333334
+R50L6_SHORT NB50 NB7A8 333.3333333333333
+R7A8_SHORT NB7A8 NB7B7 42
+R7B7_SHORT NB7B7 NB7C6 42
+R7C6_SHORT NB7C6 0 42
+
+.control
+set noaskquit
+op
+echo OPEN_LAMP_BOUND
+print -i(VOPEN)
+print v(NOHEATER)
+echo IDEAL_SHORT_LAMP_BOUND
+print -i(VSHORT)
+print v(NBHEATER)
+quit
+.endc
+.end

@@ -1,0 +1,53 @@
+{
+  "schema": "PT44_CHASSIS_POSITION_CROSSWALK_V1",
+  "version": "0.34.0",
+  "model": "Philco PT-44",
+  "source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+  "source_pdf_sha256": "8a7e016b0814584a31f5c113dec7d1605712b3f163980584acd89c5b347f1a09",
+  "source_page": 38,
+  "figure": "PART LOCATIONS — UNDERSIDE OF CHASSIS PT-42, PT-44",
+  "scope": "Numbered component callouts in Philco's underside parts-location drawing. The diagram is a 2D parts locator, not a wiring, lead-dress, dimensional, or 3D placement drawing.",
+  "position_callouts": [
+    {"callout": "23", "component_ids": ["23"], "figure_zone": "upper edge"},
+    {"callout": "13", "component_ids": ["13"], "figure_zone": "upper edge"},
+    {"callout": "22", "component_ids": ["22"], "figure_zone": "upper edge"},
+    {"callout": "26", "component_ids": ["26"], "figure_zone": "upper edge"},
+    {"callout": "30", "component_ids": ["30"], "figure_zone": "upper edge"},
+    {"callout": "6", "component_ids": ["6"], "figure_zone": "upper edge"},
+    {"callout": "31", "component_ids": ["31"], "figure_zone": "upper edge"},
+    {"callout": "1", "component_ids": ["1"], "figure_zone": "upper edge"},
+    {"callout": "16", "component_ids": ["16"], "figure_zone": "upper edge"},
+    {"callout": "15", "component_ids": ["15"], "figure_zone": "upper edge"},
+    {"callout": "18", "component_ids": ["18"], "figure_zone": "upper edge"},
+    {"callout": "17", "component_ids": ["17"], "figure_zone": "upper edge"},
+    {"callout": "7", "component_ids": ["7"], "figure_zone": "upper edge"},
+    {"callout": "20", "component_ids": ["20"], "figure_zone": "left flank"},
+    {"callout": "24", "component_ids": ["24"], "figure_zone": "left flank"},
+    {"callout": "25", "component_ids": ["25"], "figure_zone": "left flank"},
+    {"callout": "19", "component_ids": ["19"], "figure_zone": "right flank"},
+    {"callout": "14", "component_ids": ["14"], "figure_zone": "right flank"},
+    {"callout": "21", "component_ids": ["21"], "figure_zone": "lower edge"},
+    {"callout": "10", "component_ids": ["10"], "figure_zone": "lower edge"},
+    {"callout": "8", "component_ids": ["8"], "figure_zone": "lower edge"},
+    {"callout": "12", "component_ids": ["12"], "figure_zone": "lower edge"},
+    {"callout": "2", "component_ids": ["2"], "figure_zone": "lower edge"},
+    {"callout": "29", "component_ids": ["29A", "29B"], "figure_zone": "lower edge", "note": "The drawing uses one #29 callout for both electrolytic sections."},
+    {"callout": "11", "component_ids": ["11"], "figure_zone": "lower edge"},
+    {"callout": "9", "component_ids": ["9"], "figure_zone": "lower edge"}
+  ],
+  "not_shown_in_underside_figure": ["3", "4", "5", "27", "28", "32"],
+  "not_shown_policy": "These parts remain in the 33-part factory register. The p.38 underside position figure does not provide a numbered location for them; no cabinet, speaker, or top-side location is inferred.",
+  "game_crosswalk": {
+    "status": "NOT_ESTABLISHED",
+    "note": "Existing game slots identify prototype components; the parts-location drawing does not provide a scale, coordinate frame, lead dress, or one-to-one 3D placement correspondence."
+  },
+  "acceptance": {
+    "factory_components_accounted_for": 33,
+    "numbered_position_callouts": 26,
+    "components_located_by_figure": 27,
+    "components_not_shown_in_figure": 6,
+    "physical_geometry_certified": false,
+    "wiring_certified": false,
+    "benchmark_ready": false
+  }
+}
