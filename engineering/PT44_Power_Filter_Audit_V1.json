@@ -1,0 +1,71 @@
+{
+  "schema": "PT44_POWER_FILTER_AUDIT_V1",
+  "version": "0.28.0",
+  "model": "Philco PT-44",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco 1941 manufacturer schematic",
+    "native_scan": {
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+    }
+  },
+  "scope": "Source review of the 35Z3 rectifier cathode, #28 500 Ω field coil, #29A/#29B 20 µF filter capacitors, #21 filtered B+ branch and the explicitly listed B− return terminals.",
+  "findings": [
+    {
+      "id": "PF-RECTIFIER-FIRST-FILTER",
+      "net_id": "F_BPLUS_RECT",
+      "label": "35Z3 cathode / first-filter feed",
+      "status": "VERIFIED_PARTIAL",
+      "verified_members": [
+        "V5:7",
+        "28:a",
+        "29A:a"
+      ],
+      "unreviewed_members": [
+        "26:a"
+      ],
+      "source_note": "The native schematic shows the 35Z3 cathode, #28 field-coil input and #29A positive terminal on the first-filter feed. #26:a remains outside this review."
+    },
+    {
+      "id": "PF-FIELD-SECOND-FILTER",
+      "net_id": "F_BPLUS_FILT",
+      "label": "Field-coil output / second filter",
+      "status": "VERIFIED",
+      "verified_members": [
+        "28:b",
+        "29B:a",
+        "21:a"
+      ],
+      "unreviewed_members": [],
+      "source_note": "The native schematic shows #28 field-coil output, #29B positive terminal and #21 terminal a on the same filtered B+ node."
+    },
+    {
+      "id": "PF-BMINUS-RETURN",
+      "net_id": "F_BMINUS",
+      "label": "Filter-capacitor B− return",
+      "status": "VERIFIED",
+      "verified_members": [
+        "29A:b",
+        "29B:b",
+        "23:b",
+        "24:b"
+      ],
+      "unreviewed_members": [],
+      "source_note": "The native schematic shows these filter-capacitor and resistor terminals on the shared B− return. This does not establish a bond to the metal chassis."
+    }
+  ],
+  "scope_exclusions": [
+    "#26:a output-transformer primary membership on F_BPLUS_RECT",
+    "AC line switch and both mains paths",
+    "35Z3 anode connection",
+    "heater string and heater return",
+    "#31 line capacitor",
+    "any bond between B− and metal chassis"
+  ],
+  "benchmark_ready": false
+}
