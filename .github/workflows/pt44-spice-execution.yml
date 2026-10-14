@@ -2,6 +2,7 @@ name: PT-44 SPICE execution
 
 on:
   push:
+    branches: [main]
     paths:
       - "index.html"
       - "README.md"
@@ -20,6 +21,10 @@ on:
       - "tests/test_output_bypass_v36.js"
       - ".github/workflows/pt44-spice-execution.yml"
   workflow_dispatch:
+
+concurrency:
+  group: pt44-spice-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

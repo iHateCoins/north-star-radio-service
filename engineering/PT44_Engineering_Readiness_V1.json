@@ -1,13 +1,13 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.40.0",
+  "version": "0.41.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
-    "partial_traced_networks": 23,
-    "terminal_memberships_on_partial_graph": 66,
+    "partial_traced_networks": 25,
+    "terminal_memberships_on_partial_graph": 72,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 5,
     "memberships_in_those_groups": 14,
@@ -24,10 +24,10 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 10,
-    "source_reviewed_graph_groups": 23,
-    "source_reviewed_terminal_memberships": 66,
-    "rf_net_groups_added": 0,
+    "source_review_milestones": 11,
+    "source_reviewed_graph_groups": 25,
+    "source_reviewed_terminal_memberships": 72,
+    "rf_net_groups_added": 2,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
     "chassis_position_components_not_shown": 6,
@@ -44,7 +44,11 @@
     "power_line_source_level_closed": true,
     "power_line_pin_level_closed": false,
     "output_if_supply_memberships_added": 4,
-    "output_screen_symbol_connections": 3
+    "output_screen_symbol_connections": 3,
+    "pt42_shared_chassis_source_confirmed": true,
+    "pt42_pt44_shared_factory_diagram_source": true,
+    "rf_verified_endpoints_added": 6,
+    "rf_input_tube_pin_connections_source_traced": 1
   },
   "open_items": [
     {
@@ -52,7 +56,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Review of the p.38 RF/converter region is recorded, but no new RF memberships were added. Source-to-functional-terminal mapping for the 7A8, aerial/loop/oscillator windings, tuning gangs and compensators remains open."
+      "gap": "The 7A8 signal input V1:6, upper #3 loop terminal, RF gang #4 input and #5 compensator branch, plus explicit loop-mode chassis grounds are traced. The lower loop/#2 transformer winding, external antenna, oscillator section, remaining 7A8 connections, and RF behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -87,7 +91,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The 22 graph groups and 60 graph memberships now have source-review records. v0.38 adds #25 endpoints and #12/#14 primary supply ends. RF/converter remains untranscribed; socket-pin, winding, chassis and remaining component connections remain open."
+      "gap": "All 25 represented graph groups and 72 terminal memberships reconcile to source-review records through v0.41. The RF input branch is partially traced; remaining converter/winding connections, receiver pin crosswalks, chassis relationships, and full receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -138,5 +142,15 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.40 traces both #12 secondary endpoints and both #13 resistor endpoints, building on the v0.39 #14 secondary/#17 AVC branch. RF/converter remains untraced; IF pin crosswalks and winding models remain open."
+  "latest_evidence_update": "v0.41 source-traces the 7A8 signal-input conductor to the upper #3 loop lead, RF tuning gang #4 and aerial compensator #5, and records the explicit loop-operation chassis grounds without joining them to B-minus. The lower loop/#2 transformer path, oscillator subsystem and remaining RF/converter model remain open.",
+  "model_equivalence_review": {
+    "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
+    "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",
+    "finding": "Philco historical model documentation says PT-44 and PT-42 have identical chassis; the factory p.38 schematic and chassis locator are labeled for both models.",
+    "engineering_effect": "Confirms applicability of the existing shared factory source. No net memberships or completion gates are added; exact parts, RF winding terminals, 7A8 pins, and physical coordinates remain source-gated.",
+    "additional_leads": [
+      "Philco Service Bulletin 437 / 365 is indexed for PT-42 and PT-44, but no scan is linked in the online index.",
+      "Rider Volume 12 index points to PT-42/PT-44 schematic, socket, trimmer, and chassis data at 12-45; full volume was inaccessible during this review."
+    ]
+  }
 }

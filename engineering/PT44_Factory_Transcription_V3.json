@@ -48,8 +48,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #3",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.41 trace identifies loop_a as the signal-side lead; loop_b and #2 winding mapping remain open."
     },
     "4": {
       "description": "Two-gang tuning capacitor",
@@ -63,8 +64,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #4",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.41 trace identifies the RF-gang signal-side terminal and chassis-grounded rotor in loop operation; oscillator gang crosswalk remains open."
     },
     "5": {
       "description": "Aerial compensator",
@@ -77,8 +79,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #5",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.41 trace identifies the signal-side terminal and chassis-grounded terminal; no polarity is implied."
     },
     "6": {
       "description": "Condenser and choke assembly",
@@ -1439,6 +1442,74 @@
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
       }
+    },
+    {
+      "id": "F_RF_INPUT",
+      "title": "7A8 signal input / loop and RF tuning branch",
+      "stage": "RF",
+      "model": null,
+      "description": "Partial factory conductor: 7A8 signal input, upper #3 loop terminal, RF gang #4, and #5 aerial compensator. The lower loop/#2 transformer route remains open.",
+      "source": "Philco 1941 RMS p.38 — PT-42/PT-44 RF input; native 300-dpi scan",
+      "stage_status": "source_traced_partial_rf_input",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.41 trace follows the input conductor and separately marks the symbol-to-socket pin crosswalk and component terminal aliases. RF subsystem remains incomplete.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "V1:6",
+        "3:loop_a",
+        "4:rf_stator",
+        "5:a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_41_source_review": {
+        "milestone_version": "0.41.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V1:6",
+          "3:loop_a",
+          "4:rf_stator",
+          "5:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      }
+    },
+    {
+      "id": "F_RF_CHASSIS",
+      "title": "RF input tuning grounds / chassis in loop mode",
+      "stage": "RF",
+      "model": null,
+      "description": "The grounded sides of RF gang #4 and aerial compensator #5 meet the explicit chassis ground reference noted for loop operation. This does not establish a B-minus bond.",
+      "source": "Philco 1941 RMS p.38 — note: ground to chassis for loop operation",
+      "stage_status": "source_traced_component_ground_endpoints",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.41 trace follows only the explicit RF input branch ground symbols; no general chassis-to-B-minus connection is inferred.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "4:rotor",
+        "5:b"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_41_source_review": {
+        "milestone_version": "0.41.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "4:rotor",
+          "5:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      }
     }
   ],
   "subcircuits": [
@@ -1458,7 +1529,7 @@
         "10",
         "11"
       ],
-      "status": "not_fully_transcribed",
+      "status": "partial_input_branch_traced",
       "unverified": "Source-reviewed; no terminal nets promoted pending 7A8/winding/tuning crosswalk."
     },
     {
@@ -1556,49 +1627,70 @@
       "id": "P1-RF",
       "severity": "blocker",
       "stage": "RF",
-      "description": "Review of the p.38 RF/converter region is recorded, but no new RF memberships were added. Source-to-functional-terminal mapping for the 7A8, aerial/loop/oscillator windings, tuning gangs and compensators remains open."
+      "description": "The v0.41 trace resolves the 7A8 signal-input branch through the upper #3 loop terminal, RF gang #4, and #5 aerial compensator, including explicit loop-mode chassis grounds. The lower loop/#2 aerial-transformer route, external antenna winding map, oscillator section, remaining 7A8 connections, and RF behavior remain open.",
+      "area": "RF / converter",
+      "status": "OPEN",
+      "gap": "The 7A8 signal input V1:6, upper #3 loop terminal, RF gang #4 input and #5 compensator branch, plus explicit loop-mode chassis grounds are traced. The lower loop/#2 transformer winding, external antenna, oscillator section, remaining 7A8 connections, and RF behavior remain open."
     },
     {
       "id": "P1-IF",
       "severity": "blocker",
       "stage": "IF",
-      "description": "The #12/#14 primary supply ends are source-traced to filtered B+. IF secondary returns, 7B7 screen/cathode crosswalks, trimmers, and AVC connections remain open."
+      "description": "The #12/#14 primary supply ends are source-traced to filtered B+. IF secondary returns, 7B7 screen/cathode crosswalks, trimmers, and AVC connections remain open.",
+      "area": "IF",
+      "status": "OPEN",
+      "gap": "Both #12 primary/secondary ends, both #14 primary/secondary ends, and #13 grid-return resistor are now source-traced. 7B7 screen/cathode pin wiring, transformer parameters/trimmers, AVC, and full IF behavior remain open."
     },
     {
       "id": "P1-DET",
       "severity": "blocker",
       "stage": "DETECTOR",
-      "description": "The four detector/audio conductor groups and upper diode glyph link are source-checked. The diode glyph pin mapping, #17 lower branch, 7C6 external cathode return, and full AVC routing remain open."
+      "description": "The four detector/audio conductor groups and upper diode glyph link are source-checked. The diode glyph pin mapping, #17 lower branch, 7C6 external cathode return, and full AVC routing remain open.",
+      "area": "Detector / AVC",
+      "status": "OPEN",
+      "gap": "The upper #14 secondary/#17 terminal/upper 7C6 diode glyph link and #17 return are source-traced. The diode glyph is not assigned to pin 5 or 6; external cathode routing, #16 switch contacts, remaining AVC topology, and behavior remain open."
     },
     {
       "id": "P1-OUTPUT",
       "severity": "blocker",
       "stage": "AUDIO",
-      "description": "Capacitors #22 and #25 are source-traced, including #25 from filtered B+ to B−. Output-transformer winding parameters, speaker/model correlation, and full output behavior remain open."
+      "description": "Capacitors #22 and #25 are source-traced, including #25 from filtered B+ to B−. Output-transformer winding parameters, speaker/model correlation, and full output behavior remain open.",
+      "area": "Audio output",
+      "status": "OPEN",
+      "gap": "Factory #25 is source-traced across filtered B+ and B−, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
       "severity": "blocker",
       "stage": "POWER",
-      "description": "The filter/return groups, four internal heater-chain links and #30 40 Ω/lamp shunt groups were source-checked. Trace both mains paths, #16 switch, 35Z3 anode, #31 line capacitor and the complete heater endpoints before claiming a complete AC network."
+      "description": "The filter/return groups, four internal heater-chain links and #30 40 Ω/lamp shunt groups were source-checked. Trace both mains paths, #16 switch, 35Z3 anode, #31 line capacitor and the complete heater endpoints before claiming a complete AC network.",
+      "area": "Power / line",
+      "status": "OPEN",
+      "gap": "The complete AC/line topology is now source-traced at schematic-symbol level: plug conductors, #16 switch, #31 across the plug, #30 40/80-ohm branches, #32 shunt, 35Z3 plate feed, B-minus return, and all five series heaters. Numbered tube-socket heater crosswalk, physical switch-lug crosswalk, and chassis isolation/bond evidence remain open."
     },
     {
       "id": "P1-SOURCE",
       "severity": "blocker",
       "stage": "ALL",
-      "description": "The 22 current graph groups and 60 listed terminal memberships have source-review records. RF/converter remains untranscribed; socket-pin, winding, chassis, and remaining component connections remain open."
+      "description": "All 25 represented graph groups and 72 terminal memberships reconcile to source-review records through v0.41. The RF input branch is partially traced; remaining converter/winding connections, receiver pin crosswalks, chassis relationships, and full receiver behavior remain open.",
+      "area": "Source cross-check",
+      "status": "OPEN",
+      "gap": "All 25 represented graph groups and 72 terminal memberships reconcile to source-review records through v0.41. The RF input branch is partially traced; remaining converter/winding connections, receiver pin crosswalks, chassis relationships, and full receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
       "severity": "later",
       "stage": "ALL",
-      "description": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
+      "description": "Replace reduced-order model with validated tube, transformer and passive SPICE models.",
+      "area": "Full receiver simulation",
+      "status": "NOT STARTED",
+      "gap": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
     }
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 23,
-    "factory_terminals_on_traced_nets": 66,
+    "traced_network_count": 25,
+    "factory_terminals_on_traced_nets": 72,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,

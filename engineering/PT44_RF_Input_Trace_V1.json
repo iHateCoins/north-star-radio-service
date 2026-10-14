@@ -1,0 +1,118 @@
+{
+  "schema": "PT44_RF_INPUT_TRACE_V1",
+  "version": "0.41.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_RF_INPUT_BRANCH_COMPONENT_ENDPOINTS_PARTIAL",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "authority": "Philco factory schematic",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan": {
+      "filename": "native300-3.png",
+      "dpi": 300,
+      "width_px": 2022,
+      "height_px": 2587,
+      "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    }
+  },
+  "terminal_conventions": {
+    "loop_3": "loop_a is the upper end of the drawn loop connected to the 7A8 signal-input conductor; loop_b is the opposite/lower lead and remains unassigned pending the #2 winding crosswalk. No winding polarity is implied.",
+    "tuning_capacitor_4": "rf_stator is the RF-gang terminal drawn on the signal-input conductor; rotor is the grounded terminal for loop operation. osc_stator remains unassigned in this trace.",
+    "aerial_compensator_5": "a is the upper terminal on the signal-input conductor and b is the grounded terminal; no polarity is implied.",
+    "tube_v1": "The factory symbol signal-input grid is mapped to socket terminal V1:6 using the reviewed 7A8 pin-role reference; the adjacent symbol-level source path is followed without inferring the other 7A8 electrode wires."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "V1:6",
+      "net_id": "F_RF_INPUT",
+      "joined_factory_member": "3:loop_a",
+      "interpretation": "The 7A8 signal-input grid G4 lead joins the upper built-in-loop terminal and RF tuning input node.",
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ]
+    },
+    {
+      "terminal": "3:loop_a",
+      "net_id": "F_RF_INPUT",
+      "joined_factory_member": "V1:6",
+      "interpretation": "Upper built-in-loop terminal joins the 7A8 signal-input grid and RF tuning input node.",
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ]
+    },
+    {
+      "terminal": "4:rf_stator",
+      "net_id": "F_RF_INPUT",
+      "joined_factory_member": "V1:6",
+      "interpretation": "RF gang upper terminal is drawn on the common signal-input conductor.",
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ]
+    },
+    {
+      "terminal": "5:a",
+      "net_id": "F_RF_INPUT",
+      "joined_factory_member": "V1:6",
+      "interpretation": "Upper aerial-compensator terminal joins the same RF input conductor.",
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ]
+    },
+    {
+      "terminal": "4:rotor",
+      "net_id": "F_RF_CHASSIS",
+      "joined_factory_member": "5:b",
+      "interpretation": "The RF gang grounded terminal is tied to the explicit chassis ground symbol for loop operation.",
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ]
+    },
+    {
+      "terminal": "5:b",
+      "net_id": "F_RF_CHASSIS",
+      "joined_factory_member": "4:rotor",
+      "interpretation": "The opposite aerial-compensator terminal is tied to the explicit chassis ground symbol for loop operation.",
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ]
+    }
+  ],
+  "source_level_closure": {
+    "signal_input_to_loop_upper_endpoint": true,
+    "rf_gang_and_aerial_compensator_input_branch": true,
+    "ground_symbols_identified_as_chassis_for_loop_operation": true,
+    "loop_opposite_end_and_aerial_transformer_winding_crosswalk": false,
+    "7a8_remaining_electrode_wiring": false,
+    "rf_and_oscillator_complete": false,
+    "benchmark_ready": false
+  },
+  "unresolved": [
+    "Built-in loop lower terminal to #2 aerial-transformer winding terminal mapping and its complete return route.",
+    "#2 primary/secondary terminals, winding turns and relationship to external ANT eyelet.",
+    "#4 oscillator gang wiring, rotor construction/physical lug crosswalk, and remaining #5 adjustment data.",
+    "7A8 plate/screen/cathode and #6/#7/#8/#9 receiver connection crosswalks.",
+    "Antenna/chassis and B-minus relationship outside the explicit loop-operation ground symbols.",
+    "RF transfer behavior and complete receiver validation."
+  ],
+  "benchmark_ready": false
+}
