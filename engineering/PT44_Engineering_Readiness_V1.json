@@ -1,0 +1,112 @@
+{
+  "schema": "PT44_ENGINEERING_READINESS_V1",
+  "version": "0.27.0",
+  "model": "Philco PT-44",
+  "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
+  "status": "NOT_ENGINEERING_COMPLETE",
+  "evidence_snapshot": {
+    "factory_component_records": 33,
+    "partial_traced_networks": 22,
+    "terminal_memberships_on_partial_graph": 54,
+    "native_schematic_scan_dpi": 300,
+    "newly_audited_detector_audio_conductor_groups": 4,
+    "memberships_in_those_groups": 11,
+    "detector_symbol_level_traces": 1,
+    "detector_symbol_traces_assigned_to_socket_pin": 0,
+    "spice": {
+      "source_generated_passive_instances": 6,
+      "isolated_ngspice_testbench_validated": true,
+      "full_receiver_spice_validated": false
+    }
+  },
+  "open_items": [
+    {
+      "id": "P1-RF",
+      "area": "RF / converter",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "Trace the aerial, tuning capacitor, oscillator and 7A8 connections from the factory schematic; do not infer winding returns from proximity."
+    },
+    {
+      "id": "P1-IF",
+      "area": "IF",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "Trace both #12/#14 transformer windings, trimmers, 7B7 screen and AVC connections."
+    },
+    {
+      "id": "P1-DET",
+      "area": "Detector / AVC",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "The four passive audio groups are traced, but the diode pin assignment, #17 lower branch, tube returns and full AVC network remain open."
+    },
+    {
+      "id": "P1-OUTPUT",
+      "area": "Audio output",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "Verify #22/#25 routing, output transformer primary and secondary, speaker voice coil and return paths."
+    },
+    {
+      "id": "P1-AC",
+      "area": "Power / line",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "Trace the volume switch, both mains paths, 35Z3 anode, heater return and #31 line capacitor."
+    },
+    {
+      "id": "P1-SOURCE",
+      "area": "Source cross-check",
+      "severity": "blocker",
+      "status": "OPEN",
+      "gap": "Only the four detector/audio conductor groups received the native 300-dpi review. Independently verify remaining factory net memberships, ambiguous taps and pin wiring."
+    },
+    {
+      "id": "P2-SPICE",
+      "area": "Full receiver simulation",
+      "severity": "later",
+      "status": "NOT STARTED",
+      "gap": "The validated ngspice run covers an isolated passive deck only; tube, transformer and complete receiver behavior are not modeled or validated."
+    }
+  ],
+  "completion_gates": [
+    {
+      "id": "GATE-NETLIST",
+      "title": "Complete source-traced, pin-level PT-44 netlist",
+      "status": "NOT MET",
+      "acceptance": "Every factory component, external tube terminal, winding end, switch contact and return has a source-backed connection or an explicit manufacturer option."
+    },
+    {
+      "id": "GATE-CHASSIS",
+      "title": "Schematic-to-chassis crosswalk",
+      "status": "NOT MET",
+      "acceptance": "Physical component locations and lead dress are cross-checked against adequate chassis evidence; electrical membership remains the authority."
+    },
+    {
+      "id": "GATE-REFERENCE",
+      "title": "Service measurements have defined test conditions",
+      "status": "NOT MET",
+      "acceptance": "Return reference, instrument loading, operating state and tolerances are verified before factory voltages are used as pass/fail targets."
+    },
+    {
+      "id": "GATE-MODEL",
+      "title": "Full receiver behavior correlates to source data",
+      "status": "NOT MET",
+      "acceptance": "Power, heater, RF, IF, detector, AVC and audio operating behavior is validated against service references and independent calculations."
+    },
+    {
+      "id": "GATE-SPICE",
+      "title": "Full SPICE model is validated",
+      "status": "NOT MET",
+      "acceptance": "Sourced tube and transformer models, passive values and operating states reproduce documented circuit behavior; the isolated RC deck alone does not satisfy this gate."
+    },
+    {
+      "id": "GATE-REPAIRS",
+      "title": "Repair and fault regressions remain stable",
+      "status": "NOT MET",
+      "acceptance": "Known fault cases remain diagnosable and repairable through the shop workflow after the engineering model is connected to gameplay."
+    }
+  ],
+  "benchmark_ready": false
+}
