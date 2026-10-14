@@ -1,0 +1,37 @@
+name: PT-44 SPICE execution
+
+on:
+  push:
+    paths:
+      - "index.html"
+      - "engineering/**"
+      - "tests/test_spice_export_v23.js"
+      - ".github/workflows/pt44-spice-execution.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "engineering/**"
+      - "tests/test_spice_export_v23.js"
+      - ".github/workflows/pt44-spice-execution.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ngspice:
+    name: Execute source-generated passive deck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check generated-deck parity
+        run: node tests/test_spice_export_v23.js
+      - name: Install ngspice
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ngspice
+      - name: Run SPICE AC analysis
+        run: ngspice --batch engineering/PT44_Factory_Generated_Spice_v23.cir
