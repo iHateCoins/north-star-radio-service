@@ -108,12 +108,35 @@
     }
   ],
   "unresolved": [
-    "Which 7C6 detector diode plate(s) connect to the upper end of #14 second IF secondary",
-    "Routing from #17 detector/AVC resistor and remaining detector loading back to antenna/IF bias",
+    "Which numbered 7C6 diode plate pin (#5 or #6) corresponds to the unnumbered upper diode symbol in the factory schematic",
+    "Routing from #17 lower terminal and remaining AVC loading back to antenna / IF bias",
     "Specific metal-chassis-to-B-minus connection and any line-bypass wiring",
     "Potentiometer #16 full resistance, taper, and any factory production options"
   ],
   "model_parity": "These are manufacturer-wiring graph memberships only. No 3D route or reduced-order solver equivalence is asserted.",
   "spice_limit": "SPICE draft can include #15/#18/#19 passive devices but does not infer a valid detector or automatic volume control behavior.",
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "verified_schematic_symbol_connections": [
+    {
+      "connection_id": "PT44_IF2_TO_7C6_UPPER_DIODE_GLYPH",
+      "source_terminals": [
+        "14:sDetector",
+        "17:a"
+      ],
+      "schematic_symbol_terminal": "V3:UPPER_DIODE_PLATE_SYMBOL",
+      "socket_pin_number": null,
+      "basis": "Philco 1941 RMS p.38: the upper end of the second IF secondary, upper end of #17, and the upper diode plate glyph share the drawn conductor. The factory symbol does not label the 7C6 socket pin.",
+      "source_box": {
+        "native_width_px": 2022,
+        "native_height_px": 2587,
+        "dpi": 300,
+        "bbox_left_top_right_bottom_px": [
+          750,
+          265,
+          1400,
+          810
+        ]
+      }
+    }
+  ]
 }
