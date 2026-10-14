@@ -7,4 +7,5 @@ C22 K_CATH 0 250p
 .ac lin 2 1000 455000
 .measure ac I_1K FIND mag(i(VTEST)) AT=1000
 .measure ac I_455K FIND mag(i(VTEST)) AT=455000
+.print ac mag(i(VTEST))
 .end
