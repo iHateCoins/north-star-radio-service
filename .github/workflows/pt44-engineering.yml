@@ -61,5 +61,9 @@ jobs:
         run: node tests/test_oscillator_return_trace_v43.js
       - name: Verify v0.44 7A8/7B7 screen pin crosswalk and open supply path
         run: node tests/test_7a8_screen_trace_v44.js
+      - name: Verify v0.45 50L6 screen pin crosswalk and corrected tube supplies
+        run: node tests/test_output_if_supply_v45.js
+      - name: Verify tube pin review statuses and membership boundaries
+        run: node tests/tube_pin_audit_v15.test.js
       - name: Verify PT-42/PT-44 source equivalence scope
         run: node tests/test_model_equivalence_v1.js

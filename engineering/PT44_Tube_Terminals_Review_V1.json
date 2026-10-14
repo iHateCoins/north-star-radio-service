@@ -1,6 +1,6 @@
 {
   "schema": "PT44_TUBE_TERMINALS_V1",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "status": "COMPONENT_PIN_IDENTITIES_VERIFIED_RECEIVER_CONNECTIONS_PENDING",
   "factory_reference": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "factory_reference_page": 38,
@@ -109,7 +109,7 @@
       "id": "RF-03",
       "stage": "RF",
       "terminal": "V1:7",
-      "task": "Trace the 7A8 cathode and suppressor grid G6 return (do not assume chassis = B\u2212).",
+      "task": "Trace the 7A8 cathode and suppressor grid G6 return (do not assume chassis = B−).",
       "status": "source_trace_required",
       "factory_net_claim": false
     },
@@ -237,7 +237,7 @@
       "id": "DET-06",
       "stage": "DETECTOR",
       "terminal": "15:a",
-      "task": "Resolve detector filtering #15\u2013#19 and AVC junction topology.",
+      "task": "Resolve detector filtering #15–#19 and AVC junction topology.",
       "status": "source_trace_required",
       "factory_net_claim": false
     },
@@ -245,9 +245,13 @@
       "id": "AUDIO-01",
       "stage": "AUDIO",
       "terminal": "V4:4",
-      "task": "Trace 50L6 screen-grid B+ connection and bypass capacitor.",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "task": "Trace the 50L6 screen-grid glyph to the filtered B+ rail and establish its socket pin from manufacturer basing data.",
+      "status": "source_traced_pin_crosswalk_complete",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "review_result": "Philco p.38 connects the screen glyph to filtered B+; RCA 50L6-GT basing data identifies that electrode as socket pin 4.",
+      "pinout_reference": "https://www.r-type.org/pdfs/50l6gt.pdf",
+      "pinout_basis": "RCA manufacturer basing data maps the screen grid to socket pin 4; Philco p.38 establishes the receiver connection."
     },
     {
       "id": "AUDIO-02",
@@ -269,7 +273,7 @@
       "id": "POWER-02",
       "stage": "POWER",
       "terminal": "30:endA",
-      "task": "Resolve #30 separate 40 \u03a9/80 \u03a9 sections and exact pilot lamp bypass.",
+      "task": "Resolve #30 separate 40 Ω/80 Ω sections and exact pilot lamp bypass.",
       "status": "source_trace_required",
       "factory_net_claim": false
     }
@@ -345,5 +349,5 @@
     ]
   },
   "required_factory_net_status": "PINOUT VALIDATION DOES NOT CERTIFY FACTORY WIRING. Proposed terminal trace tasks are not electrical edges and do not enter SPICE.",
-  "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity. v0.44 closes only the source-backed shared screen conductor and the V1:5/V2:3 pin crosswalk; it does not trace the 45 V supply origin."
+  "source_note": "Tube references document electrode identity; Philco 1941 schematic remains the authority for receiver-specific connectivity. v0.45 completes the wired 50L6 screen pin crosswalk (V4:4) and corrects the older 7A8/7B7 screen-to-B+ glyph claims; the shared 45 V feed source remains open."
 }

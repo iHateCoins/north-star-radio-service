@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.44.0",
+  "version": "0.45.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -16,7 +16,7 @@
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
-    "version": "0.43.0"
+    "version": "0.45.0"
   },
   "milestones": [
     {
@@ -164,6 +164,16 @@
       "status": "SOURCE_TRACED_SHARED_45V_SCREEN_LEAD_PIN_CROSSWALK",
       "artifact": "engineering/PT44_7A8_Screen_Trace_V1.json",
       "summary": "Traced the shared screen lead between V1:5 (7A8 G3/G5) and V2:3 (7B7 G2). Upstream supply and measurement conditions remain open."
+    },
+    {
+      "version": "0.45.0",
+      "title": "50L6 screen pin crosswalk and tube-supply correction",
+      "status": "SOURCE_TRACED_50L6_SCREEN_PIN_AND_RETIRED_FALSE_7A8_7B7_BPLUS_CLAIMS",
+      "net_ids": [
+        "F_BPLUS_FILT",
+        "F_SCREEN_45V"
+      ],
+      "summary": "Mapped the 50L6 screen glyph to pin 4 on filtered B+, closing the last wired 50L6 socket pin. Cross-checked v0.38: 7A8/7B7 screens belong to the separate shared 45 V lead, so the earlier screen-to-B+ glyph claims are retired; the upstream 45 V feed remains open."
     }
   ],
   "reviewed_net_memberships": [
@@ -872,7 +882,19 @@
       "source_artifact_version": "0.43.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "basis": "Philco p.38 native scan: lower terminals of #9 22 kΩ and #11 0.05 µF meet the horizontal B− return rail."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.45.0",
+      "reviewed_members": [
+        "V4:4"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.45.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 shows the 50L6 screen glyph on filtered B+ shared with #25; RCA 50L6-GT data maps the screen to socket pin 4."
     }
   ],
-  "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json"
+  "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
+  "milestone_record_note": "All current partial-graph memberships reconcile to source-review rows through v0.45. The v0.45 review closes V4:4 on filtered B+ and corrects the earlier v0.38 V1/V2 screen-glyph assignments; the actual V1:5/V2:3 connection remains the annotated 45 V conductor, with source and measurement conditions open."
 }

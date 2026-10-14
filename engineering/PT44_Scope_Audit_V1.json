@@ -1,8 +1,8 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.44.0",
-  "factory_transcription_artifact_version": "0.44.0",
+  "snapshot_build_version": "0.45.0",
+  "factory_transcription_artifact_version": "0.45.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "purpose": "Establish a denominator-based scope baseline for engineering-complete PT-44; terminal references in this audit are coverage counts only and do not assert circuit completeness, electrical behavior, or chassis routing.",
@@ -16,12 +16,12 @@
     "factory_component_records": 33,
     "declared_factory_component_terminals": 83,
     "current_partial_graph_net_groups": 29,
-    "current_partial_graph_membership_entries": 83,
-    "unique_partial_graph_memberships": 83,
+    "current_partial_graph_membership_entries": 84,
+    "unique_partial_graph_memberships": 84,
     "component_terminal_memberships_in_partial_graph": 63,
     "declared_component_terminals_not_in_partial_graph": 20,
     "component_terminal_reference_coverage_percent": 75.9,
-    "tube_pin_memberships_in_partial_graph": 20,
+    "tube_pin_memberships_in_partial_graph": 21,
     "unique_tube_pin_terminals_referenced": [
       "V1:1",
       "V1:2",
@@ -38,6 +38,7 @@
       "V3:3",
       "V4:2",
       "V4:3",
+      "V4:4",
       "V4:5",
       "V4:7",
       "V4:8",
@@ -63,7 +64,6 @@
       "V3:7",
       "V3:8",
       "V4:1",
-      "V4:4",
       "V4:6",
       "V5:1",
       "V5:2",
@@ -73,13 +73,13 @@
       "V5:6"
     ],
     "tube_receiver_connection_review_tasks": 22,
-    "tube_receiver_connection_review_tasks_open": 20,
+    "tube_receiver_connection_review_tasks_open": 19,
     "tube_pinout_scope_note": "Electrode identities/base pin roles are inventoried for all five tubes. This is not a receiver-specific connection map; all review tasks remain source-trace tasks."
   },
   "source_review_reconciliation": {
     "schematic_audit_net_groups": 29,
-    "schematic_audit_membership_entries": 83,
-    "unique_schematic_audit_memberships": 83,
+    "schematic_audit_membership_entries": 84,
+    "unique_schematic_audit_memberships": 84,
     "current_graph_memberships_missing_from_schematic_audit": [],
     "schematic_audit_memberships_absent_from_current_graph": [],
     "reconciliation_record": {
@@ -113,10 +113,11 @@
         "9:b",
         "V1:5",
         "V1:6",
-        "V2:3"
+        "V2:3",
+        "V4:4"
       ],
       "initial_count_difference": 2,
-      "status": "RESOLVED_IN_V0.44",
+      "status": "RESOLVED_IN_V0.45",
       "evidence_artifacts": [
         "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
         "engineering/PT44_Output_IF_Supply_Trace_V1.json",
@@ -128,7 +129,7 @@
         "engineering/PT44_7A8_Screen_Trace_V1.json"
       ]
     },
-    "milestone_record_note": "All 83 current graph memberships reconcile to source-review rows through v0.44. The shared 45 V screen lead is source-traced between V1:5 and V2:3; its supply path and the remaining oscillator network remain open."
+    "milestone_record_note": "All 84 current graph memberships reconcile to source-review rows through v0.45; V4:4 closes the 50L6 screen pin on filtered B+. The shared V1:5/V2:3 45 V lead still lacks upstream source and test conditions."
   },
   "subsystems": [
     {
@@ -193,7 +194,7 @@
         "F_BMINUS",
         "F_SCREEN_45V"
       ],
-      "transcription_note": "Signal input, loop/aerial interface, loop-mode chassis reference, oscillator lower B\u2212 endpoints, and shared 45 V screen lead are traced. Oscillator node closure, remaining converter pins, 45 V source path, winding parameters and receiver behavior remain open.",
+      "transcription_note": "Signal input, loop/aerial interface, loop-mode chassis reference, oscillator lower B− endpoints, and shared 45 V screen lead are traced. Oscillator node closure, remaining converter pins, 45 V source path, winding parameters and receiver behavior remain open.",
       "source_trace_artifacts": [
         "engineering/PT44_RF_Input_Trace_V1.json",
         "engineering/PT44_Aerial_Transformer_Trace_V1.json",
@@ -376,7 +377,7 @@
   "component_inventory": [
     {
       "factory_part": "1",
-      "description": "0.0015 \u00b5F / 200 V capacitor",
+      "description": "0.0015 µF / 200 V capacitor",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -527,7 +528,7 @@
     },
     {
       "factory_part": "7",
-      "description": "4.7 M\u03a9 resistor",
+      "description": "4.7 MΩ resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -549,7 +550,7 @@
     },
     {
       "factory_part": "8",
-      "description": "0.1 \u00b5F / 200 V capacitor",
+      "description": "0.1 µF / 200 V capacitor",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -571,7 +572,7 @@
     },
     {
       "factory_part": "9",
-      "description": "22 k\u03a9 resistor",
+      "description": "22 kΩ resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -623,7 +624,7 @@
     },
     {
       "factory_part": "11",
-      "description": "0.05 \u00b5F capacitor",
+      "description": "0.05 µF capacitor",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -677,7 +678,7 @@
     },
     {
       "factory_part": "13",
-      "description": "27 k\u03a9 resistor",
+      "description": "27 kΩ resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -786,7 +787,7 @@
     },
     {
       "factory_part": "17",
-      "description": "4.7 M\u03a9 resistor",
+      "description": "4.7 MΩ resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -808,7 +809,7 @@
     },
     {
       "factory_part": "18",
-      "description": "0.01 \u00b5F / 400 V capacitor",
+      "description": "0.01 µF / 400 V capacitor",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -830,7 +831,7 @@
     },
     {
       "factory_part": "19",
-      "description": "4.7 M\u03a9 resistor",
+      "description": "4.7 MΩ resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -852,7 +853,7 @@
     },
     {
       "factory_part": "20",
-      "description": "0.01 \u00b5F / 400 V capacitor",
+      "description": "0.01 µF / 400 V capacitor",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -874,7 +875,7 @@
     },
     {
       "factory_part": "21",
-      "description": "470 k\u03a9 resistor",
+      "description": "470 kΩ resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -918,7 +919,7 @@
     },
     {
       "factory_part": "23",
-      "description": "470 k\u03a9 resistor",
+      "description": "470 kΩ resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -940,7 +941,7 @@
     },
     {
       "factory_part": "24",
-      "description": "130 \u03a9 resistor",
+      "description": "130 Ω resistor",
       "category": "resistor",
       "declared_terminals": [
         "a",
@@ -962,7 +963,7 @@
     },
     {
       "factory_part": "25",
-      "description": "0.02 \u00b5F / 400 V capacitor",
+      "description": "0.02 µF / 400 V capacitor",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -1036,7 +1037,7 @@
     },
     {
       "factory_part": "28",
-      "description": "500 \u03a9 field coil",
+      "description": "500 Ω field coil",
       "category": "field_coil",
       "declared_terminals": [
         "a",
@@ -1058,7 +1059,7 @@
     },
     {
       "factory_part": "30",
-      "description": "40 \u03a9 + 80 \u03a9 tapped line resistance assembly (#30)",
+      "description": "40 Ω + 80 Ω tapped line resistance assembly (#30)",
       "category": "resistor",
       "declared_terminals": [
         "endA",
@@ -1087,7 +1088,7 @@
     },
     {
       "factory_part": "31",
-      "description": "0.04 \u00b5F / 400 V capacitor",
+      "description": "0.04 µF / 400 V capacitor",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -1135,7 +1136,7 @@
     },
     {
       "factory_part": "29A",
-      "description": "20 \u00b5F electrolytic",
+      "description": "20 µF electrolytic",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -1157,7 +1158,7 @@
     },
     {
       "factory_part": "29B",
-      "description": "20 \u00b5F electrolytic",
+      "description": "20 µF electrolytic",
       "category": "capacitor",
       "declared_terminals": [
         "a",
@@ -1258,7 +1259,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The v0.41/v0.42 loop and aerial-transformer interfaces are traced, and v0.43 connects the lower #9/#11 terminals to B\u2212. The #4 oscillator gang, #6\u2013#10 connections, upper #9/#11 ends, remaining 7A8 socket pins, and RF/receiver behavior remain open."
+      "gap": "The v0.41/v0.42 loop and aerial-transformer interfaces are traced, and v0.43 connects the lower #9/#11 terminals to B−. The #4 oscillator gang, #6–#10 connections, upper #9/#11 ends, remaining 7A8 socket pins, and RF/receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -1279,7 +1280,7 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Factory #25 is source-traced across filtered B+ and B\u2212, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+      "gap": "Factory #25 is source-traced across filtered B+ and B−, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
@@ -1311,13 +1312,13 @@
     "All 28 graph groups are partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
     "Component endpoint reference coverage is not electrical closure: transformer windings, tuning assemblies, tube electrodes, switch contacts, chassis return and circuit behavior require separate evidence.",
     "The v0.37 power/line trace source-closes mains, switch, #31, #30/#32, rectifier plate feed, B-minus rail and heater-string topology at schematic-symbol level; it adds zero socket-pin memberships to the partial graph.",
-    "The v0.42 trace resolves the loop return and external antenna/aerial-transformer interface; v0.43 traces lower #9/#11 oscillator-network endpoints to B\u2212. Transformer parameters, remaining oscillator/converter connections and receiver behavior remain incomplete."
+    "The v0.42 trace resolves the loop return and external antenna/aerial-transformer interface; v0.43 traces lower #9/#11 oscillator-network endpoints to B−. Transformer parameters, remaining oscillator/converter connections and receiver behavior remain incomplete."
   ],
   "next_audit_actions": [
     "Resolve symbol-to-socket pin and #16 switch-lug crosswalks before promoting any power-line pin memberships.",
     "Trace remaining subsystem endpoints and source-to-functional-terminal mappings; label evidence at symbol, component, or pin level without mixing them.",
     "Recompute graph denominator and source-ledger reconciliation after any pin-level membership update.",
-    "Trace the opposite #9/#11 ends, #4 oscillator gang and #6\u2013#10 network while keeping symbol-level leads separate from confirmed 7A8 socket pins."
+    "Trace the opposite #9/#11 ends, #4 oscillator gang and #6–#10 network while keeping symbol-level leads separate from confirmed 7A8 socket pins."
   ],
   "tube_pin_reference_artifact": "engineering/PT44_Tube_Terminals_Review_V1.json",
   "power_line_source_trace": {
