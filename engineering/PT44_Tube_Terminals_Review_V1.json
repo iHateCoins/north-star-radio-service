@@ -90,10 +90,12 @@
     {
       "id": "RF-01",
       "stage": "RF",
-      "terminal": "V1:4",
-      "task": "Trace 7A8 signal-input grid to aerial transformer, tuning capacitor, and any loop/mains isolation path.",
+      "terminal": "V1:5",
+      "task": "Trace the 7A8 signal-input grid (g3, pin 5) to the aerial transformer, RF tuning gang, and loop/mains-isolation path.",
       "status": "source_trace_required",
-      "factory_net_claim": false
+      "factory_net_claim": false,
+      "pinout_reference": "https://bms.isjtr.ro/sheets/108/7/7A8.pdf",
+      "pinout_basis": "Sylvania 7A8 data sheet identifies pin 4 as oscillator grid G1 and pin 5 as grids G3/G5; receiver wiring remains governed by the Philco schematic."
     },
     {
       "id": "RF-02",
