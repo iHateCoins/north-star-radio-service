@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -17,7 +17,10 @@
       "source_generated_passive_instances": 6,
       "isolated_ngspice_testbench_validated": true,
       "full_receiver_spice_validated": false
-    }
+    },
+    "power_filter_audit_findings": 3,
+    "power_filter_verified_memberships": 10,
+    "power_filter_unreviewed_memberships": 1
   },
   "open_items": [
     {
@@ -108,5 +111,6 @@
       "acceptance": "Known fault cases remain diagnosable and repairable through the shop workflow after the engineering model is connected to gameplay."
     }
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "latest_evidence_update": "Native 300-dpi audit of the 35Z3/#28/#29A/#29B power-filter slice; F_BPLUS_RECT remains partial because #26:a is unreviewed."
 }

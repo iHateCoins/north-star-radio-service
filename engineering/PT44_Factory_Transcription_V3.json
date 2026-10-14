@@ -569,7 +569,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.28 native 300-dpi source review: verified members are limited to the listed subset; #26:a remains unreviewed."
       },
       "factory_members": [
         "V5:7",
@@ -582,7 +582,19 @@
         "R1:a",
         "C1:a",
         "T1:a"
-      ]
+      ],
+      "v0_28_power_filter_audit": {
+        "status": "VERIFIED_PARTIAL",
+        "verified_members": [
+          "V5:7",
+          "28:a",
+          "29A:a"
+        ],
+        "unreviewed_members": [
+          "26:a"
+        ],
+        "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      }
     },
     {
       "id": "F_BPLUS_FILT",
@@ -596,7 +608,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.28 native 300-dpi source review: listed terminals verified for this power-filter slice only."
       },
       "factory_members": [
         "28:b",
@@ -607,7 +619,17 @@
         "R1:b",
         "C2:a",
         "R4:a"
-      ]
+      ],
+      "v0_28_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "28:b",
+          "29B:a",
+          "21:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      }
     },
     {
       "id": "F_7C6_PLATE",
@@ -717,7 +739,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.28 native 300-dpi source review: listed terminals verified for this power-filter slice only."
       },
       "factory_members": [
         "29A:b",
@@ -730,7 +752,18 @@
         "C2:b",
         "R3:b",
         "R2:b"
-      ]
+      ],
+      "v0_28_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "29A:b",
+          "29B:b",
+          "23:b",
+          "24:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      }
     },
     {
       "id": "F_VOICE_SEC_A",
