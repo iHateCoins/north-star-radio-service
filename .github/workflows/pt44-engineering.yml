@@ -110,6 +110,11 @@ jobs:
       - name: Verify generated alignment worker and settings lifecycle
         run: node tests/test_if_alignment_workbench_v58.js
 
+      - name: Verify one-second coupled AVC release, convergence, loading and faults
+        run: node tests/test_avc_release_v59.js
+      - name: Verify actual generated release worker and lifecycle
+        run: node tests/test_avc_release_workbench_v59.js
+
       - name: Keep the EC finish line fixed and version contributions explicit
         run: node tests/test_ec_reporting_v58.js
 
@@ -165,4 +170,14 @@ jobs:
         with:
           name: pt44-if-alignment-browser-v058
           path: tmp/pt44-if-alignment-browser/
+          retention-days: 7
+
+      - name: Exercise one-second AVC release and continuation export in Chromium
+        run: node tests/test_avc_release_browser_v59.js --browser
+      - name: Retain AVC release screenshots and measurement evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-avc-release-browser-v059
+          path: tmp/pt44-avc-release-browser/
           retention-days: 7

@@ -1,38 +1,48 @@
-# North Star Radio Service — v0.58.0 source-corrected IF alignment
+# North Star Radio Service — v0.59.0 coupled AVC release
 
-The PT-44 engineering panel now has a loaded IF frequency sweep and three independent adjustments. The previous generic fixture had a tuning capacitor across both windings of each IF transformer and uniform 30 Ω winding resistances. Philco p.38 instead shows **12A/12B across the first IF windings and 14A across the second IF secondary**, with **31/29/45/6.8 Ω** printed winding DCRs. The model now follows those branches and values; it does not invent a second-IF primary tuning capacitor. Tube/parasitic capacitances remain explicit.
-
-The sweep linearizes the same coupled 26-variable MNA at its no-signal hot DC operating point and solves the complex equations across frequency. It reports IF grid/plate/secondary magnitude and phase, sampled peak frequency and the contiguous −3 dB band around the highest peak. The equivalent AC SPICE export executes independently. Trimmers can be adjusted separately or optimized in the documented 12A → 12B → 14A order for maximum infinitesimal IF-secondary voltage at 455 kHz. Settings transfer directly into the nonlinear IF/detector/audio/supply test.
-
-The Sylvania 7B7 curves end at zero control-grid voltage. The previous clamp made the slope at zero ambiguous for AC analysis. The final tabulated slope now continues to +3 V in screen-normalized coordinates as an explicit **uncalibrated extrapolation**, and the grid-current Jacobian uses the analytic derivative. Published manufacturer anchors remain checked. L, coupling, core-loss Q, actual tuning capacitance, positive-grid behavior, physical trimmer range and other inherited component approximations still need correlation.
+The coupled IF/detector/audio/supply bench now continues through signal removal and a full second of AVC release. It carries all 26 circuit states forward from the existing short signal-arrival test, resolves 0.2 ms of IF ringdown, then uses backward Euler at ≤0.1 ms for the unforced circuit. No AVC reset, fitted exponential or frozen supply/audio state is used. The original carrier-resolved arrival and alignment controls remain available.
 
 ## What this version supports toward engineering completion
 
-Every release must report the EC IDs supported, concrete evidence added toward closure, and any EC IDs actually closed. The nine acceptance lists remain fixed in `engineering/PT44_Remaining_Actions_V1.json`.
+Every release reports supported EC IDs, concrete evidence toward closure, actual full closures and remaining work. The nine acceptance lists remain fixed in `engineering/PT44_Remaining_Actions_V1.json`; a frozen acceptance snapshot now guards against accidental scope changes.
 
-| EC supported | Evidence added in v0.58 | Full EC closed? |
+| EC supported | Evidence added in v0.59 | Full EC closed? |
 |---|---|---|
-| **EC-02** | Source-backed winding DCRs, separate copper/core loss, and a checked numerical tube-table boundary. | No |
-| **EC-05** | Three independent source-drawn controls, loaded complex IF response, bandwidth checks and fixture alignment recovery. | No |
-| **EC-07** | Defined DC/current-injection conditions and measured instrument loading in the IF sweep. | No |
-| **EC-09** | Misalign → adjust → recover demonstrated in the coupled detector/audio/supply arrival fixture. | No |
+| **EC-05** | One-second release, timestep/ringdown convergence, both #8 alternatives, fault/restoration and independent circuit continuation. | No |
+| **EC-07** | Defined removal/ringdown/release times; AVC/grid/B+ checkpoints; ideal, DMM and service-meter loading. | No |
+| **EC-09** | Deterministic release, #17-open, no-signal and restored cases in the coupled electrical regression matrix. | No |
 
-No full EC or full-receiver engineering gate closes in this increment. The current milestone support record and the latest remaining work are displayed in the Factory ledger. Broader game development remains on hold.
+No full EC or full-receiver engineering gate closes in this increment. Broader game development remains on hold.
 
 ## Conditions and limits
 
-The sweep is infinitesimal AC about a no-signal DC point. Its 1 µA input is a normalization, **not a validated finite-amplitude sensitivity measurement**; it does not predict detected audio or dynamic AVC regulation. The input remains an external converter-current boundary, rather than Philco's complete antenna-side generator hookup. The ±25% adjustment range is a fixture bound, not documented physical trimmer travel. Reported bandwidth is the declared circuit's response, not a published factory acceptance target. All voltages reference B-minus; no chassis bond is asserted.
+The UI uses hot DC equilibrium followed by the existing **6 ms, 455 kHz, 1 kHz/50% AM arrival**, then removes the injected current. Automated comparison fixtures use **3 ms arrival with 2 kHz/50% AM**. Neither initializes AVC at a settled strong-signal operating point. Release time is measured from signal removal to 10% of the instantaneous removal magnitude; this is not a published Philco specification. A negligible starting bias has no reported recovery time. Both unresolved #8 values remain available as sensitivity cases; no variant is selected by this release.
 
-RF/converter tracking and actual 7A8 loads, the three source ambiguities, remaining parameter correlation, long-duration AVC, the full supply/audio envelope, authoritative shop instruments/chassis mapping and complete diagnosis/replacement/alignment/checkout acceptance remain open.
+The displayed release checkpoints use actual circuit states at 10/50/100/250/500/1000 ms. All voltages reference B-minus; no chassis bond is asserted. After carrier ringdown, backward Euler damps unresolved fast modes so they cannot persist as trapezoidal numerical ringing. The early step is also limited to C8 × probe resistance / 50 for a fast AVC probe, through 20 such time constants. Halving the release step and doubling the ringdown window bound the effect of that transition; independent recovery-time checks include the fast service meter.
+
+The release SPICE export starts from the recorded **common post-ringdown capacitor voltages and inductor currents**, with no input current. Independent adaptive Gear execution checks the continuation, rather than independently establishing that initial state. The prior carrier-resolved coupled transient SPICE suite separately checks signal arrival. Agreement validates numerical implementation under declared parameters, not factory calibration.
+
+## Remaining work
+
+| EC | Still required for full closure |
+|---|---|
+| EC-01 | Physical diode-pin assignment, oscillator coupling interpretation, approved resolution of #8 value conflict. |
+| EC-02 | Remaining tube, winding, transformer/speaker, volume, field, heater and lamp parameter correlation. |
+| EC-03 | Active converter loads, full AC/DC supply, startup/discharge and heater/lamp envelope. |
+| EC-04 | Audio parameter/frequency-envelope correlation and shop repair integration. |
+| EC-05 | Correlated passband/trimmer/diode parameters; long-duration attack/steady AVC regulation and converter feedback. |
+| EC-06 | RF/oscillator/converter operation and tracking across 540–1600 kHz. |
+| EC-07 | RF/shop generator, meter and tracer integration; historical service measurement conditions. |
+| EC-08 | Serviceable chassis endpoints, access and repair-relevant physical identities. |
+| EC-09 | Full receiver baseline and complete diagnosis/replacement/alignment/checkout acceptance. |
 
 ## Evidence and checks
 
-- `PT44_IF_Tuning_Winding_Trace_V1.json`: p.38 branch/DCR review, source hash and limits.
-- `PT44_IF_Alignment_Validation_V1.json`: complex-solver oracle, controls, loaded response, sweep-grid convergence and deterministic alignment recovery.
-- `PT44_IF_AC_Spice_Validation_V1.json`: independent complex magnitude/phase comparisons across healthy, aligned, detuned, loaded, dead-stage, supply and coupling cases.
-- `PT44_IF_Alignment_Transient_Validation_V1.json`: alignment recovery through the coupled nonlinear audio/supply arrival fixture.
-- Existing coupled transient validation artifacts are regenerated for the corrected IF circuit.
+- `engineering/PT44_AVC_Release_Validation_V1.json`: release convergence, #8 alternatives, loaded meters, fault/restoration and no-signal cases.
+- `engineering/PT44_AVC_Release_Spice_Validation_V1.json`: independent adaptive circuit continuation from common snapshots.
+- `node tests/test_avc_release_v59.js --record` regenerates coupled release evidence.
+- `node tests/test_avc_release_spice_v59.js --ngspice --record` regenerates independent continuation evidence.
+- `node tests/test_avc_release_workbench_v59.js` executes the generated release worker and checks its lifecycle.
+- `node tests/test_avc_release_browser_v59.js --browser` checks the real controls/worker, exact release export and desktop/mobile layout.
 
-Run `node tests/test_if_alignment_v58.js`, `node tests/test_if_alignment_transient_v58.js`, and `node tests/test_if_alignment_workbench_v58.js`. Run `node tests/test_if_ac_spice_v58.js --ngspice` for independent AC execution and `node tests/test_if_spice_v57.js --ngspice` for coupled transient comparisons. `--record` regenerates numerical evidence. Run `node tests/test_if_alignment_browser_v58.js --browser` with Playwright/Chromium for actual controls, adjustment, exact export, settings transfer, probe loading and mobile layout. Existing power/audio/detector/IF checks remain in CI. Browser artifacts are retained for seven days.
-
-Watermark: **BUILD v0.58.0**. All six full-receiver gates remain **NOT MET**.
+Existing source, supply, audio, detector, IF and alignment regressions remain in CI. Watermark: **BUILD v0.59.0**. All six full-receiver gates remain **NOT MET**.

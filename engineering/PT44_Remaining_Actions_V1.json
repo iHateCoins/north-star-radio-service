@@ -1,6 +1,6 @@
 {
   "schema": "PT44_REMAINING_ACTIONS_V1",
-  "version": "0.58.0",
+  "version": "0.59.0",
   "model": "Philco PT-44",
   "benchmark_ready": false,
   "scope_policy": "Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.",
@@ -13,7 +13,7 @@
       "acceptance": [
         "Assign both 7C6 diode glyphs to socket pins 5/6.",
         "Resolve the four-dot oscillator coupling symbol and complete its electrical representation.",
-        "Resolve #8 0.05/0.1 \u00b5F value conflict or retain a specifically approved variant."
+        "Resolve #8 0.05/0.1 µF value conflict or retain a specifically approved variant."
       ],
       "v055_review": "Manufacturer basing identifies the two separate 7C6 diodes, but does not assign the unnumbered Philco glyphs to physical pins. No source-backed assignment or oscillator/#8 resolution is claimed."
     },
@@ -132,6 +132,12 @@
       ],
       "remaining_after_v058": [
         "Correlate the actual loaded passband and physical trimmer range; complete converter AVC feedback and long-duration AVC behavior."
+      ],
+      "completed_in_v059": [
+        "Continue the same coupled IF/detector/audio/supply state through signal removal and one second of AVC release; verify timestep/ringdown convergence, both #8 alternatives, fault/restoration and independent SPICE continuation."
+      ],
+      "remaining_after_v059": [
+        "Correlate tube/winding/diode parameters, actual loaded passband and physical trimmer range; validate long-duration AVC attack/steady regulation and converter AVC feedback."
       ]
     },
     {
@@ -140,7 +146,7 @@
       "status": "NOT STARTED",
       "evidence_dependency": "Actionable after the coupling symbol is resolved; additional schematics are not a general prerequisite.",
       "acceptance": [
-        "Implement oscillator/converter behavior and tracking across 540\u20131600 kHz.",
+        "Implement oscillator/converter behavior and tracking across 540–1600 kHz.",
         "Validate the 455 kHz frequency relationship, tuning/alignment effects and input behavior.",
         "Check weak/dead oscillator and aerial faults against the receiver model."
       ]
@@ -156,7 +162,7 @@
         "Use historical voltage labels only where return/loading/conditions support comparison; distinguish simulated reference conditions."
       ],
       "completed_in_v055": [
-        "Connect ideal, 10 M\u03a9/100 pF and 1000 \u03a9/V (250 V range) probes to explicit audio/power nodes.",
+        "Connect ideal, 10 MΩ/100 pF and 1000 Ω/V (250 V range) probes to explicit audio/power nodes.",
         "Record supply, signal, volume, timing and instrument conditions; keep factory targets separate."
       ],
       "remaining_after_v055": [
@@ -164,7 +170,7 @@
         "Verify historical measurement conditions where factory targets are used."
       ],
       "completed_in_v056": [
-        "Five detector/AVC probe ports with ideal, 10 M\u03a9/100 pF and 1000 \u03a9/V (10 V range) loading; declared signal/timing/reference conditions."
+        "Five detector/AVC probe ports with ideal, 10 MΩ/100 pF and 1000 Ω/V (10 V range) loading; declared signal/timing/reference conditions."
       ],
       "completed_in_v057": [
         "Loaded probes on IF grid/plate, shared screen, supply, AVC and audio nodes in one coupled circuit; explicit DC/injection/timing/range conditions."
@@ -177,6 +183,12 @@
       ],
       "remaining_after_v058": [
         "Complete RF/shop generator, meter and tracer integration; validate historical service measurement conditions."
+      ],
+      "completed_in_v059": [
+        "Record removal/ringdown/release times and AVC/IF-grid/B+ checkpoints; measure ideal, 10 MΩ/100 pF and 1000 Ω/V AVC-probe loading."
+      ],
+      "remaining_after_v059": [
+        "Complete RF/shop generator, meter and tracer integration; validate historical service measurement conditions."
       ]
     },
     {
@@ -187,7 +199,7 @@
       "acceptance": [
         "Map component endpoints and instrument access to the serviceable game chassis.",
         "Resolve physical identities that affect faults, polarity or repairs.",
-        "Keep unsupported lead dress and chassis/B\u2212 bond claims explicit."
+        "Keep unsupported lead dress and chassis/B− bond claims explicit."
       ]
     },
     {
@@ -221,48 +233,46 @@
       ],
       "remaining_after_v058": [
         "Full RF receiver baseline and complete shop diagnosis/replacement/alignment/checkout acceptance remain open."
+      ],
+      "completed_in_v059": [
+        "Add deterministic signal-removal, #17-open, no-signal and restored electrical release cases to the coupled receiver regression matrix."
+      ],
+      "remaining_after_v059": [
+        "Full RF receiver baseline and complete shop diagnosis/replacement/alignment/checkout acceptance remain open."
       ]
     }
   ],
   "next_integration_target": [
     "EC-01/06: close oscillator coupling interpretation and implement RF/converter tracking and actual converter currents.",
-    "EC-02/05: correlate remaining IF/tube parameters and long-duration AVC behavior.",
+    "EC-02/05: correlate remaining IF/tube parameters; validate long-duration AVC attack/steady regulation and converter feedback. One-second release is covered by the declared v0.59 fixture.",
     "EC-03/04: validate the complete receiver supply/audio envelope.",
     "EC-07/08/09: serviceable chassis/shop instruments and full repair acceptance."
   ],
-  "milestone_completed": "v0.58 supports EC-02/05/07/09 through source-corrected IF tuning/DCRs, independently verified loaded AC response and a coupled alignment-recovery subset. It closes no full EC item.",
+  "milestone_completed": "v0.59 supports EC-05/07/09 with one-second coupled AVC release, loaded-instrument/fault/restoration evidence and independent circuit continuation. It closes no full EC item.",
   "version_reporting_policy": "Every release names the EC IDs it supports, the concrete evidence added toward closure, and any EC IDs actually closed. Support is not full closure; the nine acceptance lists remain fixed.",
   "version_support": {
-    "version": "0.58.0",
+    "version": "0.59.0",
     "supported_ec_ids": [
-      "EC-02",
       "EC-05",
       "EC-07",
       "EC-09"
     ],
     "closed_ec_ids": [],
     "evidence": [
-      "PT44_IF_Tuning_Winding_Trace_V1.json",
-      "PT44_IF_Alignment_Validation_V1.json",
-      "PT44_IF_AC_Spice_Validation_V1.json",
-      "PT44_IF_Alignment_Transient_Validation_V1.json"
+      "PT44_AVC_Release_Validation_V1.json",
+      "PT44_AVC_Release_Spice_Validation_V1.json"
     ],
-    "summary": "Source-corrected IF branches/DCRs; independent trimmers; loaded complex frequency response; repeatable alignment recovery.",
-    "limitations": "Actual RF hookup/tracking, parameter calibration, long-duration AVC and full shop acceptance remain open.",
+    "summary": "One-second AVC release in the coupled receiver, with explicit timing, meter loading, fault/restoration and independent numerical continuation.",
+    "limitations": "Initial signal arrival is short, not steady state. Long-duration attack, converter feedback, parameter calibration, RF/shop integration and full receiver acceptance remain open. SPICE release imports a common post-ringdown state; arrival has separate SPICE evidence.",
     "evidence_by_ec": {
-      "EC-02": [
-        "Replace generic winding DCRs with printed 31/29/45/6.8-ohm values; separate assumed core loss from copper loss.",
-        "Replace the zero-grid current-table clamp with a declared continuous positive-grid extrapolation and verify its numerical implementation."
-      ],
       "EC-05": [
-        "Correct the second IF to its source-drawn single tuned secondary; independently control 12A/12B/14A.",
-        "Solve loaded complex IF response from the same MNA; validate passband sampling and repeatable 455 kHz fixture adjustment."
+        "Continue the same coupled IF/detector/audio/supply state through signal removal and one second of AVC release; verify timestep/ringdown convergence, both #8 alternatives, fault/restoration and independent SPICE continuation."
       ],
       "EC-07": [
-        "Define hot-DC infinitesimal current-injection conditions and measure probe loading on the coupled IF response."
+        "Record removal/ringdown/release times and AVC/IF-grid/B+ checkpoints; measure ideal, 10 MΩ/100 pF and 1000 Ω/V AVC-probe loading."
       ],
       "EC-09": [
-        "Exercise misalignment/three-control adjustment/recovered audio in the coupled IF/detector/audio/supply arrival fixture."
+        "Add deterministic signal-removal, #17-open, no-signal and restored electrical release cases to the coupled receiver regression matrix."
       ]
     }
   }

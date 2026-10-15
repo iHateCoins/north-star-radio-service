@@ -14,5 +14,5 @@ for(const [label,expr] of [
  ['false winding contact',`(()=>{const n=PT44_FACTORY_V3.factory_nets.find(x=>x.id==='F_OSC_TUNED_LEFT_WINDING');n.factory_members.push('9:a');const bad=!pt44OscillatorGridScreenBypassAudit().ok;n.factory_members.pop();return bad;})()`],
  ['false screen measurement target',`(()=>{const c=PT44_OSCILLATOR_GRID_SCREEN_BYPASS_TRACE_V1.source_level_closure;c.screen_45v_measurement_conditions_verified=true;const bad=!pt44OscillatorGridScreenBypassAudit().ok;c.screen_45v_measurement_conditions_verified=false;return bad;})()`]
 ])assert.equal(vm.runInContext(expr,ctx),true,label);
-assert(html.includes('BUILD v0.58.0<small>'));
+assert(html.includes('BUILD v0.59.0<small>'));
 console.log('PASS v0.51: #9 grid leak and #11 screen bypass source-traced; false winding/measurement claims rejected');

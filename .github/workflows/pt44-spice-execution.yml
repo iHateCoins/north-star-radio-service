@@ -79,3 +79,6 @@ jobs:
 
       - name: Cross-check loaded IF AC magnitude and phase across all three controls
         run: node tests/test_if_ac_spice_v58.js --ngspice
+
+      - name: Cross-check one-second coupled AVC release continuation
+        run: node tests/test_avc_release_spice_v59.js --ngspice
