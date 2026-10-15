@@ -1,0 +1,404 @@
+{
+  "schema": "PT44_PIN_CLOSURE_INVENTORY_V1",
+  "version": "0.52.0",
+  "model": "Philco PT-44",
+  "status": "SOCKET_ROLE_CLASSIFIED_NETLIST_OPEN",
+  "sources": {
+    "tube_pin_review": "engineering/PT44_Tube_Terminals_Review_V1.json",
+    "tube_internal_review": "engineering/PT44_Tube_Internal_Topology_V1.json",
+    "factory_schematic": "Philco 1941 RMS Year Book p.38; Rider XII 12-45 is a reproduction of the PT-42/PT-44 drawing"
+  },
+  "policy": "A manufacturer no-connection or shell option is not an absent factory wire. Active electrodes and shields require a source-backed receiver crosswalk. Internal tube links are not external chassis connections.",
+  "counts": {
+    "inventoried_socket_positions": 40,
+    "reviewed_graph_members": 26,
+    "manufacturer_nonfunctional_or_option": 6,
+    "external_receiver_crosswalk_open": 8
+  },
+  "pin_records": [
+    {
+      "terminal": "V1:1",
+      "tube_type": "7A8",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_50L6_7A8",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V1:2",
+      "tube_type": "7A8",
+      "manufacturer_role": "plate",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_IF1_PLATE",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V1:3",
+      "tube_type": "7A8",
+      "manufacturer_role": "oscillator anode grid g2",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_OSC_ANODE_RIGHT_WINDING",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V1:4",
+      "tube_type": "7A8",
+      "manufacturer_role": "oscillator grid g1",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_OSC_GRID_LEAK",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V1:5",
+      "tube_type": "7A8",
+      "manufacturer_role": "screen grids g3,g5",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_SCREEN_45V",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V1:6",
+      "tube_type": "7A8",
+      "manufacturer_role": "signal input grid g4",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_RF_INPUT",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V1:7",
+      "tube_type": "7A8",
+      "manufacturer_role": "cathode and suppressor grid g6",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+    },
+    {
+      "terminal": "V1:8",
+      "tube_type": "7A8",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_7A8_7B7",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V2:1",
+      "tube_type": "7B7",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_7A8_7B7",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V2:2",
+      "tube_type": "7B7",
+      "manufacturer_role": "plate",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_IF2_PLATE",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V2:3",
+      "tube_type": "7B7",
+      "manufacturer_role": "screen grid g2",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_SCREEN_45V",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V2:4",
+      "tube_type": "7B7",
+      "manufacturer_role": "suppressor grid g3",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+    },
+    {
+      "terminal": "V2:5",
+      "tube_type": "7B7",
+      "manufacturer_role": "internal shield",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved. Internal shield contact; do not equate it to cathode, B−, or chassis without a receiver trace."
+    },
+    {
+      "terminal": "V2:6",
+      "tube_type": "7B7",
+      "manufacturer_role": "control grid g1",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_IF1_GRID",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V2:7",
+      "tube_type": "7B7",
+      "manufacturer_role": "cathode",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+    },
+    {
+      "terminal": "V2:8",
+      "tube_type": "7B7",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_7B7_7C6",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V3:1",
+      "tube_type": "7C6",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_7B7_7C6",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V3:2",
+      "tube_type": "7C6",
+      "manufacturer_role": "triode plate",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_7C6_PLATE",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V3:3",
+      "tube_type": "7C6",
+      "manufacturer_role": "triode control grid",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_7C6_AUDIO_GRID",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V3:4",
+      "tube_type": "7C6",
+      "manufacturer_role": "cathode",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": "V3:7",
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved. Manufacturer confirms internal cathode bond to V3:7, but external socket return remains unverified."
+    },
+    {
+      "terminal": "V3:5",
+      "tube_type": "7C6",
+      "manufacturer_role": "diode plate 2",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+    },
+    {
+      "terminal": "V3:6",
+      "tube_type": "7C6",
+      "manufacturer_role": "diode plate 1",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+    },
+    {
+      "terminal": "V3:7",
+      "tube_type": "7C6",
+      "manufacturer_role": "cathode",
+      "status": "external_receiver_crosswalk_open",
+      "graph_net": null,
+      "internal_bond_peer": "V3:4",
+      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved. Manufacturer confirms internal cathode bond to V3:4, but external socket return remains unverified."
+    },
+    {
+      "terminal": "V3:8",
+      "tube_type": "7C6",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BMINUS",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V4:1",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "shell / no circuit connection (glass variant)",
+      "status": "manufacturer_nonfunctional_or_option",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "No external functional receiver wire is required by this tube role. A socket tie point or shell treatment is not inferred."
+    },
+    {
+      "terminal": "V4:2",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_35Z3_50L6",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V4:3",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "plate",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_OUTPUT_PLATE",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V4:4",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "screen grid g2",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BPLUS_FILT",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V4:5",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "control grid g1",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_50L6_GRID",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V4:6",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "no connection",
+      "status": "manufacturer_nonfunctional_or_option",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "No external functional receiver wire is required by this tube role. A socket tie point or shell treatment is not inferred."
+    },
+    {
+      "terminal": "V4:7",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_50L6_7A8",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V4:8",
+      "tube_type": "50L6GT",
+      "manufacturer_role": "cathode and beam plates",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_50L6_CATH",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V5:1",
+      "tube_type": "35Z3",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_DROPPER_HEATER_INPUT",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V5:2",
+      "tube_type": "35Z3",
+      "manufacturer_role": "rectifier plate",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_30_40_LAMP_B",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V5:3",
+      "tube_type": "35Z3",
+      "manufacturer_role": "no connection",
+      "status": "manufacturer_nonfunctional_or_option",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "No external functional receiver wire is required by this tube role. A socket tie point or shell treatment is not inferred."
+    },
+    {
+      "terminal": "V5:4",
+      "tube_type": "35Z3",
+      "manufacturer_role": "no connection",
+      "status": "manufacturer_nonfunctional_or_option",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "No external functional receiver wire is required by this tube role. A socket tie point or shell treatment is not inferred."
+    },
+    {
+      "terminal": "V5:5",
+      "tube_type": "35Z3",
+      "manufacturer_role": "no connection",
+      "status": "manufacturer_nonfunctional_or_option",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "No external functional receiver wire is required by this tube role. A socket tie point or shell treatment is not inferred."
+    },
+    {
+      "terminal": "V5:6",
+      "tube_type": "35Z3",
+      "manufacturer_role": "no connection",
+      "status": "manufacturer_nonfunctional_or_option",
+      "graph_net": null,
+      "internal_bond_peer": null,
+      "note": "No external functional receiver wire is required by this tube role. A socket tie point or shell treatment is not inferred."
+    },
+    {
+      "terminal": "V5:7",
+      "tube_type": "35Z3",
+      "manufacturer_role": "rectifier cathode",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BPLUS_RECT",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    },
+    {
+      "terminal": "V5:8",
+      "tube_type": "35Z3",
+      "manufacturer_role": "heater",
+      "status": "reviewed_graph_member",
+      "graph_net": "F_HT_35Z3_50L6",
+      "internal_bond_peer": null,
+      "note": "Source-reviewed receiver net member; additional circuit behavior is not implied."
+    }
+  ],
+  "open_terminal_list": [
+    "V1:7",
+    "V2:4",
+    "V2:5",
+    "V2:7",
+    "V3:4",
+    "V3:5",
+    "V3:6",
+    "V3:7"
+  ],
+  "nonfunctional_or_option_list": [
+    "V4:1",
+    "V4:6",
+    "V5:3",
+    "V5:4",
+    "V5:5",
+    "V5:6"
+  ],
+  "acceptance": {
+    "all_pin_roles_accounted_for": true,
+    "all_external_receiver_wiring_traced": false,
+    "chassis_bminus_relation_verified": false,
+    "benchmark_ready": false
+  }
+}

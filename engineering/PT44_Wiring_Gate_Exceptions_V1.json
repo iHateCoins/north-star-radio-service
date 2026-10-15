@@ -32,8 +32,9 @@
     {
       "area": "Prior #12/#13 IF secondary return trace",
       "artifact_to_recheck": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
-      "evidence": "Enlargement of Philco p.38 places #13 beside the right-hand oscillator winding and several crossing conductors; the prior v0.40 claim that #13:a is the 7B7 grid node and #13:b is B\u2212 must be independently reverified before using it to close the oscillator path.",
-      "required_resolution": "Follow #12 secondary and both #13 ends through every crossing in an independent scan or with continuity testing; amend the prior graph and audit if its assignments are contradicted."
+      "evidence": "The clearer Rider XII 12-45 reproduction makes the left #13 lead appear connected to the lower right #10 winding and lower first-IF primary, while the legacy v0.40 graph places that lead on the 7B7 grid. The exact crossing-by-crossing path is not yet independently verified.",
+      "required_resolution": "Follow #12 secondary and both #13 ends through every crossing in an independent scan or with continuity testing; amend the prior graph and audit if its assignments are contradicted.",
+      "recheck_artifact": "engineering/PT44_IF_Oscillator_Continuity_Recheck_V1.json"
     },
     {
       "area": "External tube pins and internal/no-connection roles",
@@ -45,7 +46,10 @@
         "V3:4",
         "V3:5",
         "V3:6",
-        "V3:7",
+        "V3:7"
+      ],
+      "required_resolution": "Crosswalk eight active/shield socket positions, including 7C6 diode plates and the externally routed cathode, against factory conductor geometry or original chassis continuity. Six manufacturer no-connection/shell positions need no invented electrical net.",
+      "manufacturer_nonfunctional_or_option": [
         "V4:1",
         "V4:6",
         "V5:3",
@@ -53,7 +57,7 @@
         "V5:5",
         "V5:6"
       ],
-      "required_resolution": "Classify each omitted socket position as externally wired, internal-only, or no connection using manufacturer basing and Philco p.38; crosswalk both diode plates and their returns without assigning an unnumbered glyph by guesswork."
+      "classification_artifact": "engineering/PT44_Pin_Closure_Inventory_V1.json"
     },
     {
       "area": "Physical line switch and chassis return",

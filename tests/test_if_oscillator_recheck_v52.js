@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'..'),read=n=>JSON.parse(fs.readFileSync(path.join(root,'engineering',n),'utf8'));
+const x=read('PT44_IF_Oscillator_Continuity_Recheck_V1.json'),old=read('PT44_IF1_Secondary_Return_Trace_V1.json'),g=read('PT44_Factory_Transcription_V3.json'),r=read('PT44_Engineering_Readiness_V1.json');
+assert.equal(x.sources[1].printed_page,'12-45');assert.equal(x.netlist_gate_met,false);
+assert.deepEqual(x.graph_claims_under_review.map(y=>y.terminal),['13:a','13:b','12:sReturn']);
+assert.equal(old.verified_endpoints.find(y=>y.terminal==='13:a').net_id,'F_IF1_GRID');
+assert(g.factory_nets.find(n=>n.id==='F_IF1_GRID').factory_members.includes('13:a'));
+assert(!g.factory_nets.some(n=>n.factory_members.includes('10:secondary_b')));
+assert.equal(r.completion_gates.find(y=>y.id==='GATE-NETLIST').status,'NOT MET');
+assert(r.latest_evidence_update.includes('not gate-eligible'));
+assert.equal(read('PT44_Wiring_Gate_Exceptions_V1.json').blocking_reconciliation[1].recheck_artifact,'engineering/PT44_IF_Oscillator_Continuity_Recheck_V1.json');
+console.log('PASS v0.52 IF/oscillator recheck: conflicting legacy trace quarantined from gate closure');
