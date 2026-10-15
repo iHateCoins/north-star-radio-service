@@ -78,9 +78,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #4",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_subset_300dpi",
+      "connectivity": "source_traced_rf_and_oscillator_gang_partial_400dpi",
       "geometry_certified": false,
-      "evidence_note": "v0.41 trace identifies the RF-gang signal-side terminal and chassis-grounded rotor in loop operation; oscillator gang crosswalk remains open."
+      "evidence_note": "v0.50 maps the oscillator gang signal plate to the upper left #10 winding; the rotor ground remains as in v0.41. Tuning value, compensator and physical lug crosswalk remain open.",
+      "source_terminal_crosswalk": {
+        "osc_stator": "upper signal-side oscillator gang plate joins #10:primary_a (provisional upper left winding end)",
+        "rotor": "lower RF/oscillator gang plates terminate at explicit loop-mode chassis ground",
+        "limits": "Does not assign physical lug, oscillator trimmer, capacitance or complete 7A8 oscillator path."
+      }
     },
     "5": {
       "description": "Aerial compensator",
@@ -224,8 +229,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #10",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_left_winding_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.50 follows the upper left drawn winding end to #4 oscillator tuning plate and the lower end to the explicit loop-mode chassis ground. The inventory primary alias is provisional, not winding function or polarity.",
+      "source_terminal_crosswalk": {
+        "primary_a": "upper left drawn winding end joined to #4:osc_stator; primary alias provisional",
+        "primary_b": "lower left drawn winding end at explicit loop-mode chassis ground; primary alias provisional",
+        "limits": "Opposite winding, physical lugs, polarity, inductance, coupling, and tube-electrode paths remain open."
+      }
     },
     "11": {
       "description": "0.05 µF capacitor",
@@ -1593,7 +1604,7 @@
       "title": "RF input tuning grounds / chassis in loop mode",
       "stage": "RF",
       "model": null,
-      "description": "The grounded ends of #1 bypass capacitor, RF gang #4 and aerial compensator #5 meet the explicit chassis ground reference noted for loop operation. This does not establish a B-minus bond. The lower terminal of the #6 series choke also ends at the explicit loop-operation chassis reference; no B− bond is inferred.",
+      "description": "The grounded ends of #1 bypass capacitor, RF gang #4 and aerial compensator #5 meet the explicit chassis ground reference noted for loop operation. This does not establish a B-minus bond. The lower terminal of the #6 series choke also ends at the explicit loop-operation chassis reference; no B− bond is inferred. The lower left #10 oscillator winding also ends at an explicit loop-mode chassis ground symbol.",
       "source": "Philco 1941 RMS p.38 — note: ground to chassis for loop operation",
       "stage_status": "source_traced_component_ground_endpoints",
       "evidence": {
@@ -1607,7 +1618,8 @@
         "4:rotor",
         "5:b",
         "1:b",
-        "6:choke_b"
+        "6:choke_b",
+        "10:primary_b"
       ],
       "prototype_member_crosswalk": [],
       "v0_41_source_review": {
@@ -1620,6 +1632,16 @@
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      },
+      "v0_50_source_review": {
+        "milestone_version": "0.50.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "10:primary_b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
       }
     },
     {
@@ -1790,6 +1812,38 @@
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
       }
+    },
+    {
+      "id": "F_OSC_TUNED_LEFT_WINDING",
+      "title": "Oscillator tuning plate / upper left transformer winding",
+      "stage": "RF",
+      "model": "unassigned",
+      "description": "#4 oscillator gang signal plate joins the upper left drawn #10 oscillator winding end. The lower end is separately grounded; transformer role and tube-electrode junctions remain open.",
+      "source": "Philco 1941 RMS p.38 — PT-42/PT-44 oscillator section",
+      "stage_status": "source_traced_partial_oscillator_tank",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.50 400-dpi review of the #4 oscillator gang and left #10 winding. Primary alias is provisional.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "4:osc_stator",
+        "10:primary_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_50_source_review": {
+        "milestone_version": "0.50.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "4:osc_stator",
+          "10:primary_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
+      }
     }
   ],
   "subcircuits": [
@@ -1955,7 +2009,7 @@
       "description": "All 30 represented graph groups and 90 component/tube terminal memberships reconcile to source-review evidence through v0.48. The #7 loop-return branch is now source-traced; oscillator/converter topology and full receiver behavior remain open.",
       "area": "Source cross-check",
       "status": "OPEN",
-      "gap": "30 partial graph groups and 92 component/tube endpoint memberships reconcile to source reviews through v0.49. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "31 partial graph groups and 95 component/tube endpoint memberships reconcile to source reviews through v0.50. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1969,14 +2023,14 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 30,
-    "factory_terminals_on_traced_nets": 92,
+    "traced_network_count": 31,
+    "factory_terminals_on_traced_nets": 95,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.49.0",
+  "version": "0.50.0",
   "source_pages_reviewed": "Philco p.38 PT-42/PT-44 schematic and replacement-parts list; v0.49 traces both #8 endpoints and records the unresolved value conflict."
 }
