@@ -1,8 +1,8 @@
 {
   "schema": "PT44_RF_INPUT_TRACE_V1",
-  "version": "0.41.0",
+  "version": "0.47.0",
   "model": "Philco PT-44",
-  "status": "SOURCE_TRACED_RF_INPUT_BRANCH_COMPONENT_ENDPOINTS_PARTIAL",
+  "status": "SOURCE_TRACED_RF_INPUT_AND_SERIES_TRAP_COMPONENT_ENDPOINTS_PARTIAL",
   "source": {
     "document": "Philco 1941 RMS Year Book",
     "printed_page": 38,
@@ -15,13 +15,32 @@
       "width_px": 2022,
       "height_px": 2587,
       "sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    },
+    "supplemental_render": {
+      "source_pdf_sha256": "8a7e016b0814584a31f5c113dec7d1605712b3f163980584acd89c5b347f1a09",
+      "source_pdf_page_index_zero_based": 2,
+      "printed_page": 38,
+      "rendered_dpi": 400,
+      "pixel_dimensions": [
+        2696,
+        3450
+      ],
+      "rendered_page_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "review_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "note": "Rendered from Philco Year Book PDF page 3 (printed p.38); this is a review derivative, not a new electrical source."
     }
   },
   "terminal_conventions": {
     "loop_3": "loop_a is the upper end of the drawn loop connected to the 7A8 signal-input conductor; loop_b is the opposite/lower lead and remains unassigned pending the #2 winding crosswalk. No winding polarity is implied.",
     "tuning_capacitor_4": "rf_stator is the RF-gang terminal drawn on the signal-input conductor; rotor is the grounded terminal for loop operation. osc_stator remains unassigned in this trace.",
     "aerial_compensator_5": "a is the upper terminal on the signal-input conductor and b is the grounded terminal; no polarity is implied.",
-    "tube_v1": "The factory symbol signal-input grid is mapped to socket terminal V1:6 using the reviewed 7A8 pin-role reference; the adjacent symbol-level source path is followed without inferring the other 7A8 electrode wires."
+    "tube_v1": "The factory symbol signal-input grid is mapped to socket terminal V1:6 using the reviewed 7A8 pin-role reference; the adjacent symbol-level source path is followed without inferring the other 7A8 electrode wires.",
+    "component_6": "cap_a is the upper #6 condenser lead on F_RF_INPUT; cap_b and choke_a form the drawn internal series junction; choke_b ends at the explicit loop-operation chassis ground. No B− equivalence or RF behavior is inferred."
   },
   "verified_endpoints": [
     {
@@ -95,6 +114,58 @@
         570,
         790
       ]
+    },
+    {
+      "terminal": "6:cap_a",
+      "net_id": "F_RF_INPUT",
+      "joined_factory_member": "V1:6 / 4:rf_stator / 5:a",
+      "interpretation": "The upper terminal of the #6 2 mmf condenser joins the 7A8 RF signal-input conductor.",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400
+    },
+    {
+      "terminal": "6:cap_b",
+      "net_id": "F_RF_INPUT_TRAP_JUNCTION",
+      "joined_factory_member": "6:choke_a",
+      "interpretation": "The lower condenser terminal connects directly to the upper terminal of the #6 series choke.",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400
+    },
+    {
+      "terminal": "6:choke_a",
+      "net_id": "F_RF_INPUT_TRAP_JUNCTION",
+      "joined_factory_member": "6:cap_b",
+      "interpretation": "The upper choke terminal connects directly to the lower terminal of the #6 series condenser.",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400
+    },
+    {
+      "terminal": "6:choke_b",
+      "net_id": "F_RF_CHASSIS",
+      "joined_factory_member": "explicit chassis ground reference for loop operation",
+      "interpretation": "The lower #6 choke terminal ends at the explicit ground symbol; Philco identifies grounds as chassis for loop operation. It is not mapped to B−.",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400
     }
   ],
   "source_level_closure": {
@@ -104,7 +175,10 @@
     "loop_opposite_end_and_aerial_transformer_winding_crosswalk": false,
     "7a8_remaining_electrode_wiring": false,
     "rf_and_oscillator_complete": false,
-    "benchmark_ready": false
+    "benchmark_ready": false,
+    "component_6_series_condenser_choke_terminals_traced": true,
+    "component_6_chassis_ground_identified_for_loop_operation": true,
+    "component_6_chassis_to_bminus_bond_verified": false
   },
   "unresolved": [
     "Built-in loop lower terminal to #2 aerial-transformer winding terminal mapping and its complete return route.",
@@ -112,7 +186,8 @@
     "#4 oscillator gang wiring, rotor construction/physical lug crosswalk, and remaining #5 adjustment data.",
     "7A8 plate/screen/cathode and #6/#7/#8/#9 receiver connection crosswalks.",
     "Antenna/chassis and B-minus relationship outside the explicit loop-operation ground symbols.",
-    "RF transfer behavior and complete receiver validation."
+    "RF transfer behavior and complete receiver validation.",
+    "The #4 oscillator gang and 7A8 converter path remain open; #6 trace completion does not establish oscillator behavior or full RF tracking."
   ],
   "benchmark_ready": false
 }

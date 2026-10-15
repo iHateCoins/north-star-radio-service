@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.45.0",
+  "version": "0.47.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -174,6 +174,30 @@
         "F_SCREEN_45V"
       ],
       "summary": "Mapped the 50L6 screen glyph to pin 4 on filtered B+, closing the last wired 50L6 socket pin. Cross-checked v0.38: 7A8/7B7 screens belong to the separate shared 45 V lead, so the earlier screen-to-B+ glyph claims are retired; the upstream 45 V feed remains open."
+    },
+    {
+      "version": "0.46.0",
+      "title": "Independent PT-44 oscillator alignment reference cross-check",
+      "status": "ALIGNMENT_ROLE_CORROBORATED_CIRCUIT_ENDPOINTS_OPEN",
+      "net_ids": [],
+      "evidence_artifact": "engineering/PT44_Service_Alignment_Reference_V1.json",
+      "source": "Philco Complete Instructions for Adjusting All Philco Receivers, Volume 2, printed pp. xiii and 133",
+      "evidence": "Confirms approximately 15-minute warm-up, 455 kHz IF alignment, #4 OSC at 1600 kHz, and #5 ANT at 1500 kHz for PT-42/PT-44.",
+      "scope_limit": "Independent alignment corroboration does not trace #4 oscillator stator or #6–#11 endpoints, assign remaining 7A8 pins, or validate oscillator behavior."
+    },
+    {
+      "version": "0.47.0",
+      "title": "7A8 RF input series trap component #6 traced",
+      "status": "SOURCE_TRACED_6_SERIES_CONDENSER_CHOKE_ENDPOINTS",
+      "net_ids": [
+        "F_RF_INPUT",
+        "F_RF_INPUT_TRAP_JUNCTION",
+        "F_RF_CHASSIS"
+      ],
+      "evidence_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
+      "evidence": "Traces all four #6 terminals: condenser input on F_RF_INPUT, the condenser/choke series junction, and the choke output at the explicit loop-mode chassis ground.",
+      "scope_limit": "Does not establish a chassis-to-B− bond, #4 oscillator gang routing, #7–#10 topology, remaining 7A8 pin assignments, or receiver behavior."
     }
   ],
   "reviewed_net_memberships": [
@@ -686,6 +710,24 @@
         "V2:3"
       ],
       "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_INPUT_TRAP_JUNCTION",
+      "milestone_version": "0.47.0",
+      "status": "SOURCE_CHECKED_COMPONENT_INTERNAL_SERIES_JUNCTION",
+      "unreviewed_members": [],
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "basis": "Philco p.38 draws the lower #6 2 mmf condenser terminal directly wired to the upper #6 series choke terminal.",
+      "reviewed_members": [
+        "6:cap_b",
+        "6:choke_a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
     }
   ],
   "reviewed_open_areas": [
@@ -712,10 +754,10 @@
         "RF tracking, oscillator behavior, sensitivity/selectivity and receiver-level validation.",
         "Chassis-to-B− relationship beyond explicitly traced nets.",
         "The upper #9 and #11 endpoints and their oscillator-network crosswalk remain open.",
-        "7A8 socket-pin assignments, #4 oscillator gang and #6–#10 converter wiring remain open.",
-        "The upstream source of the shared 45 V screen lead and its operating measurement conditions remain open."
+        "The upstream source of the shared 45 V screen lead and its operating measurement conditions remain open.",
+        "The #4 oscillator gang, #7/#8 network, #9 upper endpoint, #10 windings, remaining 7A8 pin crosswalks, and receiver behavior remain open."
       ],
-      "note": "v0.44 traces the shared 45 V screen conductor between V1:5 and V2:3. The supply origin is still open; no oscillator behavior or remaining 7A8 pin crosswalk is certified."
+      "note": "v0.47 traces the complete #6 RF input series trap while preserving the explicit chassis/B− distinction; oscillator and converter topology remain partial."
     },
     {
       "milestone_version": "0.37.0",
@@ -893,8 +935,44 @@
       "source_artifact_version": "0.45.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "basis": "Philco p.38 shows the 50L6 screen glyph on filtered B+ shared with #25; RCA 50L6-GT data maps the screen to socket pin 4."
+    },
+    {
+      "net_id": "F_RF_INPUT",
+      "milestone_version": "0.47.0",
+      "reviewed_members": [
+        "6:cap_a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.47.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #6 condenser terminal joins the existing 7A8 signal-input conductor."
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.47.0",
+      "reviewed_members": [
+        "6:choke_b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.47.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower #6 series choke terminal ends at the explicit ground symbol; the drawing note identifies loop-operation grounds as chassis, not B−."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All current partial-graph memberships reconcile to source-review rows through v0.45. The v0.45 review closes V4:4 on filtered B+ and corrects the earlier v0.38 V1/V2 screen-glyph assignments; the actual V1:5/V2:3 connection remains the annotated 45 V conductor, with source and measurement conditions open."
+  "milestone_record_note": "All 88 current partial-graph memberships reconcile to source-review evidence through v0.47. The v0.47 update traces all four #6 series condenser/choke endpoints across the RF signal input, internal junction and loop-mode chassis ground; no oscillator or receiver behavior is certified."
 }

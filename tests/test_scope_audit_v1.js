@@ -50,8 +50,8 @@ assert.equal(readiness.evidence_snapshot.partial_traced_networks, audit.baseline
 assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph, audit.baseline.current_partial_graph_membership_entries);
 assert.equal(readiness.evidence_snapshot.source_reviewed_graph_groups, audit.source_review_reconciliation.schematic_audit_net_groups);
 assert.equal(readiness.evidence_snapshot.source_reviewed_terminal_memberships, audit.source_review_reconciliation.schematic_audit_membership_entries);
-assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph, 63);
-assert.equal(audit.baseline.component_terminal_reference_coverage_percent, 75.9);
+assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph, 67);
+assert.equal(audit.baseline.component_terminal_reference_coverage_percent, 80.7);
 assert.equal(audit.baseline.tube_pin_memberships_in_partial_graph, 21);
 assert.equal(audit.baseline.unique_partial_graph_memberships, memberSet.size);
 assert.equal(audit.baseline.component_terminal_memberships_in_partial_graph,
@@ -81,7 +81,7 @@ assert.deepEqual(audit.source_review_reconciliation.schematic_audit_memberships_
 assert.deepEqual(graphNotInTraceAudit, []);
 assert.deepEqual(audit.source_review_reconciliation.reconciliation_record.added_and_source_verified_memberships,
   [...outputTrace.verified_endpoints, ...outputIfTrace.verified_endpoints, ...detectorAvcTrace.traced_component_endpoints, ...if1Trace.verified_endpoints, ...rfTrace.verified_endpoints, ...aerialTrace.verified_endpoints, ...oscillatorTrace.verified_endpoints, ...read('engineering/PT44_7A8_Screen_Trace_V1.json').verified_endpoints].map(endpoint => endpoint.terminal).sort());
-assert.equal(audit.source_review_reconciliation.reconciliation_record.status, 'RESOLVED_IN_V0.45');
+assert.equal(audit.source_review_reconciliation.reconciliation_record.status, 'RESOLVED_IN_V0.47');
 assert.equal(powerLineTrace.inventory_reconciliation.source_level_closure, true);
 assert.equal(powerLineTrace.inventory_reconciliation.factory_pin_level_closure, false);
 assert.equal(powerLineTrace.benchmark_ready, false);
