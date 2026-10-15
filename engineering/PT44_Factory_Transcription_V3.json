@@ -212,9 +212,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #9",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_partial_endpoint_300dpi",
+      "connectivity": "source_traced_both_endpoints_400dpi",
       "geometry_certified": false,
-      "evidence_note": "Philco p.38 native scan v0.43 traces the lower terminal of #9 lower return to the B− rail; the opposite terminal and complete oscillator path remain open."
+      "evidence_note": "v0.51 traces #9:a to 7A8 oscillator grid G1 (V1:4); #9:b remains on B−. The four-dot symbol does not establish a tuned-winding contact.",
+      "source_terminal_crosswalk": {
+        "a": "upper #9 end at 7A8 oscillator grid G1 (V1:4)",
+        "b": "lower #9 end on B−",
+        "limits": "The nearby four-dot symbol is not assigned to winding/tap contacts; oscillator behavior remains open."
+      }
     },
     "10": {
       "description": "Oscillator transformer",
@@ -249,9 +254,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #11",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_partial_endpoint_300dpi",
+      "connectivity": "source_traced_both_endpoints_400dpi",
       "geometry_certified": false,
-      "evidence_note": "Philco p.38 native scan v0.43 traces the lower terminal of #11 lower return to the B− rail; the opposite terminal and complete oscillator path remain open."
+      "evidence_note": "v0.51 traces #11:a to the shared annotated 45 V screen conductor; #11:b remains on B−. Screen feed and voltage-test conditions remain open.",
+      "source_terminal_crosswalk": {
+        "a": "upper #11 end on shared 7A8/7B7 annotated 45 V screen conductor",
+        "b": "lower #11 end on B−",
+        "limits": "The 45 V callout is not a measured target; upstream feed and receiver operation remain open."
+      }
     },
     "12": {
       "description": "First IF transformer",
@@ -1755,7 +1765,7 @@
       "title": "Shared 45 V screen lead (upstream source unresolved)",
       "stage": "RF/IF",
       "model": null,
-      "description": "The factory schematic shows a continuous conductor from the 7A8 screen-grid glyph to the 7B7 screen-grid glyph, with 45 V marked at both tube branches. Sylvania pin data maps those screen electrodes to V1:5 (7A8 G3/G5) and V2:3 (7B7 G2). This records only the shared tube-side conductor; it does not identify a regulator, dropping element, source impedance, or complete supply path.",
+      "description": "The factory schematic shows a continuous conductor from the 7A8 screen-grid glyph to the 7B7 screen-grid glyph, with 45 V marked at both tube branches. Sylvania pin data maps those screen electrodes to V1:5 (7A8 G3/G5) and V2:3 (7B7 G2). This records only the shared tube-side conductor; it does not identify a regulator, dropping element, source impedance, or complete supply path. The upper #11 0.05 µF bypass terminal also joins this conductor; the lower terminal is on B−.",
       "source": "Philco 1941 RMS, p.38 — 7A8/7B7 screen-grid branches; Sylvania Type 7A8 and 7B7 pin data",
       "stage_status": "source_traced_shared_screen_lead_upstream_open",
       "evidence": {
@@ -1767,7 +1777,8 @@
       },
       "factory_members": [
         "V1:5",
-        "V2:3"
+        "V2:3",
+        "11:a"
       ],
       "prototype_member_crosswalk": [],
       "v0_44_source_review": {
@@ -1780,6 +1791,16 @@
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
+      },
+      "v0_51_source_review": {
+        "milestone_version": "0.51.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "11:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
       }
     },
     {
@@ -1843,6 +1864,38 @@
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
+      }
+    },
+    {
+      "id": "F_OSC_GRID_LEAK",
+      "title": "7A8 oscillator grid / #9 grid-leak upper lead",
+      "stage": "RF",
+      "model": "unassigned",
+      "description": "#9 upper lead and the 7A8 G1 oscillator-grid glyph share a conductor. Sylvania maps G1 to V1:4. The #9 lower lead returns to B−; four-dot contacts are not assigned to this net.",
+      "source": "Philco 1941 RMS p.38 — PT-42/PT-44 oscillator section; Sylvania 7A8 basing data for socket pin",
+      "stage_status": "source_traced_partial_grid_leak",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.51 400-dpi review of upper #9 lead and oscillator-grid glyph with independent 7A8 pin-role crosswalk.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "9:a",
+        "V1:4"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_51_source_review": {
+        "milestone_version": "0.51.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "9:a",
+          "V1:4"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
       }
     }
   ],
@@ -1961,7 +2014,7 @@
       "id": "P1-RF",
       "severity": "blocker",
       "stage": "RF",
-      "description": "The loop/#2 aerial interface, complete #6 RF input trap, #7 loop-return resistor, and lower #9/#11 returns are source-traced. The #4 oscillator gang, #8–#11 converter connections, remaining 7A8 pins, winding parameters and RF behavior remain open.",
+      "description": "The loop/#2 aerial interface, complete #6 RF input trap, #7 loop-return resistor, and lower #9/#11 returns are source-traced. The #4 tuning plate, #9 grid leak and #11 screen bypass are partially traced; the four-dot contacts, opposite #10 winding, remaining 7A8 pins, winding parameters and RF behavior remain open.",
       "area": "RF / converter",
       "status": "OPEN",
       "gap": "The #2/#3 interface, #6 series input trap, #7 resistor, and #8 capacitor endpoints are source-traced. Resolve the #8 schematic/parts-list value conflict; #4 oscillator gang, #9/#10/#11 converter paths, remaining 7A8 pin crosswalks, winding parameters and receiver behavior remain open."
@@ -2009,7 +2062,7 @@
       "description": "All 30 represented graph groups and 90 component/tube terminal memberships reconcile to source-review evidence through v0.48. The #7 loop-return branch is now source-traced; oscillator/converter topology and full receiver behavior remain open.",
       "area": "Source cross-check",
       "status": "OPEN",
-      "gap": "31 partial graph groups and 95 component/tube endpoint memberships reconcile to source reviews through v0.50. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "32 partial graph groups and 98 component/tube endpoint memberships reconcile to source reviews through v0.51. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -2023,14 +2076,14 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 31,
-    "factory_terminals_on_traced_nets": 95,
+    "traced_network_count": 32,
+    "factory_terminals_on_traced_nets": 98,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.50.0",
+  "version": "0.51.0",
   "source_pages_reviewed": "Philco p.38 PT-42/PT-44 schematic and replacement-parts list; v0.49 traces both #8 endpoints and records the unresolved value conflict."
 }

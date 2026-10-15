@@ -1,0 +1,73 @@
+{
+  "schema": "PT44_OSCILLATOR_GRID_SCREEN_BYPASS_TRACE_V1",
+  "version": "0.51.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_GRID_LEAK_AND_SCREEN_BYPASS_PARTIAL",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+    "review_render_dpi": 400,
+    "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+    "review_box_px": [
+      420,
+      330,
+      1500,
+      1550
+    ]
+  },
+  "tube_pin_identity": {
+    "terminal": "V1:4",
+    "type": "7A8",
+    "electrode": "oscillator grid G1",
+    "document": "Sylvania Type 7A8 manufacturer datasheet",
+    "url": "https://bms.isjtr.ro/sheets/108/7/7A8.pdf",
+    "scope": "Manufacturer pin role only; Philco p.38 separately establishes the resistor-to-symbol conductor."
+  },
+  "terminal_conventions": {
+    "9:a": "Upper drawn #9 22 kΩ resistor end at the 7A8 oscillator grid glyph branch; terminal a is a diagram orientation alias.",
+    "11:a": "Upper drawn #11 0.05 µF capacitor end joins the shared 45 V screen conductor. The 45 V mark is an annotation, not a validated pass/fail measurement.",
+    "oscillator_contact_dots": "The #10-adjacent four-dot symbol is left at schematic symbol level; no contact-to-winding equivalence is inferred."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "9:a",
+      "net_id": "F_OSC_GRID_LEAK",
+      "joined_factory_member": "V1:4",
+      "interpretation": "The upper #9 lead joins the drawn 7A8 oscillator grid branch above the four-dot symbol."
+    },
+    {
+      "terminal": "V1:4",
+      "net_id": "F_OSC_GRID_LEAK",
+      "joined_factory_member": "9:a",
+      "interpretation": "The 7A8 oscillator grid G1 glyph is connected to #9:a; Sylvania maps G1 to socket pin 4."
+    },
+    {
+      "terminal": "11:a",
+      "net_id": "F_SCREEN_45V",
+      "joined_factory_member": "V1:5 / V2:3",
+      "interpretation": "The upper #11 lead joins the continuous screen conductor marked 45 V at the 7A8 and 7B7 branches."
+    }
+  ],
+  "source_level_closure": {
+    "resistor_9_both_endpoints_traced": true,
+    "capacitor_11_both_endpoints_traced": true,
+    "oscillator_grid_pin_crosswalk": true,
+    "shared_screen_decoupling_connected": true,
+    "four_dot_contact_to_winding_mapping_verified": false,
+    "screen_45v_measurement_conditions_verified": false,
+    "screen_upstream_feed_traced": false,
+    "opposite_10_winding_traced": false,
+    "oscillator_behavior_validated": false,
+    "benchmark_ready": false
+  },
+  "unresolved": [
+    "The four-dot #10-adjacent symbol has not been resolved into electrical contacts or transformer taps; no connection from F_OSC_GRID_LEAK to the tuned winding is inferred.",
+    "The opposite #10 winding and 7A8 oscillator-anode connection, winding roles, polarity, L and coupling remain open.",
+    "The upstream origin and measurement conditions of the annotated 45 V screen conductor remain unverified.",
+    "The #8 schematic/parts-list value conflict, chassis physical lugs and receiver behavior remain open."
+  ],
+  "benchmark_ready": false
+}

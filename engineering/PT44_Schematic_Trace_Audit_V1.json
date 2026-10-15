@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.50.0",
+  "version": "0.51.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -16,7 +16,7 @@
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
-    "version": "0.50.0"
+    "version": "0.51.0"
   },
   "milestones": [
     {
@@ -237,6 +237,19 @@
       "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
       "evidence": "Connects #4 oscillator gang signal plate to the upper left #10 winding, and its lower end to the explicit chassis ground symbol.",
       "scope_limit": "Provisional winding aliases do not assign transformer role, polarity, parameters, physical lugs or remaining converter paths."
+    },
+    {
+      "version": "0.51.0",
+      "title": "7A8 oscillator grid leak and shared-screen bypass trace",
+      "status": "SOURCE_TRACED_GRID_LEAK_AND_SCREEN_BYPASS_PARTIAL",
+      "net_ids": [
+        "F_OSC_GRID_LEAK",
+        "F_SCREEN_45V"
+      ],
+      "evidence_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json",
+      "source": "Philco 1941 RMS Year Book p.38; Sylvania 7A8 pin roles",
+      "evidence": "#9 upper end joins 7A8 oscillator grid G1 (V1:4); #11 upper end joins the annotated shared 45 V screen conductor. Both lower ends were already traced to B−.",
+      "scope_limit": "Four-dot oscillator contacts, opposite winding, upstream 45 V feed and measurement conditions, winding parameters and behavior remain open."
     }
   ],
   "reviewed_net_memberships": [
@@ -785,6 +798,24 @@
         "10:primary_a"
       ],
       "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
+    },
+    {
+      "net_id": "F_OSC_GRID_LEAK",
+      "milestone_version": "0.51.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        420,
+        330,
+        1500,
+        1550
+      ],
+      "basis": "Philco p.38 upper #9 lead joins the 7A8 oscillator G1 glyph; Sylvania maps G1 to pin 4. Four-dot symbol contacts remain open.",
+      "reviewed_members": [
+        "9:a",
+        "V1:4"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
     }
   ],
   "reviewed_open_areas": [
@@ -1123,8 +1154,27 @@
       ],
       "source_render_dpi": 400,
       "basis": "Philco p.38: lower left #10 winding end terminates at explicit loop-mode chassis ground symbol; no B− bond."
+    },
+    {
+      "net_id": "F_SCREEN_45V",
+      "milestone_version": "0.51.0",
+      "reviewed_members": [
+        "11:a"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json",
+      "source_artifact_version": "0.51.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        420,
+        330,
+        1500,
+        1550
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #11 capacitor terminal joins the shared annotated 45 V screen conductor; lower end remains B−."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All 95 partial-graph memberships reconcile to source-review rows through v0.50. The #4 oscillator tuning plate and left #10 winding endpoints are traced; remaining converter paths and #8 value conflict stay open."
+  "milestone_record_note": "All 98 partial-graph memberships reconcile through v0.51. #9 grid leak and #11 screen bypass endpoints are traced; four-dot oscillator contacts and behavior remain open."
 }

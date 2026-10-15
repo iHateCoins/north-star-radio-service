@@ -1,9 +1,7 @@
-# North Star Radio Service — v0.50.0 PT-44 engineering update
+# North Star Radio Service — v0.51.0 PT-44 engineering update
 
-v0.50 traces the #4 oscillator tuning gang signal plate to the upper left #10 winding end and the winding lower end to the explicit chassis ground symbol for loop operation. The #10 primary terminal names are provisional inventory aliases; winding function, polarity, inductance, coupling, physical lugs and remaining converter routes are open. This source review adds one partial net and three component terminal memberships.
+v0.51 traces the upper #9 22 kΩ grid-leak resistor end to the 7A8 oscillator grid G1 (socket V1:4), and the upper #11 0.05 µF bypass capacitor end to the shared 7A8/7B7 screen conductor annotated 45 V. Their lower ends were already traced to B−. The nearby four-dot symbol is not promoted to a winding tap or closed contact; the screen voltage is not yet a validated pass/fail target.
 
-The partial graph now contains 31 groups and 95 reviewed memberships. Component-terminal reference coverage is 74/83 (89.2%); this is inventory coverage, not electrical completion. The #8 schematic versus parts-list value conflict remains unresolved. PT-44 is still NOT ENGINEERING COMPLETE.
+The partial graph has 32 groups and 98 reviewed memberships. Component-terminal reference coverage is 76/83 (91.6%), an inventory count rather than an engineering completion score. The #8 value conflict, opposite oscillator winding, screen-feed origin and full receiver behavior remain open. PT-44 remains NOT ENGINEERING COMPLETE.
 
-Watermark: `BUILD v0.50.0`.
-
-See `engineering/PT44_Oscillator_Tank_Trace_V1.json`, `engineering/PT44_Schematic_Trace_Audit_V1.json`, and `engineering/PT44_Engineering_Readiness_V1.json` for source and open boundaries.
+Watermark: `BUILD v0.51.0`. See `engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json` for source boundaries.
