@@ -1,8 +1,8 @@
 {
   "schema": "PT44_RF_INPUT_TRACE_V1",
-  "version": "0.48.0",
+  "version": "0.49.0",
   "model": "Philco PT-44",
-  "status": "SOURCE_TRACED_RF_INPUT_LOOP_RETURN_AND_SERIES_TRAP_PARTIAL",
+  "status": "SOURCE_TRACED_RF_LOOP_RETURN_BYPASS_AND_SERIES_TRAP_PARTIAL",
   "source": {
     "document": "Philco 1941 RMS Year Book",
     "printed_page": 38,
@@ -32,7 +32,7 @@
         1450,
         2000
       ],
-      "note": "400 dpi review rendering of the official p.38 page; v0.47 reviewed #6 and v0.48 reviewed the #7 loop-return resistor. This is a derivative of the same published schematic."
+      "note": "400 dpi review rendering of the official p.38 page; v0.47 reviewed #6, v0.48 reviewed #7, and v0.49 reviewed #8 connectivity and its schematic/parts-list value conflict. This is a derivative of the same published schematic and parts list."
     }
   },
   "terminal_conventions": {
@@ -41,7 +41,8 @@
     "aerial_compensator_5": "a is the upper terminal on the signal-input conductor and b is the grounded terminal; no polarity is implied.",
     "tube_v1": "The factory symbol signal-input grid is mapped to socket terminal V1:6 using the reviewed 7A8 pin-role reference; the adjacent symbol-level source path is followed without inferring the other 7A8 electrode wires.",
     "component_6": "cap_a is the upper #6 condenser lead on F_RF_INPUT; cap_b and choke_a form the drawn internal series junction; choke_b ends at the explicit loop-operation chassis ground. No B− equivalence or RF behavior is inferred.",
-    "component_7": "7:a is the upper 4.7 MΩ resistor lead at the lower loop/#2 11-turn winding junction; 7:b is the lower lead on B−. This establishes external connectivity only."
+    "component_7": "7:a is the upper 4.7 MΩ resistor lead at the lower loop/#2 11-turn winding junction; 7:b is the lower lead on B−. This establishes external connectivity only.",
+    "component_8": "a and b are drawing-end aliases only: #8:a is the upper loop/#2 11-turn junction; #8:b is B−. The source value is disputed between schematic and parts list."
   },
   "verified_endpoints": [
     {
@@ -193,6 +194,32 @@
         1400
       ],
       "source_render_dpi": 400
+    },
+    {
+      "terminal": "8:a",
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "joined_factory_member": "3:loop_b / 2:secondary_a / 7:a",
+      "interpretation": "Upper #8 capacitor terminal is drawn on the lower-loop/#2 11-turn winding junction shared with the upper #7 resistor terminal. The terminal alias is not polarity.",
+      "source_box_px": [
+        240,
+        950,
+        680,
+        1350
+      ],
+      "source_render_dpi": 400
+    },
+    {
+      "terminal": "8:b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "2:secondary_b / 7:b / B− return rail",
+      "interpretation": "Lower #8 capacitor terminal is drawn on the B− rail shared with the lower #2 11-turn winding and lower #7 resistor terminals. The terminal alias is not polarity.",
+      "source_box_px": [
+        240,
+        950,
+        680,
+        1350
+      ],
+      "source_render_dpi": 400
     }
   ],
   "source_level_closure": {
@@ -206,17 +233,57 @@
     "component_6_series_condenser_choke_terminals_traced": true,
     "component_6_chassis_ground_identified_for_loop_operation": true,
     "component_6_chassis_to_bminus_bond_verified": false,
-    "component_7_loop_return_resistor_endpoints_traced": true
+    "component_7_loop_return_resistor_endpoints_traced": true,
+    "component_8_external_endpoints_traced": true,
+    "component_8_factory_value_resolved": false
   },
   "unresolved": [
-    "Built-in loop/#2 winding parameters and oscillator behavior.",
     "#2 primary/secondary terminals, winding turns and relationship to external ANT eyelet.",
     "#4 oscillator gang wiring, rotor construction/physical lug crosswalk, and remaining #5 adjustment data.",
-    "7A8 plate/screen/cathode and #8/#9 receiver connection crosswalks.",
+    "7A8 plate/screen/cathode and #9 receiver connection crosswalk.",
     "Antenna/chassis and B-minus relationship outside the explicit loop-operation ground symbols.",
     "RF transfer behavior and complete receiver validation.",
     "The #4 oscillator gang and 7A8 converter path remain open; #6 trace completion does not establish oscillator behavior or full RF tracking.",
-    "The #7 resistor return is source-traced, but the oscillator gang, transformer parameters and receiver behavior remain open."
+    "The #7 resistor return is source-traced, but the oscillator gang, transformer parameters and receiver behavior remain open.",
+    "The #8 capacitor endpoints are traced, but its p.38 schematic marking (0.05 mfd) conflicts with the replacement-parts list (0.1 mfd, 200 V); selected simulation value remains unresolved."
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "source_value_discrepancies": [
+    {
+      "status": "UNRESOLVED_CONFLICT",
+      "schematic": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "marking": "0.05 mfd",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+        "source_box_px": [
+          350,
+          980,
+          650,
+          1320
+        ],
+        "render_dpi": 400
+      },
+      "replacement_parts_list": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "marking": "Condenser (.1 mfd., 200 volts)",
+        "part_number": "30-4499",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+        "source_box_px": [
+          0,
+          2100,
+          1300,
+          2450
+        ],
+        "render_dpi": 400
+      },
+      "selected_simulation_value": null,
+      "resolution_needed": "Service bulletin, correct model-specific parts data, or inspected original/replacement component evidence.",
+      "factory_part": "8"
+    }
+  ]
 }

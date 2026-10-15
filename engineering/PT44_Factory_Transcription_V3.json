@@ -142,7 +142,7 @@
       }
     },
     "8": {
-      "description": "0.1 µF / 200 V capacitor",
+      "description": "0.1 µF / 200 V per replacement-parts list; schematic annotation differs",
       "category": "capacitor",
       "terminals": [
         "a",
@@ -152,8 +152,49 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #8",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_both_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.49 traces both #8 terminals across the #2 11-turn winding / lower-loop junction and B−. The schematic marks 0.05 mfd, while the replacement-parts list gives 0.1 mfd, 200 V (part 30-4499); selected simulation value remains unresolved.",
+      "source_terminal_crosswalk": {
+        "a": "upper drawn terminal joined to the lower-loop / #2 11-turn winding junction (F_RF_LOOP_SECONDARY); endpoint label is not polarity",
+        "b": "lower drawn terminal joined to B− (F_BMINUS); endpoint label is not polarity",
+        "limits": "Connectivity is source-traced. The schematic marking (0.05 mfd) conflicts with the replacement-parts list (0.1 mfd, 200 V); do not choose a simulation value without corroborating evidence."
+      },
+      "source_value_discrepancy": {
+        "status": "UNRESOLVED_CONFLICT",
+        "schematic": {
+          "document": "Philco 1941 RMS Year Book",
+          "printed_page": 38,
+          "figure": "Schematic diagram — PT-42, PT-44",
+          "marking": "0.05 mfd",
+          "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+          "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+          "source_box_px": [
+            350,
+            980,
+            650,
+            1320
+          ],
+          "render_dpi": 400
+        },
+        "replacement_parts_list": {
+          "document": "Philco 1941 RMS Year Book",
+          "printed_page": 38,
+          "marking": "Condenser (.1 mfd., 200 volts)",
+          "part_number": "30-4499",
+          "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+          "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+          "source_box_px": [
+            0,
+            2100,
+            1300,
+            2450
+          ],
+          "render_dpi": 400
+        },
+        "selected_simulation_value": null,
+        "resolution_needed": "Service bulletin, correct model-specific parts data, or inspected original/replacement component evidence."
+      }
     },
     "9": {
       "description": "22 kΩ resistor",
@@ -890,7 +931,7 @@
       "title": "Common B− return (partial)",
       "stage": "Return",
       "model": "GND",
-      "description": "Return for the filter capacitors and output-stage bias and grid resistors; the #2 aerial-transformer 11-turn winding and oscillator #9/#11 lower terminals also join this net; not automatically the metal chassis. The lower terminal of #7 also joins this B− return rail.",
+      "description": "Partial B− return includes the lower #2 11-turn winding, #7 resistor and #8 capacitor terminals, in addition to the previously traced filter/audio returns; B− is not automatically the chassis.",
       "source": "Philco 1941 RMS, p.38 — #23, #24, #29A/B",
       "stage_status": "traced_limited",
       "evidence": {
@@ -911,7 +952,8 @@
         "2:secondary_b",
         "9:b",
         "11:b",
-        "7:b"
+        "7:b",
+        "8:b"
       ],
       "prototype_member_crosswalk": [
         "C1:b",
@@ -977,6 +1019,16 @@
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_Oscillator_Return_Trace_V1.json"
+      },
+      "v0_49_source_review": {
+        "milestone_version": "0.49.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "8:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
       }
     },
     {
@@ -1575,7 +1627,7 @@
       "title": "Built-in loop lower lead / aerial transformer 11-turn winding",
       "stage": "RF",
       "model": null,
-      "description": "The 4.7 MΩ #7 resistor bridges the lower built-in-loop/#2 11-turn winding junction to the B− return.",
+      "description": "The 4.7 MΩ #7 resistor and #8 capacitor branch across the lower built-in-loop / #2 11-turn winding junction and B−; #8 schematic/list value conflict remains unresolved.",
       "source": "Philco 1941 RMS p.38 — PT-42/PT-44 RF input; native 300-dpi scan",
       "stage_status": "source_traced_partial_antenna_coupling",
       "evidence": {
@@ -1588,7 +1640,8 @@
       "factory_members": [
         "3:loop_b",
         "2:secondary_a",
-        "7:a"
+        "7:a",
+        "8:a"
       ],
       "prototype_member_crosswalk": [],
       "v0_42_source_review": {
@@ -1601,6 +1654,16 @@
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+      },
+      "v0_49_source_review": {
+        "milestone_version": "0.49.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "8:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
       }
     },
     {
@@ -1847,7 +1910,7 @@
       "description": "The loop/#2 aerial interface, complete #6 RF input trap, #7 loop-return resistor, and lower #9/#11 returns are source-traced. The #4 oscillator gang, #8–#11 converter connections, remaining 7A8 pins, winding parameters and RF behavior remain open.",
       "area": "RF / converter",
       "status": "OPEN",
-      "gap": "v0.48 traces #7:a from the loop/#2 secondary junction and #7:b to B−. The #4 oscillator gang, #8/#9 network, #10 windings, #11 upper terminal, remaining 7A8 pin crosswalks and receiver behavior remain open."
+      "gap": "The #2/#3 interface, #6 series input trap, #7 resistor, and #8 capacitor endpoints are source-traced. Resolve the #8 schematic/parts-list value conflict; #4 oscillator gang, #9/#10/#11 converter paths, remaining 7A8 pin crosswalks, winding parameters and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -1892,7 +1955,7 @@
       "description": "All 30 represented graph groups and 90 component/tube terminal memberships reconcile to source-review evidence through v0.48. The #7 loop-return branch is now source-traced; oscillator/converter topology and full receiver behavior remain open.",
       "area": "Source cross-check",
       "status": "OPEN",
-      "gap": "The source-reviewed graph is a partial network with 30 groups and 90 memberships. #6 RF input trap and #7 loop-return resistor are checked; the oscillator gang, #8–#10 endpoints, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "30 partial graph groups and 92 component/tube endpoint memberships reconcile to source reviews through v0.49. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1907,13 +1970,13 @@
   "checks": {
     "factory_register_count": 33,
     "traced_network_count": 30,
-    "factory_terminals_on_traced_nets": 90,
+    "factory_terminals_on_traced_nets": 92,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.48.0",
-  "source_pages_reviewed": "Philco p.38, PT-42/PT-44 shared schematic; the #6 trace was independently reviewed against a 400 dpi rendering of the official scan."
+  "version": "0.49.0",
+  "source_pages_reviewed": "Philco p.38 PT-42/PT-44 schematic and replacement-parts list; v0.49 traces both #8 endpoints and records the unresolved value conflict."
 }
