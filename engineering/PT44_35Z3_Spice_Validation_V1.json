@@ -1,0 +1,1484 @@
+{
+  "schema": "PT44_35Z3_SPICE_VALIDATION_V1",
+  "version": "0.60.0",
+  "scope": "Independent execution of both declared manufacturer reference laws. Loaded supply transients and actual modeled IF/audio hot DC currents; neither thermal behavior nor full receiver calibration.",
+  "supply": {
+    "AC_90_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 89.32914747072127,
+          "ngspice": 89.39505575573368,
+          "absolute_error": 0.0659082850124122,
+          "tolerance": 0.19879011151146736
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 9.22372588124517,
+          "ngspice": 9.236949877919235,
+          "absolute_error": 0.01322399667406593,
+          "tolerance": 0.2971084963375771
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 29.390787396604466,
+          "ngspice": 29.430471390485152,
+          "absolute_error": 0.03968399388068633,
+          "tolerance": 0.9029141417145545
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 82.45767458835856,
+          "ngspice": 82.51693098183654,
+          "absolute_error": 0.059256393477980396,
+          "tolerance": 0.18503386196367308
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.6088267959730066,
+          "ngspice": 0.610395858589262,
+          "absolute_error": 0.0015690626162554455,
+          "tolerance": 0.03831187575767786
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 1.7162458065439807,
+          "ngspice": 1.7206739120955632,
+          "absolute_error": 0.004428105551582462,
+          "tolerance": 0.07162021736286689
+        }
+      ]
+    },
+    "AC_90_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 87.88352022565489,
+          "ngspice": 87.9472586861177,
+          "absolute_error": 0.06373846046281528,
+          "tolerance": 0.1958945173722354
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 9.03470795434962,
+          "ngspice": 9.047446231689916,
+          "absolute_error": 0.012738277340295312,
+          "tolerance": 0.29142338695069747
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 28.755264387055263,
+          "ngspice": 28.794163834086362,
+          "absolute_error": 0.038899447031099044,
+          "tolerance": 0.8838249150225909
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 81.12324943906569,
+          "ngspice": 81.18059902671622,
+          "absolute_error": 0.05734958765053477,
+          "tolerance": 0.18236119805343243
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.5976007187405847,
+          "ngspice": 0.5991314264533618,
+          "absolute_error": 0.0015307077127770796,
+          "tolerance": 0.037973942793600855
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 1.684840711749004,
+          "ngspice": 1.6891671637396541,
+          "absolute_error": 0.004326451990650071,
+          "tolerance": 0.07067501491218962
+        }
+      ]
+    },
+    "AC_115_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 115.47156557255806,
+          "ngspice": 115.55572192288389,
+          "absolute_error": 0.08415635032582713,
+          "tolerance": 0.2511114438457678
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 11.961512721611214,
+          "ngspice": 11.979239161842747,
+          "absolute_error": 0.017726440231532692,
+          "tolerance": 0.37937717485528244
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 38.14665870311336,
+          "ngspice": 38.19890896095308,
+          "absolute_error": 0.052250257839716596,
+          "tolerance": 1.1659672688285923
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 106.58913745159182,
+          "ngspice": 106.66661256406829,
+          "absolute_error": 0.07747511247646344,
+          "tolerance": 0.23333322512813656
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.7883071784167839,
+          "ngspice": 0.7903722616959836,
+          "absolute_error": 0.002065083279199742,
+          "tolerance": 0.04371116785087951
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 2.2219546617721164,
+          "ngspice": 2.2277114557244033,
+          "absolute_error": 0.005756793952286898,
+          "tolerance": 0.0868313436717321
+        }
+      ]
+    },
+    "AC_115_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 113.74139576718302,
+          "ngspice": 113.82551012321335,
+          "absolute_error": 0.08411435603032658,
+          "tolerance": 0.24765102024642668
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 11.733133042027891,
+          "ngspice": 11.749806441987882,
+          "absolute_error": 0.016673399959991286,
+          "tolerance": 0.37249419325963645
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 37.37749356035164,
+          "ngspice": 37.42790225305214,
+          "absolute_error": 0.050408692700500524,
+          "tolerance": 1.1428370675915642
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 104.99205763124561,
+          "ngspice": 105.06719134760998,
+          "absolute_error": 0.07513371636436261,
+          "tolerance": 0.23013438269521994
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.7748224062865784,
+          "ngspice": 0.7768101483572161,
+          "absolute_error": 0.001987742070637677,
+          "tolerance": 0.04330430445071648
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 2.1842444555167333,
+          "ngspice": 2.1898789848157065,
+          "absolute_error": 0.005634529298973234,
+          "tolerance": 0.0856963695444712
+        }
+      ]
+    },
+    "AC_130_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 131.24724356307345,
+          "ngspice": 131.34557658426374,
+          "absolute_error": 0.09833302119028531,
+          "tolerance": 0.2826911531685275
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 13.616765175299031,
+          "ngspice": 13.636637403798735,
+          "absolute_error": 0.019872228499703937,
+          "tolerance": 0.42909912211396206
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 43.4432998239613,
+          "ngspice": 43.50279090580281,
+          "absolute_error": 0.059491081841514415,
+          "tolerance": 1.3250837271740843
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 121.1513017505292,
+          "ngspice": 121.23952058266549,
+          "absolute_error": 0.08821883213629178,
+          "tolerance": 0.262479041165331
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.8967133703217864,
+          "ngspice": 0.8990375666028437,
+          "absolute_error": 0.002324196281057289,
+          "tolerance": 0.04697112699808531
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 2.5273806193311827,
+          "ngspice": 2.5339469251916,
+          "absolute_error": 0.0065663058604172875,
+          "tolerance": 0.096018407755748
+        }
+      ]
+    },
+    "AC_130_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 129.35585017010388,
+          "ngspice": 129.45176392320636,
+          "absolute_error": 0.0959137531024794,
+          "tolerance": 0.27890352784641276
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 13.365932242416944,
+          "ngspice": 13.38510281627764,
+          "absolute_error": 0.01917057386069665,
+          "tolerance": 0.42155308448832923
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 42.59682054904577,
+          "ngspice": 42.655374835608,
+          "absolute_error": 0.058554286562227276,
+          "tolerance": 1.29966124506824
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 119.40540015701978,
+          "ngspice": 119.49134660146186,
+          "absolute_error": 0.08594644444207233,
+          "tolerance": 0.2589826932029237
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.8819458297962022,
+          "ngspice": 0.8842174739281771,
+          "absolute_error": 0.0022716441319748926,
+          "tolerance": 0.04652652421784531
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 2.4860891872320536,
+          "ngspice": 2.4925107112555906,
+          "absolute_error": 0.0064215240235370175,
+          "tolerance": 0.09477532133766772
+        }
+      ]
+    },
+    "DC_90_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 80.79913208390536,
+          "ngspice": 80.79913206288184,
+          "absolute_error": 2.102352425481513e-8,
+          "tolerance": 0.18159826412576366
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0.000032606737131650464,
+          "ngspice": 0.00003053247564999031,
+          "absolute_error": 0.0000020742614816601505,
+          "tolerance": 0.0200009159742695
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 1.4210854715202004e-14,
+          "absolute_error": 1.4210854715202004e-14,
+          "tolerance": 0.020000000000000427
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 74.58381416301387,
+          "ngspice": 74.58381421189614,
+          "absolute_error": 4.888227067567641e-8,
+          "tolerance": 0.16916762842379227
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0.000027524699572871803,
+          "absolute_error": 0.000027524699572871803,
+          "tolerance": 0.020000825740987188
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        }
+      ]
+    },
+    "DC_90_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 80.16409394227674,
+          "ngspice": 80.16409392275887,
+          "absolute_error": 1.951786998688476e-8,
+          "tolerance": 0.1803281878455177
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0.000038714948902481915,
+          "ngspice": 0.00003289830839283054,
+          "absolute_error": 0.000005816640509651373,
+          "tolerance": 0.020000986949251787
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 73.99762514651462,
+          "ngspice": 73.9976251594823,
+          "absolute_error": 1.2967674933861417e-8,
+          "tolerance": 0.1679952503189646
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.00002011778174374484,
+          "ngspice": 0.00002128211365167751,
+          "absolute_error": 0.0000011643319079326712,
+          "tolerance": 0.02000063846340955
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 1.4210854715202004e-14,
+          "absolute_error": 1.4210854715202004e-14,
+          "tolerance": 0.020000000000000427
+        }
+      ]
+    },
+    "DC_115_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 103.82154529280832,
+          "ngspice": 103.8215452725989,
+          "absolute_error": 2.0209427020745352e-8,
+          "tolerance": 0.2276430905451978
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 95.83527244003056,
+          "ngspice": 95.83527255932374,
+          "absolute_error": 1.192931762261651e-7,
+          "tolerance": 0.21167054511864747
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        }
+      ]
+    },
+    "DC_115_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 103.06780846973705,
+          "ngspice": 103.06780844722644,
+          "absolute_error": 2.2510604935632728e-8,
+          "tolerance": 0.22613561689445288
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 95.13951543361796,
+          "ngspice": 95.1395154897601,
+          "absolute_error": 5.6142141602322226e-8,
+          "tolerance": 0.2102790309795202
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0.000015728399755926745,
+          "absolute_error": 0.000015728399755926745,
+          "tolerance": 0.020000471851992677
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 2.842170943040401e-14,
+          "absolute_error": 2.842170943040401e-14,
+          "tolerance": 0.020000000000000854
+        }
+      ]
+    },
+    "DC_130_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 117.67261786846332,
+          "ngspice": 117.67261785837444,
+          "absolute_error": 1.0088882618219941e-8,
+          "tolerance": 0.2553452357167489
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 9.947598300641403e-14,
+          "absolute_error": 9.947598300641403e-14,
+          "tolerance": 0.020000000000002984
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 108.62087785317104,
+          "ngspice": 108.62087802310324,
+          "absolute_error": 1.6993220697258948e-7,
+          "tolerance": 0.23724175604620648
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.000021452373274234758,
+          "ngspice": 0.000010271386732357986,
+          "absolute_error": 0.000011180986541876772,
+          "tolerance": 0.02000030814160197
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        }
+      ]
+    },
+    "DC_130_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 116.85162272631133,
+          "ngspice": 116.85162270166038,
+          "absolute_error": 2.4650958607708162e-8,
+          "tolerance": 0.25370324540332073
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0.00003099074708799729,
+          "ngspice": 0.000017271776462817034,
+          "absolute_error": 0.000013718970625180253,
+          "tolerance": 0.020000518153293886
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 107.86303625163355,
+          "ngspice": 107.86303634001369,
+          "absolute_error": 8.83801476447843e-8,
+          "tolerance": 0.23572607268002738
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.00003821843130018974,
+          "ngspice": 0,
+          "absolute_error": 0.00003821843130018974,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        }
+      ]
+    },
+    "fault_reservoir_dry": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 0.1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000005208333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 48.908626733307436,
+          "ngspice": 48.85250583895408,
+          "absolute_error": 0.056120894353355766,
+          "tolerance": 0.11770501167790817
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 56.45872787250099,
+          "ngspice": 56.519488279771295,
+          "absolute_error": 0.06076040727030829,
+          "tolerance": 1.7155846483931387
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 162.9669054868427,
+          "ngspice": 163.14834325329699,
+          "absolute_error": 0.18143776645428034,
+          "tolerance": 4.914450297598909
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 45.14642446753698,
+          "ngspice": 45.094042503908234,
+          "absolute_error": 0.05238196362874703,
+          "tolerance": 0.11018808500781647
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 3.9702069531442032,
+          "ngspice": 3.9761495837722,
+          "absolute_error": 0.0059426306279966035,
+          "tolerance": 0.139284487513166
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 11.31232995630289,
+          "ngspice": 11.329020318741314,
+          "absolute_error": 0.0166903624384247,
+          "tolerance": 0.35987060956223943
+        }
+      ]
+    },
+    "fault_rectifier_weak": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 0.35,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 98.17192708409435,
+          "ngspice": 98.23281868258171,
+          "absolute_error": 0.06089159848735903,
+          "tolerance": 0.21646563736516342
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 9.782449188532663,
+          "ngspice": 9.794264689362931,
+          "absolute_error": 0.011815500830268277,
+          "tolerance": 0.31382794068088793
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 30.89090670282988,
+          "ngspice": 30.92715398737907,
+          "absolute_error": 0.036247284549190795,
+          "tolerance": 0.9478146196213721
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 90.62024038493377,
+          "ngspice": 90.67461598613133,
+          "absolute_error": 0.05437560119756313,
+          "tolerance": 0.20134923197226265
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.6560436533250871,
+          "ngspice": 0.6576220828276187,
+          "absolute_error": 0.0015784295025316197,
+          "tolerance": 0.039728662484828564
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 1.851476963121442,
+          "ngspice": 1.8559658270808086,
+          "absolute_error": 0.00448886395936654,
+          "tolerance": 0.07567897481242426
+        }
+      ]
+    },
+    "fault_rectifier_open": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 0,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 0.02
+        }
+      ]
+    },
+    "fault_switch_off": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": 0.6,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 1.2
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 0.11623886980350027,
+          "ngspice": 0.11621698894125852,
+          "absolute_error": 0.00002188086224175212,
+          "tolerance": 0.02023243397788252
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 0.04116336788405572,
+          "ngspice": 0.041153614391820637,
+          "absolute_error": 0.000009753492235080319,
+          "tolerance": 0.02123460843175462
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 0.1443965363603403,
+          "ngspice": 0.14436214525753627,
+          "absolute_error": 0.00003439110280403779,
+          "tolerance": 0.02433086435772609
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 0.12055778739058838,
+          "ngspice": 0.1205350935331831,
+          "absolute_error": 0.000022693857405275963,
+          "tolerance": 0.020241070187066366
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.04269281490721331,
+          "ngspice": 0.042682699018737905,
+          "absolute_error": 0.000010115888475402401,
+          "tolerance": 0.02128048097056214
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 0.14976166714981398,
+          "ngspice": 0.14972599822611324,
+          "absolute_error": 0.00003566892370074348,
+          "tolerance": 0.024491779946783396
+        }
+      ]
+    },
+    "fault_restored": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "checks": [
+        {
+          "node": "reservoir_v",
+          "metric": "mean",
+          "javascript": 113.74139576718302,
+          "ngspice": 113.82551012321335,
+          "absolute_error": 0.08411435603032658,
+          "tolerance": 0.24765102024642668
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "ripple_rms",
+          "javascript": 11.733133042027891,
+          "ngspice": 11.749806441987882,
+          "absolute_error": 0.016673399959991286,
+          "tolerance": 0.37249419325963645
+        },
+        {
+          "node": "reservoir_v",
+          "metric": "peak_to_peak",
+          "javascript": 37.37749356035164,
+          "ngspice": 37.42790225305214,
+          "absolute_error": 0.050408692700500524,
+          "tolerance": 1.1428370675915642
+        },
+        {
+          "node": "filtered_v",
+          "metric": "mean",
+          "javascript": 104.99205763124561,
+          "ngspice": 105.06719134760998,
+          "absolute_error": 0.07513371636436261,
+          "tolerance": 0.23013438269521994
+        },
+        {
+          "node": "filtered_v",
+          "metric": "ripple_rms",
+          "javascript": 0.7748224062865784,
+          "ngspice": 0.7768101483572161,
+          "absolute_error": 0.001987742070637677,
+          "tolerance": 0.04330430445071648
+        },
+        {
+          "node": "filtered_v",
+          "metric": "peak_to_peak",
+          "javascript": 2.1842444555167333,
+          "ngspice": 2.1898789848157065,
+          "absolute_error": 0.005634529298973234,
+          "tolerance": 0.0856963695444712
+        }
+      ]
+    }
+  },
+  "operating_points": {
+    "90_ge_legacy": {
+      "options": {
+        "line_v": 90,
+        "rectifier_model": "ge_legacy"
+      },
+      "checks": [
+        {
+          "node": "B",
+          "javascript": 75.47086085347686,
+          "ngspice": 75.4708608538117,
+          "absolute_error_v": 3.348361587995896e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "S",
+          "javascript": 42.92789814842707,
+          "ngspice": 42.92789814858305,
+          "absolute_error_v": 1.559783413540572e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "P",
+          "javascript": 22.54653253496335,
+          "ngspice": 22.5465325350634,
+          "absolute_error_v": 1.0004796990870091e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "K",
+          "javascript": 4.287568344738444,
+          "ngspice": 4.287568344761326,
+          "absolute_error_v": 2.2882140626734326e-11,
+          "tolerance_v": 0.00001
+        }
+      ]
+    },
+    "90_rca_1947": {
+      "options": {
+        "line_v": 90,
+        "rectifier_model": "rca_1947"
+      },
+      "checks": [
+        {
+          "node": "B",
+          "javascript": 74.87766915502024,
+          "ngspice": 74.87766915523838,
+          "absolute_error_v": 2.1813661987835076e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "S",
+          "javascript": 42.63395318625436,
+          "ngspice": 42.6339531863544,
+          "absolute_error_v": 1.000373117676645e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "P",
+          "javascript": 22.369319557961706,
+          "ngspice": 22.36931955802688,
+          "absolute_error_v": 6.517453243759519e-11,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "K",
+          "javascript": 4.246915000254526,
+          "ngspice": 4.246915000269218,
+          "absolute_error_v": 1.469224741867947e-11,
+          "tolerance_v": 0.00001
+        }
+      ]
+    },
+    "115_ge_legacy": {
+      "options": {
+        "line_v": 115,
+        "rectifier_model": "ge_legacy"
+      },
+      "checks": [
+        {
+          "node": "B",
+          "javascript": 96.45301460259483,
+          "ngspice": 96.4530146028919,
+          "absolute_error_v": 2.970637069665827e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "S",
+          "javascript": 53.096539207603435,
+          "ngspice": 53.09653920773366,
+          "absolute_error_v": 1.3022827261011116e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "P",
+          "javascript": 28.81484333476392,
+          "ngspice": 28.81484333485264,
+          "absolute_error_v": 8.871836598700611e-11,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "K",
+          "javascript": 5.754940666606151,
+          "ngspice": 5.754940666627199,
+          "absolute_error_v": 2.1048052190053568e-11,
+          "tolerance_v": 0.00001
+        }
+      ]
+    },
+    "115_rca_1947": {
+      "options": {
+        "line_v": 115,
+        "rectifier_model": "rca_1947"
+      },
+      "checks": [
+        {
+          "node": "B",
+          "javascript": 95.7314248127901,
+          "ngspice": 95.73142481300277,
+          "absolute_error_v": 2.126796516677132e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "S",
+          "javascript": 52.7536556883722,
+          "ngspice": 52.75365568846365,
+          "absolute_error_v": 9.14539555196825e-11,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "P",
+          "javascript": 28.599272086619308,
+          "ngspice": 28.59927208668285,
+          "absolute_error_v": 6.354028414534696e-11,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "K",
+          "javascript": 5.70361749624871,
+          "ngspice": 5.703617496263625,
+          "absolute_error_v": 1.4915180202024203e-11,
+          "tolerance_v": 0.00001
+        }
+      ]
+    },
+    "130_ge_legacy": {
+      "options": {
+        "line_v": 130,
+        "rectifier_model": "ge_legacy"
+      },
+      "checks": [
+        {
+          "node": "B",
+          "javascript": 109.0404185427422,
+          "ngspice": 109.0404185430113,
+          "absolute_error_v": 2.6909674488706514e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "S",
+          "javascript": 59.008302084049426,
+          "ngspice": 59.00830208416297,
+          "absolute_error_v": 1.1354472917446401e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "P",
+          "javascript": 32.575265691920386,
+          "ngspice": 32.57526569200075,
+          "absolute_error_v": 8.036238341446733e-11,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "K",
+          "javascript": 6.658708912520082,
+          "ngspice": 6.65870891253952,
+          "absolute_error_v": 1.943867289355694e-11,
+          "tolerance_v": 0.00001
+        }
+      ]
+    },
+    "130_rca_1947": {
+      "options": {
+        "line_v": 130,
+        "rectifier_model": "rca_1947"
+      },
+      "checks": [
+        {
+          "node": "B",
+          "javascript": 108.24515981908841,
+          "ngspice": 108.2451598192935,
+          "absolute_error_v": 2.0509105524979532e-10,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "S",
+          "javascript": 58.63853957515037,
+          "ngspice": 58.63853957523514,
+          "absolute_error_v": 8.477485380353755e-11,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "P",
+          "javascript": 32.337686227689986,
+          "ngspice": 32.33768622775125,
+          "absolute_error_v": 6.126299467723584e-11,
+          "tolerance_v": 0.00001
+        },
+        {
+          "node": "K",
+          "javascript": 6.601158197036794,
+          "ngspice": 6.601158197051497,
+          "absolute_error_v": 1.4702905559715873e-11,
+          "tolerance_v": 0.00001
+        }
+      ]
+    }
+  },
+  "full_ec_closed": []
+}

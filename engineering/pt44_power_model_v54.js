@@ -6,6 +6,7 @@ function pt44PowerValidate(spec,graph){
  const map=new Map();for(const n of graph.factory_nets)for(const t of n.factory_members){if(map.has(t))throw Error('Duplicate source terminal '+t);map.set(t,n.id);}
  for(const [t,n] of Object.entries(spec.factory_terminal_nets))if(map.get(t)!==n)throw Error('Power topology source mismatch '+t);
  if(graph.factory_nets.find(n=>n.id==='F_BMINUS')?.factory_members.includes('__CHASSIS__'))throw Error('B-minus cannot be fused with chassis');
+ for(const id of ['ge_legacy','rca_1947']){const m=spec.rectifier_models?.[id];if(!m||m.reference_v!==(id==='ge_legacy'?18:20)||m.reference_a!==.2||Math.abs(m.perveance_a_per_v_1_5-.2/m.reference_v**1.5)>1e-14)throw Error('Unreviewed rectifier curve '+id);if(JSON.stringify(m.checked_forward_range_v)!==JSON.stringify(id==='rca_1947'?[5,40]:null))throw Error('Unreviewed rectifier curve range');}
  const d=spec.rectifier_approximation;if(Math.abs(d.perveance_a_per_v_1_5-d.reference_a/Math.pow(d.reference_v,1.5))>1e-14)throw Error('Rectifier reference-point derivation changed');
  if(spec.acceptance.factory_voltage_calibrated||spec.acceptance.full_receiver_loads_connected||spec.acceptance.benchmark_ready)throw Error('Uncalibrated power model cannot certify receiver completion');
  return true;
@@ -22,16 +23,17 @@ function pt44PowerConfigure(spec,graph,input={}){
  if(!['AC','DC'].includes(p.line_mode)||![1,-1].includes(p.dc_polarity)||typeof p.field_open!=='boolean'||p.emission>2||p.line_v>250||p.line_hz<40||p.line_hz>100||p.duration_s>20||p.dt_s>1/(p.line_hz*100)||p.duration_s/p.dt_s>1000000)throw Error('Power input outside supported numerical domain');
  if(p.coupled_load_law&&(typeof p.coupled_load_law!=='function'||p.load_laws))throw Error('Use one coupled load function or two independent load callbacks');
  if(p.load_laws&&(!p.load_laws.rectifier||!p.load_laws.filtered))throw Error('Both load callbacks are required');
+ if(!Object.hasOwn(spec.rectifier_models,p.rectifier_model))throw Error('Unknown rectifier model');
  const f=spec.factory_parameters,rParallel=p.lamp_hot_resistance_ohm===null?f.dropper_40_ohm:1/(1/f.dropper_40_ohm+1/p.lamp_hot_resistance_ohm),rHeater=f.dropper_80_ohm+p.hot_heater_resistance_ohm,rLine=p.source_resistance_ohm+rParallel;
- return {spec,p,capA:f.cap_29a_f*p.cap_a_scale,capB:f.cap_29b_f*p.cap_b_scale,fieldR:f.field_dcr_ohm,fieldL:p.field_inductance_h,plateRatio:rHeater/(rHeater+rLine),plateR:rHeater*rLine/(rHeater+rLine),heaterR:rHeater,rectK:spec.rectifier_approximation.perveance_a_per_v_1_5*p.emission};
+ return {spec,p,capA:f.cap_29a_f*p.cap_a_scale,capB:f.cap_29b_f*p.cap_b_scale,fieldR:f.field_dcr_ohm,fieldL:p.field_inductance_h,plateRatio:rHeater/(rHeater+rLine),plateR:rHeater*rLine/(rHeater+rLine),heaterR:rHeater,rectK:spec.rectifier_models[p.rectifier_model].perveance_a_per_v_1_5*p.emission};
 }
 function pt44PowerRectifier(c,anodeTheveninV,cathodeV,on=true){
- const head=anodeTheveninV-cathodeV;if(!on||head<=0||c.rectK===0)return {current_a:0,conductance_s:0,plate_v:anodeTheveninV};
+ const head=anodeTheveninV-cathodeV;if(!on||head<=0||c.rectK===0)return {current_a:0,conductance_s:0,plate_v:anodeTheveninV,forward_drop_v:0};
  // Solve the monotonic local relation x + R*K*x^(3/2) = available voltage.
  let lo=0,hi=head,x=head/(1+c.plateR*c.rectK*Math.sqrt(head));
  for(let i=0;i<24;i++){const y=x+c.plateR*c.rectK*Math.pow(x,1.5)-head;if(Math.abs(y)<1e-10)break;if(y>0)hi=x;else lo=x;const next=x-y/(1+1.5*c.plateR*c.rectK*Math.sqrt(x));x=next>lo&&next<hi?next:(lo+hi)/2;}
  const current=c.rectK*Math.pow(x,1.5),g=1.5*c.rectK*Math.sqrt(x);
- return {current_a:current,conductance_s:g/(1+c.plateR*g),plate_v:anodeTheveninV-c.plateR*current};
+ return {current_a:current,conductance_s:g/(1+c.plateR*g),plate_v:anodeTheveninV-c.plateR*current,forward_drop_v:x};
 }
 function pt44PowerLoad(c,port,v,t){
  const fn=c.p.load_laws?.[port];const resistance=port==='rectifier'?c.p.load_rect_ohm:c.p.load_filtered_ohm;
@@ -67,7 +69,7 @@ function pt44PowerStep(c,previous,time,dt){
  }
  if(residual>1e-7)throw Error('Power solver did not converge');
  rect=pt44PowerRectifier(c,th,a,on);
- return {time_s:time,reservoir_v:a,filtered_v:b,field_current_a:i,rectifier_current_a:rect.current_a,plate_v:rect.plate_v,heater_current_a:rect.plate_v/c.heaterR,kcl_residual_a:residual};
+ return {time_s:time,reservoir_v:a,filtered_v:b,field_current_a:i,rectifier_current_a:rect.current_a,rectifier_forward_drop_v:rect.forward_drop_v,plate_v:rect.plate_v,heater_current_a:rect.plate_v/c.heaterR,kcl_residual_a:residual};
 }
 function pt44PowerSummary(samples,from,to){
  const keys=['reservoir_v','filtered_v','field_current_a','rectifier_current_a','heater_current_a'];const accum=Object.fromEntries(keys.map(k=>[k,{integral:0,square:0,min:Infinity,max:-Infinity}]));let duration=0;
@@ -88,7 +90,8 @@ function pt44PowerSimulate(spec,graph,input={}){
  const count=Math.ceil(p.duration_s/p.dt_s),dt=p.duration_s/count;
  for(let n=1;n<=count;n++){state=pt44PowerStep(c,state,n*dt,dt);samples.push(state);maxResidual=Math.max(maxResidual,state.kcl_residual_a);}
  const from=Math.max(0,p.duration_s-spec.numerical_contract.report_cycles/p.line_hz),summary=pt44PowerSummary(samples,from,p.duration_s);
- return {samples,final:state,summary,measurement_from_s:from,max_kcl_residual_a:maxResidual,parameters:{...p,load_laws:undefined,coupled_load_law:undefined},model_calibrated:false,receiver_complete:false};
+ const range=spec.rectifier_models[p.rectifier_model].checked_forward_range_v,coverage=from=>{const conducting=samples.filter(s=>s.time_s>=from&&s.rectifier_current_a>1e-12),outside=range?conducting.filter(s=>s.rectifier_forward_drop_v<range[0]||s.rectifier_forward_drop_v>range[1]).length:null;return {conducting_steps:conducting.length,outside_checked_curve_steps:outside,max_forward_drop_v:conducting.length?conducting.reduce((v,s)=>Math.max(v,s.rectifier_forward_drop_v),0):null};};
+ return {samples,final:state,summary,rectifier_curve_coverage:{model:p.rectifier_model,emission_scale:p.emission,reference_perveance_unscaled:p.emission===1,checked_forward_range_v:range,whole_run:coverage(0),measurement_window:coverage(from)},measurement_from_s:from,max_kcl_residual_a:maxResidual,parameters:{...p,load_laws:undefined,coupled_load_law:undefined},model_calibrated:false,receiver_complete:false};
 }
 function pt44PowerSpiceDeck(spec,graph,input={}){
  const c=pt44PowerConfigure(spec,graph,input),p=c.p;
@@ -97,7 +100,7 @@ function pt44PowerSpiceDeck(spec,graph,input={}){
  const r=spec.factory_parameters,off=p.power_off_at_s;
  const source=p.line_mode==='DC'?String(p.line_v*p.dc_polarity):`SIN(0 ${Math.SQRT2*p.line_v} ${p.line_hz})`;
  const lineExpression=p.line_mode==='DC'?String(p.line_v*p.dc_polarity):`${Math.SQRT2*p.line_v}*sin(${2*3.141592653589793*p.line_hz}*time)`;
- const lines=['PT-44 v0.54 dynamic power model - explicitly uncalibrated parameters','* Factory topology: Philco p.38. Load resistors, field L and lamp hot R are test inputs.','* B-minus is the reference; no chassis bond. Rectifier is a single-point 3/2-power approximation.',off===null?`VMAIN LINE 0 ${source}`:`BMAIN LINE 0 V={(${lineExpression})*(time < ${off})}`,p.source_resistance_ohm>0?`RSOURCE LINE LINE_IN ${p.source_resistance_ohm}`:'VLINE_LINK LINE LINE_IN 0',`R30_40 LINE_IN PLATE ${r.dropper_40_ohm}`];
+ const lines=['PT-44 v0.54 dynamic power model - explicitly uncalibrated parameters','* Factory topology: Philco p.38. Load resistors, field L and lamp hot R are test inputs.',`* B-minus reference; no chassis bond. Rectifier model: ${p.rectifier_model}; ${spec.rectifier_models[p.rectifier_model].evidence}`,off===null?`VMAIN LINE 0 ${source}`:`BMAIN LINE 0 V={(${lineExpression})*(time < ${off})}`,p.source_resistance_ohm>0?`RSOURCE LINE LINE_IN ${p.source_resistance_ohm}`:'VLINE_LINK LINE LINE_IN 0',`R30_40 LINE_IN PLATE ${r.dropper_40_ohm}`];
  if(p.lamp_hot_resistance_ohm!==null)lines.push(`RLAMP LINE_IN PLATE ${p.lamp_hot_resistance_ohm}`);
  lines.push(`R30_80 PLATE HEATER_IN ${r.dropper_80_ohm}`,`RHEATERS HEATER_IN 0 ${p.hot_heater_resistance_ohm}`);
  const active=off===null?'1':`(time < ${off})`;
