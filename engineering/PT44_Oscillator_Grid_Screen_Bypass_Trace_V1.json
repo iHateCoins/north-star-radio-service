@@ -58,16 +58,17 @@
     "shared_screen_decoupling_connected": true,
     "four_dot_contact_to_winding_mapping_verified": false,
     "screen_45v_measurement_conditions_verified": false,
-    "screen_upstream_feed_traced": false,
-    "opposite_10_winding_traced": false,
+    "screen_upstream_feed_traced": true,
+    "opposite_10_winding_traced": true,
     "oscillator_behavior_validated": false,
     "benchmark_ready": false
   },
   "unresolved": [
-    "The four-dot #10-adjacent symbol has not been resolved into electrical contacts or transformer taps; no connection from F_OSC_GRID_LEAK to the tuned winding is inferred.",
-    "The opposite #10 winding and 7A8 oscillator-anode connection, winding roles, polarity, L and coupling remain open.",
-    "The upstream origin and measurement conditions of the annotated 45 V screen conductor remain unverified.",
-    "The #8 schematic/parts-list value conflict, chassis physical lugs and receiver behavior remain open."
+    "Four-dot oscillator coupling remains unresolved.",
+    "Winding polarity, L and coupling, physical lugs, #8 value conflict and receiver behavior remain open.",
+    "45 V measurement conditions are not verified."
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "review_revision": "0.53.0",
+  "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

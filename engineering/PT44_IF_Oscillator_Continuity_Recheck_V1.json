@@ -1,8 +1,8 @@
 {
   "schema": "PT44_IF_OSCILLATOR_CONTINUITY_RECHECK_V1",
-  "version": "0.52.0",
+  "version": "0.53.0",
   "model": "Philco PT-44",
-  "status": "PRIOR_V0_40_IF_RETURN_ASSIGNMENT_CHALLENGED_NOT_GATE_ELIGIBLE",
+  "status": "RESOLVED_BY_SOURCE_CONDUCTOR_RECONCILIATION",
   "sources": [
     {
       "document": "Philco 1941 RMS Year Book",
@@ -17,7 +17,12 @@
       "source_relation": "Reproduces the Philco schematic; a clearer print, not independent physical continuity evidence."
     }
   ],
-  "graph_claims_under_review": [
+  "drawing_observation": "The lower right #10 winding conductor appears to meet the lower first-IF primary and the left #13 resistor lead. This is an observation for continuity review, not a newly certified graph membership.",
+  "required_evidence": "A legible independent schematic annotation or continuity measurements on an original PT-42/PT-44 chassis from both #10 winding ends through #12 primary/secondary and both #13 resistor leads, with the set unplugged.",
+  "policy": "The v0.40 assignments are superseded. Use the corrected supply/screen/AVC groups in the v0.53 reconciliation; this is source drawing closure, not chassis validation.",
+  "netlist_gate_met": false,
+  "resolution_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+  "graph_claims_under_review_history": [
     {
       "terminal": "13:a",
       "current_graph_net": "F_IF1_GRID",
@@ -37,8 +42,9 @@
       "reason": "The secondary cold end and adjacent conductor crossings require independent rechecking as part of the same path."
     }
   ],
-  "drawing_observation": "The lower right #10 winding conductor appears to meet the lower first-IF primary and the left #13 resistor lead. This is an observation for continuity review, not a newly certified graph membership.",
-  "required_evidence": "A legible independent schematic annotation or continuity measurements on an original PT-42/PT-44 chassis from both #10 winding ends through #12 primary/secondary and both #13 resistor leads, with the set unplugged.",
-  "policy": "Do not treat the v0.40 IF return membership assertions as accepted gate-closure evidence until the conflicting path is resolved. Retain existing graph only as provisional legacy data pending a coherent correction of the whole conductor group.",
-  "netlist_gate_met": false
+  "resolved_assignments": {
+    "13:a": "F_BPLUS_FILT",
+    "13:b": "F_SCREEN_45V",
+    "12:sReturn": "F_AVC_RETURN"
+  }
 }

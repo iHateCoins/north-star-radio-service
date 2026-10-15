@@ -79,3 +79,6 @@ jobs:
         run: node tests/tube_pin_audit_v15.test.js
       - name: Verify PT-42/PT-44 source equivalence scope
         run: node tests/test_model_equivalence_v1.js
+
+      - name: Verify corrected supply, screen, AVC and cathode conductors
+        run: node tests/test_supply_avc_reconciliation_v53.js

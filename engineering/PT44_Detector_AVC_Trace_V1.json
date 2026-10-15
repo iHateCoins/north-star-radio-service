@@ -45,9 +45,9 @@
     },
     {
       "terminal": "17:b",
-      "net_id": "F_DET_PASSIVE_RETURN",
-      "joined_factory_member": "15:b / 16:b / 19:b",
-      "interpretation": "Lower #17 terminal joins shared detector return; this does not prove chassis bond.",
+      "net_id": "F_AVC_RETURN",
+      "joined_factory_member": "12:sReturn / 2:secondary_b / 7:b / 8:b",
+      "interpretation": "Lower #17 lead joins the lower unnumbered 7C6 diode glyph lead and descends to the AVC rail; its crossing of the passive B− return has no junction dot.",
       "source_box_px": [
         750,
         265,
@@ -78,9 +78,10 @@
     "benchmark_ready": false
   },
   "unresolved": [
-    "Upper 7C6 diode glyph to pin 5 or 6",
-    "External 7C6 cathode pin and chassis/B− routing",
-    "Volume-control switch lugs",
-    "Complete AVC route and operating behavior"
-  ]
+    "Upper/lower 7C6 diode glyphs to numbered socket pins 5/6.",
+    "Physical switch lugs and B−/chassis relationship.",
+    "AVC operating behavior and receiver validation."
+  ],
+  "review_revision": "0.53.0",
+  "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

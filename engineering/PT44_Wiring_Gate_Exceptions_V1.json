@@ -1,6 +1,6 @@
 {
   "schema": "PT44_WIRING_GATE_EXCEPTIONS_V1",
-  "version": "0.52.0",
+  "version": "0.53.0",
   "model": "Philco PT-44 / shared PT-42 chassis",
   "gate": "GATE-NETLIST",
   "status": "NOT_MET",
@@ -13,60 +13,43 @@
   },
   "progress": {
     "component_terminal_inventory": 83,
-    "component_terminals_in_reviewed_graph": 82,
+    "component_terminals_in_reviewed_graph": 83,
     "reviewed_graph_groups": 35,
-    "reviewed_memberships": 108,
+    "reviewed_memberships": 114,
     "new_power_crosswalk": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
-    "rider_crosscheck": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+    "rider_crosscheck": "engineering/PT44_Rider_12_45_Crosscheck_V1.json",
+    "reconciliation": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
   },
   "blocking_reconciliation": [
     {
-      "area": "Oscillator transformer #10",
-      "unrepresented_terminals": [
-        "10:secondary_b"
-      ],
-      "evidence": "Rider XII 12-45 corroborates the upper opposite #10 winding end at 7A8 oscillator-anode pin V1:3. The lower end lies beside #12/#13 and several conductor crossings and is not yet promoted.",
-      "required_resolution": "Trace the lower right-hand winding end and recheck #12/#13 conductor assignments in the printed sources and, if still ambiguous, original chassis continuity.",
-      "do_not_infer": "Do not assign winding polarity, physical lugs, inductance, or a crossing as a junction from page proximity."
-    },
-    {
-      "area": "Prior #12/#13 IF secondary return trace",
-      "artifact_to_recheck": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
-      "evidence": "The clearer Rider XII 12-45 reproduction makes the left #13 lead appear connected to the lower right #10 winding and lower first-IF primary, while the legacy v0.40 graph places that lead on the 7B7 grid. The exact crossing-by-crossing path is not yet independently verified.",
-      "required_resolution": "Follow #12 secondary and both #13 ends through every crossing in an independent scan or with continuity testing; amend the prior graph and audit if its assignments are contradicted.",
-      "recheck_artifact": "engineering/PT44_IF_Oscillator_Continuity_Recheck_V1.json"
-    },
-    {
-      "area": "External tube pins and internal/no-connection roles",
+      "area": "7C6 diode socket assignments",
       "unrepresented_pin_roles": [
-        "V1:7",
-        "V2:4",
-        "V2:5",
-        "V2:7",
-        "V3:4",
         "V3:5",
-        "V3:6",
-        "V3:7"
+        "V3:6"
       ],
-      "required_resolution": "Crosswalk eight active/shield socket positions, including 7C6 diode plates and the externally routed cathode, against factory conductor geometry or original chassis continuity. Six manufacturer no-connection/shell positions need no invented electrical net.",
-      "manufacturer_nonfunctional_or_option": [
-        "V4:1",
-        "V4:6",
-        "V5:3",
-        "V5:4",
-        "V5:5",
-        "V5:6"
-      ],
-      "classification_artifact": "engineering/PT44_Pin_Closure_Inventory_V1.json"
+      "required_resolution": "Map upper and lower diode glyphs to pins 5/6 using factory socket labels or documented chassis continuity; no arbitrary plate numbering."
     },
     {
-      "area": "Physical line switch and chassis return",
-      "required_resolution": "Correlate #16 switch terminals and physical socket leads to a clear original chassis underside or continuity record; retain AC plug A/B aliases because the factory diagram does not polarize the plug. Keep chassis distinct from B\u2212 unless a source establishes the relation."
+      "area": "Oscillator coupling symbol",
+      "required_resolution": "Resolve the #10-adjacent four-dot symbol/coupling before claiming complete oscillator topology."
+    },
+    {
+      "area": "Component values and physical boundaries",
+      "required_resolution": "Resolve #8 0.05/0.1 µF discrepancy; retain physical switch/coil lug and chassis/B− relationship as unverified."
     }
   ],
   "preferred_new_evidence": [
     "Philco PT-42/PT-44 Service Bulletin 365 schematic and under-chassis views",
     "Clear original PT-42/PT-44 underside photos around #10, 7A8, #12/#13, and 7C6 with continuity readings"
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "resolved_in_v053": {
+    "artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+    "items": [
+      "Lower right #10 winding to filtered B+",
+      "#13 filtered B+ to screen-feed path",
+      "#12 secondary, #17 and aerial AVC return distinguished from B−",
+      "Converter/IF and 7C6 cathode returns; passive audio B− rail"
+    ]
+  }
 }

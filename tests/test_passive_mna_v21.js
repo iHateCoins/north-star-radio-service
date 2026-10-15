@@ -8,11 +8,11 @@ const read=x=>JSON.parse(vm.runInContext('JSON.stringify('+x+')',ctx));
 assert.deepEqual(read('PT44_PASSIVE_STUDY_V1'),fixture);
 const outcome=read('pt44PassiveStudyAudit()');assert(outcome.ok,JSON.stringify(outcome.issues));
 assert.deepEqual(read('pt44PassiveComponents()').map(x=>[x.name,x.a,x.b]),[
- ['Philco #15','F_IF2_SECONDARY_VOL_TOP','F_DET_PASSIVE_RETURN'],
+ ['Philco #15','F_IF2_SECONDARY_VOL_TOP','F_BMINUS'],
  ['Philco #18','F_VOL_WIPER_C18','F_7C6_AUDIO_GRID'],
- ['Philco #19','F_7C6_AUDIO_GRID','F_DET_PASSIVE_RETURN']]);
+ ['Philco #19','F_7C6_AUDIO_GRID','F_BMINUS']]);
 for(const hz of [0,0.02,0.1,1,2,3.3862753849339435,10,100,1000,10000,455000]){
- const v=read('pt44SolvePassiveNetwork([pt44PassiveComponents()[1],pt44PassiveComponents()[2]],'+hz+',{"F_VOL_WIPER_C18":1,"F_DET_PASSIVE_RETURN":0})');
+ const v=read('pt44SolvePassiveNetwork([pt44PassiveComponents()[1],pt44PassiveComponents()[2]],'+hz+',{"F_VOL_WIPER_C18":1,"F_BMINUS":0})');
  const y=v.voltages.F_7C6_AUDIO_GRID,w=2*Math.PI*hz*10e-9*4.7e6;
  assert(Math.hypot(y.re-w*w/(1+w*w),y.im-w/(1+w*w))<2e-12,'complex RC @ '+hz+' Hz');
  assert(v.kclResidualAmps<1e-14,'KCL @ '+hz+' Hz');
@@ -25,7 +25,7 @@ const cases=[
 ];
 for(const [i,e] of cases.entries())assert.equal(vm.runInContext(e,ctx),true,'Missed mutation '+i);
 assert.equal(vm.runInContext('Object.isFrozen(PT44_PASSIVE_STUDY_V1)',ctx),true);
-for(const invalid of ['NaN','Infinity','-1'])assert.throws(()=>vm.runInContext('pt44SolvePassiveNetwork(pt44PassiveComponents(),'+invalid+',{"F_DET_PASSIVE_RETURN":0})',ctx),/Frequency must be nonnegative/);
+for(const invalid of ['NaN','Infinity','-1'])assert.throws(()=>vm.runInContext('pt44SolvePassiveNetwork(pt44PassiveComponents(),'+invalid+',{"F_BMINUS":0})',ctx),/Frequency must be nonnegative/);
 assert.throws(()=>vm.runInContext('pt44SolvePassiveNetwork([{type:"R",a:"A",b:"B",value:100}],0,{"GROUND":0})',ctx),/singular/i);
 const build=html.match(/<meta name="nsrs-build" content="(v\d+\.\d+\.\d+)">/); assert(build&&html.includes('BUILD '+build[1]+'<small>'));
 console.log('PASS v0.21: 11 complex AC results, KCL, 4 mutation checks, invalid frequencies and source-parity watermark');

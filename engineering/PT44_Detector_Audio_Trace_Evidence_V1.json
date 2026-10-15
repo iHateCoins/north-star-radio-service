@@ -3,7 +3,7 @@
   "version": "0.21.0",
   "factory_document": "Philco 1941 RMS Year Book, printed page 38, schematic diagram for PT-42/PT-44",
   "source_scan": {
-    "native_image_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382",
+    "native_image_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
     "pixel_dimensions": [
       2022,
       2587
@@ -20,7 +20,8 @@
         1400,
         810
       ]
-    }
+    },
+    "prior_review_raster_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
   },
   "verified_external_conductor_groups": [
     {
@@ -86,15 +87,14 @@
       }
     },
     {
-      "net_id": "F_DET_PASSIVE_RETURN",
+      "net_id": "F_BMINUS",
       "title": "Detector audio passive common return",
       "terminals": [
         "15:b",
         "16:b",
-        "19:b",
-        "17:b"
+        "19:b"
       ],
-      "basis": "Factory page 38: #15, #16, #17 and #19 lower terminals share detector return; this does not establish a chassis bond.",
+      "basis": "Explicit dots join #15, #16 and #19 to B−; #17 lower end crosses that rail without a dot and goes to AVC. Corrected in v0.53.",
       "source_box": {
         "native_width_px": 2022,
         "native_height_px": 2587,
@@ -129,11 +129,9 @@
     }
   ],
   "unresolved": [
-    "Which numbered 7C6 diode plate pin (#5 or #6) corresponds to the upper diode glyph",
-    "External 7C6 cathode return and #16 on/off switch contacts",
-    "Remaining AVC route, loading and relationship to aerial return",
-    "Specific metal-chassis-to-B-minus connection and any line-bypass wiring",
-    "Potentiometer #16 full resistance, taper, and production options"
+    "Which numbered 7C6 diode plate pin (#5 or #6) corresponds to each glyph.",
+    "Physical switch-lug and B−/chassis relationship.",
+    "Potentiometer full resistance/taper and receiver behavior."
   ],
   "model_parity": "These are manufacturer-wiring graph memberships only. No 3D route or reduced-order solver equivalence is asserted.",
   "spice_limit": "SPICE draft can include #15/#18/#19 passive devices but does not infer a valid detector or automatic volume control behavior.",
@@ -163,5 +161,7 @@
       "symbol_label": "Upper 7C6 diode glyph",
       "pin_status": "Not numbered on source schematic"
     }
-  ]
+  ],
+  "review_revision": "0.53.0",
+  "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

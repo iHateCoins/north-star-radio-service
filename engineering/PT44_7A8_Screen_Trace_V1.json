@@ -2,11 +2,11 @@
   "schema": "PT44_7A8_SCREEN_TRACE_V1",
   "version": "0.44.0",
   "model": "Philco PT-44",
-  "status": "SOURCE_TRACED_SHARED_45V_SCREEN_LEAD_SUPPLY_PATH_OPEN",
+  "status": "SOURCE_TRACED_SHARED_45V_SCREEN_LEAD_SUPPLY_PATH_TRACED",
   "source": {
     "document": "Philco 1941 RMS Year Book",
     "printed_page": 38,
-    "figure": "Schematic diagram \u2014 PT-42, PT-44",
+    "figure": "Schematic diagram — PT-42, PT-44",
     "authority": "Philco factory schematic",
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
     "native_scan": {
@@ -19,8 +19,8 @@
   },
   "traced_net": {
     "id": "F_SCREEN_45V",
-    "title": "Shared 45 V screen lead (upstream source unresolved)",
-    "description": "The factory schematic shows a continuous conductor from the 7A8 screen-grid glyph to the 7B7 screen-grid glyph, with 45 V marked at both tube branches. Sylvania pin data maps those screen electrodes to V1:5 (7A8 G3/G5) and V2:3 (7B7 G2). This records only the shared tube-side conductor; it does not identify a regulator, dropping element, source impedance, or complete supply path.",
+    "title": "Shared screen lead fed through #13",
+    "description": "Tube-side conductor crosswalk, now source-traced through #13 27 kΩ to filtered B+ by the v0.53 reconciliation. The printed 45 V annotation still lacks validated measurement conditions.",
     "members": [
       "V1:5",
       "V2:3"
@@ -62,22 +62,19 @@
     "shared_v1_v2_screen_conductor": true,
     "screen_electrode_socket_pin_crosswalk": true,
     "annotated_voltage_is_operating_measurement": false,
-    "upstream_45v_supply_path_traced": false,
+    "upstream_45v_supply_path_traced": true,
     "7a8_oscillator_network_complete": false,
     "if_stage_complete": false,
     "benchmark_ready": false,
     "45v_annotation_is_not_measurement_target": true
   },
   "limits": [
-    "The \u201c45 V\u201d callout is transcribed as a schematic annotation; no meter reference, operating condition or tolerance is asserted by this trace.",
-    "The upstream feed to this shared screen conductor is not source-traced here.",
-    "This trace does not close the 7A8 oscillator, 7A8 cathode, 7B7 cathode, IF transformers or receiver behavior."
+    "The 45 V annotation is not a calibrated simulator target.",
+    "The supply path is traced through #13; its loaded receiver behavior is not validated."
   ],
   "unresolved": [
-    "Upstream source and any intervening impedance for the shared 45 V lead.",
-    "7A8 oscillator wiring and #4, #6\u2013#11 endpoints.",
-    "7A8 cathode/suppressor external connection and 7B7 cathode/suppressor connections.",
-    "Full receiver and full-receiver SPICE validation."
+    "Four-dot oscillator coupling symbol, winding parameters and receiver behavior.",
+    "Service measurement conditions and physical chassis boundaries."
   ],
   "benchmark_ready": false,
   "pin_identity_sources": {
@@ -91,5 +88,7 @@
       "url": "https://archives.doctsf.com/documents/afficher_document.php?num_doc=83300&num_fic=1",
       "scope": "Manufacturer basing data maps screen grid G2 to socket pin 3; it does not document PT-44 wiring."
     }
-  }
+  },
+  "review_revision": "0.53.0",
+  "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

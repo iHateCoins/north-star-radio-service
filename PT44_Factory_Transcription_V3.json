@@ -4,7 +4,7 @@
   "year": 1941,
   "source": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "source_page": 38,
-  "status": "PARTIAL_FACTORY_TRANSCRIPTION_NOT_SPICE_READY",
+  "status": "PARTIAL_FACTORY_TRANSCRIPTION_SOURCE_PARTS_RECORDED_NOT_SPICE_READY",
   "evidence_policy": "The published source is a schematic and parts diagram. Device terminal naming is provisional where exact pins/winding contacts have not been read from the drawing. 3D lead dress is not documented wire-for-wire.",
   "factory_components": {
     "1": {
@@ -18,8 +18,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #1",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.42 traces #1:a to the lower #2 38-turn winding and #1:b to the explicit RF chassis ground reference for loop operation."
     },
     "2": {
       "description": "Aerial transformer",
@@ -30,12 +31,20 @@
         "secondary_a",
         "secondary_b"
       ],
-      "terminal_definition_status": "functional_only",
+      "terminal_definition_status": "functional_roles_source_crosswalked_partial",
       "factory_schematic_position": "1941 RMS p.38; numeric callout #2",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.42 maps both ends of the 38-turn and 11-turn windings: external ANT and #1 bypass on the 38-turn side; #3 loop and B− return on the 11-turn side. Winding polarity and L/k remain unknown.",
+      "source_terminal_crosswalk": {
+        "primary_a": "upper terminal of the 38-turn winding; connected to external ANT",
+        "primary_b": "lower terminal of the 38-turn winding; connected to capacitor #1:a",
+        "secondary_a": "upper terminal of the 11-turn winding; connected to loop #3:loop_b",
+        "secondary_b": "lower terminal of the 11-turn winding; connected to B−",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      }
     },
     "3": {
       "description": "Built-in loop aerial",
@@ -44,12 +53,18 @@
         "loop_a",
         "loop_b"
       ],
-      "terminal_definition_status": "functional_only",
+      "terminal_definition_status": "functional_roles_source_crosswalked_partial",
       "factory_schematic_position": "1941 RMS p.38; numeric callout #3",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.41 maps loop_a to the RF input conductor; v0.42 maps loop_b to the upper #2 11-turn winding terminal. No loop inductance/polarity is implied.",
+      "source_terminal_crosswalk": {
+        "loop_a": "upper loop lead on the V1:6 RF input conductor",
+        "loop_b": "lower loop lead connected to #2:secondary_a",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      }
     },
     "4": {
       "description": "Two-gang tuning capacitor",
@@ -63,8 +78,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #4",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_rf_and_oscillator_gang_partial_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.50 maps the oscillator gang signal plate to the upper left #10 winding; the rotor ground remains as in v0.41. Tuning value, compensator and physical lug crosswalk remain open.",
+      "source_terminal_crosswalk": {
+        "osc_stator": "upper signal-side oscillator gang plate joins #10:primary_a (provisional upper left winding end)",
+        "rotor": "lower RF/oscillator gang plates terminate at explicit loop-mode chassis ground",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      }
     },
     "5": {
       "description": "Aerial compensator",
@@ -77,8 +98,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #5",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.41 trace identifies the signal-side terminal and chassis-grounded terminal; no polarity is implied."
     },
     "6": {
       "description": "Condenser and choke assembly",
@@ -89,12 +111,20 @@
         "choke_a",
         "choke_b"
       ],
-      "terminal_definition_status": "functional_only",
+      "terminal_definition_status": "four_terminal_series_capacitor_choke_assembly",
       "factory_schematic_position": "1941 RMS p.38; numeric callout #6",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_all_four_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.47 traces the 2 mmf condenser from the 7A8 signal-input net through the assembly junction to the series choke, whose lower terminal ends at the explicit loop-operation chassis ground. The source does not equate this chassis ground with B−.",
+      "source_terminal_crosswalk": {
+        "cap_a": "upper condenser terminal connected to F_RF_INPUT",
+        "cap_b": "lower condenser terminal connected by a drawn wire to choke_a",
+        "choke_a": "upper choke terminal connected by a drawn wire to cap_b",
+        "choke_b": "lower choke terminal connected to the explicit chassis-ground symbol for loop operation",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      }
     },
     "7": {
       "description": "4.7 MΩ resistor",
@@ -103,15 +133,21 @@
         "a",
         "b"
       ],
-      "terminal_definition_status": "two_terminal_physical_structure",
+      "terminal_definition_status": "two_terminal_resistor_source_crosswalked",
       "factory_schematic_position": "1941 RMS p.38; numeric callout #7",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_both_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.48 traces the 4.7 MΩ resistor across the lower loop/#2 11-turn winding node and the B− return rail; no oscillator winding parameter or behavior is inferred.",
+      "source_terminal_crosswalk": {
+        "a": "upper resistor terminal joins the lower built-in-loop lead and upper terminal of #2 11-turn winding (F_RF_LOOP_SECONDARY)",
+        "b": "lower resistor terminal joins the B− return rail (F_BMINUS)",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      }
     },
     "8": {
-      "description": "0.1 µF / 200 V capacitor",
+      "description": "0.1 µF / 200 V per replacement-parts list; schematic annotation differs",
       "category": "capacitor",
       "terminals": [
         "a",
@@ -121,8 +157,49 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #8",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_both_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.49 traces both #8 terminals across the #2 11-turn winding / lower-loop junction and B−. The schematic marks 0.05 mfd, while the replacement-parts list gives 0.1 mfd, 200 V (part 30-4499); selected simulation value remains unresolved.",
+      "source_terminal_crosswalk": {
+        "a": "upper drawn terminal joined to the lower-loop / #2 11-turn winding junction (F_RF_LOOP_SECONDARY); endpoint label is not polarity",
+        "b": "lower drawn terminal joined to B− (F_BMINUS); endpoint label is not polarity",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      },
+      "source_value_discrepancy": {
+        "status": "UNRESOLVED_CONFLICT",
+        "schematic": {
+          "document": "Philco 1941 RMS Year Book",
+          "printed_page": 38,
+          "figure": "Schematic diagram — PT-42, PT-44",
+          "marking": "0.05 mfd",
+          "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+          "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+          "source_box_px": [
+            350,
+            980,
+            650,
+            1320
+          ],
+          "render_dpi": 400
+        },
+        "replacement_parts_list": {
+          "document": "Philco 1941 RMS Year Book",
+          "printed_page": 38,
+          "marking": "Condenser (.1 mfd., 200 volts)",
+          "part_number": "30-4499",
+          "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+          "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+          "source_box_px": [
+            0,
+            2100,
+            1300,
+            2450
+          ],
+          "render_dpi": 400
+        },
+        "selected_simulation_value": null,
+        "resolution_needed": "Service bulletin, correct model-specific parts data, or inspected original/replacement component evidence."
+      }
     },
     "9": {
       "description": "22 kΩ resistor",
@@ -135,8 +212,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #9",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_both_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.51 traces #9:a to 7A8 oscillator grid G1 (V1:4); #9:b remains on B−. The four-dot symbol does not establish a tuned-winding contact.",
+      "source_terminal_crosswalk": {
+        "a": "upper #9 end at 7A8 oscillator grid G1 (V1:4)",
+        "b": "lower #9 end on B−",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      }
     },
     "10": {
       "description": "Oscillator transformer",
@@ -151,8 +234,16 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #10",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "all_four_declared_winding_ends_source_traced",
+      "geometry_certified": false,
+      "evidence_note": "v0.50 follows the upper left drawn winding end to #4 oscillator tuning plate and the lower end to the explicit loop-mode chassis ground. The inventory primary alias is provisional, not winding function or polarity.",
+      "source_terminal_crosswalk": {
+        "primary_a": "upper left drawn winding end joined to #4:osc_stator; primary alias provisional",
+        "primary_b": "lower left drawn winding end at explicit loop-mode chassis ground; primary alias provisional",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified.",
+        "secondary_a": "Upper right drawn winding end to 7A8 oscillator anode g2, V1:3; secondary alias does not assert winding role/polarity.",
+        "secondary_b": "Lower right drawn winding end to filtered B+ at #12:pSupply / #13:a; no polarity inferred."
+      }
     },
     "11": {
       "description": "0.05 µF capacitor",
@@ -165,8 +256,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #11",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_both_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.51 traces #11:a to the shared annotated 45 V screen conductor; #11:b remains on B−. Screen feed and voltage-test conditions remain open.",
+      "source_terminal_crosswalk": {
+        "a": "upper #11 end on shared 7A8/7B7 annotated 45 V screen conductor",
+        "b": "lower #11 end on B−",
+        "limits": "Winding role/polarity, physical lug identification, inductance and coupling remain unverified."
+      }
     },
     "12": {
       "description": "First IF transformer",
@@ -183,8 +280,9 @@
       "model_slots": [
         "T2"
       ],
-      "connectivity": "partial",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco p.38 native 300-dpi scan; v0.40 trace reconciles the first IF secondary return and #13 grid-return resistor endpoints."
     },
     "13": {
       "description": "27 kΩ resistor",
@@ -197,8 +295,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #13",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.53 corrects the v0.40 misread: #13 is a filtered-B+ to screen-feed resistor, not an IF-grid return."
     },
     "14": {
       "description": "Second IF transformer",
@@ -215,8 +314,9 @@
       "model_slots": [
         "T3"
       ],
-      "connectivity": "partial",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300-dpi page 38; v0.38 supply-end trace PT44_Output_IF_Supply_Trace_V1; winding and detector crosswalks unresolved."
     },
     "15": {
       "description": "250 pF capacitor",
@@ -229,8 +329,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #15",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "16": {
       "description": "Volume control",
@@ -246,8 +347,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #16",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_all_declared_electrical_endpoints_symbol_aliases",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locators PT44_DETECTOR_AUDIO_TRACES_V1 and PT44_POWER_LINE_TRACE_V1; potentiometer track and switch trace are separate terminal groups; physical switch-lug crosswalk remains open. v0.52 promotes the line/switch endpoints to the partial graph; #16 physical lug numbering and plug polarity remain open."
     },
     "17": {
       "description": "4.7 MΩ resistor",
@@ -260,8 +362,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #17",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco p.38 native 300-dpi scan; v0.39 traces both #17 endpoints. Upper diode remains an unnumbered symbol glyph."
     },
     "18": {
       "description": "0.01 µF / 400 V capacitor",
@@ -274,8 +377,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #18",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "19": {
       "description": "4.7 MΩ resistor",
@@ -288,8 +392,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #19",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_DETECTOR_AUDIO_TRACES_V1."
     },
     "20": {
       "description": "0.01 µF / 400 V capacitor",
@@ -334,8 +439,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #22",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300-dpi page 38; v0.36 trace audit PT44_OUTPUT_CATHODE_BYPASS_V1."
     },
     "23": {
       "description": "470 kΩ resistor",
@@ -380,8 +486,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #25",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_subset_300dpi",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300-dpi page 38; v0.38 source trace PT44_Output_IF_Supply_Trace_V1."
     },
     "26": {
       "description": "Output transformer",
@@ -433,6 +540,52 @@
       "connectivity": "partial",
       "geometry_certified": false
     },
+    "30": {
+      "description": "40 Ω + 80 Ω tapped line resistance assembly (#30)",
+      "category": "resistor",
+      "terminals": [
+        "endA",
+        "tap",
+        "endB"
+      ],
+      "terminal_definition_status": "factory_two_section_resistor_terminals",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #30",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "source_traced_all_declared_electrical_endpoints_symbol_aliases",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open. v0.52 promotes the line/switch endpoints to the partial graph; #16 physical lug numbering and plug polarity remain open."
+    },
+    "31": {
+      "description": "0.04 µF / 400 V capacitor",
+      "category": "capacitor",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #31",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "source_traced_all_declared_electrical_endpoints_symbol_aliases",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open. v0.52 promotes the line/switch endpoints to the partial graph; #16 physical lug numbering and plug polarity remain open."
+    },
+    "32": {
+      "description": "Pilot lamp",
+      "category": "lamp",
+      "terminals": [
+        "a",
+        "b"
+      ],
+      "terminal_definition_status": "two_terminal_physical_structure",
+      "factory_schematic_position": "1941 RMS p.38; numeric callout #32",
+      "source_page": 38,
+      "model_slots": [],
+      "connectivity": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "geometry_certified": false,
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open."
+    },
     "29A": {
       "description": "20 µF electrolytic",
       "category": "capacitor",
@@ -463,49 +616,6 @@
         "C2"
       ],
       "connectivity": "traced_subset",
-      "geometry_certified": false
-    },
-    "30": {
-      "description": "40/80 Ω line resistor assembly",
-      "category": "resistor",
-      "terminals": [
-        "endA",
-        "tap",
-        "endB"
-      ],
-      "terminal_definition_status": "functional_only",
-      "factory_schematic_position": "1941 RMS p.38; numeric callout #30",
-      "source_page": 38,
-      "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
-    },
-    "31": {
-      "description": "0.04 µF / 400 V capacitor",
-      "category": "capacitor",
-      "terminals": [
-        "a",
-        "b"
-      ],
-      "terminal_definition_status": "two_terminal_physical_structure",
-      "factory_schematic_position": "1941 RMS p.38; numeric callout #31",
-      "source_page": 38,
-      "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
-    },
-    "32": {
-      "description": "Pilot lamp",
-      "category": "lamp",
-      "terminals": [
-        "a",
-        "b"
-      ],
-      "terminal_definition_status": "two_terminal_physical_structure",
-      "factory_schematic_position": "1941 RMS p.38; numeric callout #32",
-      "source_page": 38,
-      "model_slots": [],
-      "connectivity": "not_transcribed",
       "geometry_certified": false
     }
   },
@@ -564,7 +674,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V5:7",
@@ -577,32 +687,151 @@
         "R1:a",
         "C1:a",
         "T1:a"
-      ]
+      ],
+      "v0_28_power_filter_audit": {
+        "status": "VERIFIED_PARTIAL",
+        "verified_members": [
+          "V5:7",
+          "28:a",
+          "29A:a"
+        ],
+        "unreviewed_members": [
+          "26:a"
+        ],
+        "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V5:7",
+          "28:a",
+          "29A:a",
+          "26:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_29_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "V5:7",
+          "28:a",
+          "29A:a",
+          "26:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V5:7",
+          "28:a",
+          "29A:a",
+          "26:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_BPLUS_FILT",
       "title": "Filtered B+ / second filter",
       "stage": "Power",
       "model": "B2",
-      "description": "Speaker field winding output feeds second 20 µF electrolytic and the 7C6 plate-load resistor.",
+      "description": "Speaker field winding output feeds second 20 µF electrolytic, 7C6 plate-load resistor, IF primary supply ends and the 50L6 screen grid (V4:4).",
       "source": "Philco 1941 RMS, p.38 — #21, #28, #29B",
       "stage_status": "traced_limited",
       "evidence": {
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "28:b",
         "29B:a",
-        "21:a"
+        "21:a",
+        "25:a",
+        "12:pSupply",
+        "14:pSupply",
+        "V4:4",
+        "13:a",
+        "10:secondary_b"
       ],
       "prototype_member_crosswalk": [
         "R1:b",
         "C2:a",
         "R4:a"
-      ]
+      ],
+      "v0_28_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "28:b",
+          "29B:a",
+          "21:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "28:b",
+          "29B:a",
+          "21:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_29_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "28:b",
+          "29B:a",
+          "21:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_38_source_trace": {
+        "status": "SOURCE_TRACED",
+        "members": [
+          "12:pSupply",
+          "14:pSupply",
+          "25:a"
+        ],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
+      },
+      "v0_45_source_review": {
+        "milestone_version": "0.45.0",
+        "status": "SOURCE_CHECKED_50L6_SCREEN_PIN_CROSSWALK",
+        "reviewed_members": [
+          "V4:4"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
+      },
+      "reconciled_in": "0.53.0",
+      "current_topology_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "28:b",
+          "29B:a",
+          "21:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_7C6_PLATE",
@@ -616,7 +845,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V3:2",
@@ -627,7 +856,30 @@
         "V3:2",
         "R4:b",
         "C3:a"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V3:2",
+          "21:b",
+          "20:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V3:2",
+          "21:b",
+          "20:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_50L6_GRID",
@@ -641,7 +893,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:5",
@@ -652,7 +904,30 @@
         "V4:5",
         "C3:b",
         "R3:a"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:5",
+          "20:b",
+          "23:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V4:5",
+          "20:b",
+          "23:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_50L6_CATH",
@@ -666,7 +941,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:8",
@@ -676,7 +951,34 @@
       "prototype_member_crosswalk": [
         "V4:8",
         "R2:a"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:8",
+          "24:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_36_source_review": {
+        "milestone_version": "0.36.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBER",
+        "reviewed_member": "22:a",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V4:8",
+          "24:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_OUTPUT_PLATE",
@@ -690,7 +992,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:3",
@@ -699,35 +1001,171 @@
       "prototype_member_crosswalk": [
         "V4:3",
         "T1:b"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:3",
+          "26:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V4:3",
+          "26:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_BMINUS",
       "title": "Common B− return (partial)",
       "stage": "Return",
       "model": "GND",
-      "description": "Return for the filter capacitors and output-stage bias and grid resistors; not automatically the metal chassis.",
+      "description": "B− power, bypass, passive audio and cathode return; distinct from AVC distribution and metal chassis.",
       "source": "Philco 1941 RMS, p.38 — #23, #24, #29A/B",
       "stage_status": "traced_limited",
       "evidence": {
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
+        "source_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "reconciled_in": "0.53.0"
       },
       "factory_members": [
         "29A:b",
         "29B:b",
         "23:b",
         "24:b",
-        "22:b"
+        "22:b",
+        "25:b",
+        "9:b",
+        "11:b",
+        "16:switch_b",
+        "V3:8",
+        "7:a",
+        "8:a",
+        "15:b",
+        "16:b",
+        "19:b",
+        "V1:7",
+        "V2:4",
+        "V2:5",
+        "V2:7",
+        "V3:7"
       ],
       "prototype_member_crosswalk": [
         "C1:b",
         "C2:b",
         "R3:b",
         "R2:b"
-      ]
+      ],
+      "v0_28_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "29A:b",
+          "29B:b",
+          "23:b",
+          "24:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "29A:b",
+          "29B:b",
+          "23:b",
+          "24:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_29_power_filter_audit": {
+        "status": "VERIFIED",
+        "verified_members": [
+          "29A:b",
+          "29B:b",
+          "23:b",
+          "24:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_36_source_review": {
+        "milestone_version": "0.36.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBER",
+        "reviewed_member": "22:b",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_38_source_trace": {
+        "status": "SOURCE_TRACED",
+        "members": [
+          "25:b"
+        ],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json"
+      },
+      "v0_43_source_review": {
+        "milestone_version": "0.43.0",
+        "status": "SOURCE_CHECKED_ADDITIONAL_MEMBERS",
+        "reviewed_members": [
+          "9:b",
+          "11:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Return_Trace_V1.json"
+      },
+      "v0_49_source_review": {
+        "milestone_version": "0.49.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "8:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      },
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBERS",
+        "reviewed_members": [
+          "16:switch_b",
+          "V3:8"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      },
+      "reconciled_in": "0.53.0",
+      "current_topology_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "29A:b",
+          "29B:b",
+          "23:b",
+          "24:b",
+          "15:b",
+          "16:b",
+          "19:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_VOICE_SEC_A",
@@ -741,7 +1179,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "26:sA",
@@ -750,7 +1188,28 @@
       "prototype_member_crosswalk": [
         "T1:sA",
         "SP1:voiceA"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "26:sA",
+          "27:voiceA"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "26:sA",
+          "27:voiceA"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_VOICE_SEC_B",
@@ -764,7 +1223,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "26:sB",
@@ -773,7 +1232,28 @@
       "prototype_member_crosswalk": [
         "T1:sB",
         "SP1:voiceB"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.30.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "26:sB",
+          "27:voiceB"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "26:sB",
+          "27:voiceB"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_HT_35Z3_50L6",
@@ -787,7 +1267,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V5:8",
@@ -796,7 +1276,28 @@
       "prototype_member_crosswalk": [
         "V5:8",
         "V4:2"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V5:8",
+          "V4:2"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V5:8",
+          "V4:2"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_HT_50L6_7A8",
@@ -810,7 +1311,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V4:7",
@@ -819,7 +1320,28 @@
       "prototype_member_crosswalk": [
         "V4:7",
         "V1:1"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V4:7",
+          "V1:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V4:7",
+          "V1:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_HT_7A8_7B7",
@@ -833,7 +1355,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V1:8",
@@ -842,7 +1364,28 @@
       "prototype_member_crosswalk": [
         "V1:8",
         "V2:1"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V1:8",
+          "V2:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V1:8",
+          "V2:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_HT_7B7_7C6",
@@ -856,7 +1399,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V2:8",
@@ -865,7 +1408,28 @@
       "prototype_member_crosswalk": [
         "V2:8",
         "V3:1"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V2:8",
+          "V3:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V2:8",
+          "V3:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_IF1_PLATE",
@@ -879,7 +1443,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V1:2",
@@ -888,21 +1452,42 @@
       "prototype_member_crosswalk": [
         "V1:2",
         "T2:pPlate"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.32.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V1:2",
+          "12:pPlate"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V1:2",
+          "12:pPlate"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_IF1_GRID",
       "title": "First IF secondary to 7B7 control grid",
       "stage": "IF (partial)",
       "model": null,
-      "description": "First IF secondary signal goes to the IF amplifier control grid; secondary return and AVC are not modeled.",
+      "description": "First IF secondary hot end to the 7B7 control grid; #13 is not connected to this wire net.",
       "source": "Philco 1941 RMS, p.38 — #12, #14 and tube symbols",
       "stage_status": "partial_signal_side_only",
       "evidence": {
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "12:sGrid",
@@ -911,7 +1496,30 @@
       "prototype_member_crosswalk": [
         "T2:sGrid",
         "V2:6"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.32.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "12:sGrid",
+          "V2:6"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "reconciled_in": "0.53.0",
+      "current_topology_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "12:sGrid",
+          "V2:6"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     },
     {
       "id": "F_IF2_PLATE",
@@ -925,7 +1533,7 @@
         "document": "Philco 1941 RMS Year Book",
         "printed_page": 38,
         "figure": "Schematic diagram — PT-42, PT-44",
-        "verification": "source-traced from v0.12, still pending independent second-reader verification"
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
       },
       "factory_members": [
         "V2:2",
@@ -934,7 +1542,914 @@
       "prototype_member_crosswalk": [
         "V2:2",
         "T3:pPlate"
-      ]
+      ],
+      "v0_33_source_review": {
+        "milestone_version": "0.32.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V2:2",
+          "14:pPlate"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V2:2",
+          "14:pPlate"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_30_40_LAMP_A",
+      "title": "Pilot lamp / 40 Ω resistor — line side",
+      "stage": "Power",
+      "model": null,
+      "description": "One side of the dial lamp #32 across the 40 Ω section of resistance assembly #30.",
+      "source": "Philco 1941 RMS Year Book p.38, bottom-left AC supply, parts #30 and #32",
+      "stage_status": "factory_component_branch_traced_external_line_undetermined",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic — line resistance and pilot lamp, lower edge",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
+      },
+      "factory_members": [
+        "30:endA",
+        "32:a",
+        "31:b"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "30:endA",
+          "32:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBERS",
+        "reviewed_members": [
+          "31:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "30:endA",
+          "32:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_30_40_LAMP_B",
+      "title": "Pilot lamp / 40 Ω resistor — tap side",
+      "stage": "Power",
+      "model": null,
+      "description": "Other side of the dial lamp #32 across the 40 Ω section of resistance assembly #30.",
+      "source": "Philco 1941 RMS Year Book p.38, bottom-left AC supply, parts #30 and #32",
+      "stage_status": "factory_component_branch_traced_external_line_undetermined",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic — line resistance and pilot lamp, lower edge",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged."
+      },
+      "factory_members": [
+        "30:tap",
+        "32:b",
+        "V5:2"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.29.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "30:tap",
+          "32:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBERS",
+        "reviewed_members": [
+          "V5:2"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "30:tap",
+          "32:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_IF2_SECONDARY_VOL_TOP",
+      "title": "Second IF secondary low to volume control top",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: secondary lower terminal descends to #16 track upper lug and #15 250 pF upper side.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
+        "source_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "reconciled_in": "0.53.0"
+      },
+      "factory_members": [
+        "14:sReturn",
+        "16:a",
+        "15:a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "14:sReturn",
+          "16:a",
+          "15:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "14:sReturn",
+          "16:a",
+          "15:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_VOL_WIPER_C18",
+      "title": "Volume-control wiper to coupling capacitor",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: wiper arrow terminates at left side of #18 0.01 µF; crossing vertical lines do not have junction dots.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
+        "source_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "reconciled_in": "0.53.0"
+      },
+      "factory_members": [
+        "16:wiper",
+        "18:a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "16:wiper",
+          "18:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "16:wiper",
+          "18:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_7C6_AUDIO_GRID",
+      "title": "7C6 triode grid and grid leak",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: right side of #18 and upper end #19 connect to 7C6 triode grid lead.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
+        "source_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "reconciled_in": "0.53.0"
+      },
+      "factory_members": [
+        "18:b",
+        "19:a",
+        "V3:3"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "18:b",
+          "19:a",
+          "V3:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "18:b",
+          "19:a",
+          "V3:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_IF2_AVC_FEED",
+      "title": "Second IF upper secondary to AVC diode glyph and #17 load",
+      "stage": "Detector",
+      "model": null,
+      "description": "Factory page 38: upper #14 secondary end, upper 7C6 diode plate glyph lead, and #17 upper end share a conductor; the diode socket pin is not printed.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_symbol_crosswalk_open",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; second IF and detector",
+        "verification": "v0.39 native page-38 scan: upper #14 secondary, upper 7C6 diode glyph, and #17 upper terminal share a conductor.",
+        "source_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "reconciled_in": "0.53.0"
+      },
+      "factory_members": [
+        "14:sDetector",
+        "17:a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_39_source_review": {
+        "milestone_version": "0.39.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "14:sDetector",
+          "17:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "14:sDetector",
+          "17:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_RF_INPUT",
+      "title": "7A8 signal input / loop and RF tuning branch",
+      "stage": "RF",
+      "model": null,
+      "description": "Partial 7A8 signal-input conductor: upper #3 loop terminal, RF gang #4, #5 aerial compensator, and #6 condenser input; #7A8 input grid is V1:6.",
+      "source": "Philco 1941 RMS p.38 — PT-42/PT-44 RF input; native 300-dpi scan",
+      "stage_status": "source_traced_partial_rf_input",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.41 trace follows the input conductor and separately marks the symbol-to-socket pin crosswalk and component terminal aliases. RF subsystem remains incomplete.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "V1:6",
+        "3:loop_a",
+        "4:rf_stator",
+        "5:a",
+        "6:cap_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_41_source_review": {
+        "milestone_version": "0.41.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "V1:6",
+          "3:loop_a",
+          "4:rf_stator",
+          "5:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V1:6",
+          "3:loop_a",
+          "4:rf_stator",
+          "5:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_RF_CHASSIS",
+      "title": "RF input tuning grounds / chassis in loop mode",
+      "stage": "RF",
+      "model": null,
+      "description": "The grounded ends of #1 bypass capacitor, RF gang #4 and aerial compensator #5 meet the explicit chassis ground reference noted for loop operation. This does not establish a B-minus bond. The lower terminal of the #6 series choke also ends at the explicit loop-operation chassis reference; no B− bond is inferred. The lower left #10 oscillator winding also ends at an explicit loop-mode chassis ground symbol.",
+      "source": "Philco 1941 RMS p.38 — note: ground to chassis for loop operation",
+      "stage_status": "source_traced_component_ground_endpoints",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.41 trace follows only the explicit RF input branch ground symbols; no general chassis-to-B-minus connection is inferred.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "4:rotor",
+        "5:b",
+        "1:b",
+        "6:choke_b",
+        "10:primary_b"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_41_source_review": {
+        "milestone_version": "0.41.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "4:rotor",
+          "5:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      },
+      "v0_50_source_review": {
+        "milestone_version": "0.50.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "10:primary_b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "4:rotor",
+          "5:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_RF_LOOP_SECONDARY",
+      "title": "Built-in loop lower lead / aerial transformer 11-turn winding",
+      "stage": "RF",
+      "model": null,
+      "description": "Loop lower lead to upper #2 11-turn winding lead; #7 and #8 do not join this junction.",
+      "source": "Philco 1941 RMS p.38 — PT-42/PT-44 RF input; native 300-dpi scan",
+      "stage_status": "source_traced_partial_antenna_coupling",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.42 follows the lower #3 loop conductor to the upper end of the lower-turn #2 aerial-transformer winding; winding polarity is not shown.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "3:loop_b",
+        "2:secondary_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_42_source_review": {
+        "milestone_version": "0.42.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "3:loop_b",
+          "2:secondary_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+      },
+      "v0_49_source_review": {
+        "milestone_version": "0.49.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "8:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      },
+      "reconciled_in": "0.53.0",
+      "current_topology_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "3:loop_b",
+          "2:secondary_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_RF_EXTERNAL_ANTENNA",
+      "title": "External ANT terminal / #2 38-turn winding",
+      "stage": "RF",
+      "model": null,
+      "description": "The external ANT symbol connects to the upper end of the 38-turn #2 winding. The external port is documented by the trace artifact but is outside the numbered factory-component graph.",
+      "source": "Philco 1941 RMS p.38 — ANT input and #2 38-turn aerial-transformer winding",
+      "stage_status": "source_traced_external_interface",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.42 maps the upper terminal of the 38-turn winding to the external ANT symbol. The port is kept outside the numbered-component terminal denominator.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "2:primary_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_42_source_review": {
+        "milestone_version": "0.42.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "2:primary_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "2:primary_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_RF_ANTENNA_BYPASS",
+      "title": "#2 38-turn winding return / #1 bypass capacitor",
+      "stage": "RF",
+      "model": null,
+      "description": "The lower end of the #2 38-turn winding joins #1:a. The opposite #1 terminal carries the explicit RF ground symbol identified by Philco for loop operation.",
+      "source": "Philco 1941 RMS p.38 — #2 38-turn winding and #1 0.0015 µF capacitor",
+      "stage_status": "source_traced_partial_antenna_return",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.42 traces the winding lower lead to #1:a and #1:b to the explicit chassis ground reference for loop operation; it does not connect this chassis reference to B−.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "2:primary_b",
+        "1:a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_42_source_review": {
+        "milestone_version": "0.42.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "2:primary_b",
+          "1:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "2:primary_b",
+          "1:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_SCREEN_45V",
+      "title": "Shared 45 V screen lead (upstream source unresolved)",
+      "stage": "RF/IF",
+      "model": null,
+      "description": "Shared converter/IF screen rail supplied through #13 27 kΩ from filtered B+ and bypassed by #11. The printed 45 V label is a service reference.",
+      "source": "Philco 1941 RMS, p.38 — 7A8/7B7 screen-grid branches; Sylvania Type 7A8 and 7B7 pin data",
+      "stage_status": "source_traced_shared_screen_lead_upstream_open",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.44 traces the shared annotated 45 V screen conductor at symbol level, then maps both screen glyphs to socket pins with manufacturer tube pin data. The supply source/path and test conditions remain open.",
+        "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
+      },
+      "factory_members": [
+        "V1:5",
+        "V2:3",
+        "11:a",
+        "13:b"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_44_source_review": {
+        "milestone_version": "0.44.0",
+        "status": "SOURCE_CHECKED_SHARED_SCREEN_LEAD_PIN_CROSSWALK",
+        "reviewed_members": [
+          "V1:5",
+          "V2:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
+      },
+      "v0_51_source_review": {
+        "milestone_version": "0.51.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBER",
+        "reviewed_members": [
+          "11:a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
+      },
+      "reconciled_in": "0.53.0",
+      "current_topology_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "V1:5",
+          "V2:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_RF_INPUT_TRAP_JUNCTION",
+      "title": "#6 condenser-to-choke series junction",
+      "stage": "RF",
+      "model": "unassigned",
+      "description": "The lower terminal of the #6 2 mmf condenser is wired directly to the upper terminal of its series choke; this internal assembly junction is not a chassis or B− connection.",
+      "source": "Philco 1941 RMS p.38 — schematic component #6",
+      "stage_status": "source_traced_component_internal_junction",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.47 high-resolution source review of the factory-drawn #6 condenser/choke series connection."
+      },
+      "factory_members": [
+        "6:cap_b",
+        "6:choke_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_47_source_review": {
+        "milestone_version": "0.47.0",
+        "status": "SOURCE_CHECKED_COMPONENT_INTERNAL_SERIES_JUNCTION",
+        "reviewed_members": [
+          "6:cap_b",
+          "6:choke_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "6:cap_b",
+          "6:choke_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_OSC_TUNED_LEFT_WINDING",
+      "title": "Oscillator tuning plate / upper left transformer winding",
+      "stage": "RF",
+      "model": "unassigned",
+      "description": "#4 oscillator gang signal plate joins the upper left drawn #10 oscillator winding end. The lower end is separately grounded; transformer role and tube-electrode junctions remain open.",
+      "source": "Philco 1941 RMS p.38 — PT-42/PT-44 oscillator section",
+      "stage_status": "source_traced_partial_oscillator_tank",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.50 400-dpi review of the #4 oscillator gang and left #10 winding. Primary alias is provisional.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "4:osc_stator",
+        "10:primary_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_50_source_review": {
+        "milestone_version": "0.50.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "4:osc_stator",
+          "10:primary_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "4:osc_stator",
+          "10:primary_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_OSC_GRID_LEAK",
+      "title": "7A8 oscillator grid / #9 grid-leak upper lead",
+      "stage": "RF",
+      "model": "unassigned",
+      "description": "#9 upper lead and the 7A8 G1 oscillator-grid glyph share a conductor. Sylvania maps G1 to V1:4. The #9 lower lead returns to B−; four-dot contacts are not assigned to this net.",
+      "source": "Philco 1941 RMS p.38 — PT-42/PT-44 oscillator section; Sylvania 7A8 basing data for socket pin",
+      "stage_status": "source_traced_partial_grid_leak",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "Schematic diagram — PT-42, PT-44",
+        "verification": "v0.51 400-dpi review of upper #9 lead and oscillator-grid glyph with independent 7A8 pin-role crosswalk.",
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "9:a",
+        "V1:4"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_51_source_review": {
+        "milestone_version": "0.51.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "9:a",
+          "V1:4"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "9:a",
+          "V1:4"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_AC_PLUG_A_PRE_SWITCH",
+      "title": "Plug conductor A / pre-switch terminal",
+      "stage": "Power",
+      "model": "unassigned",
+      "description": "AC plug A connects #31:a and the first #16 switch contact. Plug polarity and physical switch lug orientation are not specified.",
+      "external_ports": [
+        "AC_PLUG:A"
+      ],
+      "source": "Philco 1941 RMS p.38; PT-42/PT-44 line and switch drawing",
+      "stage_status": "source_traced_schematic_electrical_contacts",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "31:a",
+        "16:switch_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "31:a",
+          "16:switch_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "31:a",
+          "16:switch_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_DROPPER_HEATER_INPUT",
+      "title": "#30 80 Ω end / first 35Z3 heater",
+      "stage": "Power",
+      "model": "unassigned",
+      "description": "#30 endB from the 80 Ω section feeds the first 35Z3 heater end. V5:1 identity follows the tube pinout and existing V5:8 to 50L6 string review; physical lead mapping is retained as a scope limit.",
+      "source": "Philco 1941 RMS p.38; Sylvania/Philco 35Z3 pin roles",
+      "stage_status": "source_traced_heater_boundary_pin_crosswalk",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "30:endB",
+        "V5:1"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "30:endB",
+          "V5:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "30:endB",
+          "V5:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_OSC_ANODE_RIGHT_WINDING",
+      "title": "7A8 oscillator anode to #10 upper right winding",
+      "stage": "Converter",
+      "model": "unassigned",
+      "description": "Source-level upper right winding end to 7A8 oscillator anode g2; lower right winding end, four-dot contacts and physical lugs remain open.",
+      "source": "Philco 1941 RMS p.38 and Rider XII 12-45; 7A8 manufacturer basing",
+      "stage_status": "source_traced_upper_right_winding_pin_crosswalk_partial",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "corroboration_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+      },
+      "factory_members": [
+        "10:secondary_a",
+        "V1:3"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "10:secondary_a",
+          "V1:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+      },
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [
+          "10:secondary_a",
+          "V1:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
+    },
+    {
+      "id": "F_AVC_RETURN",
+      "title": "AVC distribution / first-IF and aerial cold ends",
+      "stage": "Detector",
+      "model": null,
+      "description": "Separate AVC conductor: first IF secondary cold end, #17 lower diode branch and aerial return. No copper bond to B− or chassis.",
+      "source": "User-supplied original Philco RMS PDF, p.38, native 300dpi scan",
+      "stage_status": "source_traced_300dpi_external_wires",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "figure": "PT-42/PT-44 schematic; detector and audio passives",
+        "verification": "v0.33 native page-38 review: listed symbol/conductor memberships were checked; complete net and exact socket-pin crosswalk remain unresolved where flagged.",
+        "source_sha256": "9ca24a964eaf3efb771110146d05875d5ba3104ca5c3e198e46261107b19d382"
+      },
+      "factory_members": [
+        "12:sReturn",
+        "17:b",
+        "2:secondary_b",
+        "7:b",
+        "8:b"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_33_source_review": {
+        "milestone_version": "0.33.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "15:b",
+          "16:b",
+          "19:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "external_ports": [
+        "V3:LOWER_DIODE_PLATE_GLYPH"
+      ],
+      "reconciled_in": "0.53.0",
+      "current_topology_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "v0_53_source_review": {
+        "milestone_version": "0.53.0",
+        "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+        "reviewed_members": [],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
+      }
     }
   ],
   "subcircuits": [
@@ -954,8 +2469,8 @@
         "10",
         "11"
       ],
-      "status": "not_fully_transcribed",
-      "unverified": "RF coil, tuning condenser, 7A8 grid/screen nodes"
+      "status": "partial_loop_aerial_input_trap_and_return_resistor_traced",
+      "unverified": "The #4 oscillator gang, #8/#9/#10/#11 oscillator and converter connections, remaining 7A8 pins, winding parameters and receiver behavior remain open. Loop/#2 coupling, ANT primary, #6 series input trap and #7 loop-return resistor endpoints are source-traced."
     },
     {
       "id": "IF",
@@ -966,7 +2481,7 @@
         "14"
       ],
       "status": "partial",
-      "unverified": "Both complete winding pairs, supply, detector side, trimmer capacitors"
+      "unverified": "Three listed groups source-checked; winding, screen, trimmer and AVC connectivity remains partial."
     },
     {
       "id": "DETECTOR",
@@ -979,7 +2494,7 @@
         "19"
       ],
       "status": "not_fully_transcribed",
-      "unverified": "All diode load/AVC/filter junctions and volume control pot tracks"
+      "unverified": "Four passive groups and one unnumbered diode-symbol connection reviewed; AVC and socket-pin assignments remain open."
     },
     {
       "id": "AUDIO",
@@ -995,7 +2510,7 @@
         "27"
       ],
       "status": "partial",
-      "unverified": "#22 and #25 return paths, transformer/speaker winding characteristics"
+      "unverified": "Listed plate/grid/cathode/transformer/speaker groups source-checked; #22/#25 and models remain open."
     },
     {
       "id": "POWER",
@@ -1009,7 +2524,7 @@
         "32"
       ],
       "status": "partial",
-      "unverified": "Line dropper taps, pilot-lamp branch, B- vs metal chassis isolation, field-coil inductance"
+      "unverified": "Filter, B−, heater interconnects and #30 lamp shunt reviewed; AC/heater endpoints remain open."
     }
   ],
   "verified_part_ledger": [
@@ -1052,54 +2567,76 @@
       "id": "P1-RF",
       "severity": "blocker",
       "stage": "RF",
-      "description": "Transcribe all aerial, tuning, oscillator and 7A8 connections from p.38; do not infer winding returns from component proximity."
+      "description": "The loop/#2 aerial interface, complete #6 RF input trap, #7 loop-return resistor, and lower #9/#11 returns are source-traced. The #4 tuning plate, #9 grid leak and #11 screen bypass are partially traced; the four-dot contacts, opposite #10 winding, remaining 7A8 pins, winding parameters and RF behavior remain open.",
+      "area": "RF / converter",
+      "status": "OPEN",
+      "gap": "v0.53 corrects supply/screen/AVC/B− conductors; remaining diode pin mapping, four-dot oscillator coupling, #8 value conflict, physical boundaries and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
       "severity": "blocker",
       "stage": "IF",
-      "description": "Trace #12/#14 primary and secondary winding terminals, trimmers, 7B7 screen and AVC connections."
+      "description": "The #12/#14 primary supply ends are source-traced to filtered B+. IF secondary returns, 7B7 screen/cathode crosswalks, trimmers, and AVC connections remain open.",
+      "area": "IF",
+      "status": "OPEN",
+      "gap": "v0.53 corrects supply/screen/AVC/B− conductors; remaining diode pin mapping, four-dot oscillator coupling, #8 value conflict, physical boundaries and receiver behavior remain open."
     },
     {
       "id": "P1-DET",
       "severity": "blocker",
       "stage": "DETECTOR",
-      "description": "Trace 7C6 diode pins and all #15–#19 passive connections; distinguish detector return, AVC and audio grid."
+      "description": "The four detector/audio conductor groups and upper diode glyph link are source-checked. The diode glyph pin mapping, #17 lower branch, 7C6 external cathode return, and full AVC routing remain open.",
+      "area": "Detector / AVC",
+      "status": "OPEN",
+      "gap": "v0.53 corrects supply/screen/AVC/B− conductors; remaining diode pin mapping, four-dot oscillator coupling, #8 value conflict, physical boundaries and receiver behavior remain open."
     },
     {
       "id": "P1-OUTPUT",
       "severity": "blocker",
       "stage": "AUDIO",
-      "description": "Verify #22 and #25 routes; trace full output-transformer primary and secondary plus voice coil."
+      "description": "Capacitors #22 and #25 are source-traced, including #25 from filtered B+ to B−. Output-transformer winding parameters, speaker/model correlation, and full output behavior remain open.",
+      "area": "Audio output",
+      "status": "OPEN",
+      "gap": "Factory #25 is source-traced across filtered B+ and B−, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
       "severity": "blocker",
       "stage": "POWER",
-      "description": "Trace the #30 40/80 Ω assembly, #31 line capacitor and #32 pilot lamp exactly, including AC line/common return."
+      "description": "The filter/return groups, four internal heater-chain links and #30 40 Ω/lamp shunt groups were source-checked. Trace both mains paths, #16 switch, 35Z3 anode, #31 line capacitor and the complete heater endpoints before claiming a complete AC network.",
+      "area": "Power / line",
+      "status": "OPEN",
+      "gap": "The complete AC/line topology is now source-traced at schematic-symbol level: plug conductors, #16 switch, #31 across the plug, #30 40/80-ohm branches, #32 shunt, 35Z3 plate feed, B-minus return, and all five series heaters. Numbered tube-socket heater crosswalk, physical switch-lug crosswalk, and chassis isolation/bond evidence remain open."
     },
     {
       "id": "P1-SOURCE",
       "severity": "blocker",
       "stage": "ALL",
-      "description": "Independently recheck every connection on a legible high-resolution factory scan and record confidence for all net memberships."
+      "description": "All 30 represented graph groups and 90 component/tube terminal memberships reconcile to source-review evidence through v0.48. The #7 loop-return branch is now source-traced; oscillator/converter topology and full receiver behavior remain open.",
+      "area": "Source cross-check",
+      "status": "OPEN",
+      "gap": "v0.53 corrects supply/screen/AVC/B− conductors; remaining diode pin mapping, four-dot oscillator coupling, #8 value conflict, physical boundaries and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
       "severity": "later",
       "stage": "ALL",
-      "description": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
+      "description": "Replace reduced-order model with validated tube, transformer and passive SPICE models.",
+      "area": "Full receiver simulation",
+      "status": "NOT STARTED",
+      "gap": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
     }
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 16,
-    "factory_terminals_on_traced_nets": 41,
+    "traced_network_count": 35,
+    "factory_terminals_on_traced_nets": 114,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.13.0"
+  "version": "0.53.0",
+  "source_pages_reviewed": "Philco p.38 PT-42/PT-44 schematic and replacement-parts list; v0.49 traces both #8 endpoints and records the unresolved value conflict."
 }

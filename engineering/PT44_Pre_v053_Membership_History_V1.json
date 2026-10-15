@@ -1,0 +1,949 @@
+{
+  "build": "0.52.0",
+  "reviewed_net_memberships": [
+    {
+      "net_id": "F_BPLUS_RECT",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V5:7",
+        "28:a",
+        "29A:a",
+        "26:a"
+      ]
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "28:b",
+        "29B:a",
+        "21:a"
+      ]
+    },
+    {
+      "net_id": "F_7C6_PLATE",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V3:2",
+        "21:b",
+        "20:a"
+      ]
+    },
+    {
+      "net_id": "F_50L6_GRID",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V4:5",
+        "20:b",
+        "23:a"
+      ]
+    },
+    {
+      "net_id": "F_50L6_CATH",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V4:8",
+        "24:a"
+      ]
+    },
+    {
+      "net_id": "F_OUTPUT_PLATE",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "V4:3",
+        "26:b"
+      ]
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "29A:b",
+        "29B:b",
+        "23:b",
+        "24:b"
+      ]
+    },
+    {
+      "net_id": "F_VOICE_SEC_A",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "26:sA",
+        "27:voiceA"
+      ]
+    },
+    {
+      "net_id": "F_VOICE_SEC_B",
+      "milestone_version": "0.30.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        1380,
+        170,
+        1980,
+        820
+      ],
+      "basis": "Philco p.38 7C6/50L6/output-transformer section: listed members match conductor junctions; #22/#25 routes and full component models remain open.",
+      "reviewed_members": [
+        "26:sB",
+        "27:voiceB"
+      ]
+    },
+    {
+      "net_id": "F_HT_35Z3_50L6",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V5:8",
+        "V4:2"
+      ]
+    },
+    {
+      "net_id": "F_HT_50L6_7A8",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V4:7",
+        "V1:1"
+      ]
+    },
+    {
+      "net_id": "F_HT_7A8_7B7",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V1:8",
+        "V2:1"
+      ]
+    },
+    {
+      "net_id": "F_HT_7B7_7C6",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "V2:8",
+        "V3:1"
+      ]
+    },
+    {
+      "net_id": "F_IF1_PLATE",
+      "milestone_version": "0.32.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        520,
+        170,
+        1490,
+        840
+      ],
+      "basis": "Philco p.38 IF section: listed plate/grid/secondary members match drawn conductors; unlisted winding ends, screens, trimmers and AVC branches remain open.",
+      "reviewed_members": [
+        "V1:2",
+        "12:pPlate"
+      ]
+    },
+    {
+      "net_id": "F_IF1_GRID",
+      "milestone_version": "0.32.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        520,
+        170,
+        1490,
+        840
+      ],
+      "basis": "Philco p.38 IF section: listed plate/grid/secondary members match drawn conductors; unlisted winding ends, screens, trimmers and AVC branches remain open.",
+      "reviewed_members": [
+        "12:sGrid",
+        "V2:6"
+      ]
+    },
+    {
+      "net_id": "F_IF2_PLATE",
+      "milestone_version": "0.32.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        520,
+        170,
+        1490,
+        840
+      ],
+      "basis": "Philco p.38 IF section: listed plate/grid/secondary members match drawn conductors; unlisted winding ends, screens, trimmers and AVC branches remain open.",
+      "reviewed_members": [
+        "V2:2",
+        "14:pPlate"
+      ]
+    },
+    {
+      "net_id": "F_30_40_LAMP_A",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "30:endA",
+        "32:a"
+      ]
+    },
+    {
+      "net_id": "F_30_40_LAMP_B",
+      "milestone_version": "0.29.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1600,
+        1140
+      ],
+      "basis": "Philco p.38 lower circuit: drawn filter, return, heater-chain and #30/lamp junctions checked; line-switch, mains and heater-string endpoints remain outside these groups.",
+      "reviewed_members": [
+        "30:tap",
+        "32:b"
+      ]
+    },
+    {
+      "net_id": "F_IF2_SECONDARY_VOL_TOP",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "reviewed_members": [
+        "14:sReturn",
+        "16:a",
+        "15:a"
+      ]
+    },
+    {
+      "net_id": "F_VOL_WIPER_C18",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "reviewed_members": [
+        "16:wiper",
+        "18:a"
+      ]
+    },
+    {
+      "net_id": "F_7C6_AUDIO_GRID",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: crossings and junctions checked against the native scan; diode symbol contacts remain unnumbered.",
+      "reviewed_members": [
+        "18:b",
+        "19:a",
+        "V3:3"
+      ]
+    },
+    {
+      "net_id": "F_DET_PASSIVE_RETURN",
+      "milestone_version": "0.33.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: the v0.33 review covers #15, #16, and #19 return terminals; #17:b is reconciled by a dedicated v0.39 membership update.",
+      "reviewed_members": [
+        "15:b",
+        "16:b",
+        "19:b"
+      ]
+    },
+    {
+      "net_id": "F_IF2_AVC_FEED",
+      "milestone_version": "0.39.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        750,
+        265,
+        1400,
+        810
+      ],
+      "basis": "Philco 1941 RMS p.38 native scan: upper #14 secondary, upper 7C6 diode glyph, and #17 upper terminal share a conductor. The schematic does not number the diode socket pin.",
+      "reviewed_members": [
+        "14:sDetector",
+        "17:a"
+      ]
+    },
+    {
+      "net_id": "F_RF_INPUT",
+      "milestone_version": "0.41.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ],
+      "basis": "Philco p.38 native 300-dpi scan: input symbol maps to V1:6 and shares a conductor with the upper #3 loop terminal, RF gang #4 terminal and #5 aerial compensator terminal.",
+      "reviewed_members": [
+        "V1:6",
+        "3:loop_a",
+        "4:rf_stator",
+        "5:a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.41.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        90,
+        140,
+        570,
+        790
+      ],
+      "basis": "Philco p.38 explicitly says grounds are to chassis for loop operation; only the grounded ends of the RF gang and aerial compensator are included. No B-minus bond is inferred.",
+      "reviewed_members": [
+        "4:rotor",
+        "5:b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "milestone_version": "0.42.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1330
+      ],
+      "basis": "The lower built-in loop lead joins the upper end of the #2 11-turn winding. Winding polarity and inductive parameters remain unspecified. Checked against the native 300-dpi p.38 scan; unresolved winding parameters and external port remain outside the component graph.",
+      "reviewed_members": [
+        "3:loop_b",
+        "2:secondary_a"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_EXTERNAL_ANTENNA",
+      "milestone_version": "0.42.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1330
+      ],
+      "basis": "The external ANT symbol connects to the upper end of the 38-turn #2 winding. The external port is documented by the trace artifact but is outside the numbered factory-component graph. Checked against the native 300-dpi p.38 scan; unresolved winding parameters and external port remain outside the component graph.",
+      "reviewed_members": [
+        "2:primary_a"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_ANTENNA_BYPASS",
+      "milestone_version": "0.42.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        75,
+        170,
+        620,
+        1330
+      ],
+      "basis": "The lower end of the #2 38-turn winding joins #1:a. The opposite #1 terminal carries the explicit RF ground symbol identified by Philco for loop operation. Checked against the native 300-dpi p.38 scan; unresolved winding parameters and external port remain outside the component graph.",
+      "reviewed_members": [
+        "2:primary_b",
+        "1:a"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json"
+    },
+    {
+      "net_id": "F_SCREEN_45V",
+      "milestone_version": "0.44.0",
+      "status": "SOURCE_CHECKED_SHARED_SCREEN_LEAD_PIN_CROSSWALK",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        260,
+        1350,
+        800
+      ],
+      "basis": "Philco p.38 native 300-dpi scan shows one continuous annotated 45 V screen conductor between the 7A8 and 7B7 screen glyphs; Sylvania pin data maps them to V1:5 and V2:3. Upstream supply remains untraced.",
+      "reviewed_members": [
+        "V1:5",
+        "V2:3"
+      ],
+      "source_artifact": "engineering/PT44_7A8_Screen_Trace_V1.json"
+    },
+    {
+      "net_id": "F_RF_INPUT_TRAP_JUNCTION",
+      "milestone_version": "0.47.0",
+      "status": "SOURCE_CHECKED_COMPONENT_INTERNAL_SERIES_JUNCTION",
+      "unreviewed_members": [],
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "basis": "Philco p.38 draws the lower #6 2 mmf condenser terminal directly wired to the upper #6 series choke terminal.",
+      "reviewed_members": [
+        "6:cap_b",
+        "6:choke_a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+    },
+    {
+      "net_id": "F_OSC_TUNED_LEFT_WINDING",
+      "milestone_version": "0.50.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        550,
+        480,
+        1300,
+        1200
+      ],
+      "basis": "Philco p.38: #4 oscillator gang signal plate joins upper left #10 winding end; functional winding identity remains provisional.",
+      "reviewed_members": [
+        "4:osc_stator",
+        "10:primary_a"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
+    },
+    {
+      "net_id": "F_OSC_GRID_LEAK",
+      "milestone_version": "0.51.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        420,
+        330,
+        1500,
+        1550
+      ],
+      "basis": "Philco p.38 upper #9 lead joins the 7A8 oscillator G1 glyph; Sylvania maps G1 to pin 4. Four-dot symbol contacts remain open.",
+      "reviewed_members": [
+        "9:a",
+        "V1:4"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
+    },
+    {
+      "net_id": "F_AC_PLUG_A_PRE_SWITCH",
+      "milestone_version": "0.52.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1700,
+        1120
+      ],
+      "basis": "Philco p.38 power trace and pin identity crosswalk; electrical endpoints are source-traced, physical orientation remains open.",
+      "reviewed_members": [
+        "31:a",
+        "16:switch_a"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+    },
+    {
+      "net_id": "F_DROPPER_HEATER_INPUT",
+      "milestone_version": "0.52.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1700,
+        1120
+      ],
+      "basis": "Philco p.38 power trace and pin identity crosswalk; electrical endpoints are source-traced, physical orientation remains open.",
+      "reviewed_members": [
+        "30:endB",
+        "V5:1"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+    },
+    {
+      "net_id": "F_OSC_ANODE_RIGHT_WINDING",
+      "milestone_version": "0.52.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "basis": "Philco p.38 and Rider XII 12-45 upper right #10 winding conductor to 7A8 oscillator-anode glyph; manufacturer pin role V1:3.",
+      "reviewed_members": [
+        "10:secondary_a",
+        "V1:3"
+      ],
+      "source_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+    }
+  ],
+  "reviewed_terminal_membership_updates": [
+    {
+      "net_id": "F_50L6_CATH",
+      "milestone_version": "0.36.0",
+      "reviewed_members": [
+        "22:a"
+      ],
+      "source_artifact": "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
+      "source_artifact_version": "0.36.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco 1941 RMS Year Book p.38 native 300-dpi scan. Capacitor #22 lead joins the top of #24 on the 50L6 cathode net."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.36.0",
+      "reviewed_members": [
+        "22:b"
+      ],
+      "source_artifact": "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
+      "source_artifact_version": "0.36.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco 1941 RMS Year Book p.38 native 300-dpi scan. The opposite #22 lead joins the bottom of #24 on the source-traced B− return."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "25:a"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: #25 lead joins the filtered 95 V bus at #21:a."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "25:b"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: opposite #25 lead joins B− at the #23:b return rail."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "12:pSupply"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: first IF transformer #12 primary supply end joins the 95 V filtered B+ bus."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.38.0",
+      "reviewed_members": [
+        "14:pSupply"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.38.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native 300-dpi scan: second IF transformer #14 primary supply end joins the 95 V filtered B+ bus."
+    },
+    {
+      "net_id": "F_DET_PASSIVE_RETURN",
+      "milestone_version": "0.39.0",
+      "reviewed_members": [
+        "17:b"
+      ],
+      "source_artifact": "engineering/PT44_Detector_AVC_Trace_V1.json",
+      "source_artifact_version": "0.39.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: lower #17 terminal joins #15/#16/#19 return; no chassis bond inferred."
+    },
+    {
+      "net_id": "F_IF1_GRID",
+      "milestone_version": "0.40.0",
+      "reviewed_members": [
+        "13:a"
+      ],
+      "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "source_artifact_version": "0.40.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: #13 upper terminal joins #12 secondary/grid node at V2 control-grid lead."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.40.0",
+      "reviewed_members": [
+        "12:sReturn",
+        "13:b"
+      ],
+      "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "source_artifact_version": "0.40.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: #12 secondary lower end and #13 lower end join the B− return bus."
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.42.0",
+      "reviewed_members": [
+        "1:b"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json",
+      "source_artifact_version": "0.42.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 RF note identifies the #1 lower terminal ground symbol as chassis for loop operation; no connection to B− is inferred."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.42.0",
+      "reviewed_members": [
+        "2:secondary_b"
+      ],
+      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json",
+      "source_artifact_version": "0.42.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: lower terminal of the #2 11-turn aerial-transformer winding joins the horizontal B− return rail."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.43.0",
+      "reviewed_members": [
+        "9:b",
+        "11:b"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Return_Trace_V1.json",
+      "source_artifact_version": "0.43.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 native scan: lower terminals of #9 22 kΩ and #11 0.05 µF meet the horizontal B− return rail."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.45.0",
+      "reviewed_members": [
+        "V4:4"
+      ],
+      "source_artifact": "engineering/PT44_Output_IF_Supply_Trace_V1.json",
+      "source_artifact_version": "0.45.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 shows the 50L6 screen glyph on filtered B+ shared with #25; RCA 50L6-GT data maps the screen to socket pin 4."
+    },
+    {
+      "net_id": "F_RF_INPUT",
+      "milestone_version": "0.47.0",
+      "reviewed_members": [
+        "6:cap_a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.47.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #6 condenser terminal joins the existing 7A8 signal-input conductor."
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.47.0",
+      "reviewed_members": [
+        "6:choke_b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.47.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_box_px": [
+        0,
+        250,
+        1450,
+        1550
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower #6 series choke terminal ends at the explicit ground symbol; the drawing note identifies loop-operation grounds as chassis, not B−."
+    },
+    {
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "milestone_version": "0.48.0",
+      "reviewed_members": [
+        "7:a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.48.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        150,
+        900,
+        850,
+        1400
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #7 4.7 MΩ terminal joins the lower loop/#2 11-turn winding junction."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.48.0",
+      "reviewed_members": [
+        "7:b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.48.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        150,
+        900,
+        850,
+        1400
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower #7 4.7 MΩ terminal joins the B− return rail."
+    },
+    {
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "milestone_version": "0.49.0",
+      "reviewed_members": [
+        "8:a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.49.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        240,
+        950,
+        680,
+        1350
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #8 lead shares the lower-loop/#2 11-turn winding junction with #7:a; no polarity is implied."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.49.0",
+      "reviewed_members": [
+        "8:b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.49.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        240,
+        950,
+        680,
+        1350
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower #8 lead joins the B− rail at #2:secondary_b and #7:b."
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.50.0",
+      "reviewed_members": [
+        "10:primary_b"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json",
+      "source_artifact_version": "0.50.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        550,
+        480,
+        1300,
+        1200
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower left #10 winding end terminates at explicit loop-mode chassis ground symbol; no B− bond."
+    },
+    {
+      "net_id": "F_SCREEN_45V",
+      "milestone_version": "0.51.0",
+      "reviewed_members": [
+        "11:a"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json",
+      "source_artifact_version": "0.51.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        420,
+        330,
+        1500,
+        1550
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #11 capacitor terminal joins the shared annotated 45 V screen conductor; lower end remains B−."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.52.0",
+      "reviewed_members": [
+        "16:switch_b",
+        "V3:8"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "source_artifact_version": "0.52.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 power-line conductor group with tube pin role crosswalk where applicable."
+    },
+    {
+      "net_id": "F_30_40_LAMP_A",
+      "milestone_version": "0.52.0",
+      "reviewed_members": [
+        "31:b"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "source_artifact_version": "0.52.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 power-line conductor group with tube pin role crosswalk where applicable."
+    },
+    {
+      "net_id": "F_30_40_LAMP_B",
+      "milestone_version": "0.52.0",
+      "reviewed_members": [
+        "V5:2"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "source_artifact_version": "0.52.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 power-line conductor group with tube pin role crosswalk where applicable."
+    }
+  ],
+  "status": "SUPERSEDED_WHERE_CORRECTED_IN_V053"
+}

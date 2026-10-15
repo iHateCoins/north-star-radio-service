@@ -301,8 +301,64 @@
       "stage": "DETECTOR",
       "a": "V3:3",
       "b": "V3:7",
-      "expect": "untraced",
-      "reason": "Triode control grid and internal cathode are not shorted inside the vacuum tube."
+      "expect": "component_path",
+      "reason": "The grid returns to the now traced cathode/B− wire via #19 4.7 MΩ. This is a resistor path, not a tube-internal grid short.",
+      "expected_component": "R19",
+      "nominal_path_ohms": 4700000
+    },
+    {
+      "id": "C27",
+      "stage": "RF",
+      "a": "10:secondary_b",
+      "b": "12:pSupply",
+      "expect": "same_wire_net",
+      "reason": "Lower right oscillator winding end and first-IF primary supply have a dotted filtered-B+ junction."
+    },
+    {
+      "id": "C28",
+      "stage": "IF",
+      "a": "12:sReturn",
+      "b": "17:b",
+      "expect": "same_wire_net",
+      "reason": "First-IF secondary cold lead follows the distinct AVC rail to the lower #17 lead."
+    },
+    {
+      "id": "C29",
+      "stage": "RF",
+      "a": "17:b",
+      "b": "29A:b",
+      "expect": "component_path",
+      "reason": "AVC reaches B− through #7 4.7 MΩ; the rails are not a direct copper bond. This is a selected passive branch, not equivalent measured resistance.",
+      "expected_component": "R7",
+      "nominal_path_ohms": 4700000
+    },
+    {
+      "id": "C30",
+      "stage": "IF",
+      "a": "12:pSupply",
+      "b": "V2:3",
+      "expect": "component_path",
+      "reason": "Filtered B+ supplies the screen conductor through #13 27 kΩ, not an IF-grid return.",
+      "expected_component": "R13",
+      "nominal_path_ohms": 27000
+    },
+    {
+      "id": "C31",
+      "stage": "IF",
+      "a": "V2:5",
+      "b": "V2:7",
+      "expect": "same_wire_net",
+      "reason": "The explicit 7B7 shield/cathode junction is on B−."
+    },
+    {
+      "id": "C32",
+      "stage": "DETECTOR",
+      "a": "V3:4",
+      "b": "29A:b",
+      "expect": "tube_internal_connection",
+      "reason": "Pin 4 reaches the factory cathode/B− wire through the documented tube-internal link to pin 7; no external jumper is asserted.",
+      "expected_component": "V3:CATHODE_BOND",
+      "nominal_path_ohms": 0
     }
   ],
   "acceptance": {
@@ -324,5 +380,6 @@
     "Source location in historic schematic is not a physical chassis route.",
     "7C6 pins 4/7 internally common from Sylvania: this is a device-internal bond, not a documented chassis wire.",
     "v0.20 four 300dpi-traced passive junction groups are not proof of complete detector or SPICE-equivalent topology."
-  ]
+  ],
+  "review_revision": "0.53.0"
 }

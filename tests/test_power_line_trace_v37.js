@@ -18,9 +18,9 @@ assert.equal(trace.inventory_reconciliation.source_level_closure,true);assert.eq
 assert.deepEqual(trace.component_paths.find(x=>x.id==='SERIES_HEATER_PATH').tube_order.map(x=>x.split(':')[0]),['V5','V4','V1','V2','V3']);
 assert(trace.component_paths.find(x=>x.id==='LINE_SUPPRESSION_CAPACITOR').terminal_connections.length===2);
 assert(trace.unresolved.some(x=>x.id==='POWER-PIN-CROSSWALK'));
-assert.equal(readiness.version,'0.52.0');assert.equal(readiness.evidence_snapshot.power_line_pin_level_closed,false);assert.equal(readiness.benchmark_ready,false);
+assert.equal(readiness.version,'0.53.0');assert.equal(readiness.evidence_snapshot.power_line_pin_level_closed,false);assert.equal(readiness.benchmark_ready,false);
 assert.equal(schematic.milestones.find(x=>x.version==='0.37.0').version,'0.37.0');assert.equal(schematic.milestones.find(x=>x.version==='0.37.0').status,'SOURCE_TRACED_SYMBOL_LEVEL_PIN_CROSSWALK_OPEN');assert.equal(schematic.milestones.find(x=>x.version==='0.38.0').version,'0.38.0');
-assert.equal(graph.factory_nets.length,35);assert.equal(graph.factory_nets.reduce((n,x)=>n+x.factory_members.length,0),108);
+assert.equal(graph.factory_nets.length,35);assert.equal(graph.factory_nets.reduce((n,x)=>n+x.factory_members.length,0),114);
 const panel=read('pt44PowerLineTraceHTML(x=>x)');assert(panel.includes('line and heater topology'));assert(panel.includes('pin-level netlist open'));
 const bad=vm.runInContext(`(()=>{const n=PT44_POWER_LINE_TRACE_V1.conductor_groups.find(x=>x.id==='HT_7B7_TO_7C6');const v=n.members.pop();const failed=!pt44PowerLineTraceAudit().ok;n.members.push(v);return failed;})()`,ctx);
 assert(bad,'audit must reject a missing heater-series conductor endpoint');

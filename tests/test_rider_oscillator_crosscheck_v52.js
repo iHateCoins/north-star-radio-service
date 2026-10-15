@@ -4,8 +4,8 @@ const cross=read('engineering/PT44_Rider_12_45_Crosscheck_V1.json'),graph=read('
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(x=>x[1]);
 assert.equal(cross.sources[1].printed_page,'12-45');assert.equal(cross.sources[1].pdf_page,45);
 assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_OSC_ANODE_RIGHT_WINDING').factory_members,['10:secondary_a','V1:3']);
-assert.equal(scope.baseline.component_terminal_reference_coverage_percent,98.8);
-assert.deepEqual(scope.subsystems.find(x=>x.id==='RF').unrepresented_terminals,['10:secondary_b']);
+assert.equal(scope.baseline.component_terminal_reference_coverage_percent,100);
+assert.deepEqual(scope.subsystems.find(x=>x.id==='RF').unrepresented_terminals,[]);
 const ctx=vm.createContext({console});vm.runInContext(scripts[1],ctx);const a=scripts[3].indexOf('function pt44BenchAudit()'),b=scripts[3].indexOf('function renderFactoryLedger(box){');vm.runInContext(scripts[3].slice(a,b),ctx);
 const inspect=x=>JSON.parse(vm.runInContext('JSON.stringify('+x+')',ctx));assert.deepEqual(inspect('PT44_RIDER_12_45_CROSSCHECK_V1'),cross);assert(inspect('pt44RiderCrosscheckAudit()').ok);assert(inspect('pt44SchematicTraceAudit()').ok);
 for(const [label,expression] of [

@@ -14,7 +14,7 @@
       ],
       "expected_nets": [
         "F_IF2_SECONDARY_VOL_TOP",
-        "F_DET_PASSIVE_RETURN"
+        "F_BMINUS"
       ],
       "factory_document": "Philco 1941 RMS p.38; component #15 250 pF"
     },
@@ -44,7 +44,7 @@
       ],
       "expected_nets": [
         "F_7C6_AUDIO_GRID",
-        "F_DET_PASSIVE_RETURN"
+        "F_BMINUS"
       ],
       "factory_document": "Philco 1941 RMS p.38; component #19 4.7 MΩ"
     }
@@ -52,7 +52,7 @@
   "isolated_bench": {
     "source_ac_rms_volts": 1,
     "source_plus": "F_VOL_WIPER_C18",
-    "source_minus": "F_DET_PASSIVE_RETURN",
+    "source_minus": "F_BMINUS",
     "node_measured": "F_7C6_AUDIO_GRID",
     "included_component_parts": [
       "18",

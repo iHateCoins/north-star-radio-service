@@ -190,11 +190,12 @@
       ],
       "connection_nets": [
         "F_IF2_AVC_FEED",
-        "F_DET_PASSIVE_RETURN"
+        "F_AVC_RETURN"
       ],
-      "connection_status": "both_component_endpoints_source_traced_v0.39",
+      "connection_status": "source_reconciled_v0.53",
       "source_artifact": "engineering/PT44_Detector_AVC_Trace_V1.json",
-      "model_validation_status": "not_validated_in_full_receiver"
+      "model_validation_status": "not_validated_in_full_receiver",
+      "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
     },
     "13": {
       "kind": "resistor",
@@ -206,12 +207,13 @@
         "13:b"
       ],
       "connection_nets": [
-        "F_IF1_GRID",
-        "F_BMINUS"
+        "F_BPLUS_FILT",
+        "F_SCREEN_45V"
       ],
-      "connection_status": "both_component_endpoints_source_traced_v0.40",
+      "connection_status": "source_reconciled_v0.53",
       "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
-      "model_validation_status": "not_validated_in_full_receiver"
+      "model_validation_status": "not_validated_in_full_receiver",
+      "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
     }
   },
   "acceptance": {
