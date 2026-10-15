@@ -1,0 +1,64 @@
+{
+  "schema": "PT44_35Z3_CURVE_REFERENCE_V1",
+  "version": "0.60.0",
+  "model": "Philco PT-44",
+  "source": {
+    "document": "RCA HB-3, 35Z3, June 20 1947",
+    "url": "https://frank.pocnet.net/sheets/049/3/35Z3.pdf",
+    "sha256": "c4c38f0706a6c3283512a6ba7b3481c87b9cae8a0f79444f9333693a7c63cce1",
+    "pdf_page": 1,
+    "curve": "Average plate characteristic, 91CM-6067",
+    "heater_v": 35,
+    "render_dpi": 280,
+    "reading_method": "Manual readings of the printed average curve. Values rounded to 5 mA. Fit point is separated from seven withheld readings; no precision digitization or individual tube calibration.",
+    "reading_tolerance_a": 0.008,
+    "reading_tolerance_relative": 0.03
+  },
+  "fit": {
+    "forward_v": 20,
+    "current_a": 0.2,
+    "exponent": 1.5
+  },
+  "withheld_points": [
+    {
+      "forward_v": 5,
+      "current_a": 0.03
+    },
+    {
+      "forward_v": 10,
+      "current_a": 0.075
+    },
+    {
+      "forward_v": 15,
+      "current_a": 0.135
+    },
+    {
+      "forward_v": 25,
+      "current_a": 0.29
+    },
+    {
+      "forward_v": 30,
+      "current_a": 0.375
+    },
+    {
+      "forward_v": 35,
+      "current_a": 0.465
+    },
+    {
+      "forward_v": 40,
+      "current_a": 0.57
+    }
+  ],
+  "checked_forward_range_v": [
+    5,
+    40
+  ],
+  "law": "I=K*max(Vplate-Vcathode,0)^1.5; K=0.2/20^1.5",
+  "limits": [
+    "The checked range is 5–40 V forward drop at nominal 35 V heater; values outside are explicitly extrapolated.",
+    "An average manufacturer curve is not a PT-44 factory voltage target or a model of heater/emission variation.",
+    "No reverse leakage/breakdown, saturation, cold-heater or nonlinear lamp validation.",
+    "The GE 18 V/200 mA reference remains an explicitly named alternative; its power law is not validated against this RCA curve."
+  ],
+  "full_ec_closed": []
+}

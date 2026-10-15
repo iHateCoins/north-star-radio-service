@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.59.0",
+  "version": "0.60.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -223,7 +223,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.59 supports EC-05/07/09 with one-second coupled AVC release, loaded meters, fault/restoration and independent circuit continuation. Initial arrival remains short; long-duration attack/steady regulation and converter feedback remain open. All nine EC acceptance lists and six NOT MET benchmark gates are unchanged.",
+  "latest_evidence_update": "v0.60 supports EC-02/03/07 with a source-traced RCA 35Z3 alternative, shared solver/export selection, supply sensitivity and curve-coverage reporting. No full EC closes. The GE legacy reference remains selectable; outside-range and heater/emission behavior are still assumptions. All nine EC acceptance lists and six NOT MET gates are unchanged.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

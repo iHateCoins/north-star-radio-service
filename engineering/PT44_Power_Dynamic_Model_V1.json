@@ -1,6 +1,6 @@
 {
   "schema": "PT44_POWER_DYNAMIC_MODEL_V1",
-  "version": "0.54.0",
+  "version": "0.60.0",
   "model": "Philco PT-44",
   "status": "SOURCE_TOPOLOGY_DYNAMIC_MODEL_WITH_EXPLICIT_UNCALIBRATED_PARAMETERS",
   "sources": [
@@ -19,6 +19,13 @@
     {
       "artifact": "engineering/PT44_Heater_String_Model_V1.json",
       "scope": "Nominal hot heater resistance sum 692.6667 Ω from rated V/I; cold heaters and warm-up not represented."
+    },
+    {
+      "document": "RCA HB-3 35Z3, June 20 1947",
+      "url": "https://frank.pocnet.net/sheets/049/3/35Z3.pdf",
+      "sha256": "c4c38f0706a6c3283512a6ba7b3481c87b9cae8a0f79444f9333693a7c63cce1",
+      "scope": "Separate RCA reference model checked against the average forward curve; nominal 35 V heater, 5–40 V forward drop.",
+      "artifact": "engineering/PT44_35Z3_Curve_Reference_V1.json"
     }
   ],
   "factory_parameters": {
@@ -34,7 +41,7 @@
     "reference_v": 18,
     "reference_a": 0.2,
     "perveance_a_per_v_1_5": 0.0026189140043946205,
-    "provenance": "Derived approximation through a single GE manufacturer reference point. No reverse leakage, heater thermal model, space-charge saturation or validated full curve."
+    "provenance": "Legacy GE reference retained for reproducibility. A separately identified RCA curve model is selectable; neither identifies the installed physical tube. See rectifier_models."
   },
   "assumed_parameters": {
     "line_hz": 60,
@@ -46,7 +53,8 @@
     "emission": 1,
     "hot_heater_resistance_ohm": 692.6666666666667,
     "line_mode": "AC",
-    "dc_polarity": 1
+    "dc_polarity": 1,
+    "rectifier_model": "ge_legacy"
   },
   "assumption_policy": "Field inductance, lamp hot resistance, 60 Hz mains and resistive stand-in receiver loads are explicit test inputs, not Philco measurements. The source-derived topology is retained while these inputs vary. Do not fit to 95/110 V factory labels with undocumented measurement conditions.",
   "ports": {
@@ -166,5 +174,26 @@
     "factory_voltage_calibrated": false,
     "benchmark_ready": false
   },
-  "validation_artifact": "engineering/PT44_Power_Dynamic_Validation_V1.json"
+  "validation_artifact": "engineering/PT44_Power_Dynamic_Validation_V1.json",
+  "rectifier_models": {
+    "ge_legacy": {
+      "label": "GE 18 V / 200 mA · legacy point",
+      "reference_v": 18,
+      "reference_a": 0.2,
+      "perveance_a_per_v_1_5": 0.0026189140043946205,
+      "checked_forward_range_v": null,
+      "evidence": "Single GE manufacturer reference point only."
+    },
+    "rca_1947": {
+      "label": "RCA 1947 · checked 5–40 V curve",
+      "reference_v": 20,
+      "reference_a": 0.2,
+      "perveance_a_per_v_1_5": 0.00223606797749979,
+      "checked_forward_range_v": [
+        5,
+        40
+      ],
+      "evidence": "PT44_35Z3_Curve_Reference_V1.json; nominal heater 35 V."
+    }
+  }
 }

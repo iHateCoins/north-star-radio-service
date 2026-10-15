@@ -1,6 +1,6 @@
 PT-44 v0.58 loaded infinitesimal IF response - uncalibrated
 * Factory topology: Philco p.38. Load resistors, field L and lamp hot R are test inputs.
-* B-minus is the reference; no chassis bond. Rectifier is a single-point 3/2-power approximation.
+* B-minus reference; no chassis bond. Rectifier model: ge_legacy; Single GE manufacturer reference point only.
 VMAIN LINE 0 115
 VLINE_LINK LINE LINE_IN 0
 R30_40 LINE_IN PLATE 40

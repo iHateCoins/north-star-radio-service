@@ -1,6 +1,6 @@
 {
   "schema": "PT44_IF_RECEIVER_MODEL_V1",
-  "version": "0.59.0",
+  "version": "0.60.0",
   "model": "Philco PT-44",
   "scope": "Joint hot DC supply, tuned IF, detector/AVC and nonlinear audio; converter replaced by explicit current injection and residual loads. Not a complete receiver.",
   "factory_terminal_nets": {
@@ -330,7 +330,8 @@
     "inherited": "7C6/50L6 sparse curves, diode law and transformer/speaker approximations remain as declared in v0.55/v0.56.",
     "trimmer_fixture": "Exactly three independent controls follow p.38: 12A across first-IF primary, 12B across first-IF secondary, 14A across second-IF secondary. No tuning capacitor is invented across second-IF primary; tube/parasitic capacitances remain explicit. Legacy if1_detune/if2_detune inputs are diagnostic scale aliases.",
     "core_loss_q": 120,
-    "positive_grid_extension": "Published grid curves end at 0 V. The final slope is linearly continued to +3 V in screen-normalized coordinates, then held constant, to avoid an artificial gain discontinuity at 0 V. This extension is an assumption requiring parameter correlation; grid current is still modeled separately."
+    "positive_grid_extension": "Published grid curves end at 0 V. The final slope is linearly continued to +3 V in screen-normalized coordinates, then held constant, to avoid an artificial gain discontinuity at 0 V. This extension is an assumption requiring parameter correlation; grid current is still modeled separately.",
+    "rectifier_selection": "Shared GE legacy point or RCA 1947 nominal-heater curve model. No installed manufacturer identification or heater-dependent emission claim."
   },
   "defaults": {
     "line_v": 115,
@@ -358,7 +359,8 @@
     "probe": "AVC",
     "c12a_scale": 1,
     "c12b_scale": 1,
-    "c14a_scale": 1
+    "c14a_scale": 1,
+    "rectifier_model": "ge_legacy"
   },
   "nodes": {
     "A": "F_BPLUS_RECT",

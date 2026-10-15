@@ -1,48 +1,45 @@
-# North Star Radio Service — v0.59.0 coupled AVC release
+# North Star Radio Service — v0.60.0 shared 35Z3 curve references
 
-The coupled IF/detector/audio/supply bench now continues through signal removal and a full second of AVC release. It carries all 26 circuit states forward from the existing short signal-arrival test, resolves 0.2 ms of IF ringdown, then uses backward Euler at ≤0.1 ms for the unforced circuit. No AVC reset, fitted exponential or frozen supply/audio state is used. The original carrier-resolved arrival and alignment controls remain available.
+The supply, nonlinear audio and coupled IF circuits now share an explicit **35Z3 reference selection**. The existing GE 18 V / 200 mA single-point approximation remains the default (`ge_legacy`) for reproducibility. A separately identified RCA 1947 model (`rca_1947`) uses its published average forward characteristic at nominal 35 V heater voltage. The selected model follows the circuit controls, background workers, alignment-to-IF settings transfer and matching SPICE exports.
 
-## What this version supports toward engineering completion
+The RCA 3/2-power law is anchored at 20 V / 200 mA and checked against **seven withheld curve readings** over 5–40 V forward drop. Approximate manual graph readings have a declared 8 mA + 3% tolerance. This bounds the graph comparison; it does not measure production spread or identify the installed tube. The GE law is retained as a separate manufacturer reference, not relabeled as validated against the RCA curve.
 
-Every release reports supported EC IDs, concrete evidence toward closure, actual full closures and remaining work. The nine acceptance lists remain fixed in `engineering/PT44_Remaining_Actions_V1.json`; a frozen acceptance snapshot now guards against accidental scope changes.
+## EC support and closure
 
-| EC supported | Evidence added in v0.59 | Full EC closed? |
+| EC supported | Concrete evidence added in v0.60 | Full EC closed? |
 |---|---|---|
-| **EC-05** | One-second release, timestep/ringdown convergence, both #8 alternatives, fault/restoration and independent circuit continuation. | No |
-| **EC-07** | Defined removal/ringdown/release times; AVC/grid/B+ checkpoints; ideal, DMM and service-meter loading. | No |
-| **EC-09** | Deterministic release, #17-open, no-signal and restored cases in the coupled electrical regression matrix. | No |
+| **EC-02** | Source/hash/conditions, separated fit and withheld 35Z3 readings, derivative and reference-point checks. | No |
+| **EC-03** | Shared rectifier selection through actual modeled stage currents; loaded AC/DC supply sensitivity, faults and independent SPICE execution. | No |
+| **EC-07** | Selected reference recorded in conditions and exports; explicit forward-curve coverage during startup and measurement. | No |
 
-No full EC or full-receiver engineering gate closes in this increment. Broader game development remains on hold.
+All nine acceptance lists and all six **NOT MET** gates remain fixed. No full EC closes. Broader game development remains on hold.
 
 ## Conditions and limits
 
-The UI uses hot DC equilibrium followed by the existing **6 ms, 455 kHz, 1 kHz/50% AM arrival**, then removes the injected current. Automated comparison fixtures use **3 ms arrival with 2 kHz/50% AM**. Neither initializes AVC at a settled strong-signal operating point. Release time is measured from signal removal to 10% of the instantaneous removal magnitude; this is not a published Philco specification. A negligible starting bias has no reported recovery time. Both unresolved #8 values remain available as sensitivity cases; no variant is selected by this release.
+The power bench reports conducting time-step counts outside the RCA curve's **5–40 V forward-drop range**, separately for the whole run and the final measurement window. Those steps use extrapolation. GE coverage is reported as unavailable because that model has only one reference point. Counts are discrete sample counts, not a continuous time fraction or a tube-rating check.
 
-The displayed release checkpoints use actual circuit states at 10/50/100/250/500/1000 ms. All voltages reference B-minus; no chassis bond is asserted. After carrier ringdown, backward Euler damps unresolved fast modes so they cannot persist as trapezoidal numerical ringing. The early step is also limited to C8 × probe resistance / 50 for a fast AVC probe, through 20 such time constants. Halving the release step and doubling the ringdown window bound the effect of that transition; independent recovery-time checks include the fast service meter.
+Both reference laws still omit heater-dependent emission, reverse leakage/breakdown, saturation and cold-heater behavior. Hot heater resistance, lamp behavior and field L remain approximations. A nominal-heater average curve does not establish operation across all supported line voltages. Supply variation here checks the declared electrical model and its sensitivity, not historical receiver calibration. No factory voltage labels were used to fit it.
 
-The release SPICE export starts from the recorded **common post-ringdown capacitor voltages and inductor currents**, with no input current. Independent adaptive Gear execution checks the continuation, rather than independently establishing that initial state. The prior carrier-resolved coupled transient SPICE suite separately checks signal arrival. Agreement validates numerical implementation under declared parameters, not factory calibration.
+Supply validation covers 90/115/130 V AC and DC with both laws, plus RCA dry-reservoir, weak/open rectifier, discharge and restored cases. The dry-reservoir fixture uses a four-times finer step, with an additional refinement check, because the smaller capacitor sharpens charging pulses. The power fixture still uses declared stand-in load resistors. Six hot DC operating points separately exercise the actual modeled IF/audio/supply currents at those line voltages; the 7A8 converter remains substituted.
 
 ## Remaining work
 
-| EC | Still required for full closure |
-|---|---|
-| EC-01 | Physical diode-pin assignment, oscillator coupling interpretation, approved resolution of #8 value conflict. |
-| EC-02 | Remaining tube, winding, transformer/speaker, volume, field, heater and lamp parameter correlation. |
-| EC-03 | Active converter loads, full AC/DC supply, startup/discharge and heater/lamp envelope. |
-| EC-04 | Audio parameter/frequency-envelope correlation and shop repair integration. |
-| EC-05 | Correlated passband/trimmer/diode parameters; long-duration attack/steady AVC regulation and converter feedback. |
-| EC-06 | RF/oscillator/converter operation and tracking across 540–1600 kHz. |
-| EC-07 | RF/shop generator, meter and tracer integration; historical service measurement conditions. |
-| EC-08 | Serviceable chassis endpoints, access and repair-relevant physical identities. |
-| EC-09 | Full receiver baseline and complete diagnosis/replacement/alignment/checkout acceptance. |
+- **EC-01:** Physical diode pins, oscillator coupling interpretation and approved #8 value resolution.
+- **EC-02:** Remaining tube, winding, audio/transformer, volume, field, heater and lamp correlation; 35Z3 extrapolation and thermal behavior.
+- **EC-03:** Actual converter currents; complete coupled-receiver AC/DC startup/discharge and heater/lamp/field envelope.
+- **EC-04:** Audio parameter/frequency envelope and shop integration.
+- **EC-05:** Correlated passband/trimmer/diode parameters, long-duration attack/steady AVC and converter feedback.
+- **EC-06:** RF/oscillator/converter tracking over 540–1600 kHz.
+- **EC-07/08:** RF/shop instruments, historical service conditions and serviceable chassis crosswalk.
+- **EC-09:** Full receiver baseline and complete diagnosis/replacement/alignment/checkout acceptance.
 
-## Evidence and checks
+## Evidence and reproduction
 
-- `engineering/PT44_AVC_Release_Validation_V1.json`: release convergence, #8 alternatives, loaded meters, fault/restoration and no-signal cases.
-- `engineering/PT44_AVC_Release_Spice_Validation_V1.json`: independent adaptive circuit continuation from common snapshots.
-- `node tests/test_avc_release_v59.js --record` regenerates coupled release evidence.
-- `node tests/test_avc_release_spice_v59.js --ngspice --record` regenerates independent continuation evidence.
-- `node tests/test_avc_release_workbench_v59.js` executes the generated release worker and checks its lifecycle.
-- `node tests/test_avc_release_browser_v59.js --browser` checks the real controls/worker, exact release export and desktop/mobile layout.
+- `engineering/PT44_35Z3_Curve_Reference_V1.json`: manufacturer URL/hash, nominal conditions, fit, withheld points and reading tolerances.
+- `engineering/PT44_35Z3_Validation_V1.json`: curve, derivative, supply, receiver load and fault/restoration checks.
+- `engineering/PT44_35Z3_Spice_Validation_V1.json`: independently executed loaded supply waveforms and actual-stage DC points.
+- `node tests/test_rectifier_v60.js --record` regenerates electrical evidence.
+- `node tests/test_rectifier_spice_v60.js --ngspice --record` regenerates independent evidence.
+- `node tests/test_rectifier_browser_v60.js --browser` exercises selected-model propagation through supply/audio/alignment/IF controls, real workers, exports and mobile layout.
 
-Existing source, supply, audio, detector, IF and alignment regressions remain in CI. Watermark: **BUILD v0.59.0**. All six full-receiver gates remain **NOT MET**.
+Existing source, power, audio, detector, IF, alignment and AVC release regressions remain in CI. Watermark: **BUILD v0.60.0**.

@@ -32,7 +32,7 @@ function pt44IFConfigure(spec,audio,power,detector,graph,input={}){
  for(const k of ['c12a_scale','c12b_scale','c14a_scale'])if(p[k]<.75||p[k]>1.25)throw Error('Unsupported IF trimmer range');
  const nodes=['A','B','H','W','G','P','O','K','T','X','FIELD_I','AUDIO_L_I','U','AVC','S','IG','IP','IS','PW','SW','CP','CW','I1P','I1S','I2P','I2S'];
  if(!['ideal','dmm','service'].includes(p.meter)||!['A','B','G','P','K','U','AVC','S','IG','IP','CP'].includes(p.probe))throw Error('Invalid IF probe');
- const base=pt44AudioConfigure(audio,power,graph,{line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm,meter:'ideal'});
+ const base=pt44AudioConfigure(audio,power,graph,{rectifier_model:p.rectifier_model,line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm,meter:'ideal'});
  const a=spec.assumptions,w=2*Math.PI*455000,L=a.winding_h,C=1/(w*w*L),lossG=1/(w*L*a.core_loss_q);
  if(lossG<=0||p.duration_s*p.carrier_hz*p.samples_per_carrier>2000000)throw Error('IF passivity/work budget');
  const meter=p.meter==='ideal'?{resistance_ohm:null,capacitance_f:0}:p.meter==='dmm'?{resistance_ohm:1e7,capacitance_f:100e-12}:{resistance_ohm:1000*(p.probe==='AVC'?10:250),capacitance_f:0};
@@ -101,7 +101,7 @@ function pt44IFSimulate(spec,audio,power,detector,graph,input={}){
 }
 function pt44IFSpiceDeck(spec,audio,power,detector,graph,input={}){
  const c=pt44IFConfigure(spec,audio,power,detector,graph,input),{p}=c,a=spec.assumptions,f=detector.factory_parameters,dt=1/(p.carrier_hz*p.samples_per_carrier);
- const lines=pt44AudioSpiceDeck(audio,power,graph,{line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm}).split('\n').filter(s=>s&&!/^(RRF |BSIGNAL |RDET |\.options|\.tran|\.print|\.end)/.test(s)).map(s=>s.replace(/ IC=0/g,''));
+ const lines=pt44AudioSpiceDeck(audio,power,graph,{rectifier_model:p.rectifier_model,line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm}).split('\n').filter(s=>s&&!/^(RRF |BSIGNAL |RDET |\.options|\.tran|\.print|\.end)/.test(s)).map(s=>s.replace(/ IC=0/g,''));
  lines[0]='PT-44 v0.58 joint hot DC IF/detector/audio/power - uncalibrated';
  lines.push('* Converter injection/substitute loads and winding parameters are declared assumptions. No RF tracking claim.',`.func IFP(p,g) {${pt44IFSpiceTable(spec,'plate_current_a')}}`,`.func IFS(p,g) {${pt44IFSpiceTable(spec,'screen_current_a')}}`,'.func QIF(s) {max(s,1e-6)/100}',
  `RCP CP 0 ${a.converter_plate_ohm}`,`RCS S 0 ${a.converter_screen_ohm}`,`BDRIVE CP 0 I={${p.input_peak_a}*(1+${p.modulation}*sin(${2*Math.PI*p.audio_hz}*time))*sin(${2*Math.PI*p.carrier_hz}*time)}`,

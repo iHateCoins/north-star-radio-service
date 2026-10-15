@@ -1,6 +1,6 @@
 {
   "schema": "PT44_REMAINING_ACTIONS_V1",
-  "version": "0.59.0",
+  "version": "0.60.0",
   "model": "Philco PT-44",
   "benchmark_ready": false,
   "scope_policy": "Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.",
@@ -50,6 +50,12 @@
       ],
       "remaining_after_v058": [
         "Correlate winding L/k/core loss, tube screen/positive-grid behavior, and remaining converter/rectifier/heater/lamp/field/audio parameters."
+      ],
+      "completed_in_v060": [
+        "Add a separately identified RCA 1947 35Z3 model anchored at 20 V/200 mA and checked against seven withheld average-curve readings; retain the GE legacy reference as an explicit alternative."
+      ],
+      "remaining_after_v060": [
+        "Complete remaining tube/winding/audio/field/heater/lamp correlation, including 35Z3 low-drop/high-current extrapolation and heater-dependent emission."
       ]
     },
     {
@@ -75,6 +81,12 @@
       ],
       "remaining_after_v057": [
         "Replace remaining converter injection, plate and screen substitutes with the active 7A8. Validate full AC/DC, startup/discharge and heater/lamp/field envelope."
+      ],
+      "completed_in_v060": [
+        "Carry the same rectifier selection through power, nonlinear audio and coupled IF supply currents and matching SPICE exports; validate loaded supply sensitivity and report curve extrapolation during startup and measurement."
+      ],
+      "remaining_after_v060": [
+        "Replace converter substitute loads; validate full coupled-receiver AC/DC startup/discharge and heater/lamp/field envelope."
       ]
     },
     {
@@ -189,6 +201,12 @@
       ],
       "remaining_after_v059": [
         "Complete RF/shop generator, meter and tracer integration; validate historical service measurement conditions."
+      ],
+      "completed_in_v060": [
+        "Record selected tube reference and nominal-heater curve bounds in submitted circuit conditions; expose out-of-range conducting steps instead of implying full-envelope calibration."
+      ],
+      "remaining_after_v060": [
+        "Complete RF/shop instruments and historical service conditions; nominal manufacturer heater conditions do not establish receiver calibration."
       ]
     },
     {
@@ -248,31 +266,32 @@
     "EC-03/04: validate the complete receiver supply/audio envelope.",
     "EC-07/08/09: serviceable chassis/shop instruments and full repair acceptance."
   ],
-  "milestone_completed": "v0.59 supports EC-05/07/09 with one-second coupled AVC release, loaded-instrument/fault/restoration evidence and independent circuit continuation. It closes no full EC item.",
+  "milestone_completed": "v0.60 supports EC-02/03/07 with a source-traced RCA 35Z3 alternative, shared solver/export selection, supply sensitivity and curve-coverage reporting. No full EC closes.",
   "version_reporting_policy": "Every release names the EC IDs it supports, the concrete evidence added toward closure, and any EC IDs actually closed. Support is not full closure; the nine acceptance lists remain fixed.",
   "version_support": {
-    "version": "0.59.0",
+    "version": "0.60.0",
     "supported_ec_ids": [
-      "EC-05",
-      "EC-07",
-      "EC-09"
+      "EC-02",
+      "EC-03",
+      "EC-07"
     ],
     "closed_ec_ids": [],
     "evidence": [
-      "PT44_AVC_Release_Validation_V1.json",
-      "PT44_AVC_Release_Spice_Validation_V1.json"
+      "PT44_35Z3_Curve_Reference_V1.json",
+      "PT44_35Z3_Validation_V1.json",
+      "PT44_35Z3_Spice_Validation_V1.json"
     ],
-    "summary": "One-second AVC release in the coupled receiver, with explicit timing, meter loading, fault/restoration and independent numerical continuation.",
-    "limitations": "Initial signal arrival is short, not steady state. Long-duration attack, converter feedback, parameter calibration, RF/shop integration and full receiver acceptance remain open. SPICE release imports a common post-ringdown state; arrival has separate SPICE evidence.",
+    "summary": "Manufacturer-curve-checked 35Z3 alternative, shared circuit selection, loaded-supply sensitivity and explicit extrapolation reporting.",
+    "limitations": "RCA curve checks apply to nominal 35 V heater and 5–40 V forward drop, not all PT-44 conditions. Converter substitutes, thermal/lamp behavior, other parameters and full shop/receiver acceptance remain open.",
     "evidence_by_ec": {
-      "EC-05": [
-        "Continue the same coupled IF/detector/audio/supply state through signal removal and one second of AVC release; verify timestep/ringdown convergence, both #8 alternatives, fault/restoration and independent SPICE continuation."
+      "EC-02": [
+        "Add a separately identified RCA 1947 35Z3 model anchored at 20 V/200 mA and checked against seven withheld average-curve readings; retain the GE legacy reference as an explicit alternative."
+      ],
+      "EC-03": [
+        "Carry the same rectifier selection through power, nonlinear audio and coupled IF supply currents and matching SPICE exports; validate loaded supply sensitivity and report curve extrapolation during startup and measurement."
       ],
       "EC-07": [
-        "Record removal/ringdown/release times and AVC/IF-grid/B+ checkpoints; measure ideal, 10 MΩ/100 pF and 1000 Ω/V AVC-probe loading."
-      ],
-      "EC-09": [
-        "Add deterministic signal-removal, #17-open, no-signal and restored electrical release cases to the coupled receiver regression matrix."
+        "Record selected tube reference and nominal-heater curve bounds in submitted circuit conditions; expose out-of-range conducting steps instead of implying full-envelope calibration."
       ]
     }
   }

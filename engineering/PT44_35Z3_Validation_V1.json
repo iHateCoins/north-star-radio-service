@@ -1,0 +1,1778 @@
+{
+  "schema": "PT44_35Z3_VALIDATION_V1",
+  "version": "0.60.0",
+  "scope": "Withheld RCA curve readings, loaded supply AC/DC sensitivity/faults and joint receiver hot DC operating points. Nominal-heater forward model; no complete receiver/thermal or historical voltage calibration.",
+  "curve_checks": [
+    {
+      "forward_v": 5,
+      "current_a": 0.03,
+      "predicted_a": 0.025000000000000005,
+      "absolute_error_a": 0.004999999999999994,
+      "tolerance_a": 0.0089
+    },
+    {
+      "forward_v": 10,
+      "current_a": 0.075,
+      "predicted_a": 0.07071067811865475,
+      "absolute_error_a": 0.0042893218813452455,
+      "tolerance_a": 0.01025
+    },
+    {
+      "forward_v": 15,
+      "current_a": 0.135,
+      "predicted_a": 0.1299038105676658,
+      "absolute_error_a": 0.005096189432334197,
+      "tolerance_a": 0.01205
+    },
+    {
+      "forward_v": 25,
+      "current_a": 0.29,
+      "predicted_a": 0.2795084971874737,
+      "absolute_error_a": 0.010491502812526254,
+      "tolerance_a": 0.0167
+    },
+    {
+      "forward_v": 30,
+      "current_a": 0.375,
+      "predicted_a": 0.3674234614174767,
+      "absolute_error_a": 0.007576538582523273,
+      "tolerance_a": 0.01925
+    },
+    {
+      "forward_v": 35,
+      "current_a": 0.465,
+      "predicted_a": 0.4630064794363034,
+      "absolute_error_a": 0.001993520563696616,
+      "tolerance_a": 0.02195
+    },
+    {
+      "forward_v": 40,
+      "current_a": 0.57,
+      "predicted_a": 0.565685424949238,
+      "absolute_error_a": 0.004314575050761937,
+      "tolerance_a": 0.025099999999999997
+    }
+  ],
+  "supply": {
+    "AC_90_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 89.32914747072127,
+          "rms": 89.80408513524438,
+          "ripple_rms": 9.22372588124517,
+          "peak_to_peak": 29.390787396604466,
+          "min": 75.06765884557971,
+          "max": 104.45844624218418
+        },
+        "filtered_v": {
+          "mean": 82.45767458835856,
+          "rms": 82.45992219610159,
+          "ripple_rms": 0.6088267959730066,
+          "peak_to_peak": 1.7162458065439807,
+          "min": 81.55346352385226,
+          "max": 83.26970933039624
+        },
+        "field_current_a": {
+          "mean": 0.01374294576472685,
+          "rms": 0.014514663462306033,
+          "ripple_rms": 0.00466978555522393,
+          "peak_to_peak": 0.013866315716623397,
+          "min": 0.0055059671059731015,
+          "max": 0.0193722828225965
+        },
+        "rectifier_current_a": {
+          "mean": 0.04351932825496871,
+          "rms": 0.1018457890867272,
+          "ripple_rms": 0.09207949186944074,
+          "peak_to_peak": 0.3067807007344157,
+          "min": -2.710505431213761e-20,
+          "max": 0.3067807007344157
+        },
+        "heater_current_a": {
+          "mean": -0.0011241385350511798,
+          "rms": 0.11201612829978862,
+          "ripple_rms": 0.11201048750821825,
+          "peak_to_peak": 0.3148513736826519,
+          "min": -0.16047217178980874,
+          "max": 0.15437920189284315
+        }
+      },
+      "curve_coverage": {
+        "model": "ge_legacy",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": null,
+        "whole_run": {
+          "conducting_steps": 7051,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 38.10136455628871
+        },
+        "measurement_window": {
+          "conducting_steps": 1146,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 23.9407562378923
+        }
+      }
+    },
+    "AC_90_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 87.88352022565489,
+          "rms": 88.34669815603456,
+          "ripple_rms": 9.03470795434962,
+          "peak_to_peak": 28.755264387055263,
+          "min": 73.9308692822616,
+          "max": 102.68613366931686
+        },
+        "filtered_v": {
+          "mean": 81.12324943906569,
+          "rms": 81.12545054526299,
+          "ripple_rms": 0.5976007187405847,
+          "peak_to_peak": 1.684840711749004,
+          "min": 80.2358436719626,
+          "max": 81.9206843837116
+        },
+        "field_current_a": {
+          "mean": 0.013520541573178464,
+          "rms": 0.014275941457985514,
+          "ripple_rms": 0.004582298558560151,
+          "peak_to_peak": 0.013585958539440416,
+          "min": 0.00546440300912209,
+          "max": 0.019050361548562506
+        },
+        "rectifier_current_a": {
+          "mean": 0.04281504831523202,
+          "rms": 0.09906033591010795,
+          "ripple_rms": 0.08932984825011049,
+          "peak_to_peak": 0.295140730669364,
+          "min": 0,
+          "max": 0.295140730669364
+        },
+        "heater_current_a": {
+          "mean": -0.0011059464293485537,
+          "rms": 0.11203875243058911,
+          "ripple_rms": 0.11203329384026094,
+          "peak_to_peak": 0.3148889338132633,
+          "min": -0.16047217178980874,
+          "max": 0.15441676202345456
+        }
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 7201,
+          "outside_checked_curve_steps": 697,
+          "max_forward_drop_v": 41.34590991412955
+        },
+        "measurement_window": {
+          "conducting_steps": 1170,
+          "outside_checked_curve_steps": 108,
+          "max_forward_drop_v": 25.923646893975313
+        }
+      }
+    },
+    "AC_115_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 115.47156557255806,
+          "rms": 116.08944931546037,
+          "ripple_rms": 11.961512721611214,
+          "peak_to_peak": 38.14665870311336,
+          "min": 96.96091579139485,
+          "max": 135.1075744945082
+        },
+        "filtered_v": {
+          "mean": 106.58913745159182,
+          "rms": 106.59205247522856,
+          "ripple_rms": 0.7883071784167839,
+          "peak_to_peak": 2.2219546617721164,
+          "min": 105.41824542093124,
+          "max": 107.64020008270336
+        },
+        "field_current_a": {
+          "mean": 0.017764856241932196,
+          "rms": 0.01876607623302351,
+          "ripple_rms": 0.00604776817405665,
+          "peak_to_peak": 0.01797855535780532,
+          "min": 0.007071088716795328,
+          "max": 0.025049644074600648
+        },
+        "rectifier_current_a": {
+          "mean": 0.056255378099452295,
+          "rms": 0.1327878202332951,
+          "ripple_rms": 0.1202827403961082,
+          "peak_to_peak": 0.40332182430161534,
+          "min": 0,
+          "max": 0.40332182430161534
+        },
+        "heater_current_a": {
+          "mean": -0.0014531207364913323,
+          "rms": 0.14311130724257876,
+          "ripple_rms": 0.14310392971824692,
+          "peak_to_peak": 0.402299725674811,
+          "min": -0.20504777506475563,
+          "max": 0.19725195061005538
+        }
+      },
+      "curve_coverage": {
+        "model": "ge_legacy",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": null,
+        "whole_run": {
+          "conducting_steps": 6883,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 45.62490434336447
+        },
+        "measurement_window": {
+          "conducting_steps": 1116,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 28.731192808852278
+        }
+      }
+    },
+    "AC_115_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 113.74139576718302,
+          "rms": 114.34496719160353,
+          "ripple_rms": 11.733133042027891,
+          "peak_to_peak": 37.37749356035164,
+          "min": 95.60450668235453,
+          "max": 132.98200024270616
+        },
+        "filtered_v": {
+          "mean": 104.99205763124561,
+          "rms": 104.9949166169681,
+          "ripple_rms": 0.7748224062865784,
+          "peak_to_peak": 2.1842444555167333,
+          "min": 103.84135199716107,
+          "max": 106.0255964526778
+        },
+        "field_current_a": {
+          "mean": 0.017498676271874833,
+          "rms": 0.018480210550684946,
+          "ripple_rms": 0.005942601343668608,
+          "peak_to_peak": 0.01763987196657936,
+          "min": 0.007024199623345091,
+          "max": 0.02466407158992445
+        },
+        "rectifier_current_a": {
+          "mean": 0.055412474860937325,
+          "rms": 0.12935077576299647,
+          "ripple_rms": 0.11688062636842336,
+          "peak_to_peak": 0.3886949282584016,
+          "min": -6.776263578034403e-21,
+          "max": 0.3886949282584016
+        },
+        "heater_current_a": {
+          "mean": -0.0014313478817684316,
+          "rms": 0.14313795255515518,
+          "ripple_rms": 0.1431307957950462,
+          "peak_to_peak": 0.40231817296826267,
+          "min": -0.20504777506475563,
+          "max": 0.197270397903507
+        }
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 7089,
+          "outside_checked_curve_steps": 762,
+          "max_forward_drop_v": 49.59675225113575
+        },
+        "measurement_window": {
+          "conducting_steps": 1152,
+          "outside_checked_curve_steps": 96,
+          "max_forward_drop_v": 31.146977885288297
+        }
+      }
+    },
+    "AC_130_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 131.24724356307345,
+          "rms": 131.95171555059056,
+          "ripple_rms": 13.616765175299031,
+          "peak_to_peak": 43.4432998239613,
+          "min": 110.16597969290999,
+          "max": 153.60927951687128
+        },
+        "filtered_v": {
+          "mean": 121.1513017505292,
+          "rms": 121.15462026153313,
+          "ripple_rms": 0.8967133703217864,
+          "peak_to_peak": 2.5273806193311827,
+          "min": 119.8193267717281,
+          "max": 122.34670739105928
+        },
+        "field_current_a": {
+          "mean": 0.020191883625088457,
+          "rms": 0.021331878858794076,
+          "ripple_rms": 0.006880181052643181,
+          "peak_to_peak": 0.020464459066525515,
+          "min": 0.008011823354795704,
+          "max": 0.02847628242132122
+        },
+        "rectifier_current_a": {
+          "mean": 0.06394096481278043,
+          "rms": 0.15156577987029768,
+          "ripple_rms": 0.1374181161510458,
+          "peak_to_peak": 0.46222621822442267,
+          "min": -1.0842021724855044e-19,
+          "max": 0.46222621822442267
+        },
+        "heater_current_a": {
+          "mean": -0.0016516454963017874,
+          "rms": 0.16176717425225198,
+          "ripple_rms": 0.1617587423687295,
+          "peak_to_peak": 0.4547756219598771,
+          "min": -0.23179313702972373,
+          "max": 0.22298248493015332
+        }
+      },
+      "curve_coverage": {
+        "model": "ge_legacy",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": null,
+        "whole_run": {
+          "conducting_steps": 6840,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 49.904080548854
+        },
+        "measurement_window": {
+          "conducting_steps": 1110,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 31.464600730701815
+        }
+      }
+    },
+    "AC_130_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 129.35585017010388,
+          "rms": 130.04454666743717,
+          "ripple_rms": 13.365932242416944,
+          "peak_to_peak": 42.59682054904577,
+          "min": 108.68633495029259,
+          "max": 151.28315549933836
+        },
+        "filtered_v": {
+          "mean": 119.40540015701978,
+          "rms": 119.40865720333981,
+          "ripple_rms": 0.8819458297962022,
+          "peak_to_peak": 2.4860891872320536,
+          "min": 118.09553626677193,
+          "max": 120.58162545400398
+        },
+        "field_current_a": {
+          "mean": 0.019900900026170055,
+          "rms": 0.02101929154004012,
+          "ripple_rms": 0.006764968218224444,
+          "peak_to_peak": 0.0200926472124138,
+          "min": 0.007961934519158656,
+          "max": 0.028054581731572454
+        },
+        "rectifier_current_a": {
+          "mean": 0.06301951674953911,
+          "rms": 0.14775081767090353,
+          "ripple_rms": 0.13363698825952022,
+          "peak_to_peak": 0.44585434319285416,
+          "min": 0,
+          "max": 0.44585434319285416
+        },
+        "heater_current_a": {
+          "mean": -0.0016278437668755176,
+          "rms": 0.16179605202875413,
+          "ripple_rms": 0.1617878628845871,
+          "peak_to_peak": 0.45478056537838174,
+          "min": -0.23179313702972373,
+          "max": 0.22298742834865803
+        }
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 6987,
+          "outside_checked_curve_steps": 734,
+          "max_forward_drop_v": 54.29409441548745
+        },
+        "measurement_window": {
+          "conducting_steps": 1134,
+          "outside_checked_curve_steps": 78,
+          "max_forward_drop_v": 34.1301868808121
+        }
+      }
+    },
+    "DC_90_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 80.79913208390536,
+          "rms": 80.79913208391194,
+          "ripple_rms": 0.000032606737131650464,
+          "peak_to_peak": 0,
+          "min": 80.7991320839114,
+          "max": 80.7991320839114
+        },
+        "filtered_v": {
+          "mean": 74.58381416301387,
+          "rms": 74.58381416300925,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 74.58381416300956,
+          "max": 74.58381416300956
+        },
+        "field_current_a": {
+          "mean": 0.012430635593976766,
+          "rms": 0.01243063559397737,
+          "ripple_rms": 3.8750742043119945e-9,
+          "peak_to_peak": 0,
+          "min": 0.012430635593977389,
+          "max": 0.012430635593977389
+        },
+        "rectifier_current_a": {
+          "mean": 0.03936367955208935,
+          "rms": 0.03936367955208821,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.03936367955208803,
+          "max": 0.03936367955208803
+        },
+        "heater_current_a": {
+          "mean": 0.11245416600924116,
+          "rms": 0.11245416600923237,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.11245416600923283,
+          "max": 0.11245416600923283
+        }
+      },
+      "curve_coverage": {
+        "model": "ge_legacy",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": null,
+        "whole_run": {
+          "conducting_steps": 28800,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 61.287718307585095
+        },
+        "measurement_window": {
+          "conducting_steps": 4801,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 6.090453519223741
+        }
+      }
+    },
+    "DC_90_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 90,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 80.16409394227674,
+          "rms": 80.16409394228609,
+          "ripple_rms": 0.000038714948902481915,
+          "peak_to_peak": 0,
+          "min": 80.1640939422821,
+          "max": 80.1640939422821
+        },
+        "filtered_v": {
+          "mean": 73.99762514651462,
+          "rms": 73.99762514651736,
+          "ripple_rms": 0.00002011778174374484,
+          "peak_to_peak": 0,
+          "min": 73.9976251465137,
+          "max": 73.9976251465137
+        },
+        "field_current_a": {
+          "mean": 0.01233293742450555,
+          "rms": 0.012332937424505825,
+          "ripple_rms": 2.608326787875043e-9,
+          "peak_to_peak": 0,
+          "min": 0.012332937424506085,
+          "max": 0.012332937424506085
+        },
+        "rectifier_current_a": {
+          "mean": 0.03905430202282797,
+          "rms": 0.039054302022827815,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.0390543020228289,
+          "max": 0.0390543020228289
+        },
+        "heater_current_a": {
+          "mean": 0.11246215747456238,
+          "rms": 0.11246215747455149,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.11246215747455329,
+          "max": 0.11246215747455329
+        }
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 28800,
+          "outside_checked_curve_steps": 43,
+          "max_forward_drop_v": 63.76528834079759
+        },
+        "measurement_window": {
+          "conducting_steps": 4801,
+          "outside_checked_curve_steps": 0,
+          "max_forward_drop_v": 6.731666399723213
+        }
+      }
+    },
+    "DC_115_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 103.82154529280832,
+          "rms": 103.8215452928066,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 103.82154529280862,
+          "max": 103.82154529280862
+        },
+        "filtered_v": {
+          "mean": 95.83527244003056,
+          "rms": 95.83527244002761,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 95.83527244002491,
+          "max": 95.83527244002491
+        },
+        "field_current_a": {
+          "mean": 0.01597254534363588,
+          "rms": 0.01597254534363469,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.015972545343635337,
+          "max": 0.015972545343635337
+        },
+        "rectifier_current_a": {
+          "mean": 0.050579727008085544,
+          "rms": 0.05057972700808851,
+          "ripple_rms": 1.7323601281026634e-8,
+          "peak_to_peak": 0,
+          "min": 0.050579727008088465,
+          "max": 0.050579727008088465
+        },
+        "heater_current_a": {
+          "mean": 0.1436841580182065,
+          "rms": 0.1436841580182042,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.14368415801820061,
+          "max": 0.14368415801820061
+        }
+      },
+      "curve_coverage": {
+        "model": "ge_legacy",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": null,
+        "whole_run": {
+          "conducting_steps": 28800,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 75.76208473256825
+        },
+        "measurement_window": {
+          "conducting_steps": 4801,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 7.198414135924427
+        }
+      }
+    },
+    "DC_115_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 103.06780846973705,
+          "rms": 103.06780846973241,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 103.06780846973598,
+          "max": 103.06780846973598
+        },
+        "filtered_v": {
+          "mean": 95.13951543361796,
+          "rms": 95.1395154336123,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 95.13951543361044,
+          "max": 95.13951543361044
+        },
+        "field_current_a": {
+          "mean": 0.01585658580588358,
+          "rms": 0.0158565858058832,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.015856585805882544,
+          "max": 0.015856585805882544
+        },
+        "rectifier_current_a": {
+          "mean": 0.05021252188489582,
+          "rms": 0.05021252188489364,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.05021252188489397,
+          "max": 0.05021252188489397
+        },
+        "heater_current_a": {
+          "mean": 0.14369364321583633,
+          "rms": 0.14369364321583167,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.14369364321583125,
+          "max": 0.14369364321583125
+        }
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 28800,
+          "outside_checked_curve_steps": 61,
+          "max_forward_drop_v": 79.0354588792873
+        },
+        "measurement_window": {
+          "conducting_steps": 4801,
+          "outside_checked_curve_steps": 0,
+          "max_forward_drop_v": 7.9594798550309065
+        }
+      }
+    },
+    "DC_130_ge_legacy": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "ge_legacy",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 117.67261786846332,
+          "rms": 117.67261786846208,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 117.67261786845977,
+          "max": 117.67261786845977
+        },
+        "filtered_v": {
+          "mean": 108.62087785317104,
+          "rms": 108.62087785317316,
+          "ripple_rms": 0.000021452373274234758,
+          "peak_to_peak": 0,
+          "min": 108.62087785317142,
+          "max": 108.62087785317142
+        },
+        "field_current_a": {
+          "mean": 0.018103479676014323,
+          "rms": 0.01810347967601689,
+          "ripple_rms": 9.642112646647103e-9,
+          "peak_to_peak": 0,
+          "min": 0.018103479676016467,
+          "max": 0.018103479676016467
+        },
+        "rectifier_current_a": {
+          "mean": 0.05732768553231466,
+          "rms": 0.05732768553230835,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.057327685532311115,
+          "max": 0.057327685532311115
+        },
+        "heater_current_a": {
+          "mean": 0.16242167974392901,
+          "rms": 0.16242167974392654,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.16242167974393257,
+          "max": 0.16242167974393257
+        }
+      },
+      "curve_coverage": {
+        "model": "ge_legacy",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": null,
+        "whole_run": {
+          "conducting_steps": 28800,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 84.1715837786581
+        },
+        "measurement_window": {
+          "conducting_steps": 4801,
+          "outside_checked_curve_steps": null,
+          "max_forward_drop_v": 7.825200013691035
+        }
+      }
+    },
+    "DC_130_rca_1947": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "DC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 130,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 116.85162272631133,
+          "rms": 116.85162272631544,
+          "ripple_rms": 0.00003099074708799729,
+          "peak_to_peak": 0,
+          "min": 116.85162272631686,
+          "max": 116.85162272631686
+        },
+        "filtered_v": {
+          "mean": 107.86303625163355,
+          "rms": 107.86303625164032,
+          "ripple_rms": 0.00003821843130018974,
+          "peak_to_peak": 0,
+          "min": 107.86303625164432,
+          "max": 107.86303625164432
+        },
+        "field_current_a": {
+          "mean": 0.017977172609173985,
+          "rms": 0.01797717260917222,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.017977172609172212,
+          "max": 0.017977172609172212
+        },
+        "rectifier_current_a": {
+          "mean": 0.056927713420717216,
+          "rms": 0.05692771342071404,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.0569277134207143,
+          "max": 0.0569277134207143
+        },
+        "heater_current_a": {
+          "mean": 0.16243201133868482,
+          "rms": 0.16243201133869312,
+          "ripple_rms": 5.192071149038655e-8,
+          "peak_to_peak": 0,
+          "min": 0.16243201133868876,
+          "max": 0.16243201133868876
+        }
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 28800,
+          "outside_checked_curve_steps": 70,
+          "max_forward_drop_v": 87.926669550102
+        },
+        "measurement_window": {
+          "conducting_steps": 4801,
+          "outside_checked_curve_steps": 0,
+          "max_forward_drop_v": 8.654178034712093
+        }
+      }
+    }
+  },
+  "operating_points": {
+    "90_ge_legacy": {
+      "options": {
+        "line_v": 90,
+        "rectifier_model": "ge_legacy"
+      },
+      "x": [
+        80.62581647270738,
+        75.47086085347686,
+        -1.9527604290553084e-22,
+        -1.1716562574330888e-22,
+        -0.1857096511709281,
+        22.54653253496335,
+        4.3052944198190545e-20,
+        4.287568344738444,
+        74.53209577033883,
+        74.53209577033883,
+        0.010309911238461046,
+        0.030468603511842777,
+        -1.9527266513645719e-22,
+        2.13940810608479e-21,
+        42.92789814842707,
+        2.13940810608479e-21,
+        75.29240430817984,
+        2.13940810608479e-21,
+        75.47086085347686,
+        -1.9527604290553084e-22,
+        75.39296183208268,
+        75.47086085347686,
+        -0.002512871657876805,
+        4.1548464174792255e-29,
+        -0.003965701006600415,
+        -3.9056216294803543e-28
+      ],
+      "rectifier_a": 0.04077851475340478,
+      "kcl_residual_a": 3.100943113398813e-12
+    },
+    "90_rca_1947": {
+      "options": {
+        "line_v": 90,
+        "rectifier_model": "rca_1947"
+      },
+      "x": [
+        79.98438163603781,
+        74.87766915502024,
+        9.626503349887298e-23,
+        5.775902009932379e-23,
+        -0.1857096511709281,
+        22.369319557961706,
+        -5.472443749344885e-20,
+        4.246915000254526,
+        73.94842460223794,
+        73.94842460223794,
+        0.010213424962035145,
+        0.03017978516899941,
+        9.626750717129521e-23,
+        1.8060455711997114e-21,
+        42.63395318625436,
+        1.8060455724669733e-21,
+        74.70105132340812,
+        1.8060455711997114e-21,
+        74.87766915502024,
+        9.626503349887298e-23,
+        74.80038241036819,
+        74.87766915502024,
+        -0.002493120795227532,
+        -2.0481237935881585e-29,
+        -0.003924840702491523,
+        1.925242938149797e-28
+      ],
+      "rectifier_a": 0.04039321013290089,
+      "kcl_residual_a": 1.866371640568687e-12
+    },
+    "115_ge_legacy": {
+      "options": {
+        "line_v": 115,
+        "rectifier_model": "ge_legacy"
+      },
+      "x": [
+        103.35405379522383,
+        96.45301460259483,
+        -3.0947752194641235e-22,
+        -1.85686513167845e-22,
+        -0.1857096511709281,
+        28.81484333476392,
+        -2.292781223280789e-19,
+        5.754940666606151,
+        95.17544063433265,
+        95.17544063433265,
+        0.013802078385258007,
+        0.040893065804455904,
+        -3.09477842094722e-22,
+        -5.307612181911449e-22,
+        53.096539207603435,
+        -5.307612181911449e-22,
+        96.20712718863405,
+        -5.307612181911449e-22,
+        96.45301460259483,
+        -3.0947752194641235e-22,
+        96.35345835846176,
+        96.45301460259483,
+        -0.0032114917462276737,
+        6.584530478672684e-29,
+        -0.005464164754684112,
+        -6.189532765973013e-28
+      ],
+      "rectifier_a": 0.05469514419274562,
+      "kcl_residual_a": 3.0316651966622032e-12
+    },
+    "115_rca_1947": {
+      "options": {
+        "line_v": 115,
+        "rectifier_model": "rca_1947"
+      },
+      "x": [
+        102.57123321926875,
+        95.7314248127901,
+        -3.834898573002871e-22,
+        -2.3009391438016744e-22,
+        -0.1857096511709281,
+        28.599272086619308,
+        -8.30518180444508e-20,
+        5.70361749624871,
+        94.46553967586647,
+        94.46553967586647,
+        0.013679616812957337,
+        0.040528467717011414,
+        -3.8349476527689057e-22,
+        -3.77587766559611e-21,
+        52.7536556883722,
+        -3.77587766537275e-21,
+        95.48792816392385,
+        -3.77587766559611e-21,
+        95.7314248127901,
+        -3.834898573002871e-22,
+        95.63261337450446,
+        95.7314248127901,
+        -0.0031874657511494677,
+        -7.262020652692532e-28,
+        -0.00541103664147206,
+        -7.669628434254309e-28
+      ],
+      "rectifier_a": 0.05420808453196777,
+      "kcl_residual_a": 1.9990259447766334e-12
+    },
+    "130_ge_legacy": {
+      "options": {
+        "line_v": 130,
+        "rectifier_model": "ge_legacy"
+      },
+      "x": [
+        117.0215940727054,
+        109.0404185427422,
+        -4.0845022523458433e-22,
+        -2.450701351407458e-22,
+        -0.1857096511709281,
+        32.575265691920386,
+        3.38791068040125e-20,
+        6.658708912520082,
+        107.55893321294705,
+        107.55893321294705,
+        0.015962351059926376,
+        0.047313304298791714,
+        -4.084590057638457e-22,
+        -6.4774745298075304e-21,
+        59.008302084049426,
+        -6.477474529807723e-21,
+        108.75208936999425,
+        -6.4774745298075304e-21,
+        109.0404185427422,
+        -4.0845022523458433e-22,
+        108.92786991402863,
+        109.0404185427422,
+        -0.0036306009262442153,
+        8.690135383119354e-29,
+        -0.006407314949954597,
+        -8.168802769505522e-28
+      ],
+      "rectifier_a": 0.0632756553616556,
+      "kcl_residual_a": 2.9374974674922782e-12
+    },
+    "130_rca_1947": {
+      "options": {
+        "line_v": 130,
+        "rectifier_model": "rca_1947"
+      },
+      "x": [
+        116.15744695256883,
+        108.24515981908841,
+        -1.9337781307304371e-22,
+        -1.1602668784381178e-22,
+        -0.18570965117092808,
+        32.337686227689986,
+        7.463428643505258e-20,
+        6.601158197036794,
+        106.7765514193778,
+        106.7765514193778,
+        0.015824574266960843,
+        0.04690447766595523,
+        -1.933793776004044e-22,
+        -1.2747653196369344e-21,
+        58.63853957515037,
+        -1.274765319636164e-21,
+        107.95955183004727,
+        -1.2747653196369344e-21,
+        108.24515981908841,
+        -1.9337781307304371e-22,
+        108.1334320353424,
+        108.24515981908841,
+        -0.00360412205632343,
+        4.1144156020422505e-29,
+        -0.0063468442009144525,
+        -3.8675644166941233e-28
+      ],
+      "rectifier_a": 0.0627290519349459,
+      "kcl_residual_a": 2.029876267073405e-12
+    }
+  },
+  "faults": {
+    "reservoir_dry": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 0.1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000005208333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 48.908626733307436,
+          "rms": 74.69699941710587,
+          "ripple_rms": 56.45872787250099,
+          "peak_to_peak": 162.9669054868427,
+          "min": -15.966363490141493,
+          "max": 147.0005419967012
+        },
+        "filtered_v": {
+          "mean": 45.14642446753698,
+          "rms": 45.32065958758562,
+          "ripple_rms": 3.9702069531442032,
+          "peak_to_peak": 11.31232995630289,
+          "min": 39.23855590722323,
+          "max": 50.55088586352612
+        },
+        "field_current_a": {
+          "mean": 0.0075244045265864664,
+          "rms": 0.03105396585981782,
+          "ripple_rms": 0.030128593265252458,
+          "peak_to_peak": 0.08423379807903657,
+          "min": -0.030677850526922085,
+          "max": 0.053555947552114486
+        },
+        "rectifier_current_a": {
+          "mean": 0.023827280155339043,
+          "rms": 0.043489392278770765,
+          "ripple_rms": 0.0363811484312383,
+          "peak_to_peak": 0.09787158610130206,
+          "min": 0,
+          "max": 0.09787158610130206
+        },
+        "heater_current_a": {
+          "mean": -0.000615477418473769,
+          "rms": 0.144305880120987,
+          "ripple_rms": 0.14430456758204163,
+          "peak_to_peak": 0.40823609479953604,
+          "min": -0.20504777506475563,
+          "max": 0.20318831973478038
+        }
+      },
+      "final": {
+        "time_s": 0.6,
+        "reservoir_v": 28.72291927891918,
+        "filtered_v": 43.8985008206976,
+        "field_current_a": -0.03067754300918852,
+        "rectifier_current_a": 0,
+        "rectifier_forward_drop_v": 0,
+        "plate_v": -5.899934478749981e-12,
+        "heater_current_a": -7.635808212359767e-15,
+        "kcl_residual_a": 8.784639682346551e-15
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 43452,
+          "outside_checked_curve_steps": 7163,
+          "max_forward_drop_v": 15.226313791186575
+        },
+        "measurement_window": {
+          "conducting_steps": 7128,
+          "outside_checked_curve_steps": 1194,
+          "max_forward_drop_v": 12.419794678699795
+        }
+      }
+    },
+    "rectifier_weak": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 0.35,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 98.17192708409435,
+          "rms": 98.65811461573225,
+          "ripple_rms": 9.782449188532663,
+          "peak_to_peak": 30.89090670282988,
+          "min": 83.179162551234,
+          "max": 114.07006925406388
+        },
+        "filtered_v": {
+          "mean": 90.62024038493377,
+          "rms": 90.6226150621259,
+          "ripple_rms": 0.6560436533250871,
+          "peak_to_peak": 1.851476963121442,
+          "min": 89.64722525971115,
+          "max": 91.49870222283259
+        },
+        "field_current_a": {
+          "mean": 0.015103373398811213,
+          "rms": 0.015915783161146745,
+          "ripple_rms": 0.005019986614396903,
+          "peak_to_peak": 0.014739134312898677,
+          "min": 0.006470097599520358,
+          "max": 0.021209231912419035
+        },
+        "rectifier_current_a": {
+          "mean": 0.0478273490951559,
+          "rms": 0.10292421960480223,
+          "ripple_rms": 0.09113692807960802,
+          "peak_to_peak": 0.28606288906912447,
+          "min": -2.710505431213761e-20,
+          "max": 0.28606288906912447
+        },
+        "heater_current_a": {
+          "mean": -0.001235418107380176,
+          "rms": 0.1433937460030742,
+          "ripple_rms": 0.14338842399194615,
+          "peak_to_peak": 0.40335670910691046,
+          "min": -0.20504777506475563,
+          "max": 0.19830893404215483
+        }
+      },
+      "final": {
+        "time_s": 0.6,
+        "reservoir_v": 86.35651930551329,
+        "filtered_v": 91.43678159440894,
+        "field_current_a": 0.012911025390299794,
+        "rectifier_current_a": 0,
+        "rectifier_forward_drop_v": 0,
+        "plate_v": -5.899934478749981e-12,
+        "heater_current_a": -7.635808212359767e-15,
+        "kcl_residual_a": 3.398323289438565e-15
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 0.35,
+        "reference_perveance_unscaled": false,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 8395,
+          "outside_checked_curve_steps": 4454,
+          "max_forward_drop_v": 80.79240617572569
+        },
+        "measurement_window": {
+          "conducting_steps": 1368,
+          "outside_checked_curve_steps": 696,
+          "max_forward_drop_v": 51.1217425971837
+        }
+      }
+    },
+    "rectifier_open": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 0,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "filtered_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "field_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "rectifier_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "heater_current_a": {
+          "mean": -1.4745850994962308e-17,
+          "rms": 0.14498992690461843,
+          "ripple_rms": 0.14498992690461843,
+          "peak_to_peak": 0.41009555012951127,
+          "min": -0.20504777506475563,
+          "max": 0.20504777506475563
+        }
+      },
+      "final": {
+        "time_s": 0.6,
+        "reservoir_v": 0,
+        "filtered_v": 0,
+        "field_current_a": 0,
+        "rectifier_current_a": 0,
+        "rectifier_forward_drop_v": 0,
+        "plate_v": -5.899934478749981e-12,
+        "heater_current_a": -7.635808212359767e-15,
+        "kcl_residual_a": 0
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 0,
+        "reference_perveance_unscaled": false,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 0,
+          "outside_checked_curve_steps": 0,
+          "max_forward_drop_v": null
+        },
+        "measurement_window": {
+          "conducting_steps": 0,
+          "outside_checked_curve_steps": 0,
+          "max_forward_drop_v": null
+        }
+      }
+    },
+    "switch_off": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": 0.6,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 1.2
+      },
+      "summary": {
+        "duration_s": 0.10000000000000009,
+        "reservoir_v": {
+          "mean": 0.11623886980350027,
+          "rms": 0.12331219610708909,
+          "ripple_rms": 0.04116336788405572,
+          "peak_to_peak": 0.1443965363603403,
+          "min": 0.05861767703517265,
+          "max": 0.20301421339551295
+        },
+        "filtered_v": {
+          "mean": 0.12055778739058838,
+          "rms": 0.12789392692859144,
+          "ripple_rms": 0.04269281490721331,
+          "peak_to_peak": 0.14976166714981398,
+          "min": 0.060795648282754765,
+          "max": 0.21055731543256875
+        },
+        "field_current_a": {
+          "mean": -0.000009863245197407581,
+          "rms": 0.000010463439880637469,
+          "ripple_rms": 0.0000034928453031204967,
+          "peak_to_peak": 0.000012252514552127066,
+          "min": -0.000017226414612646445,
+          "max": -0.000004973900060519378
+        },
+        "rectifier_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "heater_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "final": {
+        "time_s": 1.2,
+        "reservoir_v": 0.05861767703517265,
+        "filtered_v": 0.060795648282754765,
+        "field_current_a": -0.000004973900060519378,
+        "rectifier_current_a": 0,
+        "rectifier_forward_drop_v": 0,
+        "plate_v": 0,
+        "heater_current_a": 0,
+        "kcl_residual_a": 1.3408531555035574e-18
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 7089,
+          "outside_checked_curve_steps": 762,
+          "max_forward_drop_v": 49.59675225113575
+        },
+        "measurement_window": {
+          "conducting_steps": 0,
+          "outside_checked_curve_steps": 0,
+          "max_forward_drop_v": null
+        }
+      }
+    },
+    "restored": {
+      "parameters": {
+        "line_hz": 60,
+        "source_resistance_ohm": 0,
+        "field_inductance_h": 5,
+        "lamp_hot_resistance_ohm": 42,
+        "load_rect_ohm": 3000,
+        "load_filtered_ohm": 6000,
+        "emission": 1,
+        "hot_heater_resistance_ohm": 692.6666666666667,
+        "line_mode": "AC",
+        "dc_polarity": 1,
+        "rectifier_model": "rca_1947",
+        "line_v": 115,
+        "cap_a_scale": 1,
+        "cap_b_scale": 1,
+        "leak_a_ohm": null,
+        "leak_b_ohm": null,
+        "field_open": false,
+        "power_off_at_s": null,
+        "dt_s": 0.000020833333333333333,
+        "duration_s": 0.6
+      },
+      "summary": {
+        "duration_s": 0.09999999999999998,
+        "reservoir_v": {
+          "mean": 113.74139576718302,
+          "rms": 114.34496719160353,
+          "ripple_rms": 11.733133042027891,
+          "peak_to_peak": 37.37749356035164,
+          "min": 95.60450668235453,
+          "max": 132.98200024270616
+        },
+        "filtered_v": {
+          "mean": 104.99205763124561,
+          "rms": 104.9949166169681,
+          "ripple_rms": 0.7748224062865784,
+          "peak_to_peak": 2.1842444555167333,
+          "min": 103.84135199716107,
+          "max": 106.0255964526778
+        },
+        "field_current_a": {
+          "mean": 0.017498676271874833,
+          "rms": 0.018480210550684946,
+          "ripple_rms": 0.005942601343668608,
+          "peak_to_peak": 0.01763987196657936,
+          "min": 0.007024199623345091,
+          "max": 0.02466407158992445
+        },
+        "rectifier_current_a": {
+          "mean": 0.055412474860937325,
+          "rms": 0.12935077576299647,
+          "ripple_rms": 0.11688062636842336,
+          "peak_to_peak": 0.3886949282584016,
+          "min": -6.776263578034403e-21,
+          "max": 0.3886949282584016
+        },
+        "heater_current_a": {
+          "mean": -0.0014313478817684316,
+          "rms": 0.14313795255515518,
+          "ripple_rms": 0.1431307957950462,
+          "peak_to_peak": 0.40231817296826267,
+          "min": -0.20504777506475563,
+          "max": 0.197270397903507
+        }
+      },
+      "final": {
+        "time_s": 0.6,
+        "reservoir_v": 99.62364562160056,
+        "filtered_v": 105.93048407758313,
+        "field_current_a": 0.014525705418792683,
+        "rectifier_current_a": 0,
+        "rectifier_forward_drop_v": 0,
+        "plate_v": -5.899934478749981e-12,
+        "heater_current_a": -7.635808212359767e-15,
+        "kcl_residual_a": 8.135853102331225e-16
+      },
+      "curve_coverage": {
+        "model": "rca_1947",
+        "emission_scale": 1,
+        "reference_perveance_unscaled": true,
+        "checked_forward_range_v": [
+          5,
+          40
+        ],
+        "whole_run": {
+          "conducting_steps": 7089,
+          "outside_checked_curve_steps": 762,
+          "max_forward_drop_v": 49.59675225113575
+        },
+        "measurement_window": {
+          "conducting_steps": 1152,
+          "outside_checked_curve_steps": 96,
+          "max_forward_drop_v": 31.146977885288297
+        }
+      }
+    }
+  },
+  "full_ec_closed": []
+}
