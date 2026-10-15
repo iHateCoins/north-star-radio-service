@@ -32,5 +32,5 @@ assert(badAdjust,'alignment audit must reject changed factory adjustment sequenc
 const badOscillatorClosure=vm.runInContext(`(()=>{const c=PT44_ALIGNMENT_REFERENCE_V1.cross_validation.source_level_closure,v=c.oscillator_circuit_connections_traced;c.oscillator_circuit_connections_traced=true;const bad=!pt44ServiceAlignmentAudit().ok;c.oscillator_circuit_connections_traced=v;return bad;})()`,ctx);assert(badOscillatorClosure,'alignment audit must reject premature oscillator-circuit closure');
 const rendered=read('pt44ChassisAlignmentHTML(x=>x)');
 assert(rendered.includes('2D parts locator'));assert(rendered.includes('455 kHz'));assert(rendered.includes('does not establish that chassis and B-minus are the same node'));
-assert(html.includes('BUILD v0.55.0<small>'));
+assert(html.includes('BUILD v0.56.0<small>'));
 console.log('PASS v0.46: Philco Volume 2 alignment cross-check, sourced warm-up, open oscillator wiring, position crosswalk and mutation checks');

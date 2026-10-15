@@ -1,0 +1,1332 @@
+{
+  "schema": "PT44_DETECTOR_AVC_VALIDATION_V1",
+  "version": "0.56.0",
+  "scope": "Numerical/functional validation under explicit detector/source assumptions; not full receiver or factory calibration.",
+  "scenarios": {
+    "no_signal": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 0,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": 0,
+          "audio_peak_v": 0
+        },
+        "H": {
+          "mean_v": 0,
+          "audio_peak_v": 0
+        },
+        "A": {
+          "mean_v": 0,
+          "audio_peak_v": 0
+        },
+        "W": {
+          "mean_v": 0,
+          "audio_peak_v": 0
+        },
+        "G": {
+          "mean_v": 0,
+          "audio_peak_v": 0
+        }
+      },
+      "at_off": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 0
+    },
+    "healthy": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2251408505168415,
+          "audio_peak_v": 0.6157082347737775
+        },
+        "H": {
+          "mean_v": -1.1106980881288526,
+          "audio_peak_v": 0.5564090420149236
+        },
+        "A": {
+          "mean_v": -0.05018455204082633,
+          "audio_peak_v": 0.0016404361584268843
+        },
+        "W": {
+          "mean_v": -0.6529419021650669,
+          "audio_peak_v": 0.3254473507465299
+        },
+        "G": {
+          "mean_v": -0.5278472362294022,
+          "audio_peak_v": 0.3289300223273775
+        }
+      },
+      "at_off": [
+        -0.9676901204659847,
+        -0.9773539079500735,
+        -0.059294096544584556,
+        -0.5754520530446263,
+        -0.4292780925788457
+      ],
+      "final": [
+        -0.007345246326503896,
+        -0.0069830801951244244,
+        -0.04138886267617418,
+        -0.00552988787675618,
+        0.0524848905875264
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999869567790072e-13
+    },
+    "upper_dead": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 0,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": 2.061680477235236e-7,
+          "audio_peak_v": 6.947874891774533e-10
+        },
+        "H": {
+          "mean_v": 1.8325250459980323e-7,
+          "audio_peak_v": 6.036094199076141e-10
+        },
+        "A": {
+          "mean_v": 0.00000236022910444693,
+          "audio_peak_v": 9.265471770022805e-9
+        },
+        "W": {
+          "mean_v": 9.149816828895608e-8,
+          "audio_peak_v": 2.3141582313700542e-10
+        },
+        "G": {
+          "mean_v": 7.227556001112796e-7,
+          "audio_peak_v": 5.125878454487582e-9
+        }
+      },
+      "at_off": [
+        0.0005820052604840753,
+        0.0005882036012982613,
+        -6.383589864447549e-7,
+        0.0003441207640249732,
+        0.00034472137286434984
+      ],
+      "final": [
+        3.82535027452146e-7,
+        3.9048631057538557e-7,
+        -3.648855861323691e-7,
+        2.3338637356963175e-7,
+        3.546200037765607e-8
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.4452534749356e-13
+    },
+    "r17_open": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": true,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.269115595853482,
+          "audio_peak_v": 0.6353451527026506
+        },
+        "H": {
+          "mean_v": -1.150566397422677,
+          "audio_peak_v": 0.5741543904469786
+        },
+        "A": {
+          "mean_v": 0,
+          "audio_peak_v": 0
+        },
+        "W": {
+          "mean_v": -0.6763802860788284,
+          "audio_peak_v": 0.3358265807181441
+        },
+        "G": {
+          "mean_v": -0.5467491346788816,
+          "audio_peak_v": 0.33942625172693613
+        }
+      },
+      "at_off": [
+        -1.0087779593241717,
+        -1.008777959319735,
+        0,
+        -0.5939689134505823,
+        -0.44249960053260046
+      ],
+      "final": [
+        -0.003523452773456322,
+        -0.003523452773456322,
+        0,
+        -0.003519929638530953,
+        0.055062770666238776
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999608664701658e-13
+    },
+    "avc_short": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": true,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.223808502173066,
+          "audio_peak_v": 0.6158392506794769
+        },
+        "H": {
+          "mean_v": -1.1094917409226162,
+          "audio_peak_v": 0.5565271007998412
+        },
+        "A": {
+          "mean_v": -2.6038467508527057e-7,
+          "audio_peak_v": 1.3102956039548502e-7
+        },
+        "W": {
+          "mean_v": -0.6522343235353081,
+          "audio_peak_v": 0.32551652214167087
+        },
+        "G": {
+          "mean_v": -0.5272115732151037,
+          "audio_peak_v": 0.3289951808712053
+        }
+      },
+      "at_off": [
+        -0.9657895945097152,
+        -0.9760639490924653,
+        -2.6331415588593027e-7,
+        -0.5746948404527662,
+        -0.42862155260624235
+      ],
+      "final": [
+        -0.0030390159020722107,
+        -0.0030713458515985157,
+        -6.465995017275541e-10,
+        -0.0031975839664034828,
+        0.05306207783823795
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.9999471729487e-13
+    },
+    "c18_open": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 0,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2328527547528838,
+          "audio_peak_v": 0.6196233735387738
+        },
+        "H": {
+          "mean_v": -1.1207740121015415,
+          "audio_peak_v": 0.5618582659801977
+        },
+        "A": {
+          "mean_v": -0.05053208249312479,
+          "audio_peak_v": 0.0016519283508091434
+        },
+        "W": {
+          "mean_v": -0.6724644072609263,
+          "audio_peak_v": 0.3371149595881254
+        },
+        "G": {
+          "mean_v": 0,
+          "audio_peak_v": 0
+        }
+      },
+      "at_off": [
+        -0.9742658515553153,
+        -0.9839953003295633,
+        -0.059697666358952385,
+        -0.590397180197738,
+        0
+      ],
+      "final": [
+        -0.00428341018154949,
+        -0.0038943661426103673,
+        -0.040853549841827055,
+        -0.0023366196855662204,
+        0
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999454538586576e-13
+    },
+    "c15_open": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 0,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -0.5364567082420609,
+          "audio_peak_v": 0.27227959305594046
+        },
+        "H": {
+          "mean_v": -0.48634719522159214,
+          "audio_peak_v": 0.2466805912371593
+        },
+        "A": {
+          "mean_v": -0.02198554491860497,
+          "audio_peak_v": 0.0006920847939546683
+        },
+        "W": {
+          "mean_v": -0.28590914313972876,
+          "audio_peak_v": 0.14428458455573567
+        },
+        "G": {
+          "mean_v": -0.23105098140149127,
+          "audio_peak_v": 0.1458484817677642
+        }
+      },
+      "at_off": [
+        -0.006093899307952622,
+        -0.005882435313871805,
+        -0.02597151433448356,
+        -0.0050365793552959205,
+        0.059028794870408706
+      ],
+      "final": [
+        -0.0031876873739238158,
+        -0.00303018854696416,
+        -0.017992577108131454,
+        -0.0024001932391255368,
+        0.02279813767875911
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.998580565756434e-13
+    },
+    "weak_signal": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 0.2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -0.10823805557294489,
+          "audio_peak_v": 0.055660266362367226
+        },
+        "H": {
+          "mean_v": -0.09812724074974528,
+          "audio_peak_v": 0.05029968497824988
+        },
+        "A": {
+          "mean_v": -0.004431467055703089,
+          "audio_peak_v": 0.00014635656600065966
+        },
+        "W": {
+          "mean_v": -0.05768556186889441,
+          "audio_peak_v": 0.029420857681204542
+        },
+        "G": {
+          "mean_v": -0.04663898442063956,
+          "audio_peak_v": 0.029726209440779437
+        }
+      },
+      "at_off": [
+        -0.08352073918232585,
+        -0.08435355885122571,
+        -0.005235690264033042,
+        -0.04967343400779692,
+        -0.036765801031756896
+      ],
+      "final": [
+        -0.0006484770943807597,
+        -0.0006165031311616927,
+        -0.00365402963697305,
+        -0.00048820754101462437,
+        0.00463363844077301
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.996482670551575e-13
+    },
+    "strong_signal": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 5,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -3.1547383505187168,
+          "audio_peak_v": 1.5749234933708105
+        },
+        "H": {
+          "mean_v": -2.860048325925713,
+          "audio_peak_v": 1.4232412488613417
+        },
+        "A": {
+          "mean_v": -0.12923833460421216,
+          "audio_peak_v": 0.004213498815078232
+        },
+        "W": {
+          "mean_v": -1.6813266069192512,
+          "audio_peak_v": 0.8324613935852805
+        },
+        "G": {
+          "mean_v": -1.3591768882491877,
+          "audio_peak_v": 0.8414450219690228
+        }
+      },
+      "at_off": [
+        -2.505870743109889,
+        -2.5309044700011847,
+        -0.15270041428542722,
+        -1.4901085934717573,
+        -1.1136684673839796
+      ],
+      "final": [
+        -0.018917056596845554,
+        -0.017984329370923705,
+        -0.10659341583349939,
+        -0.0142417595170818,
+        0.13517050753566348
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999712701523405e-13
+    },
+    "volume_zero": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2328532702595103,
+          "audio_peak_v": 0.6196235759552033
+        },
+        "H": {
+          "mean_v": -1.120774684517625,
+          "audio_peak_v": 0.5618585511641232
+        },
+        "A": {
+          "mean_v": -0.05053210347971164,
+          "audio_peak_v": 0.0016519291007448744
+        },
+        "W": {
+          "mean_v": -0.0000022415445006764635,
+          "audio_peak_v": 0.000001123714613274896
+        },
+        "G": {
+          "mean_v": -0.0000018107679275302177,
+          "audio_peak_v": 0.000001135652757303479
+        }
+      },
+      "at_off": [
+        -0.974266344118483,
+        -0.983995797868232,
+        -0.059697691225024725,
+        -0.000001967987348068561,
+        -0.0000014649580730707772
+      ],
+      "final": [
+        -0.004283419156773766,
+        -0.0038943750107559598,
+        -0.040853568882447504,
+        -7.788772950120792e-9,
+        1.809789274358366e-7
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999492494132942e-13
+    },
+    "c8_parts_list": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 1e-7,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2244885820562597,
+          "audio_peak_v": 0.6157721493897635
+        },
+        "H": {
+          "mean_v": -1.1101074914883138,
+          "audio_peak_v": 0.5564666387057201
+        },
+        "A": {
+          "mean_v": -0.02562878992332014,
+          "audio_peak_v": 0.000852012740893709
+        },
+        "W": {
+          "mean_v": -0.6525954839151501,
+          "audio_peak_v": 0.32548109714611334
+        },
+        "G": {
+          "mean_v": -0.5275362632991535,
+          "audio_peak_v": 0.3289618057178906
+        }
+      },
+      "at_off": [
+        -0.9667635986742416,
+        -0.9767248858938511,
+        -0.030402599613882402,
+        -0.5750828037659784,
+        -0.42895833767132924
+      ],
+      "final": [
+        -0.005706827555722218,
+        -0.005494150416341288,
+        -0.025698478657529535,
+        -0.004639938055572744,
+        0.052618372392578855
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999826962032825e-13
+    },
+    "service_avc": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "service",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2238778842753477,
+          "audio_peak_v": 0.6158359279198534
+        },
+        "H": {
+          "mean_v": -1.1095546398374359,
+          "audio_peak_v": 0.5565240971242075
+        },
+        "A": {
+          "mean_v": -0.0025927918521692285,
+          "audio_peak_v": 0.0003972732224930093
+        },
+        "W": {
+          "mean_v": -0.6522712912051032,
+          "audio_peak_v": 0.3255147603857829
+        },
+        "G": {
+          "mean_v": -0.5272417973134552,
+          "audio_peak_v": 0.32899359738736594
+        }
+      },
+      "at_off": [
+        -0.9658603751553487,
+        -0.97611205232253,
+        -0.0022027210232553156,
+        -0.5747231835558901,
+        -0.4286418736404078
+      ],
+      "final": [
+        -0.00303989603746256,
+        -0.0030721661500505214,
+        -0.000006505454194186796,
+        -0.0031981641144519513,
+        0.05306552328984751
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.99996079323849e-13
+    },
+    "service_grid": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "service",
+        "probe": "G"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2379971187253647,
+          "audio_peak_v": 0.4941412461673313
+        },
+        "H": {
+          "mean_v": -1.1248881261933674,
+          "audio_peak_v": 0.39835286003928305
+        },
+        "A": {
+          "mean_v": -0.04901357876485105,
+          "audio_peak_v": 0.0016199383040969172
+        },
+        "W": {
+          "mean_v": -0.6725061583268129,
+          "audio_peak_v": 0.03408582070276274
+        },
+        "G": {
+          "mean_v": -0.00020179709358251032,
+          "audio_peak_v": 0.018261194983073305
+        }
+      },
+      "at_off": [
+        -1.023130388848553,
+        -1.033394177917041,
+        -0.0583342159936056,
+        -0.6439904915977857,
+        0.0019919272608552143
+      ],
+      "final": [
+        -0.0047825150948235555,
+        -0.0043539490010802324,
+        -0.04506772790669592,
+        -0.002637929086277724,
+        0.0000021254515650928456
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.99984583392689e-13
+    },
+    "lower_dead": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 0,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2251408505167836,
+          "audio_peak_v": 0.6157082347737788
+        },
+        "H": {
+          "mean_v": -1.110698088128804,
+          "audio_peak_v": 0.5564090420149247
+        },
+        "A": {
+          "mean_v": -0.05018455203873901,
+          "audio_peak_v": 0.0016404361584324112
+        },
+        "W": {
+          "mean_v": -0.6529419021650384,
+          "audio_peak_v": 0.3254473507465315
+        },
+        "G": {
+          "mean_v": -0.5278472362293868,
+          "audio_peak_v": 0.3289300223273808
+        }
+      },
+      "at_off": [
+        -0.9676901204659203,
+        -0.9773539079500302,
+        -0.05929409654253215,
+        -0.5754520530446012,
+        -0.429278092578814
+      ],
+      "final": [
+        -0.007345246326359134,
+        -0.006983080194992941,
+        -0.041388862674781216,
+        -0.005529887876677862,
+        0.05248489058754881
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999869533908754e-13
+    },
+    "no_modulation": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2208093178366775,
+          "audio_peak_v": 0.00008819349195477568
+        },
+        "H": {
+          "mean_v": -1.106765727110268,
+          "audio_peak_v": 0.00010004480841093316
+        },
+        "A": {
+          "mean_v": -0.04961454044703887,
+          "audio_peak_v": 0.0015191902079368536
+        },
+        "W": {
+          "mean_v": -0.650607265020544,
+          "audio_peak_v": 0.00014736924319874796
+        },
+        "G": {
+          "mean_v": -0.5268767071197462,
+          "audio_peak_v": 0.003420909378458923
+        }
+      },
+      "at_off": [
+        -1.0900861631188588,
+        -1.1010539951372582,
+        -0.059109952972250246,
+        -0.6478161378395684,
+        -0.5019701536757938
+      ],
+      "final": [
+        -0.007332897599129293,
+        -0.006971527593674559,
+        -0.04130167811187424,
+        -0.00552152621025763,
+        0.05242887811707168
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.807935247722389e-13
+    },
+    "audio_400": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 400,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2224377289745552,
+          "audio_peak_v": 0.6286937475906097
+        },
+        "H": {
+          "mean_v": -1.108055277144651,
+          "audio_peak_v": 0.5693689403129124
+        },
+        "A": {
+          "mean_v": -0.03605688596113976,
+          "audio_peak_v": 0.004933466065503764
+        },
+        "W": {
+          "mean_v": -0.6505428810047712,
+          "audio_peak_v": 0.33306684019223093
+        },
+        "G": {
+          "mean_v": -0.5597028402123815,
+          "audio_peak_v": 0.3352644827041435
+        }
+      },
+      "at_off": [
+        -0.5473438982877287,
+        -0.5525291543235428,
+        -0.059929830702461426,
+        -0.32694156896270865,
+        -0.17922367556382357
+      ],
+      "final": [
+        -0.007396743291223835,
+        -0.007031890453488543,
+        -0.04169291003834127,
+        -0.005567920496343026,
+        0.05282746044978779
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.998167150150703e-13
+    },
+    "audio_2000": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2330237024298079,
+          "audio_peak_v": 0.5746266918102728
+        },
+        "H": {
+          "mean_v": -1.1179055673495677,
+          "audio_peak_v": 0.515398277931805
+        },
+        "A": {
+          "mean_v": -0.05511187330101445,
+          "audio_peak_v": 0.0008375725633230308
+        },
+        "W": {
+          "mean_v": -0.6574477965913285,
+          "audio_peak_v": 0.30150030601859795
+        },
+        "G": {
+          "mean_v": -0.5207421328879427,
+          "audio_peak_v": 0.30310008149715756
+        }
+      },
+      "at_off": [
+        -0.8807801579315149,
+        -0.8895151433224384,
+        -0.05969153076763961,
+        -0.5240875388303384,
+        -0.3768439305557011
+      ],
+      "final": [
+        -0.007390582158704494,
+        -0.007026263602420042,
+        -0.04163652644944297,
+        -0.0055644331154644676,
+        0.05282310236548734
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.997691151515664e-13
+    },
+    "carrier_24": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 24,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.224775642784235,
+          "audio_peak_v": 0.6156886377724292
+        },
+        "H": {
+          "mean_v": -1.110367058136321,
+          "audio_peak_v": 0.5563857061473693
+        },
+        "A": {
+          "mean_v": -0.050169877959548984,
+          "audio_peak_v": 0.001642027472873672
+        },
+        "W": {
+          "mean_v": -0.6527473151718208,
+          "audio_peak_v": 0.3254338398408682
+        },
+        "G": {
+          "mean_v": -0.5276893553076277,
+          "audio_peak_v": 0.3289109138827011
+        }
+      },
+      "at_off": [
+        -0.9644267135728111,
+        -0.97405596339255,
+        -0.05927723010028987,
+        -0.5735215251041565,
+        -0.42738873981212727
+      ],
+      "final": [
+        -0.007342979852994008,
+        -0.0069809251343591885,
+        -0.04137612340466707,
+        -0.005528179866214403,
+        0.052468637435956554
+      ],
+      "steps": 135840,
+      "max_kcl_residual_a": 9.99844470590686e-13
+    },
+    "carrier_96": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 96,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2254606207284908,
+          "audio_peak_v": 0.6156031848681632
+        },
+        "H": {
+          "mean_v": -1.1109879579781332,
+          "audio_peak_v": 0.5563169417176217
+        },
+        "A": {
+          "mean_v": -0.05019760404023637,
+          "audio_peak_v": 0.001640757998684281
+        },
+        "W": {
+          "mean_v": -0.653112305358003,
+          "audio_peak_v": 0.32539343839850543
+        },
+        "G": {
+          "mean_v": -0.5279850526310872,
+          "audio_peak_v": 0.3288772301259676
+        }
+      },
+      "at_off": [
+        -0.9685252048805087,
+        -0.9781977108904701,
+        -0.059309639527081195,
+        -0.5759466838982886,
+        -0.4297344199097525
+      ],
+      "final": [
+        -0.00734720760110612,
+        -0.0069849449114254185,
+        -0.04139990043109207,
+        -0.005531365149961377,
+        0.05249892962165662
+      ],
+      "steps": 528960,
+      "max_kcl_residual_a": 9.99896097248821e-13
+    },
+    "release_refined": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.000005,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2251408505168415,
+          "audio_peak_v": 0.6157082347737775
+        },
+        "H": {
+          "mean_v": -1.1106980881288526,
+          "audio_peak_v": 0.5564090420149236
+        },
+        "A": {
+          "mean_v": -0.05018455204082633,
+          "audio_peak_v": 0.0016404361584268843
+        },
+        "W": {
+          "mean_v": -0.6529419021650669,
+          "audio_peak_v": 0.3254473507465299
+        },
+        "G": {
+          "mean_v": -0.5278472362294022,
+          "audio_peak_v": 0.3289300223273775
+        }
+      },
+      "at_off": [
+        -0.9676901204659847,
+        -0.9773539079500735,
+        -0.059294096544584556,
+        -0.5754520530446263,
+        -0.4292780925788457
+      ],
+      "final": [
+        -0.00734507496899913,
+        -0.006982909996819501,
+        -0.04138858235388426,
+        -0.00552972246684777,
+        0.052482411692946006
+      ],
+      "steps": 271680,
+      "max_kcl_residual_a": 9.999869567790072e-13
+    },
+    "restored": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "summary": {
+        "U": {
+          "mean_v": -1.2251408505168415,
+          "audio_peak_v": 0.6157082347737775
+        },
+        "H": {
+          "mean_v": -1.1106980881288526,
+          "audio_peak_v": 0.5564090420149236
+        },
+        "A": {
+          "mean_v": -0.05018455204082633,
+          "audio_peak_v": 0.0016404361584268843
+        },
+        "W": {
+          "mean_v": -0.6529419021650669,
+          "audio_peak_v": 0.3254473507465299
+        },
+        "G": {
+          "mean_v": -0.5278472362294022,
+          "audio_peak_v": 0.3289300223273775
+        }
+      },
+      "at_off": [
+        -0.9676901204659847,
+        -0.9773539079500735,
+        -0.059294096544584556,
+        -0.5754520530446263,
+        -0.4292780925788457
+      ],
+      "final": [
+        -0.007345246326503896,
+        -0.0069830801951244244,
+        -0.04138886267617418,
+        -0.00552988787675618,
+        0.0524848905875264
+      ],
+      "steps": 266880,
+      "max_kcl_residual_a": 9.999869567790072e-13
+    }
+  },
+  "closed_form_release_checked": true,
+  "browser_node_identity_checked": true
+}

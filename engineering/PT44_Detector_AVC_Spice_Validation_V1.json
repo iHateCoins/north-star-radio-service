@@ -1,0 +1,364 @@
+{
+  "schema": "PT44_DETECTOR_AVC_SPICE_VALIDATION_V1",
+  "version": "0.56.0",
+  "scope": "Numerical parity for the declared diode/source circuit. Does not validate assumed parameters or a complete receiver.",
+  "ngspice_version": "** ngspice-42 : Circuit level simulation program",
+  "cases": {
+    "healthy": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "checks": [
+        {
+          "node": "H",
+          "metric": "mean",
+          "javascript": -1.1106980881288526,
+          "ngspice": -1.1111438254477537,
+          "absolute_error": 0.0004457373189010738,
+          "tolerance": 0.022272876508955076
+        },
+        {
+          "node": "H",
+          "metric": "audio",
+          "javascript": 0.5564090420149236,
+          "ngspice": 0.5563961271270218,
+          "absolute_error": 0.000012914887901782635,
+          "tolerance": 0.011177922542540436
+        },
+        {
+          "node": "A",
+          "metric": "mean",
+          "javascript": -0.05018455204082633,
+          "ngspice": -0.05015874213138743,
+          "absolute_error": 0.000025809909438900824,
+          "tolerance": 0.0010531748426277484
+        },
+        {
+          "node": "A",
+          "metric": "audio",
+          "javascript": 0.0016404361584268843,
+          "ngspice": 0.0016397957677499282,
+          "absolute_error": 6.403906769561658e-7,
+          "tolerance": 0.00008279591535499857
+        },
+        {
+          "node": "G",
+          "metric": "mean",
+          "javascript": -0.5278472362294022,
+          "ngspice": -0.5280712484120063,
+          "absolute_error": 0.00022401218260403866,
+          "tolerance": 0.010611424968240125
+        },
+        {
+          "node": "G",
+          "metric": "audio",
+          "javascript": 0.3289300223273775,
+          "ngspice": 0.3289232694034952,
+          "absolute_error": 0.000006752923882302753,
+          "tolerance": 0.0066284653880699035
+        },
+        {
+          "metric": "AVC_at_off",
+          "javascript": -0.059294096544584556,
+          "ngspice": -0.0592636123,
+          "absolute_error": 0.00003048424458455823,
+          "tolerance": 0.000642636123
+        },
+        {
+          "metric": "AVC_after_release",
+          "javascript": -0.04138886267617418,
+          "ngspice": -0.0413682417,
+          "absolute_error": 0.000020620976174175187,
+          "tolerance": 0.00046368241700000005
+        }
+      ]
+    },
+    "upper_dead": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 0,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "checks": [
+        {
+          "node": "H",
+          "metric": "mean",
+          "javascript": 1.8325250459980323e-7,
+          "ngspice": -5.759665849400692e-8,
+          "absolute_error": 2.4084916309381014e-7,
+          "tolerance": 0.000052000000000000004
+        },
+        {
+          "node": "H",
+          "metric": "audio",
+          "javascript": 6.036094199076141e-10,
+          "ngspice": 7.852650687987205e-9,
+          "absolute_error": 7.2490412680795915e-9,
+          "tolerance": 0.000052000000000000004
+        },
+        {
+          "node": "A",
+          "metric": "mean",
+          "javascript": 0.00000236022910444693,
+          "ngspice": -2.734240769008441e-9,
+          "absolute_error": 0.0000023629633452159388,
+          "tolerance": 0.000052000000000000004
+        },
+        {
+          "node": "A",
+          "metric": "audio",
+          "javascript": 9.265471770022805e-9,
+          "ngspice": 3.473236299785691e-10,
+          "absolute_error": 8.918148140044235e-9,
+          "tolerance": 0.000052000000000000004
+        },
+        {
+          "node": "G",
+          "metric": "mean",
+          "javascript": 7.227556001112796e-7,
+          "ngspice": -3.544295802870393e-8,
+          "absolute_error": 7.581985581399835e-7,
+          "tolerance": 0.000052000000000000004
+        },
+        {
+          "node": "G",
+          "metric": "audio",
+          "javascript": 5.125878454487582e-9,
+          "ngspice": 4.464668875638451e-9,
+          "absolute_error": 6.612095788491314e-10,
+          "tolerance": 0.000052000000000000004
+        },
+        {
+          "metric": "AVC_at_off",
+          "javascript": -6.383589864447549e-7,
+          "ngspice": -0.00000294849953,
+          "absolute_error": 0.0000023101405435552453,
+          "tolerance": 0.000051
+        },
+        {
+          "metric": "AVC_after_release",
+          "javascript": -3.648855861323691e-7,
+          "ngspice": -0.00000181238928,
+          "absolute_error": 0.000001447503693867631,
+          "tolerance": 0.000051
+        }
+      ]
+    },
+    "loaded_avc": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 5e-8,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "service",
+        "probe": "A"
+      },
+      "checks": [
+        {
+          "node": "H",
+          "metric": "mean",
+          "javascript": -1.1095546398374359,
+          "ngspice": -1.110010233364814,
+          "absolute_error": 0.00045559352737822856,
+          "tolerance": 0.022250204667296283
+        },
+        {
+          "node": "H",
+          "metric": "audio",
+          "javascript": 0.5565240971242075,
+          "ngspice": 0.5565184729259794,
+          "absolute_error": 0.000005624198228026955,
+          "tolerance": 0.01118036945851959
+        },
+        {
+          "node": "A",
+          "metric": "mean",
+          "javascript": -0.0025927918521692285,
+          "ngspice": -0.0025910032621238666,
+          "absolute_error": 0.0000017885900453619256,
+          "tolerance": 0.00010182006524247733
+        },
+        {
+          "node": "A",
+          "metric": "audio",
+          "javascript": 0.0003972732224930093,
+          "ngspice": 0.0003967960040157404,
+          "absolute_error": 4.772184772688579e-7,
+          "tolerance": 0.000057935920080314814
+        },
+        {
+          "node": "G",
+          "metric": "mean",
+          "javascript": -0.5272417973134552,
+          "ngspice": -0.5274706644989116,
+          "absolute_error": 0.00022886718545633844,
+          "tolerance": 0.010599413289978231
+        },
+        {
+          "node": "G",
+          "metric": "audio",
+          "javascript": 0.32899359738736594,
+          "ngspice": 0.32899104208326324,
+          "absolute_error": 0.00000255530410270266,
+          "tolerance": 0.006629820841665265
+        },
+        {
+          "metric": "AVC_at_off",
+          "javascript": -0.0022027210232553156,
+          "ngspice": -0.00220146907,
+          "absolute_error": 0.0000012519532553156854,
+          "tolerance": 0.00007201469070000001
+        },
+        {
+          "metric": "AVC_after_release",
+          "javascript": -0.000006505454194186796,
+          "ngspice": -0.00000650689045,
+          "absolute_error": 1.4362558132045811e-9,
+          "tolerance": 0.000051
+        }
+      ]
+    },
+    "c8_parts_list": {
+      "parameters": {
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "amplitude_v": 2,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "on_until_s": 0.012,
+        "duration_s": 0.06,
+        "samples_per_carrier": 48,
+        "release_dt_s": 0.00001,
+        "source_ohm": 50000,
+        "volume_track_ohm": 500000,
+        "diode_k_a": 0.0001,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "c8_f": 1e-7,
+        "c15_scale": 1,
+        "c18_scale": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "meter": "ideal",
+        "probe": "A"
+      },
+      "checks": [
+        {
+          "node": "H",
+          "metric": "mean",
+          "javascript": -1.1101074914883138,
+          "ngspice": -1.1105520050740654,
+          "absolute_error": 0.0004445135857515936,
+          "tolerance": 0.02226104010148131
+        },
+        {
+          "node": "H",
+          "metric": "audio",
+          "javascript": 0.5564666387057201,
+          "ngspice": 0.5564411743499241,
+          "absolute_error": 0.000025464355795978832,
+          "tolerance": 0.011178823486998482
+        },
+        {
+          "node": "A",
+          "metric": "mean",
+          "javascript": -0.02562878992332014,
+          "ngspice": -0.025615302085209,
+          "absolute_error": 0.000013487838111142514,
+          "tolerance": 0.00056230604170418
+        },
+        {
+          "node": "A",
+          "metric": "audio",
+          "javascript": 0.000852012740893709,
+          "ngspice": 0.0008515784678458006,
+          "absolute_error": 4.3427304790839664e-7,
+          "tolerance": 0.00006703156935691601
+        },
+        {
+          "node": "G",
+          "metric": "mean",
+          "javascript": -0.5275362632991535,
+          "ngspice": -0.527759817242058,
+          "absolute_error": 0.0002235539429045197,
+          "tolerance": 0.01060519634484116
+        },
+        {
+          "node": "G",
+          "metric": "audio",
+          "javascript": 0.3289618057178906,
+          "ngspice": 0.32894799637045163,
+          "absolute_error": 0.000013809347438942243,
+          "tolerance": 0.006628959927409033
+        },
+        {
+          "metric": "AVC_at_off",
+          "javascript": -0.030402599613882402,
+          "ngspice": -0.0303865791,
+          "absolute_error": 0.000016020513882400444,
+          "tolerance": 0.00035386579100000007
+        },
+        {
+          "metric": "AVC_after_release",
+          "javascript": -0.025698478657529535,
+          "ngspice": -0.0256856021,
+          "absolute_error": 0.000012876557529534899,
+          "tolerance": 0.000306856021
+        }
+      ]
+    }
+  }
+}

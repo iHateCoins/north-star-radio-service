@@ -70,3 +70,6 @@ jobs:
 
       - name: Cross-check coupled audio/supply faults and meter loading against ngspice
         run: node tests/test_audio_power_v55.js --ngspice
+
+      - name: Cross-check carrier-resolved detector/AVC and loaded probes against ngspice
+        run: node tests/test_detector_spice_v56.js --ngspice

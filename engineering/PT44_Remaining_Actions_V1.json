@@ -1,6 +1,6 @@
 {
   "schema": "PT44_REMAINING_ACTIONS_V1",
-  "version": "0.55.0",
+  "version": "0.56.0",
   "model": "Philco PT-44",
   "benchmark_ready": false,
   "scope_policy": "Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.",
@@ -13,7 +13,7 @@
       "acceptance": [
         "Assign both 7C6 diode glyphs to socket pins 5/6.",
         "Resolve the four-dot oscillator coupling symbol and complete its electrical representation.",
-        "Resolve #8 0.05/0.1 µF value conflict or retain a specifically approved variant."
+        "Resolve #8 0.05/0.1 \u00b5F value conflict or retain a specifically approved variant."
       ],
       "v055_review": "Manufacturer basing identifies the two separate 7C6 diodes, but does not assign the unnumbered Philco glyphs to physical pins. No source-backed assignment or oscillator/#8 resolution is claimed."
     },
@@ -34,6 +34,9 @@
       "remaining_after_v055": [
         "Validate denser audio curves, grid-current and screen-scaling behavior.",
         "Complete 7A8/7B7/35Z3 models and coil/transformer/pot/lamp/heater parameter validation."
+      ],
+      "completed_in_v056": [
+        "Declare detector/source/volume parameters and compare both unresolved #8 values; no diode-curve or IF-winding calibration claimed."
       ]
     },
     {
@@ -76,12 +79,21 @@
     {
       "id": "EC-05",
       "action": "Complete IF, detector and AVC behavior",
-      "status": "NOT STARTED",
+      "status": "IN PROGRESS",
       "evidence_dependency": "Actionable in parallel with remaining diode pin mapping.",
       "acceptance": [
         "Model 455 kHz IF transfer, bandwidth, tuned adjustments and stage loading.",
         "Implement detector rectification, audio recovery and AVC attack/release/loading.",
         "Verify responses to signal strength, misalignment and component faults."
+      ],
+      "completed_in_v056": [
+        "Carrier-resolved two-diode detector/AVC subset with factory-traced #7/#8/#15/#17/#18/#19 and volume network.",
+        "AM audio recovery, AVC arrival/release, fault/restoration and selectable #8 sensitivity cases under declared diode/source assumptions."
+      ],
+      "remaining_after_v056": [
+        "Active 7B7 stage, coupled/tuned IF windings, 455 kHz bandwidth/alignment and actual supply load.",
+        "AVC feedback to converter/IF gain; correlate diode/source parameters, grid loading and steady-state/long-duration behavior.",
+        "Join detector, nonlinear audio and supply in one loaded receiver model."
       ]
     },
     {
@@ -90,7 +102,7 @@
       "status": "NOT STARTED",
       "evidence_dependency": "Actionable after the coupling symbol is resolved; additional schematics are not a general prerequisite.",
       "acceptance": [
-        "Implement oscillator/converter behavior and tracking across 540–1600 kHz.",
+        "Implement oscillator/converter behavior and tracking across 540\u20131600 kHz.",
         "Validate the 455 kHz frequency relationship, tuning/alignment effects and input behavior.",
         "Check weak/dead oscillator and aerial faults against the receiver model."
       ]
@@ -106,12 +118,15 @@
         "Use historical voltage labels only where return/loading/conditions support comparison; distinguish simulated reference conditions."
       ],
       "completed_in_v055": [
-        "Connect ideal, 10 MΩ/100 pF and 1000 Ω/V (250 V range) probes to explicit audio/power nodes.",
+        "Connect ideal, 10 M\u03a9/100 pF and 1000 \u03a9/V (250 V range) probes to explicit audio/power nodes.",
         "Record supply, signal, volume, timing and instrument conditions; keep factory targets separate."
       ],
       "remaining_after_v055": [
         "Extend node access/loading to RF/IF/detector/AVC and shop instruments.",
         "Verify historical measurement conditions where factory targets are used."
+      ],
+      "completed_in_v056": [
+        "Five detector/AVC probe ports with ideal, 10 M\u03a9/100 pF and 1000 \u03a9/V (10 V range) loading; declared signal/timing/reference conditions."
       ]
     },
     {
@@ -122,7 +137,7 @@
       "acceptance": [
         "Map component endpoints and instrument access to the serviceable game chassis.",
         "Resolve physical identities that affect faults, polarity or repairs.",
-        "Keep unsupported lead dress and chassis/B− bond claims explicit."
+        "Keep unsupported lead dress and chassis/B\u2212 bond claims explicit."
       ]
     },
     {
@@ -141,13 +156,17 @@
       "remaining_after_v055": [
         "Integrate full receiver stages and shop repair workflow.",
         "Run the full diagnosis/replacement/alignment/checkout matrix and close all six gates."
+      ],
+      "completed_in_v056": [
+        "Deterministic detector/AVC fault/restoration cases; full shop acceptance remains open."
       ]
     }
   ],
   "next_integration_target": [
-    "EC-05: IF/detector/AVC with actual stage currents",
-    "EC-02/04: audio parameter and frequency-envelope validation",
-    "EC-07/09: connect authoritative model nodes/faults to shop instruments and repairs"
+    "EC-05/03: active IF stage, tuned transformer loading and actual supply current; AVC gain feedback.",
+    "EC-05/04: join detector with the nonlinear audio/supply model, preserving mutual loading.",
+    "EC-02/06: correlate tube/winding parameters and implement RF/converter tracking.",
+    "EC-07/08/09: chassis/instrument/shop integration and complete repair acceptance."
   ],
-  "milestone_completed": "v0.55 implements joint nonlinear audio/supply behavior, actual audio tube plate/screen loads, volume/coupling/bias/transformer equivalent, loaded probes and a deterministic audio fault/restore matrix. RF/IF substitute load, uncertain parameters and shop integration remain explicit."
+  "milestone_completed": "v0.56 adds a carrier-resolved detector/AVC subset, audio recovery and AVC arrival/release, loaded probes, unresolved #8 variant controls and fault/restoration tests. The IF source and diode law are explicit assumptions; active IF, AVC feedback, full receiver/supply coupling and shop integration remain open."
 }

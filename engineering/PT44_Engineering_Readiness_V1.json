@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.55.0",
+  "version": "0.56.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -112,21 +112,21 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Supply, screen, AVC and B− conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
+      "gap": "Supply, screen, AVC and B\u2212 conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
     },
     {
       "id": "P1-IF",
       "area": "IF",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Supply, screen, AVC and B− conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
+      "gap": "Supply, screen, AVC and B\u2212 conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
     },
     {
       "id": "P1-DET",
       "area": "Detector / AVC",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Supply, screen, AVC and B− conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
+      "gap": "v0.56 implements symbol-level detector rectification, recovered audio and AVC arrival/release using factory passives. Remaining: diode source correlation and physical pin assignment, IF tuned/active drive, AVC gain feedback, downstream audio/supply/grid loading and shop integration. #8 source value conflict stays open."
     },
     {
       "id": "P1-OUTPUT",
@@ -147,14 +147,14 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Supply, screen, AVC and B− conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
+      "gap": "Supply, screen, AVC and B\u2212 conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
     },
     {
       "id": "P2-SPICE",
       "area": "Full receiver simulation",
       "severity": "later",
       "status": "IN PROGRESS",
-      "gap": "Independent validation now includes coupled audio and supply transients, faults and meter loading. RF/IF/detector/AVC models and complete receiver SPICE/repair acceptance remain outstanding."
+      "gap": "Independent validation includes coupled audio/supply and a carrier-resolved detector/AVC subset. Active IF/RF, full receiver coupling, parameter correlation and complete SPICE/repair acceptance remain open."
     }
   ],
   "completion_gates": [
@@ -198,7 +198,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.55 jointly solves the volume/7C6/50L6/transformer-speaker electrical equivalent and dynamic supply. Audio current demand replaces the two stand-in supply resistors in this bench; RF/IF demand remains a declared substitute. Meter R/C loading, bias, gain, clipping, hum, faults and repair restoration are exercised. Sparse tube curves and assumed transformer/volume/grid-current parameters remain uncalibrated. Shop receiver integration and full benchmark gates remain open.",
+  "latest_evidence_update": "v0.56 adds a separately validated carrier-resolved detector/AVC bench with loaded probes, faults, restoration and #8 alternatives. It uses assumed diode and floating IF-source parameters, and is not joined to the audio/supply bench or shop receiver. All six benchmark gates remain NOT MET.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",
