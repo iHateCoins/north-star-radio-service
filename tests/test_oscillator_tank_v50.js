@@ -14,5 +14,5 @@ for(const [label,expression] of [
  ['false B-minus bond',`(()=>{const n=PT44_FACTORY_V3.factory_nets.find(x=>x.id==='F_BMINUS');n.factory_members.push('10:primary_b');const bad=!pt44OscillatorTankTraceAudit().ok;n.factory_members.pop();return bad;})()`],
  ['premature winding role',`(()=>{const c=PT44_OSCILLATOR_TANK_TRACE_V1.source_level_closure;c.oscillator_transformer_winding_roles_or_polarity_verified=true;const bad=!pt44OscillatorTankTraceAudit().ok;c.oscillator_transformer_winding_roles_or_polarity_verified=false;return bad;})()`]
 ])assert.equal(vm.runInContext(expression,ctx),true,label);
-assert(html.includes('BUILD v0.53.0<small>'));
+assert(html.includes('BUILD v0.54.0<small>'));
 console.log('PASS v0.50: oscillator tuning plate and left winding endpoints traced; incomplete converter claims rejected');

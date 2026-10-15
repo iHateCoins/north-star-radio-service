@@ -1,0 +1,21 @@
+PT-44 v0.54 dynamic power model - explicitly uncalibrated parameters
+* Factory topology: Philco p.38. Load resistors, field L and lamp hot R are test inputs.
+* B-minus is the reference; no chassis bond. Rectifier is a single-point 3/2-power approximation.
+VMAIN LINE 0 SIN(0 162.63455967290594 60)
+VLINE_LINK LINE LINE_IN 0
+R30_40 LINE_IN PLATE 40
+RLAMP LINE_IN PLATE 42
+R30_80 PLATE HEATER_IN 80
+RHEATERS HEATER_IN 0 692.6666666666667
+BRECT PLATE N_BPLUS_RECT I={1*0.0026189140043946205*max(V(PLATE,N_BPLUS_RECT),0)^1.5}
+C29A N_BPLUS_RECT 0 0.00002 IC=0
+C29B N_BPLUS_FILT 0 0.00002 IC=0
+RLOAD_RECT N_BPLUS_RECT 0 3000
+RLOAD_FILT N_BPLUS_FILT 0 6000
+VFIELD N_BPLUS_RECT FIELD_IN 0
+R28 FIELD_IN FIELD_L 500
+LFIELD FIELD_L N_BPLUS_FILT 5 IC=0
+.options reltol=1e-5 abstol=1e-9 vntol=1e-5 method=gear maxord=2
+.tran 0.000020833333333333333 2 1.9 0.000020833333333333333 UIC
+.print tran v(N_BPLUS_RECT) v(N_BPLUS_FILT) i(VFIELD)
+.end

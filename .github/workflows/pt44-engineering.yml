@@ -82,3 +82,6 @@ jobs:
 
       - name: Verify corrected supply, screen, AVC and cathode conductors
         run: node tests/test_supply_avc_reconciliation_v53.js
+
+      - name: Verify dynamic power behavior, energy balance, faults and workbench controls
+        run: node tests/test_power_dynamics_v54.js
