@@ -10,5 +10,5 @@ let reply;const workerCtx=vm.createContext({postMessage:message=>{reply=message;
 workerInstance.onmessage({data:reply});assert(workerInstance.terminated);assert(!vm.runInContext('pt44AudioModelHTML.busy',ctx));assert(vm.runInContext("pt44AudioModelHTML('POWER',x=>x)",ctx).includes('7C6 plate current'));
 // A new run terminates the previous worker and displays numerical errors without accepting a result.
 vm.runInContext('pt44AudioRunBench(box,pt44AudioBenchState());',ctx);workerInstance.onmessage({data:{error:'Numerical test failure'}});assert(workerInstance.terminated);assert.equal(status.textContent,'Numerical test failure');assert(!vm.runInContext('pt44AudioModelHTML.busy',ctx));
-assert(html.includes('name="nsrs-build" content="v0.57.0"'));assert(html.includes('BUILD v0.57.0<small>'));assert(html.includes('audioBenchJumpV55'));
+assert(html.includes('name="nsrs-build" content="v0.58.0"'));assert(html.includes('BUILD v0.58.0<small>'));assert(html.includes('audioBenchJumpV55'));
 console.log('PASS v0.55 generated background worker, result/error lifecycle, rendering and version watermark');

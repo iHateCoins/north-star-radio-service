@@ -1,0 +1,431 @@
+{
+  "schema": "PT44_IF_AC_SPICE_VALIDATION_V1",
+  "version": "0.58.0",
+  "scope": "Independent complex AC execution of the declared circuit; numerical agreement does not calibrate historical winding/tube parameters.",
+  "cases": {
+    "healthy": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.0769829408544035e-9,
+          "max_absolute_error_v": 6.53388368614928e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 3.5231426746949026e-9,
+          "max_absolute_error_v": 1.8011284517574925e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 6.0824895980947665e-9,
+          "max_absolute_error_v": 5.255993460849352e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    },
+    "aligned": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 0.9991424515097995,
+        "c12b_scale": 0.9591786583872373,
+        "c14a_scale": 0.999969926949847
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 3.864342197342878e-9,
+          "max_absolute_error_v": 6.490229758609843e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.937330661999173e-9,
+          "max_absolute_error_v": 5.011740491476614e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.944963827805859e-9,
+          "max_absolute_error_v": 6.312539410883635e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    },
+    "detuned": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1.1,
+        "c12b_scale": 0.9,
+        "c14a_scale": 1.1
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.361440477796735e-9,
+          "max_absolute_error_v": 5.990229560602329e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 5.1587378693459794e-9,
+          "max_absolute_error_v": 1.9751020965690875e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 7.894037397451986e-9,
+          "max_absolute_error_v": 2.0061022254563793e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    },
+    "loaded_grid": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "dmm",
+        "probe": "IG",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 3.065289807034614e-9,
+          "max_absolute_error_v": 6.876336498045248e-13,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.374691019781735e-9,
+          "max_absolute_error_v": 9.124031943345553e-12,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 6.0273607751992906e-9,
+          "max_absolute_error_v": 2.4697213243348077e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    },
+    "if_dead": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 0,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 3.8484236423368815e-9,
+          "max_absolute_error_v": 5.541201494441282e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.966141604702613e-9,
+          "max_absolute_error_v": 5.443592203288651e-15,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 6.00381178339062e-9,
+          "max_absolute_error_v": 6.5393999406997075e-15,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    },
+    "supply90": {
+      "parameters": {
+        "line_v": 90,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 3.932308284139646e-9,
+          "max_absolute_error_v": 6.395827072807298e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 5.007173484295759e-9,
+          "max_absolute_error_v": 2.912620915394465e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 7.565487567283047e-9,
+          "max_absolute_error_v": 4.3935903265102716e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    },
+    "coupling_low": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.01,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.852780470015642e-9,
+          "max_absolute_error_v": 5.482962844391973e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.6580351391517735e-9,
+          "max_absolute_error_v": 1.405009784875617e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 7.3105157999830846e-9,
+          "max_absolute_error_v": 1.6258371627312516e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    },
+    "coupling_high": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 1000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.006,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.04,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "checks": [
+        {
+          "node": "IG",
+          "frequencies": 221,
+          "max_relative_complex_error": 3.905308453989373e-9,
+          "max_absolute_error_v": 6.91542433943624e-11,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IP",
+          "frequencies": 221,
+          "max_relative_complex_error": 4.5423946141260846e-9,
+          "max_absolute_error_v": 5.991236688629653e-10,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        },
+        {
+          "node": "IFout",
+          "frequencies": 221,
+          "max_relative_complex_error": 6.360664514423357e-9,
+          "max_absolute_error_v": 1.9374560140416796e-9,
+          "tolerance": "1e-5 relative complex error plus 1e-11 V absolute"
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema": "PT44_IF_RECEIVER_SPICE_VALIDATION_V1",
-  "version": "0.57.0",
+  "version": "0.58.0",
   "scope": "Independent circuit execution checks numerical implementation under declared parameters, not factory calibration.",
   "cases": {
     "healthy": {
@@ -27,80 +27,83 @@
         "c8_f": 5e-8,
         "avc_feedback": true,
         "meter": "ideal",
-        "probe": "AVC"
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
       },
       "checks": [
         {
           "node": "B",
           "metric": "mean",
-          "javascript": 94.83432335423716,
-          "ngspice": 94.82588403535162,
-          "absolute_error": 0.00843931888553584,
-          "tolerance": 3.795035361414065
+          "javascript": 96.41405245477134,
+          "ngspice": 96.41397565260341,
+          "absolute_error": 0.00007680216792493866,
+          "tolerance": 3.8585590261041363
         },
         {
           "node": "S",
           "metric": "mean",
-          "javascript": 52.57290025621962,
-          "ngspice": 52.570025771827865,
-          "absolute_error": 0.00287448439175364,
-          "tolerance": 2.1048010308731144
+          "javascript": 53.09127391332569,
+          "ngspice": 53.09124968965241,
+          "absolute_error": 0.000024223673285916902,
+          "tolerance": 2.125649987586096
         },
         {
           "node": "AVC",
           "metric": "mean",
-          "javascript": -0.006619099716851619,
-          "ngspice": -0.006658387547324671,
-          "absolute_error": 0.000039287830473052135,
-          "tolerance": 0.00031633550189298686
+          "javascript": -0.0027592785384172973,
+          "ngspice": -0.0027600861581231636,
+          "absolute_error": 8.07619705866288e-7,
+          "tolerance": 0.00016040344632492655
         },
         {
           "node": "IG",
           "metric": "carrier_peak",
-          "javascript": 0.02036882025773508,
-          "ngspice": 0.020458347019736985,
-          "absolute_error": 0.00008952676200190551,
-          "tolerance": 0.0008683338807894794
+          "javascript": 0.018206326203801436,
+          "ngspice": 0.018221098570503684,
+          "absolute_error": 0.00001477236670224813,
+          "tolerance": 0.0007788439428201473
         },
         {
           "node": "IP",
           "metric": "carrier_peak",
-          "javascript": 0.9550984789039287,
-          "ngspice": 0.9606045331756834,
-          "absolute_error": 0.005506054271754657,
-          "tolerance": 0.03847418132702734
+          "javascript": 0.08110952663366618,
+          "ngspice": 0.08120859267730769,
+          "absolute_error": 0.00009906604364151583,
+          "tolerance": 0.003298343707092308
         },
         {
           "node": "H",
           "metric": "audio_peak",
-          "javascript": 0.16314985340423988,
-          "ngspice": 0.1644710912410236,
-          "absolute_error": 0.0013212378367837285,
-          "tolerance": 0.006628843649640944
+          "javascript": 0.016656250798511702,
+          "ngspice": 0.016681294084726038,
+          "absolute_error": 0.000025043286214335853,
+          "tolerance": 0.0007172517633890416
         },
         {
           "node": "G",
           "metric": "audio_peak",
-          "javascript": 0.09568306043448228,
-          "ngspice": 0.0964642156070431,
-          "absolute_error": 0.0007811551725608185,
-          "tolerance": 0.003908568624281724
+          "javascript": 0.009619278342905989,
+          "ngspice": 0.009633863261065013,
+          "absolute_error": 0.000014584918159024282,
+          "tolerance": 0.00043535453044260054
         },
         {
           "node": "P",
           "metric": "audio_peak",
-          "javascript": 2.575652523201272,
-          "ngspice": 2.5194511916930313,
-          "absolute_error": 0.05620133150824058,
-          "tolerance": 0.10082804766772124
+          "javascript": 0.34425740752212636,
+          "ngspice": 0.34481941401853033,
+          "absolute_error": 0.0005620064964039773,
+          "tolerance": 0.013842776560741213
         },
         {
           "node": "speaker_v",
           "metric": "audio_peak",
-          "javascript": 0.47764568271552765,
-          "ngspice": 0.466801802335634,
-          "absolute_error": 0.010843880379893645,
-          "tolerance": 0.01872207209342536
+          "javascript": 0.10321339658069305,
+          "ngspice": 0.10338873543709085,
+          "absolute_error": 0.000175338856397797,
+          "tolerance": 0.004185549417483634
         }
       ]
     },
@@ -128,80 +131,83 @@
         "c8_f": 5e-8,
         "avc_feedback": true,
         "meter": "ideal",
-        "probe": "AVC"
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
       },
       "checks": [
         {
           "node": "B",
           "metric": "mean",
-          "javascript": 99.96866901106333,
-          "ngspice": 99.96866900757021,
-          "absolute_error": 3.4931133541249437e-9,
-          "tolerance": 4.000746760302809
+          "javascript": 99.96873105463358,
+          "ngspice": 99.96873105333704,
+          "absolute_error": 1.29654154079617e-9,
+          "tolerance": 4.000749242133482
         },
         {
           "node": "S",
           "metric": "mean",
-          "javascript": 81.60707723216049,
-          "ngspice": 81.60707722970595,
-          "absolute_error": 2.4545414589738357e-9,
-          "tolerance": 3.2662830891882377
+          "javascript": 81.60712740660288,
+          "ngspice": 81.60712739998898,
+          "absolute_error": 6.613902314711595e-9,
+          "tolerance": 3.2662850959995593
         },
         {
           "node": "AVC",
           "metric": "mean",
-          "javascript": -1.904219250748425e-8,
-          "ngspice": -1.9120409949075804e-8,
-          "absolute_error": 7.821744159155333e-11,
-          "tolerance": 0.00005000076481639797
+          "javascript": -3.994556408812136e-9,
+          "ngspice": -4.01190132592172e-9,
+          "absolute_error": 1.7344917109584296e-11,
+          "tolerance": 0.00005000016047605304
         },
         {
           "node": "IG",
           "metric": "carrier_peak",
-          "javascript": 0.02381895787737406,
-          "ngspice": 0.023935983678818624,
-          "absolute_error": 0.00011702580144456326,
-          "tolerance": 0.0010074393471527449
+          "javascript": 0.02128738174184087,
+          "ngspice": 0.021349709427891175,
+          "absolute_error": 0.00006232768605030428,
+          "tolerance": 0.0009039883771156471
         },
         {
           "node": "IP",
           "metric": "carrier_peak",
-          "javascript": 0.00002104691078051512,
-          "ngspice": 0.000021077393475504835,
-          "absolute_error": 3.048269498971657e-8,
-          "tolerance": 0.000050843095739020194
+          "javascript": 0.0000012770013370401154,
+          "ngspice": 0.0000012818359521415072,
+          "absolute_error": 4.834615101391786e-9,
+          "tolerance": 0.00005005127343808566
         },
         {
           "node": "H",
           "metric": "audio_peak",
-          "javascript": 7.376128481801891e-7,
-          "ngspice": 7.423204115756268e-7,
-          "absolute_error": 4.7075633954376966e-9,
-          "tolerance": 0.000050029692816463025
+          "javascript": 1.3836125131467422e-8,
+          "ngspice": 1.3884101193232804e-8,
+          "absolute_error": 4.797606176538158e-11,
+          "tolerance": 0.000050000555364047734
         },
         {
           "node": "G",
           "metric": "audio_peak",
-          "javascript": 4.219931208401405e-7,
-          "ngspice": 4.247095836680808e-7,
-          "absolute_error": 2.7164628279402863e-9,
-          "tolerance": 0.00005001698838334673
+          "javascript": 7.891448773482487e-9,
+          "ngspice": 7.911649984524395e-9,
+          "absolute_error": 2.02012110419074e-11,
+          "tolerance": 0.000050000316465999384
         },
         {
           "node": "P",
           "metric": "audio_peak",
-          "javascript": 0.000014712567470851,
-          "ngspice": 0.000014806811392249598,
-          "absolute_error": 9.424392139859704e-8,
-          "tolerance": 0.00005059227245568999
+          "javascript": 2.758166372934895e-7,
+          "ngspice": 2.8152381289510546e-7,
+          "absolute_error": 5.707175601615936e-9,
+          "tolerance": 0.00005001126095251581
         },
         {
           "node": "speaker_v",
           "metric": "audio_peak",
-          "javascript": 0.000004236218194328386,
-          "ngspice": 0.00000426476483915415,
-          "absolute_error": 2.854664482576398e-8,
-          "tolerance": 0.00005017059059356617
+          "javascript": 7.78905609423369e-8,
+          "ngspice": 7.81758586054952e-8,
+          "absolute_error": 2.852976631583048e-10,
+          "tolerance": 0.00005000312703434422
         }
       ]
     },
@@ -229,80 +235,83 @@
         "c8_f": 5e-8,
         "avc_feedback": true,
         "meter": "dmm",
-        "probe": "IG"
+        "probe": "IG",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
       },
       "checks": [
         {
           "node": "B",
           "metric": "mean",
-          "javascript": 96.43414858201699,
-          "ngspice": 96.43414350825854,
-          "absolute_error": 0.000005073758444495979,
-          "tolerance": 3.8593657403303414
+          "javascript": 96.45125380180835,
+          "ngspice": 96.45125668248654,
+          "absolute_error": 0.0000028806781955381666,
+          "tolerance": 3.8600502672994614
         },
         {
           "node": "S",
           "metric": "mean",
-          "javascript": 53.092885091501934,
-          "ngspice": 53.092882285264935,
-          "absolute_error": 0.000002806236999219891,
-          "tolerance": 2.125715291410597
+          "javascript": 53.09611913759903,
+          "ngspice": 53.09611991721555,
+          "absolute_error": 7.796165206741534e-7,
+          "tolerance": 2.125844796688622
         },
         {
           "node": "AVC",
           "metric": "mean",
-          "javascript": -0.00024596827871198155,
-          "ngspice": -0.00024597911585498035,
-          "absolute_error": 1.0837142998796918e-8,
-          "tolerance": 0.00005983916463419922
+          "javascript": -0.0000639972342448813,
+          "ngspice": -0.00006392409236238,
+          "absolute_error": 7.314188250129642e-8,
+          "tolerance": 0.000052556963694495206
         },
         {
           "node": "IG",
           "metric": "carrier_peak",
-          "javascript": 0.0012329146910021011,
-          "ngspice": 0.0012324635513720006,
-          "absolute_error": 4.5113963010050447e-7,
-          "tolerance": 0.00009929854205488004
+          "javascript": 0.00116278316476399,
+          "ngspice": 0.0011621886529592535,
+          "absolute_error": 5.94511804736424e-7,
+          "tolerance": 0.00009648754611837014
         },
         {
           "node": "IP",
           "metric": "carrier_peak",
-          "javascript": 0.050682432781618506,
-          "ngspice": 0.05068720506497491,
-          "absolute_error": 0.0000047722833564078915,
-          "tolerance": 0.0020774882025989968
+          "javascript": 0.005179898482584901,
+          "ngspice": 0.005179446029564567,
+          "absolute_error": 4.5245302033453116e-7,
+          "tolerance": 0.00025717784118258266
         },
         {
           "node": "H",
           "metric": "audio_peak",
-          "javascript": 0.008890267267663043,
-          "ngspice": 0.008909632208140776,
-          "absolute_error": 0.00001936494047773303,
-          "tolerance": 0.00040638528832563105
+          "javascript": 0.0009149643763389542,
+          "ngspice": 0.0009131947598852275,
+          "absolute_error": 0.0000017696164537267045,
+          "tolerance": 0.0000865277903954091
         },
         {
           "node": "G",
           "metric": "audio_peak",
-          "javascript": 0.005134474750449256,
-          "ngspice": 0.005145707783494735,
-          "absolute_error": 0.00001123303304547893,
-          "tolerance": 0.0002558283113397894
+          "javascript": 0.0005264215384047176,
+          "ngspice": 0.000525405322040562,
+          "absolute_error": 0.000001016216364155601,
+          "tolerance": 0.00007101621288162249
         },
         {
           "node": "P",
           "metric": "audio_peak",
-          "javascript": 0.17790757898215614,
-          "ngspice": 0.17829741625448942,
-          "absolute_error": 0.00038983727233327103,
-          "tolerance": 0.007181896650179576
+          "javascript": 0.017686163953573097,
+          "ngspice": 0.017651876144869332,
+          "absolute_error": 0.00003428780870376458,
+          "tolerance": 0.0007560750457947733
         },
         {
           "node": "speaker_v",
           "metric": "audio_peak",
-          "javascript": 0.053977114256212246,
-          "ngspice": 0.054097390987192094,
-          "absolute_error": 0.00012027673097984859,
-          "tolerance": 0.0022138956394876837
+          "javascript": 0.005239939404943241,
+          "ngspice": 0.005229918455557955,
+          "absolute_error": 0.000010020949385286006,
+          "tolerance": 0.00025919673822231824
         }
       ]
     },
@@ -330,80 +339,83 @@
         "c8_f": 5e-8,
         "avc_feedback": true,
         "meter": "ideal",
-        "probe": "AVC"
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
       },
       "checks": [
         {
           "node": "B",
           "metric": "mean",
-          "javascript": 93.00171844230695,
-          "ngspice": 93.00166606780105,
-          "absolute_error": 0.000052374505898455936,
-          "tolerance": 3.722066642712042
+          "javascript": 93.83809801921606,
+          "ngspice": 93.83811885317094,
+          "absolute_error": 0.00002083395487773032,
+          "tolerance": 3.7555247541268373
         },
         {
           "node": "S",
           "metric": "mean",
-          "javascript": 51.60262541838586,
-          "ngspice": 51.60260362358678,
-          "absolute_error": 0.00002179479908193116,
-          "tolerance": 2.066104144943471
+          "javascript": 51.86622963165317,
+          "ngspice": 51.86623263467376,
+          "absolute_error": 0.0000030030205877551452,
+          "tolerance": 2.07664930538695
         },
         {
           "node": "AVC",
           "metric": "mean",
-          "javascript": -0.006644063430632826,
-          "ngspice": -0.006643628296509347,
-          "absolute_error": 4.35134123478835e-7,
-          "tolerance": 0.0003157451318603739
+          "javascript": -0.00277945246884323,
+          "ngspice": -0.0027779055366709314,
+          "absolute_error": 0.0000015469321722983917,
+          "tolerance": 0.00016111622146683727
         },
         {
           "node": "IG",
           "metric": "carrier_peak",
-          "javascript": 0.020529174204719496,
-          "ngspice": 0.0205290467088275,
-          "absolute_error": 1.2749589199667621e-7,
-          "tolerance": 0.0008711618683531
+          "javascript": 0.018325619230346292,
+          "ngspice": 0.018324402015871762,
+          "absolute_error": 0.0000012172144745296876,
+          "tolerance": 0.0007829760806348705
         },
         {
           "node": "IP",
           "metric": "carrier_peak",
-          "javascript": 0.954972460166132,
-          "ngspice": 0.9550240109909385,
-          "absolute_error": 0.000051550824806456674,
-          "tolerance": 0.03825096043963754
+          "javascript": 0.08071275936443247,
+          "ngspice": 0.08070847080961793,
+          "absolute_error": 0.000004288554814532719,
+          "tolerance": 0.0032783388323847176
         },
         {
           "node": "H",
           "metric": "audio_peak",
-          "javascript": 0.16365613220388814,
-          "ngspice": 0.1636714631354249,
-          "absolute_error": 0.00001533093153677223,
-          "tolerance": 0.006596858525416996
+          "javascript": 0.016533643729273413,
+          "ngspice": 0.016531464822708817,
+          "absolute_error": 0.0000021789065645962113,
+          "tolerance": 0.0007112585929083527
         },
         {
           "node": "G",
           "metric": "audio_peak",
-          "javascript": 0.09598262994455545,
-          "ngspice": 0.09599183386141552,
-          "absolute_error": 0.000009203916860073269,
-          "tolerance": 0.003889673354456621
+          "javascript": 0.00954869030921803,
+          "ngspice": 0.009547417577152674,
+          "absolute_error": 0.00000127273206535633,
+          "tolerance": 0.000431896703086107
         },
         {
           "node": "P",
           "metric": "audio_peak",
-          "javascript": 0.6527370048799095,
-          "ngspice": 0.6523230346720493,
-          "absolute_error": 0.00041397020786015926,
-          "tolerance": 0.026142921386881974
+          "javascript": 0.31481935788649384,
+          "ngspice": 0.31477124399074996,
+          "absolute_error": 0.00004811389574388425,
+          "tolerance": 0.012640849759629999
         },
         {
           "node": "speaker_v",
           "metric": "audio_peak",
-          "javascript": 0.1528385179460708,
-          "ngspice": 0.1526100077957708,
-          "absolute_error": 0.00022851015030000976,
-          "tolerance": 0.006154400311830832
+          "javascript": 0.09321111532843539,
+          "ngspice": 0.09319933033507796,
+          "absolute_error": 0.000011784993357424889,
+          "tolerance": 0.0037779732134031185
         }
       ]
     }

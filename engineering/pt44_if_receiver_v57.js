@@ -7,21 +7,33 @@ function pt44IFValidate(spec,audio,power,detector,graph){
  if(spec.factory_parameters.r13_ohm!==27000||spec.factory_parameters.c11_f!==.05e-6)throw Error('Unreviewed IF factory value');
  for(const axis of [spec.curve.plate_v,spec.curve.grid_v])if(axis.some((v,i)=>!Number.isFinite(v)||(i&&v<=axis[i-1])))throw Error('Invalid IF tube axis');
  for(const key of ['plate_current_a','screen_current_a'])if(spec.curve[key].length!==spec.curve.grid_v.length||spec.curve[key].some(r=>r.length!==spec.curve.plate_v.length||r.some(v=>!Number.isFinite(v)||v<0)))throw Error('Invalid IF tube table');
+ const dcr=spec.factory_parameters.if_winding_dcr_ohm;const expectedDcr={'12_primary':31,'12_secondary':29,'14_primary':45,'14_secondary':6.8};if(!dcr||Object.keys(dcr).length!==4||Object.entries(expectedDcr).some(([k,v])=>dcr[k]!==v))throw Error('Unreviewed IF winding DCR');
  if(Object.values(spec.acceptance).some(Boolean))throw Error('IF increment cannot certify receiver');return true;
+}
+function pt44IFTable(table,key,plate,grid){
+ // Published curves stop at zero grid voltage. Continue the last slope to +3 V
+ // as an explicit uncalibrated positive-grid law, instead of a zero-gain clamp at bias zero.
+ if(grid<=0)return pt44AudioTable(table,key,plate,grid);
+ const top=pt44AudioTable(table,key,plate,0),previous=pt44AudioTable(table,key,plate,table.grid_v.at(-2));
+ return top+(top-previous)*Math.min(grid,3)/(-table.grid_v.at(-2));
+}
+function pt44IFSpiceTable(spec,key){
+ const t=spec.curve,rows=t[key],gap=-t.grid_v.at(-2),extended={...t,grid_v:[...t.grid_v,3],[key]:[...rows,rows.at(-1).map((v,i)=>v+3*(v-rows.at(-2)[i])/gap)]};return pt44AudioSpiceTable(extended,key);
 }
 function pt44IFTube(spec,plate,screen,grid,emission=1){
  if(screen<=0||emission===0)return {plate_a:0,screen_a:0,grid_a:0};const q=screen/100,p=Math.max(0,plate)/q,g=grid/q,k=emission*Math.pow(q,1.5);
- return {plate_a:k*pt44AudioTable(spec.curve,'plate_current_a',p,g),screen_a:k*pt44AudioTable(spec.curve,'screen_current_a',p,g),grid_a:emission*spec.assumptions.grid_current_k_a*Math.pow(Math.max(0,grid),1.5)};
+ return {plate_a:k*pt44IFTable(spec.curve,'plate_current_a',p,g),screen_a:k*pt44IFTable(spec.curve,'screen_current_a',p,g),grid_a:emission*spec.assumptions.grid_current_k_a*Math.pow(Math.max(0,grid),1.5)};
 }
 function pt44IFConfigure(spec,audio,power,detector,graph,input={}){
  pt44IFValidate(spec,audio,power,detector,graph);const p={...spec.defaults,...input};for(const k of Object.keys(input))if(!(k in spec.defaults))throw Error('Unknown IF input '+k);
  for(const [k,v] of Object.entries(spec.defaults)){if(typeof v==='number'&&(!Number.isFinite(p[k])||p[k]<0))throw Error('Invalid IF numeric input '+k);if(typeof v==='boolean'&&typeof p[k]!=='boolean')throw Error('Invalid IF flag '+k);}
  if(p.line_v<90||p.line_v>130||p.carrier_hz<420000||p.carrier_hz>490000||![1000,2000].includes(p.audio_hz)||p.input_peak_a>.0001||p.modulation>1||p.volume>1||p.duration_s<4/p.audio_hz||p.duration_s>.02||![48,96,192].includes(p.samples_per_carrier)||p.if_emission>2||p.upper_emission>2||p.lower_emission>2||p.if1_detune<.8||p.if1_detune>1.2||p.if2_detune<.8||p.if2_detune>1.2||p.coupling<.005||p.coupling>.08||![.05e-6,.1e-6].includes(p.c8_f)||p.c18_scale>2||p.c20_leak_ohm!==null&&(!Number.isFinite(p.c20_leak_ohm)||p.c20_leak_ohm<1e5))throw Error('Unsupported IF domain');
  if(p.c20_leak_ohm!==null&&p.samples_per_carrier<192)throw Error('Coupling leakage requires 192 steps per carrier cycle');
+ for(const k of ['c12a_scale','c12b_scale','c14a_scale'])if(p[k]<.75||p[k]>1.25)throw Error('Unsupported IF trimmer range');
  const nodes=['A','B','H','W','G','P','O','K','T','X','FIELD_I','AUDIO_L_I','U','AVC','S','IG','IP','IS','PW','SW','CP','CW','I1P','I1S','I2P','I2S'];
  if(!['ideal','dmm','service'].includes(p.meter)||!['A','B','G','P','K','U','AVC','S','IG','IP','CP'].includes(p.probe))throw Error('Invalid IF probe');
  const base=pt44AudioConfigure(audio,power,graph,{line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm,meter:'ideal'});
- const a=spec.assumptions,w=2*Math.PI*455000,L=a.winding_h,C=1/(w*w*L),lossG=1/(w*L*a.unloaded_q)-a.winding_dcr_ohm/(w*w*L*L);
+ const a=spec.assumptions,w=2*Math.PI*455000,L=a.winding_h,C=1/(w*w*L),lossG=1/(w*L*a.core_loss_q);
  if(lossG<=0||p.duration_s*p.carrier_hz*p.samples_per_carrier>2000000)throw Error('IF passivity/work budget');
  const meter=p.meter==='ideal'?{resistance_ohm:null,capacitance_f:0}:p.meter==='dmm'?{resistance_ohm:1e7,capacitance_f:100e-12}:{resistance_ohm:1000*(p.probe==='AVC'?10:250),capacitance_f:0};
  return {spec,audio,power,detector,graph,p,base,N:26,nodes,L,C,lossG,meter};
@@ -40,14 +52,16 @@ function pt44IFSystem(c,x,old,time,dt,equilibrium=false){
  const drive=equilibrium?0:p.input_peak_a*(1+p.modulation*Math.sin(2*Math.PI*p.audio_hz*time))*Math.sin(2*Math.PI*p.carrier_hz*time);branch(20,-1,drive,[]);
  if(!p.screen_feed_open)r(1,14,spec.factory_parameters.r13_ohm);cap(14,-1,spec.factory_parameters.c11_f);
  const tube=z=>pt44IFTube(spec,z[16],z[14],z[15],p.if_emission);
- nl(16,-1,[16,14,15],z=>tube(z).plate_a);nl(14,-1,[16,14,15],z=>tube(z).screen_a);nl(15,-1,[15],z=>tube(z).grid_a);
+ nl(16,-1,[16,14,15],z=>tube(z).plate_a);nl(14,-1,[16,14,15],z=>tube(z).screen_a);const gridU=Math.max(0,x[15]),gridK=p.if_emission*a.grid_current_k_a;branch(15,-1,gridK*Math.pow(gridU,1.5),[[15,1.5*gridK*Math.sqrt(gridU)]]);
  cap(15,-1,a.input_capacitance_f);cap(16,-1,a.output_capacitance_f);cap(15,16,a.grid_plate_capacitance_f);
- const transformer=(top,bottom,internal,secondaryTop,secondaryBottom,secondaryInternal,ip,is,scale)=>{
-  r(top,internal,a.winding_dcr_ohm);r(secondaryTop,secondaryInternal,a.winding_dcr_ohm);r(top,bottom,1/c.lossG);r(secondaryTop,secondaryBottom,1/c.lossG);
-  cap(top,bottom,c.C*scale);cap(secondaryTop,secondaryBottom,c.C*scale);branch(internal,bottom,x[ip],[[ip,1]]);branch(secondaryInternal,secondaryBottom,x[is],[[is,1]]);
+ const transformer=(top,bottom,internal,secondaryTop,secondaryBottom,secondaryInternal,ip,is,Rp,Rs,Cp,Cs)=>{
+  r(top,internal,Rp);r(secondaryTop,secondaryInternal,Rs);r(top,bottom,1/c.lossG);r(secondaryTop,secondaryBottom,1/c.lossG);
+  cap(top,bottom,Cp);cap(secondaryTop,secondaryBottom,Cs);branch(internal,bottom,x[ip],[[ip,1]]);branch(secondaryInternal,secondaryBottom,x[is],[[is,1]]);
   const L=c.L/dt,mut=p.coupling*L;for(const [row,other,u,l] of [[ip,is,internal,bottom],[is,ip,secondaryInternal,secondaryBottom]]){F[row]=L*(x[row]-old[row])+mut*(x[other]-old[other])-v(u)+v(l);M[row][row]=L;M[row][other]=mut;M[row][u]=-1;if(l>=0)M[row][l]=1;}
  };
- transformer(20,1,21,15,p.avc_feedback?13:-1,17,22,23,p.if1_detune);transformer(16,1,18,12,2,19,24,25,p.if2_detune);
+ const dc=spec.factory_parameters.if_winding_dcr_ohm;
+ transformer(20,1,21,15,p.avc_feedback?13:-1,17,22,23,dc['12_primary'],dc['12_secondary'],c.C*p.if1_detune*p.c12a_scale,c.C*p.if1_detune*p.c12b_scale);
+ transformer(16,1,18,12,2,19,24,25,dc['14_primary'],dc['14_secondary'],0,c.C*p.if2_detune*p.c14a_scale);
  const f=c.detector.factory_parameters;if(!p.r17_open)r(12,13,f.r17_ohm);r(13,-1,f.r7_ohm);cap(13,-1,p.c8_f);if(p.avc_short)r(13,-1,1);
  for(const [i,emission] of [[12,p.upper_emission],[13,p.lower_emission]]){const d=pt44DetectorDiode(x[i],c.detector.defaults.diode_k_a*emission);branch(i,-1,d.current_a,[[i,d.conductance_s]]);}
  const probe=c.nodes.indexOf(p.probe);if(c.meter.resistance_ohm)r(probe,-1,c.meter.resistance_ohm);cap(probe,-1,c.meter.capacitance_f);
@@ -61,7 +75,7 @@ function pt44IFSingleStep(c,old,time,dt,equilibrium=false){
   if(sys.F.every((v,i)=>Math.abs(v)/([10,11,22,23,24,25].includes(i)?1000:1)<(!equilibrium&&i<2?1e-9:2e-11)))break;const dx=pt44AudioSolve(sys.M,sys.F.map(v=>-v));let alpha=1,z;for(let j=0;j<15;j++){z=x.map((v,i)=>v+alpha*dx[i]);if(norm(pt44IFSystem(c,z,old,t,h,equilibrium).F)<residual)break;alpha/=2;}x=z;}
  sys=pt44IFSystem(c,x,old,t,h,equilibrium);residual=norm(sys.F);if(!x.every(Number.isFinite)||residual>1e-8)throw Error('IF Newton convergence at '+time+': '+residual);
  if(!equilibrium)x=x.map((v,i)=>2*v-old[i]);
- return {time_s:time,x,kcl_residual_a:residual,if_plate_a:sys.tube.plate_a,if_screen_a:sys.tube.screen_a,speaker_v:(x[9]-x[8])/c.base.ratio,rectifier_a:sys.rect.current_a};
+ return {time_s:time,x,kcl_residual_a:residual,if_plate_a:sys.tube.plate_a,if_screen_a:sys.tube.screen_a,speaker_v:(x[9]-x[8])/c.base.ratio,if_secondary_v:x[12]-x[2],rectifier_a:sys.rect.current_a};
 }
 function pt44IFStep(c,old,time,dt,equilibrium=false,depth=0){
  try{return pt44IFSingleStep(c,old,time,dt,equilibrium);}catch(error){
@@ -79,7 +93,7 @@ function pt44IFSimulate(spec,audio,power,detector,graph,input={}){
   for(let n=1;n<=8;n++){const stage=pt44IFConfigure(spec,audio,power,detector,graph,{...input,c20_leak_ohm:p.c20_leak_ohm*8/n});initial=pt44IFStep(stage,seed,0,1e12,true);seed=initial.x;}
  }else initial=pt44IFStep(c,seed,0,1e12,true);
  const samples=[initial];
- let s=initial,maxResidual=initial.kcl_residual_a,subdivisions=0;const start=p.duration_s-4/p.audio_hz,keys=['B','S','AVC','IG','IP','H','G','P','T','speaker_v','if_plate_a','if_screen_a'],stats=Object.fromEntries(keys.map(k=>[k,{area:0,cos:0,sin:0,carrier_cos:0,carrier_sin:0,min:Infinity,max:-Infinity}]));let T=0;const value=(s,k)=>k in s?s[k]:s.x[c.nodes.indexOf(k)];
+ let s=initial,maxResidual=initial.kcl_residual_a,subdivisions=0;const start=p.duration_s-4/p.audio_hz,keys=['B','S','AVC','IG','IP','H','G','P','T','speaker_v','if_secondary_v','if_plate_a','if_screen_a'],stats=Object.fromEntries(keys.map(k=>[k,{area:0,cos:0,sin:0,carrier_cos:0,carrier_sin:0,min:Infinity,max:-Infinity}]));let T=0;const value=(s,k)=>k in s?s[k]:s.x[c.nodes.indexOf(k)];
  for(let n=1;n<=count;n++){const prev=s;s=pt44IFStep(c,s.x,n*dt,dt);maxResidual=Math.max(maxResidual,s.kcl_residual_a);subdivisions+=s.subdivisions||0;if(n%p.samples_per_carrier===0||n===count)samples.push(s);
   if(prev.time_s>=start-1e-12){T+=dt;for(const k of keys){const z=stats[k],u=value(prev,k),v=value(s,k);z.area+=(u+v)*dt/2;for(const [f,cos,sin] of [[p.audio_hz,'cos','sin'],[p.carrier_hz,'carrier_cos','carrier_sin']]){z[cos]+=(u*Math.cos(2*Math.PI*f*prev.time_s)+v*Math.cos(2*Math.PI*f*s.time_s))*dt/2;z[sin]+=(u*Math.sin(2*Math.PI*f*prev.time_s)+v*Math.sin(2*Math.PI*f*s.time_s))*dt/2;}z.min=Math.min(z.min,u,v);z.max=Math.max(z.max,u,v);}}
  }
@@ -88,15 +102,16 @@ function pt44IFSimulate(spec,audio,power,detector,graph,input={}){
 function pt44IFSpiceDeck(spec,audio,power,detector,graph,input={}){
  const c=pt44IFConfigure(spec,audio,power,detector,graph,input),{p}=c,a=spec.assumptions,f=detector.factory_parameters,dt=1/(p.carrier_hz*p.samples_per_carrier);
  const lines=pt44AudioSpiceDeck(audio,power,graph,{line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm}).split('\n').filter(s=>s&&!/^(RRF |BSIGNAL |RDET |\.options|\.tran|\.print|\.end)/.test(s)).map(s=>s.replace(/ IC=0/g,''));
- lines[0]='PT-44 v0.57 joint hot DC IF/detector/audio/power - uncalibrated';
- lines.push('* Converter injection/substitute loads and winding parameters are declared assumptions. No RF tracking claim.',`.func IFP(p,g) {${pt44AudioSpiceTable(spec.curve,'plate_current_a')}}`,`.func IFS(p,g) {${pt44AudioSpiceTable(spec.curve,'screen_current_a')}}`,'.func QIF(s) {max(s,1e-6)/100}',
+ lines[0]='PT-44 v0.58 joint hot DC IF/detector/audio/power - uncalibrated';
+ lines.push('* Converter injection/substitute loads and winding parameters are declared assumptions. No RF tracking claim.',`.func IFP(p,g) {${pt44IFSpiceTable(spec,'plate_current_a')}}`,`.func IFS(p,g) {${pt44IFSpiceTable(spec,'screen_current_a')}}`,'.func QIF(s) {max(s,1e-6)/100}',
  `RCP CP 0 ${a.converter_plate_ohm}`,`RCS S 0 ${a.converter_screen_ohm}`,`BDRIVE CP 0 I={${p.input_peak_a}*(1+${p.modulation}*sin(${2*Math.PI*p.audio_hz}*time))*sin(${2*Math.PI*p.carrier_hz}*time)}`,
  `C11 S 0 ${spec.factory_parameters.c11_f}`,`BIFP IP 0 I={${p.if_emission}*(V(S)>0)*QIF(V(S))^1.5*IFP(max(V(IP),0)/QIF(V(S)),V(IG)/QIF(V(S)))}`,
  `BIFS S 0 I={${p.if_emission}*(V(S)>0)*QIF(V(S))^1.5*IFS(max(V(IP),0)/QIF(V(S)),V(IG)/QIF(V(S)))}`,`BIFG IG 0 I={${p.if_emission*a.grid_current_k_a}*max(V(IG),0)^1.5}`,
  `CIG IG 0 ${a.input_capacitance_f}`,`CIP IP 0 ${a.output_capacitance_f}`,`CIGP IG IP ${a.grid_plate_capacitance_f}`);
  if(!p.screen_feed_open)lines.push(`R13 N_BPLUS_FILT S ${spec.factory_parameters.r13_ohm}`);
- const trans=(id,t,b,i,st,sb,si,scale)=>lines.push(`R${id}P ${t} ${i} ${a.winding_dcr_ohm}`,`R${id}S ${st} ${si} ${a.winding_dcr_ohm}`,`L${id}P ${i} ${b} ${c.L}`,`L${id}S ${si} ${sb} ${c.L}`,`K${id} L${id}P L${id}S ${p.coupling}`,`C${id}P ${t} ${b} ${c.C*scale}`,`C${id}S ${st} ${sb} ${c.C*scale}`,`R${id}LP ${t} ${b} ${1/c.lossG}`,`R${id}LS ${st} ${sb} ${1/c.lossG}`);
- trans('12','CP','N_BPLUS_FILT','CW','IG',p.avc_feedback?'AVC':'0','IS',p.if1_detune);trans('14','IP','N_BPLUS_FILT','PW','U','H','SW',p.if2_detune);
+ const dc=spec.factory_parameters.if_winding_dcr_ohm;
+ const trans=(id,t,b,i,st,sb,si,Cp,Cs)=>{lines.push(`R${id}P ${t} ${i} ${dc[id+'_primary']}`,`R${id}S ${st} ${si} ${dc[id+'_secondary']}`,`L${id}P ${i} ${b} ${c.L}`,`L${id}S ${si} ${sb} ${c.L}`,`K${id} L${id}P L${id}S ${p.coupling}`,`R${id}LP ${t} ${b} ${1/c.lossG}`,`R${id}LS ${st} ${sb} ${1/c.lossG}`);if(Cp)lines.push(`C${id}P ${t} ${b} ${Cp}`);if(Cs)lines.push(`C${id}S ${st} ${sb} ${Cs}`);};
+ trans('12','CP','N_BPLUS_FILT','CW','IG',p.avc_feedback?'AVC':'0','IS',c.C*p.if1_detune*p.c12a_scale,c.C*p.if1_detune*p.c12b_scale);trans('14','IP','N_BPLUS_FILT','PW','U','H','SW',0,c.C*p.if2_detune*p.c14a_scale);
  lines.push(`R7 AVC 0 ${f.r7_ohm}`,`C8 AVC 0 ${p.c8_f}`,`BDUP U 0 I={${detector.defaults.diode_k_a*p.upper_emission}*max(V(U),0)^1.5}`,`BDLOW AVC 0 I={${detector.defaults.diode_k_a*p.lower_emission}*max(V(AVC),0)^1.5}`);
  if(!p.r17_open)lines.push(`R17 U AVC ${f.r17_ohm}`);if(p.avc_short)lines.push('RAVCSHORT AVC 0 1');
  const probe={A:'N_BPLUS_RECT',B:'N_BPLUS_FILT'}[p.probe]||p.probe;if(c.meter.resistance_ohm)lines.push(`RMETER ${probe} 0 ${c.meter.resistance_ohm}`);if(c.meter.capacitance_f)lines.push(`CMETER ${probe} 0 ${c.meter.capacitance_f}`);
