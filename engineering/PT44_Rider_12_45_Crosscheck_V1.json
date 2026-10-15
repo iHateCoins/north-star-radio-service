@@ -1,0 +1,47 @@
+{
+  "schema": "PT44_RIDER_12_45_CROSSCHECK_V1",
+  "version": "0.52.0",
+  "model": "Philco PT-44",
+  "status": "UPPER_OSCILLATOR_WINDING_END_SOURCE_CHECKED_PARTIAL",
+  "sources": [
+    {
+      "document": "Philco 1941 RMS Year Book",
+      "printed_page": 38,
+      "scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "role": "factory schematic authority"
+    },
+    {
+      "document": "Rider Perpetual Troubleshooters Manual XII, Philco",
+      "printed_page": "12-45",
+      "pdf_page": 45,
+      "uploaded_pdf_sha256": "1e586485ac7b01415e56ff766264ba94e90c7521d103520774658b31992b9549",
+      "role": "second printed scan of PT-42/PT-44 diagram and underside location; reproduces the same factory topology, not independent physical continuity"
+    },
+    {
+      "document": "Rider Perpetual Troubleshooters Manual XII, Philco",
+      "printed_page": "12-46",
+      "pdf_page": 46,
+      "role": "PT-42/PT-44 alignment chart; no additional oscillator winding contact numbering"
+    }
+  ],
+  "verified_endpoints": [
+    {
+      "terminal": "10:secondary_a",
+      "net_id": "F_OSC_ANODE_RIGHT_WINDING",
+      "joined_factory_member": "V1:3",
+      "interpretation": "Upper drawn end of the opposite #10 winding follows the conductor to the 7A8 oscillator anode grid (g2). The secondary alias denotes the right-hand drawn winding only; function/polarity are not established."
+    },
+    {
+      "terminal": "V1:3",
+      "net_id": "F_OSC_ANODE_RIGHT_WINDING",
+      "joined_factory_member": "10:secondary_a",
+      "interpretation": "Manufacturer basing maps 7A8 oscillator anode g2 to pin 3; Philco and Rider drawings show its lead at the right-hand #10 upper winding end."
+    }
+  ],
+  "limits": [
+    "The lower right-hand #10 end remains unpromoted; #12/#13 junction/crossings need a fresh continuity reconciliation.",
+    "Rider 12-45 is another scan of the Philco drawing. Agreement does not prove physical lug orientation or settle ambiguous crossing marks.",
+    "No winding polarity, coupling, inductance, four-dot contact allocation, chassis/B− bond or full oscillator behavior is inferred."
+  ],
+  "benchmark_ready": false
+}

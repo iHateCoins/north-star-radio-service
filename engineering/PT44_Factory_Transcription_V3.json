@@ -234,13 +234,14 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #10",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_left_winding_endpoints_400dpi",
+      "connectivity": "source_traced_left_winding_and_upper_right_end_partial",
       "geometry_certified": false,
       "evidence_note": "v0.50 follows the upper left drawn winding end to #4 oscillator tuning plate and the lower end to the explicit loop-mode chassis ground. The inventory primary alias is provisional, not winding function or polarity.",
       "source_terminal_crosswalk": {
         "primary_a": "upper left drawn winding end joined to #4:osc_stator; primary alias provisional",
         "primary_b": "lower left drawn winding end at explicit loop-mode chassis ground; primary alias provisional",
-        "limits": "Opposite winding, physical lugs, polarity, inductance, coupling, and tube-electrode paths remain open."
+        "limits": "Lower right winding end, four-dot contacts, physical lugs, polarity, inductance and coupling remain open.",
+        "secondary_a": "Upper right drawn winding end to 7A8 oscillator anode g2, V1:3; secondary alias does not assert winding role/polarity."
       }
     },
     "11": {
@@ -1995,6 +1996,37 @@
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
       }
+    },
+    {
+      "id": "F_OSC_ANODE_RIGHT_WINDING",
+      "title": "7A8 oscillator anode to #10 upper right winding",
+      "stage": "Converter",
+      "model": "unassigned",
+      "description": "Source-level upper right winding end to 7A8 oscillator anode g2; lower right winding end, four-dot contacts and physical lugs remain open.",
+      "source": "Philco 1941 RMS p.38 and Rider XII 12-45; 7A8 manufacturer basing",
+      "stage_status": "source_traced_upper_right_winding_pin_crosswalk_partial",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "corroboration_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+      },
+      "factory_members": [
+        "10:secondary_a",
+        "V1:3"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "10:secondary_a",
+          "V1:3"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+      }
     }
   ],
   "subcircuits": [
@@ -2174,8 +2206,8 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 34,
-    "factory_terminals_on_traced_nets": 106,
+    "traced_network_count": 35,
+    "factory_terminals_on_traced_nets": 108,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,

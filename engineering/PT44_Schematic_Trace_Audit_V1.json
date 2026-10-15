@@ -266,6 +266,18 @@
       "source": "Philco p.38 power-line drawing and tube basing references",
       "evidence": "Promotes #16, #30 and #31 endpoints plus 35Z3 plate/free heater and 7C6 end heater pin into source-reviewed electrical groups.",
       "scope_limit": "Plug polarity, physical switch lug numbering and physical heater lead orientation remain open; no chassis-to-B− bond."
+    },
+    {
+      "version": "0.52.0",
+      "title": "Rider XII 12-45 oscillator anode cross-check",
+      "status": "SOURCE_TRACED_UPPER_RIGHT_WINDING_PARTIAL",
+      "net_ids": [
+        "F_OSC_ANODE_RIGHT_WINDING"
+      ],
+      "evidence_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json",
+      "source": "Philco p.38, Rider XII 12-45 and 7A8 basing",
+      "evidence": "The 7A8 oscillator anode g2 pin V1:3 meets the upper right #10 winding end.",
+      "scope_limit": "Lower winding end and #12/#13 conductor review still open; no physical lug/polarity or operation claim."
     }
   ],
   "reviewed_net_memberships": [
@@ -868,6 +880,18 @@
         "V5:1"
       ],
       "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+    },
+    {
+      "net_id": "F_OSC_ANODE_RIGHT_WINDING",
+      "milestone_version": "0.52.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "basis": "Philco p.38 and Rider XII 12-45 upper right #10 winding conductor to 7A8 oscillator-anode glyph; manufacturer pin role V1:3.",
+      "reviewed_members": [
+        "10:secondary_a",
+        "V1:3"
+      ],
+      "source_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
     }
   ],
   "reviewed_open_areas": [
@@ -1262,5 +1286,5 @@
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All 106 partial graph memberships reconcile through v0.52. Five previously omitted component endpoints are included; #10 opposite winding, remaining tube pins and physical switch-lug crosswalk remain open."
+  "milestone_record_note": "All 108 partial graph memberships reconcile through v0.52. Rider XII 12-45 supports upper right #10 to V1:3. Lower #10 winding, #12/#13 crossing review and several other tube pins remain open."
 }

@@ -6,8 +6,8 @@
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
-    "partial_traced_networks": 34,
-    "terminal_memberships_on_partial_graph": 106,
+    "partial_traced_networks": 35,
+    "terminal_memberships_on_partial_graph": 108,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 5,
     "memberships_in_those_groups": 14,
@@ -24,9 +24,9 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 22,
-    "source_reviewed_graph_groups": 34,
-    "source_reviewed_terminal_memberships": 106,
+    "source_review_milestones": 23,
+    "source_reviewed_graph_groups": 35,
+    "source_reviewed_terminal_memberships": 108,
     "rf_net_groups_added": 5,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
@@ -53,9 +53,9 @@
     "external_antenna_symbol_connections_traced": 1,
     "oscillator_return_endpoints_source_traced": 2,
     "screen_bias_pin_connections_source_traced": 2,
-    "unique_tube_pin_terminals_referenced": 25,
-    "component_terminal_memberships_in_partial_graph": 81,
-    "component_terminal_reference_coverage_percent": 97.6,
+    "unique_tube_pin_terminals_referenced": 26,
+    "component_terminal_memberships_in_partial_graph": 82,
+    "component_terminal_reference_coverage_percent": 98.8,
     "output_screen_socket_pin_crosswalks_completed": 1,
     "retired_v038_screen_to_bplus_claims": 2,
     "alignment_reference_crosschecks": 1,
@@ -79,7 +79,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The loop/#2 interface, #6 series input trap, #7 resistor and #8 capacitor endpoints are source-traced. The #8 schematic/parts-list value conflict is unresolved; #9 and #11 are now endpoint-traced, while the four-dot oscillator contacts, opposite #10 winding, remaining 7A8 pins, screen feed, winding parameters and receiver behavior remain open."
+      "gap": "The loop/#2 interface, #6 series input trap, #7 resistor and #8 capacitor endpoints are source-traced. The #8 schematic/parts-list value conflict is unresolved; #9 and #11 are now endpoint-traced, while the four-dot oscillator contacts, lower opposite #10 winding, remaining 7A8 pins, screen feed, winding parameters and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -100,21 +100,21 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Factory #25 is source-traced across filtered B+ and B\u2212. v0.45 maps the 50L6 screen glyph to socket pin V4:4 on filtered B+. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+      "gap": "Factory #25 is source-traced across filtered B+ and B−. v0.45 maps the 50L6 screen glyph to socket pin V4:4 on filtered B+. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "34 partial graph groups and 106 component/tube endpoint memberships reconcile to source reviews through v0.52. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "35 partial graph groups and 108 component/tube endpoint memberships reconcile to source reviews through v0.52. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P1-SOURCE",
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "34 partial graph groups and 106 component/tube endpoint memberships reconcile to source reviews through v0.52. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "35 partial graph groups and 108 component/tube endpoint memberships reconcile to source reviews through v0.52. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -165,7 +165,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.52 promotes #16/#30/#31 line endpoints and V5:1, V5:2, V3:8 into the partial pin graph. 34 groups, 106 memberships, 81/83 component terminals (97.6% inventory coverage). Opposite #10 winding, physical switch lug identity and several active tube pin connections remain open. Wiring gate is NOT MET. The older #12/#13 IF secondary return assignment is flagged for re-review in PT44_Wiring_Gate_Exceptions_V1.",
+  "latest_evidence_update": "Rider XII 12-45 supplies a second printed scan of the PT-42/PT-44 factory schematic. The upper right #10 winding end now crosswalks to 7A8 oscillator anode V1:3. The graph has 35 groups, 108 memberships and 82/83 component terminals (98.8% coverage). The lower right winding end and #12/#13 crossing interpretation remain under re-review; GATE-NETLIST is NOT MET.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

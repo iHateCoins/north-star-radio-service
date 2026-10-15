@@ -4,7 +4,7 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),scripts=[...html
 const trace=read('engineering/PT44_Power_Pin_Crosswalk_V1.json'),graph=read('engineering/PT44_Factory_Transcription_V3.json');
 assert.equal(trace.version,'0.52.0');assert.equal(trace.verified_endpoints.length,8);
 assert.equal(graph.checks.factory_wiring_fully_transcribed,false);assert.equal(graph.checks.benchmark_ready,false);
-assert.equal(read('engineering/PT44_Scope_Audit_V1.json').baseline.declared_component_terminals_not_in_partial_graph,2);
+assert.equal(read('engineering/PT44_Scope_Audit_V1.json').baseline.declared_component_terminals_not_in_partial_graph,1);
 assert.deepEqual(graph.factory_nets.find(n=>n.id==='F_AC_PLUG_A_PRE_SWITCH').factory_members,['31:a','16:switch_a']);
 assert.deepEqual(graph.factory_nets.find(n=>n.id==='F_DROPPER_HEATER_INPUT').factory_members,['30:endB','V5:1']);
 assert(!graph.factory_nets.find(n=>n.id==='F_RF_CHASSIS').factory_members.includes('16:switch_b'));

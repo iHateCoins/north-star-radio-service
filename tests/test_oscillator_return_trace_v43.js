@@ -5,9 +5,9 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),scripts=[...html
 assert.equal(trace.version,'0.43.0');assert.equal(trace.verified_endpoints.length,2);assert.equal(trace.benchmark_ready,false);
 const b=graph.factory_nets.find(n=>n.id==='F_BMINUS'),chassis=graph.factory_nets.find(n=>n.id==='F_RF_CHASSIS');
 assert(b.factory_members.includes('9:b')&&b.factory_members.includes('11:b'));assert(!chassis.factory_members.includes('9:b')&&!chassis.factory_members.includes('11:b'));
-assert.equal(graph.checks.traced_network_count,34);assert.equal(graph.checks.factory_terminals_on_traced_nets,106);assert.equal(graph.checks.benchmark_ready,false);
-assert.equal(scope.baseline.component_terminal_memberships_in_partial_graph,81);assert.equal(scope.baseline.component_terminal_reference_coverage_percent,97.6);assert.equal(scope.subsystems.find(x=>x.id==='RF').terminals_referenced_in_partial_graph,27);
-assert.equal(ready.version,'0.52.0');assert.equal(ready.evidence_snapshot.source_reviewed_terminal_memberships,106);assert.equal(ready.evidence_snapshot.oscillator_return_endpoints_source_traced,2);assert.equal(ready.benchmark_ready,false);
+assert.equal(graph.checks.traced_network_count,35);assert.equal(graph.checks.factory_terminals_on_traced_nets,108);assert.equal(graph.checks.benchmark_ready,false);
+assert.equal(scope.baseline.component_terminal_memberships_in_partial_graph,82);assert.equal(scope.baseline.component_terminal_reference_coverage_percent,98.8);assert.equal(scope.subsystems.find(x=>x.id==='RF').terminals_referenced_in_partial_graph,28);
+assert.equal(ready.version,'0.52.0');assert.equal(ready.evidence_snapshot.source_reviewed_terminal_memberships,108);assert.equal(ready.evidence_snapshot.oscillator_return_endpoints_source_traced,2);assert.equal(ready.benchmark_ready,false);
 assert(audit.milestones.some(m=>m.version==='0.43.0'&&m.status==='SOURCE_CHECKED_OSCILLATOR_RETURN_PARTIAL'));
 const ctx=vm.createContext({console});vm.runInContext(scripts[1],ctx);const a=scripts[3].indexOf('function pt44BenchAudit()'),z=scripts[3].indexOf('function renderFactoryLedger(box){');assert(a>=0&&z>a);vm.runInContext(scripts[3].slice(a,z),ctx);
 const inspect=e=>JSON.parse(vm.runInContext('JSON.stringify('+e+')',ctx));assert.deepEqual(inspect('PT44_OSCILLATOR_RETURN_TRACE_V1'),trace);
