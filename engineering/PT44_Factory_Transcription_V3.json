@@ -345,9 +345,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #16",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_subset_300dpi",
+      "connectivity": "source_traced_all_declared_electrical_endpoints_symbol_aliases",
       "geometry_certified": false,
-      "evidence_note": "Philco native 300dpi page 38; source locators PT44_DETECTOR_AUDIO_TRACES_V1 and PT44_POWER_LINE_TRACE_V1; potentiometer track and switch trace are separate terminal groups; physical switch-lug crosswalk remains open."
+      "evidence_note": "Philco native 300dpi page 38; source locators PT44_DETECTOR_AUDIO_TRACES_V1 and PT44_POWER_LINE_TRACE_V1; potentiometer track and switch trace are separate terminal groups; physical switch-lug crosswalk remains open. v0.52 promotes the line/switch endpoints to the partial graph; #16 physical lug numbering and plug polarity remain open."
     },
     "17": {
       "description": "4.7 MΩ resistor",
@@ -550,9 +550,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #30",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "connectivity": "source_traced_all_declared_electrical_endpoints_symbol_aliases",
       "geometry_certified": false,
-      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open."
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open. v0.52 promotes the line/switch endpoints to the partial graph; #16 physical lug numbering and plug polarity remain open."
     },
     "31": {
       "description": "0.04 µF / 400 V capacitor",
@@ -565,9 +565,9 @@
       "factory_schematic_position": "1941 RMS p.38; numeric callout #31",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "source_traced_subset_300dpi_symbol_level_pin_crosswalk_open",
+      "connectivity": "source_traced_all_declared_electrical_endpoints_symbol_aliases",
       "geometry_certified": false,
-      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open."
+      "evidence_note": "Philco native 300dpi page 38; source locator PT44_POWER_LINE_TRACE_V1; schematic-symbol topology closed, socket/lug crosswalk remains open. v0.52 promotes the line/switch endpoints to the partial graph; #16 physical lug numbering and plug polarity remain open."
     },
     "32": {
       "description": "Pilot lamp",
@@ -974,7 +974,9 @@
         "9:b",
         "11:b",
         "7:b",
-        "8:b"
+        "8:b",
+        "16:switch_b",
+        "V3:8"
       ],
       "prototype_member_crosswalk": [
         "C1:b",
@@ -1050,6 +1052,17 @@
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+      },
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBERS",
+        "reviewed_members": [
+          "16:switch_b",
+          "V3:8"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
       }
     },
     {
@@ -1366,7 +1379,8 @@
       },
       "factory_members": [
         "30:endA",
-        "32:a"
+        "32:a",
+        "31:b"
       ],
       "prototype_member_crosswalk": [],
       "v0_33_source_review": {
@@ -1378,6 +1392,16 @@
         ],
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBERS",
+        "reviewed_members": [
+          "31:b"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
       }
     },
     {
@@ -1396,7 +1420,8 @@
       },
       "factory_members": [
         "30:tap",
-        "32:b"
+        "32:b",
+        "V5:2"
       ],
       "prototype_member_crosswalk": [],
       "v0_33_source_review": {
@@ -1408,6 +1433,16 @@
         ],
         "unreviewed_members": [],
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_TRACED_ADDITIONAL_MEMBERS",
+        "reviewed_members": [
+          "V5:2"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
       }
     },
     {
@@ -1897,6 +1932,69 @@
         "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
         "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
       }
+    },
+    {
+      "id": "F_AC_PLUG_A_PRE_SWITCH",
+      "title": "Plug conductor A / pre-switch terminal",
+      "stage": "Power",
+      "model": "unassigned",
+      "description": "AC plug A connects #31:a and the first #16 switch contact. Plug polarity and physical switch lug orientation are not specified.",
+      "external_ports": [
+        "AC_PLUG:A"
+      ],
+      "source": "Philco 1941 RMS p.38; PT-42/PT-44 line and switch drawing",
+      "stage_status": "source_traced_schematic_electrical_contacts",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "31:a",
+        "16:switch_a"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "31:a",
+          "16:switch_a"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      }
+    },
+    {
+      "id": "F_DROPPER_HEATER_INPUT",
+      "title": "#30 80 Ω end / first 35Z3 heater",
+      "stage": "Power",
+      "model": "unassigned",
+      "description": "#30 endB from the 80 Ω section feeds the first 35Z3 heater end. V5:1 identity follows the tube pinout and existing V5:8 to 50L6 string review; physical lead mapping is retained as a scope limit.",
+      "source": "Philco 1941 RMS p.38; Sylvania/Philco 35Z3 pin roles",
+      "stage_status": "source_traced_heater_boundary_pin_crosswalk",
+      "evidence": {
+        "document": "Philco 1941 RMS Year Book",
+        "printed_page": 38,
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+      },
+      "factory_members": [
+        "30:endB",
+        "V5:1"
+      ],
+      "prototype_member_crosswalk": [],
+      "v0_52_source_review": {
+        "milestone_version": "0.52.0",
+        "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+        "reviewed_members": [
+          "30:endB",
+          "V5:1"
+        ],
+        "unreviewed_members": [],
+        "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+        "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      }
     }
   ],
   "subcircuits": [
@@ -2076,14 +2174,14 @@
   ],
   "checks": {
     "factory_register_count": 33,
-    "traced_network_count": 32,
-    "factory_terminals_on_traced_nets": 98,
+    "traced_network_count": 34,
+    "factory_terminals_on_traced_nets": 106,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.51.0",
+  "version": "0.52.0",
   "source_pages_reviewed": "Philco p.38 PT-42/PT-44 schematic and replacement-parts list; v0.49 traces both #8 endpoints and records the unresolved value conflict."
 }

@@ -1,0 +1,82 @@
+{
+  "schema": "PT44_POWER_PIN_CROSSWALK_V1",
+  "version": "0.52.0",
+  "model": "Philco PT-44",
+  "status": "POWER_COMPONENT_TERMINALS_AND_EDGE_TUBE_PINS_SOURCE_CROSSWALKED_PARTIAL",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+    "earlier_symbol_trace": "engineering/PT44_Power_Line_Trace_V1.json",
+    "tube_identity_reference": "engineering/PT44_Tube_Terminals_Review_V1.json"
+  },
+  "alias_policy": {
+    "ac_plug": "Plug contacts A/B are arbitrary source aliases; no hot/neutral polarization is assigned.",
+    "switch": "#16 switch_a and switch_b are the electrical ends of a single contact pair, not numbered physical lugs.",
+    "heater": "V5:1 and V3:8 are the free heater ends under the already reviewed series order and manufacturer pin roles. Pin 1/8 within a heater has no externally defined polarity in the published schematic; physical lead-to-socket orientation is retained as a crosswalk limit.",
+    "rectifier": "RCA 35Z3 pin review maps the 35Z3 plate to V5:2; Philco p.38 independently traces the plate glyph from the #30 tap."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "31:a",
+      "net_id": "F_AC_PLUG_A_PRE_SWITCH",
+      "joined_factory_member": "16:switch_a / AC_PLUG:A"
+    },
+    {
+      "terminal": "16:switch_a",
+      "net_id": "F_AC_PLUG_A_PRE_SWITCH",
+      "joined_factory_member": "31:a / AC_PLUG:A"
+    },
+    {
+      "terminal": "31:b",
+      "net_id": "F_30_40_LAMP_A",
+      "joined_factory_member": "30:endA / 32:a / AC_PLUG:B"
+    },
+    {
+      "terminal": "16:switch_b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "switched return, including 29A:b and 29B:b"
+    },
+    {
+      "terminal": "30:endB",
+      "net_id": "F_DROPPER_HEATER_INPUT",
+      "joined_factory_member": "V5:1 (35Z3 first heater end)"
+    },
+    {
+      "terminal": "V5:1",
+      "net_id": "F_DROPPER_HEATER_INPUT",
+      "joined_factory_member": "30:endB"
+    },
+    {
+      "terminal": "V5:2",
+      "net_id": "F_30_40_LAMP_B",
+      "joined_factory_member": "30:tap / 32:b"
+    },
+    {
+      "terminal": "V3:8",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "end of heater chain at switched B−"
+    }
+  ],
+  "source_level_closure": {
+    "ac_plug_pair_and_switch_to_bminus": true,
+    "capacitor_31_across_unswitched_plug": true,
+    "resistor_30_both_sections_external_endpoints": true,
+    "rectifier_plate_pin_crosswalk": true,
+    "heater_first_and_last_pin_crosswalk": true,
+    "physical_switch_lug_numbering_verified": false,
+    "plug_polarization_verified": false,
+    "chassis_to_bminus_bond_verified": false,
+    "complete_power_socket_crosswalk_verified": false,
+    "benchmark_ready": false
+  },
+  "open_items": [
+    "The source does not number #16 physical switch lugs or polarize the plug; logical switch contacts are recorded as aliases.",
+    "The original wiring at the 35Z3/7C6 free heater ends is identified by functional pin roles; the schematic does not print socket contact numbers. Physical orientation and unreviewed intermediate heater assignment remain open.",
+    "The source does not establish a chassis-to-B− bond or an isolation transformer.",
+    "Receiver behavior and full engineering-complete gate remain open."
+  ],
+  "benchmark_ready": false
+}

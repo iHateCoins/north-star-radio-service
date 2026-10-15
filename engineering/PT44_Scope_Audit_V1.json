@@ -1,8 +1,8 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.51.0",
-  "factory_transcription_artifact_version": "0.51.0",
+  "snapshot_build_version": "0.52.0",
+  "factory_transcription_artifact_version": "0.52.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "purpose": "Establish a denominator-based scope baseline for engineering-complete PT-44; terminal references in this audit are coverage counts only and do not assert circuit completeness, electrical behavior, or chassis routing.",
@@ -15,13 +15,13 @@
   "baseline": {
     "factory_component_records": 33,
     "declared_factory_component_terminals": 83,
-    "current_partial_graph_net_groups": 32,
-    "current_partial_graph_membership_entries": 98,
-    "unique_partial_graph_memberships": 98,
-    "component_terminal_memberships_in_partial_graph": 76,
-    "declared_component_terminals_not_in_partial_graph": 7,
-    "component_terminal_reference_coverage_percent": 91.6,
-    "tube_pin_memberships_in_partial_graph": 22,
+    "current_partial_graph_net_groups": 34,
+    "current_partial_graph_membership_entries": 106,
+    "unique_partial_graph_memberships": 106,
+    "component_terminal_memberships_in_partial_graph": 81,
+    "declared_component_terminals_not_in_partial_graph": 2,
+    "component_terminal_reference_coverage_percent": 97.6,
+    "tube_pin_memberships_in_partial_graph": 25,
     "unique_tube_pin_terminals_referenced": [
       "V1:1",
       "V1:2",
@@ -37,12 +37,15 @@
       "V3:1",
       "V3:2",
       "V3:3",
+      "V3:8",
       "V4:2",
       "V4:3",
       "V4:4",
       "V4:5",
       "V4:7",
       "V4:8",
+      "V5:1",
+      "V5:2",
       "V5:7",
       "V5:8"
     ],
@@ -62,11 +65,8 @@
       "V3:5",
       "V3:6",
       "V3:7",
-      "V3:8",
       "V4:1",
       "V4:6",
-      "V5:1",
-      "V5:2",
       "V5:3",
       "V5:4",
       "V5:5",
@@ -77,9 +77,9 @@
     "tube_pinout_scope_note": "Electrode identities/base pin roles are inventoried for all five tubes. This is not a receiver-specific connection map; all review tasks remain source-trace tasks."
   },
   "source_review_reconciliation": {
-    "schematic_audit_net_groups": 32,
-    "schematic_audit_membership_entries": 98,
-    "unique_schematic_audit_memberships": 98,
+    "schematic_audit_net_groups": 34,
+    "schematic_audit_membership_entries": 106,
+    "unique_schematic_audit_memberships": 106,
     "current_graph_memberships_missing_from_schematic_audit": [],
     "schematic_audit_memberships_absent_from_current_graph": [],
     "reconciliation_record": {
@@ -95,6 +95,8 @@
         "13:b",
         "14:pSupply",
         "14:sDetector",
+        "16:switch_a",
+        "16:switch_b",
         "17:a",
         "17:b",
         "1:a",
@@ -107,6 +109,9 @@
         "2:primary_b",
         "2:secondary_a",
         "2:secondary_b",
+        "30:endB",
+        "31:a",
+        "31:b",
         "3:loop_a",
         "3:loop_b",
         "4:osc_stator",
@@ -128,10 +133,13 @@
         "V1:5",
         "V1:6",
         "V2:3",
-        "V4:4"
+        "V3:8",
+        "V4:4",
+        "V5:1",
+        "V5:2"
       ],
       "initial_count_difference": 2,
-      "status": "RESOLVED_IN_V0.51",
+      "status": "RESOLVED_IN_V0.52",
       "evidence_artifacts": [
         "engineering/PT44_7A8_Screen_Trace_V1.json",
         "engineering/PT44_Aerial_Transformer_Trace_V1.json",
@@ -142,11 +150,12 @@
         "engineering/PT44_Output_IF_Supply_Trace_V1.json",
         "engineering/PT44_RF_Input_Trace_V1.json",
         "engineering/PT44_Oscillator_Tank_Trace_V1.json",
-        "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
+        "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json",
+        "engineering/PT44_Power_Pin_Crosswalk_V1.json"
       ],
-      "milestone_record_note": "All 98 memberships reconcile through v0.51; #9 and #11 upper endpoints are source-traced."
+      "milestone_record_note": "All 106 current memberships reconcile to reviewed evidence through v0.52."
     },
-    "milestone_record_note": "All 98 memberships reconcile through v0.51; #9 and #11 upper endpoints are source-traced."
+    "milestone_record_note": "All 106 current memberships reconcile to reviewed evidence through v0.52."
   },
   "subsystems": [
     {
@@ -204,12 +213,13 @@
       ],
       "graph_net_groups": [
         "F_BMINUS",
-        "F_RF_ANTENNA_BYPASS",
-        "F_RF_CHASSIS",
-        "F_RF_EXTERNAL_ANTENNA",
         "F_RF_INPUT",
-        "F_RF_INPUT_TRAP_JUNCTION",
+        "F_RF_CHASSIS",
         "F_RF_LOOP_SECONDARY",
+        "F_RF_EXTERNAL_ANTENNA",
+        "F_RF_ANTENNA_BYPASS",
+        "F_SCREEN_45V",
+        "F_RF_INPUT_TRAP_JUNCTION",
         "F_OSC_TUNED_LEFT_WINDING",
         "F_OSC_GRID_LEAK"
       ],
@@ -255,8 +265,7 @@
         "F_IF1_GRID",
         "F_IF2_PLATE",
         "F_IF2_SECONDARY_VOL_TOP",
-        "F_IF2_AVC_FEED",
-        "F_SCREEN_45V"
+        "F_IF2_AVC_FEED"
       ],
       "transcription_note": "Plate/grid groups, first IF return, and shared 7B7/7A8 45 V screen lead are source-traced. 7B7 cathode wiring, transformer parameters/trimmers, AVC and full IF behavior remain partial."
     },
@@ -272,13 +281,15 @@
       ],
       "status_in_transcription": "not_fully_transcribed",
       "declared_component_terminals": 13,
-      "terminals_referenced_in_partial_graph": 11,
-      "terminals_not_yet_referenced_in_partial_graph": 2,
+      "terminals_referenced_in_partial_graph": 13,
+      "terminals_not_yet_referenced_in_partial_graph": 0,
       "represented_terminals": [
         "15:a",
         "15:b",
         "16:a",
         "16:b",
+        "16:switch_a",
+        "16:switch_b",
         "16:wiper",
         "17:a",
         "17:b",
@@ -287,18 +298,20 @@
         "19:a",
         "19:b"
       ],
-      "unrepresented_terminals": [
-        "16:switch_a",
-        "16:switch_b"
-      ],
+      "unrepresented_terminals": [],
       "graph_net_groups": [
+        "F_BMINUS",
         "F_IF2_SECONDARY_VOL_TOP",
         "F_VOL_WIPER_C18",
         "F_7C6_AUDIO_GRID",
         "F_DET_PASSIVE_RETURN",
-        "F_IF2_AVC_FEED"
+        "F_IF2_AVC_FEED",
+        "F_AC_PLUG_A_PRE_SWITCH"
       ],
-      "transcription_note": "Four passive groups and one unnumbered diode-symbol connection reviewed; AVC and socket-pin assignments remain open."
+      "transcription_note": "Four passive groups and one unnumbered diode-symbol connection reviewed; AVC and socket-pin assignments remain open.",
+      "source_trace_artifacts": [
+        "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      ]
     },
     {
       "id": "AUDIO",
@@ -364,8 +377,8 @@
       ],
       "status_in_transcription": "partial",
       "declared_component_terminals": 13,
-      "terminals_referenced_in_partial_graph": 10,
-      "terminals_not_yet_referenced_in_partial_graph": 3,
+      "terminals_referenced_in_partial_graph": 13,
+      "terminals_not_yet_referenced_in_partial_graph": 0,
       "represented_terminals": [
         "28:a",
         "28:b",
@@ -374,25 +387,29 @@
         "29B:a",
         "29B:b",
         "30:endA",
+        "30:endB",
         "30:tap",
+        "31:a",
+        "31:b",
         "32:a",
         "32:b"
       ],
-      "unrepresented_terminals": [
-        "30:endB",
-        "31:a",
-        "31:b"
-      ],
+      "unrepresented_terminals": [],
       "graph_net_groups": [
         "F_BPLUS_RECT",
         "F_BPLUS_FILT",
         "F_BMINUS",
         "F_30_40_LAMP_A",
-        "F_30_40_LAMP_B"
+        "F_30_40_LAMP_B",
+        "F_AC_PLUG_A_PRE_SWITCH",
+        "F_DROPPER_HEATER_INPUT"
       ],
       "transcription_note": "AC/line and heater topology now traced through all source-drawn components and symbol terminals; no new numbered socket-pin edges added. See the dedicated power-line trace.",
       "source_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-      "source_trace_status": "schematic_symbol_level_closed_pin_and_switch_lug_crosswalk_open"
+      "source_trace_status": "schematic_symbol_level_closed_pin_and_switch_lug_crosswalk_open",
+      "source_trace_artifacts": [
+        "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+      ]
     }
   ],
   "component_inventory": [

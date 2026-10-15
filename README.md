@@ -1,7 +1,7 @@
-# North Star Radio Service — v0.51.0 PT-44 engineering update
+# North Star Radio Service — v0.52.0 PT-44 wiring-gate work
 
-v0.51 traces the upper #9 22 kΩ grid-leak resistor end to the 7A8 oscillator grid G1 (socket V1:4), and the upper #11 0.05 µF bypass capacitor end to the shared 7A8/7B7 screen conductor annotated 45 V. Their lower ends were already traced to B−. The nearby four-dot symbol is not promoted to a winding tap or closed contact; the screen voltage is not yet a validated pass/fail target.
+v0.52 promotes the five line/switch/resistor component endpoints already traced in the Philco p.38 power schematic and crosswalks the 35Z3 plate and end-heater pins plus the 7C6 end heater pin. Plug polarity, physical switch lug numbers, heater-lead orientation and chassis-to-B− relation remain unverified.
 
-The partial graph has 32 groups and 98 reviewed memberships. Component-terminal reference coverage is 76/83 (91.6%), an inventory count rather than an engineering completion score. The #8 value conflict, opposite oscillator winding, screen-feed origin and full receiver behavior remain open. PT-44 remains NOT ENGINEERING COMPLETE.
+The partial graph now has 34 groups and 106 reviewed memberships; 81/83 declared component terminals are referenced (97.6% inventory coverage, not completion). The two #10 opposite-winding ends and several active tube-pin mappings remain open. An enlarged p.38 review also flags the older #12/#13 IF return assignment for independent continuity recheck before the oscillator/IF boundary can be certified. See `engineering/PT44_Wiring_Gate_Exceptions_V1.json` for the precise evidence requests. **GATE-NETLIST is NOT MET.**
 
-Watermark: `BUILD v0.51.0`. See `engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json` for source boundaries.
+Watermark: `BUILD v0.52.0`. See `engineering/PT44_Power_Pin_Crosswalk_V1.json` and `engineering/PT44_Engineering_Readiness_V1.json`.
