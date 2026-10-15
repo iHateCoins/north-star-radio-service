@@ -1,13 +1,13 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.49.0",
+  "version": "0.50.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
   "evidence_snapshot": {
     "factory_component_records": 33,
-    "partial_traced_networks": 30,
-    "terminal_memberships_on_partial_graph": 92,
+    "partial_traced_networks": 31,
+    "terminal_memberships_on_partial_graph": 95,
     "native_schematic_scan_dpi": 300,
     "newly_audited_detector_audio_conductor_groups": 5,
     "memberships_in_those_groups": 14,
@@ -24,9 +24,9 @@
     "power_filter_audit_findings": 3,
     "power_filter_verified_memberships": 11,
     "power_filter_unreviewed_memberships": 0,
-    "source_review_milestones": 19,
-    "source_reviewed_graph_groups": 30,
-    "source_reviewed_terminal_memberships": 92,
+    "source_review_milestones": 20,
+    "source_reviewed_graph_groups": 31,
+    "source_reviewed_terminal_memberships": 95,
     "rf_net_groups_added": 5,
     "chassis_position_callouts": 26,
     "chassis_position_components_located": 27,
@@ -54,8 +54,8 @@
     "oscillator_return_endpoints_source_traced": 2,
     "screen_bias_pin_connections_source_traced": 2,
     "unique_tube_pin_terminals_referenced": 21,
-    "component_terminal_memberships_in_partial_graph": 71,
-    "component_terminal_reference_coverage_percent": 85.5,
+    "component_terminal_memberships_in_partial_graph": 74,
+    "component_terminal_reference_coverage_percent": 89.2,
     "output_screen_socket_pin_crosswalks_completed": 1,
     "retired_v038_screen_to_bplus_claims": 2,
     "alignment_reference_crosschecks": 1,
@@ -65,7 +65,8 @@
     "rf_input_trap_internal_junction_groups_added": 1,
     "rf_loop_return_resistor_endpoints_source_traced": 2,
     "rf_loop_bypass_capacitor_endpoints_source_traced": 2,
-    "rf_loop_bypass_capacitor_value_conflicts_open": 1
+    "rf_loop_bypass_capacitor_value_conflicts_open": 1,
+    "oscillator_tuning_plate_and_left_winding_endpoints_source_traced": 3
   },
   "open_items": [
     {
@@ -73,7 +74,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The loop/#2 interface, #6 series input trap, #7 resistor and #8 capacitor endpoints are source-traced. The #8 schematic/parts-list value conflict is unresolved; the #4 oscillator gang, #9–#11 paths, remaining 7A8 pin crosswalks, winding parameters and receiver behavior remain open."
+      "gap": "The loop/#2 interface, #6 series input trap, #7 resistor and #8 capacitor endpoints are source-traced. The #8 schematic/parts-list value conflict is unresolved; the remaining #4/#10 oscillator connections, #9/#11 paths, remaining 7A8 pin crosswalks, winding parameters and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -101,14 +102,14 @@
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "30 partial graph groups and 92 component/tube endpoint memberships reconcile to source reviews through v0.49. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "31 partial graph groups and 95 component/tube endpoint memberships reconcile to source reviews through v0.50. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P1-SOURCE",
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "30 partial graph groups and 92 component/tube endpoint memberships reconcile to source reviews through v0.49. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "31 partial graph groups and 95 component/tube endpoint memberships reconcile to source reviews through v0.50. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -159,7 +160,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.49 traces both terminals of factory capacitor #8 across the lower loop/#2 11-turn winding junction and B−. The p.38 schematic marks 0.05 mfd; the replacement-parts list gives 0.1 mfd, 200 V (part 30-4499), so the simulation value remains unresolved. The partial graph advances from 90 to 92 reviewed memberships and component-terminal reference coverage from 69/83 to 71/83 (85.5%). PT-44 remains not engineering complete.",
+  "latest_evidence_update": "v0.50 traces #4 oscillator tuning signal plate to the upper left #10 winding and that winding lower end to explicit loop-mode chassis ground. The partial graph has 31 groups, 95 reviewed memberships and 74/83 component terminal references (89.2% inventory coverage). Winding roles, opposite winding, 7A8 paths, #8 value, physical lugs and full receiver behavior remain open; benchmark not ready.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

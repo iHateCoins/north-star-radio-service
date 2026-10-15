@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.49.0",
+  "version": "0.50.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -16,7 +16,7 @@
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
-    "version": "0.49.0"
+    "version": "0.50.0"
   },
   "milestones": [
     {
@@ -224,6 +224,19 @@
       "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
       "evidence": "Traces both #8 capacitor terminals across the lower-loop/#2 11-turn junction and B−. The schematic marks 0.05 mfd, while the replacement-parts list specifies 0.1 mfd, 200 V, part 30-4499.",
       "scope_limit": "Connectivity is resolved at schematic-symbol/component-terminal level; the capacitor value conflict, #4 oscillator gang, #9–#11 converter paths, tube-pin mapping, winding parameters and receiver behavior remain open."
+    },
+    {
+      "version": "0.50.0",
+      "title": "Oscillator tuning gang and left winding endpoint trace",
+      "status": "SOURCE_TRACED_OSCILLATOR_TANK_PARTIAL",
+      "net_ids": [
+        "F_OSC_TUNED_LEFT_WINDING",
+        "F_RF_CHASSIS"
+      ],
+      "evidence_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json",
+      "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
+      "evidence": "Connects #4 oscillator gang signal plate to the upper left #10 winding, and its lower end to the explicit chassis ground symbol.",
+      "scope_limit": "Provisional winding aliases do not assign transformer role, polarity, parameters, physical lugs or remaining converter paths."
     }
   ],
   "reviewed_net_memberships": [
@@ -754,6 +767,24 @@
         "6:choke_a"
       ],
       "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json"
+    },
+    {
+      "net_id": "F_OSC_TUNED_LEFT_WINDING",
+      "milestone_version": "0.50.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        550,
+        480,
+        1300,
+        1200
+      ],
+      "basis": "Philco p.38: #4 oscillator gang signal plate joins upper left #10 winding end; functional winding identity remains provisional.",
+      "reviewed_members": [
+        "4:osc_stator",
+        "10:primary_a"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json"
     }
   ],
   "reviewed_open_areas": [
@@ -1073,8 +1104,27 @@
       ],
       "source_render_dpi": 400,
       "basis": "Philco p.38: lower #8 lead joins the B− rail at #2:secondary_b and #7:b."
+    },
+    {
+      "net_id": "F_RF_CHASSIS",
+      "milestone_version": "0.50.0",
+      "reviewed_members": [
+        "10:primary_b"
+      ],
+      "source_artifact": "engineering/PT44_Oscillator_Tank_Trace_V1.json",
+      "source_artifact_version": "0.50.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        550,
+        480,
+        1300,
+        1200
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower left #10 winding end terminates at explicit loop-mode chassis ground symbol; no B− bond."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All 92 current partial-graph memberships reconcile to source-review rows through v0.49. The #8 connections are traced; its schematic/parts-list value conflict remains unresolved, and the oscillator is not closed."
+  "milestone_record_note": "All 95 partial-graph memberships reconcile to source-review rows through v0.50. The #4 oscillator tuning plate and left #10 winding endpoints are traced; remaining converter paths and #8 value conflict stay open."
 }

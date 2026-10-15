@@ -1,0 +1,64 @@
+{
+  "schema": "PT44_OSCILLATOR_TANK_TRACE_V1",
+  "version": "0.50.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TRACED_TUNING_GANG_AND_LEFT_WINDING_PARTIAL",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "Schematic diagram — PT-42, PT-44",
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "native_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+    "review_render_dpi": 400,
+    "review_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+    "review_box_px": [
+      550,
+      480,
+      1300,
+      1200
+    ]
+  },
+  "terminal_conventions": {
+    "10:primary_a": "Provisional inventory alias for upper drawn end of the left #10 winding; primary is not an asserted electrical role or winding polarity.",
+    "10:primary_b": "Provisional inventory alias for lower drawn end of the left #10 winding; physical lug, inductance and winding polarity remain unknown.",
+    "4:osc_stator": "Signal-side plate of the oscillator tuning gang, distinct from #4:rf_stator. The rotor was already mapped to chassis in the RF trace; its oscillator plate is separately drawn to the same ground reference."
+  },
+  "verified_endpoints": [
+    {
+      "terminal": "4:osc_stator",
+      "net_id": "F_OSC_TUNED_LEFT_WINDING",
+      "joined_factory_member": "10:primary_a",
+      "interpretation": "Oscillator tuning gang signal plate joins the upper left #10 winding terminal in the factory drawing."
+    },
+    {
+      "terminal": "10:primary_a",
+      "net_id": "F_OSC_TUNED_LEFT_WINDING",
+      "joined_factory_member": "4:osc_stator",
+      "interpretation": "Upper left drawn #10 winding end meets the #4 oscillator gang signal plate; coil function and polarity are not inferred."
+    },
+    {
+      "terminal": "10:primary_b",
+      "net_id": "F_RF_CHASSIS",
+      "joined_factory_member": "explicit ground symbol below left #10 winding",
+      "interpretation": "Lower left drawn #10 winding end terminates at the explicit chassis ground symbol for loop operation."
+    }
+  ],
+  "source_level_closure": {
+    "oscillator_tuning_plate_to_left_winding_top": true,
+    "left_winding_bottom_to_chassis": true,
+    "remaining_oscillator_winding_endpoints_traced": false,
+    "oscillator_component_network_complete": false,
+    "tube_pin_crosswalk_complete": false,
+    "oscillator_transformer_winding_roles_or_polarity_verified": false,
+    "oscillator_behavior_validated": false,
+    "benchmark_ready": false
+  },
+  "unresolved": [
+    "The #9 upper terminal, #11 upper terminal, opposite #10 winding, and 7A8 oscillator electrode wires require separate conductor review.",
+    "The #4 oscillator compensator/physical lug and tuning capacitance are not established by this symbol trace.",
+    "The provisional primary_a/primary_b terminal names do not establish transformer primary/secondary function, polarity, L or coupling.",
+    "The #8 schematic and parts-list value conflict remains unresolved.",
+    "No chassis-to-B− bond or complete converter operation is inferred."
+  ],
+  "benchmark_ready": false
+}
