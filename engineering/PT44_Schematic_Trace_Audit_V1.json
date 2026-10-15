@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.47.0",
+  "version": "0.48.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -16,7 +16,7 @@
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
-    "version": "0.45.0"
+    "version": "0.48.0"
   },
   "milestones": [
     {
@@ -198,6 +198,19 @@
       "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
       "evidence": "Traces all four #6 terminals: condenser input on F_RF_INPUT, the condenser/choke series junction, and the choke output at the explicit loop-mode chassis ground.",
       "scope_limit": "Does not establish a chassis-to-B− bond, #4 oscillator gang routing, #7–#10 topology, remaining 7A8 pin assignments, or receiver behavior."
+    },
+    {
+      "version": "0.48.0",
+      "title": "Loop return resistor #7 traced",
+      "status": "SOURCE_TRACED_4_7_MEGOHM_LOOP_RETURN_RESISTOR_ENDPOINTS",
+      "net_ids": [
+        "F_RF_LOOP_SECONDARY",
+        "F_BMINUS"
+      ],
+      "evidence_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
+      "evidence": "Traces both #7 terminals: its upper lead joins the lower loop/#2 11-turn winding junction; its lower lead joins the B− rail.",
+      "scope_limit": "Does not establish winding polarity or parameters, the #4 oscillator gang, remaining converter wiring, receiver behavior, or a chassis-to-B− bond."
     }
   ],
   "reviewed_net_memberships": [
@@ -755,9 +768,9 @@
         "Chassis-to-B− relationship beyond explicitly traced nets.",
         "The upper #9 and #11 endpoints and their oscillator-network crosswalk remain open.",
         "The upstream source of the shared 45 V screen lead and its operating measurement conditions remain open.",
-        "The #4 oscillator gang, #7/#8 network, #9 upper endpoint, #10 windings, remaining 7A8 pin crosswalks, and receiver behavior remain open."
+        "The #4 oscillator gang, #8 network, #9 upper endpoint, #10 windings, remaining 7A8 pin crosswalks, and receiver behavior remain open."
       ],
-      "note": "v0.47 traces the complete #6 RF input series trap while preserving the explicit chassis/B− distinction; oscillator and converter topology remain partial."
+      "note": "v0.47 traces the complete #6 RF input series trap and v0.48 traces both #7 loop-return resistor endpoints while preserving the explicit chassis/B− distinction; oscillator and converter topology remain partial."
     },
     {
       "milestone_version": "0.37.0",
@@ -971,8 +984,46 @@
       ],
       "source_render_dpi": 400,
       "basis": "Philco p.38: lower #6 series choke terminal ends at the explicit ground symbol; the drawing note identifies loop-operation grounds as chassis, not B−."
+    },
+    {
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "milestone_version": "0.48.0",
+      "reviewed_members": [
+        "7:a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.48.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        150,
+        900,
+        850,
+        1400
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #7 4.7 MΩ terminal joins the lower loop/#2 11-turn winding junction."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.48.0",
+      "reviewed_members": [
+        "7:b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.48.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        150,
+        900,
+        850,
+        1400
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower #7 4.7 MΩ terminal joins the B− return rail."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All 88 current partial-graph memberships reconcile to source-review evidence through v0.47. The v0.47 update traces all four #6 series condenser/choke endpoints across the RF signal input, internal junction and loop-mode chassis ground; no oscillator or receiver behavior is certified."
+  "milestone_record_note": "All 90 current partial-graph memberships reconcile to source-review rows through v0.48. The v0.48 update traces both #7 loop-return resistor endpoints between the loop/#2 secondary junction and B−; oscillator and receiver behavior remain open."
 }

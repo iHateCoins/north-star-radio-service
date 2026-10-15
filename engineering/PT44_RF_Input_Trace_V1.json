@@ -1,8 +1,8 @@
 {
   "schema": "PT44_RF_INPUT_TRACE_V1",
-  "version": "0.47.0",
+  "version": "0.48.0",
   "model": "Philco PT-44",
-  "status": "SOURCE_TRACED_RF_INPUT_AND_SERIES_TRAP_COMPONENT_ENDPOINTS_PARTIAL",
+  "status": "SOURCE_TRACED_RF_INPUT_LOOP_RETURN_AND_SERIES_TRAP_PARTIAL",
   "source": {
     "document": "Philco 1941 RMS Year Book",
     "printed_page": 38,
@@ -30,9 +30,9 @@
         0,
         250,
         1450,
-        1550
+        2000
       ],
-      "note": "Rendered from Philco Year Book PDF page 3 (printed p.38); this is a review derivative, not a new electrical source."
+      "note": "400 dpi review rendering of the official p.38 page; v0.47 reviewed #6 and v0.48 reviewed the #7 loop-return resistor. This is a derivative of the same published schematic."
     }
   },
   "terminal_conventions": {
@@ -40,7 +40,8 @@
     "tuning_capacitor_4": "rf_stator is the RF-gang terminal drawn on the signal-input conductor; rotor is the grounded terminal for loop operation. osc_stator remains unassigned in this trace.",
     "aerial_compensator_5": "a is the upper terminal on the signal-input conductor and b is the grounded terminal; no polarity is implied.",
     "tube_v1": "The factory symbol signal-input grid is mapped to socket terminal V1:6 using the reviewed 7A8 pin-role reference; the adjacent symbol-level source path is followed without inferring the other 7A8 electrode wires.",
-    "component_6": "cap_a is the upper #6 condenser lead on F_RF_INPUT; cap_b and choke_a form the drawn internal series junction; choke_b ends at the explicit loop-operation chassis ground. No B− equivalence or RF behavior is inferred."
+    "component_6": "cap_a is the upper #6 condenser lead on F_RF_INPUT; cap_b and choke_a form the drawn internal series junction; choke_b ends at the explicit loop-operation chassis ground. No B− equivalence or RF behavior is inferred.",
+    "component_7": "7:a is the upper 4.7 MΩ resistor lead at the lower loop/#2 11-turn winding junction; 7:b is the lower lead on B−. This establishes external connectivity only."
   },
   "verified_endpoints": [
     {
@@ -166,6 +167,32 @@
         1550
       ],
       "source_render_dpi": 400
+    },
+    {
+      "terminal": "7:a",
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "joined_factory_member": "3:loop_b / 2:secondary_a",
+      "interpretation": "Upper #7 4.7 MΩ terminal joins the lower built-in-loop lead and the upper end of the #2 11-turn winding.",
+      "source_box_px": [
+        150,
+        900,
+        850,
+        1400
+      ],
+      "source_render_dpi": 400
+    },
+    {
+      "terminal": "7:b",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "2:secondary_b / B− return rail",
+      "interpretation": "Lower #7 4.7 MΩ terminal joins the same B− rail as the lower #2 11-turn winding terminal.",
+      "source_box_px": [
+        150,
+        900,
+        850,
+        1400
+      ],
+      "source_render_dpi": 400
     }
   ],
   "source_level_closure": {
@@ -178,16 +205,18 @@
     "benchmark_ready": false,
     "component_6_series_condenser_choke_terminals_traced": true,
     "component_6_chassis_ground_identified_for_loop_operation": true,
-    "component_6_chassis_to_bminus_bond_verified": false
+    "component_6_chassis_to_bminus_bond_verified": false,
+    "component_7_loop_return_resistor_endpoints_traced": true
   },
   "unresolved": [
-    "Built-in loop lower terminal to #2 aerial-transformer winding terminal mapping and its complete return route.",
+    "Built-in loop/#2 winding parameters and oscillator behavior.",
     "#2 primary/secondary terminals, winding turns and relationship to external ANT eyelet.",
     "#4 oscillator gang wiring, rotor construction/physical lug crosswalk, and remaining #5 adjustment data.",
-    "7A8 plate/screen/cathode and #6/#7/#8/#9 receiver connection crosswalks.",
+    "7A8 plate/screen/cathode and #8/#9 receiver connection crosswalks.",
     "Antenna/chassis and B-minus relationship outside the explicit loop-operation ground symbols.",
     "RF transfer behavior and complete receiver validation.",
-    "The #4 oscillator gang and 7A8 converter path remain open; #6 trace completion does not establish oscillator behavior or full RF tracking."
+    "The #4 oscillator gang and 7A8 converter path remain open; #6 trace completion does not establish oscillator behavior or full RF tracking.",
+    "The #7 resistor return is source-traced, but the oscillator gang, transformer parameters and receiver behavior remain open."
   ],
   "benchmark_ready": false
 }

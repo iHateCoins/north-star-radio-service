@@ -1,8 +1,8 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.47.0",
-  "factory_transcription_artifact_version": "0.47.0",
+  "snapshot_build_version": "0.48.0",
+  "factory_transcription_artifact_version": "0.48.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "purpose": "Establish a denominator-based scope baseline for engineering-complete PT-44; terminal references in this audit are coverage counts only and do not assert circuit completeness, electrical behavior, or chassis routing.",
@@ -16,11 +16,11 @@
     "factory_component_records": 33,
     "declared_factory_component_terminals": 83,
     "current_partial_graph_net_groups": 30,
-    "current_partial_graph_membership_entries": 88,
-    "unique_partial_graph_memberships": 88,
-    "component_terminal_memberships_in_partial_graph": 67,
-    "declared_component_terminals_not_in_partial_graph": 16,
-    "component_terminal_reference_coverage_percent": 80.7,
+    "current_partial_graph_membership_entries": 90,
+    "unique_partial_graph_memberships": 90,
+    "component_terminal_memberships_in_partial_graph": 69,
+    "declared_component_terminals_not_in_partial_graph": 14,
+    "component_terminal_reference_coverage_percent": 83.1,
     "tube_pin_memberships_in_partial_graph": 21,
     "unique_tube_pin_terminals_referenced": [
       "V1:1",
@@ -78,8 +78,8 @@
   },
   "source_review_reconciliation": {
     "schematic_audit_net_groups": 30,
-    "schematic_audit_membership_entries": 88,
-    "unique_schematic_audit_memberships": 88,
+    "schematic_audit_membership_entries": 90,
+    "unique_schematic_audit_memberships": 90,
     "current_graph_memberships_missing_from_schematic_audit": [],
     "schematic_audit_memberships_absent_from_current_graph": [],
     "reconciliation_record": {
@@ -114,6 +114,8 @@
         "6:cap_b",
         "6:choke_a",
         "6:choke_b",
+        "7:a",
+        "7:b",
         "9:b",
         "V1:5",
         "V1:6",
@@ -121,7 +123,7 @@
         "V4:4"
       ],
       "initial_count_difference": 2,
-      "status": "RESOLVED_IN_V0.47",
+      "status": "RESOLVED_IN_V0.48",
       "evidence_artifacts": [
         "engineering/PT44_7A8_Screen_Trace_V1.json",
         "engineering/PT44_Aerial_Transformer_Trace_V1.json",
@@ -133,7 +135,7 @@
         "engineering/PT44_RF_Input_Trace_V1.json"
       ]
     },
-    "milestone_record_note": "All 88 current graph memberships reconcile to source-review rows through v0.47; the new group and two endpoint additions close the #6 component trace, not the converter."
+    "milestone_record_note": "All 90 current graph memberships reconcile to source-review rows through v0.48; the new two-terminal #7 branch connects the lower loop/#2 secondary junction to B− and does not close the oscillator."
   },
   "subsystems": [
     {
@@ -152,10 +154,10 @@
         "10",
         "11"
       ],
-      "status_in_transcription": "partial_rf_input_and_oscillator_return_traced_6_series_trap_added",
+      "status_in_transcription": "partial_loop_aerial_input_trap_and_return_resistor_traced",
       "declared_component_terminals": 29,
-      "terminals_referenced_in_partial_graph": 18,
-      "terminals_not_yet_referenced_in_partial_graph": 11,
+      "terminals_referenced_in_partial_graph": 20,
+      "terminals_not_yet_referenced_in_partial_graph": 9,
       "represented_terminals": [
         "11:b",
         "1:a",
@@ -174,6 +176,8 @@
         "6:cap_b",
         "6:choke_a",
         "6:choke_b",
+        "7:a",
+        "7:b",
         "9:b"
       ],
       "unrepresented_terminals": [
@@ -183,8 +187,6 @@
         "10:secondary_b",
         "11:a",
         "4:osc_stator",
-        "7:a",
-        "7:b",
         "8:a",
         "8:b",
         "9:a"
@@ -198,7 +200,7 @@
         "F_RF_INPUT_TRAP_JUNCTION",
         "F_RF_LOOP_SECONDARY"
       ],
-      "transcription_note": "Signal input, #2 loop/aerial interface, loop-mode chassis reference, lower #9/#11 returns, and all four #6 series condenser/choke endpoints are source-traced. #4 oscillator gang, #7–#10 converter topology, remaining 7A8 pins, 45 V source, transformer parameters and receiver behavior remain open.",
+      "transcription_note": "Signal input, #2 loop/aerial interface, loop-mode chassis reference, #6 series input trap and #7 loop-return resistor, and lower #9/#11 returns are source-traced. #4 oscillator gang, #8/#9/#10 converter topology, remaining 7A8 pins, 45 V source, transformer parameters and receiver behavior remain open.",
       "source_trace_artifacts": [
         "engineering/PT44_7A8_Screen_Trace_V1.json",
         "engineering/PT44_Aerial_Transformer_Trace_V1.json",
@@ -537,18 +539,18 @@
         "b"
       ],
       "terminal_definition_status": "two_terminal_physical_structure",
-      "connectivity_status": "not_transcribed",
-      "terminals_referenced_in_partial_graph": [],
-      "terminals_not_yet_referenced_in_partial_graph": [
+      "connectivity_status": "source_traced_both_endpoints_400dpi",
+      "terminals_referenced_in_partial_graph": [
         "7:a",
         "7:b"
       ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
       "geometry_certified": false,
-      "terminals_in_partial_graph": [],
-      "terminals_not_in_partial_graph": [
+      "terminals_in_partial_graph": [
         "7:a",
         "7:b"
-      ]
+      ],
+      "terminals_not_in_partial_graph": []
     },
     {
       "factory_part": "8",
@@ -767,8 +769,8 @@
       "connectivity_status": "source_traced_subset_300dpi",
       "terminals_referenced_in_partial_graph": [
         "16:a",
-        "16:b",
-        "16:wiper"
+        "16:wiper",
+        "16:b"
       ],
       "terminals_not_yet_referenced_in_partial_graph": [
         "16:switch_a",
@@ -779,8 +781,8 @@
       "source_trace_status": "schematic_symbol_level_traced_pin_or_lug_crosswalk_open",
       "terminals_in_partial_graph": [
         "16:a",
-        "16:b",
-        "16:wiper"
+        "16:wiper",
+        "16:b"
       ],
       "terminals_not_in_partial_graph": [
         "16:switch_a",
@@ -1261,7 +1263,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "v0.47 traces all four endpoints of #6 from the 7A8 signal-input net through its series junction to explicit loop-mode chassis ground. The #4 oscillator gang, #7–#10 network, remaining 7A8 pins and receiver behavior remain open."
+      "gap": "The loop/#2 interface, #6 series input trap and both #7 loop-return resistor terminals are source-traced. The #4 oscillator gang, #8–#11 converter paths, remaining 7A8 pins and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -1296,7 +1298,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "30 partial graph groups and 88 component/tube endpoint memberships reconcile to source reviews through v0.47. Component #6 is traced end-to-end; #4 oscillator gang, #7–#10 converter topology, remaining pin crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "30 partial graph groups and 90 component/tube endpoint memberships reconcile to source reviews through v0.48. #6 input trap and #7 loop-return branch are traced; full oscillator/converter topology, remaining pin crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1308,19 +1310,19 @@
   ],
   "benchmark_ready": false,
   "audit_findings": [
-    "The partial graph references 67 of 83 declared factory component terminals (80.7%); 16 component terminals are not yet represented. This is reference coverage, not circuit closure.",
-    "The 88 graph membership entries comprise 67 component-terminal references and 21 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes; receiver-connection tasks remain open.",
-    "The schematic trace audit reconciles all 88 current graph memberships. v0.47 adds four source-verified memberships for component #6 across RF input, its internal series junction, and loop-mode chassis ground.",
+    "The partial graph references 69 of 83 declared factory component terminals (83.1%); 14 component terminals are not yet represented. This is reference coverage, not circuit closure.",
+    "The 90 graph membership entries comprise 69 component-terminal references and 21 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes; receiver-connection tasks remain open.",
+    "The schematic trace audit reconciles all 90 current graph memberships. v0.48 adds two source-verified memberships for the #7 loop-return resistor between the loop/#2 secondary junction and B−.",
     "All 30 graph groups remain partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
     "Component endpoint reference coverage is not electrical closure: transformer windings, tuning assemblies, tube electrodes, switch contacts, chassis return and circuit behavior require separate evidence.",
     "The v0.37 power/line trace source-closes mains, switch, #31, #30/#32, rectifier plate feed, B-minus rail and heater-string topology at schematic-symbol level; socket-pin crosswalks and chassis isolation remain open.",
-    "The RF input and loop/aerial interfaces are partly traced. v0.47 closes component #6's series condenser/choke topology while #4 oscillator gang, #7–#10 converter routing, remaining socket pins, winding behavior and receiver performance remain open."
+    "The RF input and loop/aerial interfaces are partly traced. v0.47 closes component #6's series condenser/choke topology and v0.48 traces both #7 return endpoints; #4 oscillator gang, #8/#9/#10 converter routing, remaining socket pins, winding behavior and receiver performance remain open."
   ],
   "next_audit_actions": [
     "Resolve symbol-to-socket pin and #16 switch-lug crosswalks before promoting any power-line pin memberships.",
     "Trace remaining subsystem endpoints and source-to-functional-terminal mappings; label evidence at symbol, component, or pin level without mixing them.",
     "Recompute graph denominator and source-ledger reconciliation after any pin-level membership update.",
-    "Trace #4 oscillator gang and #7–#10 converter connections while keeping symbol-level leads separate from confirmed 7A8 socket pins; #6 is already traced end-to-end."
+    "Trace the #4 oscillator gang and #8–#11 converter connections while keeping symbol-level leads separate from confirmed 7A8 socket pins; #6 and #7 are source-traced."
   ],
   "tube_pin_reference_artifact": "engineering/PT44_Tube_Terminals_Review_V1.json",
   "power_line_source_trace": {
