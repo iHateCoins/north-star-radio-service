@@ -20,7 +20,7 @@ assert.equal(evidence.verified_endpoints.length,2);assert.equal(audit.verifiedMe
 assert.equal(graph.checks.traced_network_count,35);assert.equal(graph.checks.factory_terminals_on_traced_nets,114);assert.equal(legacyGraph.checks.factory_terminals_on_traced_nets,114);assert(legacyGraph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members.includes('22:a'));assert(legacyGraph.factory_nets.find(x=>x.id==='F_BMINUS').factory_members.includes('22:b'));
 assert.deepEqual(graph.factory_nets.find(x=>x.id==='F_50L6_CATH').factory_members,['V4:8','24:a','22:a']);
 assert.deepEqual(legacyGraph,graph,'Shipped root graph must match canonical engineering graph');
-assert.equal(readiness.version,'0.54.0');assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph,114);
+assert.equal(readiness.version,'0.55.0');assert.equal(readiness.evidence_snapshot.terminal_memberships_on_partial_graph,114);
 assert.equal(readiness.evidence_snapshot.output_cathode_bypass_memberships,2);assert.equal(readiness.evidence_snapshot.spice.full_receiver_spice_validated,false);
 assert.equal(readiness.benchmark_ready,false);assert.equal(graph.checks.benchmark_ready,false);assert.equal(evidence.acceptance.benchmark_ready,false);
 assert.equal(passive.devices['22'].connection_nets.join('|'),'F_50L6_CATH|F_BMINUS');assert.equal(passive.devices['22'].parallel_with_factory_part,'24');

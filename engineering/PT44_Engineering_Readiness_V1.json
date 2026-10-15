@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.54.0",
+  "version": "0.55.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -89,6 +89,21 @@
       "factory_voltage_calibrated": false,
       "ngspice_transient_cases_passed": 9,
       "numerical_energy_balance_verified": true
+    },
+    "audio_power_model": {
+      "artifact": "engineering/PT44_Audio_Power_Model_V1.json",
+      "joint_audio_supply_solver": true,
+      "audio_tube_currents_connected": true,
+      "full_receiver_tube_currents_connected": false,
+      "source_topology_verified": true,
+      "instrument_loading_implemented": true,
+      "fault_conditions": 10,
+      "tube_curves": "Sparse manufacturer-derived samples with explicit interpolation and scaling assumptions",
+      "transformer_speaker_calibrated": false,
+      "factory_voltage_calibrated": false,
+      "numerical_scenarios_passed": 19,
+      "ngspice_transient_cases_passed": 5,
+      "validation_artifact": "engineering/PT44_Audio_Power_Validation_V1.json"
     }
   },
   "open_items": [
@@ -118,14 +133,14 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Factory #25 is source-traced across filtered B+ and B−. v0.45 maps the 50L6 screen glyph to socket pin V4:4 on filtered B+. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+      "gap": "v0.55 implements volume control, 7C6 triode, 50L6 plate/screen/grid currents and an output-transformer/speaker electrical equivalent. Bias, loading, clipping, hum and fault responses are modeled. Sparse curve interpolation, grid current, transformer/speaker parameters and physical/acoustic correlation need validation; shop receiver integration remains open."
     },
     {
       "id": "P1-AC",
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "v0.54 implements dynamic power behavior with explicit stand-in loads, assumed field L/lamp hot resistance and a single-reference-point rectifier approximation. Connect actual receiver currents and validate rectifier/heater/lamp/field parameters, physical boundaries and voltage reference conditions."
+      "gap": "Audio plate/screen currents and supply are now solved jointly in v0.55. RF/IF loads remain substituted; rectifier/heater/lamp/field parameters, physical boundaries and factory voltage reference conditions remain open."
     },
     {
       "id": "P1-SOURCE",
@@ -139,7 +154,7 @@
       "area": "Full receiver simulation",
       "severity": "later",
       "status": "IN PROGRESS",
-      "gap": "Independent SPICE validation now includes the nonlinear supply model alongside earlier passive/heater fixtures. Full receiver stage models and their coupled operating states remain outstanding."
+      "gap": "Independent validation now includes coupled audio and supply transients, faults and meter loading. RF/IF/detector/AVC models and complete receiver SPICE/repair acceptance remain outstanding."
     }
   ],
   "completion_gates": [
@@ -183,7 +198,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.54 adds a reusable nonlinear power transient core for AC/DC supply, rectification, reservoir/smoothing filters and field R/L with explicit assumptions. Startup, ripple, discharge, fault and restore cases are exercised through the engineering workbench and matching SPICE export. Actual receiver stage loads, calibrated tube/lamp/field behavior and full receiver integration remain open.",
+  "latest_evidence_update": "v0.55 jointly solves the volume/7C6/50L6/transformer-speaker electrical equivalent and dynamic supply. Audio current demand replaces the two stand-in supply resistors in this bench; RF/IF demand remains a declared substitute. Meter R/C loading, bias, gain, clipping, hum, faults and repair restoration are exercised. Sparse tube curves and assumed transformer/volume/grid-current parameters remain uncalibrated. Shop receiver integration and full benchmark gates remain open.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

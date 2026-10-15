@@ -85,3 +85,33 @@ jobs:
 
       - name: Verify dynamic power behavior, energy balance, faults and workbench controls
         run: node tests/test_power_dynamics_v54.js
+
+      - name: Verify jointly solved audio, supply, loaded instruments and fault restoration
+        run: node tests/test_audio_power_v55.js
+
+      - name: Verify generated audio worker and bench result/error lifecycle
+        run: node tests/test_audio_workbench_v55.js
+
+  audio-browser:
+    name: Exercise coupled audio bench in Chromium
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned browser test dependency
+        run: npm install --no-save --no-package-lock playwright@1.62.1
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Run actual page, background worker, fault, repair and export checks
+        run: node tests/test_audio_browser_v55.js --browser
+      - name: Retain desktop/mobile screenshots and measurement evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-audio-browser-v055
+          path: tmp/pt44-browser/
+          retention-days: 7

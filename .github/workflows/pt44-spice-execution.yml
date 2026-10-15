@@ -67,3 +67,6 @@ jobs:
 
       - name: Cross-check nonlinear supply transients and faults against ngspice
         run: node tests/test_power_dynamics_v54.js --ngspice
+
+      - name: Cross-check coupled audio/supply faults and meter loading against ngspice
+        run: node tests/test_audio_power_v55.js --ngspice

@@ -1,0 +1,624 @@
+{
+  "schema": "PT44_AUDIO_POWER_MODEL_V1",
+  "version": "0.55.0",
+  "model": "Philco PT-44",
+  "scope": "Nonlinear audio chain and jointly solved supply, with explicit RF/IF substitute load. Not a full receiver.",
+  "sources": [
+    {
+      "document": "Philco 1941 RMS Year Book p.38",
+      "scope": "Audio and supply topology/passive values",
+      "artifact": "engineering/PT44_Factory_Transcription_V3.json"
+    },
+    {
+      "document": "Sylvania 7C6 two-page sheet",
+      "url": "https://frank.pocnet.net/sheets/084/7/7C6.pdf",
+      "sha256": "0ce81972f06ce689971f6d966d482097c536aacbdce6b3aa8897f30afe241fa6",
+      "scope": "Typical operation, grid-leak-bias requirement, approximate manual triode curve samples; 6.3 V heater condition."
+    },
+    {
+      "document": "GE ET-T867, 7-54, pages 2–3",
+      "url": "https://frank.pocnet.net/sheets/093/2/25L6GT.pdf",
+      "sha256": "31305062cdf905d421f3ac9ee27e02f7de9bf5e1d13811c2d27c454eddcc1050",
+      "scope": "50L6 typical operation, plate families at 110 V screen, positive-grid current. Screen and low-plate knee samples are approximate monotonic envelopes, not exact digitization."
+    }
+  ],
+  "factory_parameters": {
+    "c15_f": 2.5e-10,
+    "c18_f": 1e-08,
+    "r19_ohm": 4700000.0,
+    "c20_f": 1e-08,
+    "r21_ohm": 470000.0,
+    "c22_f": 2.5e-10,
+    "r23_ohm": 470000.0,
+    "r24_ohm": 130,
+    "c25_f": 2e-08
+  },
+  "factory_terminal_nets": {
+    "26:a": "F_BPLUS_RECT",
+    "21:a": "F_BPLUS_FILT",
+    "25:a": "F_BPLUS_FILT",
+    "V4:4": "F_BPLUS_FILT",
+    "V3:2": "F_7C6_PLATE",
+    "21:b": "F_7C6_PLATE",
+    "20:a": "F_7C6_PLATE",
+    "V4:5": "F_50L6_GRID",
+    "20:b": "F_50L6_GRID",
+    "23:a": "F_50L6_GRID",
+    "V4:8": "F_50L6_CATH",
+    "24:a": "F_50L6_CATH",
+    "22:a": "F_50L6_CATH",
+    "V4:3": "F_OUTPUT_PLATE",
+    "26:b": "F_OUTPUT_PLATE",
+    "23:b": "F_BMINUS",
+    "24:b": "F_BMINUS",
+    "22:b": "F_BMINUS",
+    "25:b": "F_BMINUS",
+    "15:b": "F_BMINUS",
+    "16:b": "F_BMINUS",
+    "19:b": "F_BMINUS",
+    "V3:7": "F_BMINUS",
+    "26:sA": "F_VOICE_SEC_A",
+    "27:voiceA": "F_VOICE_SEC_A",
+    "26:sB": "F_VOICE_SEC_B",
+    "27:voiceB": "F_VOICE_SEC_B",
+    "16:a": "F_IF2_SECONDARY_VOL_TOP",
+    "15:a": "F_IF2_SECONDARY_VOL_TOP",
+    "16:wiper": "F_VOL_WIPER_C18",
+    "18:a": "F_VOL_WIPER_C18",
+    "18:b": "F_7C6_AUDIO_GRID",
+    "19:a": "F_7C6_AUDIO_GRID",
+    "V3:3": "F_7C6_AUDIO_GRID"
+  },
+  "curves": {
+    "triode": {
+      "plate_v": [
+        0,
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "grid_v": [
+        -4,
+        -3,
+        -2,
+        -1.5,
+        -1,
+        -0.5,
+        0,
+        0.5,
+        1
+      ],
+      "plate_current_a": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          4e-05
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.00015,
+          0.0004
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0001,
+          0.0004,
+          0.0007199999999999999
+        ],
+        [
+          0.0,
+          0.0,
+          8e-05,
+          0.0004,
+          0.00082,
+          0.0013
+        ],
+        [
+          0.0,
+          8e-05,
+          0.00047,
+          0.00095,
+          0.00145,
+          0.00185
+        ],
+        [
+          0.0,
+          0.00035,
+          0.001,
+          0.0015,
+          0.002,
+          0.0025
+        ],
+        [
+          0.0,
+          0.00065,
+          0.00145,
+          0.002,
+          0.0025499999999999997,
+          0.0031
+        ],
+        [
+          0.0,
+          0.001,
+          0.0019,
+          0.0025,
+          0.0031,
+          0.00365
+        ]
+      ]
+    },
+    "output": {
+      "reference_screen_v": 110,
+      "plate_v": [
+        0,
+        10,
+        25,
+        50,
+        100,
+        110,
+        200,
+        300,
+        400
+      ],
+      "grid_v": [
+        -20,
+        -16,
+        -12,
+        -10,
+        -8,
+        -7.5,
+        -6,
+        -4,
+        -2,
+        0,
+        2,
+        4,
+        6
+      ],
+      "plate_current_a": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.00025,
+          0.0008,
+          0.001,
+          0.002,
+          0.0022,
+          0.004,
+          0.006,
+          0.008
+        ],
+        [
+          0.0,
+          0.003,
+          0.009600000000000001,
+          0.012,
+          0.017,
+          0.0175,
+          0.02,
+          0.022,
+          0.024
+        ],
+        [
+          0.0,
+          0.006,
+          0.019200000000000002,
+          0.024,
+          0.03,
+          0.0305,
+          0.033,
+          0.035,
+          0.037
+        ],
+        [
+          0.0,
+          0.0095,
+          0.030400000000000003,
+          0.038,
+          0.045,
+          0.0455,
+          0.05,
+          0.053,
+          0.055
+        ],
+        [
+          0.0,
+          0.01025,
+          0.0328,
+          0.041,
+          0.048229999999999995,
+          0.049,
+          0.053,
+          0.056,
+          0.058
+        ],
+        [
+          0.0,
+          0.01425,
+          0.0456,
+          0.057,
+          0.065,
+          0.0655,
+          0.07,
+          0.073,
+          0.076
+        ],
+        [
+          0.0,
+          0.01925,
+          0.0616,
+          0.077,
+          0.084,
+          0.0845,
+          0.091,
+          0.095,
+          0.098
+        ],
+        [
+          0.0,
+          0.02525,
+          0.08080000000000001,
+          0.101,
+          0.109,
+          0.1095,
+          0.119,
+          0.124,
+          0.127
+        ],
+        [
+          0.0,
+          0.032,
+          0.1024,
+          0.128,
+          0.136,
+          0.1365,
+          0.146,
+          0.152,
+          0.156
+        ],
+        [
+          0.0,
+          0.0385,
+          0.1232,
+          0.154,
+          0.165,
+          0.1655,
+          0.176,
+          0.182,
+          0.187
+        ],
+        [
+          0.0,
+          0.0455,
+          0.1456,
+          0.182,
+          0.193,
+          0.1935,
+          0.205,
+          0.212,
+          0.217
+        ],
+        [
+          0.0,
+          0.05275,
+          0.1688,
+          0.211,
+          0.223,
+          0.2235,
+          0.234,
+          0.241,
+          0.246
+        ]
+      ],
+      "screen_current_a": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0021551020408163268,
+          0.0016163265306122446,
+          0.0008979591836734693,
+          0.00035918367346938774,
+          0.0001903673469387755,
+          0.00017959183673469387,
+          9.877551020408164e-05,
+          6.824489795918367e-05,
+          5.3877551020408154e-05
+        ],
+        [
+          0.01714285714285714,
+          0.012857142857142855,
+          0.007142857142857143,
+          0.0028571428571428567,
+          0.0015142857142857143,
+          0.0014285714285714284,
+          0.0007857142857142857,
+          0.0005428571428571428,
+          0.0004285714285714285
+        ],
+        [
+          0.02987755102040816,
+          0.02240816326530612,
+          0.012448979591836731,
+          0.004979591836734693,
+          0.0026391836734693873,
+          0.0024897959183673465,
+          0.001369387755102041,
+          0.0009461224489795918,
+          0.000746938775510204
+        ],
+        [
+          0.04457142857142857,
+          0.033428571428571426,
+          0.01857142857142857,
+          0.007428571428571428,
+          0.003937142857142857,
+          0.003714285714285714,
+          0.0020428571428571427,
+          0.0014114285714285713,
+          0.0011142857142857141
+        ],
+        [
+          0.047999999999999994,
+          0.03599999999999999,
+          0.019999999999999997,
+          0.007999999999999998,
+          0.004239999999999999,
+          0.003999999999999999,
+          0.0021999999999999997,
+          0.0015199999999999999,
+          0.0011999999999999997
+        ],
+        [
+          0.06416326530612244,
+          0.04812244897959183,
+          0.02673469387755102,
+          0.010693877551020407,
+          0.005667755102040815,
+          0.005346938775510204,
+          0.002940816326530612,
+          0.0020318367346938773,
+          0.0016040816326530608
+        ],
+        [
+          0.08277551020408162,
+          0.06208163265306122,
+          0.034489795918367344,
+          0.013795918367346937,
+          0.007311836734693876,
+          0.006897959183673468,
+          0.0037938775510204083,
+          0.0026212244897959184,
+          0.00206938775510204
+        ],
+        [
+          0.10726530612244897,
+          0.08044897959183674,
+          0.04469387755102041,
+          0.017877551020408163,
+          0.009475102040816325,
+          0.008938775510204082,
+          0.0049163265306122455,
+          0.0033967346938775507,
+          0.0026816326530612242
+        ],
+        [
+          0.13371428571428573,
+          0.10028571428571428,
+          0.05571428571428571,
+          0.022285714285714284,
+          0.011811428571428572,
+          0.011142857142857142,
+          0.006128571428571429,
+          0.004234285714285714,
+          0.0033428571428571426
+        ],
+        [
+          0.16212244897959183,
+          0.12159183673469387,
+          0.06755102040816327,
+          0.027020408163265307,
+          0.014320816326530613,
+          0.013510204081632653,
+          0.00743061224489796,
+          0.005133877551020408,
+          0.004053061224489795
+        ],
+        [
+          0.18955102040816324,
+          0.14216326530612244,
+          0.07897959183673468,
+          0.03159183673469387,
+          0.016743673469387755,
+          0.015795918367346937,
+          0.008687755102040815,
+          0.006002448979591836,
+          0.004738775510204081
+        ],
+        [
+          0.21893877551020405,
+          0.16420408163265304,
+          0.09122448979591836,
+          0.03648979591836734,
+          0.01933959183673469,
+          0.01824489795918367,
+          0.010034693877551019,
+          0.006933061224489795,
+          0.005473469387755101
+        ]
+      ]
+    }
+  },
+  "assumptions": {
+    "volume_track_ohm": 500000.0,
+    "volume_taper": "linear electrical fraction; physical audio taper unverified",
+    "detector_source_ohm": 50000.0,
+    "primary_dcr_ohm": 200,
+    "primary_magnetizing_h": 5,
+    "reflected_speaker_ohm": 2000,
+    "speaker_ohm": 3.2,
+    "rf_if_load_ohm": 15000,
+    "triode_grid_i0_a": 1e-07,
+    "triode_grid_thermal_v": 0.2,
+    "output_grid_k_a": 0.0007,
+    "field_h": 5,
+    "lamp_hot_ohm": 42,
+    "tube_screen_scaling": "Space-charge similarity: currents scale (Vs/110)^1.5 and effective plate/grid voltages scale 110/Vs; not validated multi-screen curves."
+  },
+  "numerical_contract": {
+    "dt_s": 1.0416666666666666e-05,
+    "duration_s": 0.6,
+    "signal_start_s": 0.35,
+    "report_from_s": 0.5,
+    "integrator": "Joint modified nodal analysis, backward Euler, damped Newton; no audio/power one-way feed",
+    "source": "Known post-detector voltage with finite source R; no detector/RF simulation",
+    "secondary_reference": "Reflected ideal transformer with magnetizing L and winding DCR; reported secondary voltage is differential. No galvanic B-minus/chassis bond is asserted."
+  },
+  "faults": [
+    {
+      "id": "healthy",
+      "label": "Restored audio and supply",
+      "changes": {}
+    },
+    {
+      "id": "c18_open",
+      "label": "#18 input coupling open",
+      "changes": {
+        "c18_scale": 0
+      }
+    },
+    {
+      "id": "c20_open",
+      "label": "#20 output coupling open",
+      "changes": {
+        "c20_scale": 0
+      }
+    },
+    {
+      "id": "c20_leak",
+      "label": "#20 coupling leakage (1 MΩ)",
+      "changes": {
+        "c20_leak_ohm": 1000000.0
+      }
+    },
+    {
+      "id": "triode_dead",
+      "label": "7C6 triode nonconducting",
+      "changes": {
+        "triode_emission": 0
+      }
+    },
+    {
+      "id": "output_weak",
+      "label": "50L6 weak (35% curve currents)",
+      "changes": {
+        "output_emission": 0.35
+      }
+    },
+    {
+      "id": "output_dead",
+      "label": "50L6 nonconducting",
+      "changes": {
+        "output_emission": 0
+      }
+    },
+    {
+      "id": "speaker_open",
+      "label": "Voice coil open",
+      "changes": {
+        "speaker_open": true
+      }
+    },
+    {
+      "id": "filter_dry",
+      "label": "#29B dry (10% C)",
+      "changes": {
+        "cap_b_scale": 0.1
+      }
+    },
+    {
+      "id": "field_open",
+      "label": "Field winding open",
+      "changes": {
+        "field_open": true
+      }
+    }
+  ],
+  "measurement_contract": {
+    "reference": "B-minus for socket voltages; differential for speaker and grid-to-cathode",
+    "meters": [
+      {
+        "id": "ideal",
+        "label": "Ideal probe",
+        "resistance_ohm": null,
+        "capacitance_f": 0
+      },
+      {
+        "id": "dmm",
+        "label": "10 MΩ / 100 pF probe",
+        "resistance_ohm": 10000000.0,
+        "capacitance_f": 1e-10
+      },
+      {
+        "id": "service",
+        "label": "1000 Ω/V meter, 250 V range",
+        "resistance_ohm": 250000.0,
+        "capacitance_f": 0
+      }
+    ],
+    "note": "Defined simulator conditions; these are not claimed to be Philco factory measurement conditions."
+  },
+  "acceptance": {
+    "audio_supply_jointly_solved": true,
+    "full_receiver_loads_connected": false,
+    "factory_voltage_calibrated": false,
+    "full_audio_calibrated": false,
+    "benchmark_ready": false,
+    "numerical_functional_validation_passed": true,
+    "ngspice_parity_verified": true
+  },
+  "limits": [
+    "Manual sparse tube curve readings; interpolation and screen scaling need denser validation.",
+    "Grid-leak/contact-potential current is an explicit assumed law; no heater thermal or cold-start behavior.",
+    "Transformer/speaker use assumed electrical equivalent; acoustic frequency response, core saturation and winding parasitics absent.",
+    "RF/converter/IF demand remains a declared substitute load, not actual stage current.",
+    "Fault bench is not yet connected to shop inventory/jobs or the reduced-order receiver solver."
+  ],
+  "validation_artifact": "engineering/PT44_Audio_Power_Validation_V1.json"
+}

@@ -7,7 +7,7 @@ const b=graph.factory_nets.find(n=>n.id==='F_BMINUS'),chassis=graph.factory_nets
 assert(b.factory_members.includes('9:b')&&b.factory_members.includes('11:b'));assert(!chassis.factory_members.includes('9:b')&&!chassis.factory_members.includes('11:b'));
 assert.equal(graph.checks.traced_network_count,35);assert.equal(graph.checks.factory_terminals_on_traced_nets,114);assert.equal(graph.checks.benchmark_ready,false);
 assert.equal(scope.baseline.component_terminal_memberships_in_partial_graph,83);assert.equal(scope.baseline.component_terminal_reference_coverage_percent,100);assert.equal(scope.subsystems.find(x=>x.id==='RF').terminals_referenced_in_partial_graph,29);
-assert.equal(ready.version,'0.54.0');assert.equal(ready.evidence_snapshot.source_reviewed_terminal_memberships,114);assert.equal(ready.evidence_snapshot.oscillator_return_endpoints_source_traced,2);assert.equal(ready.benchmark_ready,false);
+assert.equal(ready.version,'0.55.0');assert.equal(ready.evidence_snapshot.source_reviewed_terminal_memberships,114);assert.equal(ready.evidence_snapshot.oscillator_return_endpoints_source_traced,2);assert.equal(ready.benchmark_ready,false);
 assert(audit.milestones.some(m=>m.version==='0.43.0'&&m.status==='SOURCE_CHECKED_OSCILLATOR_RETURN_PARTIAL'));
 const ctx=vm.createContext({console});vm.runInContext(scripts[1],ctx);const a=scripts[3].indexOf('function pt44BenchAudit()'),z=scripts[3].indexOf('function renderFactoryLedger(box){');assert(a>=0&&z>a);vm.runInContext(scripts[3].slice(a,z),ctx);
 const inspect=e=>JSON.parse(vm.runInContext('JSON.stringify('+e+')',ctx));assert.deepEqual(inspect('PT44_OSCILLATOR_RETURN_TRACE_V1'),trace);
@@ -17,5 +17,5 @@ for(const [label,expr] of [
  ['missing capacitor return',`(()=>{const n=PT44_FACTORY_V3.factory_nets.find(x=>x.id==="F_BMINUS");const i=n.factory_members.indexOf("11:b");const v=n.factory_members.splice(i,1)[0];const bad=!pt44OscillatorReturnTraceAudit().ok;n.factory_members.splice(i,0,v);return bad;})()`],
  ['premature oscillator closure','(()=>{const x=PT44_OSCILLATOR_RETURN_TRACE_V1.source_level_closure;x["7a8_socket_pin_crosswalk_complete"]=true;const bad=!pt44OscillatorReturnTraceAudit().ok;x["7a8_socket_pin_crosswalk_complete"]=false;return bad;})()']
 ])assert.equal(vm.runInContext(expr,ctx),true,label);
-assert(html.includes('BUILD v0.54.0<small>'));
+assert(html.includes('BUILD v0.55.0<small>'));
 console.log('PASS v0.43: #9/#11 lower endpoints source-traced to B−; converter and socket crosswalk remain open');

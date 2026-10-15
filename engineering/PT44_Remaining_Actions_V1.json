@@ -1,6 +1,6 @@
 {
   "schema": "PT44_REMAINING_ACTIONS_V1",
-  "version": "0.54.0",
+  "version": "0.55.0",
   "model": "Philco PT-44",
   "benchmark_ready": false,
   "scope_policy": "Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.",
@@ -14,7 +14,8 @@
         "Assign both 7C6 diode glyphs to socket pins 5/6.",
         "Resolve the four-dot oscillator coupling symbol and complete its electrical representation.",
         "Resolve #8 0.05/0.1 µF value conflict or retain a specifically approved variant."
-      ]
+      ],
+      "v055_review": "Manufacturer basing identifies the two separate 7C6 diodes, but does not assign the unnumbered Philco glyphs to physical pins. No source-backed assignment or oscillator/#8 resolution is claimed."
     },
     {
       "id": "EC-02",
@@ -25,6 +26,14 @@
         "Validate models for all five tube types against manufacturer curves.",
         "Establish coil/transformer L, coupling, winding resistance and output-transformer/speaker relationship.",
         "Establish volume-control resistance/taper, field inductance and lamp/heater behavior; identify supported approximations."
+      ],
+      "completed_in_v055": [
+        "Approximate manufacturer-derived 7C6 and 50L6 curve tables with typical-point/slope and separate graph checks.",
+        "Explicit transformer/volume/grid-current assumptions and transformer sensitivity scenario."
+      ],
+      "remaining_after_v055": [
+        "Validate denser audio curves, grid-current and screen-scaling behavior.",
+        "Complete 7A8/7B7/35Z3 models and coil/transformer/pot/lamp/heater parameter validation."
       ]
     },
     {
@@ -36,16 +45,32 @@
         "Replace power-bench stand-in resistors with currents drawn by the actual receiver stages.",
         "Validate rectifier conduction and heater/lamp behavior over supported supply conditions.",
         "Check reservoir/filtered voltages, ripple, startup and discharge under healthy and faulty receiver loads."
+      ],
+      "completed_in_v055": [
+        "Jointly solve audio plate/screen currents with the dynamic supply; no one-way rail feed.",
+        "Exercise healthy, coupling leakage, dead output, dry filter and field-open behavior."
+      ],
+      "remaining_after_v055": [
+        "Replace the remaining RF/IF substitute demand with actual converter/IF stage currents.",
+        "Validate rectifier, heater, lamp and field behavior across supported line conditions."
       ]
     },
     {
       "id": "EC-04",
       "action": "Complete audio chain",
-      "status": "NOT STARTED",
+      "status": "IN PROGRESS",
       "evidence_dependency": "Actionable with existing topology and manufacturer data; uncertain transformer/speaker values need bounded parameters.",
       "acceptance": [
         "Model volume control, 7C6 triode, 50L6 output stage and output transformer/speaker.",
         "Validate gain, bias, clipping, loading and hum transfer; make output respond to component faults."
+      ],
+      "completed_in_v055": [
+        "Implement volume, 7C6 triode, 50L6, winding DCR/magnetizing L and reflected speaker load.",
+        "Exercise gain, bias, clipping, hum, mute, coupling faults and restoration under declared parameters."
+      ],
+      "remaining_after_v055": [
+        "Correlate uncertain transformer/speaker, volume and grid-current parameters; validate frequency response and a broader operating envelope.",
+        "Connect audio behavior and faults to the shop receiver/inventory/jobs."
       ]
     },
     {
@@ -73,12 +98,20 @@
     {
       "id": "EC-07",
       "action": "Validate instruments and service conditions",
-      "status": "NOT STARTED",
+      "status": "IN PROGRESS",
       "evidence_dependency": "Actionable by defining repeatable model test conditions; historical conditions may require additional evidence.",
       "acceptance": [
         "Connect meters, signal generator and tracer to authoritative receiver nodes with defined loading.",
         "Record supply, control settings, signal and instrument conditions for each benchmark measurement.",
         "Use historical voltage labels only where return/loading/conditions support comparison; distinguish simulated reference conditions."
+      ],
+      "completed_in_v055": [
+        "Connect ideal, 10 MΩ/100 pF and 1000 Ω/V (250 V range) probes to explicit audio/power nodes.",
+        "Record supply, signal, volume, timing and instrument conditions; keep factory targets separate."
+      ],
+      "remaining_after_v055": [
+        "Extend node access/loading to RF/IF/detector/AVC and shop instruments.",
+        "Verify historical measurement conditions where factory targets are used."
       ]
     },
     {
@@ -95,18 +128,26 @@
     {
       "id": "EC-09",
       "action": "Pass end-to-end repair benchmark",
-      "status": "NOT STARTED",
+      "status": "IN PROGRESS",
       "evidence_dependency": "Actionable after receiver stages and instruments are integrated.",
       "acceptance": [
         "Establish a deterministic healthy-radio baseline over supported tuning/supply conditions.",
         "Exercise a fixed fault matrix through diagnosis, part replacement, alignment and successful checkout.",
         "Run regressions, record limitations and close the six agreed benchmark gates only when their acceptance evidence is met."
+      ],
+      "completed_in_v055": [
+        "Deterministic audio/power healthy baseline and fault/restoration scenarios."
+      ],
+      "remaining_after_v055": [
+        "Integrate full receiver stages and shop repair workflow.",
+        "Run the full diagnosis/replacement/alignment/checkout matrix and close all six gates."
       ]
     }
   ],
   "next_integration_target": [
-    "EC-03: actual receiver load coupling",
-    "EC-04: complete audio chain"
+    "EC-05: IF/detector/AVC with actual stage currents",
+    "EC-02/04: audio parameter and frequency-envelope validation",
+    "EC-07/09: connect authoritative model nodes/faults to shop instruments and repairs"
   ],
-  "milestone_completed": "v0.54 implements the nonlinear dynamic power core, AC/DC supply modes, two load ports, fault/restore controls and independently checked numerical behavior. Loads, field L and lamp hot resistance remain explicit assumptions."
+  "milestone_completed": "v0.55 implements joint nonlinear audio/supply behavior, actual audio tube plate/screen loads, volume/coupling/bias/transformer equivalent, loaded probes and a deterministic audio fault/restore matrix. RF/IF substitute load, uncertain parameters and shop integration remain explicit."
 }
