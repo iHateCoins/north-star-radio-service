@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.56.0",
+  "version": "0.57.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -104,6 +104,15 @@
       "numerical_scenarios_passed": 19,
       "ngspice_transient_cases_passed": 5,
       "validation_artifact": "engineering/PT44_Audio_Power_Validation_V1.json"
+    },
+    "coupled_if_receiver": {
+      "active_7b7": true,
+      "tuned_if_transformer_pairs": 2,
+      "detector_audio_supply_mutual_loading": true,
+      "if_avc_feedback": true,
+      "converter_boundary_still_substitute": true,
+      "factory_calibrated": false,
+      "full_receiver_validated": false
     }
   },
   "open_items": [

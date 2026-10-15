@@ -1,6 +1,6 @@
 {
   "schema": "PT44_REMAINING_ACTIONS_V1",
-  "version": "0.56.0",
+  "version": "0.57.0",
   "model": "Philco PT-44",
   "benchmark_ready": false,
   "scope_policy": "Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.",
@@ -37,6 +37,12 @@
       ],
       "completed_in_v056": [
         "Declare detector/source/volume parameters and compare both unresolved #8 values; no diode-curve or IF-winding calibration claimed."
+      ],
+      "completed_in_v057": [
+        "Approximate Sylvania 7B7 plate/screen curve samples, typical-point and transconductance checks; declared interelectrode capacitances and winding assumptions."
+      ],
+      "remaining_after_v057": [
+        "Correlate 7B7 screen scaling and full curve envelope, diode law and winding parameters; complete 7A8/35Z3/heater/lamp/field and existing audio parameter validation."
       ]
     },
     {
@@ -56,6 +62,12 @@
       "remaining_after_v055": [
         "Replace the remaining RF/IF substitute demand with actual converter/IF stage currents.",
         "Validate rectifier, heater, lamp and field behavior across supported line conditions."
+      ],
+      "completed_in_v057": [
+        "Actual modeled 7B7 plate/screen currents load the same dynamic supply and #13/#11 screen network as the detector and nonlinear audio in the hot DC fixture."
+      ],
+      "remaining_after_v057": [
+        "Replace remaining converter injection, plate and screen substitutes with the active 7A8. Validate full AC/DC, startup/discharge and heater/lamp/field envelope."
       ]
     },
     {
@@ -74,6 +86,12 @@
       "remaining_after_v055": [
         "Correlate uncertain transformer/speaker, volume and grid-current parameters; validate frequency response and a broader operating envelope.",
         "Connect audio behavior and faults to the shop receiver/inventory/jobs."
+      ],
+      "completed_in_v057": [
+        "Detector-derived signal, triode grid loading, nonlinear audio and dynamic supply now share a single 26-variable MNA system in the IF receiver fixture."
+      ],
+      "remaining_after_v057": [
+        "Correlate audio/transformer/speaker parameters and frequency envelope; connect validated receiver behavior to shop repairs."
       ]
     },
     {
@@ -94,6 +112,12 @@
         "Active 7B7 stage, coupled/tuned IF windings, 455 kHz bandwidth/alignment and actual supply load.",
         "AVC feedback to converter/IF gain; correlate diode/source parameters, grid loading and steady-state/long-duration behavior.",
         "Join detector, nonlinear audio and supply in one loaded receiver model."
+      ],
+      "completed_in_v057": [
+        "Active 7B7 and both coupled/doubly tuned IF transformers; detector/audio/supply mutual loading and AVC return through first IF secondary to the 7B7 grid."
+      ],
+      "remaining_after_v057": [
+        "Correlate tube/winding/diode parameters and IF passband/alignment against supported evidence. Validate long-duration AVC attack/release/steady behavior; add converter AVC feedback when EC-06 is implemented."
       ]
     },
     {
@@ -127,6 +151,12 @@
       ],
       "completed_in_v056": [
         "Five detector/AVC probe ports with ideal, 10 M\u03a9/100 pF and 1000 \u03a9/V (10 V range) loading; declared signal/timing/reference conditions."
+      ],
+      "completed_in_v057": [
+        "Loaded probes on IF grid/plate, shared screen, supply, AVC and audio nodes in one coupled circuit; explicit DC/injection/timing/range conditions."
+      ],
+      "remaining_after_v057": [
+        "Complete RF node/instrument and shop integration, then verify historical measurement conditions."
       ]
     },
     {
@@ -159,14 +189,20 @@
       ],
       "completed_in_v056": [
         "Deterministic detector/AVC fault/restoration cases; full shop acceptance remains open."
+      ],
+      "completed_in_v057": [
+        "Deterministic integrated IF-to-speaker hot DC baseline, fault/restoration and independent SPICE scenarios."
+      ],
+      "remaining_after_v057": [
+        "Full RF receiver baseline and the complete diagnosis/replacement/alignment/checkout shop matrix remain open."
       ]
     }
   ],
   "next_integration_target": [
-    "EC-05/03: active IF stage, tuned transformer loading and actual supply current; AVC gain feedback.",
-    "EC-05/04: join detector with the nonlinear audio/supply model, preserving mutual loading.",
-    "EC-02/06: correlate tube/winding parameters and implement RF/converter tracking.",
-    "EC-07/08/09: chassis/instrument/shop integration and complete repair acceptance."
+    "EC-02/05: correlate IF tube/winding behavior and extend AVC timing/passband validation.",
+    "EC-01/06: close oscillator coupling interpretation and implement 7A8 RF/converter/AVC tracking, replacing remaining converter substitutes.",
+    "EC-03/04: validate complete receiver supply/audio envelope and parameters.",
+    "EC-07/08/09: authoritative chassis/instrument/shop integration and full repair acceptance."
   ],
-  "milestone_completed": "v0.56 adds a carrier-resolved detector/AVC subset, audio recovery and AVC arrival/release, loaded probes, unresolved #8 variant controls and fault/restoration tests. The IF source and diode law are explicit assumptions; active IF, AVC feedback, full receiver/supply coupling and shop integration remain open."
+  "milestone_completed": "v0.57 joins active/tuned IF, AVC/detector, nonlinear audio and hot DC supply in one circuit. The converter is still an explicit input/load boundary. Fixed EC-01 through EC-09 acceptance lists are unchanged; no full EC or receiver gate is closed by this subset."
 }
