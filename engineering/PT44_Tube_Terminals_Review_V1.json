@@ -114,8 +114,10 @@
       "stage": "RF",
       "terminal": "V1:7",
       "task": "Trace the 7A8 cathode and suppressor grid G6 return (do not assume chassis = B−).",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "status": "source_traced_net_member",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "review_result": "7A8 cathode/suppressor glyph lead descends to the explicit B− junction beside #8 upper lead; manufacturer basing maps the cathode/G6 to pin 7."
     },
     {
       "id": "RF-04",
@@ -178,8 +180,10 @@
       "stage": "IF",
       "terminal": "V2:7",
       "task": "Trace IF cathode bias and suppression grid connections.",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "status": "source_traced_net_member",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "review_result": "7B7 cathode glyph lead descends to an explicit dot on B−. Intervening AVC and supply crossings without dots remain distinct."
     },
     {
       "id": "IF-05",
@@ -226,8 +230,12 @@
       "stage": "DETECTOR",
       "terminal": "V3:4",
       "task": "7C6 pins 4 and 7 are internally common by Sylvania; trace the actual external return wiring of either socket terminal without assuming chassis = B-minus.",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "status": "source_traced_internal_equivalence",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "internal_peer": "V3:7",
+      "external_wire_claim": false,
+      "review_result": "The receiver cathode glyph reaches B− at V3:7; V3:4 shares the potential through the manufacturer-documented tube-internal link, with no external pin-4 wire asserted."
     },
     {
       "id": "DET-05",

@@ -1,6 +1,6 @@
 {
   "schema": "PT44_PIN_CLOSURE_INVENTORY_V1",
-  "version": "0.52.0",
+  "version": "0.53.0",
   "model": "Philco PT-44",
   "status": "SOCKET_ROLE_CLASSIFIED_NETLIST_OPEN",
   "sources": {
@@ -11,9 +11,10 @@
   "policy": "A manufacturer no-connection or shell option is not an absent factory wire. Active electrodes and shields require a source-backed receiver crosswalk. Internal tube links are not external chassis connections.",
   "counts": {
     "inventoried_socket_positions": 40,
-    "reviewed_graph_members": 26,
+    "reviewed_graph_members": 31,
     "manufacturer_nonfunctional_or_option": 6,
-    "external_receiver_crosswalk_open": 8
+    "external_receiver_crosswalk_open": 2,
+    "internal_equivalent_receiver_net": 1
   },
   "pin_records": [
     {
@@ -74,10 +75,10 @@
       "terminal": "V1:7",
       "tube_type": "7A8",
       "manufacturer_role": "cathode and suppressor grid g6",
-      "status": "external_receiver_crosswalk_open",
-      "graph_net": null,
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BMINUS",
       "internal_bond_peer": null,
-      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+      "note": "7A8 cathode/suppressor glyph lead descends to the explicit B− junction beside #8 upper lead; manufacturer basing maps the cathode/G6 to pin 7."
     },
     {
       "terminal": "V1:8",
@@ -119,19 +120,19 @@
       "terminal": "V2:4",
       "tube_type": "7B7",
       "manufacturer_role": "suppressor grid g3",
-      "status": "external_receiver_crosswalk_open",
-      "graph_net": null,
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BMINUS",
       "internal_bond_peer": null,
-      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+      "note": "7B7 suppressor grid lead exits the upper grid and loops to the cathode return conductor; manufacturer basing maps G3 to pin 4."
     },
     {
       "terminal": "V2:5",
       "tube_type": "7B7",
       "manufacturer_role": "internal shield",
-      "status": "external_receiver_crosswalk_open",
-      "graph_net": null,
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BMINUS",
       "internal_bond_peer": null,
-      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved. Internal shield contact; do not equate it to cathode, B−, or chassis without a receiver trace."
+      "note": "7B7 shield glyph lead joins the cathode return conductor at an explicit dot; manufacturer basing maps the shield to pin 5."
     },
     {
       "terminal": "V2:6",
@@ -146,10 +147,10 @@
       "terminal": "V2:7",
       "tube_type": "7B7",
       "manufacturer_role": "cathode",
-      "status": "external_receiver_crosswalk_open",
-      "graph_net": null,
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BMINUS",
       "internal_bond_peer": null,
-      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved."
+      "note": "7B7 cathode glyph lead descends to an explicit dot on B−. Intervening AVC and supply crossings without dots remain distinct."
     },
     {
       "terminal": "V2:8",
@@ -191,10 +192,11 @@
       "terminal": "V3:4",
       "tube_type": "7C6",
       "manufacturer_role": "cathode",
-      "status": "external_receiver_crosswalk_open",
+      "status": "internal_equivalent_receiver_net",
       "graph_net": null,
       "internal_bond_peer": "V3:7",
-      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved. Manufacturer confirms internal cathode bond to V3:7, but external socket return remains unverified."
+      "note": "Receiver cathode glyph is traced to B− via V3:7; V3:4 has the same electrical potential through the documented tube-internal cathode bond. An external pin-4 wire is not claimed.",
+      "equivalent_receiver_net": "F_BMINUS"
     },
     {
       "terminal": "V3:5",
@@ -218,10 +220,10 @@
       "terminal": "V3:7",
       "tube_type": "7C6",
       "manufacturer_role": "cathode",
-      "status": "external_receiver_crosswalk_open",
-      "graph_net": null,
+      "status": "reviewed_graph_member",
+      "graph_net": "F_BMINUS",
       "internal_bond_peer": "V3:4",
-      "note": "Electrode or shield identity is known; source-level PT-44 socket conductor is unresolved. Manufacturer confirms internal cathode bond to V3:4, but external socket return remains unverified."
+      "note": "7C6 cathode glyph lead descends to the B− rail at an explicit dot and continues to the power return; manufacturer basing maps the cathode to pin 7. Pin 4 shares it internally, not by an invented external jumper."
     },
     {
       "terminal": "V3:8",
@@ -378,14 +380,8 @@
     }
   ],
   "open_terminal_list": [
-    "V1:7",
-    "V2:4",
-    "V2:5",
-    "V2:7",
-    "V3:4",
     "V3:5",
-    "V3:6",
-    "V3:7"
+    "V3:6"
   ],
   "nonfunctional_or_option_list": [
     "V4:1",

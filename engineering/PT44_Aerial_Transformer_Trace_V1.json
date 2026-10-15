@@ -18,7 +18,7 @@
     }
   },
   "terminal_conventions": {
-    "transformer_2": "primary_a/b identify the 38-turn winding shown connected to ANT and #1; secondary_a/b identify the 11-turn winding shown connected to #3 and B−. These labels identify circuit role only; winding polarity, inductance and coupling are not shown.",
+    "transformer_2": "primary_a/b identify the 38-turn winding shown connected to ANT and #1; secondary_a/b identify the 11-turn winding shown connected to #3 and the AVC rail. These labels identify circuit role only; winding polarity, inductance and coupling are not shown.",
     "loop_3": "loop_a remains the upper signal-input lead traced in v0.41; loop_b is the lower lead traced here to the upper terminal of the #2 11-turn winding. No polarity or inductance is implied.",
     "capacitor_1": "a is the terminal connected to the lower end of the #2 38-turn winding; b is the terminal on the explicit RF ground symbol. Philco labels the relevant grounds chassis for loop operation; no B− bond is inferred."
   },
@@ -49,9 +49,9 @@
     },
     {
       "terminal": "2:secondary_b",
-      "net_id": "F_BMINUS",
-      "joined_factory_member": "B− return bus",
-      "interpretation": "Lower terminal of the #2 11-turn winding joins the horizontal B− return rail.",
+      "net_id": "F_AVC_RETURN",
+      "joined_factory_member": "12:sReturn / 17:b / 7:b / 8:b",
+      "interpretation": "Lower 11-turn #2 winding lead joins lower #7/#8 leads, then rises to the lower AVC rail; the upper #2 secondary lead remains connected only to the loop lower lead.",
       "source_box_px": [
         75,
         450,
@@ -119,13 +119,14 @@
   ],
   "source_level_closure": {
     "loop_lower_to_aerial_transformer_11_turn_winding": true,
-    "aerial_transformer_11_turn_return_to_bminus": true,
+    "aerial_transformer_11_turn_return_to_bminus": false,
     "external_antenna_to_38_turn_winding": true,
     "38_turn_winding_to_1_bypass_capacitor": true,
     "bypass_capacitor_ground_reference_identified_as_loop_mode_chassis": true,
     "transformer_winding_polarity_or_inductance_verified": false,
     "rf_and_oscillator_complete": false,
-    "benchmark_ready": false
+    "benchmark_ready": false,
+    "aerial_transformer_11_turn_return_to_avc": true
   },
   "unresolved": [
     "Aerial transformer #2 winding inductance, coupling, polarity and production tolerances.",
@@ -134,5 +135,7 @@
     "RF tracking, oscillator behavior, sensitivity/selectivity and receiver-level validation.",
     "Chassis-to-B− relationship beyond explicitly traced nets."
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "review_revision": "0.53.0",
+  "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

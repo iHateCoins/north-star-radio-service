@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.52.0",
+  "version": "0.53.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -76,7 +76,7 @@
         "F_IF2_SECONDARY_VOL_TOP",
         "F_VOL_WIPER_C18",
         "F_7C6_AUDIO_GRID",
-        "F_DET_PASSIVE_RETURN"
+        "F_BMINUS"
       ],
       "summary": "Rechecked four detector/audio conductor groups and the existing upper-diode symbol-level link. #17 lower branch, diode socket-pin assignment and full AVC/return routing remain open."
     },
@@ -113,7 +113,7 @@
       "status": "SOURCE_CHECKED_ADDITIONAL_MEMBERS_SYMBOL_PIN_OPEN",
       "net_ids": [
         "F_IF2_AVC_FEED",
-        "F_DET_PASSIVE_RETURN"
+        "F_BMINUS"
       ],
       "summary": "Added upper #14 secondary/#17 upper endpoint group and #17 lower return endpoint from the native page-38 scan. The linked upper 7C6 diode remains an unnumbered glyph; full AVC and socket crosswalk remain open."
     },
@@ -278,13 +278,19 @@
       "source": "Philco p.38, Rider XII 12-45 and 7A8 basing",
       "evidence": "The 7A8 oscillator anode g2 pin V1:3 meets the upper right #10 winding end.",
       "scope_limit": "Lower winding end and #12/#13 conductor review still open; no physical lug/polarity or operation claim."
+    },
+    {
+      "version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+      "artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "description": "Correct supply/screen/AVC and passive-return conductors; trace lower #10 winding and five cathode/shield socket pins. Diode pin mapping remains open."
     }
   ],
   "reviewed_net_memberships": [
     {
       "net_id": "F_BPLUS_RECT",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -302,8 +308,8 @@
     },
     {
       "net_id": "F_BPLUS_FILT",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -320,8 +326,8 @@
     },
     {
       "net_id": "F_7C6_PLATE",
-      "milestone_version": "0.30.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         1380,
@@ -338,8 +344,8 @@
     },
     {
       "net_id": "F_50L6_GRID",
-      "milestone_version": "0.30.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         1380,
@@ -356,8 +362,8 @@
     },
     {
       "net_id": "F_50L6_CATH",
-      "milestone_version": "0.30.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         1380,
@@ -373,8 +379,8 @@
     },
     {
       "net_id": "F_OUTPUT_PLATE",
-      "milestone_version": "0.30.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         1380,
@@ -390,8 +396,8 @@
     },
     {
       "net_id": "F_BMINUS",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -404,13 +410,16 @@
         "29A:b",
         "29B:b",
         "23:b",
-        "24:b"
+        "24:b",
+        "15:b",
+        "16:b",
+        "19:b"
       ]
     },
     {
       "net_id": "F_VOICE_SEC_A",
-      "milestone_version": "0.30.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         1380,
@@ -426,8 +435,8 @@
     },
     {
       "net_id": "F_VOICE_SEC_B",
-      "milestone_version": "0.30.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         1380,
@@ -443,8 +452,8 @@
     },
     {
       "net_id": "F_HT_35Z3_50L6",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -460,8 +469,8 @@
     },
     {
       "net_id": "F_HT_50L6_7A8",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -477,8 +486,8 @@
     },
     {
       "net_id": "F_HT_7A8_7B7",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -494,8 +503,8 @@
     },
     {
       "net_id": "F_HT_7B7_7C6",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -511,8 +520,8 @@
     },
     {
       "net_id": "F_IF1_PLATE",
-      "milestone_version": "0.32.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         520,
@@ -528,8 +537,8 @@
     },
     {
       "net_id": "F_IF1_GRID",
-      "milestone_version": "0.32.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         520,
@@ -545,8 +554,8 @@
     },
     {
       "net_id": "F_IF2_PLATE",
-      "milestone_version": "0.32.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         520,
@@ -562,8 +571,8 @@
     },
     {
       "net_id": "F_30_40_LAMP_A",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -579,8 +588,8 @@
     },
     {
       "net_id": "F_30_40_LAMP_B",
-      "milestone_version": "0.29.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -596,8 +605,8 @@
     },
     {
       "net_id": "F_IF2_SECONDARY_VOL_TOP",
-      "milestone_version": "0.33.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         900,
@@ -614,8 +623,8 @@
     },
     {
       "net_id": "F_VOL_WIPER_C18",
-      "milestone_version": "0.33.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         900,
@@ -631,8 +640,8 @@
     },
     {
       "net_id": "F_7C6_AUDIO_GRID",
-      "milestone_version": "0.33.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         900,
@@ -648,27 +657,9 @@
       ]
     },
     {
-      "net_id": "F_DET_PASSIVE_RETURN",
-      "milestone_version": "0.33.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
-      "unreviewed_members": [],
-      "source_box_px": [
-        900,
-        210,
-        1580,
-        850
-      ],
-      "basis": "Philco p.38 detector/audio section: the v0.33 review covers #15, #16, and #19 return terminals; #17:b is reconciled by a dedicated v0.39 membership update.",
-      "reviewed_members": [
-        "15:b",
-        "16:b",
-        "19:b"
-      ]
-    },
-    {
       "net_id": "F_IF2_AVC_FEED",
-      "milestone_version": "0.39.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         750,
@@ -684,8 +675,8 @@
     },
     {
       "net_id": "F_RF_INPUT",
-      "milestone_version": "0.41.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         90,
@@ -704,8 +695,8 @@
     },
     {
       "net_id": "F_RF_CHASSIS",
-      "milestone_version": "0.41.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         90,
@@ -722,8 +713,8 @@
     },
     {
       "net_id": "F_RF_LOOP_SECONDARY",
-      "milestone_version": "0.42.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         75,
@@ -740,8 +731,8 @@
     },
     {
       "net_id": "F_RF_EXTERNAL_ANTENNA",
-      "milestone_version": "0.42.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         75,
@@ -757,8 +748,8 @@
     },
     {
       "net_id": "F_RF_ANTENNA_BYPASS",
-      "milestone_version": "0.42.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         75,
@@ -775,8 +766,8 @@
     },
     {
       "net_id": "F_SCREEN_45V",
-      "milestone_version": "0.44.0",
-      "status": "SOURCE_CHECKED_SHARED_SCREEN_LEAD_PIN_CROSSWALK",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -793,8 +784,8 @@
     },
     {
       "net_id": "F_RF_INPUT_TRAP_JUNCTION",
-      "milestone_version": "0.47.0",
-      "status": "SOURCE_CHECKED_COMPONENT_INTERNAL_SERIES_JUNCTION",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         0,
@@ -811,8 +802,8 @@
     },
     {
       "net_id": "F_OSC_TUNED_LEFT_WINDING",
-      "milestone_version": "0.50.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         550,
@@ -829,8 +820,8 @@
     },
     {
       "net_id": "F_OSC_GRID_LEAK",
-      "milestone_version": "0.51.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         420,
@@ -847,8 +838,8 @@
     },
     {
       "net_id": "F_AC_PLUG_A_PRE_SWITCH",
-      "milestone_version": "0.52.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -865,8 +856,8 @@
     },
     {
       "net_id": "F_DROPPER_HEATER_INPUT",
-      "milestone_version": "0.52.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "source_box_px": [
         300,
@@ -883,8 +874,8 @@
     },
     {
       "net_id": "F_OSC_ANODE_RIGHT_WINDING",
-      "milestone_version": "0.52.0",
-      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
       "unreviewed_members": [],
       "basis": "Philco p.38 and Rider XII 12-45 upper right #10 winding conductor to 7A8 oscillator-anode glyph; manufacturer pin role V1:3.",
       "reviewed_members": [
@@ -892,6 +883,20 @@
         "V1:3"
       ],
       "source_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+    },
+    {
+      "net_id": "F_AVC_RETURN",
+      "milestone_version": "0.53.0",
+      "status": "SOURCE_RECONCILED_CURRENT_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        900,
+        210,
+        1580,
+        850
+      ],
+      "basis": "Philco p.38 detector/audio section: the v0.33 review covers #15, #16, and #19 return terminals; #17:b is reconciled by a dedicated v0.39 membership update.",
+      "reviewed_members": []
     }
   ],
   "reviewed_open_areas": [
@@ -1022,38 +1027,52 @@
       "basis": "Philco p.38 native 300-dpi scan: second IF transformer #14 primary supply end joins the 95 V filtered B+ bus."
     },
     {
-      "net_id": "F_DET_PASSIVE_RETURN",
+      "net_id": "F_AVC_RETURN",
       "milestone_version": "0.39.0",
       "reviewed_members": [
         "17:b"
       ],
-      "source_artifact": "engineering/PT44_Detector_AVC_Trace_V1.json",
-      "source_artifact_version": "0.39.0",
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
-      "basis": "Philco p.38 native scan: lower #17 terminal joins #15/#16/#19 return; no chassis bond inferred."
+      "basis": "Lower #17 lead joins the lower unnumbered 7C6 diode glyph lead and descends to the AVC rail; its crossing of the passive B− return has no junction dot.",
+      "reconciled_in": "0.53.0"
     },
     {
-      "net_id": "F_IF1_GRID",
+      "net_id": "F_BPLUS_FILT",
       "milestone_version": "0.40.0",
       "reviewed_members": [
         "13:a"
       ],
-      "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
-      "source_artifact_version": "0.40.0",
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
-      "basis": "Philco p.38 native scan: #13 upper terminal joins #12 secondary/grid node at V2 control-grid lead."
+      "basis": "Left #13 lead meets the lower right #10 winding lead and lower #12 primary lead at a dotted junction; that primary lead joins the filtered B+ rail.",
+      "reconciled_in": "0.53.0"
     },
     {
-      "net_id": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
       "milestone_version": "0.40.0",
       "reviewed_members": [
-        "12:sReturn",
+        "12:sReturn"
+      ],
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Lower #12 secondary lead descends, turns right, then down to the distinct lower AVC rail. It crosses the B+ and B− rails without junction dots.",
+      "reconciled_in": "0.53.0"
+    },
+    {
+      "net_id": "F_SCREEN_45V",
+      "milestone_version": "0.40.0",
+      "reviewed_members": [
         "13:b"
       ],
-      "source_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
-      "source_artifact_version": "0.40.0",
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
-      "basis": "Philco p.38 native scan: #12 secondary lower end and #13 lower end join the B− return bus."
+      "basis": "Right #13 lead rises to the 7B7 screen branch and the continuous shared 7A8/7B7 screen rail. Its crossing of filtered B+ has no junction dot.",
+      "reconciled_in": "0.53.0"
     },
     {
       "net_id": "F_RF_CHASSIS",
@@ -1067,15 +1086,16 @@
       "basis": "Philco p.38 RF note identifies the #1 lower terminal ground symbol as chassis for loop operation; no connection to B− is inferred."
     },
     {
-      "net_id": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
       "milestone_version": "0.42.0",
       "reviewed_members": [
         "2:secondary_b"
       ],
-      "source_artifact": "engineering/PT44_Aerial_Transformer_Trace_V1.json",
-      "source_artifact_version": "0.42.0",
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
-      "basis": "Philco p.38 native scan: lower terminal of the #2 11-turn aerial-transformer winding joins the horizontal B− return rail."
+      "basis": "Lower 11-turn #2 winding lead joins lower #7/#8 leads, then rises to the lower AVC rail; the upper #2 secondary lead remains connected only to the loop lower lead.",
+      "reconciled_in": "0.53.0"
     },
     {
       "net_id": "F_BMINUS",
@@ -1137,13 +1157,13 @@
       "basis": "Philco p.38: lower #6 series choke terminal ends at the explicit ground symbol; the drawing note identifies loop-operation grounds as chassis, not B−."
     },
     {
-      "net_id": "F_RF_LOOP_SECONDARY",
+      "net_id": "F_BMINUS",
       "milestone_version": "0.48.0",
       "reviewed_members": [
         "7:a"
       ],
-      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
-      "source_artifact_version": "0.48.0",
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
       "source_box_px": [
@@ -1153,16 +1173,17 @@
         1400
       ],
       "source_render_dpi": 400,
-      "basis": "Philco p.38: upper #7 4.7 MΩ terminal joins the lower loop/#2 11-turn winding junction."
+      "basis": "Upper #7 lead joins the main B− rail, not the loop/#2 upper-secondary junction.",
+      "reconciled_in": "0.53.0"
     },
     {
-      "net_id": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
       "milestone_version": "0.48.0",
       "reviewed_members": [
         "7:b"
       ],
-      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
-      "source_artifact_version": "0.48.0",
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
       "source_box_px": [
@@ -1172,35 +1193,17 @@
         1400
       ],
       "source_render_dpi": 400,
-      "basis": "Philco p.38: lower #7 4.7 MΩ terminal joins the B− return rail."
-    },
-    {
-      "net_id": "F_RF_LOOP_SECONDARY",
-      "milestone_version": "0.49.0",
-      "reviewed_members": [
-        "8:a"
-      ],
-      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
-      "source_artifact_version": "0.49.0",
-      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
-      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
-      "source_box_px": [
-        240,
-        950,
-        680,
-        1350
-      ],
-      "source_render_dpi": 400,
-      "basis": "Philco p.38: upper #8 lead shares the lower-loop/#2 11-turn winding junction with #7:a; no polarity is implied."
+      "basis": "Lower #7 lead joins the lower #2 secondary lead and AVC rail.",
+      "reconciled_in": "0.53.0"
     },
     {
       "net_id": "F_BMINUS",
       "milestone_version": "0.49.0",
       "reviewed_members": [
-        "8:b"
+        "8:a"
       ],
-      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
-      "source_artifact_version": "0.49.0",
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
       "source_box_px": [
@@ -1210,7 +1213,28 @@
         1350
       ],
       "source_render_dpi": 400,
-      "basis": "Philco p.38: lower #8 lead joins the B− rail at #2:secondary_b and #7:b."
+      "basis": "Upper #8 lead joins the main B− rail at the converter cathode return.",
+      "reconciled_in": "0.53.0"
+    },
+    {
+      "net_id": "F_AVC_RETURN",
+      "milestone_version": "0.49.0",
+      "reviewed_members": [
+        "8:b"
+      ],
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        240,
+        950,
+        680,
+        1350
+      ],
+      "source_render_dpi": 400,
+      "basis": "Lower #8 lead joins the lower #2 secondary lead and AVC rail.",
+      "reconciled_in": "0.53.0"
     },
     {
       "net_id": "F_RF_CHASSIS",
@@ -1283,8 +1307,35 @@
       "source_artifact_version": "0.52.0",
       "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
       "basis": "Philco p.38 power-line conductor group with tube pin role crosswalk where applicable."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.53.0",
+      "reviewed_members": [
+        "V1:7",
+        "V2:4",
+        "V2:5",
+        "V2:7",
+        "V3:7"
+      ],
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "7A8 cathode/suppressor glyph lead descends to the explicit B− junction beside #8 upper lead; manufacturer basing maps the cathode/G6 to pin 7. 7B7 suppressor grid lead exits the upper grid and loops to the cathode return conductor; manufacturer basing maps G3 to pin 4. 7B7 shield glyph lead joins the cathode return conductor at an explicit dot; manufacturer basing maps the shield to pin 5. 7B7 cathode glyph lead descends to an explicit dot on B−. Intervening AVC and supply crossings without dots remain distinct. 7C6 cathode glyph lead descends to the B− rail at an explicit dot and continues to the power return; manufacturer basing maps the cathode to pin 7. Pin 4 shares it internally, not by an invented external jumper."
+    },
+    {
+      "net_id": "F_BPLUS_FILT",
+      "milestone_version": "0.53.0",
+      "reviewed_members": [
+        "10:secondary_b"
+      ],
+      "source_artifact": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+      "source_artifact_version": "0.53.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Lower right #10 winding lead runs right to the dotted junction at #12:pSupply and #13:a, continuing onto filtered B+."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All 108 partial graph memberships reconcile through v0.52. Rider XII 12-45 supports upper right #10 to V1:3. Lower #10 winding, #12/#13 crossing review and several other tube pins remain open."
+  "milestone_record_note": "All 114 current graph memberships reconcile through v0.53. Prior incorrect assignments are retained only in the superseded history artifact.",
+  "prior_membership_history": "engineering/PT44_Pre_v053_Membership_History_V1.json"
 }

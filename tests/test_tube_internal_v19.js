@@ -15,10 +15,11 @@ for(const fn of ['pt44BenchAudit','pt44InternalAudit','pt44ContinuityAudit'])ass
 const result=evalJSON('pt44ContinuityQuery("V3:4","V3:7")');
 assert.equal(result.kind,'tube_internal_connection');assert.equal(result.ohms,0);
 assert.deepEqual(result.path.map(e=>e.id),['V3:CATHODE_BOND']);
-for(const endpoints of [['V3:5','V3:7'],['V3:6','V3:7'],['V3:4','__CHASSIS__'],['V3:7','29A:b']]){
+for(const endpoints of [['V3:5','V3:7'],['V3:6','V3:7'],['V3:4','__CHASSIS__']]){
  const statement='pt44ContinuityQuery('+JSON.stringify(endpoints[0])+','+JSON.stringify(endpoints[1])+')';
  assert.equal(evalJSON(statement).kind,'untraced',statement);
 }
+assert.equal(evalJSON('pt44ContinuityQuery("V3:7","29A:b")').kind,'same_wire_net');
 assert(evalJSON('pt44ContinuityAudit()').total>=17);
 const mutations=[
  {expr:'PT44_TUBE_INTERNAL_V1.certified_metallic_links[0]',key:'to',wrong:'V3:5'},

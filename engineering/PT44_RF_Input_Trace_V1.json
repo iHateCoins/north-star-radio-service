@@ -41,8 +41,12 @@
     "aerial_compensator_5": "a is the upper terminal on the signal-input conductor and b is the grounded terminal; no polarity is implied.",
     "tube_v1": "The factory symbol signal-input grid is mapped to socket terminal V1:6 using the reviewed 7A8 pin-role reference; the adjacent symbol-level source path is followed without inferring the other 7A8 electrode wires.",
     "component_6": "cap_a is the upper #6 condenser lead on F_RF_INPUT; cap_b and choke_a form the drawn internal series junction; choke_b ends at the explicit loop-operation chassis ground. No B− equivalence or RF behavior is inferred.",
-    "component_7": "7:a is the upper 4.7 MΩ resistor lead at the lower loop/#2 11-turn winding junction; 7:b is the lower lead on B−. This establishes external connectivity only.",
-    "component_8": "a and b are drawing-end aliases only: #8:a is the upper loop/#2 11-turn junction; #8:b is B−. The source value is disputed between schematic and parts list."
+    "component_7": "Upper 7:a is B− and lower 7:b is AVC; corrected in v0.53.",
+    "component_8": "Upper 8:a is B− and lower 8:b is AVC; its 0.05/0.1 µF source value remains disputed.",
+    "7:a": "Upper #7 lead joins the main B− rail, not the loop/#2 upper-secondary junction.",
+    "7:b": "Lower #7 lead joins the lower #2 secondary lead and AVC rail.",
+    "8:a": "Upper #8 lead joins the main B− rail at the converter cathode return.",
+    "8:b": "Lower #8 lead joins the lower #2 secondary lead and AVC rail."
   },
   "verified_endpoints": [
     {
@@ -171,9 +175,9 @@
     },
     {
       "terminal": "7:a",
-      "net_id": "F_RF_LOOP_SECONDARY",
-      "joined_factory_member": "3:loop_b / 2:secondary_a",
-      "interpretation": "Upper #7 4.7 MΩ terminal joins the lower built-in-loop lead and the upper end of the #2 11-turn winding.",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "29A:b / 29B:b / 23:b / 24:b / 22:b / 25:b / 9:b / 11:b / 16:switch_b / V3:8 / 8:a / 15:b / 16:b / 19:b / V1:7 / V2:4 / V2:5 / V2:7 / V3:7",
+      "interpretation": "Upper #7 lead joins the main B− rail, not the loop/#2 upper-secondary junction.",
       "source_box_px": [
         150,
         900,
@@ -184,9 +188,9 @@
     },
     {
       "terminal": "7:b",
-      "net_id": "F_BMINUS",
-      "joined_factory_member": "2:secondary_b / B− return rail",
-      "interpretation": "Lower #7 4.7 MΩ terminal joins the same B− rail as the lower #2 11-turn winding terminal.",
+      "net_id": "F_AVC_RETURN",
+      "joined_factory_member": "12:sReturn / 17:b / 2:secondary_b / 8:b",
+      "interpretation": "Lower #7 lead joins the lower #2 secondary lead and AVC rail.",
       "source_box_px": [
         150,
         900,
@@ -197,9 +201,9 @@
     },
     {
       "terminal": "8:a",
-      "net_id": "F_RF_LOOP_SECONDARY",
-      "joined_factory_member": "3:loop_b / 2:secondary_a / 7:a",
-      "interpretation": "Upper #8 capacitor terminal is drawn on the lower-loop/#2 11-turn winding junction shared with the upper #7 resistor terminal. The terminal alias is not polarity.",
+      "net_id": "F_BMINUS",
+      "joined_factory_member": "29A:b / 29B:b / 23:b / 24:b / 22:b / 25:b / 9:b / 11:b / 16:switch_b / V3:8 / 7:a / 15:b / 16:b / 19:b / V1:7 / V2:4 / V2:5 / V2:7 / V3:7",
+      "interpretation": "Upper #8 lead joins the main B− rail at the converter cathode return.",
       "source_box_px": [
         240,
         950,
@@ -210,9 +214,9 @@
     },
     {
       "terminal": "8:b",
-      "net_id": "F_BMINUS",
-      "joined_factory_member": "2:secondary_b / 7:b / B− return rail",
-      "interpretation": "Lower #8 capacitor terminal is drawn on the B− rail shared with the lower #2 11-turn winding and lower #7 resistor terminals. The terminal alias is not polarity.",
+      "net_id": "F_AVC_RETURN",
+      "joined_factory_member": "12:sReturn / 17:b / 2:secondary_b / 7:b",
+      "interpretation": "Lower #8 lead joins the lower #2 secondary lead and AVC rail.",
       "source_box_px": [
         240,
         950,
@@ -238,14 +242,7 @@
     "component_8_factory_value_resolved": false
   },
   "unresolved": [
-    "#2 primary/secondary terminals, winding turns and relationship to external ANT eyelet.",
-    "#4 oscillator gang wiring, rotor construction/physical lug crosswalk, and remaining #5 adjustment data.",
-    "7A8 plate/screen/cathode and #9 receiver connection crosswalk.",
-    "Antenna/chassis and B-minus relationship outside the explicit loop-operation ground symbols.",
-    "RF transfer behavior and complete receiver validation.",
-    "The #4 oscillator gang and 7A8 converter path remain open; #6 trace completion does not establish oscillator behavior or full RF tracking.",
-    "The #7 resistor return is source-traced, but the oscillator gang, transformer parameters and receiver behavior remain open.",
-    "The #8 capacitor endpoints are traced, but its p.38 schematic marking (0.05 mfd) conflicts with the replacement-parts list (0.1 mfd, 200 V); selected simulation value remains unresolved."
+    "#8 value conflict, physical ANT/coil/socket lug correlation, four-dot oscillator coupling, winding parameters and receiver behavior."
   ],
   "benchmark_ready": false,
   "source_value_discrepancies": [
@@ -285,5 +282,7 @@
       "resolution_needed": "Service bulletin, correct model-specific parts data, or inspected original/replacement component evidence.",
       "factory_part": "8"
     }
-  ]
+  ],
+  "review_revision": "0.53.0",
+  "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

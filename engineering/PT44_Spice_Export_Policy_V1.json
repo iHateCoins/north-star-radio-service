@@ -11,7 +11,7 @@
     "F_IF2_SECONDARY_VOL_TOP",
     "F_VOL_WIPER_C18",
     "F_7C6_AUDIO_GRID",
-    "F_DET_PASSIVE_RETURN"
+    "F_BMINUS"
   ],
   "field_coil_dcr_ohms": 500,
   "tapped_section_values_ohms": [

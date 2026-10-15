@@ -39,9 +39,10 @@
     }
   ],
   "limits": [
-    "The lower right-hand #10 end remains unpromoted; #12/#13 junction/crossings need a fresh continuity reconciliation.",
+    "The lower right winding endpoint and #12/#13 paths were subsequently reconciled in v0.53; this artifact retains the upper-end crosscheck.",
     "Rider 12-45 is another scan of the Philco drawing. Agreement does not prove physical lug orientation or settle ambiguous crossing marks.",
     "No winding polarity, coupling, inductance, four-dot contact allocation, chassis/B− bond or full oscillator behavior is inferred."
   ],
-  "benchmark_ready": false
+  "benchmark_ready": false,
+  "subsequent_lower_winding_trace": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

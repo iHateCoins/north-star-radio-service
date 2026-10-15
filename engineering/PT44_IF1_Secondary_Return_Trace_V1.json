@@ -17,15 +17,15 @@
     }
   },
   "terminal_conventions": {
-    "resistor_13": "a/b are endpoint aliases. a is the IF-grid side and b the B− return side as drawn; no resistor polarity is implied.",
+    "resistor_13": "a is the left filtered-B+ end and b is the right shared-screen-feed end. Corrected from the v0.40 grid/B− misinterpretation; no polarity implied.",
     "transformer_12": "sReturn denotes the lower secondary terminal on the native schematic; winding polarity and electrical parameters are not inferred."
   },
   "verified_endpoints": [
     {
       "terminal": "12:sReturn",
-      "net_id": "F_BMINUS",
-      "joined_factory_member": "13:b",
-      "interpretation": "The lower terminal of first IF secondary #12 returns to B−.",
+      "net_id": "F_AVC_RETURN",
+      "joined_factory_member": "17:b / 2:secondary_b / 7:b / 8:b",
+      "interpretation": "Lower #12 secondary lead descends, turns right, then down to the distinct lower AVC rail. It crosses the B+ and B− rails without junction dots.",
       "source_box_px": [
         540,
         245,
@@ -35,9 +35,9 @@
     },
     {
       "terminal": "13:a",
-      "net_id": "F_IF1_GRID",
-      "joined_factory_member": "V2:6",
-      "interpretation": "One #13 27 kΩ lead joins the #12 secondary/control-grid node.",
+      "net_id": "F_BPLUS_FILT",
+      "joined_factory_member": "28:b / 29B:a / 21:a / 25:a / 12:pSupply / 14:pSupply / V4:4 / 10:secondary_b",
+      "interpretation": "Left #13 lead meets the lower right #10 winding lead and lower #12 primary lead at a dotted junction; that primary lead joins the filtered B+ rail.",
       "source_box_px": [
         540,
         245,
@@ -47,9 +47,9 @@
     },
     {
       "terminal": "13:b",
-      "net_id": "F_BMINUS",
-      "joined_factory_member": "12:sReturn",
-      "interpretation": "The other #13 27 kΩ lead joins the B− return bus.",
+      "net_id": "F_SCREEN_45V",
+      "joined_factory_member": "V1:5 / V2:3 / 11:a",
+      "interpretation": "Right #13 lead rises to the 7B7 screen branch and the continuous shared 7A8/7B7 screen rail. Its crossing of filtered B+ has no junction dot.",
       "source_box_px": [
         540,
         245,
@@ -70,5 +70,7 @@
     "IF transformer inductance, resistance, coupling and alignment-capacitor values",
     "Remaining AVC and detector diode socket-pin assignments",
     "Full receiver behavior correlation"
-  ]
+  ],
+  "review_revision": "0.53.0",
+  "correction_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json"
 }

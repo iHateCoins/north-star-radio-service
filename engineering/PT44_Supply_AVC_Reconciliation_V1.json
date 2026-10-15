@@ -1,0 +1,346 @@
+{
+  "schema": "PT44_SUPPLY_AVC_RECONCILIATION_V1",
+  "version": "0.53.0",
+  "model": "Philco PT-44 / PT-42 shared schematic",
+  "status": "SOURCE_TRACED_CONDUCTOR_RECONCILIATION_DIODE_PINS_OPEN",
+  "sources": [
+    {
+      "document": "Philco 1941 RMS Year Book",
+      "printed_page": 38,
+      "native_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "native_dimensions_px": [
+        2022,
+        2587
+      ],
+      "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf"
+    },
+    {
+      "document": "Rider XII, Philco",
+      "printed_page": "12-45",
+      "uploaded_pdf_sha256": "1e586485ac7b01415e56ff766264ba94e90c7521d103520774658b31992b9549",
+      "relation": "Independent print/scan of the same factory drawing; not independent chassis continuity."
+    }
+  ],
+  "corrections": [
+    {
+      "terminal": "13:a",
+      "previous_net": "F_IF1_GRID",
+      "net_id": "F_BPLUS_FILT",
+      "basis": "Left #13 lead meets the lower right #10 winding lead and lower #12 primary lead at a dotted junction; that primary lead joins the filtered B+ rail."
+    },
+    {
+      "terminal": "13:b",
+      "previous_net": "F_BMINUS",
+      "net_id": "F_SCREEN_45V",
+      "basis": "Right #13 lead rises to the 7B7 screen branch and the continuous shared 7A8/7B7 screen rail. Its crossing of filtered B+ has no junction dot."
+    },
+    {
+      "terminal": "12:sReturn",
+      "previous_net": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
+      "basis": "Lower #12 secondary lead descends, turns right, then down to the distinct lower AVC rail. It crosses the B+ and B− rails without junction dots."
+    },
+    {
+      "terminal": "17:b",
+      "previous_net": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
+      "basis": "Lower #17 lead joins the lower unnumbered 7C6 diode glyph lead and descends to the AVC rail; its crossing of the passive B− return has no junction dot."
+    },
+    {
+      "terminal": "2:secondary_b",
+      "previous_net": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
+      "basis": "Lower 11-turn #2 winding lead joins lower #7/#8 leads, then rises to the lower AVC rail; the upper #2 secondary lead remains connected only to the loop lower lead."
+    },
+    {
+      "terminal": "7:a",
+      "previous_net": "F_RF_LOOP_SECONDARY",
+      "net_id": "F_BMINUS",
+      "basis": "Upper #7 lead joins the main B− rail, not the loop/#2 upper-secondary junction."
+    },
+    {
+      "terminal": "7:b",
+      "previous_net": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
+      "basis": "Lower #7 lead joins the lower #2 secondary lead and AVC rail."
+    },
+    {
+      "terminal": "8:a",
+      "previous_net": "F_RF_LOOP_SECONDARY",
+      "net_id": "F_BMINUS",
+      "basis": "Upper #8 lead joins the main B− rail at the converter cathode return."
+    },
+    {
+      "terminal": "8:b",
+      "previous_net": "F_BMINUS",
+      "net_id": "F_AVC_RETURN",
+      "basis": "Lower #8 lead joins the lower #2 secondary lead and AVC rail."
+    },
+    {
+      "terminal": "15:b",
+      "previous_net": "F_DET_PASSIVE_RETURN",
+      "net_id": "F_BMINUS",
+      "basis": "Lower #15 lead has an explicit dot on the same B− rail as #19:b and the 7C6 cathode."
+    },
+    {
+      "terminal": "16:b",
+      "previous_net": "F_DET_PASSIVE_RETURN",
+      "net_id": "F_BMINUS",
+      "basis": "Lower #16 track end has an explicit dot on that B− rail; the separate switch is unchanged."
+    },
+    {
+      "terminal": "19:b",
+      "previous_net": "F_DET_PASSIVE_RETURN",
+      "net_id": "F_BMINUS",
+      "basis": "Lower #19 lead has an explicit dot on the same B− rail as the 7C6 cathode."
+    }
+  ],
+  "verified_endpoints": [
+    {
+      "terminal": "13:a",
+      "net_id": "F_BPLUS_FILT",
+      "interpretation": "Left #13 lead meets the lower right #10 winding lead and lower #12 primary lead at a dotted junction; that primary lead joins the filtered B+ rail."
+    },
+    {
+      "terminal": "13:b",
+      "net_id": "F_SCREEN_45V",
+      "interpretation": "Right #13 lead rises to the 7B7 screen branch and the continuous shared 7A8/7B7 screen rail. Its crossing of filtered B+ has no junction dot."
+    },
+    {
+      "terminal": "12:sReturn",
+      "net_id": "F_AVC_RETURN",
+      "interpretation": "Lower #12 secondary lead descends, turns right, then down to the distinct lower AVC rail. It crosses the B+ and B− rails without junction dots."
+    },
+    {
+      "terminal": "17:b",
+      "net_id": "F_AVC_RETURN",
+      "interpretation": "Lower #17 lead joins the lower unnumbered 7C6 diode glyph lead and descends to the AVC rail; its crossing of the passive B− return has no junction dot."
+    },
+    {
+      "terminal": "2:secondary_b",
+      "net_id": "F_AVC_RETURN",
+      "interpretation": "Lower 11-turn #2 winding lead joins lower #7/#8 leads, then rises to the lower AVC rail; the upper #2 secondary lead remains connected only to the loop lower lead."
+    },
+    {
+      "terminal": "7:a",
+      "net_id": "F_BMINUS",
+      "interpretation": "Upper #7 lead joins the main B− rail, not the loop/#2 upper-secondary junction."
+    },
+    {
+      "terminal": "7:b",
+      "net_id": "F_AVC_RETURN",
+      "interpretation": "Lower #7 lead joins the lower #2 secondary lead and AVC rail."
+    },
+    {
+      "terminal": "8:a",
+      "net_id": "F_BMINUS",
+      "interpretation": "Upper #8 lead joins the main B− rail at the converter cathode return."
+    },
+    {
+      "terminal": "8:b",
+      "net_id": "F_AVC_RETURN",
+      "interpretation": "Lower #8 lead joins the lower #2 secondary lead and AVC rail."
+    },
+    {
+      "terminal": "15:b",
+      "net_id": "F_BMINUS",
+      "interpretation": "Lower #15 lead has an explicit dot on the same B− rail as #19:b and the 7C6 cathode."
+    },
+    {
+      "terminal": "16:b",
+      "net_id": "F_BMINUS",
+      "interpretation": "Lower #16 track end has an explicit dot on that B− rail; the separate switch is unchanged."
+    },
+    {
+      "terminal": "19:b",
+      "net_id": "F_BMINUS",
+      "interpretation": "Lower #19 lead has an explicit dot on the same B− rail as the 7C6 cathode."
+    },
+    {
+      "terminal": "10:secondary_b",
+      "net_id": "F_BPLUS_FILT",
+      "interpretation": "Lower right #10 winding lead runs right to the dotted junction at #12:pSupply and #13:a, continuing onto filtered B+."
+    },
+    {
+      "terminal": "V1:7",
+      "net_id": "F_BMINUS",
+      "interpretation": "7A8 cathode/suppressor glyph lead descends to the explicit B− junction beside #8 upper lead; manufacturer basing maps the cathode/G6 to pin 7."
+    },
+    {
+      "terminal": "V2:4",
+      "net_id": "F_BMINUS",
+      "interpretation": "7B7 suppressor grid lead exits the upper grid and loops to the cathode return conductor; manufacturer basing maps G3 to pin 4."
+    },
+    {
+      "terminal": "V2:5",
+      "net_id": "F_BMINUS",
+      "interpretation": "7B7 shield glyph lead joins the cathode return conductor at an explicit dot; manufacturer basing maps the shield to pin 5."
+    },
+    {
+      "terminal": "V2:7",
+      "net_id": "F_BMINUS",
+      "interpretation": "7B7 cathode glyph lead descends to an explicit dot on B−. Intervening AVC and supply crossings without dots remain distinct."
+    },
+    {
+      "terminal": "V3:7",
+      "net_id": "F_BMINUS",
+      "interpretation": "7C6 cathode glyph lead descends to the B− rail at an explicit dot and continues to the power return; manufacturer basing maps the cathode to pin 7. Pin 4 shares it internally, not by an invented external jumper."
+    }
+  ],
+  "new_endpoints": [
+    {
+      "terminal": "10:secondary_b",
+      "net_id": "F_BPLUS_FILT",
+      "interpretation": "Lower right #10 winding lead runs right to the dotted junction at #12:pSupply and #13:a, continuing onto filtered B+."
+    },
+    {
+      "terminal": "V1:7",
+      "net_id": "F_BMINUS",
+      "interpretation": "7A8 cathode/suppressor glyph lead descends to the explicit B− junction beside #8 upper lead; manufacturer basing maps the cathode/G6 to pin 7."
+    },
+    {
+      "terminal": "V2:4",
+      "net_id": "F_BMINUS",
+      "interpretation": "7B7 suppressor grid lead exits the upper grid and loops to the cathode return conductor; manufacturer basing maps G3 to pin 4."
+    },
+    {
+      "terminal": "V2:5",
+      "net_id": "F_BMINUS",
+      "interpretation": "7B7 shield glyph lead joins the cathode return conductor at an explicit dot; manufacturer basing maps the shield to pin 5."
+    },
+    {
+      "terminal": "V2:7",
+      "net_id": "F_BMINUS",
+      "interpretation": "7B7 cathode glyph lead descends to an explicit dot on B−. Intervening AVC and supply crossings without dots remain distinct."
+    },
+    {
+      "terminal": "V3:7",
+      "net_id": "F_BMINUS",
+      "interpretation": "7C6 cathode glyph lead descends to the B− rail at an explicit dot and continues to the power return; manufacturer basing maps the cathode to pin 7. Pin 4 shares it internally, not by an invented external jumper."
+    }
+  ],
+  "conductor_groups": [
+    {
+      "net_id": "F_BPLUS_FILT",
+      "members": [
+        "28:b",
+        "29B:a",
+        "21:a",
+        "25:a",
+        "12:pSupply",
+        "14:pSupply",
+        "V4:4",
+        "13:a",
+        "10:secondary_b"
+      ],
+      "boundary": "Current listed members only; unnumbered diode glyphs are not assigned to socket pins."
+    },
+    {
+      "net_id": "F_SCREEN_45V",
+      "members": [
+        "V1:5",
+        "V2:3",
+        "11:a",
+        "13:b"
+      ],
+      "boundary": "Current listed members only; unnumbered diode glyphs are not assigned to socket pins."
+    },
+    {
+      "net_id": "F_AVC_RETURN",
+      "members": [
+        "12:sReturn",
+        "17:b",
+        "2:secondary_b",
+        "7:b",
+        "8:b"
+      ],
+      "boundary": "Current listed members only; unnumbered diode glyphs are not assigned to socket pins."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "members": [
+        "29A:b",
+        "29B:b",
+        "23:b",
+        "24:b",
+        "22:b",
+        "25:b",
+        "9:b",
+        "11:b",
+        "16:switch_b",
+        "V3:8",
+        "7:a",
+        "8:a",
+        "15:b",
+        "16:b",
+        "19:b",
+        "V1:7",
+        "V2:4",
+        "V2:5",
+        "V2:7",
+        "V3:7"
+      ],
+      "boundary": "Current listed members only; unnumbered diode glyphs are not assigned to socket pins."
+    },
+    {
+      "net_id": "F_IF1_GRID",
+      "members": [
+        "12:sGrid",
+        "V2:6"
+      ],
+      "boundary": "Current listed members only; unnumbered diode glyphs are not assigned to socket pins."
+    },
+    {
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "members": [
+        "3:loop_b",
+        "2:secondary_a"
+      ],
+      "boundary": "Current listed members only; unnumbered diode glyphs are not assigned to socket pins."
+    }
+  ],
+  "nonjunctions": [
+    "#12 secondary cold conductor crosses the B+ and shared-screen rails without a junction.",
+    "#13 screen-side vertical lead crosses filtered B+ without a junction.",
+    "AVC rail runs below the main B− rail; its detector and aerial lead crossings without dots are not bonds.",
+    "Volume wiper / #18 lead crosses diode and cathode conductors without dots."
+  ],
+  "internal_equivalence": {
+    "terminal": "V3:4",
+    "peer": "V3:7",
+    "receiver_net": "F_BMINUS",
+    "basis": "Factory cathode glyph to B− plus manufacturer-documented internal 7C6 pin 4/7 link. No external pin-4 jumper is asserted.",
+    "external_wire_claim": false
+  },
+  "remaining": [
+    "7C6 upper/lower diode glyphs to physical pins 5 and 6",
+    "Four-dot #10-adjacent symbol and oscillator grid coupling",
+    "Factory #8 value conflict (schematic 0.05 µF versus parts-list 0.1 µF)",
+    "Physical lug/lead routing, B−/metal chassis relation, winding L/coupling and receiver behavior"
+  ],
+  "acceptance": {
+    "all_83_declared_component_endpoints_referenced": true,
+    "complete_pin_level_netlist": false,
+    "benchmark_ready": false
+  },
+  "review_boxes_native_px": {
+    "aerial_avc_and_converter_return": [
+      100,
+      230,
+      735,
+      990
+    ],
+    "if_supply_screen_and_secondary_return": [
+      500,
+      265,
+      1270,
+      815
+    ],
+    "detector_avc_and_cathode": [
+      950,
+      240,
+      1450,
+      800
+    ]
+  }
+}
