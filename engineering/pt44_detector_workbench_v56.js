@@ -3,7 +3,7 @@ function pt44DetectorBenchOptions(state){const f=PT44_DETECTOR_AVC_V1.faults.fin
 function pt44DetectorModelHTML(stage,esc){
  if(!['ALL','IF','DETECTOR','AUDIO'].includes(stage))return '';
  const state=pt44DetectorBenchState(),key=JSON.stringify(pt44DetectorBenchOptions(state)),result=pt44DetectorModelHTML.result?.key===key?pt44DetectorModelHTML.result.value:null,option=(v,l,current)=>`<option value="${v}"${v===current?' selected':''}>${esc(l)}</option>`;
- return `<section class="sl-audio-v55 sl-detector-v56"><h3>Detector and AVC bench · v0.56</h3><p>Apply a 455 kHz AM signal at the second IF secondary. Inspect recovered audio and the AVC rail as the signal arrives and stops. Probe loading is included in the solve.</p>
+ return `<section class="sl-detector-v56"><h3>Detector and AVC bench · v0.56</h3><p>Apply a 455 kHz AM signal at the second IF secondary. Inspect recovered audio and the AVC rail as the signal arrives and stops. Probe loading is included in the solve.</p>
  <form id="detectorFormV56" class="sl-toolbar" style="flex-wrap:wrap;align-items:end;gap:10px">
  <label>Condition<br><select name="fault">${PT44_DETECTOR_AVC_V1.faults.map(f=>option(f.id,f.label,state.fault)).join('')}</select></label>
  <label>IF peak V<br><input name="amplitude_v" type="number" min="0" max="10" step=".1" value="${state.amplitude_v}" style="width:75px"></label>
