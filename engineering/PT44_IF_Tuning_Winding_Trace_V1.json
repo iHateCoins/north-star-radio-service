@@ -1,0 +1,76 @@
+{
+  "schema": "PT44_IF_TUNING_WINDING_TRACE_V1",
+  "version": "0.58.0",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+    "pdf_sha256": "8a7e016b0814584a31f5c113dec7d1605712b3f163980584acd89c5b347f1a09",
+    "review": "400 dpi direct PDF rendering; vertical winding labels inspected after rotation. Cross-checked against p.36 alignment sequence."
+  },
+  "windings": [
+    {
+      "id": "12_primary",
+      "terminal_pair": [
+        "12:pPlate",
+        "12:pSupply"
+      ],
+      "printed_dcr_ohm": 31
+    },
+    {
+      "id": "12_secondary",
+      "terminal_pair": [
+        "12:sGrid",
+        "12:sReturn"
+      ],
+      "printed_dcr_ohm": 29
+    },
+    {
+      "id": "14_primary",
+      "terminal_pair": [
+        "14:pPlate",
+        "14:pSupply"
+      ],
+      "printed_dcr_ohm": 45
+    },
+    {
+      "id": "14_secondary",
+      "terminal_pair": [
+        "14:sDetector",
+        "14:sReturn"
+      ],
+      "printed_dcr_ohm": 6.8
+    }
+  ],
+  "adjustments": [
+    {
+      "id": "12A",
+      "winding": "12_primary",
+      "parameter": "c12a_scale"
+    },
+    {
+      "id": "12B",
+      "winding": "12_secondary",
+      "parameter": "c12b_scale"
+    },
+    {
+      "id": "14A",
+      "winding": "14_secondary",
+      "parameter": "c14a_scale"
+    }
+  ],
+  "second_if_primary_tuning_capacitor_drawn": false,
+  "correction_from_v057": "The generic double-tuned second IF and uniform 30-ohm winding fixture are superseded by the source-drawn three tuning branches and four printed DCR values. Earlier four-service-trimmer wording was incorrect.",
+  "limits": [
+    "No historical tuning-capacitance values, winding inductances, coupling, core Q, tolerances or measurement temperature are supplied by these annotations.",
+    "No zero-parasitic-capacitance claim follows from the absence of a primary tuning-capacitor glyph.",
+    "The current-injection test port is not the complete factory RF alignment hookup."
+  ],
+  "ec_support": {
+    "EC-02": "Replace assumed winding DCRs with printed values.",
+    "EC-05": "Correct tuned branches and map the three independent adjustments.",
+    "EC-07": "Define loaded small-signal IF measurement conditions.",
+    "EC-09": "Support a repeatable alignment/recovery subset; full shop acceptance remains open."
+  },
+  "benchmark_ready": false
+}

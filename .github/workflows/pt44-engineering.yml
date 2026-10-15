@@ -103,6 +103,16 @@ jobs:
       - name: Verify coupled IF generated worker and canonical source
         run: node tests/test_if_workbench_v57.js
 
+      - name: Verify source-backed IF controls and loaded complex response
+        run: node tests/test_if_alignment_v58.js
+      - name: Verify alignment recovery in the coupled transient receiver
+        run: node tests/test_if_alignment_transient_v58.js
+      - name: Verify generated alignment worker and settings lifecycle
+        run: node tests/test_if_alignment_workbench_v58.js
+
+      - name: Keep the EC finish line fixed and version contributions explicit
+        run: node tests/test_ec_reporting_v58.js
+
   audio-browser:
     name: Exercise coupled audio bench in Chromium
     runs-on: ubuntu-latest
@@ -145,4 +155,14 @@ jobs:
         with:
           name: pt44-if-browser-v057
           path: tmp/pt44-if-browser/
+          retention-days: 7
+
+      - name: Exercise IF sweep, three-trimmer alignment and coupled settings transfer
+        run: node tests/test_if_alignment_browser_v58.js --browser
+      - name: Retain alignment screenshots and measurement evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-if-alignment-browser-v058
+          path: tmp/pt44-if-alignment-browser/
           retention-days: 7

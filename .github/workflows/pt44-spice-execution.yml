@@ -76,3 +76,6 @@ jobs:
 
       - name: Cross-check coupled tuned IF, detector, audio and DC supply against ngspice
         run: node tests/test_if_spice_v57.js --ngspice
+
+      - name: Cross-check loaded IF AC magnitude and phase across all three controls
+        run: node tests/test_if_ac_spice_v58.js --ngspice

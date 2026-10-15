@@ -11,7 +11,7 @@ for(const options of [{carrier_hz:NaN},{line_v:140},{if1_detune:0},{avc_feedback
 // Mutual-inductor stored energy is positive for every supported coupling. The
 // independently computed energy derivative equals winding-port power (DC losses excluded).
 for(const k of [.005,.02,.08]){const L=s.assumptions.winding_h,M=k*L,i=.001,j=-.0004,di=200,dj=-150,vp=L*di+M*dj,vs=M*di+L*dj;assert(.5*L*(i*i+j*j)+M*i*j>0);const h=1e-9,E=(x,y)=>.5*L*(x*x+y*y)+M*x*y;assert(Math.abs((E(i+h*di,j+h*dj)-E(i-h*di,j-h*dj))/(2*h)-vp*i-vs*j)<1e-12);}
-const healthy=run('healthy');assert(healthy.summary.IP.carrier_peak>.2);assert(healthy.summary.speaker_v.audio_peak>.001);assert(healthy.final.x[13]<-.001);
+const healthy=run('healthy');assert(healthy.summary.IP.carrier_peak>.02);assert(healthy.summary.speaker_v.audio_peak>.001);assert(healthy.final.x[13]<-.001);
 // Supply and screen DC KCL checks against independent closed-form sums.
 const x=healthy.initial.x,t=m.tube(s,x[16],x[14],x[15]);assert(Math.abs((x[1]-x[14])/27000-t.screen_a-x[14]/s.assumptions.converter_screen_ohm)<1e-8);assert(Math.abs(x[24]+(x[16]-x[1])*m.configure(...args).lossG+t.plate_a)<1e-8);
 const quiet=run('no_signal',{input_peak_a:0});assert(quiet.summary.speaker_v.audio_peak<1e-6);assert(Math.abs(quiet.final.x[13])<1e-5);
@@ -19,10 +19,11 @@ const dead=run('if_dead',{if_emission:0});assert(dead.summary.IP.carrier_peak<he
 const screen=run('screen_open',{screen_feed_open:true});assert(screen.initial.if_plate_a<1e-10);assert(screen.summary.speaker_v.audio_peak<healthy.summary.speaker_v.audio_peak*.02);
 const detuned=run('if2_detuned',{if2_detune:1.1});assert(detuned.summary.speaker_v.audio_peak<healthy.summary.speaker_v.audio_peak*.6);
 const c18=run('c18_open',{c18_scale:0});assert(c18.summary.G.audio_peak<healthy.summary.G.audio_peak*.02);assert(c18.summary.speaker_v.audio_peak<healthy.summary.speaker_v.audio_peak*.03);
-const open=run('r17_open',{r17_open:true});// Grid rectification still biases the AVC rail through #12, even with #17 open.
-assert(Math.abs(open.final.x[13])<Math.abs(healthy.final.x[13])*.6);assert(open.final.x[13]<0);assert(open.summary.G.audio_peak>healthy.summary.G.audio_peak*.2);
+const open=run('r17_open',{r17_open:true});// The source-corrected single-tuned second IF has less detector drive than the old fixture.
+// Opening #17 reduces its AVC contribution; grid rectification still supplies negative bias.
+assert(Math.abs(open.final.x[13])<Math.abs(healthy.final.x[13]));assert(open.final.x[13]<0);assert(open.summary.G.audio_peak>healthy.summary.G.audio_peak*.2);
 const loaded=run('loaded_grid',{meter:'dmm',probe:'IG'});assert(loaded.summary.IG.carrier_peak<healthy.summary.IG.carrier_peak*.5);
 const strong=run('strong',{input_peak_a:.00002});const noAVC=run('strong_no_feedback',{input_peak_a:.00002,avc_feedback:false});assert(Math.abs(strong.final.x[13])>Math.abs(healthy.final.x[13])*3);assert(strong.summary.IG.mean<-.01);assert(Math.abs(noAVC.summary.IG.mean)<.001);assert(strong.summary.if_plate_a.mean<noAVC.summary.if_plate_a.mean);
 const fine=run('timestep_192',{samples_per_carrier:192});for(const [k,metric] of [['IP','carrier_peak'],['G','audio_peak'],['speaker_v','audio_peak'],['AVC','mean']])assert(Math.abs(healthy.summary[k][metric]/fine.summary[k][metric]-1)<.06,`Timestep ${k} ${metric}`);
 const restored=run('restored');assert.deepEqual(restored.summary,healthy.summary);assert.deepEqual(restored.final,healthy.final);
-const artifact={schema:'PT44_IF_RECEIVER_VALIDATION_V1',version:'0.57.0',scope:'Integrated hot DC IF/detector/audio/supply numerical and fault checks, under declared parameters. Does not close full-receiver gates.',cases:records};if(process.argv.includes('--record'))fs.writeFileSync(path.resolve(__dirname,'../engineering/PT44_IF_Receiver_Validation_V1.json'),JSON.stringify(artifact,null,2)+'\n');console.log('PASS v0.57 manufacturer anchors, screen KCL, signal, faults, AVC feedback, probe detuning, timestep and exact restoration');
+const artifact={schema:'PT44_IF_RECEIVER_VALIDATION_V1',version:'0.58.0',scope:'Integrated hot DC IF/detector/audio/supply numerical and fault checks, under declared parameters. Does not close full-receiver gates.',cases:records};if(process.argv.includes('--record'))fs.writeFileSync(path.resolve(__dirname,'../engineering/PT44_IF_Receiver_Validation_V1.json'),JSON.stringify(artifact,null,2)+'\n');console.log('PASS v0.58 manufacturer anchors, screen KCL, signal, faults, AVC feedback, probe detuning, timestep and exact restoration');

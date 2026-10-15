@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.57.0",
+  "version": "0.58.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -113,6 +113,22 @@
       "converter_boundary_still_substitute": true,
       "factory_calibrated": false,
       "full_receiver_validated": false
+    },
+    "source_if_parameters": {
+      "artifact": "engineering/PT44_IF_Tuning_Winding_Trace_V1.json",
+      "individual_trimmers": [
+        "12A",
+        "12B",
+        "14A"
+      ],
+      "winding_dcr_ohm": [
+        31,
+        29,
+        45,
+        6.8
+      ],
+      "fourth_tuning_capacitor_removed": true,
+      "factory_passband_calibrated": false
     }
   },
   "open_items": [

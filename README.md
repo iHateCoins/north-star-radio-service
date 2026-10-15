@@ -1,34 +1,38 @@
-# North Star Radio Service — v0.57.0 coupled IF receiver milestone
+# North Star Radio Service — v0.58.0 source-corrected IF alignment
 
-The Factory ledger now includes **Coupled IF → speaker**. One 26-variable modified nodal system joins both tuned IF transformers, the active 7B7, detector/AVC, nonlinear 7C6/50L6 audio and dynamic hot DC supply. The detector drives the actual audio grid; the modeled IF plate/screen currents draw from the same supply; AVC returns through the first IF secondary to the 7B7 grid. There is no injected audio source or separate IF supply-load resistor in this circuit.
+The PT-44 engineering panel now has a loaded IF frequency sweep and three independent adjustments. The previous generic fixture had a tuning capacitor across both windings of each IF transformer and uniform 30 Ω winding resistances. Philco p.38 instead shows **12A/12B across the first IF windings and 14A across the second IF secondary**, with **31/29/45/6.8 Ω** printed winding DCRs. The model now follows those branches and values; it does not invent a second-IF primary tuning capacitor. Tube/parasitic capacitances remain explicit.
 
-The new engineering panel supports carrier frequency, injected current, volume, DC supply, loaded probes, faults/restoration and an equivalent SPICE export. A generated worker performs the solve. Implicit midpoint integration avoids the artificial damping backward Euler would introduce in the tuned IF tanks. The default is 96 steps per carrier cycle; coupling-leakage fixtures require 192. Hot DC equilibrium is followed by 6 ms of 1 kHz AM input; measurements cover the final four modulation periods, including settling.
+The sweep linearizes the same coupled 26-variable MNA at its no-signal hot DC operating point and solves the complex equations across frequency. It reports IF grid/plate/secondary magnitude and phase, sampled peak frequency and the contiguous −3 dB band around the highest peak. The equivalent AC SPICE export executes independently. Trimmers can be adjusted separately or optimized in the documented 12A → 12B → 14A order for maximum infinitesimal IF-secondary voltage at 455 kHz. Settings transfer directly into the nonlinear IF/detector/audio/supply test.
 
-**This is not a complete PT-44 receiver.** The 7A8 is still an external current-injection boundary with explicit plate/screen substitute loads. Sylvania 7B7 curves are approximately sampled; screen scaling, winding L/k/DCR/loss and tuning capacitances need correlation. Existing diode, audio, volume and speaker/transformer assumptions remain. The three EC-01 source ambiguities remain open. The bench does not claim RF reception/tracking, steady-state sensitivity, AC/cold-heater startup validation, physical chassis repair or full shop acceptance. All voltages reference B-minus, without asserting a chassis bond.
+The Sylvania 7B7 curves end at zero control-grid voltage. The previous clamp made the slope at zero ambiguous for AC analysis. The final tabulated slope now continues to +3 V in screen-normalized coordinates as an explicit **uncalibrated extrapolation**, and the grid-current Jacobian uses the analytic derivative. Published manufacturer anchors remain checked. L, coupling, core-loss Q, actual tuning capacitance, positive-grid behavior, physical trimmer range and other inherited component approximations still need correlation.
 
-## Fixed engineering finish line
+## What this version supports toward engineering completion
 
-Broader game development is on hold until the first PT-44 is engineering complete. `engineering/PT44_Remaining_Actions_V1.json` retains the same nine IDs and acceptance lists; milestone sub-results do not close an EC by themselves:
+Every release must report the EC IDs supported, concrete evidence added toward closure, and any EC IDs actually closed. The nine acceptance lists remain fixed in `engineering/PT44_Remaining_Actions_V1.json`.
 
-1. **EC-01:** close source interpretation.
-2. **EC-02:** finish and correlate component parameters.
-3. **EC-03:** connect actual receiver loads and validate supply behavior.
-4. **EC-04:** complete and validate the integrated audio chain.
-5. **EC-05:** complete IF/detector/AVC behavior.
-6. **EC-06:** complete RF/converter and 540–1600 kHz tracking.
-7. **EC-07:** validate instruments and measurement conditions.
-8. **EC-08:** finish serviceable chassis/endpoints mapping.
-9. **EC-09:** pass diagnosis → replacement → alignment → checkout acceptance.
+| EC supported | Evidence added in v0.58 | Full EC closed? |
+|---|---|---|
+| **EC-02** | Source-backed winding DCRs, separate copper/core loss, and a checked numerical tube-table boundary. | No |
+| **EC-05** | Three independent source-drawn controls, loaded complex IF response, bandwidth checks and fixture alignment recovery. | No |
+| **EC-07** | Defined DC/current-injection conditions and measured instrument loading in the IF sweep. | No |
+| **EC-09** | Misalign → adjust → recover demonstrated in the coupled detector/audio/supply arrival fixture. | No |
 
-v0.57 advances EC-02/03/04/05/07/09. **No full EC item or full-receiver engineering gate closes in this increment.** Next work is remaining model correlation/AVC timing, oscillator interpretation and active RF/converter integration, followed by the full operating envelope and chassis/instrument/shop acceptance. New radios, expanded careers/jobs and cosmetic work are outside this finish line.
+No full EC or full-receiver engineering gate closes in this increment. The current milestone support record and the latest remaining work are displayed in the Factory ledger. Broader game development remains on hold.
 
-## Evidence and reproducible checks
+## Conditions and limits
 
-- `engineering/PT44_IF_Receiver_Model_V1.json`: source terminal crosswalk, approximate manufacturer data, assumptions, supported domain and measurement conditions.
-- `engineering/PT44_IF_Receiver_Validation_V1.json`: deterministic integrated cases, manufacturer anchors, DC KCL, faults, feedback and timestep checks.
-- `engineering/PT44_IF_Receiver_Spice_Validation_V1.json`: independent ngspice measurements and tolerances for the declared circuit. Numerical parity is not historical calibration.
-- Existing v0.54 power, v0.55 audio and v0.56 detector benches and checks remain available.
+The sweep is infinitesimal AC about a no-signal DC point. Its 1 µA input is a normalization, **not a validated finite-amplitude sensitivity measurement**; it does not predict detected audio or dynamic AVC regulation. The input remains an external converter-current boundary, rather than Philco's complete antenna-side generator hookup. The ±25% adjustment range is a fixture bound, not documented physical trimmer travel. Reported bandwidth is the declared circuit's response, not a published factory acceptance target. All voltages reference B-minus; no chassis bond is asserted.
 
-Run `node tests/test_if_receiver_v57.js` for coupled numerical/fault validation, `node tests/test_if_workbench_v57.js` for exact browser-source and generated-worker checks, and `node tests/test_if_spice_v57.js --ngspice` for independent SPICE execution. Use `--record` to regenerate the corresponding numerical evidence. Run `node tests/test_if_browser_v57.js --browser` with Playwright/Chromium for actual page, worker, repair, loaded controls, exports and narrow-screen checks. Set `CHROMIUM_EXECUTABLE` or `NGSPICE_BIN` if needed. CI runs the checks and retains browser evidence for seven days.
+RF/converter tracking and actual 7A8 loads, the three source ambiguities, remaining parameter correlation, long-duration AVC, the full supply/audio envelope, authoritative shop instruments/chassis mapping and complete diagnosis/replacement/alignment/checkout acceptance remain open.
 
-Watermark: **BUILD v0.57.0**. All six full-receiver gates remain **NOT MET**.
+## Evidence and checks
+
+- `PT44_IF_Tuning_Winding_Trace_V1.json`: p.38 branch/DCR review, source hash and limits.
+- `PT44_IF_Alignment_Validation_V1.json`: complex-solver oracle, controls, loaded response, sweep-grid convergence and deterministic alignment recovery.
+- `PT44_IF_AC_Spice_Validation_V1.json`: independent complex magnitude/phase comparisons across healthy, aligned, detuned, loaded, dead-stage, supply and coupling cases.
+- `PT44_IF_Alignment_Transient_Validation_V1.json`: alignment recovery through the coupled nonlinear audio/supply arrival fixture.
+- Existing coupled transient validation artifacts are regenerated for the corrected IF circuit.
+
+Run `node tests/test_if_alignment_v58.js`, `node tests/test_if_alignment_transient_v58.js`, and `node tests/test_if_alignment_workbench_v58.js`. Run `node tests/test_if_ac_spice_v58.js --ngspice` for independent AC execution and `node tests/test_if_spice_v57.js --ngspice` for coupled transient comparisons. `--record` regenerates numerical evidence. Run `node tests/test_if_alignment_browser_v58.js --browser` with Playwright/Chromium for actual controls, adjustment, exact export, settings transfer, probe loading and mobile layout. Existing power/audio/detector/IF checks remain in CI. Browser artifacts are retained for seven days.
+
+Watermark: **BUILD v0.58.0**. All six full-receiver gates remain **NOT MET**.

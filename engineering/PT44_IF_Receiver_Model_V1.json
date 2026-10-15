@@ -1,6 +1,6 @@
 {
   "schema": "PT44_IF_RECEIVER_MODEL_V1",
-  "version": "0.57.0",
+  "version": "0.58.0",
   "model": "Philco PT-44",
   "scope": "Joint hot DC supply, tuned IF, detector/AVC and nonlinear audio; converter replaced by explicit current injection and residual loads. Not a complete receiver.",
   "factory_terminal_nets": {
@@ -25,7 +25,13 @@
   },
   "factory_parameters": {
     "r13_ohm": 27000,
-    "c11_f": 5e-08
+    "c11_f": 5e-08,
+    "if_winding_dcr_ohm": {
+      "12_primary": 31,
+      "12_secondary": 29,
+      "14_primary": 45,
+      "14_secondary": 6.8
+    }
   },
   "tube_reference": {
     "document": "Sylvania Type 7B7 two-page manufacturer sheet",
@@ -310,9 +316,7 @@
   },
   "assumptions": {
     "winding_h": 0.001,
-    "winding_dcr_ohm": 30,
     "coupling": 0.02,
-    "unloaded_q": 80,
     "input_capacitance_f": 5e-12,
     "output_capacitance_f": 6e-12,
     "grid_plate_capacitance_f": 7e-15,
@@ -320,11 +324,13 @@
     "converter_plate_ohm": 30000,
     "converter_screen_ohm": 120000,
     "screen_scaling": "Space-charge similarity (Vs/100)^1.5; not validated at PT-44 screen voltages.",
-    "winding_parameters": "Symmetric 1 mH windings, k=.02, DCR 30 ohm, Q=80, positive dot convention are engineering assumptions. Parallel capacitances derive from 455 kHz resonance, not factory values. Equivalent shunt loss subtracts winding DCR at resonance.",
+    "winding_parameters": "Equal 1 mH windings and k=.02 remain declared assumptions. Copper DCRs are sourced: #12 31/29 ohm; #14 45/6.8 ohm. A separate assumed core-loss Q=120 adds passive shunt loss, without subtracting copper loss. Tuning-capacitance values are derived fixture parameters, not historical values.",
     "converter_boundary": "A modulated current sink at first IF primary plate is an external test input, not a 7A8 converter model. 30 kohm plate and 120 kohm screen substitutes remain explicit.",
     "initialization": "Hot DC equilibrium with no injected signal, then carrier-resolved transient. No cold-heater or AC startup claim.",
     "inherited": "7C6/50L6 sparse curves, diode law and transformer/speaker approximations remain as declared in v0.55/v0.56.",
-    "trimmer_fixture": "This increment scales both tuning capacitances of a selected IF transformer together. Independent adjustment of all four service trimmers and loaded passband alignment remain pending. The 455 kHz LC derivation is an unloaded reference, not a calibrated loaded response."
+    "trimmer_fixture": "Exactly three independent controls follow p.38: 12A across first-IF primary, 12B across first-IF secondary, 14A across second-IF secondary. No tuning capacitor is invented across second-IF primary; tube/parasitic capacitances remain explicit. Legacy if1_detune/if2_detune inputs are diagnostic scale aliases.",
+    "core_loss_q": 120,
+    "positive_grid_extension": "Published grid curves end at 0 V. The final slope is linearly continued to +3 V in screen-normalized coordinates, then held constant, to avoid an artificial gain discontinuity at 0 V. This extension is an assumption requiring parameter correlation; grid current is still modeled separately."
   },
   "defaults": {
     "line_v": 115,
@@ -349,7 +355,10 @@
     "c8_f": 5e-08,
     "avc_feedback": true,
     "meter": "ideal",
-    "probe": "AVC"
+    "probe": "AVC",
+    "c12a_scale": 1,
+    "c12b_scale": 1,
+    "c14a_scale": 1
   },
   "nodes": {
     "A": "F_BPLUS_RECT",
@@ -443,5 +452,6 @@
     "reference": "B-minus, not chassis. DC source 90\u2013130 V.",
     "scope": "Joint electrical IF-to-speaker response; electrical speaker equivalent, no acoustic calibration.",
     "convergence": "Damped Newton with up to four step subdivisions on failure; strict signal-node residuals, 1 nA supply-node stopping allowance for fine-step roundoff, overall accepted normalized residual <10 nA. Leakage equilibrium uses conductance continuation."
-  }
+  },
+  "source_if_trace": "engineering/PT44_IF_Tuning_Winding_Trace_V1.json"
 }
