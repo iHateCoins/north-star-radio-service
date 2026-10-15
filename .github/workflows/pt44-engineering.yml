@@ -61,6 +61,8 @@ jobs:
         run: node tests/test_oscillator_return_trace_v43.js
       - name: Verify v0.50 oscillator tuning plate and left winding source trace
         run: node tests/test_oscillator_tank_v50.js
+      - name: Verify v0.51 oscillator grid leak and screen bypass source trace
+        run: node tests/test_oscillator_grid_screen_v51.js
       - name: Verify v0.44 7A8/7B7 screen pin crosswalk and open supply path
         run: node tests/test_7a8_screen_trace_v44.js
       - name: Verify v0.45 50L6 screen pin crosswalk and corrected tube supplies
