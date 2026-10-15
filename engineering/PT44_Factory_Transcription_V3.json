@@ -128,12 +128,18 @@
         "a",
         "b"
       ],
-      "terminal_definition_status": "two_terminal_physical_structure",
+      "terminal_definition_status": "two_terminal_resistor_source_crosswalked",
       "factory_schematic_position": "1941 RMS p.38; numeric callout #7",
       "source_page": 38,
       "model_slots": [],
-      "connectivity": "not_transcribed",
-      "geometry_certified": false
+      "connectivity": "source_traced_both_endpoints_400dpi",
+      "geometry_certified": false,
+      "evidence_note": "v0.48 traces the 4.7 MΩ resistor across the lower loop/#2 11-turn winding node and the B− return rail; no oscillator winding parameter or behavior is inferred.",
+      "source_terminal_crosswalk": {
+        "a": "upper resistor terminal joins the lower built-in-loop lead and upper terminal of #2 11-turn winding (F_RF_LOOP_SECONDARY)",
+        "b": "lower resistor terminal joins the B− return rail (F_BMINUS)",
+        "limits": "The schematic establishes resistor endpoint connectivity only; no tolerance, loop polarity, or receiver behavior is inferred."
+      }
     },
     "8": {
       "description": "0.1 µF / 200 V capacitor",
@@ -884,7 +890,7 @@
       "title": "Common B− return (partial)",
       "stage": "Return",
       "model": "GND",
-      "description": "Return for the filter capacitors and output-stage bias and grid resistors; the #2 aerial-transformer 11-turn winding and oscillator #9/#11 lower terminals also join this net; not automatically the metal chassis.",
+      "description": "Return for the filter capacitors and output-stage bias and grid resistors; the #2 aerial-transformer 11-turn winding and oscillator #9/#11 lower terminals also join this net; not automatically the metal chassis. The lower terminal of #7 also joins this B− return rail.",
       "source": "Philco 1941 RMS, p.38 — #23, #24, #29A/B",
       "stage_status": "traced_limited",
       "evidence": {
@@ -904,7 +910,8 @@
         "13:b",
         "2:secondary_b",
         "9:b",
-        "11:b"
+        "11:b",
+        "7:b"
       ],
       "prototype_member_crosswalk": [
         "C1:b",
@@ -1568,7 +1575,7 @@
       "title": "Built-in loop lower lead / aerial transformer 11-turn winding",
       "stage": "RF",
       "model": null,
-      "description": "The lower built-in loop lead joins the upper end of the #2 11-turn winding. Winding polarity and inductive parameters remain unspecified.",
+      "description": "The 4.7 MΩ #7 resistor bridges the lower built-in-loop/#2 11-turn winding junction to the B− return.",
       "source": "Philco 1941 RMS p.38 — PT-42/PT-44 RF input; native 300-dpi scan",
       "stage_status": "source_traced_partial_antenna_coupling",
       "evidence": {
@@ -1580,7 +1587,8 @@
       },
       "factory_members": [
         "3:loop_b",
-        "2:secondary_a"
+        "2:secondary_a",
+        "7:a"
       ],
       "prototype_member_crosswalk": [],
       "v0_42_source_review": {
@@ -1738,8 +1746,8 @@
         "10",
         "11"
       ],
-      "status": "partial_loop_antenna_input_trap_traced",
-      "unverified": "#4 oscillator-gang connection; #7–#10 converter endpoints; remaining 7A8 pins; winding parameters; and receiver behavior remain open. Loop/#2 coupling, ANT primary and the complete #6 series input trap are source-traced."
+      "status": "partial_loop_aerial_input_trap_and_return_resistor_traced",
+      "unverified": "The #4 oscillator gang, #8/#9/#10/#11 oscillator and converter connections, remaining 7A8 pins, winding parameters and receiver behavior remain open. Loop/#2 coupling, ANT primary, #6 series input trap and #7 loop-return resistor endpoints are source-traced."
     },
     {
       "id": "IF",
@@ -1836,10 +1844,10 @@
       "id": "P1-RF",
       "severity": "blocker",
       "stage": "RF",
-      "description": "The loop/#2 aerial interface, complete #6 RF input trap, and lower #9/#11 returns are source-traced. The #4 oscillator gang, #7–#10 converter connections, remaining 7A8 pins, winding parameters and RF behavior remain open.",
+      "description": "The loop/#2 aerial interface, complete #6 RF input trap, #7 loop-return resistor, and lower #9/#11 returns are source-traced. The #4 oscillator gang, #8–#11 converter connections, remaining 7A8 pins, winding parameters and RF behavior remain open.",
       "area": "RF / converter",
       "status": "OPEN",
-      "gap": "v0.47 completes all four external/internal endpoints of the #6 series condenser/choke assembly from F_RF_INPUT to the explicit loop-mode chassis ground. The #4 oscillator gang, #7/#8 network, #9 upper end, #10 windings, remaining 7A8 pin crosswalks, and receiver behavior remain open."
+      "gap": "v0.48 traces #7:a from the loop/#2 secondary junction and #7:b to B−. The #4 oscillator gang, #8/#9 network, #10 windings, #11 upper terminal, remaining 7A8 pin crosswalks and receiver behavior remain open."
     },
     {
       "id": "P1-IF",
@@ -1881,10 +1889,10 @@
       "id": "P1-SOURCE",
       "severity": "blocker",
       "stage": "ALL",
-      "description": "All 30 represented graph groups and 88 component/tube terminal memberships reconcile to source-review evidence through v0.47. The #6 series trap is traced end-to-end; the oscillator/converter topology and full receiver behavior remain open.",
+      "description": "All 30 represented graph groups and 90 component/tube terminal memberships reconcile to source-review evidence through v0.48. The #7 loop-return branch is now source-traced; oscillator/converter topology and full receiver behavior remain open.",
       "area": "Source cross-check",
       "status": "OPEN",
-      "gap": "The source-reviewed graph is a partial network with 30 groups and 88 memberships. #6 RF trap topology is now checked; the oscillator gang, #7–#10 endpoints, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "The source-reviewed graph is a partial network with 30 groups and 90 memberships. #6 RF input trap and #7 loop-return resistor are checked; the oscillator gang, #8–#10 endpoints, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1899,13 +1907,13 @@
   "checks": {
     "factory_register_count": 33,
     "traced_network_count": 30,
-    "factory_terminals_on_traced_nets": 88,
+    "factory_terminals_on_traced_nets": 90,
     "unresolved_graph_errors": [],
     "factory_wiring_fully_transcribed": false,
     "simulator_matches_factory": false,
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.47.0",
+  "version": "0.48.0",
   "source_pages_reviewed": "Philco p.38, PT-42/PT-44 shared schematic; the #6 trace was independently reviewed against a 400 dpi rendering of the official scan."
 }
