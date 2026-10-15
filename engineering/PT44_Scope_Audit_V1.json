@@ -1,8 +1,8 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.48.0",
-  "factory_transcription_artifact_version": "0.48.0",
+  "snapshot_build_version": "0.49.0",
+  "factory_transcription_artifact_version": "0.49.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "purpose": "Establish a denominator-based scope baseline for engineering-complete PT-44; terminal references in this audit are coverage counts only and do not assert circuit completeness, electrical behavior, or chassis routing.",
@@ -16,11 +16,11 @@
     "factory_component_records": 33,
     "declared_factory_component_terminals": 83,
     "current_partial_graph_net_groups": 30,
-    "current_partial_graph_membership_entries": 90,
-    "unique_partial_graph_memberships": 90,
-    "component_terminal_memberships_in_partial_graph": 69,
-    "declared_component_terminals_not_in_partial_graph": 14,
-    "component_terminal_reference_coverage_percent": 83.1,
+    "current_partial_graph_membership_entries": 92,
+    "unique_partial_graph_memberships": 92,
+    "component_terminal_memberships_in_partial_graph": 71,
+    "declared_component_terminals_not_in_partial_graph": 12,
+    "component_terminal_reference_coverage_percent": 85.5,
     "tube_pin_memberships_in_partial_graph": 21,
     "unique_tube_pin_terminals_referenced": [
       "V1:1",
@@ -78,8 +78,8 @@
   },
   "source_review_reconciliation": {
     "schematic_audit_net_groups": 30,
-    "schematic_audit_membership_entries": 90,
-    "unique_schematic_audit_memberships": 90,
+    "schematic_audit_membership_entries": 92,
+    "unique_schematic_audit_memberships": 92,
     "current_graph_memberships_missing_from_schematic_audit": [],
     "schematic_audit_memberships_absent_from_current_graph": [],
     "reconciliation_record": {
@@ -116,6 +116,8 @@
         "6:choke_b",
         "7:a",
         "7:b",
+        "8:a",
+        "8:b",
         "9:b",
         "V1:5",
         "V1:6",
@@ -123,7 +125,7 @@
         "V4:4"
       ],
       "initial_count_difference": 2,
-      "status": "RESOLVED_IN_V0.48",
+      "status": "RESOLVED_IN_V0.49",
       "evidence_artifacts": [
         "engineering/PT44_7A8_Screen_Trace_V1.json",
         "engineering/PT44_Aerial_Transformer_Trace_V1.json",
@@ -133,9 +135,10 @@
         "engineering/PT44_Output_Cathode_Bypass_Trace_V1.json",
         "engineering/PT44_Output_IF_Supply_Trace_V1.json",
         "engineering/PT44_RF_Input_Trace_V1.json"
-      ]
+      ],
+      "milestone_record_note": "All 92 current partial-graph memberships reconcile to source-review rows through v0.49; #8 endpoints are source-traced and its source-value conflict remains open."
     },
-    "milestone_record_note": "All 90 current graph memberships reconcile to source-review rows through v0.48; the new two-terminal #7 branch connects the lower loop/#2 secondary junction to B− and does not close the oscillator."
+    "milestone_record_note": "All 92 current graph memberships reconcile to source-review rows through v0.49. The #8 connections are traced; its schematic/parts-list value conflict remains open, and the oscillator is not closed."
   },
   "subsystems": [
     {
@@ -154,10 +157,10 @@
         "10",
         "11"
       ],
-      "status_in_transcription": "partial_loop_aerial_input_trap_and_return_resistor_traced",
+      "status_in_transcription": "partial_loop_aerial_input_trap_loop_return_and_bypass_traced_value_conflict_open",
       "declared_component_terminals": 29,
-      "terminals_referenced_in_partial_graph": 20,
-      "terminals_not_yet_referenced_in_partial_graph": 9,
+      "terminals_referenced_in_partial_graph": 22,
+      "terminals_not_yet_referenced_in_partial_graph": 7,
       "represented_terminals": [
         "11:b",
         "1:a",
@@ -178,6 +181,8 @@
         "6:choke_b",
         "7:a",
         "7:b",
+        "8:a",
+        "8:b",
         "9:b"
       ],
       "unrepresented_terminals": [
@@ -187,8 +192,6 @@
         "10:secondary_b",
         "11:a",
         "4:osc_stator",
-        "8:a",
-        "8:b",
         "9:a"
       ],
       "graph_net_groups": [
@@ -200,7 +203,7 @@
         "F_RF_INPUT_TRAP_JUNCTION",
         "F_RF_LOOP_SECONDARY"
       ],
-      "transcription_note": "Signal input, #2 loop/aerial interface, loop-mode chassis reference, #6 series input trap and #7 loop-return resistor, and lower #9/#11 returns are source-traced. #4 oscillator gang, #8/#9/#10 converter topology, remaining 7A8 pins, 45 V source, transformer parameters and receiver behavior remain open.",
+      "transcription_note": "Signal input, #2 loop/aerial interface, loop-mode chassis reference, #6 series input trap, #7 loop-return resistor and #8 bypass endpoints are source-traced. The #8 schematic/parts-list value conflict, #4 oscillator gang, #9/#10 paths, remaining 7A8 pins, winding parameters and receiver behavior remain open.",
       "source_trace_artifacts": [
         "engineering/PT44_7A8_Screen_Trace_V1.json",
         "engineering/PT44_Aerial_Transformer_Trace_V1.json",
@@ -554,25 +557,25 @@
     },
     {
       "factory_part": "8",
-      "description": "0.1 µF / 200 V capacitor",
+      "description": "0.1 µF / 200 V per replacement-parts list; schematic annotation differs",
       "category": "capacitor",
       "declared_terminals": [
         "a",
         "b"
       ],
       "terminal_definition_status": "two_terminal_physical_structure",
-      "connectivity_status": "not_transcribed",
-      "terminals_referenced_in_partial_graph": [],
-      "terminals_not_yet_referenced_in_partial_graph": [
+      "connectivity_status": "source_traced_both_endpoints_400dpi",
+      "terminals_referenced_in_partial_graph": [
         "8:a",
         "8:b"
       ],
+      "terminals_not_yet_referenced_in_partial_graph": [],
       "geometry_certified": false,
-      "terminals_in_partial_graph": [],
-      "terminals_not_in_partial_graph": [
+      "terminals_in_partial_graph": [
         "8:a",
         "8:b"
-      ]
+      ],
+      "terminals_not_in_partial_graph": []
     },
     {
       "factory_part": "9",
@@ -1263,7 +1266,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The loop/#2 interface, #6 series input trap and both #7 loop-return resistor terminals are source-traced. The #4 oscillator gang, #8–#11 converter paths, remaining 7A8 pins and receiver behavior remain open."
+      "gap": "The #2/#3 interface, #6 trap, #7 resistor and #8 capacitor endpoints are traced. Resolve #8’s 0.05/0.1 µF source conflict; #4 gang, #9–#11 converter connections, remaining 7A8 pins, transformer behavior and receiver validation remain open."
     },
     {
       "id": "P1-IF",
@@ -1298,7 +1301,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "30 partial graph groups and 90 component/tube endpoint memberships reconcile to source reviews through v0.48. #6 input trap and #7 loop-return branch are traced; full oscillator/converter topology, remaining pin crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "30 partial graph groups and 90 component/tube endpoint memberships reconcile to source reviews through v0.49. #6 input trap and #7 loop-return branch and #8 bypass terminals are traced; full oscillator/converter topology, remaining pin crosswalks, transformer parameters and receiver behavior remain open."
     },
     {
       "id": "P2-SPICE",
@@ -1310,13 +1313,13 @@
   ],
   "benchmark_ready": false,
   "audit_findings": [
-    "The partial graph references 69 of 83 declared factory component terminals (83.1%); 14 component terminals are not yet represented. This is reference coverage, not circuit closure.",
-    "The 90 graph membership entries comprise 69 component-terminal references and 21 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes; receiver-connection tasks remain open.",
-    "The schematic trace audit reconciles all 90 current graph memberships. v0.48 adds two source-verified memberships for the #7 loop-return resistor between the loop/#2 secondary junction and B−.",
+    "The partial graph references 71 of 83 declared factory component terminals (85.5%); 14 component terminals are not yet represented. This is reference coverage, not circuit closure.",
+    "The 92 graph membership entries comprise 71 component-terminal references and 21 tube-pin references. The tube reference artifact inventories all 40 socket-pin roles across five tubes; receiver-connection tasks remain open.",
+    "The schematic trace audit reconciles all 92 current graph memberships. v0.49 adds both #8 capacitor endpoints across the loop/#2 secondary junction and B−, while recording the unresolved 0.05/0.1 µF source conflict.",
     "All 30 graph groups remain partial/limited; there is no complete subsystem netlist. Group count alone is not a completeness measure.",
     "Component endpoint reference coverage is not electrical closure: transformer windings, tuning assemblies, tube electrodes, switch contacts, chassis return and circuit behavior require separate evidence.",
     "The v0.37 power/line trace source-closes mains, switch, #31, #30/#32, rectifier plate feed, B-minus rail and heater-string topology at schematic-symbol level; socket-pin crosswalks and chassis isolation remain open.",
-    "The RF input and loop/aerial interfaces are partly traced. v0.47 closes component #6's series condenser/choke topology and v0.48 traces both #7 return endpoints; #4 oscillator gang, #8/#9/#10 converter routing, remaining socket pins, winding behavior and receiver performance remain open."
+    "The RF loop/aerial and input sections are partly traced. v0.47 closes #6’s series condenser/choke topology, v0.48 traces #7, and v0.49 traces #8 endpoints; the #8 schematic/parts-list value conflict, #4 oscillator gang, #9/#10/#11 converter routing, remaining socket pins, winding behavior and receiver performance remain open."
   ],
   "next_audit_actions": [
     "Resolve symbol-to-socket pin and #16 switch-lug crosswalks before promoting any power-line pin memberships.",

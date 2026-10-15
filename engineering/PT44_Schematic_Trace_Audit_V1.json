@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.48.0",
+  "version": "0.49.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -16,7 +16,7 @@
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
-    "version": "0.48.0"
+    "version": "0.49.0"
   },
   "milestones": [
     {
@@ -211,6 +211,19 @@
       "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
       "evidence": "Traces both #7 terminals: its upper lead joins the lower loop/#2 11-turn winding junction; its lower lead joins the B− rail.",
       "scope_limit": "Does not establish winding polarity or parameters, the #4 oscillator gang, remaining converter wiring, receiver behavior, or a chassis-to-B− bond."
+    },
+    {
+      "version": "0.49.0",
+      "title": "Loop-secondary bypass capacitor #8 traced; factory value conflict logged",
+      "status": "SOURCE_TRACED_BYPASS_CAPACITOR_ENDPOINTS_VALUE_CONFLICT_OPEN",
+      "net_ids": [
+        "F_RF_LOOP_SECONDARY",
+        "F_BMINUS"
+      ],
+      "evidence_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source": "Philco 1941 RMS Year Book, printed p.38; 400 dpi review rendering",
+      "evidence": "Traces both #8 capacitor terminals across the lower-loop/#2 11-turn junction and B−. The schematic marks 0.05 mfd, while the replacement-parts list specifies 0.1 mfd, 200 V, part 30-4499.",
+      "scope_limit": "Connectivity is resolved at schematic-symbol/component-terminal level; the capacitor value conflict, #4 oscillator gang, #9–#11 converter paths, tube-pin mapping, winding parameters and receiver behavior remain open."
     }
   ],
   "reviewed_net_memberships": [
@@ -768,9 +781,9 @@
         "Chassis-to-B− relationship beyond explicitly traced nets.",
         "The upper #9 and #11 endpoints and their oscillator-network crosswalk remain open.",
         "The upstream source of the shared 45 V screen lead and its operating measurement conditions remain open.",
-        "The #4 oscillator gang, #8 network, #9 upper endpoint, #10 windings, remaining 7A8 pin crosswalks, and receiver behavior remain open."
+        "Resolve #8 schematic/parts-list value conflict before selecting a simulation value."
       ],
-      "note": "v0.47 traces the complete #6 RF input series trap and v0.48 traces both #7 loop-return resistor endpoints while preserving the explicit chassis/B− distinction; oscillator and converter topology remain partial."
+      "note": "v0.47 traces the complete #6 RF input series trap, v0.48 traces both #7 loop-return resistor endpoints, and v0.49 traces #8 across the same loop-secondary/B− nodes while explicitly recording a source value conflict; #4 and #9–#11 oscillator/converter topology remain partial."
     },
     {
       "milestone_version": "0.37.0",
@@ -1022,8 +1035,46 @@
       ],
       "source_render_dpi": 400,
       "basis": "Philco p.38: lower #7 4.7 MΩ terminal joins the B− return rail."
+    },
+    {
+      "net_id": "F_RF_LOOP_SECONDARY",
+      "milestone_version": "0.49.0",
+      "reviewed_members": [
+        "8:a"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.49.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        240,
+        950,
+        680,
+        1350
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: upper #8 lead shares the lower-loop/#2 11-turn winding junction with #7:a; no polarity is implied."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.49.0",
+      "reviewed_members": [
+        "8:b"
+      ],
+      "source_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
+      "source_artifact_version": "0.49.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "source_render_sha256": "b81f60417cb33e2f58acad9ed61ed1176c7d6ed15d040b4e1173fd4567814e97",
+      "source_box_px": [
+        240,
+        950,
+        680,
+        1350
+      ],
+      "source_render_dpi": 400,
+      "basis": "Philco p.38: lower #8 lead joins the B− rail at #2:secondary_b and #7:b."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All 90 current partial-graph memberships reconcile to source-review rows through v0.48. The v0.48 update traces both #7 loop-return resistor endpoints between the loop/#2 secondary junction and B−; oscillator and receiver behavior remain open."
+  "milestone_record_note": "All 92 current partial-graph memberships reconcile to source-review rows through v0.49. The #8 connections are traced; its schematic/parts-list value conflict remains unresolved, and the oscillator is not closed."
 }
