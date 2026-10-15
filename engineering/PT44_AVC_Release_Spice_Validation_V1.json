@@ -3,6 +3,185 @@
   "version": "0.59.0",
   "scope": "Independent adaptive Gear circuit continuation from common post-ringdown JS capacitor/inductor states. Does not independently establish arrival state, tube parameters or factory calibration. Arrival has separate coupled transient SPICE evidence.",
   "cases": {
+    "service_avc": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "service",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "common_snapshot_time_s": 0.0032,
+      "recovery_javascript_s": 0.0011954091132523991,
+      "recovery_ngspice_s": 0.0011853998789129118,
+      "checks": [
+        {
+          "elapsed_s": 0.01,
+          "node": "avc_v",
+          "javascript": -4.819339922338067e-7,
+          "ngspice": -4.819007921651604e-7,
+          "absolute_error": 3.320006864624526e-11,
+          "tolerance": 1.2409503960825802e-8
+        },
+        {
+          "elapsed_s": 0.01,
+          "node": "if_grid_v",
+          "javascript": -4.845753031088438e-7,
+          "ngspice": -4.845447445721774e-7,
+          "absolute_error": 3.055853666641049e-11,
+          "tolerance": 1.2422723722860888e-8
+        },
+        {
+          "elapsed_s": 0.01,
+          "node": "filtered_bplus_v",
+          "javascript": 96.44942248050671,
+          "ngspice": 96.44942389865022,
+          "absolute_error": 0.0000014181435119553498,
+          "tolerance": 0.4823471194932511
+        },
+        {
+          "elapsed_s": 0.05,
+          "node": "avc_v",
+          "javascript": -1.107816565405229e-7,
+          "ngspice": -1.1047388279887156e-7,
+          "absolute_error": 3.077737416513306e-10,
+          "tolerance": 1.0552369413994358e-8
+        },
+        {
+          "elapsed_s": 0.05,
+          "node": "if_grid_v",
+          "javascript": -1.1055012202944899e-7,
+          "ngspice": -1.102475839128823e-7,
+          "absolute_error": 3.0253811656669337e-10,
+          "tolerance": 1.0551237919564412e-8
+        },
+        {
+          "elapsed_s": 0.05,
+          "node": "filtered_bplus_v",
+          "javascript": 96.45004819624565,
+          "ngspice": 96.44992073361,
+          "absolute_error": 0.00012746263564622495,
+          "tolerance": 0.48234960366805
+        },
+        {
+          "elapsed_s": 0.1,
+          "node": "avc_v",
+          "javascript": -1.7670028272857524e-8,
+          "ngspice": -1.7561643761317733e-8,
+          "absolute_error": 1.0838451153979012e-10,
+          "tolerance": 1.0087808218806589e-8
+        },
+        {
+          "elapsed_s": 0.1,
+          "node": "if_grid_v",
+          "javascript": -1.7681376546813933e-8,
+          "ngspice": -1.757239792878198e-8,
+          "absolute_error": 1.0897861803195268e-10,
+          "tolerance": 1.008786198964391e-8
+        },
+        {
+          "elapsed_s": 0.1,
+          "node": "filtered_bplus_v",
+          "javascript": 96.45254665826673,
+          "ngspice": 96.4525534931301,
+          "absolute_error": 0.0000068348633703863015,
+          "tolerance": 0.4823627674656505
+        },
+        {
+          "elapsed_s": 0.25,
+          "node": "avc_v",
+          "javascript": -7.193838152725174e-11,
+          "ngspice": -7.077607914838207e-11,
+          "absolute_error": 1.1623023788696682e-12,
+          "tolerance": 1.0000353880395742e-8
+        },
+        {
+          "elapsed_s": 0.25,
+          "node": "if_grid_v",
+          "javascript": -7.199481781006844e-11,
+          "ngspice": -7.083154702131643e-11,
+          "absolute_error": 1.1632707887520112e-12,
+          "tolerance": 1.0000354157735106e-8
+        },
+        {
+          "elapsed_s": 0.25,
+          "node": "filtered_bplus_v",
+          "javascript": 96.45301229450847,
+          "ngspice": 96.45301233180327,
+          "absolute_error": 3.7294796584319556e-8,
+          "tolerance": 0.4823650616590163
+        },
+        {
+          "elapsed_s": 0.5,
+          "node": "avc_v",
+          "javascript": -7.469546788033994e-15,
+          "ngspice": -7.226855979950525e-15,
+          "absolute_error": 2.426908080834694e-16,
+          "tolerance": 1.000000003613428e-8
+        },
+        {
+          "elapsed_s": 0.5,
+          "node": "if_grid_v",
+          "javascript": -7.475307871022647e-15,
+          "ngspice": -7.226964400167774e-15,
+          "absolute_error": 2.4834347085487335e-16,
+          "tolerance": 1.0000000036134823e-8
+        },
+        {
+          "elapsed_s": 0.5,
+          "node": "filtered_bplus_v",
+          "javascript": 96.45301460264739,
+          "ngspice": 96.4530146026659,
+          "absolute_error": 1.851674369390821e-11,
+          "tolerance": 0.48236507301332954
+        },
+        {
+          "elapsed_s": 1,
+          "node": "avc_v",
+          "javascript": -6.680119893515559e-16,
+          "ngspice": -1.127570259384925e-17,
+          "absolute_error": 6.567362867577066e-16,
+          "tolerance": 1.000000000005638e-8
+        },
+        {
+          "elapsed_s": 1,
+          "node": "if_grid_v",
+          "javascript": -6.68654306222291e-16,
+          "ngspice": -3.126839065448195e-16,
+          "absolute_error": 3.5597039967747153e-16,
+          "tolerance": 1.000000000156342e-8
+        },
+        {
+          "elapsed_s": 1,
+          "node": "filtered_bplus_v",
+          "javascript": 96.45301460286576,
+          "ngspice": 96.45301460289329,
+          "absolute_error": 2.752642558334628e-11,
+          "tolerance": 0.48236507301446646
+        }
+      ]
+    },
     "healthy": {
       "parameters": {
         "line_v": 115,
