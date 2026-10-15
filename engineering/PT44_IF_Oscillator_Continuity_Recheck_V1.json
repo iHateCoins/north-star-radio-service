@@ -1,0 +1,44 @@
+{
+  "schema": "PT44_IF_OSCILLATOR_CONTINUITY_RECHECK_V1",
+  "version": "0.52.0",
+  "model": "Philco PT-44",
+  "status": "PRIOR_V0_40_IF_RETURN_ASSIGNMENT_CHALLENGED_NOT_GATE_ELIGIBLE",
+  "sources": [
+    {
+      "document": "Philco 1941 RMS Year Book",
+      "printed_page": 38,
+      "scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+    },
+    {
+      "document": "Rider Perpetual Troubleshooters Manual XII, Philco",
+      "printed_page": "12-45",
+      "pdf_page": 45,
+      "uploaded_pdf_sha256": "1e586485ac7b01415e56ff766264ba94e90c7521d103520774658b31992b9549",
+      "source_relation": "Reproduces the Philco schematic; a clearer print, not independent physical continuity evidence."
+    }
+  ],
+  "graph_claims_under_review": [
+    {
+      "terminal": "13:a",
+      "current_graph_net": "F_IF1_GRID",
+      "prior_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "reason": "In both reproduced drawings the left #13 resistor lead appears at the lower right #10 winding conductor and lower first-IF primary conductor. The 7B7 control-grid lead enters the upper first-IF secondary. The previous equality to the 7B7 grid requires a fresh crossing-by-crossing trace."
+    },
+    {
+      "terminal": "13:b",
+      "current_graph_net": "F_BMINUS",
+      "prior_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "reason": "The right #13 resistor lead passes beneath several vertical conductors. Its return assignment must be rechecked before the entire #13 branch is certified."
+    },
+    {
+      "terminal": "12:sReturn",
+      "current_graph_net": "F_BMINUS",
+      "prior_artifact": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "reason": "The secondary cold end and adjacent conductor crossings require independent rechecking as part of the same path."
+    }
+  ],
+  "drawing_observation": "The lower right #10 winding conductor appears to meet the lower first-IF primary and the left #13 resistor lead. This is an observation for continuity review, not a newly certified graph membership.",
+  "required_evidence": "A legible independent schematic annotation or continuity measurements on an original PT-42/PT-44 chassis from both #10 winding ends through #12 primary/secondary and both #13 resistor leads, with the set unplugged.",
+  "policy": "Do not treat the v0.40 IF return membership assertions as accepted gate-closure evidence until the conflicting path is resolved. Retain existing graph only as provisional legacy data pending a coherent correction of the whole conductor group.",
+  "netlist_gate_met": false
+}

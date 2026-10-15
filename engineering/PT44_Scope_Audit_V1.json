@@ -73,8 +73,15 @@
       "V5:6"
     ],
     "tube_receiver_connection_review_tasks": 22,
-    "tube_receiver_connection_review_tasks_open": 19,
-    "tube_pinout_scope_note": "Electrode identities/base pin roles are inventoried for all five tubes. This is not a receiver-specific connection map; all review tasks remain source-trace tasks."
+    "tube_receiver_connection_review_tasks_open": 17,
+    "tube_pinout_scope_note": "All five tube pinouts have 40 socket positions. 26 are in reviewed graph groups, six have manufacturer no-connection/shell options, and eight external electrode or shield roles still lack receiver wiring crosswalks. This is not full receiver pin-level closure.",
+    "pin_role_classification": {
+      "artifact": "engineering/PT44_Pin_Closure_Inventory_V1.json",
+      "socket_positions": 40,
+      "reviewed_graph_members": 26,
+      "manufacturer_nonfunctional_or_option": 6,
+      "external_crosswalks_open": 8
+    }
   },
   "source_review_reconciliation": {
     "schematic_audit_net_groups": 35,
