@@ -2603,7 +2603,7 @@
       "id": "P1-AC",
       "severity": "blocker",
       "stage": "POWER",
-      "description": "The filter/return groups, four internal heater-chain links and #30 40 Ω/lamp shunt groups were source-checked. Trace both mains paths, #16 switch, 35Z3 anode, #31 line capacitor and the complete heater endpoints before claiming a complete AC network.",
+      "description": "Dynamic power core validated with explicit loads; receiver-stage coupling, heater/lamp/rectifier/field calibration and physical boundaries remain open.",
       "area": "Power / line",
       "status": "OPEN",
       "gap": "The complete AC/line topology is now source-traced at schematic-symbol level: plug conductors, #16 switch, #31 across the plug, #30 40/80-ohm branches, #32 shunt, 35Z3 plate feed, B-minus return, and all five series heaters. Numbered tube-socket heater crosswalk, physical switch-lug crosswalk, and chassis isolation/bond evidence remain open."
@@ -2621,7 +2621,7 @@
       "id": "P2-SPICE",
       "severity": "later",
       "stage": "ALL",
-      "description": "Replace reduced-order model with validated tube, transformer and passive SPICE models.",
+      "description": "Power transients and earlier passive fixtures are independently checked; full receiver SPICE model and coupled validation remain outstanding.",
       "area": "Full receiver simulation",
       "status": "NOT STARTED",
       "gap": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
@@ -2637,6 +2637,6 @@
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.53.0",
+  "version": "0.54.0",
   "source_pages_reviewed": "Philco p.38 PT-42/PT-44 schematic and replacement-parts list; v0.49 traces both #8 endpoints and records the unresolved value conflict."
 }

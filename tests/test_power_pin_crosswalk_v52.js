@@ -19,5 +19,5 @@ for(const [label,expression] of [
  ['invented chassis bond',`(()=>{const n=PT44_FACTORY_V3.factory_nets.find(x=>x.id==='F_RF_CHASSIS');n.factory_members.push('16:switch_b');const bad=!pt44PowerPinCrosswalkAudit().ok;n.factory_members.pop();return bad;})()`],
  ['premature physical lug claim',`(()=>{const c=PT44_POWER_PIN_CROSSWALK_V1.source_level_closure;c.physical_switch_lug_numbering_verified=true;const bad=!pt44PowerPinCrosswalkAudit().ok;c.physical_switch_lug_numbering_verified=false;return bad;})()`]
 ])assert.equal(vm.runInContext(expression,ctx),true,label);
-assert(html.includes('BUILD v0.53.0<small>'));
+assert(html.includes('BUILD v0.54.0<small>'));
 console.log('PASS v0.52: power boundaries crosswalked; missing endpoints and unsafe physical claims rejected');

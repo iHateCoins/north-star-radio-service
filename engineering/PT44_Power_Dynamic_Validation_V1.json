@@ -1,0 +1,546 @@
+{
+  "schema": "PT44_POWER_DYNAMIC_VALIDATION_V1",
+  "version": "0.54.0",
+  "model": "Philco PT-44 dynamic power core",
+  "scope": "Independent numerical validation under explicit model assumptions; not measured factory acceptance targets.",
+  "checks": [
+    "Independent DC operating point",
+    "Discrete KCL and energy balance",
+    "Timestep convergence",
+    "Fault and restore behavior",
+    "Coupled receiver load Jacobian",
+    "Browser/module identity and form handlers",
+    "Source topology and value mutation guards",
+    "Nine independent ngspice transient comparisons"
+  ],
+  "spice_version": "42",
+  "comparison_limits": {
+    "mean_voltage_abs_v": 0.6,
+    "ripple_peak_to_peak_abs_floor_v": 0.05,
+    "ripple_peak_to_peak_relative": 0.02,
+    "mean_field_current_abs_a": 0.0002
+  },
+  "cases": [
+    {
+      "case": "healthy",
+      "inputs": {},
+      "javascript": {
+        "reservoir_v": {
+          "mean": 115.47156557255792,
+          "rms": 116.0894493154604,
+          "ripple_rms": 11.961512721612886,
+          "peak_to_peak": 38.14665870311292,
+          "min": 96.96091579139538,
+          "max": 135.1075744945083
+        },
+        "filtered_v": {
+          "mean": 106.58913745159198,
+          "rms": 106.59205247522863,
+          "ripple_rms": 0.7883071784052466,
+          "peak_to_peak": 2.221954661771875,
+          "min": 105.41824542093147,
+          "max": 107.64020008270334
+        },
+        "field_current_a": {
+          "mean": 0.017764856241932026,
+          "rms": 0.018766076233023343,
+          "ripple_rms": 0.0060477681740566365,
+          "peak_to_peak": 0.017978555357805133,
+          "min": 0.007071088716795256,
+          "max": 0.025049644074600388
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 115.55565613906136,
+          "rms": 116.17492045428665,
+          "ripple_rms": 11.979251931186816,
+          "peak_to_peak": 38.19888999999999,
+          "min": 97.01331,
+          "max": 135.2122
+        },
+        "filtered_v": {
+          "mean": 106.66661718117169,
+          "rms": 106.66954537131097,
+          "ripple_rms": 0.7903726004473978,
+          "peak_to_peak": 2.2276999999999987,
+          "min": 105.4928,
+          "max": 107.7205
+        },
+        "field_current_a": {
+          "mean": 0.017777801440564334,
+          "rms": 0.018783343017809286,
+          "ripple_rms": 0.006063311872611664,
+          "peak_to_peak": 0.018026625,
+          "min": 0.007053845,
+          "max": 0.02508047
+        }
+      }
+    },
+    {
+      "case": "reservoir_dry",
+      "inputs": {
+        "cap_a_scale": 0.1
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 49.41459177229869,
+          "rms": 75.1838049700614,
+          "ripple_rms": 56.663944883438,
+          "peak_to_peak": 163.49753772463615,
+          "min": -15.58002082225829,
+          "max": 147.91751690237786
+        },
+        "filtered_v": {
+          "mean": 45.61346932827605,
+          "rms": 45.78674847311736,
+          "ripple_rms": 3.9796672698776834,
+          "peak_to_peak": 11.339303608330717,
+          "min": 39.689484179171664,
+          "max": 51.02878778750238
+        },
+        "field_current_a": {
+          "mean": 0.007602244888046058,
+          "rms": 0.031145955148713433,
+          "ripple_rms": 0.030203913567414514,
+          "peak_to_peak": 0.08445873528018061,
+          "min": -0.03070531398971255,
+          "max": 0.053753421290468055
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 49.1889273694803,
+          "rms": 75.21855270881244,
+          "ripple_rms": 56.90588805957067,
+          "peak_to_peak": 164.21769999999998,
+          "min": -16.2403,
+          "max": 147.9774
+        },
+        "filtered_v": {
+          "mean": 45.402574506776105,
+          "rms": 45.57872153246933,
+          "ripple_rms": 4.003259258532701,
+          "peak_to_peak": 11.405439999999999,
+          "min": 39.44679,
+          "max": 50.85223
+        },
+        "field_current_a": {
+          "mean": 0.007572841455084759,
+          "rms": 0.03130494709391489,
+          "ripple_rms": 0.03037518370066196,
+          "peak_to_peak": 0.08492504000000001,
+          "min": -0.030949,
+          "max": 0.05397604
+        }
+      }
+    },
+    {
+      "case": "smoothing_dry",
+      "inputs": {
+        "cap_b_scale": 0.1
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 114.47581484117507,
+          "rms": 115.090620731084,
+          "ripple_rms": 11.880185045495963,
+          "peak_to_peak": 37.66795249425492,
+          "min": 97.2918278196483,
+          "max": 134.95978031390322
+        },
+        "filtered_v": {
+          "mean": 105.6699829303154,
+          "rms": 106.56863278858027,
+          "ripple_rms": 13.810438151417147,
+          "peak_to_peak": 39.60425708777932,
+          "min": 84.75832856644365,
+          "max": 124.36258565422297
+        },
+        "field_current_a": {
+          "mean": 0.017611663821719255,
+          "rms": 0.02063258699643988,
+          "ripple_rms": 0.010748625195642703,
+          "peak_to_peak": 0.029844222571523502,
+          "min": 0.0033297973423905792,
+          "max": 0.03317401991391408
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 114.53690527265843,
+          "rms": 115.15460825575542,
+          "ripple_rms": 11.91138669922879,
+          "peak_to_peak": 37.739549999999994,
+          "min": 97.33115,
+          "max": 135.0707
+        },
+        "filtered_v": {
+          "mean": 105.72593235847113,
+          "rms": 106.64978978234387,
+          "ripple_rms": 14.007315501198928,
+          "peak_to_peak": 40.16336,
+          "min": 84.53064,
+          "max": 124.694
+        },
+        "field_current_a": {
+          "mean": 0.017621384660749796,
+          "rms": 0.02071559641744903,
+          "ripple_rms": 0.010891406592746358,
+          "peak_to_peak": 0.030235231999999997,
+          "min": 0.003151128,
+          "max": 0.03338636
+        }
+      }
+    },
+    {
+      "case": "filter_leak",
+      "inputs": {
+        "leak_b_ohm": 1000
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 95.85033484234351,
+          "rms": 98.09881428888339,
+          "ripple_rms": 20.882784189266033,
+          "peak_to_peak": 65.97628969356417,
+          "min": 63.41742546262755,
+          "max": 129.39371515619172
+        },
+        "filtered_v": {
+          "mean": 60.5370535846378,
+          "rms": 60.552779313811186,
+          "ripple_rms": 1.3799369253017855,
+          "peak_to_peak": 3.9053261868703046,
+          "min": 58.4541946975146,
+          "max": 62.35952088438491
+        },
+        "field_current_a": {
+          "mean": 0.07062656251541073,
+          "rms": 0.07143028119716159,
+          "ripple_rms": 0.010685211236206603,
+          "peak_to_peak": 0.03139657432148431,
+          "min": 0.052250252441014555,
+          "max": 0.08364682676249886
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 95.94216074881496,
+          "rms": 98.19656693494234,
+          "ripple_rms": 20.920505458931007,
+          "peak_to_peak": 66.09137999999999,
+          "min": 63.44182,
+          "max": 129.5332
+        },
+        "filtered_v": {
+          "mean": 60.59467397927952,
+          "rms": 60.610496009664615,
+          "ripple_rms": 1.384814746598225,
+          "peak_to_peak": 3.9190299999999993,
+          "min": 58.50466,
+          "max": 62.42369
+        },
+        "field_current_a": {
+          "mean": 0.07069396233484668,
+          "rms": 0.07150168918039265,
+          "ripple_rms": 0.01071705393514279,
+          "peak_to_peak": 0.03149377999999999,
+          "min": 0.05225753,
+          "max": 0.08375131
+        }
+      }
+    },
+    {
+      "case": "field_open",
+      "inputs": {
+        "field_open": true
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 123.39012930512361,
+          "rms": 123.6751723220434,
+          "ripple_rms": 8.39191509442297,
+          "peak_to_peak": 27.480723745865575,
+          "min": 109.86264949606603,
+          "max": 137.3433732419316
+        },
+        "filtered_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "field_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 123.45874753150045,
+          "rms": 123.74420767476023,
+          "ripple_rms": 8.400392312708993,
+          "peak_to_peak": 27.5077,
+          "min": 109.9178,
+          "max": 137.4255
+        },
+        "filtered_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "field_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "case": "rectifier_weak",
+      "inputs": {
+        "emission": 0.35
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 100.98913908297553,
+          "rms": 101.49526003410253,
+          "ripple_rms": 10.123319449148745,
+          "peak_to_peak": 32.01464036508649,
+          "min": 85.45265391991661,
+          "max": 117.4672942850031
+        },
+        "filtered_v": {
+          "mean": 93.22074376890083,
+          "rms": 93.22320358944452,
+          "ripple_rms": 0.6772138893725629,
+          "peak_to_peak": 1.9108524144479588,
+          "min": 92.21608277436354,
+          "max": 94.1269351888115
+        },
+        "field_current_a": {
+          "mean": 0.015536790628149964,
+          "rms": 0.01637881494467717,
+          "ripple_rms": 0.005183986493907139,
+          "peak_to_peak": 0.015246986941111876,
+          "min": 0.006585474089205422,
+          "max": 0.021832461030317298
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 101.05399239935984,
+          "rms": 101.56104861973535,
+          "ripple_rms": 10.135936902446137,
+          "peak_to_peak": 32.05336,
+          "min": 85.49204,
+          "max": 117.5454
+        },
+        "filtered_v": {
+          "mean": 93.27878930939661,
+          "rms": 93.281259597642,
+          "ripple_rms": 0.6788645637190877,
+          "peak_to_peak": 1.9155400000000071,
+          "min": 92.27189,
+          "max": 94.18743
+        },
+        "field_current_a": {
+          "mean": 0.015546828619292847,
+          "rms": 0.016392403432165782,
+          "ripple_rms": 0.005196826932390323,
+          "peak_to_peak": 0.015284803,
+          "min": 0.006572027,
+          "max": 0.02185683
+        }
+      }
+    },
+    {
+      "case": "rectifier_open",
+      "inputs": {
+        "emission": 0
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "filtered_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "field_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "filtered_v": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        },
+        "field_current_a": {
+          "mean": 0,
+          "rms": 0,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "case": "switch_off",
+      "inputs": {
+        "power_off_at_s": 1
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 0.0008199405514952733,
+          "rms": 0.0008698352818893222,
+          "ripple_rms": 0.00029036340959753126,
+          "peak_to_peak": 0.001018562687796474,
+          "min": 0.00041348483959724404,
+          "max": 0.0014320475273937182
+        },
+        "filtered_v": {
+          "mean": 0.0008504058827098934,
+          "rms": 0.0009021544785879028,
+          "ripple_rms": 0.00030115201790560506,
+          "peak_to_peak": 0.0010564079310765888,
+          "min": 0.0004288480907104879,
+          "max": 0.0014852560217870766
+        },
+        "field_current_a": {
+          "mean": -6.957461579876524e-8,
+          "rms": 7.380834553833968e-8,
+          "ripple_rms": 2.4638277284768765e-8,
+          "peak_to_peak": 8.642834842253269e-8,
+          "min": -1.215138784663019e-7,
+          "max": -3.508553004376921e-8
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 0.0008193683665756669,
+          "rms": 0.0008692395621574513,
+          "ripple_rms": 0.0002901945834690945,
+          "peak_to_peak": 0.0010179663,
+          "min": 0.0004131597,
+          "max": 0.001431126
+        },
+        "filtered_v": {
+          "mean": 0.0008498124385858857,
+          "rms": 0.000901536625959715,
+          "ripple_rms": 0.00030097692132709654,
+          "peak_to_peak": 0.0010557892,
+          "min": 0.0004285108,
+          "max": 0.0014843
+        },
+        "field_current_a": {
+          "mean": -6.952606529865297e-8,
+          "rms": 7.37577986314901e-8,
+          "ripple_rms": 2.462395384683145e-8,
+          "peak_to_peak": 8.63781e-8,
+          "min": -1.21436e-7,
+          "max": -3.50579e-8
+        }
+      }
+    },
+    {
+      "case": "dc_supply",
+      "inputs": {
+        "line_mode": "DC"
+      },
+      "javascript": {
+        "reservoir_v": {
+          "mean": 103.8215452928061,
+          "rms": 103.82154529280547,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 103.82154529280862,
+          "max": 103.82154529280862
+        },
+        "filtered_v": {
+          "mean": 95.83527244003058,
+          "rms": 95.83527244002751,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 95.83527244002491,
+          "max": 95.83527244002491
+        },
+        "field_current_a": {
+          "mean": 0.015972545343636332,
+          "rms": 0.01597254534363471,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.015972545343635337,
+          "max": 0.015972545343635337
+        }
+      },
+      "ngspice": {
+        "reservoir_v": {
+          "mean": 103.82150000000273,
+          "rms": 103.82149999999727,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 103.8215,
+          "max": 103.8215
+        },
+        "filtered_v": {
+          "mean": 95.8352700000015,
+          "rms": 95.83526999999786,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 95.83527,
+          "max": 95.83527
+        },
+        "field_current_a": {
+          "mean": 0.01597255000000083,
+          "rms": 0.015972549999999648,
+          "ripple_rms": 0,
+          "peak_to_peak": 0,
+          "min": 0.01597255,
+          "max": 0.01597255
+        }
+      }
+    }
+  ],
+  "full_receiver_validated": false
+}

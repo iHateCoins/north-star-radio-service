@@ -1,0 +1,112 @@
+{
+  "schema": "PT44_REMAINING_ACTIONS_V1",
+  "version": "0.54.0",
+  "model": "Philco PT-44",
+  "benchmark_ready": false,
+  "scope_policy": "Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.",
+  "actions": [
+    {
+      "id": "EC-01",
+      "action": "Close source interpretation",
+      "status": "OPEN",
+      "evidence_dependency": "Existing drawings may suffice; clearer source/chassis evidence only if the unresolved details remain ambiguous.",
+      "acceptance": [
+        "Assign both 7C6 diode glyphs to socket pins 5/6.",
+        "Resolve the four-dot oscillator coupling symbol and complete its electrical representation.",
+        "Resolve #8 0.05/0.1 µF value conflict or retain a specifically approved variant."
+      ]
+    },
+    {
+      "id": "EC-02",
+      "action": "Finish electrical component parameters",
+      "status": "IN PROGRESS",
+      "evidence_dependency": "Manufacturer data, derivation and sensitivity work are actionable; some exact parameters need measurements or parts data.",
+      "acceptance": [
+        "Validate models for all five tube types against manufacturer curves.",
+        "Establish coil/transformer L, coupling, winding resistance and output-transformer/speaker relationship.",
+        "Establish volume-control resistance/taper, field inductance and lamp/heater behavior; identify supported approximations."
+      ]
+    },
+    {
+      "id": "EC-03",
+      "action": "Connect power supply to receiver loads",
+      "status": "IN PROGRESS",
+      "evidence_dependency": "Actionable with existing sources and models.",
+      "acceptance": [
+        "Replace power-bench stand-in resistors with currents drawn by the actual receiver stages.",
+        "Validate rectifier conduction and heater/lamp behavior over supported supply conditions.",
+        "Check reservoir/filtered voltages, ripple, startup and discharge under healthy and faulty receiver loads."
+      ]
+    },
+    {
+      "id": "EC-04",
+      "action": "Complete audio chain",
+      "status": "NOT STARTED",
+      "evidence_dependency": "Actionable with existing topology and manufacturer data; uncertain transformer/speaker values need bounded parameters.",
+      "acceptance": [
+        "Model volume control, 7C6 triode, 50L6 output stage and output transformer/speaker.",
+        "Validate gain, bias, clipping, loading and hum transfer; make output respond to component faults."
+      ]
+    },
+    {
+      "id": "EC-05",
+      "action": "Complete IF, detector and AVC behavior",
+      "status": "NOT STARTED",
+      "evidence_dependency": "Actionable in parallel with remaining diode pin mapping.",
+      "acceptance": [
+        "Model 455 kHz IF transfer, bandwidth, tuned adjustments and stage loading.",
+        "Implement detector rectification, audio recovery and AVC attack/release/loading.",
+        "Verify responses to signal strength, misalignment and component faults."
+      ]
+    },
+    {
+      "id": "EC-06",
+      "action": "Complete RF/converter and tracking",
+      "status": "NOT STARTED",
+      "evidence_dependency": "Actionable after the coupling symbol is resolved; additional schematics are not a general prerequisite.",
+      "acceptance": [
+        "Implement oscillator/converter behavior and tracking across 540–1600 kHz.",
+        "Validate the 455 kHz frequency relationship, tuning/alignment effects and input behavior.",
+        "Check weak/dead oscillator and aerial faults against the receiver model."
+      ]
+    },
+    {
+      "id": "EC-07",
+      "action": "Validate instruments and service conditions",
+      "status": "NOT STARTED",
+      "evidence_dependency": "Actionable by defining repeatable model test conditions; historical conditions may require additional evidence.",
+      "acceptance": [
+        "Connect meters, signal generator and tracer to authoritative receiver nodes with defined loading.",
+        "Record supply, control settings, signal and instrument conditions for each benchmark measurement.",
+        "Use historical voltage labels only where return/loading/conditions support comparison; distinguish simulated reference conditions."
+      ]
+    },
+    {
+      "id": "EC-08",
+      "action": "Finish serviceable chassis crosswalk",
+      "status": "IN PROGRESS",
+      "evidence_dependency": "Existing layout/photos support most work; exact hidden physical routes may need better photos or continuity.",
+      "acceptance": [
+        "Map component endpoints and instrument access to the serviceable game chassis.",
+        "Resolve physical identities that affect faults, polarity or repairs.",
+        "Keep unsupported lead dress and chassis/B− bond claims explicit."
+      ]
+    },
+    {
+      "id": "EC-09",
+      "action": "Pass end-to-end repair benchmark",
+      "status": "NOT STARTED",
+      "evidence_dependency": "Actionable after receiver stages and instruments are integrated.",
+      "acceptance": [
+        "Establish a deterministic healthy-radio baseline over supported tuning/supply conditions.",
+        "Exercise a fixed fault matrix through diagnosis, part replacement, alignment and successful checkout.",
+        "Run regressions, record limitations and close the six agreed benchmark gates only when their acceptance evidence is met."
+      ]
+    }
+  ],
+  "next_integration_target": [
+    "EC-03: actual receiver load coupling",
+    "EC-04: complete audio chain"
+  ],
+  "milestone_completed": "v0.54 implements the nonlinear dynamic power core, AC/DC supply modes, two load ports, fault/restore controls and independently checked numerical behavior. Loads, field L and lamp hot resistance remain explicit assumptions."
+}

@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.53.0",
+  "version": "0.54.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -78,6 +78,17 @@
       "internal_equivalent_receiver_net": 1,
       "manufacturer_nonfunctional_or_option": 6,
       "external_crosswalks_open": 2
+    },
+    "power_dynamic_model": {
+      "artifact": "engineering/PT44_Power_Dynamic_Model_V1.json",
+      "source_topology_verified": true,
+      "nonlinear_transient_core_implemented": true,
+      "receiver_load_ports": 2,
+      "fault_scenarios": 8,
+      "receiver_tube_loads_connected": false,
+      "factory_voltage_calibrated": false,
+      "ngspice_transient_cases_passed": 9,
+      "numerical_energy_balance_verified": true
     }
   },
   "open_items": [
@@ -114,7 +125,7 @@
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "35 partial graph groups and 108 component/tube endpoint memberships reconcile to source reviews through v0.52. #6 input trap, #7 return and #8 endpoints are traced; #8 value conflict, full oscillator/converter topology, remaining socket crosswalks, transformer parameters and receiver behavior remain open."
+      "gap": "v0.54 implements dynamic power behavior with explicit stand-in loads, assumed field L/lamp hot resistance and a single-reference-point rectifier approximation. Connect actual receiver currents and validate rectifier/heater/lamp/field parameters, physical boundaries and voltage reference conditions."
     },
     {
       "id": "P1-SOURCE",
@@ -127,8 +138,8 @@
       "id": "P2-SPICE",
       "area": "Full receiver simulation",
       "severity": "later",
-      "status": "NOT STARTED",
-      "gap": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
+      "status": "IN PROGRESS",
+      "gap": "Independent SPICE validation now includes the nonlinear supply model alongside earlier passive/heater fixtures. Full receiver stage models and their coupled operating states remain outstanding."
     }
   ],
   "completion_gates": [
@@ -172,7 +183,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "All 114 current graph memberships reconcile through v0.53. Prior incorrect assignments are retained only in the superseded history artifact. All 83 declared component terminals are referenced; 31 socket pins and one internal equivalent are accounted for, with two diode socket crosswalks open. #13 is a B+-to-screen resistor and AVC is distinct from B−. Benchmark not complete.",
+  "latest_evidence_update": "v0.54 adds a reusable nonlinear power transient core for AC/DC supply, rectification, reservoir/smoothing filters and field R/L with explicit assumptions. Startup, ripple, discharge, fault and restore cases are exercised through the engineering workbench and matching SPICE export. Actual receiver stage loads, calibrated tube/lamp/field behavior and full receiver integration remain open.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",
@@ -182,5 +193,6 @@
       "Philco Service Bulletin 437 / 365 is indexed for PT-42 and PT-44, but no scan is linked in the online index.",
       "Rider Volume 12 index points to PT-42/PT-44 schematic, socket, trimmer, and chassis data at 12-45; full volume was inaccessible during this review."
     ]
-  }
+  },
+  "remaining_actions_artifact": "engineering/PT44_Remaining_Actions_V1.json"
 }

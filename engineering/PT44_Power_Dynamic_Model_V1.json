@@ -1,0 +1,170 @@
+{
+  "schema": "PT44_POWER_DYNAMIC_MODEL_V1",
+  "version": "0.54.0",
+  "model": "Philco PT-44",
+  "status": "SOURCE_TOPOLOGY_DYNAMIC_MODEL_WITH_EXPLICIT_UNCALIBRATED_PARAMETERS",
+  "sources": [
+    {
+      "document": "Philco 1941 RMS Year Book",
+      "printed_page": 38,
+      "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
+      "scope": "20 µF #29A/#29B filters, 500 Ω #28 field winding, 40/80 Ω #30 tap and #32 shunt, rectifier anode/cathode routing."
+    },
+    {
+      "document": "General Electric Essential Characteristics",
+      "printed_page": 112,
+      "url": "https://www.worldradiohistory.com/Archive-Catalogs/Suppliers/GHI/GE-Tubes-Essential-Characteristics-231-pages.pdf",
+      "scope": "35Z3 nominal heater 35 V / 0.15 A; tube voltage-drop reference 18 V at 200 mA DC. This one point does not validate a full I–V curve."
+    },
+    {
+      "artifact": "engineering/PT44_Heater_String_Model_V1.json",
+      "scope": "Nominal hot heater resistance sum 692.6667 Ω from rated V/I; cold heaters and warm-up not represented."
+    }
+  ],
+  "factory_parameters": {
+    "cap_29a_f": 2e-05,
+    "cap_29b_f": 2e-05,
+    "field_dcr_ohm": 500,
+    "dropper_40_ohm": 40,
+    "dropper_80_ohm": 80,
+    "line_nominal_v": 115
+  },
+  "rectifier_approximation": {
+    "law": "I = emission * K * max(Vplate - Vcathode, 0)^(3/2)",
+    "reference_v": 18,
+    "reference_a": 0.2,
+    "perveance_a_per_v_1_5": 0.0026189140043946205,
+    "provenance": "Derived approximation through a single GE manufacturer reference point. No reverse leakage, heater thermal model, space-charge saturation or validated full curve."
+  },
+  "assumed_parameters": {
+    "line_hz": 60,
+    "source_resistance_ohm": 0,
+    "field_inductance_h": 5,
+    "lamp_hot_resistance_ohm": 42,
+    "load_rect_ohm": 3000,
+    "load_filtered_ohm": 6000,
+    "emission": 1,
+    "hot_heater_resistance_ohm": 692.6666666666667,
+    "line_mode": "AC",
+    "dc_polarity": 1
+  },
+  "assumption_policy": "Field inductance, lamp hot resistance, 60 Hz mains and resistive stand-in receiver loads are explicit test inputs, not Philco measurements. The source-derived topology is retained while these inputs vary. Do not fit to 95/110 V factory labels with undocumented measurement conditions.",
+  "ports": {
+    "line": "F_30_40_LAMP_A",
+    "rectifier_plate": "F_30_40_LAMP_B",
+    "rectifier_cathode": "F_BPLUS_RECT",
+    "filtered": "F_BPLUS_FILT",
+    "return": "F_BMINUS"
+  },
+  "factory_terminal_nets": {
+    "30:endA": "F_30_40_LAMP_A",
+    "32:a": "F_30_40_LAMP_A",
+    "30:tap": "F_30_40_LAMP_B",
+    "32:b": "F_30_40_LAMP_B",
+    "V5:2": "F_30_40_LAMP_B",
+    "V5:7": "F_BPLUS_RECT",
+    "28:a": "F_BPLUS_RECT",
+    "29A:a": "F_BPLUS_RECT",
+    "28:b": "F_BPLUS_FILT",
+    "29B:a": "F_BPLUS_FILT",
+    "29A:b": "F_BMINUS",
+    "29B:b": "F_BMINUS",
+    "V5:1": "F_DROPPER_HEATER_INPUT",
+    "30:endB": "F_DROPPER_HEATER_INPUT",
+    "V5:8": "F_HT_35Z3_50L6",
+    "V4:2": "F_HT_35Z3_50L6",
+    "V4:7": "F_HT_50L6_7A8",
+    "V1:1": "F_HT_50L6_7A8",
+    "V1:8": "F_HT_7A8_7B7",
+    "V2:1": "F_HT_7A8_7B7",
+    "V2:8": "F_HT_7B7_7C6",
+    "V3:1": "F_HT_7B7_7C6",
+    "V3:8": "F_BMINUS"
+  },
+  "exclusions": [
+    "Full receiver tube currents, output transformer and screen-feed load (represented by explicit load ports)",
+    "Cold-heater warm-up and nonlinear lamp I–V",
+    "Calibrated 35Z3 curve, reverse leakage and breakdown",
+    "Field inductance measurement, winding parasitics, capacitor ESR and dielectric absorption",
+    "#31 is across the externally imposed ideal line; its source-current contribution is excluded from reported heater/rectifier currents",
+    "AC/DC switch physical lugs and metal-chassis bond; return is B− only"
+  ],
+  "faults": [
+    {
+      "id": "healthy",
+      "label": "Restored filters and conducting rectifier",
+      "changes": {}
+    },
+    {
+      "id": "reservoir_dry",
+      "label": "#29A dry: 10% capacitance",
+      "changes": {
+        "cap_a_scale": 0.1
+      }
+    },
+    {
+      "id": "smoothing_dry",
+      "label": "#29B dry: 10% capacitance",
+      "changes": {
+        "cap_b_scale": 0.1
+      }
+    },
+    {
+      "id": "filter_leak",
+      "label": "#29B leakage: 1 kΩ",
+      "changes": {
+        "leak_b_ohm": 1000
+      }
+    },
+    {
+      "id": "field_open",
+      "label": "#28 field winding open",
+      "changes": {
+        "field_open": true
+      }
+    },
+    {
+      "id": "rectifier_weak",
+      "label": "35Z3 weak: 35% model perveance",
+      "changes": {
+        "emission": 0.35
+      }
+    },
+    {
+      "id": "rectifier_open",
+      "label": "35Z3 nonconducting",
+      "changes": {
+        "emission": 0
+      }
+    },
+    {
+      "id": "switch_off",
+      "label": "Switch off after charge",
+      "changes": {
+        "power_off_at_s": 1
+      }
+    }
+  ],
+  "numerical_contract": {
+    "integrator": "Implicit backward Euler; coupled reservoir, smoothing capacitor and field-inductor states; monotonic diode solve",
+    "default_dt_s": 2.0833333333333333e-05,
+    "default_duration_s": 2,
+    "report_cycles": 6,
+    "states": [
+      "reservoir_v",
+      "filtered_v",
+      "field_current_a"
+    ],
+    "load_port_contract": "Independent load_laws callbacks return {current_a, conductance_s}; alternatively coupled_load_law receives {reservoir_v, filtered_v}, time and returns currents_a:[Irect,Ifilt], jacobian_s:[[dIrect/dVrect,dIrect/dVfilt],[dIfilt/dVrect,dIfilt/dVfilt]]. This permits actual multi-electrode receiver-stage coupling. Default ports are declared test resistors.",
+    "spice_reference": "Independent ngspice B-source rectifier, heater/dropper/lamp network and R-L-C filter with adaptive Gear integration; integrates startup and reports the same final six-cycle window."
+  },
+  "acceptance": {
+    "source_topology_verified": true,
+    "transient_solver_tested": true,
+    "ngspice_parity_verified": true,
+    "full_receiver_loads_connected": false,
+    "factory_voltage_calibrated": false,
+    "benchmark_ready": false
+  },
+  "validation_artifact": "engineering/PT44_Power_Dynamic_Validation_V1.json"
+}

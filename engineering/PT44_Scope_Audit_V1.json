@@ -1,8 +1,8 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.53.0",
-  "factory_transcription_artifact_version": "0.53.0",
+  "snapshot_build_version": "0.54.0",
+  "factory_transcription_artifact_version": "0.54.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "purpose": "Establish a denominator-based scope baseline for engineering-complete PT-44; terminal references in this audit are coverage counts only and do not assert circuit completeness, electrical behavior, or chassis routing.",
@@ -1253,7 +1253,10 @@
       "full_receiver_spice_validated": false,
       "nominal_heater_sanity_scenarios": 2,
       "nominal_heater_sanity_spice_validated": true,
-      "isolated_output_bypass_ac_study_validated": true
+      "isolated_output_bypass_ac_study_validated": true,
+      "dynamic_power_core_implemented": true,
+      "dynamic_power_receiver_loads_connected": false,
+      "dynamic_power_ngspice_cases_passed": 9
     },
     "model_equivalence": {
       "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
@@ -1328,14 +1331,14 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Factory #25 is source-traced across filtered B+ and B−, and 50L6 screen routing is recorded at glyph level. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+      "gap": "Factory #25 is source-traced across filtered B+ and B−. v0.45 maps the 50L6 screen glyph to socket pin V4:4 on filtered B+. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "The complete AC/line topology is now source-traced at schematic-symbol level: plug conductors, #16 switch, #31 across the plug, #30 40/80-ohm branches, #32 shunt, 35Z3 plate feed, B-minus return, and all five series heaters. Numbered tube-socket heater crosswalk, physical switch-lug crosswalk, and chassis isolation/bond evidence remain open."
+      "gap": "v0.54 implements dynamic power behavior with explicit stand-in loads, assumed field L/lamp hot resistance and a single-reference-point rectifier approximation. Connect actual receiver currents and validate rectifier/heater/lamp/field parameters, physical boundaries and voltage reference conditions."
     },
     {
       "id": "P1-SOURCE",
@@ -1348,8 +1351,8 @@
       "id": "P2-SPICE",
       "area": "Full receiver simulation",
       "severity": "later",
-      "status": "NOT STARTED",
-      "gap": "Replace reduced-order model with validated tube, transformer and passive SPICE models."
+      "status": "IN PROGRESS",
+      "gap": "Independent SPICE validation now includes the nonlinear supply model alongside earlier passive/heater fixtures. Full receiver stage models and their coupled operating states remain outstanding."
     }
   ],
   "benchmark_ready": false,
@@ -1397,5 +1400,6 @@
     ]
   },
   "rf_input_trace_artifact": "engineering/PT44_RF_Input_Trace_V1.json",
-  "snapshot_note": "All 114 current graph memberships reconcile through v0.53. Prior incorrect assignments are retained only in the superseded history artifact."
+  "snapshot_note": "All 114 current graph memberships reconcile through v0.53. Prior incorrect assignments are retained only in the superseded history artifact.",
+  "remaining_actions_artifact": "engineering/PT44_Remaining_Actions_V1.json"
 }

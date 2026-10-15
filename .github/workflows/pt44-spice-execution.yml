@@ -64,3 +64,6 @@ jobs:
         run: node tests/test_heater_model_v35.js --ngspice
       - name: Execute isolated cathode-bypass AC branch study
         run: node tests/test_output_bypass_v36.js --ngspice
+
+      - name: Cross-check nonlinear supply transients and faults against ngspice
+        run: node tests/test_power_dynamics_v54.js --ngspice

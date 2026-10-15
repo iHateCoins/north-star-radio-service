@@ -1,7 +1,9 @@
-# North Star Radio Service — v0.53.0 PT-44 supply and AVC reconciliation
+# North Star Radio Service — v0.54.0 PT-44 dynamic power milestone
 
-v0.53 corrects earlier conductor assignments using complete paths in the Philco p.38 and Rider XII 12-45 factory drawings. #13 is the 27 kΩ feed from filtered B+ to the shared screen rail. The lower right #10 winding joins filtered B+. The first-IF secondary, #17 lower lead and aerial return meet on a separate AVC conductor. #7/#8 connect AVC to B−, and the passive audio returns join B−.
+The engineering workbench now runs a reusable nonlinear supply model from the traced rectifier/dropper, #29A/#29B filter capacitors and #28 field-coil topology. It shows AC/DC supply operation, electrical startup, ripple and switch-off discharge. Fault controls cover dry/leaky filters, open field winding and weak/nonconducting rectifier; restoring parts reproduces the baseline. A matching SPICE deck can be exported from the same controls.
 
-The graph now references all 83 declared component endpoints in 35 conductor groups and 114 memberships. Five additional cathode/shield socket pins are source-crosswalked; 31 socket positions have graph memberships, one has a documented tube-internal equivalence, and six are manufacturer no-connection/shell options. The two 7C6 diode socket assignments, four-dot oscillator coupling, #8 value conflict, physical boundaries and receiver behavior remain open. **GATE-NETLIST is NOT MET.** Endpoint inventory coverage is not an engineering completion percentage.
+Factory values and assumptions are separate. The 35Z3 approximation passes through one GE manufacturer reference point; field inductance, lamp hot resistance and resistive stand-in loads are explicit inputs. The two load callback ports are ready for receiver-stage coupling. This is not a calibrated complete PT-44 or a replacement for the shop receiver's existing reduced-order solver.
 
-Watermark: `BUILD v0.53.0`. See `engineering/PT44_Supply_AVC_Reconciliation_V1.json` for paths, nonjunctions and superseded claims. Prior membership evidence is retained in `engineering/PT44_Pre_v053_Membership_History_V1.json`.
+The source graph retains 35 conductor groups, 114 memberships and all 83 declared component endpoints from v0.53. **GATE-NETLIST and the other benchmark gates remain NOT MET.** Remaining diode pin assignments, oscillator coupling, #8 value conflict, parameter validation, chassis boundaries and full receiver/repair integration are tracked in `engineering/PT44_Remaining_Actions_V1.json`.
+
+Watermark: `BUILD v0.54.0`. Numerical checks cover KCL, discrete energy balance, an independent DC operating point, timestep convergence, fault/restore behavior, browser/module parity and ngspice transient comparisons.
