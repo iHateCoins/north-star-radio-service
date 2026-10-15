@@ -10,7 +10,7 @@ function pt44IFModelHTML(stage,esc){
  <label>Injected IF peak A<br><input name="input_peak_a" type="number" min="0" max="0.0001" step="0.000002" value="${state.input_peak_a}" style="width:110px"></label>
  <label>Carrier Hz<br><input name="carrier_hz" type="number" min="420000" max="490000" step="5000" value="${state.carrier_hz}" style="width:95px"></label>
  <label>Volume<br><input name="volume" type="number" min="0" max="1" step=".1" value="${state.volume}" style="width:65px"></label>
- ${[['c12a_scale','12A'],['c12b_scale','12B'],['c14a_scale','14A']].map(([k,label])=>`<label>${label} capacitance scale<br><input name="${k}" type="number" min=".75" max="1.25" step=".001" value="${state[k]}" style="width:110px"></label>`).join('')}
+ ${[['c12a_scale','12A'],['c12b_scale','12B'],['c14a_scale','14A']].map(([k,label])=>`<label>${label} capacitance scale<br><input name="${k}" type="number" min=".75" max="1.25" step="any" value="${state[k]}" style="width:110px"></label>`).join('')}
  <label>Probe<br><select name="probe">${[['AVC','AVC rail'],['IG','7B7 grid · pin 6'],['IP','7B7 plate · pin 2'],['S','Shared screen rail'],['B','Filtered B+'],['G','7C6 audio grid'],['P','7C6 plate']].map(([v,l])=>option(v,l,state.probe)).join('')}</select></label>
  <label>Instrument<br><select name="meter">${[['ideal','Ideal'],['dmm','10 MΩ / 100 pF'],['service','1000 Ω/V; AVC 10 V, other 250 V']].map(([v,l])=>option(v,l,state.meter)).join('')}</select></label>
  <button class="sl-btn" id="ifRunV57" type="submit">Run coupled IF</button><button class="sl-btn" id="ifRepairV57" type="button">Restore and rerun</button><button class="sl-btn" id="ifExportV57" type="button">Export matching SPICE</button></form>
