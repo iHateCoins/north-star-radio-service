@@ -1,8 +1,8 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.54.0",
-  "factory_transcription_artifact_version": "0.54.0",
+  "snapshot_build_version": "0.55.0",
+  "factory_transcription_artifact_version": "0.55.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
   "purpose": "Establish a denominator-based scope baseline for engineering-complete PT-44; terminal references in this audit are coverage counts only and do not assert circuit completeness, electrical behavior, or chassis routing.",
@@ -1256,7 +1256,11 @@
       "isolated_output_bypass_ac_study_validated": true,
       "dynamic_power_core_implemented": true,
       "dynamic_power_receiver_loads_connected": false,
-      "dynamic_power_ngspice_cases_passed": 9
+      "dynamic_power_ngspice_cases_passed": 9,
+      "audio_supply_jointly_solved": true,
+      "audio_tube_loads_connected": true,
+      "full_receiver_loads_connected": false,
+      "audio_power_artifact": "engineering/PT44_Audio_Power_Model_V1.json"
     },
     "model_equivalence": {
       "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
@@ -1331,14 +1335,14 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Factory #25 is source-traced across filtered B+ and B−. v0.45 maps the 50L6 screen glyph to socket pin V4:4 on filtered B+. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+      "gap": "v0.55 implements volume control, 7C6 triode, 50L6 plate/screen/grid currents and an output-transformer/speaker electrical equivalent. Bias, loading, clipping, hum and fault responses are modeled. Sparse curve interpolation, grid current, transformer/speaker parameters and physical/acoustic correlation need validation; shop receiver integration remains open."
     },
     {
       "id": "P1-AC",
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "v0.54 implements dynamic power behavior with explicit stand-in loads, assumed field L/lamp hot resistance and a single-reference-point rectifier approximation. Connect actual receiver currents and validate rectifier/heater/lamp/field parameters, physical boundaries and voltage reference conditions."
+      "gap": "Audio plate/screen currents and supply are now solved jointly in v0.55. RF/IF loads remain substituted; rectifier/heater/lamp/field parameters, physical boundaries and factory voltage reference conditions remain open."
     },
     {
       "id": "P1-SOURCE",
@@ -1352,7 +1356,7 @@
       "area": "Full receiver simulation",
       "severity": "later",
       "status": "IN PROGRESS",
-      "gap": "Independent SPICE validation now includes the nonlinear supply model alongside earlier passive/heater fixtures. Full receiver stage models and their coupled operating states remain outstanding."
+      "gap": "Independent validation now includes coupled audio and supply transients, faults and meter loading. RF/IF/detector/AVC models and complete receiver SPICE/repair acceptance remain outstanding."
     }
   ],
   "benchmark_ready": false,
