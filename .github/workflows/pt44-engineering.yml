@@ -98,6 +98,11 @@ jobs:
       - name: Verify detector worker source and lifecycle
         run: node tests/test_detector_workbench_v56.js
 
+      - name: Verify coupled tuned IF, AVC feedback, audio and supply faults
+        run: node tests/test_if_receiver_v57.js
+      - name: Verify coupled IF generated worker and canonical source
+        run: node tests/test_if_workbench_v57.js
+
   audio-browser:
     name: Exercise coupled audio bench in Chromium
     runs-on: ubuntu-latest
@@ -130,4 +135,14 @@ jobs:
         with:
           name: pt44-detector-browser-v056
           path: tmp/pt44-detector-browser/
+          retention-days: 7
+
+      - name: Exercise coupled IF worker, faults, repair and loaded controls in Chromium
+        run: node tests/test_if_browser_v57.js --browser
+      - name: Retain coupled IF screenshots and measurement evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-if-browser-v057
+          path: tmp/pt44-if-browser/
           retention-days: 7

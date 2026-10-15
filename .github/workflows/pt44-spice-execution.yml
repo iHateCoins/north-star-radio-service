@@ -73,3 +73,6 @@ jobs:
 
       - name: Cross-check carrier-resolved detector/AVC and loaded probes against ngspice
         run: node tests/test_detector_spice_v56.js --ngspice
+
+      - name: Cross-check coupled tuned IF, detector, audio and DC supply against ngspice
+        run: node tests/test_if_spice_v57.js --ngspice
