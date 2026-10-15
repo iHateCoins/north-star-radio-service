@@ -104,8 +104,10 @@
       "stage": "RF",
       "terminal": "V1:3",
       "task": "Trace 7A8 oscillator-anode grid G2 (socket pin 3) through the oscillator circuit and #10 transformer.",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "status": "source_traced_net_member",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json",
+      "review_result": "The named socket pin has a reviewed receiver net; this does not close the rest of the subsystem."
     },
     {
       "id": "RF-03",
@@ -268,8 +270,10 @@
       "stage": "POWER",
       "terminal": "V5:2",
       "task": "Trace 35Z3 anode to AC line, pilot lamp, #30 resistor taps and line switch.",
-      "status": "source_trace_required",
-      "factory_net_claim": false
+      "status": "source_traced_net_member",
+      "factory_net_claim": true,
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "review_result": "The named socket pin has a reviewed receiver net; this does not close the rest of the subsystem."
     },
     {
       "id": "POWER-02",

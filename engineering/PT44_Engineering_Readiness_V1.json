@@ -71,7 +71,13 @@
     "oscillator_grid_leak_endpoints_source_traced": 2,
     "screen_bypass_capacitor_endpoints_source_traced": 2,
     "power_line_component_endpoints_in_partial_graph": 5,
-    "power_boundary_tube_pins_source_crosswalked": 3
+    "power_boundary_tube_pins_source_crosswalked": 3,
+    "pin_role_classification": {
+      "inventoried": 40,
+      "reviewed_graph_members": 26,
+      "manufacturer_nonfunctional_or_option": 6,
+      "external_crosswalks_open": 8
+    }
   },
   "open_items": [
     {
@@ -86,7 +92,7 @@
       "area": "IF",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Both IF transformer primary/secondary component endpoints and #13 grid return are source-traced. v0.44 maps the shared 45 V screen lead to 7B7 pin 3; 7B7 cathode wiring, screen-feed origin, transformer parameters/trimmers, AVC and full IF behavior remain open. The v0.40 #12/#13 conductor interpretation is under independent re-review after enlarging p.38; it is not accepted as closure evidence for the oscillator/IF boundary."
+      "gap": "Both IF transformer primary/secondary component endpoints were inventoried; the v0.40 #13 grid-return attribution is challenged by the clearer drawing. v0.44 maps the shared 45 V screen lead to 7B7 pin 3; 7B7 cathode wiring, screen-feed origin, transformer parameters/trimmers, AVC and full IF behavior remain open. The v0.40 #12/#13 conductor interpretation is under independent re-review after enlarging p.38; it is not accepted as closure evidence for the oscillator/IF boundary."
     },
     {
       "id": "P1-DET",
@@ -100,7 +106,7 @@
       "area": "Audio output",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Factory #25 is source-traced across filtered B+ and B−. v0.45 maps the 50L6 screen glyph to socket pin V4:4 on filtered B+. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
+      "gap": "Factory #25 is source-traced across filtered B+ and B\u2212. v0.45 maps the 50L6 screen glyph to socket pin V4:4 on filtered B+. Output-transformer winding parameters, speaker/model correlation, and complete output behavior remain open."
     },
     {
       "id": "P1-AC",
@@ -165,7 +171,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "Rider XII 12-45 supplies a second printed scan of the PT-42/PT-44 factory schematic. The upper right #10 winding end now crosswalks to 7A8 oscillator anode V1:3. The graph has 35 groups, 108 memberships and 82/83 component terminals (98.8% coverage). The lower right winding end and #12/#13 crossing interpretation remain under re-review; GATE-NETLIST is NOT MET.",
+  "latest_evidence_update": "Rider XII 12-45 supplies a second printed scan of the PT-42/PT-44 factory schematic. The upper right #10 winding end now crosswalks to 7A8 oscillator anode V1:3. The graph has 35 groups, 108 memberships and 82/83 component terminals (98.8% coverage). The lower right winding end and #12/#13 crossing interpretation remain under re-review; GATE-NETLIST is NOT MET. Pin-role inventory classifies all 40 positions: 26 reviewed graph members, six manufacturer no-connection/shell options, and eight active/shield positions still awaiting receiver crosswalks. The v0.40 #12/#13 graph claims are challenged by the enlarged Philco/Rider drawing and are not gate-eligible pending coherent continuity correction.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",
