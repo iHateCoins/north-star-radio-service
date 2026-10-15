@@ -67,20 +67,20 @@ function pt44IFSystem(c,x,old,time,dt,equilibrium=false){
  const probe=c.nodes.indexOf(p.probe);if(c.meter.resistance_ohm)r(probe,-1,c.meter.resistance_ohm);cap(probe,-1,c.meter.capacitance_f);
  return {M,F,rect:bs.rect,drive,tube:tube(x)};
 }
-function pt44IFSingleStep(c,old,time,dt,equilibrium=false){
- const t=equilibrium?time:time-dt/2,h=equilibrium?dt:dt/2;let x=old.slice(),sys,residual;const norm=F=>Math.max(...F.map((v,i)=>Math.abs(v)/([10,11,22,23,24,25].includes(i)?1000:1)));
+function pt44IFSingleStep(c,old,time,dt,equilibrium=false,method='midpoint'){
+ const midpoint=!equilibrium&&method==='midpoint';if(!['midpoint','backward_euler'].includes(method))throw Error('Unknown IF integrator');const t=midpoint?time-dt/2:time,h=midpoint?dt/2:dt;let x=old.slice(),sys,residual;const norm=F=>Math.max(...F.map((v,i)=>Math.abs(v)/([10,11,22,23,24,25].includes(i)?1000:1)));
  for(let n=0;n<50;n++){sys=pt44IFSystem(c,x,old,t,h,equilibrium);residual=norm(sys.F);
   // Large supply-capacitor conductances hit floating-point subtraction noise at fine IF steps.
   // Keep high-impedance signal-node tolerance strict while allowing 1 nA at the two supply nodes.
-  if(sys.F.every((v,i)=>Math.abs(v)/([10,11,22,23,24,25].includes(i)?1000:1)<(!equilibrium&&i<2?1e-9:2e-11)))break;const dx=pt44AudioSolve(sys.M,sys.F.map(v=>-v));let alpha=1,z;for(let j=0;j<15;j++){z=x.map((v,i)=>v+alpha*dx[i]);if(norm(pt44IFSystem(c,z,old,t,h,equilibrium).F)<residual)break;alpha/=2;}x=z;}
+  if(sys.F.every((v,i)=>Math.abs(v)/([10,11,22,23,24,25].includes(i)?1000:1)<(!equilibrium&&i<2?1e-9:method==='backward_euler'?2e-14:2e-11)))break;const dx=pt44AudioSolve(sys.M,sys.F.map(v=>-v));let alpha=1,z;for(let j=0;j<15;j++){z=x.map((v,i)=>v+alpha*dx[i]);if(norm(pt44IFSystem(c,z,old,t,h,equilibrium).F)<residual)break;alpha/=2;}x=z;}
  sys=pt44IFSystem(c,x,old,t,h,equilibrium);residual=norm(sys.F);if(!x.every(Number.isFinite)||residual>1e-8)throw Error('IF Newton convergence at '+time+': '+residual);
- if(!equilibrium)x=x.map((v,i)=>2*v-old[i]);
+ if(midpoint)x=x.map((v,i)=>2*v-old[i]);
  return {time_s:time,x,kcl_residual_a:residual,if_plate_a:sys.tube.plate_a,if_screen_a:sys.tube.screen_a,speaker_v:(x[9]-x[8])/c.base.ratio,if_secondary_v:x[12]-x[2],rectifier_a:sys.rect.current_a};
 }
-function pt44IFStep(c,old,time,dt,equilibrium=false,depth=0){
- try{return pt44IFSingleStep(c,old,time,dt,equilibrium);}catch(error){
+function pt44IFStep(c,old,time,dt,equilibrium=false,depth=0,method='midpoint'){
+ try{return pt44IFSingleStep(c,old,time,dt,equilibrium,method);}catch(error){
   if(equilibrium||depth>=4||!String(error.message).startsWith('IF Newton convergence'))throw error;
-  const first=pt44IFStep(c,old,time-dt/2,dt/2,false,depth+1),second=pt44IFStep(c,first.x,time,dt/2,false,depth+1);
+  const first=pt44IFStep(c,old,time-dt/2,dt/2,false,depth+1,method),second=pt44IFStep(c,first.x,time,dt/2,false,depth+1,method);
   second.kcl_residual_a=Math.max(first.kcl_residual_a,second.kcl_residual_a);second.subdivisions=1+(first.subdivisions||0)+(second.subdivisions||0);return second;
  }
 }
@@ -117,4 +117,25 @@ function pt44IFSpiceDeck(spec,audio,power,detector,graph,input={}){
  const probe={A:'N_BPLUS_RECT',B:'N_BPLUS_FILT'}[p.probe]||p.probe;if(c.meter.resistance_ohm)lines.push(`RMETER ${probe} 0 ${c.meter.resistance_ohm}`);if(c.meter.capacitance_f)lines.push(`CMETER ${probe} 0 ${c.meter.capacitance_f}`);
  lines.push('.options method=trap maxord=2 reltol=1e-6 abstol=1e-12',`* DC operating point initializes hot equilibrium; no UIC. JS uses implicit midpoint at ${dt} s.`,`.tran ${dt} ${p.duration_s} 0 ${dt}`,'.print tran V(N_BPLUS_FILT) V(S) V(AVC) V(IG) V(IP) V(H) V(G) V(P) V(T) V(SPEAKER)','.end');return lines.join('\n')+'\n';
 }
-if(typeof module!=='undefined'&&module.exports){const a=require('./pt44_audio_power_v55'),p=require('./pt44_power_model_v54'),d=require('./pt44_detector_avc_v56');var pt44AudioValidate=a.validate,pt44PowerValidate=p.validate,pt44DetectorValidate=d.validate,pt44AudioTable=a.table,pt44AudioSpiceTable=a.spiceTable,pt44AudioSpiceDeck=a.spiceDeck,pt44AudioConfigure=a.configure,pt44AudioSystem=a.system,pt44AudioSolve=a.solve,pt44DetectorDiode=d.diode;module.exports={validate:pt44IFValidate,tube:pt44IFTube,configure:pt44IFConfigure,system:pt44IFSystem,step:pt44IFStep,simulate:pt44IFSimulate,spiceDeck:pt44IFSpiceDeck};}
+// Carrier-resolved arrival/ringdown, then the same unforced MNA with L-stable steps.
+// No artificial AVC exponential, reset, or frozen supply/audio state.
+function pt44IFRelease(spec,audio,power,detector,graph,input={},release={}){
+ const q={duration_s:1,step_s:.0001,ringdown_s:.0002,...release};
+ if(Object.keys(release).some(k=>!['duration_s','step_s','ringdown_s'].includes(k))||!Object.values(q).every(Number.isFinite)||q.duration_s<.1||q.duration_s>2||q.step_s<.000025||q.step_s>.0002||q.ringdown_s<.0001||q.ringdown_s>.001)throw Error('Unsupported AVC release domain');
+ const args=[spec,audio,power,detector,graph],arrival=pt44IFSimulate(...args,input),c=pt44IFConfigure(...args,{...arrival.parameters,input_peak_a:0}),off=arrival.parameters.duration_s,initial=arrival.final;
+ let state=initial,maxResidual=arrival.max_kcl_residual_a,steps=0;const samples=[initial],advance=(duration,limit,method)=>{const count=Math.ceil(duration/limit),dt=duration/count,start=state.time_s;for(let n=1;n<=count;n++){state=pt44IFStep(c,state.x,start+n*dt,dt,false,0,method);maxResidual=Math.max(maxResidual,state.kcl_residual_a);steps++;if(method==='backward_euler'||n===count)samples.push(state);}};
+ advance(q.ringdown_s,1/(c.p.carrier_hz*c.p.samples_per_carrier),'midpoint');advance(q.duration_s-q.ringdown_s,q.step_s,'backward_euler');
+ const checkpoint=t=>{const target=off+t;let i=1;while(i<samples.length-1&&samples[i].time_s<target)i++;const a=samples[i-1],b=samples[i],f=(target-a.time_s)/(b.time_s-a.time_s);return {elapsed_s:t,avc_v:a.x[13]+f*(b.x[13]-a.x[13]),if_grid_v:a.x[15]+f*(b.x[15]-a.x[15]),filtered_bplus_v:a.x[1]+f*(b.x[1]-a.x[1])};};
+ const checkpoints=[.01,.05,.1,.25,.5,1,2].filter(t=>t<=q.duration_s+1e-12).map(checkpoint),startMagnitude=Math.abs(initial.x[13]),threshold=startMagnitude*.1;let recovery=null;
+ for(let i=1;i<samples.length;i++)if(startMagnitude>1e-8&&Math.abs(samples[i].x[13])<=threshold&&Math.abs(samples[i-1].x[13])>threshold){const a=samples[i-1],b=samples[i];recovery=a.time_s-off+(b.time_s-a.time_s)*(Math.abs(a.x[13])-threshold)/(Math.abs(a.x[13])-Math.abs(b.x[13]));break;}
+ return {kind:'avc_release',parameters:arrival.parameters,release:q,arrival_summary:arrival.summary,initial,final:state,samples,checkpoints,recovery_to_10_percent_s:recovery,max_kcl_residual_a:maxResidual,release_steps:steps,signal_off_s:off,factory_calibrated:false,full_receiver_validated:false};
+}
+function pt44IFReleaseSpiceDeck(spec,audio,power,detector,graph,input={},snapshot){
+ const c=pt44IFConfigure(spec,audio,power,detector,graph,input);
+ if(!snapshot||snapshot.x?.length!==26||!snapshot.x.every(Number.isFinite)||!Number.isFinite(snapshot.time_s))throw Error('Release export needs the post-ringdown state');
+ const names=['N_BPLUS_RECT','N_BPLUS_FILT','H','W','G','P','O','K','T','X',null,null,'U','AVC','S','IG','IP','IS','PW','SW','CP','CW'],inductors={LFIELD:10,L26:11,L12P:22,L12S:23,L14P:24,L14S:25};
+ const lines=pt44IFSpiceDeck(spec,audio,power,detector,graph,{...input,input_peak_a:0}).split('\n').filter(line=>line&&!/^(BDRIVE |\.options|\.tran|\.print|\.end)/.test(line)).map(line=>{const i=inductors[line.split(' ')[0]];return i===undefined?line:line+` IC=${snapshot.x[i]}`;});
+ lines[0]='PT-44 v0.59 coupled AVC release continuation - uncalibrated';
+ lines.push(`* Common JS post-ringdown snapshot at absolute ${snapshot.time_s} s. Validates continuation only; arrival is checked separately.`,'.ic '+names.flatMap((name,i)=>name?[`V(${name})=${snapshot.x[i]}`]:[]).join(' '),'.options method=gear maxord=2 reltol=1e-8 abstol=1e-13',`.tran .0001 ${1-(snapshot.time_s-c.p.duration_s)} 0 .0001 UIC`,'.print tran V(N_BPLUS_FILT) V(S) V(AVC) V(IG) V(P) V(T)','.end');return lines.join('\n')+'\n';
+}
+if(typeof module!=='undefined'&&module.exports){const a=require('./pt44_audio_power_v55'),p=require('./pt44_power_model_v54'),d=require('./pt44_detector_avc_v56');var pt44AudioValidate=a.validate,pt44PowerValidate=p.validate,pt44DetectorValidate=d.validate,pt44AudioTable=a.table,pt44AudioSpiceTable=a.spiceTable,pt44AudioSpiceDeck=a.spiceDeck,pt44AudioConfigure=a.configure,pt44AudioSystem=a.system,pt44AudioSolve=a.solve,pt44DetectorDiode=d.diode;module.exports={validate:pt44IFValidate,tube:pt44IFTube,configure:pt44IFConfigure,system:pt44IFSystem,step:pt44IFStep,simulate:pt44IFSimulate,release:pt44IFRelease,releaseSpiceDeck:pt44IFReleaseSpiceDeck,spiceDeck:pt44IFSpiceDeck};}

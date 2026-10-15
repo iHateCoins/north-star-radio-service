@@ -1,6 +1,6 @@
 {
   "schema": "PT44_IF_RECEIVER_MODEL_V1",
-  "version": "0.58.0",
+  "version": "0.59.0",
   "model": "Philco PT-44",
   "scope": "Joint hot DC supply, tuned IF, detector/AVC and nonlinear audio; converter replaced by explicit current injection and residual loads. Not a complete receiver.",
   "factory_terminal_nets": {
@@ -449,9 +449,10 @@
     "steps": "48/96/192 steps per carrier cycle; default 96. Coupling-leakage fixtures require 192 because their nonlinear audio response amplifies carrier-step error.",
     "statistics": "Final four modulation periods, using full-rate states. The finite arrival window includes settling; no steady-state sensitivity claim.",
     "display": "One sample per carrier cycle; carrier amplitudes are calculated before display decimation.",
-    "reference": "B-minus, not chassis. DC source 90\u2013130 V.",
+    "reference": "B-minus, not chassis. DC source 90–130 V.",
     "scope": "Joint electrical IF-to-speaker response; electrical speaker equivalent, no acoustic calibration.",
-    "convergence": "Damped Newton with up to four step subdivisions on failure; strict signal-node residuals, 1 nA supply-node stopping allowance for fine-step roundoff, overall accepted normalized residual <10 nA. Leakage equilibrium uses conductance continuation."
+    "convergence": "Damped Newton with up to four step subdivisions on failure; strict signal-node residuals, 1 nA supply-node stopping allowance for fine-step roundoff, overall accepted normalized residual <10 nA. Leakage equilibrium uses conductance continuation.",
+    "release": "After the existing short arrival, remove injected IF current, resolve 0.2 ms ringdown at carrier steps, then continue all 26 states with backward Euler at <=0.1 ms for 1 s. No AVC reset or fitted release law. Step/ringdown convergence and independent SPICE continuation checked. Long-duration attack/steady regulation remain unvalidated."
   },
   "source_if_trace": "engineering/PT44_IF_Tuning_Winding_Trace_V1.json"
 }

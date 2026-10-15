@@ -1,0 +1,78 @@
+{
+  "schema": "PT44_EC_ACCEPTANCE_V1",
+  "authority": "Fixed nine acceptance lists from merged v0.58; changes require explicit scope agreement.",
+  "actions": [
+    {
+      "id": "EC-01",
+      "acceptance": [
+        "Assign both 7C6 diode glyphs to socket pins 5/6.",
+        "Resolve the four-dot oscillator coupling symbol and complete its electrical representation.",
+        "Resolve #8 0.05/0.1 µF value conflict or retain a specifically approved variant."
+      ]
+    },
+    {
+      "id": "EC-02",
+      "acceptance": [
+        "Validate models for all five tube types against manufacturer curves.",
+        "Establish coil/transformer L, coupling, winding resistance and output-transformer/speaker relationship.",
+        "Establish volume-control resistance/taper, field inductance and lamp/heater behavior; identify supported approximations."
+      ]
+    },
+    {
+      "id": "EC-03",
+      "acceptance": [
+        "Replace power-bench stand-in resistors with currents drawn by the actual receiver stages.",
+        "Validate rectifier conduction and heater/lamp behavior over supported supply conditions.",
+        "Check reservoir/filtered voltages, ripple, startup and discharge under healthy and faulty receiver loads."
+      ]
+    },
+    {
+      "id": "EC-04",
+      "acceptance": [
+        "Model volume control, 7C6 triode, 50L6 output stage and output transformer/speaker.",
+        "Validate gain, bias, clipping, loading and hum transfer; make output respond to component faults."
+      ]
+    },
+    {
+      "id": "EC-05",
+      "acceptance": [
+        "Model 455 kHz IF transfer, bandwidth, tuned adjustments and stage loading.",
+        "Implement detector rectification, audio recovery and AVC attack/release/loading.",
+        "Verify responses to signal strength, misalignment and component faults."
+      ]
+    },
+    {
+      "id": "EC-06",
+      "acceptance": [
+        "Implement oscillator/converter behavior and tracking across 540–1600 kHz.",
+        "Validate the 455 kHz frequency relationship, tuning/alignment effects and input behavior.",
+        "Check weak/dead oscillator and aerial faults against the receiver model."
+      ]
+    },
+    {
+      "id": "EC-07",
+      "acceptance": [
+        "Connect meters, signal generator and tracer to authoritative receiver nodes with defined loading.",
+        "Record supply, control settings, signal and instrument conditions for each benchmark measurement.",
+        "Use historical voltage labels only where return/loading/conditions support comparison; distinguish simulated reference conditions."
+      ]
+    },
+    {
+      "id": "EC-08",
+      "acceptance": [
+        "Map component endpoints and instrument access to the serviceable game chassis.",
+        "Resolve physical identities that affect faults, polarity or repairs.",
+        "Keep unsupported lead dress and chassis/B− bond claims explicit."
+      ]
+    },
+    {
+      "id": "EC-09",
+      "acceptance": [
+        "Establish a deterministic healthy-radio baseline over supported tuning/supply conditions.",
+        "Exercise a fixed fault matrix through diagnosis, part replacement, alignment and successful checkout.",
+        "Run regressions, record limitations and close the six agreed benchmark gates only when their acceptance evidence is met."
+      ]
+    }
+  ],
+  "baseline_commit": "f200825a370464df1ac716a1fcbc40008cd87209"
+}

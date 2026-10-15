@@ -1,0 +1,692 @@
+{
+  "schema": "PT44_AVC_RELEASE_VALIDATION_V1",
+  "version": "0.59.0",
+  "scope": "Same coupled 26-variable MNA: short carrier-resolved arrival, removal, ringdown, then one second unforced release. No long-duration attack or converter-feedback claim.",
+  "cases": {
+    "healthy": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -0.003892098112184609,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -0.003630282076427238,
+          "if_grid_v": -0.0036302848330737785,
+          "filtered_bplus_v": 96.45021357710311
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -0.002641959034105966,
+          "if_grid_v": -0.00264195878021183,
+          "filtered_bplus_v": 96.45179722043099
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -0.0017666201060551705,
+          "if_grid_v": -0.0017666201136801803,
+          "filtered_bplus_v": 96.4535251431505
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -0.0005252868053733216,
+          "if_grid_v": -0.0005252868045349504,
+          "filtered_bplus_v": 96.45329239212744
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -0.00006950726476737198,
+          "if_grid_v": -0.00006950726464947345,
+          "filtered_bplus_v": 96.45305164478309
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -0.0000012169984188313945,
+          "if_grid_v": -0.000001216998416767053,
+          "filtered_bplus_v": 96.4530152514539
+        }
+      ],
+      "recovery_to_10_percent_s": 0.28706160847471585,
+      "max_kcl_residual_a": 3.511174684334151e-11
+    },
+    "half_release_step": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.00005,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -0.003892098112184609,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -0.0036302337184923547,
+          "if_grid_v": -0.003630236488068592,
+          "filtered_bplus_v": 96.45023553571497
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -0.0026417551835382696,
+          "if_grid_v": -0.002641754932736294,
+          "filtered_bplus_v": 96.45171869190366
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -0.001766335269705697,
+          "if_grid_v": -0.0017663352770029622,
+          "filtered_bplus_v": 96.45352874320531
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -0.0005250721795231841,
+          "if_grid_v": -0.0005250721786847283,
+          "filtered_bplus_v": 96.4532922958174
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -0.00006945044490837298,
+          "if_grid_v": -0.00006945044479057078,
+          "filtered_bplus_v": 96.4530516145061
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -0.000001215009134583684,
+          "if_grid_v": -0.0000012150091325227624,
+          "filtered_bplus_v": 96.45301525039389
+        }
+      ],
+      "recovery_to_10_percent_s": 0.2870035946084641,
+      "max_kcl_residual_a": 3.511174684334151e-11
+    },
+    "double_ringdown": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0004
+      },
+      "initial_avc_v": -0.003892098112184609,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -0.00363028020889354,
+          "if_grid_v": -0.003630282966161945,
+          "filtered_bplus_v": 96.45021366072376
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -0.002641957399550133,
+          "if_grid_v": -0.0026419571456718547,
+          "filtered_bplus_v": 96.45179665065196
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -0.0017666189483489083,
+          "if_grid_v": -0.0017666189559725405,
+          "filtered_bplus_v": 96.45352516232957
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -0.0005252864552112782,
+          "if_grid_v": -0.0005252864543729066,
+          "filtered_bplus_v": 96.45329239198058
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -0.00006950721842222284,
+          "if_grid_v": -0.00006950721830432448,
+          "filtered_bplus_v": 96.45305164475833
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -0.0000012169976073778735,
+          "if_grid_v": -0.0000012169976053135378,
+          "filtered_bplus_v": 96.45301525145345
+        }
+      ],
+      "recovery_to_10_percent_s": 0.2870615260703962,
+      "max_kcl_residual_a": 3.511174684334151e-11
+    },
+    "c8_0_1uf": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 1e-7,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -0.00209978951798615,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -0.0020392996408594138,
+          "if_grid_v": -0.002039302318251881,
+          "filtered_bplus_v": 96.44986058353112
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -0.0017431353981860898,
+          "if_grid_v": -0.0017431351571470526,
+          "filtered_bplus_v": 96.4511755416202
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -0.001425849170319062,
+          "if_grid_v": -0.0014258491800914232,
+          "filtered_bplus_v": 96.45333241791253
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -0.0007771748923636793,
+          "if_grid_v": -0.0007771748917481899,
+          "filtered_bplus_v": 96.45343044591434
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -0.0002824898390211112,
+          "if_grid_v": -0.0002824898387776042,
+          "filtered_bplus_v": 96.45316656198207
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -0.00003732232036392855,
+          "if_grid_v": -0.0000373223203317566,
+          "filtered_bplus_v": 96.45303467949253
+        }
+      ],
+      "recovery_to_10_percent_s": 0.5732776238492806,
+      "max_kcl_residual_a": 3.5411073379121305e-11
+    },
+    "dmm_avc": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "dmm",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -0.0038741129307519905,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -0.003542983513896288,
+          "if_grid_v": -0.0035429862696310234,
+          "filtered_bplus_v": 96.45020041029342
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -0.002383202022886208,
+          "if_grid_v": -0.002383201767963338,
+          "filtered_bplus_v": 96.45166464416499
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -0.0014441345320929055,
+          "if_grid_v": -0.0014441345396514283,
+          "filtered_bplus_v": 96.45334576070468
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -0.00031934035259060004,
+          "if_grid_v": -0.00031934035198555647,
+          "filtered_bplus_v": 96.45318015741783
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -0.000025787513182349604,
+          "if_grid_v": -0.00002578751312927361,
+          "filtered_bplus_v": 96.45302814400992
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -1.6815411576365132e-7,
+          "if_grid_v": -1.6815411541752306e-7,
+          "filtered_bplus_v": 96.45301469118694
+        }
+      ],
+      "recovery_to_10_percent_s": 0.23080183787932101,
+      "max_kcl_residual_a": 3.570276626424507e-11
+    },
+    "service_avc": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "service",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -0.000654907342268326,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -4.822334711754323e-7,
+          "if_grid_v": -4.848518828456115e-7,
+          "filtered_bplus_v": 96.44938546575048
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -1.1084839038361798e-7,
+          "if_grid_v": -1.1061584511029322e-7,
+          "filtered_bplus_v": 96.45007467284906
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -1.7680645314877627e-8,
+          "if_grid_v": -1.7692050554682874e-8,
+          "filtered_bplus_v": 96.45254596445655
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -7.198161986482261e-11,
+          "if_grid_v": -7.203809050801958e-11,
+          "filtered_bplus_v": 96.45301229312044
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -7.473977867435857e-15,
+          "if_grid_v": -7.479829222318678e-15,
+          "filtered_bplus_v": 96.45301460264727
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -6.683809100403941e-16,
+          "if_grid_v": -6.690240792059661e-16,
+          "filtered_bplus_v": 96.45301460286574
+        }
+      ],
+      "recovery_to_10_percent_s": 0.0012827624212695705,
+      "max_kcl_residual_a": 3.626839800707771e-11
+    },
+    "r17_open": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": true,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -0.003368332122251384,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -0.003239224063760402,
+          "if_grid_v": -0.003239227094712709,
+          "filtered_bplus_v": 96.44983426410278
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -0.0027323836227951246,
+          "if_grid_v": -0.002732383352483187,
+          "filtered_bplus_v": 96.45127968513044
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -0.002208856149295892,
+          "if_grid_v": -0.002208856160009632,
+          "filtered_bplus_v": 96.45368586333043
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -0.0011669302683760092,
+          "if_grid_v": -0.001166930267371411,
+          "filtered_bplus_v": 96.45364413044665
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -0.00040287846254653375,
+          "if_grid_v": -0.00040287846217720337,
+          "filtered_bplus_v": 96.45323286761662
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -0.00004802112650394185,
+          "if_grid_v": -0.00004802112645992003,
+          "filtered_bplus_v": 96.45304061875505
+        }
+      ],
+      "recovery_to_10_percent_s": 0.5420892264940275,
+      "max_kcl_residual_a": 3.4252248606869706e-11
+    },
+    "no_signal": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -2.628856993932761e-16,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -2.628856993932761e-16,
+          "if_grid_v": -2.6294990427073283e-16,
+          "filtered_bplus_v": 96.4530146025935
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -2.628856993932761e-16,
+          "if_grid_v": -2.6294990427073283e-16,
+          "filtered_bplus_v": 96.4530146025935
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -2.628856993932761e-16,
+          "if_grid_v": -2.6294990427073283e-16,
+          "filtered_bplus_v": 96.4530146025935
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -2.628856993932761e-16,
+          "if_grid_v": -2.6294990427073283e-16,
+          "filtered_bplus_v": 96.4530146025935
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -2.628856993932761e-16,
+          "if_grid_v": -2.6294990427073283e-16,
+          "filtered_bplus_v": 96.4530146025935
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -2.628856993932761e-16,
+          "if_grid_v": -2.6294990427073283e-16,
+          "filtered_bplus_v": 96.4530146025935
+        }
+      ],
+      "recovery_to_10_percent_s": null,
+      "max_kcl_residual_a": 3.0338370704541262e-12
+    },
+    "restored": {
+      "parameters": {
+        "line_v": 115,
+        "carrier_hz": 455000,
+        "audio_hz": 2000,
+        "input_peak_a": 0.000002,
+        "modulation": 0.5,
+        "volume": 0.6,
+        "duration_s": 0.003,
+        "samples_per_carrier": 96,
+        "if_emission": 1,
+        "upper_emission": 1,
+        "lower_emission": 1,
+        "r17_open": false,
+        "avc_short": false,
+        "screen_feed_open": false,
+        "c18_scale": 1,
+        "c20_leak_ohm": null,
+        "if1_detune": 1,
+        "if2_detune": 1,
+        "coupling": 0.02,
+        "c8_f": 5e-8,
+        "avc_feedback": true,
+        "meter": "ideal",
+        "probe": "AVC",
+        "c12a_scale": 1,
+        "c12b_scale": 1,
+        "c14a_scale": 1
+      },
+      "release": {
+        "duration_s": 1,
+        "step_s": 0.0001,
+        "ringdown_s": 0.0002
+      },
+      "initial_avc_v": -0.003892098112184609,
+      "checkpoints": [
+        {
+          "elapsed_s": 0.01,
+          "avc_v": -0.003630282076427238,
+          "if_grid_v": -0.0036302848330737785,
+          "filtered_bplus_v": 96.45021357710311
+        },
+        {
+          "elapsed_s": 0.05,
+          "avc_v": -0.002641959034105966,
+          "if_grid_v": -0.00264195878021183,
+          "filtered_bplus_v": 96.45179722043099
+        },
+        {
+          "elapsed_s": 0.1,
+          "avc_v": -0.0017666201060551705,
+          "if_grid_v": -0.0017666201136801803,
+          "filtered_bplus_v": 96.4535251431505
+        },
+        {
+          "elapsed_s": 0.25,
+          "avc_v": -0.0005252868053733216,
+          "if_grid_v": -0.0005252868045349504,
+          "filtered_bplus_v": 96.45329239212744
+        },
+        {
+          "elapsed_s": 0.5,
+          "avc_v": -0.00006950726476737198,
+          "if_grid_v": -0.00006950726464947345,
+          "filtered_bplus_v": 96.45305164478309
+        },
+        {
+          "elapsed_s": 1,
+          "avc_v": -0.0000012169984188313945,
+          "if_grid_v": -0.000001216998416767053,
+          "filtered_bplus_v": 96.4530152514539
+        }
+      ],
+      "recovery_to_10_percent_s": 0.28706160847471585,
+      "max_kcl_residual_a": 3.511174684334151e-11
+    }
+  },
+  "full_receiver_validated": false
+}
