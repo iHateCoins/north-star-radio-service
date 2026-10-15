@@ -12,9 +12,9 @@ assert.deepEqual(net('F_RF_ANTENNA_BYPASS').factory_members,['2:primary_b','1:a'
 assert(net('F_RF_CHASSIS').factory_members.includes('1:b'));assert(net('F_BMINUS').factory_members.includes('2:secondary_b'));
 assert.equal(trace.external_ports[0].represented_in_component_terminal_graph,false);
 assert.equal(trace.source_level_closure.transformer_winding_polarity_or_inductance_verified,false);
-assert.equal(graph.checks.traced_network_count,32);assert.equal(graph.checks.factory_terminals_on_traced_nets,98);assert.equal(graph.checks.benchmark_ready,false);
-assert.equal(scope.baseline.component_terminal_memberships_in_partial_graph,76);assert.equal(scope.baseline.component_terminal_reference_coverage_percent,91.6);
-assert.equal(ready.version,'0.51.0');assert.equal(ready.evidence_snapshot.source_reviewed_terminal_memberships,98);assert.equal(ready.benchmark_ready,false);
+assert.equal(graph.checks.traced_network_count,35);assert.equal(graph.checks.factory_terminals_on_traced_nets,108);assert.equal(graph.checks.benchmark_ready,false);
+assert.equal(scope.baseline.component_terminal_memberships_in_partial_graph,82);assert.equal(scope.baseline.component_terminal_reference_coverage_percent,98.8);
+assert.equal(ready.version,'0.52.0');assert.equal(ready.evidence_snapshot.source_reviewed_terminal_memberships,108);assert.equal(ready.benchmark_ready,false);
 assert(audit.milestones.some(m=>m.version==='0.42.0'&&m.status==='SOURCE_CHECKED_LOOP_AND_EXTERNAL_ANTENNA_PATH_PARTIAL'));
 const ctx=vm.createContext({console});vm.runInContext(scripts[1],ctx);const fn=scripts[3].slice(scripts[3].indexOf('function pt44BenchAudit()'),scripts[3].indexOf('function renderFactoryLedger(box){'));assert(fn.includes('function pt44AerialTransformerTraceAudit()'));vm.runInContext(fn,ctx);
 const inspect=e=>JSON.parse(vm.runInContext('JSON.stringify('+e+')',ctx));
@@ -26,5 +26,5 @@ for(const [label,expr] of [
  ['invented winding polarity','(()=>{const x=PT44_AERIAL_TRANSFORMER_TRACE_V1.source_level_closure;x.transformer_winding_polarity_or_inductance_verified=true;const bad=!pt44AerialTransformerTraceAudit().ok;x.transformer_winding_polarity_or_inductance_verified=false;return bad;})()'],
  ['missing lower loop connection','(()=>{const n=PT44_FACTORY_V3.factory_nets.find(x=>x.id==="F_RF_LOOP_SECONDARY");const i=n.factory_members.indexOf("2:secondary_a"),v=n.factory_members.splice(i,1)[0];const bad=!pt44AerialTransformerTraceAudit().ok;n.factory_members.splice(i,0,v);return bad;})()']
 ])assert.equal(vm.runInContext(expr,ctx),true,label);
-assert(html.includes('BUILD v0.51.0<small>'));
+assert(html.includes('BUILD v0.52.0<small>'));
 console.log('PASS v0.42: loop return, both #2 windings, external ANT, #1 bypass and separate chassis/B− nets');

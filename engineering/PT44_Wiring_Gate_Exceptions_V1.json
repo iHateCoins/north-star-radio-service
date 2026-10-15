@@ -1,0 +1,69 @@
+{
+  "schema": "PT44_WIRING_GATE_EXCEPTIONS_V1",
+  "version": "0.52.0",
+  "model": "Philco PT-44 / shared PT-42 chassis",
+  "gate": "GATE-NETLIST",
+  "status": "NOT_MET",
+  "acceptance": "Every factory component, external tube terminal, winding end, switch contact and return has a source-backed connection or an explicit manufacturer option.",
+  "source": {
+    "document": "Philco 1941 RMS Year Book",
+    "printed_page": 38,
+    "figure": "PT-42/PT-44 schematic and under-chassis location view",
+    "scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b"
+  },
+  "progress": {
+    "component_terminal_inventory": 83,
+    "component_terminals_in_reviewed_graph": 82,
+    "reviewed_graph_groups": 35,
+    "reviewed_memberships": 108,
+    "new_power_crosswalk": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+    "rider_crosscheck": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
+  },
+  "blocking_reconciliation": [
+    {
+      "area": "Oscillator transformer #10",
+      "unrepresented_terminals": [
+        "10:secondary_b"
+      ],
+      "evidence": "Rider XII 12-45 corroborates the upper opposite #10 winding end at 7A8 oscillator-anode pin V1:3. The lower end lies beside #12/#13 and several conductor crossings and is not yet promoted.",
+      "required_resolution": "Trace the lower right-hand winding end and recheck #12/#13 conductor assignments in the printed sources and, if still ambiguous, original chassis continuity.",
+      "do_not_infer": "Do not assign winding polarity, physical lugs, inductance, or a crossing as a junction from page proximity."
+    },
+    {
+      "area": "Prior #12/#13 IF secondary return trace",
+      "artifact_to_recheck": "engineering/PT44_IF1_Secondary_Return_Trace_V1.json",
+      "evidence": "Enlargement of Philco p.38 places #13 beside the right-hand oscillator winding and several crossing conductors; the prior v0.40 claim that #13:a is the 7B7 grid node and #13:b is B− must be independently reverified before using it to close the oscillator path.",
+      "required_resolution": "Follow #12 secondary and both #13 ends through every crossing in an independent scan or with continuity testing; amend the prior graph and audit if its assignments are contradicted."
+    },
+    {
+      "area": "External tube pins and internal/no-connection roles",
+      "unrepresented_pin_roles": [
+        "V1:3",
+        "V1:7",
+        "V2:4",
+        "V2:5",
+        "V2:7",
+        "V3:4",
+        "V3:5",
+        "V3:6",
+        "V3:7",
+        "V4:1",
+        "V4:6",
+        "V5:3",
+        "V5:4",
+        "V5:5",
+        "V5:6"
+      ],
+      "required_resolution": "Classify each omitted socket position as externally wired, internal-only, or no connection using manufacturer basing and Philco p.38; crosswalk both diode plates and their returns without assigning an unnumbered glyph by guesswork."
+    },
+    {
+      "area": "Physical line switch and chassis return",
+      "required_resolution": "Correlate #16 switch terminals and physical socket leads to a clear original chassis underside or continuity record; retain AC plug A/B aliases because the factory diagram does not polarize the plug. Keep chassis distinct from B− unless a source establishes the relation."
+    }
+  ],
+  "preferred_new_evidence": [
+    "Philco PT-42/PT-44 Service Bulletin 365 schematic and under-chassis views",
+    "Clear original PT-42/PT-44 underside photos around #10, 7A8, #12/#13, and 7C6 with continuity readings"
+  ],
+  "benchmark_ready": false
+}

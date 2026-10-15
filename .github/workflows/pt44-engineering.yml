@@ -45,6 +45,10 @@ jobs:
         run: node tests/test_output_bypass_v36.js
       - name: Validate PT-44 scope denominator and trace-ledger reconciliation
         run: node tests/test_scope_audit_v1.js
+      - name: Cross-check PT-44 oscillator anode against Rider XII 12-45
+        run: node tests/test_rider_oscillator_crosscheck_v52.js
+      - name: Verify v0.52 power pin crosswalk and open physical boundaries
+        run: node tests/test_power_pin_crosswalk_v52.js
       - name: Verify v0.37 source-traced power and AC-line topology
         run: node tests/test_power_line_trace_v37.js
 

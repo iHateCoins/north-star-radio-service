@@ -1,6 +1,6 @@
 {
   "schema": "PT44_SCHEMATIC_TRACE_AUDIT_V1",
-  "version": "0.51.0",
+  "version": "0.52.0",
   "model": "Philco PT-44",
   "source": {
     "document": "Philco 1941 RMS Year Book",
@@ -16,7 +16,7 @@
       "derivative_note": "SHA-256 identifies the reviewed 300-dpi page raster generated from the Philco PDF, not the publisher PDF bytes."
     },
     "url": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",
-    "version": "0.51.0"
+    "version": "0.52.0"
   },
   "milestones": [
     {
@@ -250,6 +250,34 @@
       "source": "Philco 1941 RMS Year Book p.38; Sylvania 7A8 pin roles",
       "evidence": "#9 upper end joins 7A8 oscillator grid G1 (V1:4); #11 upper end joins the annotated shared 45 V screen conductor. Both lower ends were already traced to B−.",
       "scope_limit": "Four-dot oscillator contacts, opposite winding, upstream 45 V feed and measurement conditions, winding parameters and behavior remain open."
+    },
+    {
+      "version": "0.52.0",
+      "title": "Power, switch and heater boundary pin crosswalk",
+      "status": "SOURCE_TRACED_POWER_COMPONENT_ENDPOINTS_AND_BOUNDARY_PINS_PARTIAL",
+      "net_ids": [
+        "F_AC_PLUG_A_PRE_SWITCH",
+        "F_DROPPER_HEATER_INPUT",
+        "F_30_40_LAMP_A",
+        "F_30_40_LAMP_B",
+        "F_BMINUS"
+      ],
+      "evidence_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "source": "Philco p.38 power-line drawing and tube basing references",
+      "evidence": "Promotes #16, #30 and #31 endpoints plus 35Z3 plate/free heater and 7C6 end heater pin into source-reviewed electrical groups.",
+      "scope_limit": "Plug polarity, physical switch lug numbering and physical heater lead orientation remain open; no chassis-to-B− bond."
+    },
+    {
+      "version": "0.52.0",
+      "title": "Rider XII 12-45 oscillator anode cross-check",
+      "status": "SOURCE_TRACED_UPPER_RIGHT_WINDING_PARTIAL",
+      "net_ids": [
+        "F_OSC_ANODE_RIGHT_WINDING"
+      ],
+      "evidence_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json",
+      "source": "Philco p.38, Rider XII 12-45 and 7A8 basing",
+      "evidence": "The 7A8 oscillator anode g2 pin V1:3 meets the upper right #10 winding end.",
+      "scope_limit": "Lower winding end and #12/#13 conductor review still open; no physical lug/polarity or operation claim."
     }
   ],
   "reviewed_net_memberships": [
@@ -816,6 +844,54 @@
         "V1:4"
       ],
       "source_artifact": "engineering/PT44_Oscillator_Grid_Screen_Bypass_Trace_V1.json"
+    },
+    {
+      "net_id": "F_AC_PLUG_A_PRE_SWITCH",
+      "milestone_version": "0.52.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1700,
+        1120
+      ],
+      "basis": "Philco p.38 power trace and pin identity crosswalk; electrical endpoints are source-traced, physical orientation remains open.",
+      "reviewed_members": [
+        "31:a",
+        "16:switch_a"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+    },
+    {
+      "net_id": "F_DROPPER_HEATER_INPUT",
+      "milestone_version": "0.52.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "source_box_px": [
+        300,
+        650,
+        1700,
+        1120
+      ],
+      "basis": "Philco p.38 power trace and pin identity crosswalk; electrical endpoints are source-traced, physical orientation remains open.",
+      "reviewed_members": [
+        "30:endB",
+        "V5:1"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json"
+    },
+    {
+      "net_id": "F_OSC_ANODE_RIGHT_WINDING",
+      "milestone_version": "0.52.0",
+      "status": "SOURCE_CHECKED_LISTED_MEMBERS",
+      "unreviewed_members": [],
+      "basis": "Philco p.38 and Rider XII 12-45 upper right #10 winding conductor to 7A8 oscillator-anode glyph; manufacturer pin role V1:3.",
+      "reviewed_members": [
+        "10:secondary_a",
+        "V1:3"
+      ],
+      "source_artifact": "engineering/PT44_Rider_12_45_Crosscheck_V1.json"
     }
   ],
   "reviewed_open_areas": [
@@ -1173,8 +1249,42 @@
       ],
       "source_render_dpi": 400,
       "basis": "Philco p.38: upper #11 capacitor terminal joins the shared annotated 45 V screen conductor; lower end remains B−."
+    },
+    {
+      "net_id": "F_BMINUS",
+      "milestone_version": "0.52.0",
+      "reviewed_members": [
+        "16:switch_b",
+        "V3:8"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "source_artifact_version": "0.52.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 power-line conductor group with tube pin role crosswalk where applicable."
+    },
+    {
+      "net_id": "F_30_40_LAMP_A",
+      "milestone_version": "0.52.0",
+      "reviewed_members": [
+        "31:b"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "source_artifact_version": "0.52.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 power-line conductor group with tube pin role crosswalk where applicable."
+    },
+    {
+      "net_id": "F_30_40_LAMP_B",
+      "milestone_version": "0.52.0",
+      "reviewed_members": [
+        "V5:2"
+      ],
+      "source_artifact": "engineering/PT44_Power_Pin_Crosswalk_V1.json",
+      "source_artifact_version": "0.52.0",
+      "source_scan_sha256": "af444be9422647f7f24ea1a7d8d4556cd0e213dfd9aa37f6eb83d05823ac788b",
+      "basis": "Philco p.38 power-line conductor group with tube pin role crosswalk where applicable."
     }
   ],
   "power_line_trace_artifact": "engineering/PT44_Power_Line_Trace_V1.json",
-  "milestone_record_note": "All 98 partial-graph memberships reconcile through v0.51. #9 grid leak and #11 screen bypass endpoints are traced; four-dot oscillator contacts and behavior remain open."
+  "milestone_record_note": "All 108 partial graph memberships reconcile through v0.52. Rider XII 12-45 supports upper right #10 to V1:3. Lower #10 winding, #12/#13 crossing review and several other tube pins remain open."
 }
