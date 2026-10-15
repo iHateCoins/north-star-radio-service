@@ -1,0 +1,152 @@
+{
+  "schema": "PT44_DETECTOR_AVC_MODEL_V1",
+  "version": "0.56.0",
+  "model": "Philco PT-44",
+  "scope": "Carrier-resolved detector/AVC subset driven by a floating 455 kHz second-IF secondary Thevenin source. No active IF, RF, audio-tube or supply coupling.",
+  "topology_authority": "engineering/PT44_Supply_AVC_Reconciliation_V1.json",
+  "factory_parameters": {
+    "r7_ohm": 4700000.0,
+    "r17_ohm": 4700000.0,
+    "c15_f": 2.5e-10,
+    "c18_f": 1e-08,
+    "r19_ohm": 4700000.0
+  },
+  "factory_terminal_nets": {
+    "7:a": "F_BMINUS",
+    "8:a": "F_BMINUS",
+    "15:b": "F_BMINUS",
+    "16:b": "F_BMINUS",
+    "19:b": "F_BMINUS",
+    "V3:7": "F_BMINUS",
+    "14:sReturn": "F_IF2_SECONDARY_VOL_TOP",
+    "16:a": "F_IF2_SECONDARY_VOL_TOP",
+    "15:a": "F_IF2_SECONDARY_VOL_TOP",
+    "16:wiper": "F_VOL_WIPER_C18",
+    "18:a": "F_VOL_WIPER_C18",
+    "18:b": "F_7C6_AUDIO_GRID",
+    "19:a": "F_7C6_AUDIO_GRID",
+    "14:sDetector": "F_IF2_AVC_FEED",
+    "17:a": "F_IF2_AVC_FEED",
+    "17:b": "F_AVC_RETURN",
+    "7:b": "F_AVC_RETURN",
+    "8:b": "F_AVC_RETURN"
+  },
+  "diode_ports": {
+    "upper": "F_IF2_AVC_FEED",
+    "lower": "F_AVC_RETURN",
+    "cathode": "F_BMINUS",
+    "socket_pins": null
+  },
+  "defaults": {
+    "carrier_hz": 455000,
+    "audio_hz": 1000,
+    "amplitude_v": 2,
+    "modulation": 0.5,
+    "volume": 0.6,
+    "on_until_s": 0.012,
+    "duration_s": 0.06,
+    "samples_per_carrier": 48,
+    "release_dt_s": 1e-05,
+    "source_ohm": 50000,
+    "volume_track_ohm": 500000,
+    "diode_k_a": 0.0001,
+    "upper_emission": 1,
+    "lower_emission": 1,
+    "c8_f": 5e-08,
+    "c15_scale": 1,
+    "c18_scale": 1,
+    "r17_open": false,
+    "avc_short": false,
+    "meter": "ideal",
+    "probe": "A"
+  },
+  "meters": [
+    {
+      "id": "ideal",
+      "label": "Ideal probe",
+      "resistance_ohm": null,
+      "capacitance_f": 0
+    },
+    {
+      "id": "dmm",
+      "label": "10 M\u03a9 / 100 pF probe",
+      "resistance_ohm": 10000000.0,
+      "capacitance_f": 1e-10
+    },
+    {
+      "id": "service",
+      "label": "1000 \u03a9/V, 10 V range",
+      "resistance_ohm": 10000,
+      "capacitance_f": 0
+    }
+  ],
+  "faults": [
+    {
+      "id": "healthy",
+      "label": "Restored detector/AVC",
+      "changes": {}
+    },
+    {
+      "id": "upper_dead",
+      "label": "Upper diode nonconducting",
+      "changes": {
+        "upper_emission": 0
+      }
+    },
+    {
+      "id": "lower_dead",
+      "label": "Lower diode nonconducting",
+      "changes": {
+        "lower_emission": 0
+      }
+    },
+    {
+      "id": "r17_open",
+      "label": "#17 AVC feed open",
+      "changes": {
+        "r17_open": true
+      }
+    },
+    {
+      "id": "avc_short",
+      "label": "AVC rail short to B\u2212",
+      "changes": {
+        "avc_short": true
+      }
+    },
+    {
+      "id": "c15_open",
+      "label": "#15 detector bypass open",
+      "changes": {
+        "c15_scale": 0
+      }
+    },
+    {
+      "id": "c18_open",
+      "label": "#18 audio coupling open",
+      "changes": {
+        "c18_scale": 0
+      }
+    }
+  ],
+  "assumptions": [
+    "Diode law I=k\u00b7max(Vplate\u2212Vk,0)^1.5 is an assumed space-charge approximation, not a manufacturer curve fit. Reverse leakage, contact potential and heater behavior are absent.",
+    "50 k\u03a9 floating source replaces the complete second IF transformer and driving 7B7; source impedance is resistive and frequency independent.",
+    "500 k\u03a9 linear volume track; no triode grid-current loading, output/supply coupling, AVC feedback to tube gain, or RF grid loading.",
+    "Both #8 values are selectable experimental alternatives, not a resolved factory value.",
+    "Cold capacitor initial conditions, hot diode emission; signal ends after 12 ms by default. AVC is still charging at that time; results do not claim steady-state sensitivity."
+  ],
+  "numerical_contract": {
+    "integrator": "Backward Euler, damped Newton, five nodal voltages; resolves each carrier cycle.",
+    "carrier_steps": "24/48/96 per carrier cycle; default 48.",
+    "release_steps": "After exact carrier switch-off, at most 10 \u00b5s by default. SPICE retains carrier-size maximum steps for an independent release check.",
+    "statistics": "Last four complete modulation cycles before switch-off; means and sine/cosine fundamental projection over full-rate samples.",
+    "display": "One sample per carrier cycle plus release samples. Display does not retain IF ripple; no ripple amplitude is claimed from the decimated trace.",
+    "reference": "All voltages relative to B-minus; no chassis bond asserted."
+  },
+  "acceptance": {
+    "full_if_stage": false,
+    "factory_calibrated": false,
+    "benchmark_ready": false
+  }
+}

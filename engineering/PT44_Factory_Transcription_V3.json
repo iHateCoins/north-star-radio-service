@@ -2637,6 +2637,6 @@
     "chassis_lead_dress_factory_verified": false,
     "benchmark_ready": false
   },
-  "version": "0.55.0",
+  "version": "0.56.0",
   "source_pages_reviewed": "Philco p.38 PT-42/PT-44 schematic and replacement-parts list; v0.49 traces both #8 endpoints and records the unresolved value conflict."
 }

@@ -92,6 +92,12 @@ jobs:
       - name: Verify generated audio worker and bench result/error lifecycle
         run: node tests/test_audio_workbench_v55.js
 
+      - name: Verify carrier-resolved detector, AVC, loading, variants and restoration
+        run: node tests/test_detector_dynamics_v56.js
+
+      - name: Verify detector worker source and lifecycle
+        run: node tests/test_detector_workbench_v56.js
+
   audio-browser:
     name: Exercise coupled audio bench in Chromium
     runs-on: ubuntu-latest
@@ -114,4 +120,14 @@ jobs:
         with:
           name: pt44-audio-browser-v055
           path: tmp/pt44-browser/
+          retention-days: 7
+
+      - name: Exercise detector/AVC worker, faults, restoration, controls and export
+        run: node tests/test_detector_browser_v56.js --browser
+      - name: Retain detector desktop/mobile screenshots and measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-detector-browser-v056
+          path: tmp/pt44-detector-browser/
           retention-days: 7

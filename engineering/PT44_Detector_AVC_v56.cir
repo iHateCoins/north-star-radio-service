@@ -1,0 +1,21 @@
+PT-44 v0.56 detector/AVC subset - assumed diode/source parameters
+* Symbol-level diode plates; physical pins 5/6 remain unresolved. 0 is B-minus, not chassis.
+BIF S H V={2*(1+0.5*sin(6283.185307179586*time))*sin(2858849.3147667116*time)*(time<=0.012)}
+RSOURCE S U 50000
+R7 A 0 4700000
+C8 A 0 5e-8 IC=0
+R16TOP H W 200000
+R16BOT W 0 300000
+R19 G 0 4700000
+.func DSPACE(v) {max(v,0)^1.5}
+BDUP U 0 I={0.0001*DSPACE(V(U))}
+BDLOW A 0 I={0.0001*DSPACE(V(A))}
+R17 U A 4700000
+C15 H 0 2.5e-10 IC=0
+C18 W G 1e-8 IC=0
+.options method=gear maxord=1 reltol=1e-6 abstol=1e-12
+* Browser takes carrier steps until 0.012 s, then uses 0.00001 s maximum release steps.
+* SPICE keeps fine steps through release; use this to check the coarser browser release.
+.tran 4.578754578754579e-8 0.06 0 4.578754578754579e-8 UIC
+.print tran V(U) V(H) V(A) V(W) V(G)
+.end
