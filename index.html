@@ -3784,10 +3784,11 @@ function renderFactoryLedger(box){
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
    <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.63.0</div>
-   <h2>Factory circuit transcription</h2>
-   <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. The current 3D and simplified receiver solver remain provisional.</p>
-   <div class="sl-kpi"><div><strong>${a.parts}/33</strong><span>Factory part records</span></div><div><strong>${a.sourceNets}</strong><span>Partial traced networks</span></div><div><strong>${a.tracedTerminals}</strong><span>Terminal references</span></div><div><strong>${a.unknownConnections.length}</strong><span>Open Phase-1 blockers</span></div></div>
-   <div class="sl-alert">${a.benchmarkReady?'BENCHMARK READY':'FACTORY TRANSCRIPTION INCOMPLETE'} · ${a.issues.length?'Audit errors: '+a.issues.map(escapeHTML).join(', '):'Source-ledger integrity checks pass, but the full radio and SPICE verification are still outstanding.'}</div>
+   ${pt44GameCompletionHTML(escapeHTML)}
+   <h2>Optional research · factory circuit transcription</h2>
+   <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. Physical 3D routing remains illustrative. The playable receiver uses the separate behavioral V2 completion standard above.</p>
+   <div class="sl-kpi"><div><strong>${a.parts}/33</strong><span>Factory part records</span></div><div><strong>${a.sourceNets}</strong><span>Partial traced networks</span></div><div><strong>${a.tracedTerminals}</strong><span>Terminal references</span></div><div><strong>${a.unknownConnections.length}</strong><span>Open research items</span></div></div>
+   <div class="sl-alert">${a.benchmarkReady?'BENCHMARK READY':'FACTORY TRANSCRIPTION INCOMPLETE'} · ${a.issues.length?'Audit errors: '+a.issues.map(escapeHTML).join(', '):'Research ledger integrity checks pass. Full scientific receiver/SPICE verification remains optional and does not gate V2 game completion.'}</div>
    <div class="sl-toolbar"><button type="button" class="sl-btn" id="powerBenchJumpV54">Dynamic power bench</button><button type="button" class="sl-btn" id="audioBenchJumpV55">Coupled audio bench</button><button type="button" class="sl-btn" id="detectorBenchJumpV56">Detector / AVC bench</button><span>Inspect stage:</span>${all.map(id=>`<button type="button" class="sl-btn ${id===choice?'sl-on':''}" data-stage="${id}">${id}</button>`).join('')}</div>
    <h3>${sub?escapeHTML(sub.name):'All factory parts'}</h3>
    ${sub?`<p><b>Still missing:</b> ${escapeHTML(sub.unverified)}</p>`:'<p>Select a stage to see which connections are traced, which parts still lack pin mapping, and what blocks certification.</p>'}
@@ -3813,12 +3814,10 @@ function renderFactoryLedger(box){
    ${pt44ConverterHTML(choice,escapeHTML)}
    ${pt44DetectorModelHTML(choice,escapeHTML)}
    ${pt44SchematicTraceAuditHTML(escapeHTML)}
-   ${pt44EngineeringReadinessHTML(escapeHTML)}
-   ${pt44RemainingActionsHTML(escapeHTML)}
    ${pt44PassiveStudyHTML(choice,escapeHTML)}
    ${pt44FaultStudyHTML(choice,escapeHTML)}
    ${pt44SpiceExportHTML(choice,escapeHTML)}
-   <h3>Outstanding acceptance work</h3><div class="sl-issues">${g.open_issues.filter(x=>x.severity==='blocker'&&(!sub||x.stage===choice||x.stage==='ALL')).map(x=>`<div><b>${escapeHTML(x.id)}</b> ${escapeHTML(x.description)}</div>`).join('')}</div>
+   <h3>Optional scientific acceptance work</h3><div class="sl-issues">${g.open_issues.filter(x=>x.severity==='blocker'&&(!sub||x.stage===choice||x.stage==='ALL')).map(x=>`<div><b>${escapeHTML(x.id)}</b> ${escapeHTML(x.description)}</div>`).join('')}</div>
    <div class="sl-toolbar"><button class="sl-btn sl-export" id="bExportFactoryV3">Export factory graph JSON</button><a href="${g.source}" target="_blank" rel="noopener noreferrer">Original 1941 service document ↗</a></div>
    <p class="sl-footnote">Engineering principle: 3D routing can only be certified after all electrical nets have documented pin membership. A plausible physical wire path is not a factory schematic connection.</p>
   </section>`;
