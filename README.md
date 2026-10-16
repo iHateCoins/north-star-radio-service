@@ -8,7 +8,7 @@ The Factory ledger gains a **7A8 conversion reference** panel for published-cond
 
 | EC supported | Concrete v0.62 evidence | Remaining for closure |
 |---|---|---|
-| **EC-02** | Two bounded 7A8 characteristic slices, 31 withheld graph-coordinate/typical-point checks and independently executed interpolation. | Full voltage/drive surfaces, loading and heater behavior; remaining tube/winding/audio/field/lamp correlation. |
+| **EC-02** | Two bounded 7A8 characteristic slices, 31 withheld graph-coordinate/typical-point checks and independently executed interpolation. | Receiver-range voltage/drive behavior, loading and heater behavior; remaining tube/winding/audio/field/lamp correlation. |
 | **EC-06** | Separately driven small-signal difference/sum conversion, AM sidebands and bias/drive sensitivity. | Actual oscillator, aerial/RF input, loaded conversion, 540–1600 kHz tracking, alignment, AVC feedback and physical fault response. |
 
 **Full ECs closed: none.** EC-06 is now in progress at the isolated component-fixture level. All nine acceptance lists and all six **NOT MET** completion gates remain unchanged. Broader game work remains on hold.
@@ -46,7 +46,7 @@ The new Chromium check exercises bias/drive selection, omitted clock, restoratio
 ## Remaining work
 
 - **EC-01:** Physical diode pins, oscillator coupling interpretation and approved #8 resolution.
-- **EC-02:** Full 7A8 and remaining tube/winding/audio/field/heater/lamp correlation.
+- **EC-02:** Receiver-range 7A8 behavior and remaining tube/winding/audio/field/heater/lamp correlation.
 - **EC-03:** Active converter currents and RF-operating loads; remaining thermal supply envelope.
 - **EC-04:** Audio/transformer/speaker parameter and frequency correlation; shop integration.
 - **EC-05:** Actual passband/trimmer/diode correlation, long-duration attack/steady AVC and converter feedback.

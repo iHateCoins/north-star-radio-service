@@ -61,7 +61,7 @@
         "Add a bounded 7A8 average-characteristic evaluator at separate published bias and oscillator-drive conditions; compare withheld graph coordinates and typical points without inventing a voltage/drive surface."
       ],
       "remaining_after_v062": [
-        "Complete 7A8 plate/screen/oscillator voltage surfaces, interelectrode/output loading and heater behavior; correlate remaining tube/winding/audio/field/lamp parameters. The two published 7A8 slices do not replace a full tube model."
+        "Extend 7A8 voltage/drive, loading and heater behavior over the supported receiver operating range, with identified approximations; correlate remaining tube/winding/audio/field/lamp parameters. The two published slices do not yet support receiver-load replacement."
       ]
     },
     {
