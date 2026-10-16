@@ -1,4 +1,4 @@
-# PT-44 playable behavior — v0.63
+# PT-44 playable behavior — v0.64
 
 The approved completion standard is [PT44_Game_Completion_V2.json](PT44_Game_Completion_V2.json). It keeps the nine EC IDs and replaces scientific simulation gates with fixed, observable game outcomes. This is an explicit scope change, not a claim that the original scientific requirements passed. Original engineering registries and research code remain intact.
 
@@ -10,4 +10,4 @@ Voltage targets, stage currents, bandwidth, AVC timing and output levels are bou
 
 `node tests/test_gameplay_v63.js` checks fixed fault/restoration, healthy limits, full-band conversion, alignment, loaded measurements, injection boundaries, AVC timing, power and stress. `node tests/test_gameplay_browser_v63.js --browser` checks the actual shop UI, replacements, checkout, persistence and geometry. Game CI runs these; historical electrical/SPICE workflows remain available manually as optional research.
 
-v0.63 closes EC-04 and EC-06 under V2 when game CI passes. EC-03, EC-05, EC-07 and EC-09 receive support. EC-01, EC-02 and EC-08 still require their bounded reviews; the full PT-44 is not yet engineering complete.
+v0.64 closes the remaining ECs under the unchanged V2 acceptance when release CI passes. The 20-case saved browser repair matrix, catalog audit, live power/cascade tests and instrument checks are in `test_completion_v64.js` and `test_completion_browser_v64.js`. `PT44_Service_Scope_V1.json` records component behavior and source presentation decisions. Scientific source unknowns stay explicitly unknown; they are not game completion blockers.

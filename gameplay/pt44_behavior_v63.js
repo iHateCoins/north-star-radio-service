@@ -10,20 +10,20 @@ function pt44GameEvaluate(spec,r,env={}){
  if(!Number.isFinite(lineV)||lineV<90||lineV>130||!['AC','DC'].includes(lineMode))throw Error('Supported supply is 90–130 V AC/DC');
  const e=id=>lit&&powered?C(s[id]?.emis||0,0,1.2)*warm:0,rect=e('V5'),a=r.alignment||{},centers=['12A','12B','14A'].map(k=>a[k]??455),oscShift=a['4A']??0,rfTrim=a['5']??0;
  if(centers.some(x=>!Number.isFinite(x)||x<440||x>470)||!Number.isFinite(oscShift)||Math.abs(oscShift)>30||!Number.isFinite(rfTrim)||Math.abs(rfTrim)>30)throw Error('Alignment control outside supported range');
- const r2=ohm('R2',130)/130,leak=C((1e6/pt44GameLeak(s.C3,30)-.01)/3,0,2),gas=C(s.V4?.gas||0),shortLoad=C(1e5/pt44GameLeak(s.C2,100)-.5,0,4),screenConnected=good('R1');
+ const r2=ohm('R2',130)/130,leak=C((1e6/pt44GameLeak(s.C3,30)-.01)/3,0,2),gas=C(s.V4?.gas||0),shortLoad=C(1e5/pt44GameLeak(s.C2,100)-.5,0,4),reservoirShort=C(1e5/pt44GameLeak(s.C1,100)-.5,0,4),screenConnected=good('R1');
  const loadGate=screenConnected?1:0,outputReturn=good('R2')?1:0;
  const I5p=.045*e('V4')*loadGate*outputReturn*(good('T1')?1:0)*(1+.8*leak+gas)/(.4+.6*r2),I5s=.005*e('V4')*loadGate*outputReturn;
  const Icv=.0045*e('V1')*loadGate,Iif=.007*e('V2')*loadGate*(good('R7')?1:0),I6=.00017*e('V3')*loadGate;
- const filteredLoad=I5s+Icv+Iif+I6+.04*shortLoad,totalLoad=I5p+filteredLoad;
+ const filteredLoad=I5s+Icv+Iif+I6+.04*shortLoad,totalLoad=I5p+filteredLoad+.04*reservoirShort;
  const reservoirFactor=(.65+.35*cap('C1')/(cap('C1')+2))/(.65+.35*20/22);
- let B1=110*(lineV/115)*Math.sqrt(rect)*reservoirFactor/(1+.15*(totalLoad/.06167-1)),B2=screenConnected?Math.max(0,B1-filteredLoad*ohm('R1',500)):0;B2/=1+shortLoad*3;
+ let B1=110*(lineV/115)*Math.sqrt(rect)*reservoirFactor/(1+.15*(totalLoad/.06167-1)),B2=screenConnected?Math.max(0,B1-filteredLoad*ohm('R1',500)):0;B1/=1+reservoirShort*3;B2=Math.min(B1,B2)/(1+shortLoad*3);
  if(!powered){B1=pt44GameStoredVoltage(env.off_v?.[spec.nodes.indexOf('B1')]||0,env.off_elapsed_s||0,cap('C1'),s.C1?.leak0);B2=pt44GameStoredVoltage(env.off_v?.[spec.nodes.indexOf('B2')]||0,env.off_elapsed_s||0,cap('C2'),s.C2?.leak0);}
- const supply=C(B2/102),r6=ohm('R6',22000),osc=powered&&good('L1')&&good('C4')&&pt44GameLeak(s.C4,10)>1e6&&r6>=3000&&r6<=250000?C(e('V1')*supply):0;
+ const supply=C(B2/102),r6=ohm('R6',22000),osc=powered&&good('L1')&&good('C4')&&cap('C4')/47e-6>.5&&cap('C4')/47e-6<1.5&&pt44GameLeak(s.C4,10)>1e6&&r6>=3000&&r6<=250000?C(e('V1')*supply):0;
  const meter=env.meter,sourceR={B1:500,B2:1000,P5:1500,K5:130,G5:470000,P6:220000,G6:4700000,PCV:1500,PIF:1500,KIF:68,OSC:22000,AVC:4700000,SCREEN:27000},loading=node=>meter?.node===node?meter.R/(meter.R+sourceR[node]):1;
  if(meter&&(!(meter.node in sourceR)||!Number.isFinite(meter.R)||meter.R<=0))throw Error('Invalid behavioral meter port');
- const oscActive=osc*(meter?.node==='OSC'?C(meter.R/10000):1),loKHz=(r.dial??880)+455+oscShift*(r.dial??880)/1600,pass=f=>centers.reduce((g,x)=>g/(1+Math.pow((f-x)/8,2)),1);
- const aerial=(r.loopConnected!==false?1:0)*Math.exp(-Math.pow(rfTrim*(r.dial??880)/1600/15,2)),convGain=oscActive*C(e('V1'))*aerial,ifGain=C(e('V2'))*(good('R7')?1:0)*(good('T2')?1:0)*(good('T3')?1:0)*supply;
- const stations=env.stations||spec.stations,upstream=stations.map(st=>st.pwr*pass(Math.abs(loKHz-st.kc))*convGain),weights=upstream.map(x=>x*ifGain),bestIndex=weights.indexOf(Math.max(...weights)),radioRaw=weights[bestIndex]||0,gen=env.generator||{},enabled=!!gen.enabled;
+ const oscActive=osc*(meter?.node==='OSC'?C(meter.R/10000):1),loKHz=(r.dial??880)+455+oscShift*(r.dial??880)/1600+2*(Math.sqrt(47e-6/Math.max(1e-12,cap('C4')))-1),pass=f=>centers.reduce((g,x)=>g/(1+Math.pow((f-x)/8,2)),1);
+ const aerial=(r.loopConnected!==false?1:0)*Math.exp(-Math.pow(rfTrim*(r.dial??880)/1600/15,2)),convGain=oscActive*C(e('V1'))*aerial,ifGain=C(e('V2'))*(good('R7')?1:0)*(good('T2')?1:0)*(good('T3')?1:0)*supply/(1+Math.abs(Math.log(ohm('R7',68)/68)));
+ const stations=env.stations||spec.stations,upstream=stations.map(st=>st.pwr*convGain/(1+Math.pow((loKHz-st.kc-455)/8,2))),weights=upstream.map((x,i)=>x*ifGain*pass(Math.abs(loKHz-stations[i].kc))),bestIndex=weights.indexOf(Math.max(...weights)),radioRaw=weights[bestIndex]||0,gen=env.generator||{},enabled=!!gen.enabled;
  let generated=0;
  if(enabled){if(!['aerial','if','audio'].includes(gen.point)||!Number.isFinite(gen.khz)||!Number.isFinite(gen.mv)||gen.mv<0||gen.mv>50||gen.khz<.1||gen.khz>1600)throw Error('Invalid generator conditions');const input=C(gen.mv/(gen.point==='audio'?20:1),0,2);generated=gen.point==='aerial'?input*pass(Math.abs(loKHz-gen.khz))*convGain*ifGain:gen.point==='if'?input*pass(gen.khz)*ifGain:input;}
  const received=radioRaw+(enabled&&gen.point!=='audio'?generated:0),avcTarget=-4*received/(.3+received)*loading('AVC'),dt=env.dt_s??0;
@@ -32,13 +32,13 @@ function pt44GameEvaluate(spec,r,env={}){
  const audioSource=enabled&&gen.point==='audio'?generated:detector,det=audioSource*volume;
  const r4=ohm('R4',470000),audioGain=good('R4')?e('V3')*supply/(1+Math.abs(Math.log(r4/470000))*1.8):0;
  const hp=cap('C3')>0?400/Math.hypot(400,1/(2*Math.PI*Math.max(1,ohm('R3',470000))*cap('C3')*1e-6)):0;
- const V={B1,B2,P5:good('T1')?Math.max(0,B1-25*(I5p/.045)*(ohm('T1',250)/250)):0,K5:good('R2')?(I5p+I5s)*ohm('R2',130):B2*.8,G5:leak*7+gas*5,P6:good('R4')?Math.min(B2,30*supply/(Math.pow(r4/470000,.55)*Math.max(.1,e('V3')))):0,G6:good('R5')?-.35*e('V3'):-.05,PCV:good('T2')?Math.max(0,B2-5*e('V1')):0,PIF:good('T3')?Math.max(0,B2-5*e('V2')):0,KIF:good('R7')?.007*e('V2')*ohm('R7',68):B2,OSC:-10*oscActive,AVC:avc,SCREEN:45*supply};
+ const V={B1,B2,P5:good('T1')?Math.max(0,B1-25*(I5p/.045)*(ohm('T1',250)/250)):0,K5:good('R2')?(I5p+I5s)*ohm('R2',130):B2*.8,G5:leak*7+gas*5+(!good('R3')?6:0),P6:good('R4')?Math.min(B2,30*supply/(Math.pow(r4/470000,.55)*Math.max(.1,e('V3')))):0,G6:good('R5')?-.35*e('V3'):-.05,PCV:good('T2')?Math.max(0,B2-5*e('V1')):0,PIF:good('T3')?Math.max(0,B2-5*e('V2')):0,KIF:good('R7')?.007*e('V2')*ohm('R7',68):B2,OSC:-10*oscActive,AVC:avc,SCREEN:45*supply};
  if(!powered){for(const k of Object.keys(V))if(!['B1','B2'].includes(k))V[k]=0;}
  if(meter&&meter.node!=='AVC')V[meter.node]*=loading(meter.node);
- const af=audioGain*loading('P6')*loading('G6'),outputGain=e('V4')*supply*outputReturn*(good('T1')?1:0)*(good('SP1')?1:0)*C(2/(1+r2));
+ const af=audioGain*loading('P6')*loading('G6')*Math.min(1,ohm('R5',4700000)/4700000),outputGain=e('V4')*supply*outputReturn*(good('T1')?1:0)*(good('SP1')?1:0)*C(2/(1+r2));
  const a1=det*af,g5=a1*hp,loud=C(g5*1.7*outputGain,0,1.6),bias=V.K5-V.G5,drive=g5*8;
  const ripple1=lineMode==='AC'?Math.min(B1,totalLoad/(60*Math.max(cap('C1'),.5)*1e-6)*.55):0,ripple2=lineMode==='AC'?ripple1/(1+377*(good('R1')?ohm('R1',500):1e9)*Math.max(cap('C2'),.05)*1e-6):0;
- let hum=(ripple2*.003+ripple1*.0004)*outputGain;
+ let hum=(ripple2*.004+ripple1*.0004)*outputGain;
  for(const id of ['V1','V2','V3','V4'])hum+=(s[id]?.hk||0)*(id==='V3'?.5:.25)*outputGain;
  if(!good('R5'))hum+=.35*outputGain*volume;
  const dist=C(.02+C((drive-Math.max(.5,bias))/6)+C((2-bias)/4)*C(drive)+C((.65-e('V4')))*C(drive)+C((.6-supply))*C(drive)+(s.SP1?.rub||0));
@@ -50,3 +50,15 @@ function pt44GameEvaluate(spec,r,env={}){
  return {model:'PT44_BEHAVIOR_V63',V:spec.nodes.map(n=>V[n]),ports:V,lit,A:oscActive,warm,signal,stress,Irect:totalLoad,Itotal:totalLoad,I5p,I5s,Icv,Iif,I6,P5diss:stress.V4.P,Vgk5:V.G5-V.K5,arg5:4,arg6:.5,AVC:avc,ripple_v:ripple2,source:'Game behavioral reference; not a factory voltage calibration'};
 }
 if(typeof module!=='undefined'&&module.exports)module.exports={evaluate:pt44GameEvaluate,storedVoltage:pt44GameStoredVoltage};
+
+function pt44GameTubeTest(p){return {heater:!!p?.heaterOk,emission:p?.heaterOk?pt44GameClamp(((p.emis??0)-.1),0,1.02):0,short:!!p&&((p.hk||0)>.15||(p.gas||0)>.3)};}
+function pt44GameCapTest(p,c){const voltage=c.V,rawLeakage=voltage/pt44GameLeak(p,voltage),leakage=Math.min(.01,rawLeakage);return {voltage,rawLeakage,leakage,currentLimited:rawLeakage>.01,capacitance:p.open?0:p.uF,capOk:!p.open&&p.uF>c.uF*.6,leakOk:leakage<(p.ctype==='electrolytic'?.0005:2e-6)};}
+function pt44GameMigrate(state){
+ if(!state||state.ver!==1||!Array.isArray(state.jobs))return null;
+ for(const j of state.jobs){const r=j.radio;if(!r||!r.slots)return null;
+  r.dial=Number.isFinite(r.dial)?pt44GameClamp(r.dial,540,1600):880;r.vol=Number.isFinite(r.vol)?pt44GameClamp(r.vol):.6;
+  r.lineV=Number.isFinite(r.lineV)?pt44GameClamp(r.lineV,90,130):115;r.lineMode=r.lineMode==='DC'?'DC':'AC';r.loopConnected=r.loopConnected!==false;
+  r.alignment||={};for(const k of ['12A','12B','14A','4A','5']){const f=['12A','12B','14A'].includes(k);r.alignment[k]=Number.isFinite(r.alignment[k])?pt44GameClamp(r.alignment[k],f?440:-30,f?470:30):f?455:0;}
+ }state.gameModelVersion='0.64.0';return state;
+}
+if(typeof module!=='undefined'&&module.exports)Object.assign(module.exports,{tubeTest:pt44GameTubeTest,capTest:pt44GameCapTest,migrate:pt44GameMigrate});

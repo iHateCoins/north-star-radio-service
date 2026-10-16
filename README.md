@@ -1,25 +1,27 @@
-# North Star Radio Service — v0.63.0 playable PT-44
+# North Star Radio Service — v0.64.0 PT-44 game completion
 
-The first PT-44 now runs one shared behavioral receiver. Actual installed part properties, tuning, volume, alignment, supply and instrument loading produce sound, service readings, tracer levels, AVC and damage together. Correct repairs restore those outputs; unrelated replacement does not clear the fault.
+The first PT-44 meets all nine fixed V2 engineering packages when the release CI passes. The receiver remains a bounded behavioral game model: symptoms, sound, tools, controls, damage and repair outcomes share installed part properties. Full circuit simulation remains optional research.
 
-The user approved a scope change to believable surface behavior and cause/effect. The fixed nine-package finish line is now [game completion V2](gameplay/PT44_Game_Completion_V2.json). Full circuit simulation, exhaustive curve matching and exact undocumented wiring are optional research. Original scientific acceptance files remain historical records; V2 closures do not claim that V1 scientific gates passed.
+The approved V2 package IDs, titles and acceptance wording are unchanged. A checked-in signature guards that finish line. Original scientific V1 records remain intact and do not become scientific passes through this release.
 
-| EC | v0.63 result | Remaining |
-|---|---|---|
-| EC-04 | **Closed under V2:** playable volume/audio, coupling/bias, output tube, transformer/speaker faults and replacement checkout. | Regression maintenance against the fixed behavioral criteria. |
-| EC-06 | **Closed under V2:** full-band high-side conversion, dead/weak oscillator/converter, aerial loop, trim errors, injection and restoration. | Regression maintenance against the fixed behavioral criteria. |
-| EC-03 | Supports power, warmup, heater string, residual charge and fault stress. | Complete live power-cycle and cascade acceptance matrix. |
-| EC-05 | Supports 455 kHz filtering, three manual IF controls, detector and timed AVC. | Combined IF/detector fault and complete alignment acceptance. |
-| EC-07 | Supports loaded DC ports, RF/IF/audio generator and coherent tracer. | Full instrument range, polarity and component-tester matrix. |
-| EC-09 | Supports all 20 stock faults in the fixed core matrix plus real-shop repair scenarios. | All-stock-fault browser diagnosis/repair matrix and final acceptance. |
-| EC-01 / EC-02 / EC-08 | Remain open/in progress with bounded reviews. | Source/presentation ambiguities; catalog behavior coverage; chassis/access review. |
+| EC | v0.64 closure evidence |
+|---|---|
+| EC-01 | Named 0.05 µF game variant; 0.1 µF acknowledged alternative; functional detector/AVC and oscillator labels without invented physical pin/winding assignments. |
+| EC-02 | Every sold component class, 346 compatible catalog placements, missing/failed behavior, wrong-value/rating response and enforced compatibility; wound field assembly presentation. |
+| EC-03 | Live warmup, heater-string faults, AC/DC envelope, hot-off and checkout charge, discharge guards and damaging fault cascades. |
+| EC-04 | Retains v0.63 audio closure and extends stock repair coverage. |
+| EC-05 | IF/detector faults, independent upstream tracer, 455 kHz selectivity, timed AVC and loaded probing, manual alignment recovery. |
+| EC-06 | Retains v0.63 RF/converter closure and extends oscillator/converter repair coverage. |
+| EC-07 | Shared tube/cap test results, pulled-part guards, current-limited leakage test, meter range/polarity/live-ohms checks, generator and tracer. Service references now declare the actual 115 V / volume 6 / 880 kHz / 11 MΩ conditions and B− return. |
+| EC-08 | Every repairable slot has a named location and camera-independent Inspector selector; full removal/install pass, compatibility guards and field assembly rendering. |
+| EC-09 | All 20 stock faults through saved browser diagnosis, incorrect-repair checkout, replacement and successful checkout, plus healthy baseline, migration, alignment and cascade tests. |
 
-The PT-44 is not yet fully engineering complete. Broader game development remains on hold. New fidelity work requires a separate scope decision; it does not silently expand these package criteria.
+The authoritative statuses and evidence are in [game completion V2](gameplay/PT44_Game_Completion_V2.json). [Service scope](gameplay/PT44_Service_Scope_V1.json) declares the game variant, component classes and physical presentation boundaries. Exact undocumented lead dress, hidden socket mapping and precision historical calibration remain outside V2; future fidelity additions are separate scope decisions.
 
-Open `index.html` in a modern browser. The playable bench includes a **Generator / alignment** tab: select aerial, IF or volume injection; set frequency/level; peak 12A/12B/14A and oscillator/aerial trims manually. Supply and alignment persist with the radio. Loop repairs use the existing power-off/discharge guard. The meter offers named service ports with B− reference. Checkout disables the generator and restores the player's tuning/volume after its standard test.
+Open `index.html` to play. Use the Inspector's **Service part** selector to locate any supported part. Pull tubes or capacitors for component tests; power off and discharge before replacement. Use **Generator / alignment** for aerial, IF or volume injection, manual peaking, loop connection and AC/DC settings. Checkout disables the generator and retains filter charge after its powered run.
 
-Readings are declared game approximations, not calibrated historical measurements. Extra service ports do not certify unresolved socket wiring. Research ledger panels retain their original narrower scope and are optional references.
+Validation runs `node tests/test_gameplay_v63.js` (208 retained checks), `node tests/test_completion_v64.js` (519 checks including 346 catalog placements), EC/source regressions, the retained v0.63 Chromium suite and four new browser matrix shards covering every stock fault and the remaining service criteria. Workflow artifacts contain measurements, checkout records and desktop/mobile screenshots. Historical electrical/SPICE workflows remain manual research tools.
 
-Validation: `node tests/test_gameplay_v63.js`; `node tests/test_gameplay_browser_v63.js --browser` with Playwright/Chromium. The game workflow runs both. Historical electrical/SPICE workflows remain available through manual dispatch. See [model scope and reproduction](gameplay/README.md) and [previous research release](engineering/RELEASE_v062.md).
+After this release is merged with passing game CI, the PT-44 engineering hold is satisfied and broader game development can resume. Further fidelity work does not reopen a closed EC unless it violates the fixed V2 acceptance.
 
-Watermark: **BUILD v0.63.0**.
+Watermark: **BUILD v0.64.0**.

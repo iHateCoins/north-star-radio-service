@@ -42,5 +42,5 @@ check(ev(healthy(),{warm:0}).signal.loud===0,'cold startup silent');check(ev(hea
 check(ev(healthy(),{line_mode:'DC'}).signal.hum===0,'DC removes filter ripple');check(ev(healthy(),{line_v:90}).ports.B1<ev(healthy(),{line_v:130}).ports.B1,'line voltage follows supply');
 r=healthy();r.slots.C3.leak0=2;r.slots.C3.vcoef=.03;for(let i=0;i<30;i++)m.applyStress(r,ev(r),1);check(r.slots.R2.open||r.slots.R2.charred,'unrepaired leakage causes downstream damage');
 assert.throws(()=>ev(healthy(),{line_v:200}));assert.throws(()=>ev(healthy(),{generator:{...gen,mv:NaN}}));
-const contract=require('../gameplay/PT44_Game_Completion_V2.json');check(contract.packages.length===9&&contract.closed_ec_ids.join(',')==='EC-04,EC-06','fixed nine package standard and explicit closures');
+const contract=require('../gameplay/PT44_Game_Completion_V2.json');check(contract.packages.length===9&&['EC-04','EC-06'].every(id=>contract.closed_ec_ids.includes(id)),'fixed nine package standard and explicit closures');
 fs.mkdirSync('tmp/pt44-gameplay',{recursive:true});fs.writeFileSync('tmp/pt44-gameplay/core-evidence.json',JSON.stringify({checks,baseline:base,faults:evidence},null,2));console.log('PASS '+checks+' behavioral gameplay checks');
