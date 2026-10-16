@@ -1,17 +1,13 @@
-# North Star Radio Service — v0.65.0 player UI pass
+# North Star Radio Service — v0.66.0 first-repair tutorial
 
-The default UI focuses on taking a job, diagnosing the radio, replacing parts and returning a working set. The PT-44 remains engineering complete under the unchanged V2 acceptance; all nine EC closures are retained.
+New shops open with a completely dead PT-44 and an optional guided first repair. The player confirms symptoms, switches off safely, pulls and tests tubes, identifies an open 7B7 heater, buys the matching replacement, installs it, listens to the repaired set and completes checkout before collecting payment.
 
-- **Bench and Schematic** are the main views. Circuit maps, wiring/source audits, the engineering notebook and the floating build badge are absent from the player interface. They remain available only with `?engineering=1` for development/reference work.
-- **Meter, Tube tester and Alignment** remain included. Unowned capacitor-checker/tracer tabs and the disabled VTVM control are removed. A single **Upgrades** panel explains and sells the existing VTVM, capacitor checker and signal tracer at their unchanged prices. Owned tools and existing saves keep their capabilities; repeat purchase cannot charge twice.
-- Alignment adjustments and power-supply settings are collapsed until requested. Their settings and reveal state survive routine panel redraws. No diagnostic or repair capability is put behind a new purchase.
-- **Readings** follows the selected meter/range, so the starter VOM has a useful comparison chart. Source/variant details are under Reference notes. The field assembly is sold under Tubes & parts rather than as an interchangeable carbon resistor.
-- Routine **Bench notes** are folded away, while heat/failure warnings open them and surface a notification. Returning a set unrepaired is under Job options. The first-run introduction is three short steps; mobile users see the service counter first when no job is selected.
+The guide waits for actual game actions and test results. It can be paused and resumed from the Service manual, saves progress across reloads, and offers a location button plus an optional diagnosis hint. Good tubes must be reinstalled; the tutorial never repairs the radio, supplies free parts, overrides safety guards or forces a checkout pass. Normal prices, overnight mail order, same-day jobber purchases, rent and billing apply. The first shop starts without a spare 7B7 so that buying a part has a purpose; other starter stock is retained. Later jobs use the regular fault generator.
 
-This version supports **EC-07 instruments, EC-08 service access and EC-09 repair workflow usability**. It adds no new EC closures and reopens none. Receiver behavior, cascading damage, inventory, prices and checkout standards are unchanged.
+Existing shops retain their jobs, faults, inventory and cash. They are not converted to tutorial scenarios. A new shop can skip the guide and repair the same first job normally.
 
-Validation retains the 727 behavioral checks, historical/source regressions, stock 20-fault browser repair matrix and prior shop suite. `tests/test_ui_browser_v65.js` verifies uncluttered player navigation, upgrade affordability/purchases/persistence, correct references, advanced reveals, critical warning visibility, explicit research opt-in and desktop/mobile layout. Optional research browser tests now enter engineering mode explicitly.
+This release supports **EC-07 instruments, EC-08 service access and EC-09 end-to-end repair usability**. All nine fixed V2 closures remain intact. Receiver behavior, cascading damage, prices and checkout limits are unchanged. The v0.65 UI cleanup and optional equipment upgrades are retained.
 
-Open `index.html` to play. Main development can continue beyond the completed PT-44 benchmark; additional scientific fidelity remains optional research.
+Validation includes the 727 behavioral checks, reporting/source regressions, all 20 stock fault browser repairs, the player UI suite, and tutorial checks. `tests/test_tutorial_v66.js` checks 50 first-radio fixtures against normal service and stress limits. `tests/test_tutorial_browser_v66.js` exercises the actual guided workflow, a good tube before the failed tube, both purchase routes, pause/reload/resume, saved completion, mobile layout and pre-tutorial saves.
 
-Watermark: **BUILD v0.65.0** (shown only in engineering mode; player version is in the manual).
+Open `index.html` to play. Engineering references remain available with `?engineering=1`; the player version is in the Service manual.

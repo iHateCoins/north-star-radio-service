@@ -19,6 +19,7 @@ jobs:
           node-version: '22'
       - run: node tests/test_gameplay_v63.js
       - run: node tests/test_completion_v64.js
+      - run: node tests/test_tutorial_v66.js
       - run: node tests/test_ec_reporting_v58.js
       - run: node tests/test_supply_avc_reconciliation_v53.js
       - uses: actions/upload-artifact@v4
@@ -88,9 +89,12 @@ jobs:
       - run: npm install --no-save --no-package-lock playwright@1.62.1
       - run: npx playwright install --with-deps chromium
       - run: node tests/test_ui_browser_v65.js --browser
+      - run: node tests/test_tutorial_browser_v66.js --browser
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: pt44-player-ui-v065
-          path: tmp/pt44-ui-v065/
+          path: |
+            tmp/pt44-ui-v065/
+            tmp/pt44-tutorial-v066/
           retention-days: 7
