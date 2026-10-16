@@ -1,9 +1,7 @@
 name: PT-44 electrical engineering checks
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: pt44-engineering-${{ github.event.pull_request.number || github.ref }}

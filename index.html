@@ -82,7 +82,7 @@
 .build-watermark small{display:block;margin-top:3px;font:400 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.02em;color:#d8cbc3;opacity:.92}
 @media(max-width:680px){.build-watermark{right:8px;bottom:8px;padding:7px 9px;font-size:10px}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.62.0</title><meta name="nsrs-build" content="v0.62.0">
+<title>North Star Radio Service — PT-44 v0.63.0</title><meta name="nsrs-build" content="v0.63.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -262,7 +262,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.62.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.63.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -307,7 +307,7 @@ function fmtCap(uF){ if (uF<1e-3) return Math.round(uF*1e6)+' pF'; if (uF<1) ret
 function fmtW(w){ return w===0.5?'½ W':w===0.25?'¼ W':w+' W'; }
 function skuName(sku){
   const c = CATALOG[sku]; if (!c) return sku;
-  if (sku==='R500-2') return '500 Ω field-coil proxy (not a resistor)';
+  if (sku==='R500-2') return '500 Ω speaker field-coil assembly';
   if (c.kind==='R') return `${fmtOhms(c.ohms)} ${fmtW(c.W)} carbon`;
   if (c.kind==='C') return `${fmtCap(c.uF)} ${c.V} V ${c.ctype}`;
   if (c.kind==='TUBE') return `${c.tube} tube`;
@@ -320,7 +320,7 @@ const PT44_REF = Object.freeze({
   maker:'Philco', model:'PT-44', year:1941, ifKHz:455, power:'115 V AC/DC', band:'540–1600 kHz',
   source:'https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf',
   tubes:[
-    {id:'V1',type:'7A8',role:'Converter',base:'Loktal B8B',heater:[1,8],pins:{1:'H',2:'Plate',3:'Screen (g2)',4:'Oscillator grid (g1)',5:'Grid g3,g5',6:'Grid g4',7:'Cathode',8:'H'}},
+    {id:'V1',type:'7A8',role:'Converter',base:'Loktal B8B',heater:[1,8],pins:{1:'H',2:'Plate',3:'Oscillator anode (g2)',4:'Oscillator grid (g1)',5:'Grid g3,g5',6:'Grid g4',7:'Cathode',8:'H'}},
     {id:'V2',type:'7B7',role:'I.F. amplifier',base:'Loktal B8B',heater:[1,8],pins:{1:'H',2:'Plate',3:'Screen',4:'Suppressor',5:'Shell',6:'Control grid',7:'Cathode',8:'H'}},
     {id:'V3',type:'7C6',role:'Detector, AVC, 1st audio',base:'Loktal B8B',heater:[1,8],pins:{1:'H',2:'Triode plate',3:'Triode grid',4:'No connection',5:'Diode plate 2',6:'Diode plate 1',7:'Cathode',8:'H'}},
     {id:'V4',type:'50L6GT',role:'Beam power output',base:'Octal',heater:[2,7],pins:{1:'No connection',2:'H',3:'Plate',4:'Screen',5:'Control grid',6:'No connection',7:'H',8:'Cathode'}},
@@ -346,7 +346,7 @@ const SLOTS = {
   V3:{type:'TUBE',tube:'7C6',label:'V3',name:'7C6 detector / 1st audio',nom:'T7C6'},
   V4:{type:'TUBE',tube:'50L6GT',label:'V4',name:'50L6GT power output',nom:'T50L6GT'},
   V5:{type:'TUBE',tube:'35Z3',label:'V5',name:'35Z3 rectifier',nom:'T35Z3'},
-  R1:{type:'R',a:'B1',b:'B2',name:'Speaker field coil #28 — 500 Ω DC PROXY (not a resistor)',nom:'R500-2'},
+  R1:{type:'R',a:'B1',b:'B2',name:'Speaker field coil #28 — 500 Ω',nom:'R500-2'},
   R2:{type:'R',a:'K5',b:null,name:'50L6GT cathode resistor (Philco #24)',nom:'R130-0.5'},
   R3:{type:'R',a:'G5',b:null,name:'50L6GT grid resistor',nom:'R470000-0.5'},
   R4:{type:'R',a:'B2',b:'P6',name:'7C6 plate load (simplified model)',nom:'R470000-0.5'},
@@ -440,7 +440,7 @@ function pt44FactoryContactScope(net,a,b){
 // parts marked factoryVerified; undocumented wire locations are explicitly provisional.
 const PT44_MODEL = (function(){
   const tubePins={
-    V1:{'2':'PCV','3':'B2','4':'OSC'},
+    V1:{'2':'PCV','4':'OSC'},
     V2:{'2':'PIF','3':'B2','7':'KIF'},
     V3:{'2':'P6','3':'G6'},
     V4:{'3':'P5','4':'B2','5':'G5','8':'K5'},
@@ -654,11 +654,7 @@ function gauss(A, b){
     for (let r=0;r<n;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; if(!f) continue; for(let k=c;k<=n;k++) M[r][k]-=f*M[c][k]; } }
   return M.map((r,i)=>r[n]/r[i]);
 }
-function settle(r, env={}){ // two passes so voltage-dependent leakage and oscillator state are consistent
-  let d = solveDC(r, env, env.guess||null);
-  d = solveDC(r, env, d.V); d = solveDC(r, env, d.V);
-  return d;
-}
+function settle(r, env={}){ return pt44GameEvaluate(PT44_GAME_MODEL_V1,r,env); }
 
 // ---------- Ohmmeter (power off, linear network) ----------
 function ohmsBetween(r, a, b){
@@ -702,6 +698,7 @@ const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 // Reference healthy values for normalisation (filled by calibrate())
 const REF = {Icv:1, Iif:1, gm6:1, gm5:1, Av6:1};
 function sigPath(r, d){
+  if(d.model==='PT44_BEHAVIOR_V63')return d.signal;
   const s=r.slots, v=n=>d.V[NI[n]];
   const out = {};
   if (!d.lit || d.warm<0.05){ return {loud:0, hum:0, dist:0, stat:0, crackle:0, lit:d.lit, levels:{conv:0,if:0,det:0,a1:0,g5:0,spk:0}, humLv:0, station:null}; }
@@ -827,7 +824,62 @@ function observe(r){ r.vol=0.6; let best=null;
   for (const kc of [610,880,1150]){ r.dial=kc; const d=settle(r); const g=sigPath(r,d); if(!best||g.loud>best.g.loud) best={g,d,kc}; }
   r.dial = best.kc; return best; }
 
-if (typeof module!=='undefined' && module.exports) module.exports = {NODES,NI,CATALOG,SLOTS,newRadio,newPart,settle,solveDC,sigPath,calibrate,REF,applyStress,ohmsBetween,partOhms,FAULTS,pickFault,customerUse,observe,capLeakOhms,stationAt,fmtOhms,skuName};
+const PT44_GAME_MODEL_V1 = Object.freeze({"schema":"PT44_GAME_BEHAVIOR_V1","version":"0.63.0","nodes":["B1","B2","P5","K5","G5","P6","G6","PCV","PIF","KIF","OSC"],"stations":[{"kc":610,"call":"KPLN","prog":"band","pwr":1},{"kc":880,"call":"WEBR","prog":"talk","pwr":0.85},{"kc":1150,"call":"KDOX","prog":"waltz","pwr":0.55},{"kc":1340,"call":"WTCN","prog":"news","pwr":0.32}],"scope":"Deterministic game cause/effect model. Stage currents, voltage targets, gain, bandwidth, warmup, AVC timing and symptoms are bounded service approximations. No carrier stepping, full netlist, curve fitting or SPICE parity is required for gameplay.","supported_supply":{"line_v":[90,130],"modes":["AC","DC"]},"signal_controls":{"dial_khz":[540,1600],"if_khz":455,"alignment":["12A","12B","14A","4A","5"]},"reference":"Game measurement ports are service abstractions referenced to B-minus. They do not certify physical socket routing or undocumented diode assignments."});
+// BEGIN PT44_BEHAVIOR_V63
+// Player-facing cause/effect model. No carrier stepping, tube-curve solver or fault-ID lookup.
+function pt44GameClamp(x,a=0,b=1){return Math.max(a,Math.min(b,x));}
+function pt44GameLeak(p,v){return !p?Infinity:Math.max(.5,(p.leak0??1000)*1e6/(1+(p.vcoef??0)*Math.abs(v)*((p.leak0??1000)>50?1:20)));}
+function pt44GameStoredVoltage(initial,time,capUf=20,leakMohm=4){
+ const tau=Math.max(.25,40*Math.max(.01,capUf)/20*Math.min(1,Math.max(.01,leakMohm)/4));return initial*Math.exp(-Math.max(0,time)/tau);
+}
+function pt44GameEvaluate(spec,r,env={}){
+ const s=r.slots,C=pt44GameClamp,good=id=>!!s[id]&&!s[id].open,ohm=(id,fallback)=>good(id)?Math.max(.1,s[id].ohms??fallback):Infinity,cap=id=>good(id)?Math.max(0,s[id].uF||0):0;
+ const lit=['V1','V2','V3','V4','V5'].every(id=>s[id]&&s[id].heaterOk),warm=C(env.warm??1),powered=env.power!==false,lineV=env.line_v??r.lineV??115,lineMode=env.line_mode??r.lineMode??'AC';
+ if(!Number.isFinite(lineV)||lineV<90||lineV>130||!['AC','DC'].includes(lineMode))throw Error('Supported supply is 90–130 V AC/DC');
+ const e=id=>lit&&powered?C(s[id]?.emis||0,0,1.2)*warm:0,rect=e('V5'),a=r.alignment||{},centers=['12A','12B','14A'].map(k=>a[k]??455),oscShift=a['4A']??0,rfTrim=a['5']??0;
+ if(centers.some(x=>!Number.isFinite(x)||x<440||x>470)||!Number.isFinite(oscShift)||Math.abs(oscShift)>30||!Number.isFinite(rfTrim)||Math.abs(rfTrim)>30)throw Error('Alignment control outside supported range');
+ const r2=ohm('R2',130)/130,leak=C((1e6/pt44GameLeak(s.C3,30)-.01)/3,0,2),gas=C(s.V4?.gas||0),shortLoad=C(1e5/pt44GameLeak(s.C2,100)-.5,0,4),screenConnected=good('R1');
+ const loadGate=screenConnected?1:0,outputReturn=good('R2')?1:0;
+ const I5p=.045*e('V4')*loadGate*outputReturn*(good('T1')?1:0)*(1+.8*leak+gas)/(.4+.6*r2),I5s=.005*e('V4')*loadGate*outputReturn;
+ const Icv=.0045*e('V1')*loadGate,Iif=.007*e('V2')*loadGate*(good('R7')?1:0),I6=.00017*e('V3')*loadGate;
+ const filteredLoad=I5s+Icv+Iif+I6+.04*shortLoad,totalLoad=I5p+filteredLoad;
+ const reservoirFactor=(.65+.35*cap('C1')/(cap('C1')+2))/(.65+.35*20/22);
+ let B1=110*(lineV/115)*Math.sqrt(rect)*reservoirFactor/(1+.15*(totalLoad/.06167-1)),B2=screenConnected?Math.max(0,B1-filteredLoad*ohm('R1',500)):0;B2/=1+shortLoad*3;
+ if(!powered){B1=pt44GameStoredVoltage(env.off_v?.[spec.nodes.indexOf('B1')]||0,env.off_elapsed_s||0,cap('C1'),s.C1?.leak0);B2=pt44GameStoredVoltage(env.off_v?.[spec.nodes.indexOf('B2')]||0,env.off_elapsed_s||0,cap('C2'),s.C2?.leak0);}
+ const supply=C(B2/102),r6=ohm('R6',22000),osc=powered&&good('L1')&&good('C4')&&pt44GameLeak(s.C4,10)>1e6&&r6>=3000&&r6<=250000?C(e('V1')*supply):0;
+ const meter=env.meter,sourceR={B1:500,B2:1000,P5:1500,K5:130,G5:470000,P6:220000,G6:4700000,PCV:1500,PIF:1500,KIF:68,OSC:22000,AVC:4700000,SCREEN:27000},loading=node=>meter?.node===node?meter.R/(meter.R+sourceR[node]):1;
+ if(meter&&(!(meter.node in sourceR)||!Number.isFinite(meter.R)||meter.R<=0))throw Error('Invalid behavioral meter port');
+ const oscActive=osc*(meter?.node==='OSC'?C(meter.R/10000):1),loKHz=(r.dial??880)+455+oscShift*(r.dial??880)/1600,pass=f=>centers.reduce((g,x)=>g/(1+Math.pow((f-x)/8,2)),1);
+ const aerial=(r.loopConnected!==false?1:0)*Math.exp(-Math.pow(rfTrim*(r.dial??880)/1600/15,2)),convGain=oscActive*C(e('V1'))*aerial,ifGain=C(e('V2'))*(good('R7')?1:0)*(good('T2')?1:0)*(good('T3')?1:0)*supply;
+ const stations=env.stations||spec.stations,upstream=stations.map(st=>st.pwr*pass(Math.abs(loKHz-st.kc))*convGain),weights=upstream.map(x=>x*ifGain),bestIndex=weights.indexOf(Math.max(...weights)),radioRaw=weights[bestIndex]||0,gen=env.generator||{},enabled=!!gen.enabled;
+ let generated=0;
+ if(enabled){if(!['aerial','if','audio'].includes(gen.point)||!Number.isFinite(gen.khz)||!Number.isFinite(gen.mv)||gen.mv<0||gen.mv>50||gen.khz<.1||gen.khz>1600)throw Error('Invalid generator conditions');const input=C(gen.mv/(gen.point==='audio'?20:1),0,2);generated=gen.point==='aerial'?input*pass(Math.abs(loKHz-gen.khz))*convGain*ifGain:gen.point==='if'?input*pass(gen.khz)*ifGain:input;}
+ const received=radioRaw+(enabled&&gen.point!=='audio'?generated:0),avcTarget=-4*received/(.3+received)*loading('AVC'),dt=env.dt_s??0;
+ let avc=avcTarget;if(Number.isFinite(env.avc_v)&&dt>0){const tau=Math.abs(avcTarget)>Math.abs(env.avc_v)?.15:.6;avc=env.avc_v+(avcTarget-env.avc_v)*(1-Math.exp(-dt/tau));}
+ const detector=C(e('V3'))*1.2*received/(1+.6*Math.abs(avc))/(.25+received/(1+.6*Math.abs(avc))),volume=good('VR1')?C(r.vol??.6):0;
+ const audioSource=enabled&&gen.point==='audio'?generated:detector,det=audioSource*volume;
+ const r4=ohm('R4',470000),audioGain=good('R4')?e('V3')*supply/(1+Math.abs(Math.log(r4/470000))*1.8):0;
+ const hp=cap('C3')>0?400/Math.hypot(400,1/(2*Math.PI*Math.max(1,ohm('R3',470000))*cap('C3')*1e-6)):0;
+ const V={B1,B2,P5:good('T1')?Math.max(0,B1-25*(I5p/.045)*(ohm('T1',250)/250)):0,K5:good('R2')?(I5p+I5s)*ohm('R2',130):B2*.8,G5:leak*7+gas*5,P6:good('R4')?Math.min(B2,30*supply/(Math.pow(r4/470000,.55)*Math.max(.1,e('V3')))):0,G6:good('R5')?-.35*e('V3'):-.05,PCV:good('T2')?Math.max(0,B2-5*e('V1')):0,PIF:good('T3')?Math.max(0,B2-5*e('V2')):0,KIF:good('R7')?.007*e('V2')*ohm('R7',68):B2,OSC:-10*oscActive,AVC:avc,SCREEN:45*supply};
+ if(!powered){for(const k of Object.keys(V))if(!['B1','B2'].includes(k))V[k]=0;}
+ if(meter&&meter.node!=='AVC')V[meter.node]*=loading(meter.node);
+ const af=audioGain*loading('P6')*loading('G6'),outputGain=e('V4')*supply*outputReturn*(good('T1')?1:0)*(good('SP1')?1:0)*C(2/(1+r2));
+ const a1=det*af,g5=a1*hp,loud=C(g5*1.7*outputGain,0,1.6),bias=V.K5-V.G5,drive=g5*8;
+ const ripple1=lineMode==='AC'?Math.min(B1,totalLoad/(60*Math.max(cap('C1'),.5)*1e-6)*.55):0,ripple2=lineMode==='AC'?ripple1/(1+377*(good('R1')?ohm('R1',500):1e9)*Math.max(cap('C2'),.05)*1e-6):0;
+ let hum=(ripple2*.003+ripple1*.0004)*outputGain;
+ for(const id of ['V1','V2','V3','V4'])hum+=(s[id]?.hk||0)*(id==='V3'?.5:.25)*outputGain;
+ if(!good('R5'))hum+=.35*outputGain*volume;
+ const dist=C(.02+C((drive-Math.max(.5,bias))/6)+C((2-bias)/4)*C(drive)+C((.65-e('V4')))*C(drive)+C((.6-supply))*C(drive)+(s.SP1?.rub||0));
+ const active=powered&&lit&&warm>.05,signal={loud:active?loud:0,hum:active?C(hum,0,1.5):0,dist:active?dist:0,stat:active?.03*volume*ifGain*outputGain/(1+received*5):0,crackle:active?(s.VR1?.scratch||0):0,lit:active,osc:oscActive,strength:radioRaw,station:active&&radioRaw>.025?stations[bestIndex]:null,stationWeights:weights,levels:{conv:Math.max(...upstream)+(enabled&&gen.point==='if'?C(gen.mv):0),if:received,det,a1,g5,spk:loud},generatorTone:active&&enabled?loud:0,generatorActive:active&&enabled,avc_v:avc,if_khz:455,lo_khz:loKHz};
+ if(!active)for(const k of Object.keys(signal.levels))signal.levels[k]=0;
+ const stress={};for(const [id,dv] of Object.entries({R1:B1-B2,R2:V.K5,R3:V.G5,R4:B2-V.P6,R5:V.G6,R6:V.OSC,R7:V.KIF})){if(good(id))stress[id]={P:dv*dv/ohm(id,1),ratio:dv*dv/ohm(id,1)/(s[id].W||.5)};}
+ for(const [id,v] of Object.entries({C1:B1,C2:B2,C3:V.P6-V.G5})){if(s[id])stress[id]={Vc:Math.abs(v),ratio:Math.abs(v)/s[id].V,Ileak:Math.abs(v)/pt44GameLeak(s[id],v)};}
+ stress.T1={I:I5p,ratio:I5p/.075};stress.V4={P:I5p*Math.max(0,V.P5-V.K5),ratio:I5p*Math.max(0,V.P5-V.K5)/5.5};stress.V5={I:totalLoad,ratio:totalLoad/.1};
+ return {model:'PT44_BEHAVIOR_V63',V:spec.nodes.map(n=>V[n]),ports:V,lit,A:oscActive,warm,signal,stress,Irect:totalLoad,Itotal:totalLoad,I5p,I5s,Icv,Iif,I6,P5diss:stress.V4.P,Vgk5:V.G5-V.K5,arg5:4,arg6:.5,AVC:avc,ripple_v:ripple2,source:'Game behavioral reference; not a factory voltage calibration'};
+}
+if(typeof module!=='undefined'&&module.exports)module.exports={evaluate:pt44GameEvaluate,storedVoltage:pt44GameStoredVoltage};
+// END PT44_BEHAVIOR_V63
+if (typeof module!=='undefined' && module.exports) module.exports = {NODES,NI,CATALOG,SLOTS,newRadio,newPart,settle,solveDC,sigPath,calibrate,REF,applyStress,ohmsBetween,partOhms,FAULTS,pickFault,customerUse,observe,capLeakOhms,stationAt,fmtOhms,skuName,PT44_GAME_MODEL_V1,pt44GameEvaluate,pt44GameStoredVoltage};
 
 </script>
 <script>
@@ -1456,7 +1508,7 @@ const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat'];
 
 let S = null;      // saved game state
 const R = {        // runtime (not saved)
-  power:false, warm:0, rect:0, dc:null, sig:null, offV:null, offT:0, sel:null, view:'bench3d', cam:'overview', showTestPosts:false,
+  power:false, warm:0, rect:0, dc:null, sig:null, avcV:0, generator:{enabled:false,point:'if',khz:455,mv:.5}, offV:null, offT:0, sel:null, view:'bench3d', cam:'overview', showTestPosts:false,
   tool:'meter', side:'insp', inst:'vom', mode:'V', range:{vom:250,vtvm:150,ohvom:100,ohvtvm:100}, pol:1,
   probe:null, ohmTarget:null, tubeTarget:null, capTarget:null, tracePt:null, audio:null, mute:false,
   benchLog:[], smelled:{}, catTab:'R'
@@ -1497,7 +1549,7 @@ function addJob(forceTier){
   S.jobs.push(job);
   return job;
 }
-function healthyEnough(g){ return g.lit && g.loud>0.42 && g.hum<0.06 && g.dist<0.12 && g.crackle<0.2 && g.station; }
+function healthyEnough(g){ return g.lit && g.loud>0.42 && g.hum<0.05 && g.dist<0.12 && g.crackle<0.2 && g.station; }
 function complaintFrom(g){
   const pick = a => a[Math.floor(Math.random()*a.length)];
   const lines=[];
@@ -1505,7 +1557,7 @@ function complaintFrom(g){
   else if (g.loud<0.05 && !g.station && g.hum>0.03) lines.push(pick(['The tubes light up and it hums, but it won\'t pull in a single station.','Warms up and hums. Turn the dial all you like, no stations.']));
   else if (g.loud<0.05 && !g.station) lines.push(pick(['Lights up, but there\'s no stations anywhere on the dial.','You can hear a little hiss and that\'s all. No programs.']));
   else if (g.loud<0.05) lines.push(pick(['The tubes glow but it doesn\'t make a sound.','Lights up fine, stays quiet. Not a peep.','Dial lights, nothing comes out of the speaker.']));
-  if (g.lit && g.hum>0.06) lines.push(pick(['There\'s a terrible hum over everything.','It hums like a refrigerator.','Loud buzzing hum, even with the volume down.']));
+  if (g.lit && g.hum>0.05) lines.push(pick(['There\'s a terrible hum over everything.','It hums like a refrigerator.','Loud buzzing hum, even with the volume down.']));
   if (g.lit && g.dist>0.15 && g.loud>0.05) lines.push(pick(['The voices sound fuzzy and garbled, worse after it warms up.','Music comes out scratchy and distorted.','It sounds like the announcer has a mouthful of gravel.']));
   if (g.lit && g.loud>=0.05 && g.loud<0.38) lines.push(pick(['It\'s weak. I have to turn it all the way up.','Plays, but so quiet you can barely hear it across the kitchen.']));
   if (g.crackle>0.3) lines.push(pick(['It crackles and cuts out when you turn the volume knob.','Scratchy noise whenever I touch the volume.']));
@@ -1528,8 +1580,8 @@ function tick(){
   if (R.power && lit){ R.warm = Math.min(1, R.warm + dt/9); }
   else R.warm = Math.max(0, R.warm - dt/6);
   if (R.power || R.warm>0){
-    R.dc = settle(r, {warm: easeWarm(R.warm), meter: meterLoad(), guess: R.dc && R.dc.V});
-    R.sig = sigPath(r, R.dc);
+    R.dc = settle(r, {warm:easeWarm(R.warm),power:R.power,off_v:R.offV,off_elapsed_s:R.offT,meter:meterLoad(),generator:R.generator,dt_s:dt,avc_v:R.avcV});
+    R.sig = sigPath(r, R.dc); R.avcV=R.dc.AVC;
     if (R.power){
       const ev = applyStress(r, R.dc, dt*0.3);
       ev.forEach(e => benchLog('⚠ '+e, 'bad'));
@@ -1547,9 +1599,8 @@ function tick(){
 const easeWarm = w => w<=0?0: Math.min(1, w*w*(3-2*w)*1.0);
 function chargeV(node){ // stored charge after switch-off (no bleeder resistor in these sets)
   if (R.power || !R.offV) return 0;
-  const r = benchJob().radio; const c1ok = r.slots.C1 && r.slots.C1.leak0>0.5;
-  const tau = c1ok ? 40 : 2;
-  return R.offV[NI[node]]*Math.exp(-R.offT/tau);
+  const r=benchJob().radio,p=r.slots[node==='B2'?'C2':'C1'];
+  return pt44GameStoredVoltage(R.offV[NI[node]]||0,R.offT,p?.uF||0,p?.leak0||.01);
 }
 function charged(){ return !R.power && R.offV && Math.max(chargeV('B1'),chargeV('B2'))>30; }
 
@@ -1595,8 +1646,9 @@ function installLoose(slot, pid, from){
   benchLog(`Installed ${from==='tray'?'the part from the tray':'a salvaged '+skuName(p.sku)} at ${slot}.`);
   R.sel={slot}; save(); renderAll();
 }
-function discharge(){ if (R.power) return; R.offV=null; benchLog('Shorted B+ to chassis through a 1 kΩ resistor. Filter caps discharged.'); renderBenchHead(); updateLive(); }
+function discharge(){ if (R.power) return; R.offV=null; benchLog('Discharged B+ to B− through a 1 kΩ resistor. Filter caps discharged.'); renderBenchHead(); updateLive(); }
 function compatible(slot, p){
+  if(slot==='R1')return (p.sku||p)==='R500-2';
   const d=SLOTS[slot]; const kind = p.kind || CATALOG[p.sku||p].kind; if (kind!==SLOT_ACCEPTS[d.type]) return false;
   if (d.type==='TUBE'){ const t = p.tube || CATALOG[p.sku||p].tube; return t===d.tube; }
   return true;
@@ -1606,8 +1658,8 @@ function compatible(slot, p){
 function runCheckout(){
   const job=benchJob(); if(!job) return;
   if (hasEmpty(job.radio)) { toast('Every socket and terminal needs a part before the checkout.'); return; }
-  R.power=false; R.warm=0; R.dc=null;
-  const r = job.radio; const before = JSON.stringify(r.slots);
+  R.power=false; R.warm=0; R.dc=null; R.sig=null; R.generator={enabled:false,point:'if',khz:455,mv:.5};
+  const r = job.radio; const savedDial=r.dial,savedVolume=r.vol; const before = JSON.stringify(r.slots);
   let d=null; const events=[];
   r.vol = 0.6; r.dial = 880;
   for (let t=0;t<600;t++){ d = settle(r,{guess:d&&d.V}); events.push(...applyStress(r,d,1)); }
@@ -1620,14 +1672,15 @@ function runCheckout(){
   add('Tube heaters (series string)', g.lit?'All lit':'Open string', g.lit);
   add('Stations received (610 / 880 / 1150 kc)', stations.map(s=>s.g.station?'✓':'—').join(' '), stations.every(s=>s.g.station));
   add('Audio output, volume at 6', (g.loud*1.6).toFixed(2)+' W', g.loud>=0.42);
-  const humExcess=Math.max(0,g.hum-(REF.goodHum||0)), distortionExcess=Math.max(0,g.dist-(REF.goodDist||0));
-  add('Excess hum vs model reference', humExcess.toFixed(3)+' relative units', humExcess<=0.06);
-  add('Excess distortion vs model reference', distortionExcess.toFixed(3)+' relative units', distortionExcess<=0.12);
+  const humExcess=g.hum, distortionExcess=g.dist;
+  add('Hum vs service limit', humExcess.toFixed(3)+' relative units', humExcess<=0.05);
+  add('Distortion vs service limit', distortionExcess.toFixed(3)+' relative units', distortionExcess<=0.12);
   add('Volume control', g.crackle>0.2?'Scratchy':'Smooth', g.crackle<=0.2);
   let worst=null; for (const [id,st] of Object.entries(dd.stress)){ if(st.ratio>1.02 && (!worst||st.ratio>worst.r)) worst={id,r:st.ratio}; }
   add('All parts within ratings', worst?`${worst.id} at ${Math.round(worst.r*100)}%`:'Yes', !worst);
   add('No failures during 10-minute run', events.length?events.join('; '):'None', !events.length);
   const v4p = dd.V[NI.P5], b2 = dd.V[NI.B2];
+  r.dial=savedDial;r.vol=savedVolume;
   job.lastCheck = {pass, results, at:S.day};
   if (events.length) benchLog('Checkout: '+events.join('; '), 'bad');
   save(); renderAll();
@@ -1704,7 +1757,7 @@ function renderTickets(){
     <div class="meta"><span>Labor ${money(j.labor)}</span><span>Parts up to ${money(j.budget)}</span><span>Due ${dateStr(j.due).replace(' 1955','')}</span></div>
   </div>`).join('');
   el.querySelectorAll('.ticket').forEach(t=>{ const go=()=>{ const id=+t.dataset.job; if (S.bench===id) return; if (R.power){ toast('Switch off the set on the bench first.'); return; }
-      S.bench=id; R.power=false; R.warm=0; R.dc=null; R.offV=null; R.sel=null; R.probe=null; R.ohmTarget=null; R.benchLog=[]; const j=benchJob(); benchLog(`${j.brand} ${j.model} on the bench. Customer says: “${j.complaint}”`); save(); renderAll(); };
+      S.bench=id; R.power=false; R.warm=0; R.dc=null; R.offV=null; R.sel=null; R.probe=null; R.ohmTarget=null; R.avcV=0; R.generator={enabled:false,point:'if',khz:455,mv:.5}; R.benchLog=[]; const j=benchJob(); benchLog(`${j.brand} ${j.model} on the bench. Customer says: “${j.complaint}”`); save(); renderAll(); };
     t.onclick=go; t.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go();} }; });
 }
 function renderShopLog(){ $('#shopLog').innerHTML = S.log.map(l=>`<div class="${l.cls}"><span style="color:var(--faint)">${dateStr(l.d).slice(0,3)} </span>${esc(l.t)}</div>`).join(''); }
@@ -1725,7 +1778,7 @@ function renderBench(){
 function renderBenchHead(){
   const job=benchJob(), el=$('#benchHead'); if(!el||!job) return;
   const ch = charged();
-  el.innerHTML = `<h2>${esc(job.brand)} ${esc(job.model)}</h2><span style="color:#b4bb94;font:10px monospace">1941 · MODEL UNDER RECONSTRUCTION</span><span class="muted mono" style="font-size:12px">RO № ${job.id}</span><span style="flex:1"></span>
+  el.innerHTML = `<h2>${esc(job.brand)} ${esc(job.model)}</h2><span style="color:#b4bb94;font:10px monospace">1941 · PT-44 SERVICE</span><span class="muted mono" style="font-size:12px">RO № ${job.id}</span><span style="flex:1"></span>
     ${ch?'<button class="btn warn sm" id="bDis">Discharge B+</button>':''}
     <button class="btn sm" id="bRet">Return unrepaired</button>
     <button class="btn pri sm" id="bChk">Run checkout</button>`;
@@ -2477,7 +2530,15 @@ function pt44EngineeringReadinessAudit(){
  if(counts.spice.isolated_ngspice_testbench_validated!==true||counts.spice.full_receiver_spice_validated!==false||counts.spice.nominal_heater_sanity_spice_validated!==counts.heater_string_sanity_spice_validated)errors.push('SPICE readiness must distinguish sanity fixtures from full-receiver validation');
  return {ok:!errors.length,errors,benchmarkReady:false,blockers:r.open_items.length,gates:r.completion_gates.length};
 }
-function pt44EngineeringReadinessHTML(esc){
+const PT44_GAME_COMPLETION_V2 = Object.freeze({"schema":"PT44_GAME_COMPLETION_V2","version":"0.63.0","approved_scope_change":"User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.","historical_standard":"engineering/PT44_EC_Acceptance_V1.json","policy":"Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.","fidelity":"Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.","optional_research":["Full receiver SPICE parity","Exhaustive tube curve validation","Carrier stepping","Exact undocumented socket wiring, lead dress and winding parameters"],"supported_ec_ids":["EC-03","EC-04","EC-05","EC-06","EC-07","EC-09"],"closed_ec_ids":["EC-04","EC-06"],"evidence":["tests/test_gameplay_v63.js","tests/test_gameplay_browser_v63.js",".github/workflows/pt44-gameplay.yml"],"packages":[{"id":"EC-01","title":"Source and presentation","status":"OPEN","acceptance":"Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.","remaining":"Source/diagram review remains; game ports explicitly avoid unresolved pin claims."},{"id":"EC-02","title":"Component behavior","status":"IN PROGRESS","acceptance":"All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.","remaining":"Audit every catalog class and wrong-value combination; replace temporary visual field-coil representation."},{"id":"EC-03","title":"Power and operating states","status":"IN PROGRESS","acceptance":"Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.","remaining":"Shared startup, charge and stress behavior implemented; complete live power-cycle and cascade acceptance matrix."},{"id":"EC-04","title":"Playable audio chain","status":"CLOSED","acceptance":"Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.","remaining":"Closed by fixed audio fault/restoration tests and real-shop repair tests in v0.63."},{"id":"EC-05","title":"IF, detector and AVC","status":"IN PROGRESS","acceptance":"455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.","remaining":"Behavior and manual controls implemented; complete combined IF/detector faults and full service alignment acceptance."},{"id":"EC-06","title":"RF and converter","status":"CLOSED","acceptance":"540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.","remaining":"Closed by full-band generator tests, converter fault/restoration tests and real-shop oscillator/loop/alignment tests in v0.63."},{"id":"EC-07","title":"Service instruments","status":"IN PROGRESS","acceptance":"Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.","remaining":"Ports, loading and injection implemented; finish instrument range/polarity and component-tester acceptance across supported faults."},{"id":"EC-08","title":"Physical service workflow","status":"OPEN","acceptance":"Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.","remaining":"Existing removal/install guards reused; complete chassis access and location review for all repairable items."},{"id":"EC-09","title":"End-to-end benchmark","status":"IN PROGRESS","acceptance":"Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.","remaining":"Fixed core matrix added; finish all-stock-fault browser repair matrix, save migrations and final cross-package review."}]});
+function pt44GameCompletionHTML(esc){
+ const c=PT44_GAME_COMPLETION_V2;
+ return `<h3>PT-44 game engineering completion · v${c.version}</h3><p><b>Closed: ${c.closed_ec_ids.join(', ')}.</b> Supported this release: ${c.supported_ec_ids.join(', ')}. The first PT-44 remains incomplete until all nine packages close.</p><p>User-approved behavioral scope: plausible service readings, consistent sound and symptoms, diagnosis and successful repair. Full circuit simulation is optional research. Original scientific V1 criteria remain in the repository as historical records; these closures use V2.</p><table class="sl-table"><thead><tr><th>Package</th><th>Status</th><th>Fixed acceptance</th><th>Remaining / evidence</th></tr></thead><tbody>${c.packages.map(x=>`<tr><td>${esc(x.id)} · ${esc(x.title)}</td><td>${esc(x.status)}</td><td>${esc(x.acceptance)}</td><td>${esc(x.remaining)}</td></tr>`).join('')}</tbody></table><p class="sl-footnote">Readings are game service approximations referenced to B−. Research benches below retain their original narrower scope and do not gate game completion.</p>`;
+}
+
+function pt44EngineeringReadinessHTML(esc){return pt44GameCompletionHTML(esc);}
+function pt44RemainingActionsHTML(esc){return pt44GameCompletionHTML(esc);}
+function pt44ScientificReadinessHTML(esc){
  const r=PT44_ENGINEERING_READINESS_V1,a=pt44EngineeringReadinessAudit(),s=r.evidence_snapshot;
  return `<h3>Engineering-complete benchmark readiness · ${esc(r.version)}</h3>
  <div class="sl-alert" style="background:${a.ok?'#e7d5a9':'#f1cdc7'}"><b>READINESS AUDIT: ${a.ok?'PASS':'FAIL'}</b> · PT-44 BENCHMARK: ${a.benchmarkReady?'READY':'NOT ENGINEERING COMPLETE'} · ${a.blockers} open source/model items · ${a.gates} acceptance gates not met${a.errors.length?' · '+a.errors.map(esc).join('; '):''}</div>
@@ -3305,7 +3366,7 @@ function pt44BindDetectorWorkbench(box){
 }
 // END PT44_DETECTOR_WORKBENCH_V56
 const PT44_REMAINING_ACTIONS_V1 = Object.freeze({"schema":"PT44_REMAINING_ACTIONS_V1","version":"0.62.0","model":"Philco PT-44","benchmark_ready":false,"scope_policy":"Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.","actions":[{"id":"EC-01","action":"Close source interpretation","status":"OPEN","evidence_dependency":"Existing drawings may suffice; clearer source/chassis evidence only if the unresolved details remain ambiguous.","acceptance":["Assign both 7C6 diode glyphs to socket pins 5/6.","Resolve the four-dot oscillator coupling symbol and complete its electrical representation.","Resolve #8 0.05/0.1 µF value conflict or retain a specifically approved variant."],"v055_review":"Manufacturer basing identifies the two separate 7C6 diodes, but does not assign the unnumbered Philco glyphs to physical pins. No source-backed assignment or oscillator/#8 resolution is claimed."},{"id":"EC-02","action":"Finish electrical component parameters","status":"IN PROGRESS","evidence_dependency":"Manufacturer data, derivation and sensitivity work are actionable; some exact parameters need measurements or parts data.","acceptance":["Validate models for all five tube types against manufacturer curves.","Establish coil/transformer L, coupling, winding resistance and output-transformer/speaker relationship.","Establish volume-control resistance/taper, field inductance and lamp/heater behavior; identify supported approximations."],"completed_in_v055":["Approximate manufacturer-derived 7C6 and 50L6 curve tables with typical-point/slope and separate graph checks.","Explicit transformer/volume/grid-current assumptions and transformer sensitivity scenario."],"remaining_after_v055":["Validate denser audio curves, grid-current and screen-scaling behavior.","Complete 7A8/7B7/35Z3 models and coil/transformer/pot/lamp/heater parameter validation."],"completed_in_v056":["Declare detector/source/volume parameters and compare both unresolved #8 values; no diode-curve or IF-winding calibration claimed."],"completed_in_v057":["Approximate Sylvania 7B7 plate/screen curve samples, typical-point and transconductance checks; declared interelectrode capacitances and winding assumptions."],"remaining_after_v057":["Correlate 7B7 screen scaling and full curve envelope, diode law and winding parameters; complete 7A8/35Z3/heater/lamp/field and existing audio parameter validation."],"completed_in_v058":["Replace generic winding DCRs with printed 31/29/45/6.8-ohm values; separate assumed core loss from copper loss.","Replace the zero-grid current-table clamp with a declared continuous positive-grid extrapolation and verify its numerical implementation."],"remaining_after_v058":["Correlate winding L/k/core loss, tube screen/positive-grid behavior, and remaining converter/rectifier/heater/lamp/field/audio parameters."],"completed_in_v060":["Add a separately identified RCA 1947 35Z3 model anchored at 20 V/200 mA and checked against seven withheld average-curve readings; retain the GE legacy reference as an explicit alternative."],"remaining_after_v060":["Complete remaining tube/winding/audio/field/heater/lamp correlation, including 35Z3 low-drop/high-current extrapolation and heater-dependent emission."],"completed_in_v062":["Add a bounded 7A8 average-characteristic evaluator at separate published bias and oscillator-drive conditions; compare withheld graph coordinates and typical points without inventing a voltage/drive surface."],"remaining_after_v062":["Extend 7A8 voltage/drive, loading and heater behavior over the supported receiver operating range, with identified approximations; correlate remaining tube/winding/audio/field/lamp parameters. The two published slices do not yet support receiver-load replacement."]},{"id":"EC-03","action":"Connect power supply to receiver loads","status":"IN PROGRESS","evidence_dependency":"Actionable with existing sources and models.","acceptance":["Replace power-bench stand-in resistors with currents drawn by the actual receiver stages.","Validate rectifier conduction and heater/lamp behavior over supported supply conditions.","Check reservoir/filtered voltages, ripple, startup and discharge under healthy and faulty receiver loads."],"completed_in_v055":["Jointly solve audio plate/screen currents with the dynamic supply; no one-way rail feed.","Exercise healthy, coupling leakage, dead output, dry filter and field-open behavior."],"remaining_after_v055":["Replace the remaining RF/IF substitute demand with actual converter/IF stage currents.","Validate rectifier, heater, lamp and field behavior across supported line conditions."],"completed_in_v057":["Actual modeled 7B7 plate/screen currents load the same dynamic supply and #13/#11 screen network as the detector and nonlinear audio in the hot DC fixture."],"remaining_after_v057":["Replace remaining converter injection, plate and screen substitutes with the active 7A8. Validate full AC/DC, startup/discharge and heater/lamp/field envelope."],"completed_in_v060":["Carry the same rectifier selection through power, nonlinear audio and coupled IF supply currents and matching SPICE exports; validate loaded supply sensitivity and report curve extrapolation during startup and measurement."],"remaining_after_v060":["Replace converter substitute loads; validate full coupled-receiver AC/DC startup/discharge and heater/lamp/field envelope."],"completed_in_v061":["Run the shared 26-state receiver on AC and DC from zero electrical storage with actual modeled 7B7 and audio currents; validate supply charging/ripple/discharge, component faults and restoration. Converter substitutes and thermal startup remain open."],"remaining_after_v061":["Replace converter substitutes with active 7A8 currents; validate supply operation with RF running and the remaining rectifier/heater/lamp/field and thermal startup/discharge behavior."]},{"id":"EC-04","action":"Complete audio chain","status":"IN PROGRESS","evidence_dependency":"Actionable with existing topology and manufacturer data; uncertain transformer/speaker values need bounded parameters.","acceptance":["Model volume control, 7C6 triode, 50L6 output stage and output transformer/speaker.","Validate gain, bias, clipping, loading and hum transfer; make output respond to component faults."],"completed_in_v055":["Implement volume, 7C6 triode, 50L6, winding DCR/magnetizing L and reflected speaker load.","Exercise gain, bias, clipping, hum, mute, coupling faults and restoration under declared parameters."],"remaining_after_v055":["Correlate uncertain transformer/speaker, volume and grid-current parameters; validate frequency response and a broader operating envelope.","Connect audio behavior and faults to the shop receiver/inventory/jobs."],"completed_in_v057":["Detector-derived signal, triode grid loading, nonlinear audio and dynamic supply now share a single 26-variable MNA system in the IF receiver fixture."],"remaining_after_v057":["Correlate audio/transformer/speaker parameters and frequency envelope; connect validated receiver behavior to shop repairs."],"completed_in_v061":["Measure electrical speaker hum and its filter-fault response with actual IF/audio/supply loading in the same circuit; no acoustic or complete audio parameter calibration."],"remaining_after_v061":["Correlate audio/transformer/speaker parameters and frequency envelope; connect validated receiver behavior to shop repairs."]},{"id":"EC-05","action":"Complete IF, detector and AVC behavior","status":"IN PROGRESS","evidence_dependency":"Actionable in parallel with remaining diode pin mapping.","acceptance":["Model 455 kHz IF transfer, bandwidth, tuned adjustments and stage loading.","Implement detector rectification, audio recovery and AVC attack/release/loading.","Verify responses to signal strength, misalignment and component faults."],"completed_in_v056":["Carrier-resolved two-diode detector/AVC subset with factory-traced #7/#8/#15/#17/#18/#19 and volume network.","AM audio recovery, AVC arrival/release, fault/restoration and selectable #8 sensitivity cases under declared diode/source assumptions."],"remaining_after_v056":["Active 7B7 stage, coupled/tuned IF windings, 455 kHz bandwidth/alignment and actual supply load.","AVC feedback to converter/IF gain; correlate diode/source parameters, grid loading and steady-state/long-duration behavior.","Join detector, nonlinear audio and supply in one loaded receiver model."],"completed_in_v057":["Active 7B7 and both coupled/doubly tuned IF transformers; detector/audio/supply mutual loading and AVC return through first IF secondary to the 7B7 grid."],"remaining_after_v057":["Correlate tube/winding/diode parameters and IF passband/alignment against supported evidence. Validate long-duration AVC attack/release/steady behavior; add converter AVC feedback when EC-06 is implemented."],"completed_in_v058":["Correct the second IF to its source-drawn single tuned secondary; independently control 12A/12B/14A.","Solve loaded complex IF response from the same MNA; validate passband sampling and repeatable 455 kHz fixture adjustment."],"remaining_after_v058":["Correlate the actual loaded passband and physical trimmer range; complete converter AVC feedback and long-duration AVC behavior."],"completed_in_v059":["Continue the same coupled IF/detector/audio/supply state through signal removal and one second of AVC release; verify timestep/ringdown convergence, both #8 alternatives, fault/restoration and independent SPICE continuation."],"remaining_after_v059":["Correlate tube/winding/diode parameters, actual loaded passband and physical trimmer range; validate long-duration AVC attack/steady regulation and converter AVC feedback."],"completed_in_v062":["Refine SPICE release initialization time resolution after reproducing timestep collapses from captured open-#17 and service-meter states; validate both states under default and KLU engines against strict JS continuation at unchanged checkpoint bounds."],"remaining_after_v062":["Correlate tube/winding/diode parameters, actual loaded passband and physical trimmer range; validate long-duration AVC attack/steady regulation and converter AVC feedback."]},{"id":"EC-06","action":"Complete RF/converter and tracking","status":"IN PROGRESS","evidence_dependency":"Actionable after the coupling symbol is resolved; additional schematics are not a general prerequisite.","acceptance":["Implement oscillator/converter behavior and tracking across 540–1600 kHz.","Validate the 455 kHz frequency relationship, tuning/alignment effects and input behavior.","Check weak/dead oscillator and aerial faults against the receiver model."],"completed_in_v062":["Add an isolated externally clocked small-signal conversion fixture; check difference/sum frequencies and AM sidebands, bias/drive sensitivity and omitted-clock response. No physical oscillator or receiver tracking is established."],"remaining_after_v062":["Resolve oscillator coupling and implement the actual oscillator, RF/aerial input and loaded converter; validate 540–1600 kHz tracking, alignment, converter AVC feedback and physical oscillator/aerial faults. Externally selected frequencies do not establish tracking."]},{"id":"EC-07","action":"Validate instruments and service conditions","status":"IN PROGRESS","evidence_dependency":"Actionable by defining repeatable model test conditions; historical conditions may require additional evidence.","acceptance":["Connect meters, signal generator and tracer to authoritative receiver nodes with defined loading.","Record supply, control settings, signal and instrument conditions for each benchmark measurement.","Use historical voltage labels only where return/loading/conditions support comparison; distinguish simulated reference conditions."],"completed_in_v055":["Connect ideal, 10 MΩ/100 pF and 1000 Ω/V (250 V range) probes to explicit audio/power nodes.","Record supply, signal, volume, timing and instrument conditions; keep factory targets separate."],"remaining_after_v055":["Extend node access/loading to RF/IF/detector/AVC and shop instruments.","Verify historical measurement conditions where factory targets are used."],"completed_in_v056":["Five detector/AVC probe ports with ideal, 10 MΩ/100 pF and 1000 Ω/V (10 V range) loading; declared signal/timing/reference conditions."],"completed_in_v057":["Loaded probes on IF grid/plate, shared screen, supply, AVC and audio nodes in one coupled circuit; explicit DC/injection/timing/range conditions."],"remaining_after_v057":["Complete RF node/instrument and shop integration, then verify historical measurement conditions."],"completed_in_v058":["Define hot-DC infinitesimal current-injection conditions and measure probe loading on the coupled IF response."],"remaining_after_v058":["Complete RF/shop generator, meter and tracer integration; validate historical service measurement conditions."],"completed_in_v059":["Record removal/ringdown/release times and AVC/IF-grid/B+ checkpoints; measure ideal, 10 MΩ/100 pF and 1000 Ω/V AVC-probe loading."],"remaining_after_v059":["Complete RF/shop generator, meter and tracer integration; validate historical service measurement conditions."],"completed_in_v060":["Record selected tube reference and nominal-heater curve bounds in submitted circuit conditions; expose out-of-range conducting steps instead of implying full-envelope calibration."],"remaining_after_v060":["Complete RF/shop instruments and historical service conditions; nominal manufacturer heater conditions do not establish receiver calibration."],"completed_in_v061":["Record idle input, nominal-hot heater assumptions, line/rectifier/probe conditions, full-rate measurement windows, numerical bounds and rectifier curve extrapolation."],"remaining_after_v061":["Complete RF/shop instruments and historical service conditions."]},{"id":"EC-08","action":"Finish serviceable chassis crosswalk","status":"IN PROGRESS","evidence_dependency":"Existing layout/photos support most work; exact hidden physical routes may need better photos or continuity.","acceptance":["Map component endpoints and instrument access to the serviceable game chassis.","Resolve physical identities that affect faults, polarity or repairs.","Keep unsupported lead dress and chassis/B− bond claims explicit."]},{"id":"EC-09","action":"Pass end-to-end repair benchmark","status":"IN PROGRESS","evidence_dependency":"Actionable after receiver stages and instruments are integrated.","acceptance":["Establish a deterministic healthy-radio baseline over supported tuning/supply conditions.","Exercise a fixed fault matrix through diagnosis, part replacement, alignment and successful checkout.","Run regressions, record limitations and close the six agreed benchmark gates only when their acceptance evidence is met."],"completed_in_v055":["Deterministic audio/power healthy baseline and fault/restoration scenarios."],"remaining_after_v055":["Integrate full receiver stages and shop repair workflow.","Run the full diagnosis/replacement/alignment/checkout matrix and close all six gates."],"completed_in_v056":["Deterministic detector/AVC fault/restoration cases; full shop acceptance remains open."],"completed_in_v057":["Deterministic integrated IF-to-speaker hot DC baseline, fault/restoration and independent SPICE scenarios."],"remaining_after_v057":["Full RF receiver baseline and the complete diagnosis/replacement/alignment/checkout shop matrix remain open."],"completed_in_v058":["Exercise misalignment/three-control adjustment/recovered audio in the coupled IF/detector/audio/supply arrival fixture."],"remaining_after_v058":["Full RF receiver baseline and complete shop diagnosis/replacement/alignment/checkout acceptance remain open."],"completed_in_v059":["Add deterministic signal-removal, #17-open, no-signal and restored electrical release cases to the coupled receiver regression matrix."],"remaining_after_v059":["Full RF receiver baseline and complete shop diagnosis/replacement/alignment/checkout acceptance remain open."]}],"next_integration_target":["EC-01/06: close oscillator coupling interpretation and implement RF/converter tracking and actual converter currents.","EC-02/05: correlate remaining IF/tube parameters; validate long-duration AVC attack/steady regulation and converter feedback. One-second release is covered by the declared v0.59 fixture.","EC-03/04: validate the complete receiver supply/audio envelope.","EC-07/08/09: serviceable chassis/shop instruments and full repair acceptance."],"milestone_completed":"v0.62 supports EC-02/05/06 with bounded manufacturer 7A8 characteristics, isolated separately driven conversion and captured-state AVC release initialization regressions. No full EC closes; receiver converter substitutes remain.","version_reporting_policy":"Every release names the EC IDs it supports, the concrete evidence added toward closure, and any EC IDs actually closed. Support is not full closure; the nine acceptance lists remain fixed.","version_support":{"version":"0.62.0","supported_ec_ids":["EC-02","EC-05","EC-06"],"closed_ec_ids":[],"evidence":["PT44_7A8_Characteristics_V1.json","PT44_7A8_Validation_V1.json","PT44_7A8_Spice_Validation_V1.json","PT44_AVC_Release_Solver_Fixture_V1.json","PT44_AVC_Release_Solver_Validation_V1.json"],"summary":"7A8 source-bound bias/drive characteristics, separate excitation and small-signal conversion with explicit unsupported boundaries. Release initialization robustness is regression-tested from two captured failing states under both matrix engines.","limitations":"No receiver converter-load replacement, self-oscillation, oscillator coupling resolution, tracking, RF input network or converter AVC feedback. Reference slice validation is not full EC closure.","evidence_by_ec":{"EC-02":["Add a bounded 7A8 average-characteristic evaluator at separate published bias and oscillator-drive conditions; compare withheld graph coordinates and typical points without inventing a voltage/drive surface."],"EC-06":["Add an isolated externally clocked small-signal conversion fixture; check difference/sum frequencies and AM sidebands, bias/drive sensitivity and omitted-clock response. No physical oscillator or receiver tracking is established."],"EC-05":["Refine SPICE release initialization time resolution after reproducing timestep collapses from captured open-#17 and service-meter states; validate both states under default and KLU engines against strict JS continuation at unchanged checkpoint bounds."]}}});
-function pt44RemainingActionsHTML(esc){
+function pt44HistoricalRemainingActionsHTML(esc){
  const r=PT44_REMAINING_ACTIONS_V1,support=r.version_support,latest=a=>{const keys=Object.keys(a).filter(k=>/^remaining_after_v\d+$/.test(k)).sort((x,y)=>Number(y.split('_v')[1])-Number(x.split('_v')[1]));return keys.length?a[keys[0]]:a.acceptance;};
  const contribution=support?`<p><b>This version supports:</b> ${support.supported_ec_ids.map(esc).join(', ')}. <b>Full EC items closed:</b> ${support.closed_ec_ids.length?support.closed_ec_ids.map(esc).join(', '):'none'}.</p><table class="sl-table"><thead><tr><th>EC</th><th>Evidence added toward closure</th></tr></thead><tbody>${Object.entries(support.evidence_by_ec||{}).map(([id,items])=>`<tr><td>${esc(id)}</td><td>${items.map(esc).join('<br>')}</td></tr>`).join('')}</tbody></table>`:'';
  return `<h3>Remaining engineering work · ${esc(r.version)}</h3><p>All six receiver benchmark gates remain unmet. Completed subset tests do not close receiver acceptance.</p>${contribution}<table class="sl-table"><thead><tr><th>Outcome</th><th>Status</th><th>Remaining acceptance</th></tr></thead><tbody>${r.actions.map(a=>`<tr><td>${esc(a.id)} · ${esc(a.action)}</td><td>${esc(a.status)}</td><td>${latest(a).map(esc).join('<br>')}</td></tr>`).join('')}</tbody></table>`;
@@ -3722,7 +3783,7 @@ function renderFactoryLedger(box){
   const candidates = Object.fromEntries(Object.entries(PT44_FACTORY_SUBGRAPH.factory_part_register).map(([n,p])=>[n,p.game_slot||'—']));
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
-   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.62.0</div>
+   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.63.0</div>
    <h2>Factory circuit transcription</h2>
    <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. The current 3D and simplified receiver solver remain provisional.</p>
    <div class="sl-kpi"><div><strong>${a.parts}/33</strong><span>Factory part records</span></div><div><strong>${a.sourceNets}</strong><span>Partial traced networks</span></div><div><strong>${a.tracedTerminals}</strong><span>Terminal references</span></div><div><strong>${a.unknownConnections.length}</strong><span>Open Phase-1 blockers</span></div></div>
@@ -3842,12 +3903,13 @@ function hearText(){
   if (R.warm<0.5 && R.power) return 'Heaters glowing, warming up…';
   const bits=[];
   const r=job.radio;
-  if (g.loud>0.04 && g.station) bits.push(`${g.station.call} ${({band:'brass band concert',talk:'morning talk program',waltz:'waltz orchestra',news:'news bulletins'})[g.station.prog]}${g.loud<0.25?', faint':g.loud>0.9?', loud':''}`);
+  if (g.generatorTone>0.01) bits.push('1 kHz service tone');
+  else if (g.loud>0.04 && g.station) bits.push(`${g.station.call} ${({band:'brass band concert',talk:'morning talk program',waltz:'waltz orchestra',news:'news bulletins'})[g.station.prog]}${g.loud<0.25?', faint':g.loud>0.9?', loud':''}`);
   else if (g.loud>0.04) bits.push('hiss between stations');
   else if (r.vol<0.05) bits.push('volume turned down');
   else bits.push('no program');
   if (g.dist>0.4) bits.push('badly distorted'); else if (g.dist>0.12) bits.push('fuzzy, distorted');
-  if (g.hum>0.15) bits.push('loud hum'); else if (g.hum>0.06) bits.push('noticeable hum'); else if (g.hum>0.03) bits.push('faint hum');
+  if (g.hum>0.15) bits.push('loud hum'); else if (g.hum>0.05) bits.push('noticeable hum'); else if (g.hum>0.03) bits.push('faint hum');
   if (g.stat>0.15) bits.push('static');
   if (g.crackle>0.3) bits.push('crackles when the volume moves');
   return bits.join(' · ');
@@ -3896,7 +3958,7 @@ function part(id, inner){ const sel=R.sel&&R.sel.slot===id; const job=benchJob()
 
 // ---------- schematic ----------
 const TP = {B1:[230,470],B2:[400,470],P5:[800,185],K5:[780,312],G5:[700,265],P6:[580,175],G6:[515,265],PCV:[200,175],PIF:[370,175],KIF:[370,305],OSC:[120,250]};
-const TP_NAME = {B1:'B+1 (rectifier cathode)',B2:'B+2 (filtered)',P5:'V4 50L6GT plate',K5:'V4 50L6GT cathode',G5:'V4 50L6GT grid',P6:'V3 7C6 plate',G6:'V3 7C6 grid',PCV:'V1 7A8 plate',PIF:'V2 7B7 plate',KIF:'V2 7B7 cathode',OSC:'V1 7A8 osc. grid'};
+const TP_NAME = {AVC:'AVC service port',SCREEN:'Screen supply service port',B1:'B+1 (rectifier cathode)',B2:'B+2 (filtered)',P5:'V4 50L6GT plate',K5:'V4 50L6GT cathode',G5:'V4 50L6GT grid',P6:'V3 7C6 plate',G6:'V3 7C6 grid',PCV:'V1 7A8 plate',PIF:'V2 7B7 plate',KIF:'V2 7B7 cathode',OSC:'V1 7A8 osc. grid'};
 function tubeSym(id,cx,cy,type){
   const r=36; let s=`<circle cx="${cx}" cy="${cy}" r="${r}" class="w tubeenv"/>`;
   s+=`<path class="w" d="M${cx-14},${cy-18} h28 M${cx},${cy-18} v-18"/>`; // plate
@@ -4186,13 +4248,37 @@ function dataHTML(){
 }
 
 // ---------- instruments ----------
+function gameServiceHTML(){
+ const j=benchJob();if(!j)return '<p>Select a repair ticket.</p>';const r=j.radio,g=R.generator,a=r.alignment||{};
+ return `<div class="stack"><b>PT-44 service setup</b><p class="note">Tune and peak by sound, tracer or AVC. Generator is 1 kHz modulated. IF injection enters after the converter; audio injection enters at the volume control. Readings use B−. Service ports describe behavior; they do not assert unresolved socket wiring.</p>
+ <label><input id="gameGenOn" type="checkbox" ${g.enabled?'checked':''}> Signal generator on</label>
+ <label>Injection <select id="gameGenPoint">${[['aerial','Aerial input'],['if','First IF input'],['audio','Volume input']].map(([k,n])=>`<option value="${k}" ${g.point===k?'selected':''}>${n}</option>`).join('')}</select></label>
+ <label>Carrier (kHz) <input id="gameGenKhz" type="number" min="0.1" max="1600" step="0.1" value="${g.khz}"></label>
+ <label>Signal level (mV, relative service scale) <input id="gameGenMv" type="number" min="0" max="50" step="0.1" value="${g.mv}"></label>
+ ${['12A','12B','14A','4A','5'].map(k=>`<label>${k} ${['12A','12B','14A'].includes(k)?'IF center (kHz)':'trim offset'}<input data-game-align="${k}" type="range" min="${k.includes('A')&&k!=='4A'||k==='12B'?440:-30}" max="${['12A','12B','14A'].includes(k)?470:30}" step="0.5" value="${a[k]??(['12A','12B','14A'].includes(k)?455:0)}"><output>${a[k]??(['12A','12B','14A'].includes(k)?455:0)}</output></label>`).join('')}
+ <label>Supply (V) <input id="gameLineV" type="number" min="90" max="130" value="${r.lineV??115}"></label>
+ <label>Supply type <select id="gameLineMode"><option ${r.lineMode!=='DC'?'selected':''}>AC</option><option ${r.lineMode==='DC'?'selected':''}>DC</option></select></label>
+ <button class="btn" id="gameLoop">${r.loopConnected===false?'Reconnect':'Disconnect'} aerial loop</button><p class="note">Power off and discharge before changing the loop connection. Alignment and supply settings are saved with this radio. Checkout disables the generator.</p></div>`;
+}
+function bindGameService(){
+ const r=benchJob().radio,g=R.generator,el=$('#toolBody');
+ const bind=(id,fn)=>el.querySelector(id).onchange=e=>{fn(e.target);save();};
+ bind('#gameGenOn',x=>g.enabled=x.checked);bind('#gameGenPoint',x=>g.point=x.value);
+ bind('#gameGenKhz',x=>{g.khz=clamp(Number(x.value)||455,.1,1600);x.value=g.khz;});
+ bind('#gameGenMv',x=>{g.mv=clamp(Number(x.value)||0,0,50);x.value=g.mv;});
+ bind('#gameLineV',x=>{r.lineV=clamp(Number(x.value)||115,90,130);x.value=r.lineV;});bind('#gameLineMode',x=>r.lineMode=x.value);
+ el.querySelectorAll('[data-game-align]').forEach(x=>x.oninput=()=>{(r.alignment||=( {}))[x.dataset.gameAlign]=Number(x.value);x.nextElementSibling.value=x.value;save();});
+ el.querySelector('#gameLoop').onclick=()=>{if(!canWork())return;r.loopConnected=r.loopConnected===false;benchLog(r.loopConnected?'Aerial loop reconnected.':'Aerial loop disconnected.');save();renderTools();};
+}
+
 function renderTools(){
   if (B3.ok) B3.probe(R.tool==='meter'&&R.mode==='V'?R.probe:null);
-  const tabs=[['meter','Meter',1],['tube','Tube tester',1],['cap','Cap checker',S.tools.capchk],['trace','Signal tracer',S.tools.tracer]];
+  const tabs=[['meter','Meter',1],['service','Generator / alignment',1],['tube','Tube tester',1],['cap','Cap checker',S.tools.capchk],['trace','Signal tracer',S.tools.tracer]];
   $('#toolTabs').innerHTML = tabs.map(([k,n,own])=>`<button class="tab ${R.tool===k?'on':''} ${own?'':'locked'}" data-t="${k}">${n}${own?'':' 🔒'}</button>`).join('');
   $('#toolTabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ R.tool=b.dataset.t; renderTools(); renderViews(); });
   const el=$('#toolBody');
   if (R.tool==='meter') el.innerHTML=meterHTML(), bindMeter();
+  else if (R.tool==='service') el.innerHTML=gameServiceHTML(), bindGameService();
   else if (R.tool==='tube') el.innerHTML=tubeHTML(), bindTube();
   else if (R.tool==='cap') el.innerHTML = S.tools.capchk? capHTML() : lockedHTML('capchk');
   else el.innerHTML = S.tools.tracer? tracerHTML() : lockedHTML('tracer');
@@ -4207,17 +4293,19 @@ function meterHTML(){
   const orng = [1,100,10000].concat(vt?[1e6]:[]);
   const cur = R.mode==='V' ? (vt?R.range.vtvm:R.range.vom) : (vt?R.range.ohvtvm:R.range.ohvom);
   const target = R.mode==='V' ? (R.probe?TP_NAME[R.probe]:'not connected — click a ● test point on the schematic') :
-     (!R.ohmTarget?'not connected — click a test point, or “Ohms across” on a part': R.ohmTarget.node? TP_NAME[R.ohmTarget.node]+' to chassis' : R.ohmTarget.slot? 'across '+R.ohmTarget.slot : skuName(R.ohmTarget.loose.sku)+' (out of circuit)');
+     (!R.ohmTarget?'not connected — click a test point, or “Ohms across” on a part': R.ohmTarget.node? TP_NAME[R.ohmTarget.node]+' to B−' : R.ohmTarget.slot? 'across '+R.ohmTarget.slot : skuName(R.ohmTarget.loose.sku)+' (out of circuit)');
   return `<div class="stack">
    <div class="row"><div class="seg"><button class="${!vt?'on':''}" data-inst="vom">VOM 1,000 Ω/V</button><button class="${vt?'on':''}" data-inst="vtvm" ${S.tools.vtvm?'':'disabled title="Buy a VTVM in the catalog"'}>VTVM${S.tools.vtvm?'':' 🔒'}</button></div></div>
    <div class="row"><div class="seg"><button class="${R.mode==='V'?'on':''}" data-mode="V">DC volts</button><button class="${R.mode==='R'?'on':''}" data-mode="R">Ohms</button></div>
      <select id="rng" aria-label="Range">${(R.mode==='V'?vr:orng).map(x=>`<option value="${x}" ${x===cur?'selected':''}>${R.mode==='V'?x+' V':'R×'+(x>=1e6?'1M':x>=1000?x/1000+'k':x)}</option>`).join('')}</select>
      ${R.mode==='V'?`<button class="btn sm" id="pol">Polarity ${R.pol>0?'+':'−'}</button>`:''}</div>
+   ${R.mode==='V'?`<label>DC service port <select id="gameProbe"><option value="">Select red lead</option>${Object.keys(TP_NAME).map(n=>`<option value="${n}" ${R.probe===n?'selected':''}>${TP_NAME[n]}</option>`).join('')}</select></label>`:''}
    <div class="meter"><svg viewBox="0 0 300 150" id="meterFace" role="img" aria-label="Meter face"></svg><div class="reading" id="meterRead">—</div></div>
-   <div class="note">Red lead: ${esc(target)}. Black lead on chassis.</div>
+   <div class="note">Red lead: ${esc(target)}. Black lead on B− return; chassis is separate.</div>
   </div>`;
 }
 function bindMeter(){ const el=$('#toolBody');
+  const gp=el.querySelector('#gameProbe');if(gp)gp.onchange=()=>{R.probe=gp.value||null;renderTools();};
   el.querySelectorAll('[data-inst]').forEach(b=>b.onclick=()=>{ if(b.disabled) return; R.inst=b.dataset.inst; renderTools(); });
   el.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{ R.mode=b.dataset.mode; renderTools(); renderViews(); });
   $('#rng').onchange=e=>{ const v=+e.target.value; const vt=R.inst==='vtvm'; if(R.mode==='V') R.range[vt?'vtvm':'vom']=v; else R.range[vt?'ohvtvm':'ohvom']=v; renderMeterLive(); };
@@ -4229,7 +4317,7 @@ function meterReading(){
     const fs = vt?R.range.vtvm:R.range.vom;
     if (!R.probe) return {frac:0, text:'Leads not connected'};
     let v=0;
-    if (job && R.dc && (R.power||R.warm>0)) v = R.dc.V[NI[R.probe]];
+    if (job && R.dc && (R.power||R.warm>0)) v = R.dc.ports?.[R.probe]??R.dc.V[NI[R.probe]];
     else if (job) v = chargeV(R.probe);
     v*=R.pol;
     const frac=v/fs;
@@ -4283,7 +4371,8 @@ function tubeHTML(){
   S.salvage.filter(x=>x.kind==='TUBE').forEach(x=>opts.push([`salv:${x.pid}`, `${x.tube} from salvage`]));
   const selv = R.tubeTarget ? (R.tubeTarget.slot?'slot:'+R.tubeTarget.slot:(job&&job.tray.includes(R.tubeTarget.loose)?'loose:':'salv:')+R.tubeTarget.loose.pid) : '';
   return `<div class="stack"><div class="row"><select id="tubeSel"><option value="">— choose a tube —</option>${opts.map(([v,n])=>`<option value="${v}" ${v===selv?'selected':''}>${esc(n)}</option>`).join('')}</select></div>
-  <div class="meter"><svg viewBox="0 0 300 150" id="tubeFace" role="img" aria-label="Tube tester"></svg><div class="reading" id="tubeRead">Insert a tube</div></div>
+  ${R.mode==='V'?`<label>DC service port <select id="gameProbe"><option value="">Select red lead</option>${Object.keys(TP_NAME).map(n=>`<option value="${n}" ${R.probe===n?'selected':''}>${TP_NAME[n]}</option>`).join('')}</select></label>`:''}
+   <div class="meter"><svg viewBox="0 0 300 150" id="tubeFace" role="img" aria-label="Tube tester"></svg><div class="reading" id="tubeRead">Insert a tube</div></div>
   <div class="note">Emission test at rated heater voltage. The neon lamp lights for heater-to-cathode leakage, interelectrode shorts, or gas.</div></div>`;
 }
 function bindTube(){ $('#tubeSel').onchange=e=>{ const [k,v]=e.target.value.split(':'); const job=benchJob();
@@ -4374,6 +4463,7 @@ function audioInit(){
   const ns=ctx.createBufferSource(); ns.buffer=nb; ns.loop=true; const nbp=ctx.createBiquadFilter(); nbp.type='bandpass'; nbp.frequency.value=2200; nbp.Q.value=0.6; A.stat=ctx.createGain(); A.stat.gain.value=0; ns.connect(nbp); nbp.connect(A.stat); A.stat.connect(A.pre);
   A.crk=ctx.createGain(); A.crk.gain.value=0; ns.connect(A.crk); A.crk.connect(A.pre); ns.start();
   const wh=ctx.createOscillator(); wh.type='sine'; A.whf=wh.frequency; A.wh=ctx.createGain(); A.wh.gain.value=0; wh.connect(A.wh); A.wh.connect(A.pre); wh.start();
+  const tone=ctx.createOscillator(); tone.frequency.value=1000; A.tone=ctx.createGain(); A.tone.gain.value=0; tone.connect(A.tone); A.tone.connect(A.pre); tone.start();
   R.audio=A;
 }
 function audioUpdate(){
@@ -4385,8 +4475,9 @@ function audioUpdate(){
   const r=job.radio;
   let loud=g.loud, hum=g.hum, stat=g.stat, dist=g.dist;
   if (R.tracePt && S.tools.tracer){ const lv=g.levels[R.tracePt]||0; loud=lv*1.1; hum = ['a1','g5','spk'].includes(R.tracePt)?g.hum:g.hum*0.1; stat = g.stat*(R.tracePt==='conv'||R.tracePt==='if'?2:1); dist = R.tracePt==='spk'||R.tracePt==='g5'?g.dist:g.dist*0.3; }
-  const xs = STATIONS.map(st=>st.pwr*Math.exp(-Math.pow((r.dial-st.kc)/9,2))); const mx=Math.max(...xs,1e-4);
+  const xs = g.stationWeights || STATIONS.map(st=>st.pwr*Math.exp(-Math.pow((r.dial-st.kc)/9,2))); const mx=Math.max(...xs,1e-4);
   STATIONS.forEach((st,i)=>set(A.st[st.call].gain, g.station||R.tracePt ? 0.55*loud*(xs[i]/mx)*Math.min(1,mx*3) : 0));
+  set(A.tone.gain,g.generatorActive?Math.min(.6,loud*.55):0);
   set(A.hum.gain, Math.min(0.7,hum*1.6));
   set(A.stat.gain, Math.min(0.5,stat*0.9));
   // heterodyne squeal just off a station's carrier
@@ -4413,9 +4504,9 @@ function showCheckout(job, pass, results, v){
 }
 function showManual(){
   modal(`<div class="ph">Service manual<span class="sp"></span><button class="btn sm" id="mX">Close</button></div><div class="pb manual">
-  <p>You run a one-bench radio shop in 1955. Every set on the counter is the same five-tube AC-DC superhet circuit with its own failed parts. The current solver is a simplified five-stage training model; factory pinouts and the accurate Philco circuitry are being integrated. The 1941 factory-data tab contains verified historic references.</p>
+  <p>You run a one-bench radio shop in 1955. Every set on the counter is the same five-tube AC-DC superhet circuit with its own failed parts. The radio uses a shared behavioral service model: faults, controls, sound and meter readings follow the same cause and effect. Physical routing that is not documented remains illustrative. The 1941 factory-data tab contains verified historic references.</p>
   <h3>The job</h3><p>Put a repair order on the bench. Switch it on and listen. Diagnose with the meter and tube tester, unsolder bad parts, install replacements, then run the 10-minute checkout. A passing set goes home with the customer and you collect labor plus parts.</p>
-  <h3>Measuring</h3><p>In DC volts, click a ● test point on the schematic to put the red lead there. Compare against the Service data tab. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate may read low in this provisional model. A VTVM reads them correctly.</p>
+  <h3>Measuring</h3><p>In DC volts, click a ● test point on the schematic to put the red lead there. Compare against the Service data tab. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate reads lower while the VOM is attached. A VTVM reads them correctly.</p>
   <p>Ohms only works with the set off and the filter caps discharged. In-circuit readings include every parallel path. Pull a part to measure it alone.</p>
   <h3>Safety and damage</h3><p>The set has no bleeder resistor, so B+ stays charged after switch-off. Discharge it before you unsolder. Parts that run past their ratings get hot and fail, during your testing or during checkout. A leaky coupling capacitor will cook the output tube and its cathode resistor again if you only replace the burned resistor. A quarter-watt resistor where a 2-watt one belongs will not last.</p>
   <h3>Substitutions</h3><p>Any resistor fits any resistor position, and any capacitor fits any capacitor position. The circuit decides whether your choice works. Watch voltage ratings on capacitors and wattage on resistors.</p>

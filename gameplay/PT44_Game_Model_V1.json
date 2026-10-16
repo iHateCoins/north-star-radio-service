@@ -1,0 +1,69 @@
+{
+  "schema": "PT44_GAME_BEHAVIOR_V1",
+  "version": "0.63.0",
+  "nodes": [
+    "B1",
+    "B2",
+    "P5",
+    "K5",
+    "G5",
+    "P6",
+    "G6",
+    "PCV",
+    "PIF",
+    "KIF",
+    "OSC"
+  ],
+  "stations": [
+    {
+      "kc": 610,
+      "call": "KPLN",
+      "prog": "band",
+      "pwr": 1
+    },
+    {
+      "kc": 880,
+      "call": "WEBR",
+      "prog": "talk",
+      "pwr": 0.85
+    },
+    {
+      "kc": 1150,
+      "call": "KDOX",
+      "prog": "waltz",
+      "pwr": 0.55
+    },
+    {
+      "kc": 1340,
+      "call": "WTCN",
+      "prog": "news",
+      "pwr": 0.32
+    }
+  ],
+  "scope": "Deterministic game cause/effect model. Stage currents, voltage targets, gain, bandwidth, warmup, AVC timing and symptoms are bounded service approximations. No carrier stepping, full netlist, curve fitting or SPICE parity is required for gameplay.",
+  "supported_supply": {
+    "line_v": [
+      90,
+      130
+    ],
+    "modes": [
+      "AC",
+      "DC"
+    ]
+  },
+  "signal_controls": {
+    "dial_khz": [
+      540,
+      1600
+    ],
+    "if_khz": 455,
+    "alignment": [
+      "12A",
+      "12B",
+      "14A",
+      "4A",
+      "5"
+    ]
+  },
+  "reference": "Game measurement ports are service abstractions referenced to B-minus. They do not certify physical socket routing or undocumented diode assignments."
+}

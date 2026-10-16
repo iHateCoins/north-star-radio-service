@@ -1,0 +1,96 @@
+{
+  "schema": "PT44_GAME_COMPLETION_V2",
+  "version": "0.63.0",
+  "approved_scope_change": "User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.",
+  "historical_standard": "engineering/PT44_EC_Acceptance_V1.json",
+  "policy": "Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.",
+  "fidelity": "Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.",
+  "optional_research": [
+    "Full receiver SPICE parity",
+    "Exhaustive tube curve validation",
+    "Carrier stepping",
+    "Exact undocumented socket wiring, lead dress and winding parameters"
+  ],
+  "supported_ec_ids": [
+    "EC-03",
+    "EC-04",
+    "EC-05",
+    "EC-06",
+    "EC-07",
+    "EC-09"
+  ],
+  "closed_ec_ids": [
+    "EC-04",
+    "EC-06"
+  ],
+  "evidence": [
+    "tests/test_gameplay_v63.js",
+    "tests/test_gameplay_browser_v63.js",
+    ".github/workflows/pt44-gameplay.yml"
+  ],
+  "packages": [
+    {
+      "id": "EC-01",
+      "title": "Source and presentation",
+      "status": "OPEN",
+      "acceptance": "Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.",
+      "remaining": "Source/diagram review remains; game ports explicitly avoid unresolved pin claims."
+    },
+    {
+      "id": "EC-02",
+      "title": "Component behavior",
+      "status": "IN PROGRESS",
+      "acceptance": "All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.",
+      "remaining": "Audit every catalog class and wrong-value combination; replace temporary visual field-coil representation."
+    },
+    {
+      "id": "EC-03",
+      "title": "Power and operating states",
+      "status": "IN PROGRESS",
+      "acceptance": "Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.",
+      "remaining": "Shared startup, charge and stress behavior implemented; complete live power-cycle and cascade acceptance matrix."
+    },
+    {
+      "id": "EC-04",
+      "title": "Playable audio chain",
+      "status": "CLOSED",
+      "acceptance": "Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.",
+      "remaining": "Closed by fixed audio fault/restoration tests and real-shop repair tests in v0.63."
+    },
+    {
+      "id": "EC-05",
+      "title": "IF, detector and AVC",
+      "status": "IN PROGRESS",
+      "acceptance": "455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.",
+      "remaining": "Behavior and manual controls implemented; complete combined IF/detector faults and full service alignment acceptance."
+    },
+    {
+      "id": "EC-06",
+      "title": "RF and converter",
+      "status": "CLOSED",
+      "acceptance": "540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.",
+      "remaining": "Closed by full-band generator tests, converter fault/restoration tests and real-shop oscillator/loop/alignment tests in v0.63."
+    },
+    {
+      "id": "EC-07",
+      "title": "Service instruments",
+      "status": "IN PROGRESS",
+      "acceptance": "Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.",
+      "remaining": "Ports, loading and injection implemented; finish instrument range/polarity and component-tester acceptance across supported faults."
+    },
+    {
+      "id": "EC-08",
+      "title": "Physical service workflow",
+      "status": "OPEN",
+      "acceptance": "Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.",
+      "remaining": "Existing removal/install guards reused; complete chassis access and location review for all repairable items."
+    },
+    {
+      "id": "EC-09",
+      "title": "End-to-end benchmark",
+      "status": "IN PROGRESS",
+      "acceptance": "Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.",
+      "remaining": "Fixed core matrix added; finish all-stock-fault browser repair matrix, save migrations and final cross-package review."
+    }
+  ]
+}
