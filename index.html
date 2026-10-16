@@ -1,4 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+.tutorial-guide{border:1px solid #b99a53;background:#263126;padding:12px 16px;margin:12px 0;border-radius:5px}.tutorial-guide p{margin:8px 0;line-height:1.5}.tutorial-guide .row{flex-wrap:wrap}.tutorial-target{outline:3px solid #e2b745;outline-offset:3px}.tutorial-guide button{white-space:normal}
 .pt44-trace{background:#18251f;border-bottom:1px solid #4b5e4e;padding:9px 12px}
 .trace-title{color:#dcb66d;font:700 12px "Courier Prime",monospace;letter-spacing:.08em;margin-bottom:5px}
 .model-tag{font-size:10px;letter-spacing:0;color:#98aaa1;font-weight:400;margin-left:6px}
@@ -87,7 +88,7 @@
 .ui-details .log{border-top:none;padding:0}.upgrade-card{border:1px solid var(--line);border-radius:4px;padding:12px}.upgrade-card h3{font-size:15px;margin:0 0 5px}.upgrade-card .row{justify-content:space-between}.ui-nested{padding:10px 0}
 @media(max-width:800px){body.no-job .counter{order:-1}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.65.0</title><meta name="nsrs-build" content="v0.65.0">
+<title>North Star Radio Service — PT-44 v0.66.0</title><meta name="nsrs-build" content="v0.66.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -252,6 +253,7 @@ table.sd th{color:var(--dim);font-weight:400}
     </div>
     <div class="row"><button class="btn" id="bManual">Service manual</button><button class="btn" id="bDay">Close shop for the day</button></div>
   </header>
+  <aside id="firstRepairGuide" class="tutorial-guide" aria-label="First repair tutorial" hidden></aside>
   <div class="grid">
     <section class="col counter">
       <div class="panel"><h2>Service counter</h2><div class="pb stack" id="tickets"></div></div>
@@ -267,7 +269,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.65.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.66.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -1536,6 +1538,72 @@ const R = {        // runtime (not saved)
   benchLog:[], smelled:{}, catTab:'R'
 };
 
+// BEGIN PT44_TUTORIAL_V66
+// First-job coaching uses normal game actions, prices, instruments and checkout.
+function setupFirstRepair(job){
+  job.radio=newRadio();
+  for(const p of Object.values(job.radio.slots)){
+    const c=CATALOG[p.sku];p.used=true;
+    if(c.ohms)p.ohms=c.ohms;
+    if(p.kind==='TUBE')p.emis=1;
+    if(p.kind==='C'){p.uF=c.uF;p.leak0=p.ctype==='electrolytic'?4:1000;}
+  }
+  job.radio.slots.V2.heaterOk=false;job.faults=['heater'];
+  job.complaint='Completely dead. No dial light, no tube glow, and no sound.';
+  job.tutorial='open-heater-v1';
+  // This first repair teaches the normal purchase flow; other starter stock is retained.
+  delete S.inv.T7B7;
+  S.tutorial={jobId:job.id,active:false,step:0,evidence:{},completed:false};
+}
+function tutorialJob(){const t=S?.tutorial;return t&&S.jobs.find(j=>j.id===t.jobId&&j.tutorial==='open-heater-v1');}
+function tutorialEvent(kind,value){
+  const t=S?.tutorial,j=tutorialJob();if(!t||!j||S.bench!==j.id||t.completed)return;
+  const e=t.evidence;let key=null;
+  if(kind==='symptom'&&R.power&&R.sig&&!R.sig.lit)key='observed';
+  if(kind==='off'&&e.observed&&!R.power)key='switchedOff';
+  if(kind==='tube'&&value&&value.from&&value.heaterOk===false)key='diagnosed';
+  if(kind==='buy'&&value==='T7B7')key='bought';
+  if(kind==='install'&&value==='V2'&&j.radio.slots.V2?.sku==='T7B7'&&j.radio.slots.V2.heaterOk)key='installed';
+  if(kind==='listening'&&e.installed&&R.power&&R.warm>=.95&&R.sig?.station&&R.sig.loud>=.42)key='listened';
+  if(kind==='checkout'&&value===true)key='checkout';
+  if(key&&!e[key]){e[key]=true;save();}
+}
+const FIRST_REPAIR_STEPS=[
+  {title:'Read the repair order',text:'Select the first repair order at the Service counter. Note the complaint, parts allowance and due date. A symptom tells you where to start; it does not identify the failed part.',target:'#tickets',ready:()=>S.bench===S.tutorial.jobId},
+  {title:'Confirm the symptoms',text:'Switch the radio ON with the round power button. Watch the dial and tube glow, and read the Speaker line (you can play muted). This set stays completely dark and silent. Its tube heaters form a series string: one open heater stops every tube from warming.',target:'#bPow',ready:()=>S.tutorial.evidence.observed},
+  {title:'Make the set safe',text:'Switch OFF before pulling parts. If Discharge B+ appears, use it before working. This dead heater string normally leaves no B+ charge, so that button may not appear. On a working radio the filter capacitors can remain charged after switch-off.',target:'#bPow',ready:()=>S.tutorial.evidence.switchedOff&&!R.power&&!charged()},
+  {title:'Remove and test a tube',text:'Open Tube tester and choose an installed tube. The tester pulls it onto the bench tray before testing. Look for “heater open — no emission.” A good tube should be reinstalled at its original location before trying another. An open heater explains why the whole series string went dark.',target:'#tubeSel',ready:()=>S.tutorial.evidence.diagnosed},
+  {title:'Buy the matching replacement',text:'The failed tube is a 7B7. Open Catalog → Tubes & parts and find 7B7. Today buys one immediately for $2.13; Order costs $1.70 but arrives after you close for the day (rent is charged). Buy one, then wait for it to be in Parts. Match the tube type, not just the socket.',target:'[data-rush="T7B7"]',ready:()=>S.tutorial.evidence.bought&&S.inv.T7B7>0},
+  {title:'Install the replacement',text:'Open Inspect and select V2 · 7B7 IF amplifier. The old tube was removed for its test, leaving an empty socket. Choose 7B7 under Install from stock and press Install. Refit any other good tubes you tested from the tray. For soldered components, use Unsolder & remove first, then install the correctly rated part.',target:'#gamePartAccess',ready:()=>S.tutorial.evidence.installed&&!hasEmpty(tutorialJob().radio)},
+  {title:'Listen to the repaired radio',text:'Switch ON, tune to 880 kc and set volume near 0.6. Allow about ten seconds for warm-up. The Speaker line should now name a station, and the tubes should glow. This before/after check tests your diagnosis; swapping a part alone is not proof of a repair.',target:'#dial',ready:()=>S.tutorial.evidence.listened},
+  {title:'Run the service checkout',text:'Press Run checkout, then Start checkout. It checks three stations, hum, distortion, component ratings and a ten-minute run. Every row must pass. If anything fails, keep working from that evidence; checkout does not repair the set for you.',target:'#bChk',ready:()=>S.tutorial.evidence.checkout},
+  {title:'Return the set and collect',text:'The checkout passed. In its report, choose Return set & collect to finish the job and receive labor plus parts. If you closed the report, run checkout again to reopen it. The old failed tube remains on the tray until the job closes; salvage is untested, so do not treat it as a good spare.',target:'#bChk',ready:()=>false}
+];
+function startFirstRepair(){const t=S.tutorial;if(!tutorialJob()||t.completed)return;t.active=true;save();closeModal();renderAll();$('#firstRepairGuide')?.scrollIntoView({block:'nearest'});}
+function showTutorialControl(){
+  const t=S.tutorial,s=FIRST_REPAIR_STEPS[t.step];
+  if(t.step===3){R.tool='tube';renderTools();}
+  if(t.step===4){R.side='cat';R.catTab='T';renderSide();}
+  if(t.step===5){R.side='insp';R.sel={slot:'V2'};renderSide();renderViews();}
+  if(t.step===6){R.view=B3.ok?'bench3d':'top';renderBench();}
+  const el=$(s.target);if(el){el.scrollIntoView({block:'center',behavior:'smooth'});el.focus({preventScroll:true});el.classList.add('tutorial-target');}
+}
+function renderTutorial(){
+  const host=$('#firstRepairGuide');if(!host)return;
+  const t=S?.tutorial,j=tutorialJob();
+  if(!t?.active||(!j&&!t.completed)){host.hidden=true;host.dataset.state='';document.querySelectorAll('.tutorial-target').forEach(el=>el.classList.remove('tutorial-target'));return;}
+  host.hidden=false;
+  if(t.completed){if(host.dataset.state==='done')return;host.dataset.state='done';host.innerHTML='<div class="stack"><b>First repair complete</b><span>You confirmed the symptom, tested the cause, bought and fitted a replacement, and proved the repair. On future jobs: observe → measure → repair → test.</span><button class="btn sm" id="tutorialHide">Finish tutorial</button></div>';$('#tutorialHide').onclick=()=>{t.active=false;save();renderTutorial();};return;}
+  const s=FIRST_REPAIR_STEPS[t.step],onBench=S.bench===j.id,ready=!!(onBench&&s.ready());
+  const state=[t.step,ready,onBench,t.hint,!!S.orders.find(o=>o.sku==='T7B7')].join(':');if(host.dataset.state===state)return;host.dataset.state=state;document.querySelectorAll('.tutorial-target').forEach(el=>el.classList.remove('tutorial-target'));
+  host.innerHTML=`<div class="row"><b id="tutorialHeading" aria-live="polite">First repair · ${t.step+1}/${FIRST_REPAIR_STEPS.length}: ${s.title}</b><span class="sp"></span><button class="btn sm" id="tutorialPause">Pause guide</button></div><p>${onBench||t.step===0?s.text:'Select the tutorial repair order at the Service counter to continue. Your progress is saved.'}</p>${t.step===4&&S.orders.some(o=>o.sku==='T7B7')?'<p class="note">Your replacement is on order. Close for the day to receive it, then select this repair order again.</p>':''}${t.step===3?`<div class="note">${t.hint?'Hint: test V2, the 7B7 IF amplifier. Confirm its heater result before buying.':'Try the tester rather than replacing every tube.'}</div>`:''}<div class="row"><button class="btn sm" id="tutorialLocate">Show me the control</button>${t.step===3&&!t.hint?'<button class="btn sm" id="tutorialHint">Need a hint?</button>':''}${t.step<8?`<button class="btn pri sm" id="tutorialNext" ${ready?'':'disabled'}>${ready?'Continue':'Waiting for your action'}</button>`:''}</div>`;
+  $('#tutorialPause').onclick=()=>{t.active=false;save();renderTutorial();};
+  $('#tutorialLocate').onclick=()=>{if(!onBench&&t.step>0){$('#tickets').scrollIntoView({block:'center'});return;}showTutorialControl();};
+  const hint=$('#tutorialHint');if(hint)hint.onclick=()=>{t.hint=true;save();renderTutorial();};
+  const next=$('#tutorialNext');if(next)next.onclick=()=>{if(S.bench!==j.id||!s.ready())return;t.step++;save();renderTutorial();};
+}
+// END PT44_TUTORIAL_V66
+
 // ---------- persistence ----------
 function save(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(S)); }catch(e){} }
 function load(){ try{ const t=localStorage.getItem(SAVE_KEY); if(t){ const o=JSON.parse(t); if(o&&o.ver===1) return pt44GameMigrate(o); } }catch(e){} return null; }
@@ -1544,7 +1612,7 @@ function newGame(){
   const start = {'R130-0.5':2,'R470000-0.5':2,'R470000-0.5':2,'R22000-0.5':2,'R68-0.5':1,'R500-2':1,'R4700000-0.5':1,'R1000-1':1,
                  'C.01-400':2,'C.047-400':0,'E20-150':2,'T35Z3':1,'T50L6GT':1,'T7C6':1,'T7B7':1,'T7A8':1};
   for (const [k,v] of Object.entries(start)) if (v && CATALOG[k]) S.inv[k]=v;
-  addJob(1);
+  setupFirstRepair(addJob(1));
   shopLog('Opened the doors at 412 Elm Street. A 1941 Philco PT-44 is waiting for service.');
 }
 function shopLog(t, cls=''){ S.log.unshift({d:S.day,t,cls}); S.log.length=Math.min(S.log.length,60); }
@@ -1616,6 +1684,7 @@ function tick(){
   } else { R.dc=null; R.sig=null; }
   if (!R.power && R.offV){ R.offT += dt; }
   updateLive();
+  tutorialEvent('symptom');tutorialEvent('listening');renderTutorial();
   audioUpdate();
 }
 const easeWarm = w => w<=0?0: Math.min(1, w*w*(3-2*w)*1.0);
@@ -1635,7 +1704,8 @@ function setPower(on){
   R.power = on;
   if (on){ audioInit(); R.offV=null; benchLog('Plugged in through the isolation transformer and switched on.'); }
   else benchLog('Switched off and unplugged. The filter capacitors hold their charge for a while.');
-  renderBenchHead(); renderFront(); renderTools();
+  if(!on)tutorialEvent('off');
+  renderBenchHead(); renderFront(); renderTools();renderTutorial();
 }
 function hasEmpty(r){ return Object.keys(SLOTS).some(k=>!r.slots[k]); }
 function canWork(){
@@ -1657,6 +1727,7 @@ function installSku(slot, sku){
   S.inv[sku]--; if(!S.inv[sku]) delete S.inv[sku];
   const p = newPart(sku); job.radio.slots[slot]=p; job.used.push({sku, price:CATALOG[sku].price});
   benchLog(`Installed a new ${skuName(sku)} at ${slot}.`, 'good');
+  tutorialEvent('install',slot);
   R.sel = {slot}; save(); renderAll();
 }
 function installLoose(slot, pid, from){
@@ -1706,11 +1777,13 @@ function runCheckout(){
   r.dial=savedDial;r.vol=savedVolume;
   R.offV=Float64Array.from(dd.V);R.offT=0;
   job.lastCheck = {pass, results, at:S.day};
+  tutorialEvent('checkout',pass);
   if (events.length) benchLog('Checkout: '+events.join('; '), 'bad');
   save(); renderAll();
   showCheckout(job, pass, results, {B1:dd.V[NI.B1], B2:b2, P5:v4p});
 }
 function bill(job){
+  if(S.tutorial?.jobId===job.id&&job.lastCheck?.pass){S.tutorial.completed=true;S.tutorial.evidence.returned=true;}
   const parts = job.used.reduce((a,u)=>a+u.price,0);
   let partsPaid = parts, note='';
   if (parts > job.budget){ partsPaid = job.budget; S.rep = Math.max(0,S.rep-2); note=` ${job.cust} only authorized ${money(job.budget)} in parts and paid that.`; }
@@ -1756,7 +1829,8 @@ function buy(sku, qty, rush){
   S.cash -= price;
   if (rush){ S.inv[sku]=(S.inv[sku]||0)+qty; shopLog(`Picked up ${qty}× ${skuName(sku)} at the jobber: ${money(price)}.`); }
   else { S.orders.push({sku,qty,arrive:S.day+1}); shopLog(`Ordered ${qty}× ${skuName(sku)}: ${money(price)}. Arrives tomorrow.`); }
-  save(); renderHeader(); renderSide(); renderShopLog();
+  tutorialEvent('buy',sku);
+  save(); renderHeader(); renderSide(); renderShopLog();renderTutorial();
 }
 function buyTool(k){ const e=EQUIPMENT[k];if(!e||S.tools[k])return; if (S.cash<e.price){ toast('Not enough cash on hand.'); return; } S.cash-=e.price; S.tools[k]=1; shopLog(`Bought a ${e.name}: ${money(e.price)}.`,'good'); save(); renderAll(); }
 
@@ -2554,7 +2628,7 @@ function pt44EngineeringReadinessAudit(){
  if(counts.spice.isolated_ngspice_testbench_validated!==true||counts.spice.full_receiver_spice_validated!==false||counts.spice.nominal_heater_sanity_spice_validated!==counts.heater_string_sanity_spice_validated)errors.push('SPICE readiness must distinguish sanity fixtures from full-receiver validation');
  return {ok:!errors.length,errors,benchmarkReady:false,blockers:r.open_items.length,gates:r.completion_gates.length};
 }
-const PT44_GAME_COMPLETION_V2 = Object.freeze({"schema":"PT44_GAME_COMPLETION_V2","version":"0.65.0","approved_scope_change":"User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.","historical_standard":"engineering/PT44_EC_Acceptance_V1.json","policy":"Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.","fidelity":"Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.","optional_research":["Full receiver SPICE parity","Exhaustive tube curve validation","Carrier stepping","Exact undocumented socket wiring, lead dress and winding parameters"],"supported_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_gameplay_v63.js","tests/test_gameplay_browser_v63.js",".github/workflows/pt44-gameplay.yml","tests/test_completion_v64.js","tests/test_completion_browser_v64.js","gameplay/PT44_Stock_Faults_V1.json","gameplay/PT44_Service_Scope_V1.json","gameplay/PT44_V2_Acceptance_Signature.json"],"packages":[{"id":"EC-01","title":"Source and presentation","status":"CLOSED","acceptance":"Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.","remaining":"None within the fixed V2 acceptance. Named 0.05 uF game variant, functional diode labels and oscillator assembly with unknown physical mapping explicitly retained; Service data and PT44_Service_Scope_V1.json."},{"id":"EC-02","title":"Component behavior","status":"CLOSED","acceptance":"All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.","remaining":"None within the fixed V2 acceptance. 352 compatible catalog placements, all component classes, missing/failed states and wrong-kind guards; shared testers and wound field assembly presentation."},{"id":"EC-03","title":"Power and operating states","status":"CLOSED","acceptance":"Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.","remaining":"None within the fixed V2 acceptance. Live warmup, series heaters, hot switch-off, retained checkout charge, discharge and damaging-fault cascade; AC/DC supply envelope."},{"id":"EC-04","title":"Playable audio chain","status":"CLOSED","acceptance":"Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.","remaining":"None within the fixed V2 acceptance. v0.63 audio acceptance retained; complete stock fault and real-shop replacement matrix in v0.64."},{"id":"EC-05","title":"IF, detector and AVC","status":"CLOSED","acceptance":"455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.","remaining":"None within the fixed V2 acceptance. 455 kHz selectivity, combined IF/detector failures, independent upstream tracer, timed AVC/loaded probing and manual three-control alignment recovery."},{"id":"EC-06","title":"RF and converter","status":"CLOSED","acceptance":"540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.","remaining":"None within the fixed V2 acceptance. v0.63 RF/converter acceptance retained; stock converter/oscillator repairs, wrong oscillator capacitor and full-band conversion regression."},{"id":"EC-07","title":"Service instruments","status":"CLOSED","acceptance":"Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.","remaining":"None within the fixed V2 acceptance. Shared tube/cap tester properties, pulled-part guard, every service-port load, meter range/polarity/live-ohms checks, generator/tracer and corrected reference conditions."},{"id":"EC-08","title":"Physical service workflow","status":"CLOSED","acceptance":"Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.","remaining":"None within the fixed V2 acceptance. Every supported slot has a named service location, camera-independent selector, highlight and DOM remove/install action; live/charged guards and keyed field assembly."},{"id":"EC-09","title":"End-to-end benchmark","status":"CLOSED","acceptance":"Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.","remaining":"None within the fixed V2 acceptance. All 20 stock faults through browser save/load, diagnosis, incorrect-repair checkout, part replacement and successful checkout; healthy reference, all-slot access and cascade repair."}],"benchmark_ready":true,"version_support":{"supported_ec_ids":["EC-07","EC-08","EC-09"],"newly_closed_ec_ids":[],"retained_closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_ui_browser_v65.js"],"scope":"Player UI and optional equipment usability; no receiver, damage, pricing or fixed acceptance changes."}});
+const PT44_GAME_COMPLETION_V2 = Object.freeze({"schema":"PT44_GAME_COMPLETION_V2","version":"0.66.0","approved_scope_change":"User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.","historical_standard":"engineering/PT44_EC_Acceptance_V1.json","policy":"Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.","fidelity":"Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.","optional_research":["Full receiver SPICE parity","Exhaustive tube curve validation","Carrier stepping","Exact undocumented socket wiring, lead dress and winding parameters"],"supported_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_gameplay_v63.js","tests/test_gameplay_browser_v63.js",".github/workflows/pt44-gameplay.yml","tests/test_completion_v64.js","tests/test_completion_browser_v64.js","gameplay/PT44_Stock_Faults_V1.json","gameplay/PT44_Service_Scope_V1.json","gameplay/PT44_V2_Acceptance_Signature.json"],"packages":[{"id":"EC-01","title":"Source and presentation","status":"CLOSED","acceptance":"Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.","remaining":"None within the fixed V2 acceptance. Named 0.05 uF game variant, functional diode labels and oscillator assembly with unknown physical mapping explicitly retained; Service data and PT44_Service_Scope_V1.json."},{"id":"EC-02","title":"Component behavior","status":"CLOSED","acceptance":"All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.","remaining":"None within the fixed V2 acceptance. 352 compatible catalog placements, all component classes, missing/failed states and wrong-kind guards; shared testers and wound field assembly presentation."},{"id":"EC-03","title":"Power and operating states","status":"CLOSED","acceptance":"Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.","remaining":"None within the fixed V2 acceptance. Live warmup, series heaters, hot switch-off, retained checkout charge, discharge and damaging-fault cascade; AC/DC supply envelope."},{"id":"EC-04","title":"Playable audio chain","status":"CLOSED","acceptance":"Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.","remaining":"None within the fixed V2 acceptance. v0.63 audio acceptance retained; complete stock fault and real-shop replacement matrix in v0.64."},{"id":"EC-05","title":"IF, detector and AVC","status":"CLOSED","acceptance":"455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.","remaining":"None within the fixed V2 acceptance. 455 kHz selectivity, combined IF/detector failures, independent upstream tracer, timed AVC/loaded probing and manual three-control alignment recovery."},{"id":"EC-06","title":"RF and converter","status":"CLOSED","acceptance":"540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.","remaining":"None within the fixed V2 acceptance. v0.63 RF/converter acceptance retained; stock converter/oscillator repairs, wrong oscillator capacitor and full-band conversion regression."},{"id":"EC-07","title":"Service instruments","status":"CLOSED","acceptance":"Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.","remaining":"None within the fixed V2 acceptance. Shared tube/cap tester properties, pulled-part guard, every service-port load, meter range/polarity/live-ohms checks, generator/tracer and corrected reference conditions."},{"id":"EC-08","title":"Physical service workflow","status":"CLOSED","acceptance":"Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.","remaining":"None within the fixed V2 acceptance. Every supported slot has a named service location, camera-independent selector, highlight and DOM remove/install action; live/charged guards and keyed field assembly."},{"id":"EC-09","title":"End-to-end benchmark","status":"CLOSED","acceptance":"Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.","remaining":"None within the fixed V2 acceptance. All 20 stock faults through browser save/load, diagnosis, incorrect-repair checkout, part replacement and successful checkout; healthy reference, all-slot access and cascade repair."}],"benchmark_ready":true,"version_support":{"supported_ec_ids":["EC-07","EC-08","EC-09"],"newly_closed_ec_ids":[],"retained_closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_tutorial_v66.js","tests/test_tutorial_browser_v66.js"],"scope":"Optional first-job tutorial for symptoms, safe testing, buying, removal/replacement and checkout; fixed V2 acceptance and receiver/damage logic unchanged."}});
 function pt44GameCompletionHTML(esc){
  const c=PT44_GAME_COMPLETION_V2;
  return `<h3>PT-44 game engineering completion · v${c.version}</h3><p><b>Closed: ${c.closed_ec_ids.join(', ')}.</b> Supported this release: ${c.supported_ec_ids.join(', ')}. ${c.benchmark_ready?'The first PT-44 is engineering complete under the fixed V2 game scope.':'The first PT-44 remains incomplete until all nine packages close.'}</p><p>User-approved behavioral scope: plausible service readings, consistent sound and symptoms, diagnosis and successful repair. Full circuit simulation is optional research. Original scientific V1 criteria remain in the repository as historical records; these closures use V2.</p><table class="sl-table"><thead><tr><th>Package</th><th>Status</th><th>Fixed acceptance</th><th>Remaining / evidence</th></tr></thead><tbody>${c.packages.map(x=>`<tr><td>${esc(x.id)} · ${esc(x.title)}</td><td>${esc(x.status)}</td><td>${esc(x.acceptance)}</td><td>${esc(x.remaining)}</td></tr>`).join('')}</tbody></table><p class="sl-footnote">Readings are game service approximations referenced to B−. Research benches below retain their original narrower scope and do not gate game completion.</p>`;
@@ -3807,7 +3881,7 @@ function renderFactoryLedger(box){
   const candidates = Object.fromEntries(Object.entries(PT44_FACTORY_SUBGRAPH.factory_part_register).map(([n,p])=>[n,p.game_slot||'—']));
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
-   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.65.0</div>
+   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.66.0</div>
    ${pt44GameCompletionHTML(escapeHTML)}
    <h2>Optional research · factory circuit transcription</h2>
    <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. Physical 3D routing remains illustrative. The playable receiver uses the separate behavioral V2 completion standard above.</p>
@@ -4193,7 +4267,7 @@ function inspectorHTML(){
     <dl class="kv"><dt>Schematic value</dt><dd>${esc(skuName(d.nom))}</dd><dt>Installed</dt><dd>${p?esc(skuName(p.sku)):'<span style="color:var(--red)">empty</span>'}</dd>${live}</dl>
     ${p?`<ul class="note" style="padding-left:18px;margin:6px 0">${physNotes(p,id).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}
     <div class="row">
-      ${p?`<button class="btn" data-act="remove">Unsolder &amp; remove</button>`:''}
+      ${p?`<button class="btn" data-act="remove">${d.type==='TUBE'?'Pull tube':'Unsolder &amp; remove'}</button>`:''}
       ${p && dcPart?`<button class="btn" data-act="across">Ohms across ${id}</button>`:''}
       ${p && d.type==='TUBE'?`<button class="btn" data-act="tubeslot">Pull &amp; test tube</button>`:''}
       ${d.a?`<button class="btn" data-act="probe">Probe ${TP_NAME[d.a]?d.a:''}</button>`:''}
@@ -4437,6 +4511,7 @@ function renderTubeLive(){
   s+=`<defs><filter id="nb"><feGaussianBlur stdDeviation="1.5"/></filter></defs>`;
   const a=ang(frac); s+=`<path d="M${cx},${cy} L${cx+Math.cos(a)*(rr-6)},${cy+Math.sin(a)*(rr-6)}" stroke="#1a1a1a" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="6" fill="#3a3a3a"/>`;
   face.innerHTML=s; $('#tubeRead').textContent=txt;
+  tutorialEvent('tube',p);renderTutorial();
 }
 function capHTML(){
   const job=benchJob();if(R.capTarget&&!(job?.tray.includes(R.capTarget)||S.salvage.includes(R.capTarget)))R.capTarget=null;const p=R.capTarget;
@@ -4542,10 +4617,11 @@ function showCheckout(job, pass, results, v){
   </div>`);
   $('#mBack').onclick=closeModal; if (pass) $('#mBill').onclick=()=>bill(job);
 }
-function showWelcome(){modal(`<div class="ph">Your first repair</div><div class="pb stack"><p>A customer has brought in a Philco PT-44. Start with their repair order at the service counter.</p><ol><li>Switch on and listen.</li><li>Use the meter and tube tester to find the fault.</li><li>Switch off, discharge, replace the bad part, then run checkout.</li></ol><p class="note">Optional equipment is available under Upgrades. The Service manual is always available above.</p><button class="btn pri" id="mX">Open shop</button></div>`);$('#mX').onclick=closeModal;}
+function showWelcome(){modal(`<div class="ph">Your first repair</div><div class="pb stack"><p>A customer has brought in a completely dead Philco PT-44. Follow a guided repair to learn symptoms, safe testing, parts purchases, removal, replacement and checkout.</p><p class="note">The guide waits for your actions and saves your progress. You can pause it at any time and resume from the Service manual.</p><div class="row"><button class="btn pri" id="mTutorial">Start guided repair</button><button class="btn" id="mX">Open shop without guide</button></div></div>`);$('#mX').onclick=closeModal;$('#mTutorial').onclick=startFirstRepair;}
 function showManual(){
   modal(`<div class="ph">Service manual<span class="sp"></span><button class="btn sm" id="mX">Close</button></div><div class="pb manual">
   <p>Run a one-bench radio shop in 1955. Listen to the customer, diagnose the fault and return a working set.</p>
+  ${tutorialJob()&&!S.tutorial.completed?'<button class="btn pri" id="mGuide">Resume first-repair guide</button>':''}
   <h3>The job</h3><p>Put a repair order on the bench. Switch it on and listen. Diagnose with the meter and tube tester, unsolder bad parts, install replacements, then run the 10-minute checkout. A passing set goes home with the customer and you collect labor plus parts.</p>
   <h3>Measuring</h3><p>In DC volts, click a ● test point on the schematic to put the red lead there. Compare against Readings, which follows your selected meter and range. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate reads lower while the VOM is attached. The optional VTVM disturbs these circuits much less. Find it, the capacitor checker and the signal tracer under Upgrades.</p>
   <p>Ohms only works with the set off and the filter caps discharged. In-circuit readings include every parallel path. Pull a part to measure it alone.</p>
@@ -4553,14 +4629,15 @@ function showManual(){
   <h3>Safety and damage</h3><p>The set has no bleeder resistor, so B+ stays charged after switch-off. Discharge it before you unsolder. Parts that run past their ratings get hot and fail, during your testing or during checkout. A leaky coupling capacitor will cook the output tube and its cathode resistor again if you only replace the burned resistor. A quarter-watt resistor where a 2-watt one belongs will not last.</p>
   <h3>Substitutions</h3><p>Ordinary resistor and capacitor positions accept same-kind substitutions. The field-coil service assembly requires its matching replacement. The circuit decides whether your choice works. Watch voltage ratings on capacitors and wattage on resistors.</p>
   <h3>Business</h3><p>Rent is $1.75 a day. Mail-order parts arrive the next morning; the jobber sells today at 25% over list. If your parts bill runs over what the customer authorized, they pay only the authorized amount and grumble. Miss a due date and they take the set back, angry. Reputation brings harder jobs and more customers.</p>
-  <details class="ui-details"><summary>Start over</summary><p>Erase this shop and begin again.</p><button class="btn warn sm" id="mReset">Start a new shop</button></details><p class="note">Version 0.65.0</p>
+  <details class="ui-details"><summary>Start over</summary><p>Erase this shop and begin again.</p><button class="btn warn sm" id="mReset">Start a new shop</button></details><p class="note">Version 0.66.0</p>
   </div>`);
   $('#mX').onclick=closeModal;
-  $('#mReset').onclick=()=>confirmModal('Start over?','This erases your cash, tools, parts and customers.','Erase and restart',()=>{ R.power=false; R.warm=0; R.dc=null; R.sel=null; R.benchLog=[]; newGame(); save(); renderAll(); });
+  if($('#mGuide'))$('#mGuide').onclick=startFirstRepair;
+  $('#mReset').onclick=()=>confirmModal('Start over?','This erases your cash, tools, parts and customers.','Erase and restart',()=>{ R.power=false; R.warm=0; R.dc=null; R.sel=null; R.benchLog=[]; newGame(); save(); renderAll();showWelcome(); });
 }
 
 // ---------- boot ----------
-function renderAll(){document.body.classList.toggle('engineering',ENGINEERING_MODE);document.body.classList.toggle('no-job',!benchJob()); renderHeader(); renderTickets(); renderShopLog(); renderBench(); renderSide(); renderTools(); }
+function renderAll(){document.body.classList.toggle('engineering',ENGINEERING_MODE);document.body.classList.toggle('no-job',!benchJob()); renderHeader(); renderTickets(); renderShopLog(); renderBench(); renderSide(); renderTools();renderTutorial(); }
 function boot(){
   calibrate();
   if (B3.ok){
