@@ -20,6 +20,7 @@ jobs:
       - run: node tests/test_gameplay_v63.js
       - run: node tests/test_completion_v64.js
       - run: node tests/test_tutorial_v66.js
+      - run: node tests/test_title_v67.js
       - run: node tests/test_ec_reporting_v58.js
       - run: node tests/test_supply_avc_reconciliation_v53.js
       - uses: actions/upload-artifact@v4
@@ -76,8 +77,8 @@ jobs:
           retention-days: 7
 
   player-ui:
-    name: Player UI and upgrades
-    timeout-minutes: 7
+    name: Player UI, tutorial and title
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -90,6 +91,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: node tests/test_ui_browser_v65.js --browser
       - run: node tests/test_tutorial_browser_v66.js --browser
+      - run: node tests/test_title_browser_v67.js --browser
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -97,4 +99,5 @@ jobs:
           path: |
             tmp/pt44-ui-v065/
             tmp/pt44-tutorial-v066/
+            tmp/pt44-title-v067/
           retention-days: 7

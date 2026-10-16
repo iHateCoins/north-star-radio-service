@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs'),{html,scripts}=require('./gameplay_helpers_v63');
+const source=fs.readFileSync('gameplay/pt44_title_v67.js','utf8');assert(html.includes('// BEGIN PT44_TITLE_V67\n'+source+'// END PT44_TITLE_V67'));
+const nodes={},storage={};let writes=0,confirmation=null;
+const c={console,URLSearchParams,location:{search:''},document:{addEventListener(){},querySelector(s){return nodes[s]||=( {hidden:false,disabled:false,innerHTML:'',textContent:'',focus(){}});}},B3:{ok:false},localStorage:{getItem:k=>storage[k]||null,setItem:(k,v)=>{writes++;storage[k]=v;}},setTimeout(){},clearTimeout(){}};
+vm.createContext(c);vm.runInContext(scripts[1],c);vm.runInContext(scripts[3].replace(/boot\(\);\s*$/,''),c);vm.runInContext('renderAll=()=>{};confirmModal=(title,body,ok,fn)=>globalThis.confirmation=fn;',c);
+const run=s=>vm.runInContext(s,c);run('showTitleScreen();save();tick();');assert.equal(writes,0);assert(nodes['#titleLoad'].disabled);assert.equal(run('S'),null);
+run('enterShopGame(true)');assert.equal(run('S.cash'),40);assert(run('S.tutorial.active&&S.tutorial.step===0&&!R.atTitle'));assert.equal(writes,1);
+run('S.cash=17.25;S.tutorial.step=3;S.tutorial.evidence.observed=true;R.range.vom=10;showTitleScreen();');const snapshot=storage[run('SAVE_KEY')],count=writes;run('for(let n=0;n<100;n++){tick();save();}');assert.equal(writes,count);assert.equal(storage[run('SAVE_KEY')],snapshot);assert(run('R.atTitle&&!R.power'));assert(!nodes['#titleLoad'].disabled);
+run('enterShopGame(false)');assert.equal(run('S.cash'),17.25);assert.equal(run('S.tutorial.step'),3);assert.equal(run('R.range.vom'),250);assert(run('S.tutorial.evidence.observed'));
+run('showTitleScreen()');nodes['#titleNew'].onclick();assert(c.confirmation);assert.equal(storage[run('SAVE_KEY')],snapshot);c.confirmation();assert.equal(run('S.cash'),40);assert.equal(run('S.tutorial.step'),0);assert(run('S.tutorial.active'));
+console.log('PASS title lifecycle: no implicit save, automatic tutorial, paused simulation/autosave, load preservation, clean runtime and confirmed new game');
