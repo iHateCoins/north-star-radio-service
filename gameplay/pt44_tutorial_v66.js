@@ -13,6 +13,7 @@ function setupFirstRepair(job){
   // This first repair teaches the normal purchase flow; other starter stock is retained.
   delete S.inv.T7B7;
   S.tutorial={jobId:job.id,active:false,step:0,evidence:{},completed:false};
+  pt44GameMigrate(S);
 }
 function tutorialJob(){const t=S?.tutorial;return t&&S.jobs.find(j=>j.id===t.jobId&&j.tutorial==='open-heater-v1');}
 function tutorialEvent(kind,value){
