@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.60.0",
+  "version": "0.61.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -165,7 +165,7 @@
       "area": "Power / line",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Actual modeled 7B7, detector and audio currents share the dynamic supply. Converter plate/screen substitute loads remain. Rectifier/heater/lamp/field parameters, AC/DC startup/discharge envelope, physical boundaries and factory voltage reference conditions remain open."
+      "gap": "Actual modeled 7B7/detector/audio currents now share AC/DC supply charging/ripple/discharge in the v0.61 idle fixture. Converter plate/screen substitutes remain. RF-operating loads, cold-heater/lamp/field behavior, broader envelope and historical voltage reference conditions remain open."
     },
     {
       "id": "P1-SOURCE",
@@ -223,7 +223,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.60 supports EC-02/03/07 with a source-traced RCA 35Z3 alternative, shared solver/export selection, supply sensitivity and curve-coverage reporting. No full EC closes. The GE legacy reference remains selectable; outside-range and heater/emission behavior are still assumptions. All nine EC acceptance lists and six NOT MET gates are unchanged.",
+  "latest_evidence_update": "v0.61 supports EC-03/04/07 with the shared receiver idle AC/DC supply envelope, coupled hum, faults/restoration and independent numerical checks. No full EC closes. Zero electrical storage with nominal-hot heaters is not cold thermal startup. All nine EC acceptance lists and six NOT MET gates remain unchanged.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

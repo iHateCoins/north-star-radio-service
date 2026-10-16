@@ -1,6 +1,6 @@
 {
   "schema": "PT44_REMAINING_ACTIONS_V1",
-  "version": "0.60.0",
+  "version": "0.61.0",
   "model": "Philco PT-44",
   "benchmark_ready": false,
   "scope_policy": "Track the remaining fixed engineering outcomes. Source-inventory coverage, isolated SPICE parity and release version numbers do not substitute for receiver or repair validation.",
@@ -87,6 +87,12 @@
       ],
       "remaining_after_v060": [
         "Replace converter substitute loads; validate full coupled-receiver AC/DC startup/discharge and heater/lamp/field envelope."
+      ],
+      "completed_in_v061": [
+        "Run the shared 26-state receiver on AC and DC from zero electrical storage with actual modeled 7B7 and audio currents; validate supply charging/ripple/discharge, component faults and restoration. Converter substitutes and thermal startup remain open."
+      ],
+      "remaining_after_v061": [
+        "Replace converter substitutes with active 7A8 currents; validate supply operation with RF running and the remaining rectifier/heater/lamp/field and thermal startup/discharge behavior."
       ]
     },
     {
@@ -110,6 +116,12 @@
         "Detector-derived signal, triode grid loading, nonlinear audio and dynamic supply now share a single 26-variable MNA system in the IF receiver fixture."
       ],
       "remaining_after_v057": [
+        "Correlate audio/transformer/speaker parameters and frequency envelope; connect validated receiver behavior to shop repairs."
+      ],
+      "completed_in_v061": [
+        "Measure electrical speaker hum and its filter-fault response with actual IF/audio/supply loading in the same circuit; no acoustic or complete audio parameter calibration."
+      ],
+      "remaining_after_v061": [
         "Correlate audio/transformer/speaker parameters and frequency envelope; connect validated receiver behavior to shop repairs."
       ]
     },
@@ -207,6 +219,12 @@
       ],
       "remaining_after_v060": [
         "Complete RF/shop instruments and historical service conditions; nominal manufacturer heater conditions do not establish receiver calibration."
+      ],
+      "completed_in_v061": [
+        "Record idle input, nominal-hot heater assumptions, line/rectifier/probe conditions, full-rate measurement windows, numerical bounds and rectifier curve extrapolation."
+      ],
+      "remaining_after_v061": [
+        "Complete RF/shop instruments and historical service conditions."
       ]
     },
     {
@@ -266,32 +284,32 @@
     "EC-03/04: validate the complete receiver supply/audio envelope.",
     "EC-07/08/09: serviceable chassis/shop instruments and full repair acceptance."
   ],
-  "milestone_completed": "v0.60 supports EC-02/03/07 with a source-traced RCA 35Z3 alternative, shared solver/export selection, supply sensitivity and curve-coverage reporting. No full EC closes.",
+  "milestone_completed": "v0.61 supports EC-03/04/07 with the shared receiver idle AC/DC supply envelope, coupled hum, faults/restoration and independent numerical checks. No full EC closes.",
   "version_reporting_policy": "Every release names the EC IDs it supports, the concrete evidence added toward closure, and any EC IDs actually closed. Support is not full closure; the nine acceptance lists remain fixed.",
   "version_support": {
-    "version": "0.60.0",
+    "version": "0.61.0",
     "supported_ec_ids": [
-      "EC-02",
       "EC-03",
+      "EC-04",
       "EC-07"
     ],
     "closed_ec_ids": [],
     "evidence": [
-      "PT44_35Z3_Curve_Reference_V1.json",
-      "PT44_35Z3_Validation_V1.json",
-      "PT44_35Z3_Spice_Validation_V1.json"
+      "PT44_Receiver_Power_Fixture_V1.json",
+      "PT44_Receiver_Power_Validation_V1.json",
+      "PT44_Receiver_Power_Spice_Validation_V1.json"
     ],
-    "summary": "Manufacturer-curve-checked 35Z3 alternative, shared circuit selection, loaded-supply sensitivity and explicit extrapolation reporting.",
-    "limitations": "RCA curve checks apply to nominal 35 V heater and 5–40 V forward drop, not all PT-44 conditions. Converter substitutes, thermal/lamp behavior, other parameters and full shop/receiver acceptance remain open.",
+    "summary": "Idle receiver AC/DC charging, ripple/hum and discharge with actual modeled IF/audio loads; faults/restoration, independent SPICE and declared conditions.",
+    "limitations": "No injected IF; converter remains substituted. Heaters/emission start nominal-hot, so cold thermal startup is not validated. Parameter calibration, active RF, instruments/chassis/shop integration and full receiver acceptance remain open.",
     "evidence_by_ec": {
-      "EC-02": [
-        "Add a separately identified RCA 1947 35Z3 model anchored at 20 V/200 mA and checked against seven withheld average-curve readings; retain the GE legacy reference as an explicit alternative."
-      ],
       "EC-03": [
-        "Carry the same rectifier selection through power, nonlinear audio and coupled IF supply currents and matching SPICE exports; validate loaded supply sensitivity and report curve extrapolation during startup and measurement."
+        "Run the shared 26-state receiver on AC and DC from zero electrical storage with actual modeled 7B7 and audio currents; validate supply charging/ripple/discharge, component faults and restoration. Converter substitutes and thermal startup remain open."
+      ],
+      "EC-04": [
+        "Measure electrical speaker hum and its filter-fault response with actual IF/audio/supply loading in the same circuit; no acoustic or complete audio parameter calibration."
       ],
       "EC-07": [
-        "Record selected tube reference and nominal-heater curve bounds in submitted circuit conditions; expose out-of-range conducting steps instead of implying full-envelope calibration."
+        "Record idle input, nominal-hot heater assumptions, line/rectifier/probe conditions, full-rate measurement windows, numerical bounds and rectifier curve extrapolation."
       ]
     }
   }

@@ -1,0 +1,111 @@
+{
+  "schema": "PT44_RECEIVER_POWER_FIXTURE_V1",
+  "version": "0.61.0",
+  "model": "Philco PT-44",
+  "scope": "Same 26-variable IF/detector/audio/supply MNA without injected IF; actual modeled stage currents with remaining converter substitutes.",
+  "defaults": {
+    "fault": "healthy",
+    "line_v": 115,
+    "line_mode": "AC",
+    "line_hz": 60,
+    "rectifier_model": "rca_1947",
+    "meter": "ideal",
+    "probe": "B"
+  },
+  "faults": [
+    {
+      "id": "healthy",
+      "label": "Restored idle receiver",
+      "receiver": {},
+      "supply": {}
+    },
+    {
+      "id": "reservoir_dry",
+      "label": "#29A dry · 10% capacitance",
+      "receiver": {},
+      "supply": {
+        "cap_a_scale": 0.1,
+        "dt_s": 2.6041666666666666e-06
+      }
+    },
+    {
+      "id": "smoothing_dry",
+      "label": "#29B dry · 10% capacitance",
+      "receiver": {},
+      "supply": {
+        "cap_b_scale": 0.1
+      }
+    },
+    {
+      "id": "rectifier_weak",
+      "label": "35Z3 weak · assumed 35% perveance",
+      "receiver": {},
+      "supply": {
+        "rectifier_emission": 0.35
+      }
+    },
+    {
+      "id": "rectifier_open",
+      "label": "35Z3 nonconducting",
+      "receiver": {},
+      "supply": {
+        "rectifier_emission": 0
+      }
+    },
+    {
+      "id": "field_open",
+      "label": "#28 field winding open",
+      "receiver": {},
+      "supply": {
+        "field_open": true
+      }
+    },
+    {
+      "id": "screen_open",
+      "label": "#13 screen feed open",
+      "receiver": {
+        "screen_feed_open": true
+      },
+      "supply": {}
+    },
+    {
+      "id": "if_dead",
+      "label": "7B7 nonconducting",
+      "receiver": {
+        "if_emission": 0
+      },
+      "supply": {}
+    },
+    {
+      "id": "switch_off",
+      "label": "Switch off at 0.6 s · observe to 1.2 s",
+      "receiver": {},
+      "supply": {
+        "power_off_at_s": 0.6,
+        "duration_s": 1.2
+      }
+    }
+  ],
+  "numerical_contract": {
+    "initialization": "Zero capacitor voltages and inductor currents; nominal-hot heaters/emission. Not cold thermal startup.",
+    "integrator": "Backward Euler at default 1/48000 s, with damped Newton and up to four subdivisions. Signal-node stopping 20 pA, supply-node stopping 1 nA; accepted overall normalized residual <10 nA. Strict 20 fA signal-node comparison and half-step checks bound the reported supply behavior.",
+    "statistics": "Final six line-frequency periods, clipped/interpolated at measurement boundary using full-rate states. RMS/ripple/min/max and line-frequency projection.",
+    "display": "At most about 2001 samples; displayed points do not determine statistics.",
+    "source": "No injected IF current or synthetic detector source. Same source-traced tuning, detector/audio, field and supply network.",
+    "reference": "B-minus; no chassis bond.",
+    "timing_scope": "Supply duration_s/dt_s govern the run. The receiver parameter block retains inherited IF arrival/carrier timing defaults; these do not set this idle simulation duration or step.",
+    "dry_reservoir": "The 10% reservoir-capacitance fault uses an eight-times finer step (1/384000 s) to resolve narrow charging pulses and near-zero rail crossings against independent SPICE."
+  },
+  "limits": [
+    "7A8 remains the explicit 30 kohm plate/120 kohm screen substitute load.",
+    "Heater resistance, lamp hot resistance, emission versus heater temperature and field inductance remain assumed.",
+    "No RF/oscillator operation, cold-heater warmup, historical voltage calibration or full shop benchmark closure.",
+    "RCA curve checks remain nominal-heater 5–40 V forward drop; extrapolation and emission-scaled faults are not validated curve behavior."
+  ],
+  "supported_ec_ids": [
+    "EC-03",
+    "EC-04",
+    "EC-07"
+  ],
+  "closed_ec_ids": []
+}

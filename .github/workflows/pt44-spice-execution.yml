@@ -65,6 +65,9 @@ jobs:
       - name: Execute isolated cathode-bypass AC branch study
         run: node tests/test_output_bypass_v36.js --ngspice
 
+      - name: Cross-check complete idle IF/audio/supply charging and discharge
+        run: node tests/test_receiver_power_spice_v61.js --ngspice
+
       - name: Cross-check manufacturer rectifier alternatives and loaded supplies
         run: node tests/test_rectifier_spice_v60.js --ngspice
 
