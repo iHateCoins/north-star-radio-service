@@ -1,0 +1,45 @@
+name: PT-44 game completion
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: pt44-game-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  behavioral-acceptance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/test_gameplay_v63.js
+      - run: node tests/test_ec_reporting_v58.js
+      - run: node tests/test_supply_avc_reconciliation_v53.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pt44-game-core-v063
+          path: tmp/pt44-gameplay/
+  playable-shop:
+    timeout-minutes: 8
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright@1.62.1
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/test_gameplay_browser_v63.js --browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pt44-game-shop-v063
+          path: tmp/pt44-gameplay-browser/
+          retention-days: 7

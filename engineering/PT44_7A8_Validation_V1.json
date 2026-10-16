@@ -1,0 +1,1254 @@
+{
+  "schema": "PT44_7A8_VALIDATION_V1",
+  "version": "0.62.0",
+  "scope": "Source graph-coordinate checks and typical points; numerical Fourier/analytic frequency-translation checks. Separate excitation, unloaded small-signal AC current; no physical oscillator or receiver tracking validation.",
+  "source_checks": [
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -18,
+      "key": "conversion_s",
+      "target": 0.000009999999999999999,
+      "actual": 0.0000105,
+      "error": 5.000000000000003e-7,
+      "tolerance": 0.0000154
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -18,
+      "key": "plate_a",
+      "target": 0.00008,
+      "actual": 0.00007999999999999999,
+      "error": 1.3552527156068805e-20,
+      "tolerance": 0.0000832
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -18,
+      "key": "screen_a",
+      "target": 0.0039,
+      "actual": 0.003905,
+      "error": 0.00000500000000000023,
+      "tolerance": 0.000236
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -14,
+      "key": "conversion_s",
+      "target": 0.000023,
+      "actual": 0.000024,
+      "error": 0.0000010000000000000006,
+      "tolerance": 0.00001592
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -14,
+      "key": "plate_a",
+      "target": 0.0002,
+      "actual": 0.00020000000000000004,
+      "error": 2.710505431213761e-20,
+      "tolerance": 0.00008800000000000001
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -14,
+      "key": "screen_a",
+      "target": 0.00378,
+      "actual": 0.003775,
+      "error": 0.000004999999999999796,
+      "tolerance": 0.00023119999999999998
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -10,
+      "key": "conversion_s",
+      "target": 0.000048,
+      "actual": 0.0000535,
+      "error": 0.000005499999999999998,
+      "tolerance": 0.00001692
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -10,
+      "key": "plate_a",
+      "target": 0.0004,
+      "actual": 0.00042500000000000003,
+      "error": 0.00002500000000000001,
+      "tolerance": 0.000096
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -10,
+      "key": "screen_a",
+      "target": 0.00365,
+      "actual": 0.003645,
+      "error": 0.00000500000000000023,
+      "tolerance": 0.00022600000000000002
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -7,
+      "key": "conversion_s",
+      "target": 0.00008999999999999999,
+      "actual": 0.00009749999999999998,
+      "error": 0.0000074999999999999926,
+      "tolerance": 0.0000186
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -7,
+      "key": "plate_a",
+      "target": 0.0007,
+      "actual": 0.0007099999999999999,
+      "error": 0.000009999999999999918,
+      "tolerance": 0.00010800000000000001
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -7,
+      "key": "screen_a",
+      "target": 0.0035,
+      "actual": 0.003485,
+      "error": 0.000015000000000000256,
+      "tolerance": 0.00022000000000000003
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -5,
+      "key": "conversion_s",
+      "target": 0.000165,
+      "actual": 0.00017999999999999998,
+      "error": 0.000014999999999999985,
+      "tolerance": 0.0000216
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -5,
+      "key": "plate_a",
+      "target": 0.00107,
+      "actual": 0.0011,
+      "error": 0.00003000000000000008,
+      "tolerance": 0.0001228
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -5,
+      "key": "screen_a",
+      "target": 0.0032,
+      "actual": 0.0031999999999999997,
+      "error": 4.336808689942018e-19,
+      "tolerance": 0.00020800000000000001
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "conversion_s",
+      "target": 0.00035,
+      "actual": 0.000345,
+      "error": 0.000005000000000000013,
+      "tolerance": 0.000029
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "plate_a",
+      "target": 0.00175,
+      "actual": 0.001775,
+      "error": 0.000025000000000000066,
+      "tolerance": 0.00015000000000000001
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "screen_a",
+      "target": 0.0028,
+      "actual": 0.00279,
+      "error": 0.000010000000000000026,
+      "tolerance": 0.000192
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -1,
+      "key": "conversion_s",
+      "target": 0.00043,
+      "actual": 0.00041,
+      "error": 0.000019999999999999998,
+      "tolerance": 0.000032200000000000003
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -1,
+      "key": "plate_a",
+      "target": 0.00275,
+      "actual": 0.002725,
+      "error": 0.00002499999999999985,
+      "tolerance": 0.00019
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "bias_100v",
+      "x": -1,
+      "key": "screen_a",
+      "target": 0.0022500000000000003,
+      "actual": 0.00219,
+      "error": 0.00006000000000000016,
+      "tolerance": 0.00017
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "drive_250v",
+      "x": 150,
+      "key": "conversion_s",
+      "target": 0.00047999999999999996,
+      "actual": 0.00046999999999999993,
+      "error": 0.000010000000000000026,
+      "tolerance": 0.0000342
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "drive_250v",
+      "x": 300,
+      "key": "conversion_s",
+      "target": 0.00054,
+      "actual": 0.0005275,
+      "error": 0.000012500000000000033,
+      "tolerance": 0.0000366
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "drive_250v",
+      "x": 500,
+      "key": "conversion_s",
+      "target": 0.00054,
+      "actual": 0.0005375,
+      "error": 0.0000025000000000000066,
+      "tolerance": 0.0000366
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "drive_250v",
+      "x": 700,
+      "key": "conversion_s",
+      "target": 0.0005149999999999999,
+      "actual": 0.000515,
+      "error": 1.0842021724855044e-19,
+      "tolerance": 0.0000356
+    },
+    {
+      "kind": "withheld_graph_coordinate",
+      "slice": "drive_250v",
+      "x": 900,
+      "key": "conversion_s",
+      "target": 0.00047999999999999996,
+      "actual": 0.00048249999999999996,
+      "error": 0.0000025000000000000066,
+      "tolerance": 0.0000342
+    },
+    {
+      "kind": "published_typical_point",
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "conversion_s",
+      "target": 0.000375,
+      "actual": 0.000345,
+      "error": 0.000030000000000000024,
+      "tolerance": 0.000059999999999999995
+    },
+    {
+      "kind": "published_typical_point",
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "plate_a",
+      "target": 0.0018,
+      "actual": 0.001775,
+      "error": 0.00002499999999999985,
+      "tolerance": 0.000296
+    },
+    {
+      "kind": "published_typical_point",
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "screen_a",
+      "target": 0.0027,
+      "actual": 0.00279,
+      "error": 0.0000899999999999998,
+      "tolerance": 0.000404
+    },
+    {
+      "kind": "published_typical_point",
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "oscillator_anode_a",
+      "target": 0.0028,
+      "actual": 0.00276,
+      "error": 0.000040000000000000105,
+      "tolerance": 0.000416
+    },
+    {
+      "kind": "published_typical_point",
+      "slice": "drive_250v",
+      "x": 400,
+      "key": "conversion_s",
+      "target": 0.00055,
+      "actual": 0.000545,
+      "error": 0.000005000000000000013,
+      "tolerance": 0.000081
+    }
+  ],
+  "cases": {
+    "healthy": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 4.3124999999999974e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000017250000000000131
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.3124999999998894e-7
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 4.3124999999999534e-7
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0.000001725000000000009
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 4.312499999999892e-7
+        }
+      ],
+      "mean_ac_a": -7.176299209231753e-22,
+      "rms_ac_a": 0.0000018296387963201894,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "band_low": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 540000,
+        "lo_hz": 995000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 4.3125000000000037e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000017249999999999985
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.31250000000011e-7
+        },
+        {
+          "frequency_hz": 1534000,
+          "peak_a": 4.3124999999998857e-7
+        },
+        {
+          "frequency_hz": 1535000,
+          "peak_a": 0.0000017249999999999782
+        },
+        {
+          "frequency_hz": 1536000,
+          "peak_a": 4.3125000000000016e-7
+        }
+      ],
+      "mean_ac_a": -1.0123672877754706e-21,
+      "rms_ac_a": 0.0000018296387963201958,
+      "steps": 63680,
+      "dt_s": 3.1407035175879396e-8
+    },
+    "band_high": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1600000,
+        "lo_hz": 2055000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 4.3125000000028466e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000017249999999999862
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.312499999997102e-7
+        },
+        {
+          "frequency_hz": 3654000,
+          "peak_a": 4.312499999997104e-7
+        },
+        {
+          "frequency_hz": 3655000,
+          "peak_a": 0.0000017249999999999695
+        },
+        {
+          "frequency_hz": 3656000,
+          "peak_a": 4.3124999999971106e-7
+        }
+      ],
+      "mean_ac_a": -6.507947851335924e-21,
+      "rms_ac_a": 0.0000018296387963201877,
+      "steps": 131520,
+      "dt_s": 1.5206812652068126e-8
+    },
+    "low_side": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1600000,
+        "lo_hz": 1145000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 4.312499999997225e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000017250000000000017
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.312500000002892e-7
+        },
+        {
+          "frequency_hz": 2744000,
+          "peak_a": 4.3125000000029985e-7
+        },
+        {
+          "frequency_hz": 2745000,
+          "peak_a": 0.0000017249999999999939
+        },
+        {
+          "frequency_hz": 2746000,
+          "peak_a": 4.31250000000282e-7
+        }
+      ],
+      "mean_ac_a": -5.905608373988989e-21,
+      "rms_ac_a": 0.0000018296387963202074,
+      "steps": 102400,
+      "dt_s": 1.953125e-8
+    },
+    "retuned_lo": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1460000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 459000,
+          "peak_a": 4.312500000002839e-7
+        },
+        {
+          "frequency_hz": 460000,
+          "peak_a": 0.0000017250000000000233
+        },
+        {
+          "frequency_hz": 461000,
+          "peak_a": 4.3124999999970857e-7
+        },
+        {
+          "frequency_hz": 2459000,
+          "peak_a": 4.312499999999962e-7
+        },
+        {
+          "frequency_hz": 2460000,
+          "peak_a": 0.000001724999999999991
+        },
+        {
+          "frequency_hz": 2461000,
+          "peak_a": 4.3124999999999677e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 7.386801859438852e-20
+        }
+      ],
+      "mean_ac_a": 3.5705737836475525e-22,
+      "rms_ac_a": 0.000001829638796320202,
+      "steps": 93440,
+      "dt_s": 2.1404109589041097e-8
+    },
+    "bias_reduction": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -12,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -12,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -12
+        },
+        "values": {
+          "conversion_s": 0.000032,
+          "plate_a": 0.00028000000000000003,
+          "screen_a": 0.00372,
+          "oscillator_anode_a": 0.0027
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.00028000000000000003,
+        "screen_a": 0.00372,
+        "oscillator_anode_a": 0.0027
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 3.99999999999988e-8
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 1.5999999999999969e-7
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.000000000000015e-8
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 3.99999999999988e-8
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 1.6000000000000273e-7
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 3.9999999999999544e-8
+        }
+      ],
+      "mean_ac_a": -6.660865382369396e-23,
+      "rms_ac_a": 1.697056274847717e-7,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "drive_weak": {
+      "parameters": {
+        "slice": "drive_250v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 100,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "drive_250v",
+        "coordinate": 100,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 250,
+          "oscillator_anode_supply_v": 250,
+          "oscillator_anode_series_ohm": 20000,
+          "screen_v": 100,
+          "bias_v": -3,
+          "oscillator_grid_resistor_ohm": 50000,
+          "oscillator_grid_ua": 100
+        },
+        "values": {
+          "conversion_s": 0.00043
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": null,
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 5.374999999999777e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000021499999999999837
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 5.374999999999975e-7
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 5.37499999999982e-7
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0.000002150000000000018
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 5.374999999999936e-7
+        }
+      ],
+      "mean_ac_a": -9.093736079898153e-22,
+      "rms_ac_a": 0.000002280419369326615,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "drive_nominal": {
+      "parameters": {
+        "slice": "drive_250v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "drive_250v",
+        "coordinate": 400,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 250,
+          "oscillator_anode_supply_v": 250,
+          "oscillator_anode_series_ohm": 20000,
+          "screen_v": 100,
+          "bias_v": -3,
+          "oscillator_grid_resistor_ohm": 50000,
+          "oscillator_grid_ua": 400
+        },
+        "values": {
+          "conversion_s": 0.000545
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": null,
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 6.812499999999888e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000027250000000000082
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 6.81249999999997e-7
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 6.812499999999848e-7
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0.0000027249999999999896
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 6.812499999999928e-7
+        }
+      ],
+      "mean_ac_a": -1.1421569947896733e-21,
+      "rms_ac_a": 0.0000028902989681000187,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "drive_high": {
+      "parameters": {
+        "slice": "drive_250v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 1000,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "drive_250v",
+        "coordinate": 1000,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 250,
+          "oscillator_anode_supply_v": 250,
+          "oscillator_anode_series_ohm": 20000,
+          "screen_v": 100,
+          "bias_v": -3,
+          "oscillator_grid_resistor_ohm": 50000,
+          "oscillator_grid_ua": 1000
+        },
+        "values": {
+          "conversion_s": 0.00046499999999999997
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": null,
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 5.812499999999879e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000023249999999999748
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 5.812499999999951e-7
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 5.812499999999951e-7
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0.000002325000000000019
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 5.812500000000027e-7
+        }
+      ],
+      "mean_ac_a": -9.733912481703109e-22,
+      "rms_ac_a": 0.000002466034899388094,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "clock_removed": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": false,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": null,
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 0
+        }
+      ],
+      "mean_ac_a": 0,
+      "rms_ac_a": 0,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "rf_absent": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 0
+        }
+      ],
+      "mean_ac_a": 0,
+      "rms_ac_a": 0,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "unmodulated": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 7.141747882719272e-21
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000017250000000000267
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.1729653847809256e-21
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 7.220167186497772e-21
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0.0000017250000000000036
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 6.501187433644107e-21
+        }
+      ],
+      "mean_ac_a": 4.677787395779556e-22,
+      "rms_ac_a": 0.0000017250000000000064,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    },
+    "refined": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 64
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 4.312499999999997e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000017249999999999663
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.3124999999999995e-7
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 4.3124999999999783e-7
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0.0000017250000000000182
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 4.31249999999999e-7
+        }
+      ],
+      "mean_ac_a": -8.81189185568079e-23,
+      "rms_ac_a": 0.000001829638796320208,
+      "steps": 186240,
+      "dt_s": 1.0738831615120275e-8
+    },
+    "restored": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "reference": {
+        "slice": "bias_100v",
+        "coordinate": -3,
+        "conditions": {
+          "heater_v": 6.3,
+          "plate_v": 100,
+          "oscillator_anode_v": 100,
+          "screen_v": 75,
+          "oscillator_grid_a": 0.0002,
+          "oscillator_grid_resistor_ohm": 50000,
+          "bias_v": -3
+        },
+        "values": {
+          "conversion_s": 0.000345,
+          "plate_a": 0.001775,
+          "screen_a": 0.00279,
+          "oscillator_anode_a": 0.00276
+        },
+        "extrapolated": false
+      },
+      "reference_dc_currents_a": {
+        "plate_a": 0.001775,
+        "screen_a": 0.00279,
+        "oscillator_anode_a": 0.00276
+      },
+      "spectrum": [
+        {
+          "frequency_hz": 454000,
+          "peak_a": 4.3124999999999974e-7
+        },
+        {
+          "frequency_hz": 455000,
+          "peak_a": 0.0000017250000000000131
+        },
+        {
+          "frequency_hz": 456000,
+          "peak_a": 4.3124999999998894e-7
+        },
+        {
+          "frequency_hz": 2454000,
+          "peak_a": 4.3124999999999534e-7
+        },
+        {
+          "frequency_hz": 2455000,
+          "peak_a": 0.000001725000000000009
+        },
+        {
+          "frequency_hz": 2456000,
+          "peak_a": 4.312499999999892e-7
+        }
+      ],
+      "mean_ac_a": -7.176299209231753e-22,
+      "rms_ac_a": 0.0000018296387963201894,
+      "steps": 93120,
+      "dt_s": 2.147766323024055e-8
+    }
+  },
+  "closed_ec_ids": []
+}

@@ -1,6 +1,6 @@
 {
   "schema": "PT44_IF_RECEIVER_MODEL_V1",
-  "version": "0.61.0",
+  "version": "0.62.0",
   "model": "Philco PT-44",
   "scope": "Joint hot DC supply, tuned IF, detector/AVC and nonlinear audio; converter replaced by explicit current injection and residual loads. Not a complete receiver.",
   "factory_terminal_nets": {
@@ -455,7 +455,8 @@
     "scope": "Joint electrical IF-to-speaker response; electrical speaker equivalent, no acoustic calibration.",
     "convergence": "Damped Newton with up to four step subdivisions on failure; strict signal-node residuals, 1 nA supply-node stopping allowance for fine-step roundoff, overall accepted normalized residual <10 nA. Leakage equilibrium uses conductance continuation.",
     "release": "After the existing short arrival, remove injected IF current, resolve 0.2 ms ringdown at carrier steps, then continue all 26 states with backward Euler at <=0.1 ms for 1 s. No AVC reset or fitted release law. Step/ringdown convergence and independent SPICE continuation checked. Long-duration attack/steady regulation remain unvalidated. Early AVC-probe steps are bounded by C8*probe_resistance/50 through 20 probe RC time constants; independent recovery-time checks include the fast 10 kohm service probe.",
-    "idle_supply_extension": "engineering/PT44_Receiver_Power_Fixture_V1.json extends the same MNA to idle AC/DC electrical charging/discharge with restricted supply overrides. Original carrier/AC alignment/AVC release fixtures keep their existing initialization and timing contracts."
+    "idle_supply_extension": "engineering/PT44_Receiver_Power_Fixture_V1.json extends the same MNA to idle AC/DC electrical charging/discharge with restricted supply overrides. Original carrier/AC alignment/AVC release fixtures keep their existing initialization and timing contracts.",
+    "release_spice_solver": "Adaptive Gear order 2, reltol 1e-8 and abstol 1e-13; requested time resolution 1 us instead of 100 us gives finer adaptive initialization of residual IF states, with max timestep still 100 us. Captured failing states are checked under default and KLU engines in PT44_AVC_Release_Solver_Fixture_V1.json. Circuit and checkpoint tolerances are unchanged."
   },
   "source_if_trace": "engineering/PT44_IF_Tuning_Winding_Trace_V1.json"
 }

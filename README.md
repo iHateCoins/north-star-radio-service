@@ -1,52 +1,25 @@
-# North Star Radio Service — v0.61.0 idle receiver supply envelope
+# North Star Radio Service — v0.63.0 playable PT-44
 
-The same 26-state IF/detector/audio/supply circuit now runs AC/DC electrical charging, ripple and discharge with **actual modeled 7B7 and audio currents**. This extends the brief hot-DC IF fixture to an idle receiver supply study; it does not inject a carrier. The remaining 7A8 plate/screen demand is still represented by explicit converter substitutes.
+The first PT-44 now runs one shared behavioral receiver. Actual installed part properties, tuning, volume, alignment, supply and instrument loading produce sound, service readings, tracer levels, AVC and damage together. Correct repairs restore those outputs; unrelated replacement does not clear the fault.
 
-The Factory ledger adds an **Idle receiver supply** panel with line/rectifier/instrument conditions, filter and tube faults, source removal, restoration, timed measurements, a rail-voltage plot and a matching SPICE export. Calculations run in a background worker.
+The user approved a scope change to believable surface behavior and cause/effect. The fixed nine-package finish line is now [game completion V2](gameplay/PT44_Game_Completion_V2.json). Full circuit simulation, exhaustive curve matching and exact undocumented wiring are optional research. Original scientific acceptance files remain historical records; V2 closures do not claim that V1 scientific gates passed.
 
-## EC support and closure
-
-| EC supported | Evidence added in v0.61 | Full EC closed? |
+| EC | v0.63 result | Remaining |
 |---|---|---|
-| **EC-03** | AC/DC charging, ripple and discharge with jointly solved IF/audio loads; line/reference sensitivity, faults and restoration. | No |
-| **EC-04** | Electrical speaker hum and filter-fault response under the same receiver/supply loading. | No |
-| **EC-07** | Explicit idle input, initialization, line/rectifier/probe settings, measurement windows, numerical bounds and curve extrapolation. | No |
+| EC-04 | **Closed under V2:** playable volume/audio, coupling/bias, output tube, transformer/speaker faults and replacement checkout. | Regression maintenance against the fixed behavioral criteria. |
+| EC-06 | **Closed under V2:** full-band high-side conversion, dead/weak oscillator/converter, aerial loop, trim errors, injection and restoration. | Regression maintenance against the fixed behavioral criteria. |
+| EC-03 | Supports power, warmup, heater string, residual charge and fault stress. | Complete live power-cycle and cascade acceptance matrix. |
+| EC-05 | Supports 455 kHz filtering, three manual IF controls, detector and timed AVC. | Combined IF/detector fault and complete alignment acceptance. |
+| EC-07 | Supports loaded DC ports, RF/IF/audio generator and coherent tracer. | Full instrument range, polarity and component-tester matrix. |
+| EC-09 | Supports all 20 stock faults in the fixed core matrix plus real-shop repair scenarios. | All-stock-fault browser diagnosis/repair matrix and final acceptance. |
+| EC-01 / EC-02 / EC-08 | Remain open/in progress with bounded reviews. | Source/presentation ambiguities; catalog behavior coverage; chassis/access review. |
 
-All nine acceptance lists and six **NOT MET** completion gates remain unchanged. No full EC closes. Broader game development remains on hold.
+The PT-44 is not yet fully engineering complete. Broader game development remains on hold. New fidelity work requires a separate scope decision; it does not silently expand these package criteria.
 
-## Conditions and limits
+Open `index.html` in a modern browser. The playable bench includes a **Generator / alignment** tab: select aerial, IF or volume injection; set frequency/level; peak 12A/12B/14A and oscillator/aerial trims manually. Supply and alignment persist with the radio. Loop repairs use the existing power-off/discharge guard. The meter offers named service ports with B− reference. Checkout disables the generator and restores the player's tuning/volume after its standard test.
 
-Capacitor voltages and inductor currents start at zero. Heater resistance and emission start at their nominal-hot assumptions and have no temperature evolution. This is **electrical storage charging, not cold thermal startup**. Switching off removes the source, while the assumed emission laws remain; heater cooling is not simulated.
+Readings are declared game approximations, not calibrated historical measurements. Extra service ports do not certify unresolved socket wiring. Research ledger panels retain their original narrower scope and are optional references.
 
-No synthetic detector voltage or injected IF current drives this fixture. The actual modeled 7B7, 7C6 and 50L6 currents load the shared supply. The 30 kΩ converter plate and 120 kΩ screen substitutes remain. Neither RF reception nor long-duration signal-driven AVC regulation is established. There is no acoustic speaker calibration.
+Validation: `node tests/test_gameplay_v63.js`; `node tests/test_gameplay_browser_v63.js --browser` with Playwright/Chromium. The game workflow runs both. Historical electrical/SPICE workflows remain available through manual dispatch. See [model scope and reproduction](gameplay/README.md) and [previous research release](engineering/RELEASE_v062.md).
 
-Backward Euler uses a default 1/48000 s step. Signal-node stopping tolerance is 20 pA, supply-node stopping allowance is 1 nA; accepted normalized residual remains below 10 nA. Half-step checks and comparison with the existing stricter 20 fA signal-node solver bound the reported supply behavior. This supply tolerance is separate from the tight sub-microvolt AVC release solver, which is unchanged.
-
-The 10% reservoir-capacitance fault uses an eight-times finer 1/384000 s step to resolve narrow charging pulses against SPICE; its comparison tolerance is unchanged.
-
-Measurements use full-rate states over the final six mains periods; plots are decimated. Full-rate interpolated charging/discharge checkpoints are retained separately. Supply duration/step govern the run; the receiver parameter block retains inherited IF timing defaults that are unused with zero injection. All node voltages reference B-minus; no chassis bond is asserted. The switch-off fixture records the actual modeled discharge curve rather than imposing the older resistor-load decay time.
-
-GE legacy and RCA reference selection follows the same shared circuits and exports. RCA checks remain limited to nominal heater conditions and 5–40 V forward drop. Extrapolated conducting steps are reported separately for the whole run and measurement window. Emission-scaled faults and unverified tube, transformer, field, heater and lamp parameters remain assumptions. No historical voltage label was used as a pass/fail target.
-
-## Remaining work
-
-- **EC-01:** Physical diode pins, oscillator coupling interpretation and approved #8 resolution.
-- **EC-02:** Remaining tube/winding/audio/field/heater/lamp correlation, including rectifier extrapolation and thermal behavior.
-- **EC-03:** Actual converter currents; full receiver with RF operating; cold-heater/lamp/field behavior and broader supply envelope beyond the idle fixture.
-- **EC-04:** Audio/transformer/speaker parameter and frequency-envelope correlation; shop integration.
-- **EC-05:** Passband/trimmer/diode correlation, long-duration attack/steady AVC and converter feedback.
-- **EC-06:** RF/oscillator/converter tracking across 540–1600 kHz.
-- **EC-07/08:** RF/shop instruments, historical service conditions and serviceable chassis access/crosswalk.
-- **EC-09:** Full receiver baseline and complete diagnosis/replacement/alignment/checkout acceptance.
-
-## Evidence and reproduction
-
-- `engineering/PT44_Receiver_Power_Fixture_V1.json`: conditions, faults, numerical contract and limits.
-- `engineering/PT44_Receiver_Power_Validation_V1.json`: AC/DC, line/reference/probe sensitivity, faults/restoration, discharge and precision checks.
-- `engineering/PT44_Receiver_Power_Spice_Validation_V1.json`: independent adaptive Gear execution with zero electrical initial storage; waveform statistics and charging/discharge checkpoints.
-- `node tests/test_receiver_power_v61.js --record`
-- `node tests/test_receiver_power_spice_v61.js --ngspice --record`
-- `node tests/test_receiver_power_workbench_v61.js`
-- `node tests/test_receiver_power_browser_v61.js --browser`
-
-Existing source, power, audio, detector, IF, alignment, rectifier and AVC release regressions remain in CI. Watermark: **BUILD v0.61.0**.
+Watermark: **BUILD v0.63.0**.

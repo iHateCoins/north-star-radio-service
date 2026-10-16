@@ -1,0 +1,3941 @@
+{
+  "schema": "PT44_7A8_SPICE_VALIDATION_V1",
+  "version": "0.62.0",
+  "scope": "Independent ngspice evaluation of curve interpolation and behavioral separately driven frequency translation; not independent tube measurements or oscillator/receiver validation.",
+  "curves": [
+    {
+      "slice": "bias_100v",
+      "x": -20,
+      "key": "conversion_s",
+      "javascript": 0.0000049999999999999996,
+      "ngspice": 0.000005,
+      "absolute_error": 8.470329472543003e-22
+    },
+    {
+      "slice": "bias_100v",
+      "x": -20,
+      "key": "plate_a",
+      "javascript": 0.00004,
+      "ngspice": 0.00004,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -20,
+      "key": "screen_a",
+      "javascript": 0.00398,
+      "ngspice": 0.00398,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -20,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.75,
+      "key": "conversion_s",
+      "javascript": 0.000005687499999999999,
+      "ngspice": 0.000005687499999999996,
+      "absolute_error": 3.3881317890172014e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.75,
+      "key": "plate_a",
+      "javascript": 0.000045,
+      "ngspice": 0.00004500000000000001,
+      "absolute_error": 6.776263578034403e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.75,
+      "key": "screen_a",
+      "javascript": 0.003970625,
+      "ngspice": 0.003970625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.5,
+      "key": "conversion_s",
+      "javascript": 0.000006374999999999999,
+      "ngspice": 0.000006374999999999999,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.5,
+      "key": "plate_a",
+      "javascript": 0.00005,
+      "ngspice": 0.00004999999999999997,
+      "absolute_error": 3.3881317890172014e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.5,
+      "key": "screen_a",
+      "javascript": 0.00396125,
+      "ngspice": 0.00396125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.25,
+      "key": "conversion_s",
+      "javascript": 0.0000070625,
+      "ngspice": 0.000007062499999999995,
+      "absolute_error": 5.082197683525802e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.25,
+      "key": "plate_a",
+      "javascript": 0.000055,
+      "ngspice": 0.00005500000000000004,
+      "absolute_error": 4.0657581468206416e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.25,
+      "key": "screen_a",
+      "javascript": 0.003951875,
+      "ngspice": 0.003951875000000001,
+      "absolute_error": 1.734723475976807e-18
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19,
+      "key": "conversion_s",
+      "javascript": 0.000007749999999999999,
+      "ngspice": 0.000007750000000000005,
+      "absolute_error": 6.776263578034403e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19,
+      "key": "plate_a",
+      "javascript": 0.00006,
+      "ngspice": 0.00006000000000000005,
+      "absolute_error": 4.743384504624082e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19,
+      "key": "screen_a",
+      "javascript": 0.0039425,
+      "ngspice": 0.0039425,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -19,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.75,
+      "key": "conversion_s",
+      "javascript": 0.000008437499999999998,
+      "ngspice": 0.000008437499999999995,
+      "absolute_error": 3.3881317890172014e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.75,
+      "key": "plate_a",
+      "javascript": 0.00006500000000000001,
+      "ngspice": 0.00006500000000000001,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.75,
+      "key": "screen_a",
+      "javascript": 0.003933125,
+      "ngspice": 0.003933125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.5,
+      "key": "conversion_s",
+      "javascript": 0.000009125,
+      "ngspice": 0.000009124999999999998,
+      "absolute_error": 1.6940658945086007e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.5,
+      "key": "plate_a",
+      "javascript": 0.00007,
+      "ngspice": 0.00006999999999999997,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.5,
+      "key": "screen_a",
+      "javascript": 0.00392375,
+      "ngspice": 0.00392375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.25,
+      "key": "conversion_s",
+      "javascript": 0.0000098125,
+      "ngspice": 0.000009812499999999995,
+      "absolute_error": 5.082197683525802e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.25,
+      "key": "plate_a",
+      "javascript": 0.00007500000000000001,
+      "ngspice": 0.00007500000000000003,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.25,
+      "key": "screen_a",
+      "javascript": 0.003914375,
+      "ngspice": 0.003914375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18,
+      "key": "conversion_s",
+      "javascript": 0.0000105,
+      "ngspice": 0.0000105,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18,
+      "key": "plate_a",
+      "javascript": 0.00007999999999999999,
+      "ngspice": 0.00008000000000000005,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18,
+      "key": "screen_a",
+      "javascript": 0.003905,
+      "ngspice": 0.003905,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -18,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.75,
+      "key": "conversion_s",
+      "javascript": 0.0000111875,
+      "ngspice": 0.00001118749999999999,
+      "absolute_error": 8.470329472543003e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.75,
+      "key": "plate_a",
+      "javascript": 0.000085,
+      "ngspice": 0.000085,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.75,
+      "key": "screen_a",
+      "javascript": 0.003895625,
+      "ngspice": 0.003895625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.5,
+      "key": "conversion_s",
+      "javascript": 0.000011874999999999999,
+      "ngspice": 0.000011875,
+      "absolute_error": 1.6940658945086007e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.5,
+      "key": "plate_a",
+      "javascript": 0.00008999999999999999,
+      "ngspice": 0.00008999999999999997,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.5,
+      "key": "screen_a",
+      "javascript": 0.00388625,
+      "ngspice": 0.00388625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.25,
+      "key": "conversion_s",
+      "javascript": 0.0000125625,
+      "ngspice": 0.00001256249999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.25,
+      "key": "plate_a",
+      "javascript": 0.000095,
+      "ngspice": 0.00009500000000000003,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.25,
+      "key": "screen_a",
+      "javascript": 0.003876875,
+      "ngspice": 0.003876875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17,
+      "key": "conversion_s",
+      "javascript": 0.00001325,
+      "ngspice": 0.00001325,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17,
+      "key": "plate_a",
+      "javascript": 0.00009999999999999999,
+      "ngspice": 0.0001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17,
+      "key": "screen_a",
+      "javascript": 0.0038675000000000003,
+      "ngspice": 0.0038675,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -17,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.75,
+      "key": "conversion_s",
+      "javascript": 0.0000139375,
+      "ngspice": 0.00001393749999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.75,
+      "key": "plate_a",
+      "javascript": 0.000105,
+      "ngspice": 0.0001050000000000001,
+      "absolute_error": 9.486769009248164e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.75,
+      "key": "screen_a",
+      "javascript": 0.003858125,
+      "ngspice": 0.003858125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.5,
+      "key": "conversion_s",
+      "javascript": 0.000014625,
+      "ngspice": 0.000014625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.5,
+      "key": "plate_a",
+      "javascript": 0.00010999999999999999,
+      "ngspice": 0.00011,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.5,
+      "key": "screen_a",
+      "javascript": 0.00384875,
+      "ngspice": 0.00384875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.25,
+      "key": "conversion_s",
+      "javascript": 0.0000153125,
+      "ngspice": 0.00001531249999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.25,
+      "key": "plate_a",
+      "javascript": 0.000115,
+      "ngspice": 0.000115,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.25,
+      "key": "screen_a",
+      "javascript": 0.003839375,
+      "ngspice": 0.003839375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16,
+      "key": "conversion_s",
+      "javascript": 0.000016,
+      "ngspice": 0.000016,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16,
+      "key": "plate_a",
+      "javascript": 0.00011999999999999999,
+      "ngspice": 0.00012,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16,
+      "key": "screen_a",
+      "javascript": 0.00383,
+      "ngspice": 0.00383,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -16,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.75,
+      "key": "conversion_s",
+      "javascript": 0.000017,
+      "ngspice": 0.00001699999999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.75,
+      "key": "plate_a",
+      "javascript": 0.00013000000000000002,
+      "ngspice": 0.00013,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.75,
+      "key": "screen_a",
+      "javascript": 0.003823125,
+      "ngspice": 0.003823125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.5,
+      "key": "conversion_s",
+      "javascript": 0.000018,
+      "ngspice": 0.000018,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.5,
+      "key": "plate_a",
+      "javascript": 0.00014000000000000001,
+      "ngspice": 0.00014,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.5,
+      "key": "screen_a",
+      "javascript": 0.00381625,
+      "ngspice": 0.00381625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.25,
+      "key": "conversion_s",
+      "javascript": 0.000019,
+      "ngspice": 0.00001900000000000001,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.25,
+      "key": "plate_a",
+      "javascript": 0.00015000000000000001,
+      "ngspice": 0.00015,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.25,
+      "key": "screen_a",
+      "javascript": 0.0038093750000000003,
+      "ngspice": 0.003809375,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15,
+      "key": "conversion_s",
+      "javascript": 0.000019999999999999998,
+      "ngspice": 0.00002,
+      "absolute_error": 3.3881317890172014e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15,
+      "key": "plate_a",
+      "javascript": 0.00016,
+      "ngspice": 0.00016,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15,
+      "key": "screen_a",
+      "javascript": 0.0038025000000000003,
+      "ngspice": 0.0038025,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -15,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.75,
+      "key": "conversion_s",
+      "javascript": 0.000021,
+      "ngspice": 0.000021,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.75,
+      "key": "plate_a",
+      "javascript": 0.00017,
+      "ngspice": 0.00017,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.75,
+      "key": "screen_a",
+      "javascript": 0.003795625,
+      "ngspice": 0.003795625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.5,
+      "key": "conversion_s",
+      "javascript": 0.000022,
+      "ngspice": 0.00002199999999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.5,
+      "key": "plate_a",
+      "javascript": 0.00018,
+      "ngspice": 0.00018,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.5,
+      "key": "screen_a",
+      "javascript": 0.00378875,
+      "ngspice": 0.00378875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.25,
+      "key": "conversion_s",
+      "javascript": 0.000023,
+      "ngspice": 0.00002300000000000001,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.25,
+      "key": "plate_a",
+      "javascript": 0.00019,
+      "ngspice": 0.00019,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.25,
+      "key": "screen_a",
+      "javascript": 0.003781875,
+      "ngspice": 0.003781875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14,
+      "key": "conversion_s",
+      "javascript": 0.000024,
+      "ngspice": 0.00002399999999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14,
+      "key": "plate_a",
+      "javascript": 0.00020000000000000004,
+      "ngspice": 0.0002,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14,
+      "key": "screen_a",
+      "javascript": 0.003775,
+      "ngspice": 0.003775,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -14,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.75,
+      "key": "conversion_s",
+      "javascript": 0.000024999999999999998,
+      "ngspice": 0.000025,
+      "absolute_error": 3.3881317890172014e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.75,
+      "key": "plate_a",
+      "javascript": 0.00021,
+      "ngspice": 0.00021,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.75,
+      "key": "screen_a",
+      "javascript": 0.003768125,
+      "ngspice": 0.003768125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.5,
+      "key": "conversion_s",
+      "javascript": 0.000026,
+      "ngspice": 0.000026,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.5,
+      "key": "plate_a",
+      "javascript": 0.00022000000000000003,
+      "ngspice": 0.00022,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.5,
+      "key": "screen_a",
+      "javascript": 0.0037612500000000003,
+      "ngspice": 0.00376125,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.25,
+      "key": "conversion_s",
+      "javascript": 0.000027,
+      "ngspice": 0.00002699999999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.25,
+      "key": "plate_a",
+      "javascript": 0.00023000000000000003,
+      "ngspice": 0.00023,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.25,
+      "key": "screen_a",
+      "javascript": 0.0037543750000000003,
+      "ngspice": 0.003754375,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13,
+      "key": "conversion_s",
+      "javascript": 0.000028,
+      "ngspice": 0.00002800000000000001,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13,
+      "key": "plate_a",
+      "javascript": 0.00024000000000000003,
+      "ngspice": 0.00024,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13,
+      "key": "screen_a",
+      "javascript": 0.0037475,
+      "ngspice": 0.0037475,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -13,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.75,
+      "key": "conversion_s",
+      "javascript": 0.000029,
+      "ngspice": 0.00002899999999999999,
+      "absolute_error": 1.0164395367051604e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.75,
+      "key": "plate_a",
+      "javascript": 0.00025000000000000006,
+      "ngspice": 0.00025,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.75,
+      "key": "screen_a",
+      "javascript": 0.003740625,
+      "ngspice": 0.003740625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.5,
+      "key": "conversion_s",
+      "javascript": 0.000029999999999999997,
+      "ngspice": 0.00003,
+      "absolute_error": 3.3881317890172014e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.5,
+      "key": "plate_a",
+      "javascript": 0.00026000000000000003,
+      "ngspice": 0.00026,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.5,
+      "key": "screen_a",
+      "javascript": 0.00373375,
+      "ngspice": 0.00373375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.25,
+      "key": "conversion_s",
+      "javascript": 0.000030999999999999995,
+      "ngspice": 0.00003099999999999999,
+      "absolute_error": 6.776263578034403e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.25,
+      "key": "plate_a",
+      "javascript": 0.00027000000000000006,
+      "ngspice": 0.0002699999999999999,
+      "absolute_error": 1.6263032587282567e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.25,
+      "key": "screen_a",
+      "javascript": 0.003726875,
+      "ngspice": 0.003726875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12,
+      "key": "conversion_s",
+      "javascript": 0.000032,
+      "ngspice": 0.00003199999999999999,
+      "absolute_error": 6.776263578034403e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12,
+      "key": "plate_a",
+      "javascript": 0.00028000000000000003,
+      "ngspice": 0.00028,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12,
+      "key": "screen_a",
+      "javascript": 0.00372,
+      "ngspice": 0.00372,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -12,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.75,
+      "key": "conversion_s",
+      "javascript": 0.000034687499999999996,
+      "ngspice": 0.0000346875,
+      "absolute_error": 6.776263578034403e-21
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.75,
+      "key": "plate_a",
+      "javascript": 0.00029812500000000005,
+      "ngspice": 0.000298125,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.75,
+      "key": "screen_a",
+      "javascript": 0.0037106250000000004,
+      "ngspice": 0.003710625,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.5,
+      "key": "conversion_s",
+      "javascript": 0.000037375,
+      "ngspice": 0.000037375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.5,
+      "key": "plate_a",
+      "javascript": 0.00031625,
+      "ngspice": 0.00031625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.5,
+      "key": "screen_a",
+      "javascript": 0.00370125,
+      "ngspice": 0.003701250000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.25,
+      "key": "conversion_s",
+      "javascript": 0.0000400625,
+      "ngspice": 0.0000400625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.25,
+      "key": "plate_a",
+      "javascript": 0.00033437500000000004,
+      "ngspice": 0.0003343749999999999,
+      "absolute_error": 1.6263032587282567e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.25,
+      "key": "screen_a",
+      "javascript": 0.0036918750000000003,
+      "ngspice": 0.003691875,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11,
+      "key": "conversion_s",
+      "javascript": 0.000042749999999999996,
+      "ngspice": 0.00004275000000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11,
+      "key": "plate_a",
+      "javascript": 0.0003525,
+      "ngspice": 0.0003524999999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11,
+      "key": "screen_a",
+      "javascript": 0.0036825,
+      "ngspice": 0.0036825,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -11,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.75,
+      "key": "conversion_s",
+      "javascript": 0.0000454375,
+      "ngspice": 0.0000454375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.75,
+      "key": "plate_a",
+      "javascript": 0.000370625,
+      "ngspice": 0.000370625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.75,
+      "key": "screen_a",
+      "javascript": 0.003673125,
+      "ngspice": 0.003673125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.5,
+      "key": "conversion_s",
+      "javascript": 0.000048125,
+      "ngspice": 0.000048125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.5,
+      "key": "plate_a",
+      "javascript": 0.00038875,
+      "ngspice": 0.00038875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.5,
+      "key": "screen_a",
+      "javascript": 0.00366375,
+      "ngspice": 0.00366375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.25,
+      "key": "conversion_s",
+      "javascript": 0.000050812499999999995,
+      "ngspice": 0.00005081250000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.25,
+      "key": "plate_a",
+      "javascript": 0.000406875,
+      "ngspice": 0.000406875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.25,
+      "key": "screen_a",
+      "javascript": 0.003654375,
+      "ngspice": 0.003654375000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10,
+      "key": "conversion_s",
+      "javascript": 0.0000535,
+      "ngspice": 0.0000535,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10,
+      "key": "plate_a",
+      "javascript": 0.00042500000000000003,
+      "ngspice": 0.000425,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10,
+      "key": "screen_a",
+      "javascript": 0.003645,
+      "ngspice": 0.003645,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -10,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.75,
+      "key": "conversion_s",
+      "javascript": 0.0000561875,
+      "ngspice": 0.0000561875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.75,
+      "key": "plate_a",
+      "javascript": 0.000443125,
+      "ngspice": 0.0004431249999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.75,
+      "key": "screen_a",
+      "javascript": 0.003635625,
+      "ngspice": 0.003635625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.5,
+      "key": "conversion_s",
+      "javascript": 0.000058874999999999995,
+      "ngspice": 0.00005887500000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.5,
+      "key": "plate_a",
+      "javascript": 0.00046124999999999996,
+      "ngspice": 0.00046125,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.5,
+      "key": "screen_a",
+      "javascript": 0.00362625,
+      "ngspice": 0.00362625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.25,
+      "key": "conversion_s",
+      "javascript": 0.0000615625,
+      "ngspice": 0.00006156250000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.25,
+      "key": "plate_a",
+      "javascript": 0.000479375,
+      "ngspice": 0.000479375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.25,
+      "key": "screen_a",
+      "javascript": 0.003616875,
+      "ngspice": 0.003616875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9,
+      "key": "conversion_s",
+      "javascript": 0.00006424999999999999,
+      "ngspice": 0.00006425,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9,
+      "key": "plate_a",
+      "javascript": 0.0004975,
+      "ngspice": 0.0004975,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9,
+      "key": "screen_a",
+      "javascript": 0.0036075,
+      "ngspice": 0.0036075,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -9,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.75,
+      "key": "conversion_s",
+      "javascript": 0.0000669375,
+      "ngspice": 0.00006693750000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.75,
+      "key": "plate_a",
+      "javascript": 0.000515625,
+      "ngspice": 0.000515625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.75,
+      "key": "screen_a",
+      "javascript": 0.0035981249999999998,
+      "ngspice": 0.003598125,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.5,
+      "key": "conversion_s",
+      "javascript": 0.000069625,
+      "ngspice": 0.00006962500000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.5,
+      "key": "plate_a",
+      "javascript": 0.0005337499999999999,
+      "ngspice": 0.0005337499999999999,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.5,
+      "key": "screen_a",
+      "javascript": 0.00358875,
+      "ngspice": 0.00358875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.25,
+      "key": "conversion_s",
+      "javascript": 0.0000723125,
+      "ngspice": 0.0000723125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.25,
+      "key": "plate_a",
+      "javascript": 0.000551875,
+      "ngspice": 0.000551875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.25,
+      "key": "screen_a",
+      "javascript": 0.0035793749999999997,
+      "ngspice": 0.003579375000000001,
+      "absolute_error": 1.3010426069826053e-18
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8,
+      "key": "conversion_s",
+      "javascript": 0.000075,
+      "ngspice": 0.00007500000000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8,
+      "key": "plate_a",
+      "javascript": 0.00057,
+      "ngspice": 0.00057,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8,
+      "key": "screen_a",
+      "javascript": 0.00357,
+      "ngspice": 0.00357,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -8,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027,
+      "ngspice": 0.0027,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.75,
+      "key": "conversion_s",
+      "javascript": 0.000080625,
+      "ngspice": 0.000080625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.75,
+      "key": "plate_a",
+      "javascript": 0.000605,
+      "ngspice": 0.0006050000000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.75,
+      "key": "screen_a",
+      "javascript": 0.00354875,
+      "ngspice": 0.00354875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027025,
+      "ngspice": 0.0027025,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.5,
+      "key": "conversion_s",
+      "javascript": 0.00008625,
+      "ngspice": 0.00008625000000000001,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.5,
+      "key": "plate_a",
+      "javascript": 0.0006399999999999999,
+      "ngspice": 0.0006399999999999997,
+      "absolute_error": 2.168404344971009e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.5,
+      "key": "screen_a",
+      "javascript": 0.0035275,
+      "ngspice": 0.0035275,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.002705,
+      "ngspice": 0.002705,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.25,
+      "key": "conversion_s",
+      "javascript": 0.000091875,
+      "ngspice": 0.000091875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.25,
+      "key": "plate_a",
+      "javascript": 0.0006749999999999999,
+      "ngspice": 0.000675,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.25,
+      "key": "screen_a",
+      "javascript": 0.00350625,
+      "ngspice": 0.00350625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027075000000000003,
+      "ngspice": 0.0027075,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7,
+      "key": "conversion_s",
+      "javascript": 0.00009749999999999998,
+      "ngspice": 0.00009750000000000001,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7,
+      "key": "plate_a",
+      "javascript": 0.0007099999999999999,
+      "ngspice": 0.0007099999999999997,
+      "absolute_error": 2.168404344971009e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7,
+      "key": "screen_a",
+      "javascript": 0.003485,
+      "ngspice": 0.003485,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -7,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00271,
+      "ngspice": 0.00271,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.75,
+      "key": "conversion_s",
+      "javascript": 0.000103125,
+      "ngspice": 0.000103125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.75,
+      "key": "plate_a",
+      "javascript": 0.000745,
+      "ngspice": 0.000745,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.75,
+      "key": "screen_a",
+      "javascript": 0.00346375,
+      "ngspice": 0.00346375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027125,
+      "ngspice": 0.002712500000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.5,
+      "key": "conversion_s",
+      "javascript": 0.00010874999999999999,
+      "ngspice": 0.00010875,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.5,
+      "key": "plate_a",
+      "javascript": 0.00078,
+      "ngspice": 0.00078,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.5,
+      "key": "screen_a",
+      "javascript": 0.0034425,
+      "ngspice": 0.0034425,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027150000000000004,
+      "ngspice": 0.002715,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.25,
+      "key": "conversion_s",
+      "javascript": 0.00011437499999999999,
+      "ngspice": 0.000114375,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.25,
+      "key": "plate_a",
+      "javascript": 0.000815,
+      "ngspice": 0.000815,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.25,
+      "key": "screen_a",
+      "javascript": 0.00342125,
+      "ngspice": 0.00342125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027175000000000003,
+      "ngspice": 0.0027175,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6,
+      "key": "conversion_s",
+      "javascript": 0.00011999999999999999,
+      "ngspice": 0.00012,
+      "absolute_error": 1.3552527156068805e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6,
+      "key": "plate_a",
+      "javascript": 0.00085,
+      "ngspice": 0.00085,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6,
+      "key": "screen_a",
+      "javascript": 0.0034,
+      "ngspice": 0.0034,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -6,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00272,
+      "ngspice": 0.00272,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.75,
+      "key": "conversion_s",
+      "javascript": 0.00013499999999999997,
+      "ngspice": 0.000135,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.75,
+      "key": "plate_a",
+      "javascript": 0.0009125,
+      "ngspice": 0.0009125000000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.75,
+      "key": "screen_a",
+      "javascript": 0.0033499999999999997,
+      "ngspice": 0.00335,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00272375,
+      "ngspice": 0.00272375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.5,
+      "key": "conversion_s",
+      "javascript": 0.00015,
+      "ngspice": 0.00015,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.5,
+      "key": "plate_a",
+      "javascript": 0.000975,
+      "ngspice": 0.0009749999999999997,
+      "absolute_error": 2.168404344971009e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.5,
+      "key": "screen_a",
+      "javascript": 0.0033,
+      "ngspice": 0.0033,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027275,
+      "ngspice": 0.0027275,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.25,
+      "key": "conversion_s",
+      "javascript": 0.000165,
+      "ngspice": 0.000165,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.25,
+      "key": "plate_a",
+      "javascript": 0.0010375,
+      "ngspice": 0.0010375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.25,
+      "key": "screen_a",
+      "javascript": 0.00325,
+      "ngspice": 0.003250000000000001,
+      "absolute_error": 1.3010426069826053e-18
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00273125,
+      "ngspice": 0.002731250000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5,
+      "key": "conversion_s",
+      "javascript": 0.00017999999999999998,
+      "ngspice": 0.00018,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5,
+      "key": "plate_a",
+      "javascript": 0.0011,
+      "ngspice": 0.0011,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5,
+      "key": "screen_a",
+      "javascript": 0.0031999999999999997,
+      "ngspice": 0.0032,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.002735,
+      "ngspice": 0.002735,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.75,
+      "key": "conversion_s",
+      "javascript": 0.00019499999999999997,
+      "ngspice": 0.0001950000000000001,
+      "absolute_error": 1.3552527156068805e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.75,
+      "key": "plate_a",
+      "javascript": 0.0011625,
+      "ngspice": 0.0011625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.75,
+      "key": "screen_a",
+      "javascript": 0.00315,
+      "ngspice": 0.00315,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00273875,
+      "ngspice": 0.00273875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.5,
+      "key": "conversion_s",
+      "javascript": 0.00020999999999999998,
+      "ngspice": 0.00021,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.5,
+      "key": "plate_a",
+      "javascript": 0.001225,
+      "ngspice": 0.001225,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.5,
+      "key": "screen_a",
+      "javascript": 0.0031,
+      "ngspice": 0.0031,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027425,
+      "ngspice": 0.002742500000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.25,
+      "key": "conversion_s",
+      "javascript": 0.000225,
+      "ngspice": 0.000225,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.25,
+      "key": "plate_a",
+      "javascript": 0.0012875,
+      "ngspice": 0.0012875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.25,
+      "key": "screen_a",
+      "javascript": 0.00305,
+      "ngspice": 0.00305,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00274625,
+      "ngspice": 0.00274625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4,
+      "key": "conversion_s",
+      "javascript": 0.00023999999999999998,
+      "ngspice": 0.00024,
+      "absolute_error": 2.710505431213761e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4,
+      "key": "plate_a",
+      "javascript": 0.00135,
+      "ngspice": 0.00135,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4,
+      "key": "screen_a",
+      "javascript": 0.003,
+      "ngspice": 0.003,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -4,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00275,
+      "ngspice": 0.00275,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.75,
+      "key": "conversion_s",
+      "javascript": 0.00026625,
+      "ngspice": 0.00026625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.75,
+      "key": "plate_a",
+      "javascript": 0.00145625,
+      "ngspice": 0.00145625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.75,
+      "key": "screen_a",
+      "javascript": 0.0029475,
+      "ngspice": 0.0029475,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027524999999999997,
+      "ngspice": 0.0027525,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.5,
+      "key": "conversion_s",
+      "javascript": 0.0002925,
+      "ngspice": 0.0002925,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.5,
+      "key": "plate_a",
+      "javascript": 0.0015625,
+      "ngspice": 0.0015625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.5,
+      "key": "screen_a",
+      "javascript": 0.002895,
+      "ngspice": 0.002895,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027549999999999996,
+      "ngspice": 0.002755000000000001,
+      "absolute_error": 1.3010426069826053e-18
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.25,
+      "key": "conversion_s",
+      "javascript": 0.00031874999999999997,
+      "ngspice": 0.00031875,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.25,
+      "key": "plate_a",
+      "javascript": 0.00166875,
+      "ngspice": 0.00166875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.25,
+      "key": "screen_a",
+      "javascript": 0.0028425,
+      "ngspice": 0.0028425,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027575,
+      "ngspice": 0.0027575,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "conversion_s",
+      "javascript": 0.000345,
+      "ngspice": 0.000345,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "plate_a",
+      "javascript": 0.001775,
+      "ngspice": 0.001775,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "screen_a",
+      "javascript": 0.00279,
+      "ngspice": 0.00279,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -3,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00276,
+      "ngspice": 0.00276,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.75,
+      "key": "conversion_s",
+      "javascript": 0.00037125,
+      "ngspice": 0.00037125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.75,
+      "key": "plate_a",
+      "javascript": 0.0018812500000000001,
+      "ngspice": 0.00188125,
+      "absolute_error": 2.168404344971009e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.75,
+      "key": "screen_a",
+      "javascript": 0.0027375000000000003,
+      "ngspice": 0.0027375,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027624999999999998,
+      "ngspice": 0.0027625,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.5,
+      "key": "conversion_s",
+      "javascript": 0.00039749999999999996,
+      "ngspice": 0.0003975,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.5,
+      "key": "plate_a",
+      "javascript": 0.0019875,
+      "ngspice": 0.0019875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.5,
+      "key": "screen_a",
+      "javascript": 0.0026850000000000003,
+      "ngspice": 0.002685,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.002765,
+      "ngspice": 0.002765000000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.25,
+      "key": "conversion_s",
+      "javascript": 0.00042375,
+      "ngspice": 0.00042375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.25,
+      "key": "plate_a",
+      "javascript": 0.00209375,
+      "ngspice": 0.00209375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.25,
+      "key": "screen_a",
+      "javascript": 0.0026325000000000003,
+      "ngspice": 0.002632499999999999,
+      "absolute_error": 1.3010426069826053e-18
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027675,
+      "ngspice": 0.0027675,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2,
+      "key": "conversion_s",
+      "javascript": 0.00045,
+      "ngspice": 0.00045,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2,
+      "key": "plate_a",
+      "javascript": 0.0022,
+      "ngspice": 0.0022,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2,
+      "key": "screen_a",
+      "javascript": 0.0025800000000000003,
+      "ngspice": 0.002580000000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -2,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00277,
+      "ngspice": 0.00277,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.75,
+      "key": "conversion_s",
+      "javascript": 0.00043999999999999996,
+      "ngspice": 0.00044,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.75,
+      "key": "plate_a",
+      "javascript": 0.00233125,
+      "ngspice": 0.00233125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.75,
+      "key": "screen_a",
+      "javascript": 0.0024825000000000003,
+      "ngspice": 0.0024825,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027737499999999997,
+      "ngspice": 0.00277375,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.5,
+      "key": "conversion_s",
+      "javascript": 0.00043,
+      "ngspice": 0.0004299999999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.5,
+      "key": "plate_a",
+      "javascript": 0.0024625000000000003,
+      "ngspice": 0.0024625,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.5,
+      "key": "screen_a",
+      "javascript": 0.0023850000000000004,
+      "ngspice": 0.002385,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027775,
+      "ngspice": 0.0027775,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.25,
+      "key": "conversion_s",
+      "javascript": 0.00042,
+      "ngspice": 0.00042,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.25,
+      "key": "plate_a",
+      "javascript": 0.00259375,
+      "ngspice": 0.002593750000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.25,
+      "key": "screen_a",
+      "javascript": 0.0022875000000000005,
+      "ngspice": 0.0022875,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00278125,
+      "ngspice": 0.00278125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1,
+      "key": "conversion_s",
+      "javascript": 0.00041,
+      "ngspice": 0.0004099999999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1,
+      "key": "plate_a",
+      "javascript": 0.002725,
+      "ngspice": 0.002725,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1,
+      "key": "screen_a",
+      "javascript": 0.00219,
+      "ngspice": 0.002190000000000001,
+      "absolute_error": 8.673617379884035e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -1,
+      "key": "oscillator_anode_a",
+      "javascript": 0.002785,
+      "ngspice": 0.002785,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.75,
+      "key": "conversion_s",
+      "javascript": 0.00039999999999999996,
+      "ngspice": 0.0004,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.75,
+      "key": "plate_a",
+      "javascript": 0.0028562500000000003,
+      "ngspice": 0.00285625,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.75,
+      "key": "screen_a",
+      "javascript": 0.0020925,
+      "ngspice": 0.0020925,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.75,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00278875,
+      "ngspice": 0.00278875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.5,
+      "key": "conversion_s",
+      "javascript": 0.00039,
+      "ngspice": 0.0003899999999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.5,
+      "key": "plate_a",
+      "javascript": 0.0029875,
+      "ngspice": 0.0029875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.5,
+      "key": "screen_a",
+      "javascript": 0.0019950000000000002,
+      "ngspice": 0.001995,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.5,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0027925,
+      "ngspice": 0.0027925,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.25,
+      "key": "conversion_s",
+      "javascript": 0.00038,
+      "ngspice": 0.00038,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.25,
+      "key": "plate_a",
+      "javascript": 0.00311875,
+      "ngspice": 0.00311875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.25,
+      "key": "screen_a",
+      "javascript": 0.0018975000000000003,
+      "ngspice": 0.0018975,
+      "absolute_error": 2.168404344971009e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": -0.25,
+      "key": "oscillator_anode_a",
+      "javascript": 0.00279625,
+      "ngspice": 0.00279625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "bias_100v",
+      "x": 0,
+      "key": "conversion_s",
+      "javascript": 0.00037,
+      "ngspice": 0.0003699999999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": 0,
+      "key": "plate_a",
+      "javascript": 0.0032500000000000003,
+      "ngspice": 0.00325,
+      "absolute_error": 4.336808689942018e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": 0,
+      "key": "screen_a",
+      "javascript": 0.0018000000000000002,
+      "ngspice": 0.0018,
+      "absolute_error": 2.168404344971009e-19
+    },
+    {
+      "slice": "bias_100v",
+      "x": 0,
+      "key": "oscillator_anode_a",
+      "javascript": 0.0028,
+      "ngspice": 0.0028,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 100,
+      "key": "conversion_s",
+      "javascript": 0.00043,
+      "ngspice": 0.00043,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 111.25,
+      "key": "conversion_s",
+      "javascript": 0.000439,
+      "ngspice": 0.000439,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 122.5,
+      "key": "conversion_s",
+      "javascript": 0.000448,
+      "ngspice": 0.000448,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 133.75,
+      "key": "conversion_s",
+      "javascript": 0.000457,
+      "ngspice": 0.000457,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 145,
+      "key": "conversion_s",
+      "javascript": 0.00046599999999999994,
+      "ngspice": 0.000466,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "drive_250v",
+      "x": 156.25,
+      "key": "conversion_s",
+      "javascript": 0.00047499999999999994,
+      "ngspice": 0.000475,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "drive_250v",
+      "x": 167.5,
+      "key": "conversion_s",
+      "javascript": 0.00048399999999999995,
+      "ngspice": 0.000484,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "drive_250v",
+      "x": 178.75,
+      "key": "conversion_s",
+      "javascript": 0.000493,
+      "ngspice": 0.000493,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 190,
+      "key": "conversion_s",
+      "javascript": 0.000502,
+      "ngspice": 0.000502,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 201.25,
+      "key": "conversion_s",
+      "javascript": 0.0005102187499999999,
+      "ngspice": 0.00051021875,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 212.5,
+      "key": "conversion_s",
+      "javascript": 0.0005121875,
+      "ngspice": 0.0005121875000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 223.75,
+      "key": "conversion_s",
+      "javascript": 0.00051415625,
+      "ngspice": 0.0005141562500000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 235,
+      "key": "conversion_s",
+      "javascript": 0.000516125,
+      "ngspice": 0.0005161250000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 246.25,
+      "key": "conversion_s",
+      "javascript": 0.00051809375,
+      "ngspice": 0.00051809375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 257.5,
+      "key": "conversion_s",
+      "javascript": 0.0005200624999999999,
+      "ngspice": 0.0005200625,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 268.75,
+      "key": "conversion_s",
+      "javascript": 0.0005220312499999999,
+      "ngspice": 0.00052203125,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 280,
+      "key": "conversion_s",
+      "javascript": 0.0005239999999999999,
+      "ngspice": 0.000524,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 291.25,
+      "key": "conversion_s",
+      "javascript": 0.00052596875,
+      "ngspice": 0.0005259687500000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 302.5,
+      "key": "conversion_s",
+      "javascript": 0.0005279375,
+      "ngspice": 0.0005279375000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 313.75,
+      "key": "conversion_s",
+      "javascript": 0.00052990625,
+      "ngspice": 0.00052990625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 325,
+      "key": "conversion_s",
+      "javascript": 0.000531875,
+      "ngspice": 0.000531875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 336.25,
+      "key": "conversion_s",
+      "javascript": 0.00053384375,
+      "ngspice": 0.00053384375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 347.5,
+      "key": "conversion_s",
+      "javascript": 0.0005358125,
+      "ngspice": 0.0005358125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 358.75,
+      "key": "conversion_s",
+      "javascript": 0.00053778125,
+      "ngspice": 0.0005377812500000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 370,
+      "key": "conversion_s",
+      "javascript": 0.00053975,
+      "ngspice": 0.0005397500000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 381.25,
+      "key": "conversion_s",
+      "javascript": 0.00054171875,
+      "ngspice": 0.00054171875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 392.5,
+      "key": "conversion_s",
+      "javascript": 0.0005436875,
+      "ngspice": 0.0005436875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 403.75,
+      "key": "conversion_s",
+      "javascript": 0.0005447187500000001,
+      "ngspice": 0.0005447187500000001,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 415,
+      "key": "conversion_s",
+      "javascript": 0.000543875,
+      "ngspice": 0.000543875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 426.25,
+      "key": "conversion_s",
+      "javascript": 0.00054303125,
+      "ngspice": 0.00054303125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 437.5,
+      "key": "conversion_s",
+      "javascript": 0.0005421875,
+      "ngspice": 0.0005421875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 448.75,
+      "key": "conversion_s",
+      "javascript": 0.00054134375,
+      "ngspice": 0.00054134375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 460,
+      "key": "conversion_s",
+      "javascript": 0.0005405,
+      "ngspice": 0.0005405,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 471.25,
+      "key": "conversion_s",
+      "javascript": 0.00053965625,
+      "ngspice": 0.00053965625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 482.5,
+      "key": "conversion_s",
+      "javascript": 0.0005388125,
+      "ngspice": 0.0005388125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 493.75,
+      "key": "conversion_s",
+      "javascript": 0.00053796875,
+      "ngspice": 0.00053796875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 505,
+      "key": "conversion_s",
+      "javascript": 0.000537125,
+      "ngspice": 0.0005371250000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 516.25,
+      "key": "conversion_s",
+      "javascript": 0.00053628125,
+      "ngspice": 0.00053628125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 527.5,
+      "key": "conversion_s",
+      "javascript": 0.0005354375,
+      "ngspice": 0.0005354375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 538.75,
+      "key": "conversion_s",
+      "javascript": 0.00053459375,
+      "ngspice": 0.00053459375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 550,
+      "key": "conversion_s",
+      "javascript": 0.0005337499999999999,
+      "ngspice": 0.00053375,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 561.25,
+      "key": "conversion_s",
+      "javascript": 0.00053290625,
+      "ngspice": 0.0005329062500000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 572.5,
+      "key": "conversion_s",
+      "javascript": 0.0005320625,
+      "ngspice": 0.0005320625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 583.75,
+      "key": "conversion_s",
+      "javascript": 0.00053121875,
+      "ngspice": 0.00053121875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 595,
+      "key": "conversion_s",
+      "javascript": 0.000530375,
+      "ngspice": 0.000530375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 606.25,
+      "key": "conversion_s",
+      "javascript": 0.0005290625,
+      "ngspice": 0.0005290625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 617.5,
+      "key": "conversion_s",
+      "javascript": 0.000527375,
+      "ngspice": 0.000527375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 628.75,
+      "key": "conversion_s",
+      "javascript": 0.0005256875,
+      "ngspice": 0.0005256875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 640,
+      "key": "conversion_s",
+      "javascript": 0.0005239999999999999,
+      "ngspice": 0.0005239999999999999,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 651.25,
+      "key": "conversion_s",
+      "javascript": 0.0005223125,
+      "ngspice": 0.0005223125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 662.5,
+      "key": "conversion_s",
+      "javascript": 0.000520625,
+      "ngspice": 0.0005206249999999998,
+      "absolute_error": 2.168404344971009e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 673.75,
+      "key": "conversion_s",
+      "javascript": 0.0005189375,
+      "ngspice": 0.0005189375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 685,
+      "key": "conversion_s",
+      "javascript": 0.00051725,
+      "ngspice": 0.00051725,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 696.25,
+      "key": "conversion_s",
+      "javascript": 0.0005155625,
+      "ngspice": 0.0005155625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 707.5,
+      "key": "conversion_s",
+      "javascript": 0.000513875,
+      "ngspice": 0.000513875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 718.75,
+      "key": "conversion_s",
+      "javascript": 0.0005121875,
+      "ngspice": 0.0005121875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 730,
+      "key": "conversion_s",
+      "javascript": 0.0005105,
+      "ngspice": 0.0005105,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 741.25,
+      "key": "conversion_s",
+      "javascript": 0.0005088125,
+      "ngspice": 0.0005088124999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 752.5,
+      "key": "conversion_s",
+      "javascript": 0.000507125,
+      "ngspice": 0.000507125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 763.75,
+      "key": "conversion_s",
+      "javascript": 0.0005054375,
+      "ngspice": 0.0005054375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 775,
+      "key": "conversion_s",
+      "javascript": 0.00050375,
+      "ngspice": 0.00050375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 786.25,
+      "key": "conversion_s",
+      "javascript": 0.0005020625,
+      "ngspice": 0.0005020625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 797.5,
+      "key": "conversion_s",
+      "javascript": 0.0005003750000000001,
+      "ngspice": 0.000500375,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 808.75,
+      "key": "conversion_s",
+      "javascript": 0.00049846875,
+      "ngspice": 0.00049846875,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 820,
+      "key": "conversion_s",
+      "javascript": 0.0004965,
+      "ngspice": 0.0004965,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 831.25,
+      "key": "conversion_s",
+      "javascript": 0.00049453125,
+      "ngspice": 0.00049453125,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 842.5,
+      "key": "conversion_s",
+      "javascript": 0.0004925625,
+      "ngspice": 0.0004925625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 853.75,
+      "key": "conversion_s",
+      "javascript": 0.00049059375,
+      "ngspice": 0.00049059375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 865,
+      "key": "conversion_s",
+      "javascript": 0.000488625,
+      "ngspice": 0.000488625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 876.25,
+      "key": "conversion_s",
+      "javascript": 0.00048665625,
+      "ngspice": 0.00048665625,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 887.5,
+      "key": "conversion_s",
+      "javascript": 0.0004846875,
+      "ngspice": 0.0004846874999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 898.75,
+      "key": "conversion_s",
+      "javascript": 0.00048271874999999997,
+      "ngspice": 0.0004827187500000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 910,
+      "key": "conversion_s",
+      "javascript": 0.00048075,
+      "ngspice": 0.0004807500000000001,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 921.25,
+      "key": "conversion_s",
+      "javascript": 0.00047878125,
+      "ngspice": 0.0004787812499999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 932.5,
+      "key": "conversion_s",
+      "javascript": 0.00047681249999999997,
+      "ngspice": 0.0004768125,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "drive_250v",
+      "x": 943.75,
+      "key": "conversion_s",
+      "javascript": 0.00047484375,
+      "ngspice": 0.00047484375,
+      "absolute_error": 0
+    },
+    {
+      "slice": "drive_250v",
+      "x": 955,
+      "key": "conversion_s",
+      "javascript": 0.000472875,
+      "ngspice": 0.0004728749999999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 966.25,
+      "key": "conversion_s",
+      "javascript": 0.00047090624999999997,
+      "ngspice": 0.00047090625,
+      "absolute_error": 5.421010862427522e-20
+    },
+    {
+      "slice": "drive_250v",
+      "x": 977.5,
+      "key": "conversion_s",
+      "javascript": 0.00046893749999999995,
+      "ngspice": 0.0004689375000000001,
+      "absolute_error": 1.6263032587282567e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 988.75,
+      "key": "conversion_s",
+      "javascript": 0.00046696875,
+      "ngspice": 0.0004669687499999999,
+      "absolute_error": 1.0842021724855044e-19
+    },
+    {
+      "slice": "drive_250v",
+      "x": 1000,
+      "key": "conversion_s",
+      "javascript": 0.00046499999999999997,
+      "ngspice": 0.000465,
+      "absolute_error": 5.421010862427522e-20
+    }
+  ],
+  "cases": {
+    "healthy": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 4.3124999999999974e-7,
+          "ngspice": 4.312507083377806e-7,
+          "absolute_error": 7.08337780884664e-13,
+          "tolerance": 2.3562499999999988e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000017250000000000131,
+          "ngspice": 0.0000017250007291365205,
+          "absolute_error": 7.29136507403728e-13,
+          "tolerance": 8.825000000000066e-9
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 4.3124999999998894e-7,
+          "ngspice": 4.3125074993149014e-7,
+          "absolute_error": 7.499315012074121e-13,
+          "tolerance": 2.356249999999945e-9
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 4.3124999999999534e-7,
+          "ngspice": 4.3125192661687355e-7,
+          "absolute_error": 1.9266168782121486e-12,
+          "tolerance": 2.356249999999977e-9
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 0.000001725000000000009,
+          "ngspice": 0.0000017250019356123408,
+          "absolute_error": 1.935612331901331e-12,
+          "tolerance": 8.825000000000044e-9
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 4.312499999999892e-7,
+          "ngspice": 4.3125194460416204e-7,
+          "absolute_error": 1.9446041728361743e-12,
+          "tolerance": 2.3562499999999462e-9
+        }
+      ]
+    },
+    "band_low": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 540000,
+        "lo_hz": 995000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 4.3125000000000037e-7,
+          "ngspice": 4.312510007569582e-7,
+          "absolute_error": 1.0007569578501206e-12,
+          "tolerance": 2.356250000000002e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000017249999999999985,
+          "ngspice": 0.000001725001021966635,
+          "absolute_error": 1.0219666365384074e-12,
+          "tolerance": 8.824999999999993e-9
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 4.31250000000011e-7,
+          "ngspice": 4.312510431734442e-7,
+          "absolute_error": 1.0431734331970911e-12,
+          "tolerance": 2.3562500000000554e-9
+        },
+        {
+          "frequency_hz": 1534000,
+          "javascript": 4.3124999999998857e-7,
+          "ngspice": 4.312524197843876e-7,
+          "absolute_error": 2.4197843990299705e-12,
+          "tolerance": 2.356249999999943e-9
+        },
+        {
+          "frequency_hz": 1535000,
+          "javascript": 0.0000017249999999999782,
+          "ngspice": 0.0000017250024281479001,
+          "absolute_error": 2.428147921935969e-12,
+          "tolerance": 8.824999999999892e-9
+        },
+        {
+          "frequency_hz": 1536000,
+          "javascript": 4.3125000000000016e-7,
+          "ngspice": 4.3125243650874905e-7,
+          "absolute_error": 2.436508748894915e-12,
+          "tolerance": 2.356250000000001e-9
+        }
+      ]
+    },
+    "band_high": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1600000,
+        "lo_hz": 2055000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 4.3125000000028466e-7,
+          "ngspice": 4.3125061556685674e-7,
+          "absolute_error": 6.155665720872943e-13,
+          "tolerance": 2.3562500000014236e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000017249999999999862,
+          "ngspice": 0.0000017250005435832484,
+          "absolute_error": 5.435832621868239e-13,
+          "tolerance": 8.824999999999932e-9
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 4.312499999997102e-7,
+          "ngspice": 4.3125047159558594e-7,
+          "absolute_error": 4.715958757285367e-13,
+          "tolerance": 2.356249999998551e-9
+        },
+        {
+          "frequency_hz": 3654000,
+          "javascript": 4.312499999997104e-7,
+          "ngspice": 4.3125127496465847e-7,
+          "absolute_error": 1.27496494804895e-12,
+          "tolerance": 2.3562499999985524e-9
+        },
+        {
+          "frequency_hz": 3655000,
+          "javascript": 0.0000017249999999999695,
+          "ngspice": 0.0000017250015044745089,
+          "absolute_error": 1.5044745393590656e-12,
+          "tolerance": 8.824999999999847e-9
+        },
+        {
+          "frequency_hz": 3656000,
+          "javascript": 4.3124999999971106e-7,
+          "ngspice": 4.3125173398004024e-7,
+          "absolute_error": 1.7339803291853138e-12,
+          "tolerance": 2.3562499999985553e-9
+        }
+      ]
+    },
+    "low_side": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1600000,
+        "lo_hz": 1145000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 4.312499999997225e-7,
+          "ngspice": 4.3125052787630964e-7,
+          "absolute_error": 5.278765871502589e-13,
+          "tolerance": 2.356249999998613e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000017250000000000017,
+          "ngspice": 0.0000017250006721712632,
+          "absolute_error": 6.721712614881823e-13,
+          "tolerance": 8.82500000000001e-9
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 4.312500000002892e-7,
+          "ngspice": 4.3125081646242143e-7,
+          "absolute_error": 8.16462132224656e-13,
+          "tolerance": 2.3562500000014463e-9
+        },
+        {
+          "frequency_hz": 2744000,
+          "javascript": 4.3125000000029985e-7,
+          "ngspice": 4.312516547510897e-7,
+          "absolute_error": 1.6547507898521786e-12,
+          "tolerance": 2.3562500000014993e-9
+        },
+        {
+          "frequency_hz": 2745000,
+          "javascript": 0.0000017249999999999939,
+          "ngspice": 0.0000017250018124799331,
+          "absolute_error": 1.8124799392525812e-12,
+          "tolerance": 8.82499999999997e-9
+        },
+        {
+          "frequency_hz": 2746000,
+          "javascript": 4.31250000000282e-7,
+          "ngspice": 4.3125197020567665e-7,
+          "absolute_error": 1.9702053946364217e-12,
+          "tolerance": 2.3562500000014103e-9
+        }
+      ]
+    },
+    "retuned_lo": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1460000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 459000,
+          "javascript": 4.312500000002839e-7,
+          "ngspice": 4.3125072489588253e-7,
+          "absolute_error": 7.248955986194038e-13,
+          "tolerance": 2.35625000000142e-9
+        },
+        {
+          "frequency_hz": 460000,
+          "javascript": 0.0000017250000000000233,
+          "ngspice": 0.0000017250007258962178,
+          "absolute_error": 7.258961945107097e-13,
+          "tolerance": 8.825000000000117e-9
+        },
+        {
+          "frequency_hz": 461000,
+          "javascript": 4.3124999999970857e-7,
+          "ngspice": 4.312507268927186e-7,
+          "absolute_error": 7.268930100410324e-13,
+          "tolerance": 2.356249999998543e-9
+        },
+        {
+          "frequency_hz": 2459000,
+          "javascript": 4.312499999999962e-7,
+          "ngspice": 4.3125193508709514e-7,
+          "absolute_error": 1.935087098946837e-12,
+          "tolerance": 2.356249999999981e-9
+        },
+        {
+          "frequency_hz": 2460000,
+          "javascript": 0.000001724999999999991,
+          "ngspice": 0.0000017250019242763106,
+          "absolute_error": 1.924276319714604e-12,
+          "tolerance": 8.824999999999955e-9
+        },
+        {
+          "frequency_hz": 2461000,
+          "javascript": 4.3124999999999677e-7,
+          "ngspice": 4.312519134618689e-7,
+          "absolute_error": 1.9134618721414953e-12,
+          "tolerance": 2.356249999999984e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 7.386801859438852e-20,
+          "ngspice": 7.258674085366303e-13,
+          "absolute_error": 7.258673346686116e-13,
+          "tolerance": 2.0000000000036934e-10
+        }
+      ]
+    },
+    "bias_reduction": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -12,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 3.99999999999988e-8,
+          "ngspice": 4.0000065700892935e-8,
+          "absolute_error": 6.570089413204791e-14,
+          "tolerance": 3.99999999999994e-10
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 1.5999999999999969e-7,
+          "ngspice": 1.6000006763005273e-7,
+          "absolute_error": 6.763005304830254e-14,
+          "tolerance": 9.999999999999984e-10
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 4.000000000000015e-8,
+          "ngspice": 4.000006955886078e-8,
+          "absolute_error": 6.955886062455507e-14,
+          "tolerance": 4.000000000000008e-10
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 3.99999999999988e-8,
+          "ngspice": 4.000017870069354e-8,
+          "absolute_error": 1.7870069473482338e-13,
+          "tolerance": 3.99999999999994e-10
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 1.6000000000000273e-7,
+          "ngspice": 1.600001795350567e-7,
+          "absolute_error": 1.7953505397145672e-13,
+          "tolerance": 1.0000000000000137e-9
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 3.9999999999999544e-8,
+          "ngspice": 4.000018036907964e-8,
+          "absolute_error": 1.8036908009253122e-13,
+          "tolerance": 3.9999999999999774e-10
+        }
+      ]
+    },
+    "drive_weak": {
+      "parameters": {
+        "slice": "drive_250v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 100,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 5.374999999999777e-7,
+          "ngspice": 5.375008828557896e-7,
+          "absolute_error": 8.828558119374329e-13,
+          "tolerance": 2.8874999999998885e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000021499999999999837,
+          "ngspice": 0.0000021500009087788473,
+          "absolute_error": 9.087788636412918e-13,
+          "tolerance": 1.094999999999992e-8
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 5.374999999999975e-7,
+          "ngspice": 5.375009346972226e-7,
+          "absolute_error": 9.346972251119635e-13,
+          "tolerance": 2.887499999999988e-9
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 5.37499999999982e-7,
+          "ngspice": 5.375024012905962e-7,
+          "absolute_error": 2.4012906141729915e-12,
+          "tolerance": 2.8874999999999105e-9
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 0.000002150000000000018,
+          "ngspice": 0.000002150002412502318,
+          "absolute_error": 2.4125023001342696e-12,
+          "tolerance": 1.095000000000009e-8
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 5.374999999999936e-7,
+          "ngspice": 5.375024237095403e-7,
+          "absolute_error": 2.423709546689992e-12,
+          "tolerance": 2.887499999999968e-9
+        }
+      ]
+    },
+    "drive_nominal": {
+      "parameters": {
+        "slice": "drive_250v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 6.812499999999888e-7,
+          "ngspice": 6.812511189683866e-7,
+          "absolute_error": 1.1189683977658925e-12,
+          "tolerance": 3.606249999999944e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000027250000000000082,
+          "ngspice": 0.0000027250011518243462,
+          "absolute_error": 1.1518243380159417e-12,
+          "tolerance": 1.3825000000000041e-8
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 6.81249999999997e-7,
+          "ngspice": 6.812511846743857e-7,
+          "absolute_error": 1.1846743887400295e-12,
+          "tolerance": 3.606249999999985e-9
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 6.812499999999848e-7,
+          "ngspice": 6.812530434962251e-7,
+          "absolute_error": 3.0434962403142938e-12,
+          "tolerance": 3.6062499999999243e-9
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 0.0000027249999999999896,
+          "ngspice": 0.0000027250030577064582,
+          "absolute_error": 3.0577064686486313e-12,
+          "tolerance": 1.3824999999999948e-8
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 6.812499999999928e-7,
+          "ngspice": 6.812530719109281e-7,
+          "absolute_error": 3.0719109352531033e-12,
+          "tolerance": 3.6062499999999645e-9
+        }
+      ]
+    },
+    "drive_high": {
+      "parameters": {
+        "slice": "drive_250v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 1000,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 5.812499999999879e-7,
+          "ngspice": 5.812509547161425e-7,
+          "absolute_error": 9.547161546768186e-13,
+          "tolerance": 3.1062499999999397e-9
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000023249999999999748,
+          "ngspice": 0.0000023250009827492393,
+          "absolute_error": 9.827492645551428e-13,
+          "tolerance": 1.1824999999999874e-8
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 5.812499999999951e-7,
+          "ngspice": 5.812510107772245e-7,
+          "absolute_error": 1.0107772294494662e-12,
+          "tolerance": 3.1062499999999757e-9
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 5.812499999999951e-7,
+          "ngspice": 5.812525967444847e-7,
+          "absolute_error": 2.5967444896500842e-12,
+          "tolerance": 3.1062499999999757e-9
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 0.000002325000000000019,
+          "ngspice": 0.0000023250026088687876,
+          "absolute_error": 2.608868768802855e-12,
+          "tolerance": 1.1825000000000094e-8
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 5.812500000000027e-7,
+          "ngspice": 5.812526209882239e-7,
+          "absolute_error": 2.620988221244255e-12,
+          "tolerance": 3.1062500000000138e-9
+        }
+      ]
+    },
+    "clock_removed": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0.5,
+        "lo_enabled": false,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        }
+      ]
+    },
+    "rf_absent": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0,
+        "modulation": 0.5,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 0,
+          "ngspice": 0,
+          "absolute_error": 0,
+          "tolerance": 2e-10
+        }
+      ]
+    },
+    "unmodulated": {
+      "parameters": {
+        "slice": "bias_100v",
+        "bias_v": -3,
+        "oscillator_grid_ua": 400,
+        "rf_hz": 1000000,
+        "lo_hz": 1455000,
+        "rf_peak_v": 0.005,
+        "modulation": 0,
+        "lo_enabled": true,
+        "samples_per_fast_cycle": 32
+      },
+      "checks": [
+        {
+          "frequency_hz": 454000,
+          "javascript": 7.141747882719272e-21,
+          "ngspice": 4.68447198438138e-13,
+          "absolute_error": 4.684471912963901e-13,
+          "tolerance": 2.000000000000357e-10
+        },
+        {
+          "frequency_hz": 455000,
+          "javascript": 0.0000017250000000000267,
+          "ngspice": 0.0000017250004860891143,
+          "absolute_error": 4.860890876061565e-13,
+          "tolerance": 8.825000000000134e-9
+        },
+        {
+          "frequency_hz": 456000,
+          "javascript": 4.1729653847809256e-21,
+          "ngspice": 5.052823410857345e-13,
+          "absolute_error": 5.052823369127692e-13,
+          "tolerance": 2.0000000000002087e-10
+        },
+        {
+          "frequency_hz": 2454000,
+          "javascript": 7.220167186497772e-21,
+          "ngspice": 1.3035358092403572e-12,
+          "absolute_error": 1.30353580202019e-12,
+          "tolerance": 2.0000000000003612e-10
+        },
+        {
+          "frequency_hz": 2455000,
+          "javascript": 0.0000017250000000000036,
+          "ngspice": 0.0000017250012904063042,
+          "absolute_error": 1.29040630054976e-12,
+          "tolerance": 8.825000000000018e-9
+        },
+        {
+          "frequency_hz": 2456000,
+          "javascript": 6.501187433644107e-21,
+          "ngspice": 1.3188922052322772e-12,
+          "absolute_error": 1.3188921987310897e-12,
+          "tolerance": 2.0000000000003253e-10
+        }
+      ]
+    }
+  },
+  "closed_ec_ids": []
+}

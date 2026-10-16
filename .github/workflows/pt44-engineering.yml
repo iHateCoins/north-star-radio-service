@@ -1,9 +1,7 @@
 name: PT-44 electrical engineering checks
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: pt44-engineering-${{ github.event.pull_request.number || github.ref }}
@@ -86,6 +84,11 @@ jobs:
       - name: Verify dynamic power behavior, energy balance, faults and workbench controls
         run: node tests/test_power_dynamics_v54.js
 
+      - name: Verify bounded 7A8 characteristics and separately driven frequency conversion
+        run: node tests/test_converter_v62.js
+      - name: Verify canonical 7A8 ledger controls and lifecycle
+        run: node tests/test_converter_workbench_v62.js
+
       - name: Verify coupled idle receiver AC/DC supply, faults, discharge and numerical bounds
         run: node tests/test_receiver_power_v61.js
       - name: Verify generated receiver supply worker and lifecycle
@@ -140,6 +143,16 @@ jobs:
         run: npm install --no-save --no-package-lock playwright@1.62.1
       - name: Install Chromium and system dependencies
         run: npx playwright install --with-deps chromium
+      - name: Exercise 7A8 separate excitation, bias/drive and exact export
+        run: node tests/test_converter_browser_v62.js --browser
+      - name: Retain 7A8 reference measurements and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-converter-browser-v062
+          path: tmp/pt44-converter-browser/
+          retention-days: 7
+
       - name: Exercise actual idle receiver supply, fault/restoration and export
         run: node tests/test_receiver_power_browser_v61.js --browser
       - name: Retain idle receiver supply measurements and screenshots

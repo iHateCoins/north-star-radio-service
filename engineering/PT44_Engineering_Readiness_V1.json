@@ -1,6 +1,6 @@
 {
   "schema": "PT44_ENGINEERING_READINESS_V1",
-  "version": "0.61.0",
+  "version": "0.62.0",
   "model": "Philco PT-44",
   "authority": "Philco 1941 RMS Year Book, printed p. 38 PT-42/PT-44 schematic and p. 36 specifications; Sylvania 1953 7C6 data for internal cathode bond only.",
   "status": "NOT_ENGINEERING_COMPLETE",
@@ -129,6 +129,14 @@
       ],
       "fourth_tuning_capacitor_removed": true,
       "factory_passband_calibrated": false
+    },
+    "converter_reference_v062": {
+      "artifact": "engineering/PT44_7A8_Characteristics_V1.json",
+      "published_condition_slices": 2,
+      "source_checks": 31,
+      "receiver_converter_loads_replaced": false,
+      "self_oscillation_validated": false,
+      "receiver_tracking_validated": false
     }
   },
   "open_items": [
@@ -137,7 +145,7 @@
       "area": "RF / converter",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Supply, screen, AVC and B\u2212 conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
+      "gap": "Supply, screen, AVC and B− conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
     },
     {
       "id": "P1-IF",
@@ -172,7 +180,7 @@
       "area": "Source cross-check",
       "severity": "blocker",
       "status": "OPEN",
-      "gap": "Supply, screen, AVC and B\u2212 conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
+      "gap": "Supply, screen, AVC and B− conductor groups are reconciled in v0.53, including all four declared #10 winding ends and the converter/IF/7C6 cathode returns. Remaining: unnumbered 7C6 diode pins 5/6, #10-adjacent four-dot coupling symbol, #8 value conflict, winding/model parameters, physical chassis routing and receiver behavior."
     },
     {
       "id": "P2-SPICE",
@@ -223,7 +231,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.61 supports EC-03/04/07 with the shared receiver idle AC/DC supply envelope, coupled hum, faults/restoration and independent numerical checks. No full EC closes. Zero electrical storage with nominal-hot heaters is not cold thermal startup. All nine EC acceptance lists and six NOT MET gates remain unchanged.",
+  "latest_evidence_update": "v0.62 supports EC-02/05/06 with bounded manufacturer 7A8 characteristics, isolated separately driven conversion and captured-state AVC release initialization regressions. No full EC closes; receiver converter substitutes remain. All nine acceptance lists and six NOT MET gates remain unchanged.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",

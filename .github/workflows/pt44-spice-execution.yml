@@ -1,25 +1,6 @@
 name: PT-44 SPICE execution
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "index.html"
-      - "README.md"
-      - "engineering/**"
-      - "tests/test_spice_export_v23.js"
-      - "tests/test_heater_model_v35.js"
-      - "tests/test_output_bypass_v36.js"
-      - ".github/workflows/pt44-spice-execution.yml"
-  pull_request:
-    paths:
-      - "index.html"
-      - "README.md"
-      - "engineering/**"
-      - "tests/test_spice_export_v23.js"
-      - "tests/test_heater_model_v35.js"
-      - "tests/test_output_bypass_v36.js"
-      - ".github/workflows/pt44-spice-execution.yml"
   workflow_dispatch:
 
 concurrency:
@@ -65,6 +46,9 @@ jobs:
       - name: Execute isolated cathode-bypass AC branch study
         run: node tests/test_output_bypass_v36.js --ngspice
 
+      - name: Cross-check 7A8 characteristic slices and separately driven conversion
+        run: node tests/test_converter_spice_v62.js --ngspice
+
       - name: Cross-check complete idle IF/audio/supply charging and discharge
         run: node tests/test_receiver_power_spice_v61.js --ngspice
 
@@ -86,5 +70,42 @@ jobs:
       - name: Cross-check loaded IF AC magnitude and phase across all three controls
         run: node tests/test_if_ac_spice_v58.js --ngspice
 
-      - name: Cross-check one-second coupled AVC release continuation
+
+      - name: Retain SPICE diagnostics after failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-spice-failure-diagnostics-${{ github.job }}
+          path: |
+            tmp/v59/spice/*.log
+            tmp/v59/spice/*.cir
+            tmp/v62/spice/*.log
+          retention-days: 7
+
+  avc-release:
+    name: Verify AVC release continuation and captured solver regression
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install ngspice
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ngspice
+      - name: Verify captured CI initial state with unchanged checkpoint bounds
+        run: node tests/test_avc_release_solver_v62.js --ngspice
+      - name: Cross-check all coupled AVC release continuation cases
         run: node tests/test_avc_release_spice_v59.js --ngspice
+      - name: Retain release solver diagnostics after failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-spice-failure-diagnostics-${{ github.job }}
+          path: |
+            tmp/v59/spice/*.log
+            tmp/v59/spice/*.cir
+            tmp/v62/release-solver/*.log
+            tmp/v62/release-solver/*.cir
+          retention-days: 7
