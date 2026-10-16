@@ -12,7 +12,7 @@ const warm=()=>page.evaluate(()=>{setPower(true);R.warm=1;tick();return {g:R.sig
 const stop=()=>page.evaluate(()=>{setPower(false);tick();discharge();R.warm=0;tick();});
 const select=slot=>page.evaluate(slot=>{R.sel={slot};R.side='insp';renderSide();},slot);
 const repair=async slot=>{await stop();await select(slot);await page.locator('[data-act="remove"]').click();await select(slot);const sku=await page.evaluate(slot=>SLOTS[slot].nom,slot);await page.locator('#instSel').selectOption(sku);await page.locator('[data-act="inst"]').click();assert(await page.evaluate(slot=>!!benchJob().radio.slots[slot],slot));};
-const checkout=async()=>{const result=await page.evaluate(()=>{runCheckout();return benchJob().lastCheck;});await page.locator('#mBack').click();return result;};
+const checkout=async()=>{const result=await page.evaluate(()=>{runCheckout();if(benchJob().lastCheck?.pass&&!charged())throw Error('Checkout must retain filter charge');return benchJob().lastCheck;});await page.locator('#mBack').click();return result;};
 const evidence=[];
 for(const [fault,slot]of [['dry','C2'],['coupling','C3'],['audioTube','V4'],['converter','V1'],['oscillator','L1'],['speaker','SP1'],['transformer','T1'],['leaky','C3']]){
  console.log('SHOP scenario '+fault);await setup(fault,slot);const before=await warm();assert(fault==='leaky'?before.d.ports.G5>2:fault==='dry'?before.g.hum>.05:before.g.loud<.42,fault+' symptom');

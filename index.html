@@ -1681,6 +1681,7 @@ function runCheckout(){
   add('No failures during 10-minute run', events.length?events.join('; '):'None', !events.length);
   const v4p = dd.V[NI.P5], b2 = dd.V[NI.B2];
   r.dial=savedDial;r.vol=savedVolume;
+  R.offV=Float64Array.from(dd.V);R.offT=0;
   job.lastCheck = {pass, results, at:S.day};
   if (events.length) benchLog('Checkout: '+events.join('; '), 'bad');
   save(); renderAll();
