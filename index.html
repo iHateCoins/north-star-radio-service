@@ -870,7 +870,7 @@ function pt44GameEvaluate(spec,r,env={}){
  for(const id of ['V1','V2','V3','V4'])hum+=(s[id]?.hk||0)*(id==='V3'?.5:.25)*outputGain;
  if(!good('R5'))hum+=.35*outputGain*volume;
  const dist=C(.02+C((drive-Math.max(.5,bias))/6)+C((2-bias)/4)*C(drive)+C((.65-e('V4')))*C(drive)+C((.6-supply))*C(drive)+(s.SP1?.rub||0));
- const active=powered&&lit&&warm>.05,signal={loud:active?loud:0,hum:active?C(hum,0,1.5):0,dist:active?dist:0,stat:active?.03*volume*ifGain*outputGain/(1+received*5):0,crackle:active?(s.VR1?.scratch||0):0,lit:active,osc:oscActive,strength:radioRaw,station:active&&radioRaw>.025?stations[bestIndex]:null,stationWeights:weights,levels:{conv:Math.max(...upstream)+(enabled&&gen.point==='if'?C(gen.mv):0),if:received,det,a1,g5,spk:loud},generatorTone:active&&enabled?loud:0,generatorActive:active&&enabled,avc_v:avc,if_khz:455,lo_khz:loKHz};
+ const active=powered&&lit&&warm>.05,signal={loud:active?loud:0,hum:active?C(hum,0,1.5):0,dist:active?dist:0,stat:active?.03*volume*ifGain*outputGain/(1+received*5):0,crackle:active?(s.VR1?.scratch||0):0,lit:active,osc:oscActive,strength:radioRaw,station:active&&radioRaw>.025?stations[bestIndex]:null,stationWeights:weights,upstreamWeights:upstream,levels:{conv:Math.max(...upstream)+(enabled&&gen.point==='if'?C(gen.mv):0),if:received,det,a1,g5,spk:loud},generatorTone:active&&enabled?loud:0,generatorActive:active&&enabled,avc_v:avc,if_khz:455,lo_khz:loKHz};
  if(!active)for(const k of Object.keys(signal.levels))signal.levels[k]=0;
  const stress={};for(const [id,dv] of Object.entries({R1:B1-B2,R2:V.K5,R3:V.G5,R4:B2-V.P6,R5:V.G6,R6:V.OSC,R7:V.KIF})){if(good(id))stress[id]={P:dv*dv/ohm(id,1),ratio:dv*dv/ohm(id,1)/(s[id].W||.5)};}
  for(const [id,v] of Object.entries({C1:B1,C2:B2,C3:V.P6-V.G5})){if(s[id])stress[id]={Vc:Math.abs(v),ratio:Math.abs(v)/s[id].V,Ileak:Math.abs(v)/pt44GameLeak(s[id],v)};}
@@ -4475,7 +4475,7 @@ function audioUpdate(){
   const r=job.radio;
   let loud=g.loud, hum=g.hum, stat=g.stat, dist=g.dist;
   if (R.tracePt && S.tools.tracer){ const lv=g.levels[R.tracePt]||0; loud=lv*1.1; hum = ['a1','g5','spk'].includes(R.tracePt)?g.hum:g.hum*0.1; stat = g.stat*(R.tracePt==='conv'||R.tracePt==='if'?2:1); dist = R.tracePt==='spk'||R.tracePt==='g5'?g.dist:g.dist*0.3; }
-  const xs = g.stationWeights || STATIONS.map(st=>st.pwr*Math.exp(-Math.pow((r.dial-st.kc)/9,2))); const mx=Math.max(...xs,1e-4);
+  const xs = (R.tracePt==='conv'?g.upstreamWeights:g.stationWeights) || STATIONS.map(st=>st.pwr*Math.exp(-Math.pow((r.dial-st.kc)/9,2))); const mx=Math.max(...xs,1e-4);
   STATIONS.forEach((st,i)=>set(A.st[st.call].gain, g.station||R.tracePt ? 0.55*loud*(xs[i]/mx)*Math.min(1,mx*3) : 0));
   set(A.tone.gain,g.generatorActive?Math.min(.6,loud*.55):0);
   set(A.hum.gain, Math.min(0.7,hum*1.6));
@@ -4508,8 +4508,9 @@ function showManual(){
   <h3>The job</h3><p>Put a repair order on the bench. Switch it on and listen. Diagnose with the meter and tube tester, unsolder bad parts, install replacements, then run the 10-minute checkout. A passing set goes home with the customer and you collect labor plus parts.</p>
   <h3>Measuring</h3><p>In DC volts, click a ● test point on the schematic to put the red lead there. Compare against the Service data tab. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate reads lower while the VOM is attached. A VTVM reads them correctly.</p>
   <p>Ohms only works with the set off and the filter caps discharged. In-circuit readings include every parallel path. Pull a part to measure it alone.</p>
+  <h3>Generator and alignment</h3><p>Use the Generator / alignment tool for a 1 kHz modulated signal at the aerial, first IF input or volume control. Set 455 kHz for IF service. Peak the three IF controls manually, then check oscillator and aerial trims across the dial. The meter service-port menu includes AVC and screen supply, with B− as reference. These are game approximations; alignment and supply settings stay with this radio. Checkout turns the generator off.</p>
   <h3>Safety and damage</h3><p>The set has no bleeder resistor, so B+ stays charged after switch-off. Discharge it before you unsolder. Parts that run past their ratings get hot and fail, during your testing or during checkout. A leaky coupling capacitor will cook the output tube and its cathode resistor again if you only replace the burned resistor. A quarter-watt resistor where a 2-watt one belongs will not last.</p>
-  <h3>Substitutions</h3><p>Any resistor fits any resistor position, and any capacitor fits any capacitor position. The circuit decides whether your choice works. Watch voltage ratings on capacitors and wattage on resistors.</p>
+  <h3>Substitutions</h3><p>Ordinary resistor and capacitor positions accept same-kind substitutions. The field-coil service assembly requires its matching replacement. The circuit decides whether your choice works. Watch voltage ratings on capacitors and wattage on resistors.</p>
   <h3>Business</h3><p>Rent is $1.75 a day. Mail-order parts arrive the next morning; the jobber sells today at 25% over list. If your parts bill runs over what the customer authorized, they pay only the authorized amount and grumble. Miss a due date and they take the set back, angry. Reputation brings harder jobs and more customers.</p>
   <div class="row" style="margin-top:12px"><button class="btn warn sm" id="mReset">Start a new shop (erases this save)</button></div>
   </div>`);

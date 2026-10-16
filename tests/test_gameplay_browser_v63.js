@@ -11,10 +11,10 @@ const warm=()=>page.evaluate(()=>{setPower(true);R.warm=1;tick();return {g:R.sig
 const stop=()=>page.evaluate(()=>{setPower(false);tick();discharge();R.warm=0;tick();});
 const select=slot=>page.evaluate(slot=>{R.sel={slot};R.side='insp';renderSide();},slot);
 const repair=async slot=>{await stop();await select(slot);await page.locator('[data-act="remove"]').click();await select(slot);const sku=await page.evaluate(slot=>SLOTS[slot].nom,slot);await page.locator('#instSel').selectOption(sku);await page.locator('[data-act="inst"]').click();assert(await page.evaluate(slot=>!!benchJob().radio.slots[slot],slot));};
-const checkout=async()=>{const result=await page.evaluate(()=>{runCheckout();return benchJob().lastCheck;});await page.locator('#mX').click();return result;};
+const checkout=async()=>{const result=await page.evaluate(()=>{runCheckout();return benchJob().lastCheck;});await page.locator('#mBack').click();return result;};
 const evidence=[];
 for(const [fault,slot]of [['dry','C2'],['coupling','C3'],['audioTube','V4'],['converter','V1'],['oscillator','L1'],['speaker','SP1'],['transformer','T1'],['leaky','C3']]){
- await setup(fault,slot);const before=await warm();assert(fault==='leaky'?before.d.ports.G5>2:fault==='dry'?before.g.hum>.05:before.g.loud<.42,fault+' symptom');
+ console.log('SHOP scenario '+fault);await setup(fault,slot);const before=await warm();assert(fault==='leaky'?before.d.ports.G5>2:fault==='dry'?before.g.hum>.05:before.g.loud<.42,fault+' symptom');
  // Work guards must prevent removing a live or charged part.
  const pid=await page.evaluate(slot=>benchJob().radio.slots[slot].pid,slot);await page.locator('[data-act="remove"]').click();assert.equal(await page.evaluate(slot=>benchJob().radio.slots[slot].pid,slot),pid);
  await page.evaluate(()=>{setPower(false);tick();});await page.locator('[data-act="remove"]').click();assert.equal(await page.evaluate(slot=>benchJob().radio.slots[slot].pid,slot),pid);
@@ -23,7 +23,7 @@ for(const [fault,slot]of [['dry','C2'],['coupling','C3'],['audioTube','V4'],['co
  await repair(slot);const after=await warm();assert(after.g.loud>.42&&after.g.hum<.05&&after.g.dist<.12,fault+' replacement restores output');const good=await checkout();assert(good.pass,fault+' repaired checkout');evidence.push({fault,before:{loud:before.g.loud,hum:before.g.hum},after:after.g,checkout:good});
 }
 await setup('oscillator','L1');await page.locator('[data-t="service"]').click();await page.locator('#gameGenOn').check();await page.locator('#gameGenPoint').selectOption('if');await page.locator('#gameGenMv').fill('1');await page.locator('#gameGenMv').dispatchEvent('change');const injected=await warm();assert(injected.g.generatorTone>.4&&injected.g.osc===0,'real IF generator bypass');
-await page.evaluate(()=>{R.tracePt='if';R.tool='trace';audioUpdate();});const gain=await page.evaluate(()=>({tone:R.audio.tone.gain.value,master:R.audio.master.gain.value}));assert(gain.master>=0,'Web Audio graph exists');
+await page.evaluate(()=>{R.tracePt='if';R.tool='trace';audioUpdate();});await page.evaluate(()=>R.audio.ctx.resume());await page.waitForTimeout(400);const gain=await page.evaluate(()=>({tone:R.audio.tone.gain.value,master:R.audio.master.gain.value}));assert(gain.tone>.1&&gain.master>.5,'generator reaches Web Audio through tracer');
 await setup('loop');await warm();assert.equal(await page.evaluate(()=>R.sig.loud),0);await stop();await page.locator('[data-t="service"]').click();await page.locator('#gameLoop').click();assert((await warm()).g.loud>.42);assert((await checkout()).pass,'loop repair checkout');
 await setup('alignment');await page.locator('[data-t="service"]').click();assert((await warm()).g.loud<.42);for(const k of ['12A','12B','14A','4A','5'])await page.locator(`[data-game-align="${k}"]`).evaluate((el,k)=>{el.value=['4A','5'].includes(k)?0:455;el.dispatchEvent(new Event('input',{bubbles:true}));},k);assert((await warm()).g.loud>.42);assert((await checkout()).pass,'manual alignment checkout');
 await page.locator('[data-t="meter"]').click();await page.locator('#gameProbe').selectOption('P6');await page.locator('#rng').selectOption('50');await warm();const vom=await page.evaluate(()=>R.dc.ports.P6);await page.locator('[data-inst="vtvm"]').click();await warm();assert(await page.evaluate(()=>R.dc.ports.P6)>vom*3,'actual loaded meter selection');

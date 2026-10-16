@@ -1,7 +1,7 @@
 name: PT-44 game completion
 on:
   push:
-    branches: [main, codex/pt44-v062-converter]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 concurrency:
@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: '22'
       - run: node tests/test_gameplay_v63.js
+      - run: node tests/test_ec_reporting_v58.js
+      - run: node tests/test_supply_avc_reconciliation_v53.js
       - uses: actions/upload-artifact@v4
         with:
           name: pt44-game-core-v063
