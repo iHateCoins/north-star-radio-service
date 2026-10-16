@@ -1,7 +1,7 @@
 {
   "schema": "PT44_SCOPE_AUDIT_V1",
   "audit_version": 1,
-  "snapshot_build_version": "0.60.0",
+  "snapshot_build_version": "0.61.0",
   "factory_transcription_artifact_version": "0.55.0",
   "model": "Philco PT-44",
   "source_authority": "https://philcoradio.com/library/download/service%20info/yearbooks/1941/split/Part19-Philco%201941%20RMS%20Year%20Book.pdf",

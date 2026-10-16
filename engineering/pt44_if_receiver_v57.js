@@ -24,7 +24,8 @@ function pt44IFTube(spec,plate,screen,grid,emission=1){
  if(screen<=0||emission===0)return {plate_a:0,screen_a:0,grid_a:0};const q=screen/100,p=Math.max(0,plate)/q,g=grid/q,k=emission*Math.pow(q,1.5);
  return {plate_a:k*pt44IFTable(spec.curve,'plate_current_a',p,g),screen_a:k*pt44IFTable(spec.curve,'screen_current_a',p,g),grid_a:emission*spec.assumptions.grid_current_k_a*Math.pow(Math.max(0,grid),1.5)};
 }
-function pt44IFConfigure(spec,audio,power,detector,graph,input={}){
+function pt44IFConfigure(spec,audio,power,detector,graph,input={},baseOptions={}){
+ if(!baseOptions||typeof baseOptions!=='object'||Object.keys(baseOptions).some(k=>!['line_mode','line_hz','power_off_at_s','cap_a_scale','cap_b_scale','field_open','rectifier_emission'].includes(k)))throw Error('Unsupported receiver supply override');
  pt44IFValidate(spec,audio,power,detector,graph);const p={...spec.defaults,...input};for(const k of Object.keys(input))if(!(k in spec.defaults))throw Error('Unknown IF input '+k);
  for(const [k,v] of Object.entries(spec.defaults)){if(typeof v==='number'&&(!Number.isFinite(p[k])||p[k]<0))throw Error('Invalid IF numeric input '+k);if(typeof v==='boolean'&&typeof p[k]!=='boolean')throw Error('Invalid IF flag '+k);}
  if(p.line_v<90||p.line_v>130||p.carrier_hz<420000||p.carrier_hz>490000||![1000,2000].includes(p.audio_hz)||p.input_peak_a>.0001||p.modulation>1||p.volume>1||p.duration_s<4/p.audio_hz||p.duration_s>.02||![48,96,192].includes(p.samples_per_carrier)||p.if_emission>2||p.upper_emission>2||p.lower_emission>2||p.if1_detune<.8||p.if1_detune>1.2||p.if2_detune<.8||p.if2_detune>1.2||p.coupling<.005||p.coupling>.08||![.05e-6,.1e-6].includes(p.c8_f)||p.c18_scale>2||p.c20_leak_ohm!==null&&(!Number.isFinite(p.c20_leak_ohm)||p.c20_leak_ohm<1e5))throw Error('Unsupported IF domain');
@@ -32,7 +33,7 @@ function pt44IFConfigure(spec,audio,power,detector,graph,input={}){
  for(const k of ['c12a_scale','c12b_scale','c14a_scale'])if(p[k]<.75||p[k]>1.25)throw Error('Unsupported IF trimmer range');
  const nodes=['A','B','H','W','G','P','O','K','T','X','FIELD_I','AUDIO_L_I','U','AVC','S','IG','IP','IS','PW','SW','CP','CW','I1P','I1S','I2P','I2S'];
  if(!['ideal','dmm','service'].includes(p.meter)||!['A','B','G','P','K','U','AVC','S','IG','IP','CP'].includes(p.probe))throw Error('Invalid IF probe');
- const base=pt44AudioConfigure(audio,power,graph,{rectifier_model:p.rectifier_model,line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm,meter:'ideal'});
+ const base=pt44AudioConfigure(audio,power,graph,{rectifier_model:p.rectifier_model,line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm,...baseOptions,signal_peak_v:0,meter:'ideal'});
  const a=spec.assumptions,w=2*Math.PI*455000,L=a.winding_h,C=1/(w*w*L),lossG=1/(w*L*a.core_loss_q);
  if(lossG<=0||p.duration_s*p.carrier_hz*p.samples_per_carrier>2000000)throw Error('IF passivity/work budget');
  const meter=p.meter==='ideal'?{resistance_ohm:null,capacitance_f:0}:p.meter==='dmm'?{resistance_ohm:1e7,capacitance_f:100e-12}:{resistance_ohm:1000*(p.probe==='AVC'?10:250),capacitance_f:0};
@@ -68,7 +69,7 @@ function pt44IFSystem(c,x,old,time,dt,equilibrium=false){
  return {M,F,rect:bs.rect,drive,tube:tube(x)};
 }
 function pt44IFSingleStep(c,old,time,dt,equilibrium=false,method='midpoint'){
- const midpoint=!equilibrium&&method==='midpoint';if(!['midpoint','backward_euler'].includes(method))throw Error('Unknown IF integrator');const t=midpoint?time-dt/2:time,h=midpoint?dt/2:dt;let x=old.slice(),sys,residual;const norm=F=>Math.max(...F.map((v,i)=>Math.abs(v)/([10,11,22,23,24,25].includes(i)?1000:1)));
+ const midpoint=!equilibrium&&method==='midpoint';if(!['midpoint','backward_euler','backward_euler_supply'].includes(method))throw Error('Unknown IF integrator');const t=midpoint?time-dt/2:time,h=midpoint?dt/2:dt;let x=old.slice(),sys,residual;const norm=F=>Math.max(...F.map((v,i)=>Math.abs(v)/([10,11,22,23,24,25].includes(i)?1000:1)));
  for(let n=0;n<50;n++){sys=pt44IFSystem(c,x,old,t,h,equilibrium);residual=norm(sys.F);
   // Large supply-capacitor conductances hit floating-point subtraction noise at fine IF steps.
   // Keep high-impedance signal-node tolerance strict while allowing 1 nA at the two supply nodes.
@@ -99,9 +100,9 @@ function pt44IFSimulate(spec,audio,power,detector,graph,input={}){
  }
  const summary=Object.fromEntries(keys.map(k=>{const z=stats[k];return [k,{mean:z.area/T,audio_peak:2*Math.hypot(z.cos,z.sin)/T,carrier_peak:2*Math.hypot(z.carrier_cos,z.carrier_sin)/T,min:z.min,max:z.max}];}));return {parameters:p,initial,final:s,summary,samples,max_kcl_residual_a:maxResidual,steps:count,subdivisions,measurement_window_s:[start,p.duration_s],factory_calibrated:false,full_receiver_validated:false};
 }
-function pt44IFSpiceDeck(spec,audio,power,detector,graph,input={}){
- const c=pt44IFConfigure(spec,audio,power,detector,graph,input),{p}=c,a=spec.assumptions,f=detector.factory_parameters,dt=1/(p.carrier_hz*p.samples_per_carrier);
- const lines=pt44AudioSpiceDeck(audio,power,graph,{rectifier_model:p.rectifier_model,line_v:p.line_v,line_mode:'DC',signal_peak_v:0,signal_start_s:0,volume:p.volume,c18_scale:p.c18_scale,c20_leak_ohm:p.c20_leak_ohm}).split('\n').filter(s=>s&&!/^(RRF |BSIGNAL |RDET |\.options|\.tran|\.print|\.end)/.test(s)).map(s=>s.replace(/ IC=0/g,''));
+function pt44IFSpiceDeck(spec,audio,power,detector,graph,input={},baseOptions={}){
+ const c=pt44IFConfigure(spec,audio,power,detector,graph,input,baseOptions),{p}=c,a=spec.assumptions,f=detector.factory_parameters,dt=1/(p.carrier_hz*p.samples_per_carrier);
+ const lines=pt44AudioSpiceDeck(audio,power,graph,c.base.p).split('\n').filter(s=>s&&!/^(RRF |BSIGNAL |RDET |\.options|\.tran|\.print|\.end)/.test(s)).map(s=>s.replace(/ IC=0/g,''));
  lines[0]='PT-44 v0.58 joint hot DC IF/detector/audio/power - uncalibrated';
  lines.push('* Converter injection/substitute loads and winding parameters are declared assumptions. No RF tracking claim.',`.func IFP(p,g) {${pt44IFSpiceTable(spec,'plate_current_a')}}`,`.func IFS(p,g) {${pt44IFSpiceTable(spec,'screen_current_a')}}`,'.func QIF(s) {max(s,1e-6)/100}',
  `RCP CP 0 ${a.converter_plate_ohm}`,`RCS S 0 ${a.converter_screen_ohm}`,`BDRIVE CP 0 I={${p.input_peak_a}*(1+${p.modulation}*sin(${2*Math.PI*p.audio_hz}*time))*sin(${2*Math.PI*p.carrier_hz}*time)}`,
