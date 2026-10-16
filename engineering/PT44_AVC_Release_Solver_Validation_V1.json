@@ -1,0 +1,196 @@
+{
+  "schema": "PT44_AVC_RELEASE_SOLVER_VALIDATION_V1",
+  "version": "0.62.0",
+  "scope": "Exact CI-failing initial state, strict JS backward-Euler continuation and KLU/adaptive Gear independent continuation. Same circuit and acceptance tolerances; numerical solver robustness, not new physical calibration.",
+  "solver": "KLU",
+  "method": "Gear order 2",
+  "snapshot": {
+    "time_s": 0.0032,
+    "x": [
+      103.1476240193445,
+      96.39466135579282,
+      -0.010250108627959383,
+      -0.006027851804706578,
+      -0.18819926577010193,
+      29.002799273667996,
+      -0.32095250781301965,
+      5.584027792183453,
+      100.94942470895515,
+      95.18571718585756,
+      0.013732699087955236,
+      0.04269138792896313,
+      -0.010398439093815964,
+      -0.00337712989038007,
+      53.08413306905311,
+      -0.0033438658954693425,
+      96.14912876720558,
+      -0.003343970022463368,
+      96.3947022194085,
+      -0.010406886241662524,
+      96.29516966935229,
+      96.39466574251561,
+      -0.0032095507474536097,
+      3.5905860183264413e-9,
+      -0.00545718782677502,
+      0.0000012422276243509319
+    ]
+  },
+  "input": {
+    "duration_s": 0.003,
+    "audio_hz": 2000,
+    "input_peak_a": 0,
+    "r17_open": true
+  },
+  "checks": [
+    {
+      "elapsed_s": 0.009999999999999998,
+      "node": "avc_v",
+      "javascript": -0.0032392240637604307,
+      "ngspice": -0.0032391953953000412,
+      "absolute_error": 2.8668460389479067e-8,
+      "tolerance": 0.000016205976976500207
+    },
+    {
+      "elapsed_s": 0.009999999999999998,
+      "node": "if_grid_v",
+      "javascript": -0.003239227094712738,
+      "ngspice": -0.0032391984550604854,
+      "absolute_error": 2.8639652252613473e-8,
+      "tolerance": 0.00001620599227530243
+    },
+    {
+      "elapsed_s": 0.009999999999999998,
+      "node": "filtered_bplus_v",
+      "javascript": 96.44983426410164,
+      "ngspice": 96.44988082911344,
+      "absolute_error": 0.000046565011800225875,
+      "tolerance": 0.4823494041455672
+    },
+    {
+      "elapsed_s": 0.05,
+      "node": "avc_v",
+      "javascript": -0.0027323836227951476,
+      "ngspice": -0.00273226053953999,
+      "absolute_error": 1.2308325515741902e-7,
+      "tolerance": 0.00001367130269769995
+    },
+    {
+      "elapsed_s": 0.05,
+      "node": "if_grid_v",
+      "javascript": -0.00273238335248321,
+      "ngspice": -0.0027322602762284397,
+      "absolute_error": 1.2307625477016998e-7,
+      "tolerance": 0.000013671301381142199
+    },
+    {
+      "elapsed_s": 0.05,
+      "node": "filtered_bplus_v",
+      "javascript": 96.45127968513017,
+      "ngspice": 96.45110500248892,
+      "absolute_error": 0.00017468264125852784,
+      "tolerance": 0.48235552501244455
+    },
+    {
+      "elapsed_s": 0.09999999999999999,
+      "node": "avc_v",
+      "javascript": -0.0022088561492959076,
+      "ngspice": -0.0022086566608162904,
+      "absolute_error": 1.9948847961720473e-7,
+      "tolerance": 0.000011053283304081452
+    },
+    {
+      "elapsed_s": 0.09999999999999999,
+      "node": "if_grid_v",
+      "javascript": -0.002208856160009648,
+      "ngspice": -0.0022086566707939176,
+      "absolute_error": 1.994892157301982e-7,
+      "tolerance": 0.000011053283353969588
+    },
+    {
+      "elapsed_s": 0.09999999999999999,
+      "node": "filtered_bplus_v",
+      "javascript": 96.45368586333038,
+      "ngspice": 96.45369424631919,
+      "absolute_error": 0.000008382988809785274,
+      "tolerance": 0.48236847123159593
+    },
+    {
+      "elapsed_s": 0.25,
+      "node": "avc_v",
+      "javascript": -0.0011669302683760185,
+      "ngspice": -0.0011666664582939677,
+      "absolute_error": 2.6381008205083115e-7,
+      "tolerance": 0.000005843332291469838
+    },
+    {
+      "elapsed_s": 0.25,
+      "node": "if_grid_v",
+      "javascript": -0.0011669302673714204,
+      "ngspice": -0.0011666664572885185,
+      "absolute_error": 2.6381008290192985e-7,
+      "tolerance": 0.0000058433322864425925
+    },
+    {
+      "elapsed_s": 0.25,
+      "node": "filtered_bplus_v",
+      "javascript": 96.45364413044665,
+      "ngspice": 96.4536440319449,
+      "absolute_error": 9.850174365055864e-8,
+      "tolerance": 0.4823682201597245
+    },
+    {
+      "elapsed_s": 0.5,
+      "node": "avc_v",
+      "javascript": -0.0004028784625465369,
+      "ngspice": -0.00040269624202256146,
+      "absolute_error": 1.8222052397542932e-7,
+      "tolerance": 0.0000020234812101128074
+    },
+    {
+      "elapsed_s": 0.5,
+      "node": "if_grid_v",
+      "javascript": -0.00040287846217720657,
+      "ngspice": -0.0004026962416533979,
+      "absolute_error": 1.8222052380867902e-7,
+      "tolerance": 0.0000020234812082669892
+    },
+    {
+      "elapsed_s": 0.5,
+      "node": "filtered_bplus_v",
+      "javascript": 96.45323286761662,
+      "ngspice": 96.45323276891526,
+      "absolute_error": 9.870136352674308e-8,
+      "tolerance": 0.48236616384457626
+    },
+    {
+      "elapsed_s": 1.0000000000000002,
+      "node": "avc_v",
+      "javascript": -0.0000480211265039422,
+      "ngspice": -0.00004797768588074613,
+      "absolute_error": 4.344062319607114e-8,
+      "tolerance": 2.4988842940373067e-7
+    },
+    {
+      "elapsed_s": 1.0000000000000002,
+      "node": "if_grid_v",
+      "javascript": -0.00004802112645992038,
+      "ngspice": -0.00004797768583680305,
+      "absolute_error": 4.344062311733096e-8,
+      "tolerance": 2.4988842918401525e-7
+    },
+    {
+      "elapsed_s": 1.0000000000000002,
+      "node": "filtered_bplus_v",
+      "javascript": 96.45304061875507,
+      "ngspice": 96.45304059522907,
+      "absolute_error": 2.352599892674334e-8,
+      "tolerance": 0.4823652029761453
+    }
+  ],
+  "max_kcl_residual_a": 1.1117495812840161e-13,
+  "final_spice_time_s": 0.9998,
+  "supported_ec_ids": [
+    "EC-05"
+  ],
+  "closed_ec_ids": []
+}

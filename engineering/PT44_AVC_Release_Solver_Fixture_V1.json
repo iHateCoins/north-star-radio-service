@@ -1,0 +1,61 @@
+{
+  "schema": "PT44_AVC_RELEASE_SOLVER_FIXTURE_V1",
+  "version": "0.62.0",
+  "source": "PR #29 first CI run 38834091275, open-#17 release deck. SPARSE aborted at 17.127 microseconds; the same initial state completes using KLU at unchanged equations, integration method, timestep bounds and tolerances.",
+  "snapshot": {
+    "time_s": 0.0032,
+    "x": [
+      103.1476240193445,
+      96.39466135579282,
+      -0.010250108627959383,
+      -0.006027851804706578,
+      -0.18819926577010193,
+      29.002799273667996,
+      -0.32095250781301965,
+      5.584027792183453,
+      100.94942470895515,
+      95.18571718585756,
+      0.013732699087955236,
+      0.04269138792896313,
+      -0.010398439093815964,
+      -0.00337712989038007,
+      53.08413306905311,
+      -0.0033438658954693425,
+      96.14912876720558,
+      -0.003343970022463368,
+      96.3947022194085,
+      -0.010406886241662524,
+      96.29516966935229,
+      96.39466574251561,
+      -0.0032095507474536097,
+      3.5905860183264413e-09,
+      -0.00545718782677502,
+      1.2422276243509319e-06
+    ]
+  },
+  "input": {
+    "duration_s": 0.003,
+    "audio_hz": 2000,
+    "input_peak_a": 0,
+    "r17_open": true
+  },
+  "continuation_s": 0.9998,
+  "step_s": 0.0001,
+  "checkpoint_elapsed_s": [
+    0.01,
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1
+  ],
+  "tolerances": {
+    "relative": 0.005,
+    "signal_floor_v": 1e-08,
+    "supply_floor_v": 0.0001
+  },
+  "supported_ec_ids": [
+    "EC-05"
+  ],
+  "closed_ec_ids": []
+}

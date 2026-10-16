@@ -231,7 +231,7 @@
     }
   ],
   "benchmark_ready": false,
-  "latest_evidence_update": "v0.62 supports EC-02/06 with bounded manufacturer 7A8 characteristic slices and isolated separately driven small-signal conversion. No full EC closes. Receiver converter substitutes, actual oscillator, tracking and AVC feedback remain open. All nine EC acceptance lists and six NOT MET gates are unchanged.",
+  "latest_evidence_update": "v0.62 supports EC-02/05/06 with bounded manufacturer 7A8 characteristics, isolated separately driven conversion and a captured-state AVC release solver regression. No full EC closes; receiver converter substitutes remain. All nine acceptance lists and all six NOT MET gates remain unchanged.",
   "model_equivalence_review": {
     "artifact": "engineering/PT44_Model_Equivalence_Review_V1.json",
     "status": "SHARED_CHASSIS_SOURCE_CONFIRMED_MODEL_VARIANTS_RETAINED",
