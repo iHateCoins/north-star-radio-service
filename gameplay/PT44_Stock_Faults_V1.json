@@ -1,0 +1,22 @@
+[
+ {"id":"heater","slot":"V2","set":{"heaterOk":false},"diagnosis":"tube"},
+ {"id":"c1dry","slot":"C1","set":{"uF":3},"diagnosis":"cap"},
+ {"id":"c2dry","slot":"C2","set":{"uF":2},"diagnosis":"cap"},
+ {"id":"c3leak","slot":"C3","set":{"leak0":2,"vcoef":0.03},"diagnosis":"cap"},
+ {"id":"c3open","slot":"C3","set":{"uF":0.00003},"diagnosis":"cap"},
+ {"id":"r4drift","slot":"R4","set":{"ohms":3760000},"diagnosis":"ohms"},
+ {"id":"r2open","slot":"R2","set":{"open":true},"diagnosis":"ohms"},
+ {"id":"v4weak","slot":"V4","set":{"emis":0.3},"diagnosis":"tube"},
+ {"id":"v1weak","slot":"V1","set":{"emis":0.3},"diagnosis":"tube"},
+ {"id":"v2weak","slot":"V2","set":{"emis":0.2},"diagnosis":"tube"},
+ {"id":"v5weak","slot":"V5","set":{"emis":0.2},"diagnosis":"tube"},
+ {"id":"r6open","slot":"R6","set":{"open":true},"diagnosis":"ohms"},
+ {"id":"otopen","slot":"T1","set":{"open":true},"diagnosis":"ohms"},
+ {"id":"vrscratch","slot":"VR1","set":{"scratch":0.8},"diagnosis":"control"},
+ {"id":"hk","slot":"V3","set":{"hk":0.5},"diagnosis":"tube"},
+ {"id":"c2short","slot":"C2","set":{"leak0":0.00005},"diagnosis":"cap"},
+ {"id":"spkopen","slot":"SP1","set":{"open":true},"diagnosis":"ohms"},
+ {"id":"v4gas","slot":"V4","set":{"gas":0.8},"diagnosis":"tube"},
+ {"id":"osccoil","slot":"L1","set":{"open":true},"diagnosis":"ohms"},
+ {"id":"c4open","slot":"C4","set":{"open":true,"leak0":1000000000},"diagnosis":"cap"}
+]

@@ -1,0 +1,19 @@
+{
+ "version":"0.64.0",
+ "source_policy":"Existing Philco and manufacturer evidence remains unchanged. These are explicit game presentation choices under the approved behavioral scope, not new physical wiring claims.",
+ "avc_variant":{"factory_number":"8","game_value_uf":0.05,"alternative_uf":0.1,"decision":"Use the schematic-side 0.05 uF reference as the named game variant. The parts-list 0.1 uF remains an acknowledged alternative. The game's AVC timing is a declared service approximation, not a fitted capacitor equation."},
+ "diodes":{"labels":["Signal detector diode","AVC detector diode"],"socket_mapping":"Unassigned in the game functional diagram; manufacturer pins 5 and 6 remain distinct historical electrodes. No glyph-to-pin assignment is invented."},
+ "oscillator":{"label":"Oscillator feedback / tuning assembly","representation":"Functional block. The four-dot coupling symbol remains in the historical source; it is not presented as a resolved physical winding circuit."},
+ "field_coil":{"slot":"R1","sku":"R500-2","presentation":"Wound field assembly with 500 ohm service resistance. Legacy SKU retained for saved games; this is not an interchangeable carbon resistor. 3D service placement is illustrative."},
+ "component_classes":{
+  "R":"Measured resistance, grid/cathode/plate role and I-squared-R rating. R1 is a keyed field assembly. Missing/open changes its stage or creates floating-grid hum/bias.",
+  "C":"Capacitance, leakage under test voltage and voltage rating affect coupling, filtering or oscillator operation; open parts read zero capacitance.",
+  "TUBE":"Correct type required. Emission, series heater, leakage/gas and dissipation govern stage behavior. Test only when pulled.",
+  "OT":"Matching output assembly; winding continuity, resistance and current stress. Open or missing loses plate supply/output.",
+  "IFT":"455 kHz assembly, winding continuity and manual IF centers. Open or missing interrupts IF; no alternative winding SKU is sold.",
+  "COIL":"Matching oscillator assembly; open or missing stops conversion. No alternative coil SKU is sold.",
+  "VR":"500 kilohm control; volume, open track and scratch. No alternative taper/value SKU is sold.",
+  "SPK":"Matching speaker voice-coil assembly; open coil or cone rub. No alternative impedance SKU is sold."
+ },
+ "access":"The Inspector service-part selector exposes every supported repair location independently of the camera. Top/underside locations are functional service locations, not a factory lead-dress certification. Loop and alignment actions are in Generator / alignment."
+}
