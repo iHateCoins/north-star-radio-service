@@ -170,7 +170,7 @@
         "Correlate tube/winding/diode parameters, actual loaded passband and physical trimmer range; validate long-duration AVC attack/steady regulation and converter AVC feedback."
       ],
       "completed_in_v062": [
-        "Select KLU for SPICE release continuation after reproducing a SPARSE timestep collapse from the exact CI initial state; compare the captured state against strict JS continuation at unchanged checkpoint bounds."
+        "Refine SPICE release initialization time resolution after reproducing timestep collapses from captured open-#17 and service-meter states; validate both states under default and KLU engines against strict JS continuation at unchanged checkpoint bounds."
       ],
       "remaining_after_v062": [
         "Correlate tube/winding/diode parameters, actual loaded passband and physical trimmer range; validate long-duration AVC attack/steady regulation and converter AVC feedback."
@@ -302,7 +302,7 @@
     "EC-03/04: validate the complete receiver supply/audio envelope.",
     "EC-07/08/09: serviceable chassis/shop instruments and full repair acceptance."
   ],
-  "milestone_completed": "v0.62 supports EC-02/05/06 with bounded manufacturer 7A8 characteristics, isolated separately driven conversion and a captured-state AVC release solver regression. No full EC closes; receiver converter substitutes remain.",
+  "milestone_completed": "v0.62 supports EC-02/05/06 with bounded manufacturer 7A8 characteristics, isolated separately driven conversion and captured-state AVC release initialization regressions. No full EC closes; receiver converter substitutes remain.",
   "version_reporting_policy": "Every release names the EC IDs it supports, the concrete evidence added toward closure, and any EC IDs actually closed. Support is not full closure; the nine acceptance lists remain fixed.",
   "version_support": {
     "version": "0.62.0",
@@ -319,7 +319,7 @@
       "PT44_AVC_Release_Solver_Fixture_V1.json",
       "PT44_AVC_Release_Solver_Validation_V1.json"
     ],
-    "summary": "7A8 source-bound bias/drive characteristics, separate excitation and small-signal conversion with explicit unsupported boundaries. KLU release-continuation robustness is regression-tested from the exact CI-failing state.",
+    "summary": "7A8 source-bound bias/drive characteristics, separate excitation and small-signal conversion with explicit unsupported boundaries. Release initialization robustness is regression-tested from two captured failing states under both matrix engines.",
     "limitations": "No receiver converter-load replacement, self-oscillation, oscillator coupling resolution, tracking, RF input network or converter AVC feedback. Reference slice validation is not full EC closure.",
     "evidence_by_ec": {
       "EC-02": [
@@ -329,7 +329,7 @@
         "Add an isolated externally clocked small-signal conversion fixture; check difference/sum frequencies and AM sidebands, bias/drive sensitivity and omitted-clock response. No physical oscillator or receiver tracking is established."
       ],
       "EC-05": [
-        "Select KLU for SPICE release continuation after reproducing a SPARSE timestep collapse from the exact CI initial state; compare the captured state against strict JS continuation at unchanged checkpoint bounds."
+        "Refine SPICE release initialization time resolution after reproducing timestep collapses from captured open-#17 and service-meter states; validate both states under default and KLU engines against strict JS continuation at unchanged checkpoint bounds."
       ]
     }
   }

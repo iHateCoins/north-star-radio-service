@@ -2,14 +2,14 @@
 
 The 7A8 is the remaining converter dependency for the receiver. This version adds an executable **manufacturer-characteristic reference** and a separately driven, unloaded small-signal conversion fixture. It prepares converter work without inventing a self-oscillating PT-44 circuit from the unresolved coupling symbol.
 
-The Factory ledger gains a **7A8 conversion reference** panel for published-condition selection, signal bias, oscillator drive, imposed RF/LO frequencies, AM depth, omitted external clock, restoration and matching SPICE export. Existing receiver equations and converter substitute loads are unchanged. The SPICE release export selects KLU for numerical robustness.
+The Factory ledger gains a **7A8 conversion reference** panel for published-condition selection, signal bias, oscillator drive, imposed RF/LO frequencies, AM depth, omitted external clock, restoration and matching SPICE export. Existing receiver equations and converter substitute loads are unchanged. The SPICE release export starts with finer requested time resolution for numerical robustness.
 
 ## EC support and closure
 
 | EC supported | Concrete v0.62 evidence | Remaining for closure |
 |---|---|---|
 | **EC-02** | Two bounded 7A8 characteristic slices, 31 withheld graph-coordinate/typical-point checks and independently executed interpolation. | Receiver-range voltage/drive behavior, loading and heater behavior; remaining tube/winding/audio/field/lamp correlation. |
-| **EC-05** | Captured CI initial-state regression and KLU SPICE release continuation at unchanged equations and tolerances. | Actual passband/parameter correlation, long-duration attack/steady AVC and converter feedback. |
+| **EC-05** | Two captured-state regressions and finer SPICE release initialization at unchanged equations and tolerances. | Actual passband/parameter correlation, long-duration attack/steady AVC and converter feedback. |
 | **EC-06** | Separately driven small-signal difference/sum conversion, AM sidebands and bias/drive sensitivity. | Actual oscillator, aerial/RF input, loaded conversion, 540–1600 kHz tracking, alignment, AVC feedback and physical fault response. |
 
 **Full ECs closed: none.** EC-06 is now in progress at the isolated component-fixture level. All nine acceptance lists and all six **NOT MET** completion gates remain unchanged. Broader game work remains on hold.
@@ -44,7 +44,7 @@ Selecting RF frequencies at 540, 1000 and 1600 kHz and manually setting LO = RF 
 
 The new Chromium check exercises bias/drive selection, omitted clock, restoration, exact export and mobile layout. Existing source, supply, audio, detector, IF, alignment, rectifier and AVC checks remain in CI.
 
-The legacy release SPICE check previously collapsed to a sub-femtosecond timestep at the audio plate node for one CI initial state. That exact state is retained in `PT44_AVC_Release_Solver_Fixture_V1.json`. Selecting KLU completes the continuation without changing equations, Gear order, timestep bounds or acceptance tolerances; `PT44_AVC_Release_Solver_Validation_V1.json` records the checkpoint comparison. Exported release decks require an ngspice build with KLU. CI runs this regression and the complete release set as a separate early job.
+The legacy release SPICE check collapsed at the audio plate node for a captured CI open-#17 state; selecting KLU alone exposed a second failure with a service-meter state. Both states are retained in `PT44_AVC_Release_Solver_Fixture_V1.json`. Requested SPICE time resolution is now 1 µs rather than 100 µs, enabling finer adaptive initialization of the residual IF states. The 100 µs maximum timestep, circuit equations, Gear order and all tolerances are unchanged. `PT44_AVC_Release_Solver_Validation_V1.json` records both states under default and KLU engines. The canonical export does not require KLU; the regression suite checks both engines. CI runs these regressions and the complete release set as a separate early job.
 
 ## Remaining work
 
