@@ -33,7 +33,11 @@ function pt44GameEvaluate(spec,r,env={}){
  const r4=ohm('R4',470000),audioGain=good('R4')?e('V3')*supply/(1+Math.abs(Math.log(r4/470000))*1.8):0;
  const hp=cap('C3')>0?400/Math.hypot(400,1/(2*Math.PI*Math.max(1,ohm('R3',470000))*cap('C3')*1e-6)):0;
  const V={B1,B2,P5:good('T1')?Math.max(0,B1-25*(I5p/.045)*(ohm('T1',250)/250)):0,K5:good('R2')?(I5p+I5s)*ohm('R2',130):B2*.8,G5:leak*7+gas*5+(!good('R3')?6:0),P6:good('R4')?Math.min(B2,30*supply/(Math.pow(r4/470000,.55)*Math.max(.1,e('V3')))):0,G6:good('R5')?-.35*e('V3'):-.05,PCV:good('T2')?Math.max(0,B2-5*e('V1')):0,PIF:good('T3')?Math.max(0,B2-5*e('V2')):0,KIF:good('R7')?.007*e('V2')*ohm('R7',68):B2,OSC:-10*oscActive,AVC:avc,SCREEN:45*supply};
- if(!powered){for(const k of Object.keys(V))if(!['B1','B2'].includes(k))V[k]=0;}
+ if(!powered){
+  for(const k of Object.keys(V))if(!['B1','B2'].includes(k))V[k]=0;
+  for(const k of ['P5','P6','PCV','PIF']){const filter=k==='P5'?'C1':'C2';V[k]=pt44GameStoredVoltage(env.off_v?.[spec.nodes.indexOf(k)]||0,env.off_elapsed_s||0,cap(filter),s[filter]?.leak0);}
+  V.SCREEN=B2*45/102;
+ }
  if(meter&&meter.node!=='AVC')V[meter.node]*=loading(meter.node);
  const af=audioGain*loading('P6')*loading('G6')*Math.min(1,ohm('R5',4700000)/4700000),outputGain=e('V4')*supply*outputReturn*(good('T1')?1:0)*(good('SP1')?1:0)*C(2/(1+r2));
  const a1=det*af,g5=a1*hp,loud=C(g5*1.7*outputGain,0,1.6),bias=V.K5-V.G5,drive=g5*8;
