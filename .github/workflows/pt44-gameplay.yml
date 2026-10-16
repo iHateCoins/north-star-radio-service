@@ -73,3 +73,24 @@ jobs:
           name: pt44-completion-shop-${{ matrix.shard }}-v064
           path: tmp/pt44-completion-browser-${{ matrix.shard }}/
           retention-days: 7
+
+  player-ui:
+    name: Player UI and upgrades
+    timeout-minutes: 7
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright@1.62.1
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/test_ui_browser_v65.js --browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pt44-player-ui-v065
+          path: tmp/pt44-ui-v065/
+          retention-days: 7

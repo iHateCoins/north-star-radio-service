@@ -81,8 +81,13 @@
 .build-watermark{position:fixed;right:12px;bottom:12px;z-index:9999;padding:8px 10px;border-radius:10px;background:rgba(26,22,18,.78);color:#f6e2b0;border:1px solid rgba(220,182,109,.45);font:700 11px/1.1 "Courier Prime",monospace;letter-spacing:.06em;box-shadow:0 6px 18px rgba(0,0,0,.22);pointer-events:none;user-select:none;backdrop-filter:blur(2px)}
 .build-watermark small{display:block;margin-top:3px;font:400 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.02em;color:#d8cbc3;opacity:.92}
 @media(max-width:680px){.build-watermark{right:8px;bottom:8px;padding:7px 9px;font-size:10px}}
+.build-watermark{display:none}body.engineering .build-watermark{display:block}
+.job-options>summary{cursor:pointer;font-size:12px}
+.ui-details{border-top:1px solid var(--line);padding:10px 12px}.ui-details>summary{cursor:pointer;color:var(--dim);font-size:12px}.ui-details[open]>summary{margin-bottom:10px}
+.ui-details .log{border-top:none;padding:0}.upgrade-card{border:1px solid var(--line);border-radius:4px;padding:12px}.upgrade-card h3{font-size:15px;margin:0 0 5px}.upgrade-card .row{justify-content:space-between}.ui-nested{padding:10px 0}
+@media(max-width:800px){body.no-job .counter{order:-1}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.64.0</title><meta name="nsrs-build" content="v0.64.0">
+<title>North Star Radio Service — PT-44 v0.65.0</title><meta name="nsrs-build" content="v0.65.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -262,7 +267,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.64.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.65.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -311,7 +316,7 @@ function skuName(sku){
   if (c.kind==='R') return `${fmtOhms(c.ohms)} ${fmtW(c.W)} carbon`;
   if (c.kind==='C') return `${fmtCap(c.uF)} ${c.V} V ${c.ctype}`;
   if (c.kind==='TUBE') return `${c.tube} tube`;
-  return {OT:'Output transformer (50L6GT)',SPK:'field-coil dynamic speaker (prototype voice coil)',VR:'500 kΩ volume control w/ switch',COIL:'Oscillator coil',IFT:'455 kc IF transformer'}[c.kind];
+  return {OT:'Output transformer (50L6GT)',SPK:'Speaker cone / voice-coil assembly',VR:'500 kΩ volume control w/ switch',COIL:'Oscillator coil',IFT:'455 kc IF transformer'}[c.kind];
 }
 
 // ---------- Philco PT-44 historical reference (1941 factory service booklet, pp. 36 & 38) ----------
@@ -1508,12 +1513,13 @@ const B3 = (function(){
 <script>
 // ===== North Star Radio Service — game layer =====
 const $ = s => document.querySelector(s);
+const ENGINEERING_MODE=new URLSearchParams(location.search).get('engineering')==='1';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const money = n => '$' + n.toFixed(2);
 const SAVE_KEY = 'northstar-radio-pt44-v07';
 
 const EQUIPMENT = {
-  vtvm:   {name:'Vacuum-tube voltmeter', price:49.50, blurb:'11 MΩ input on every range. Reads plate and grid voltages a 1,000 Ω/V meter drags down.'},
+  vtvm:   {name:'Vacuum-tube voltmeter', price:49.50, blurb:'Measure sensitive plate and grid circuits without pulling the reading down. 11 MΩ input on every range.'},
   capchk: {name:'Capacitor checker', price:34.50, blurb:'Bridge for capacitance and a leakage test at the rated working voltage.'},
   tracer: {name:'Signal tracer', price:29.95, blurb:'Probe-and-listen amplifier. Follow the program from the converter to the speaker.'},
 };
@@ -1619,7 +1625,7 @@ function chargeV(node,loaded=true){
 }
 function charged(){ return !R.power && R.offV && Math.max(chargeV('B1',false),chargeV('B2',false))>30; }
 
-function benchLog(t,cls=''){ R.benchLog.unshift({t,cls}); R.benchLog.length=Math.min(R.benchLog.length,40); const el=$('#benchLog'); if(el) el.innerHTML = logHTML(R.benchLog); }
+function benchLog(t,cls=''){if(cls==='bad'||cls==='hot'){R.notesOpen=true;const notes=$('#benchNotes');if(notes)notes.open=true;toast(t);} R.benchLog.unshift({t,cls}); R.benchLog.length=Math.min(R.benchLog.length,40); const el=$('#benchLog'); if(el) el.innerHTML = logHTML(R.benchLog); }
 function logHTML(a){ return a.map(x=>`<div class="${x.cls}">${esc(x.t)}</div>`).join('') || '<div>Bench is quiet.</div>'; }
 
 // ---------- actions ----------
@@ -1752,7 +1758,7 @@ function buy(sku, qty, rush){
   else { S.orders.push({sku,qty,arrive:S.day+1}); shopLog(`Ordered ${qty}× ${skuName(sku)}: ${money(price)}. Arrives tomorrow.`); }
   save(); renderHeader(); renderSide(); renderShopLog();
 }
-function buyTool(k){ const e=EQUIPMENT[k]; if (S.cash<e.price){ toast('Not enough cash on hand.'); return; } S.cash-=e.price; S.tools[k]=1; shopLog(`Bought a ${e.name}: ${money(e.price)}.`,'good'); save(); renderAll(); }
+function buyTool(k){ const e=EQUIPMENT[k];if(!e||S.tools[k])return; if (S.cash<e.price){ toast('Not enough cash on hand.'); return; } S.cash-=e.price; S.tools[k]=1; shopLog(`Bought a ${e.name}: ${money(e.price)}.`,'good'); save(); renderAll(); }
 
 // ---------- toast ----------
 let toastT=0;
@@ -1775,7 +1781,7 @@ function renderTickets(){
     <div class="meta"><span>Labor ${money(j.labor)}</span><span>Parts up to ${money(j.budget)}</span><span>Due ${dateStr(j.due).replace(' 1955','')}</span></div>
   </div>`).join('');
   el.querySelectorAll('.ticket').forEach(t=>{ const go=()=>{ const id=+t.dataset.job; if (S.bench===id) return; if (R.power){ toast('Switch off the set on the bench first.'); return; }
-      S.bench=id; R.power=false; R.warm=0; R.dc=null; R.offV=null; R.sel=null; R.probe=null; R.ohmTarget=null; R.avcV=0; R.generator={enabled:false,point:'if',khz:455,mv:.5}; R.benchLog=[]; const j=benchJob(); benchLog(`${j.brand} ${j.model} on the bench. Customer says: “${j.complaint}”`); save(); renderAll(); };
+      S.bench=id; R.power=false; R.warm=0; R.dc=null; R.offV=null; R.sel=null; R.probe=null; R.ohmTarget=null; R.avcV=0; R.generator={enabled:false,point:'if',khz:455,mv:.5};R.notesOpen=false; R.benchLog=[]; const j=benchJob(); benchLog(`${j.brand} ${j.model} on the bench. Customer says: “${j.complaint}”`); save(); renderAll(); };
     t.onclick=go; t.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();go();} }; });
 }
 function renderShopLog(){ $('#shopLog').innerHTML = S.log.map(l=>`<div class="${l.cls}"><span style="color:var(--faint)">${dateStr(l.d).slice(0,3)} </span>${esc(l.t)}</div>`).join(''); }
@@ -1790,15 +1796,15 @@ function renderBench(){
   <div class="view" id="viewBox"></div>
   <div class="front" id="front"></div>
   <div class="hear" id="hear"></div>
-  <div class="log" id="benchLog"></div>`;
-  renderBenchHead(); renderViewTabs(); renderTracePanel(); renderViews(); renderFront(); $('#benchLog').innerHTML=logHTML(R.benchLog); updateLive();
+  <details class="ui-details" id="benchNotes" ${R.notesOpen?'open':''}><summary>Bench notes</summary><div class="log" id="benchLog"></div></details>`;
+  renderBenchHead(); renderViewTabs(); renderTracePanel(); renderViews(); renderFront();$('#benchNotes').ontoggle=e=>{if(e.target.isConnected)R.notesOpen=e.target.open;}; $('#benchLog').innerHTML=logHTML(R.benchLog); updateLive();
 }
 function renderBenchHead(){
   const job=benchJob(), el=$('#benchHead'); if(!el||!job) return;
   const ch = charged();
-  el.innerHTML = `<h2>${esc(job.brand)} ${esc(job.model)}</h2><span style="color:#b4bb94;font:10px monospace">1941 · PT-44 SERVICE</span><span class="muted mono" style="font-size:12px">RO № ${job.id}</span><span style="flex:1"></span>
+  el.innerHTML = `<h2>${esc(job.brand)} ${esc(job.model)}</h2><span class="muted mono" style="font-size:12px">RO № ${job.id}</span><span style="flex:1"></span>
     ${ch?'<button class="btn warn sm" id="bDis">Discharge B+</button>':''}
-    <button class="btn sm" id="bRet">Return unrepaired</button>
+    <details class="job-options"><summary class="muted">Job options</summary><button class="btn sm" id="bRet">Return unrepaired</button></details>
     <button class="btn pri sm" id="bChk">Run checkout</button>`;
   if (ch) $('#bDis').onclick=discharge;
   $('#bRet').onclick=()=>confirmModal(`Return ${job.cust}'s set unrepaired?`, 'You keep the $1.50 bench fee, and your reputation drops a point. Parts you removed go back in.', 'Return it', returnUnrepaired);
@@ -1903,7 +1909,7 @@ function modelConnectivitySVG(){
 }
 
 function renderTracePanel(){
-  const el=$('#tracePanel');if(!el)return;
+  const el=$('#tracePanel');if(!el)return;if(!ENGINEERING_MODE){el.hidden=true;el.innerHTML='';return;}el.hidden=false;
   const st=R.traceNet||''; const a=pt44CircuitAudit(benchJob()&&benchJob().radio);
   el.innerHTML=`<div class="trace-title">CIRCUIT TRACE <span class="model-tag">MODEL + SOLDER ANCHORS · ${a.netCount} NODES · ${a.ok?'GRAPH CHECK PASS':'GRAPH ISSUE'}</span></div>
    <div class="row"><select id="selTraceNet" aria-label="Highlight modeled circuit net"><option value="">— Show all wiring —</option>${['HEATER',...Object.keys(PT44_MODEL.nodes)].map(n=>`<option ${st===n?'selected':''} value="${n}">${n} · ${n==='HEATER'?'heater chain':PT44_MODEL.nodes[n].length+' modeled terminals'}</option>`).join('')}</select>
@@ -2548,7 +2554,7 @@ function pt44EngineeringReadinessAudit(){
  if(counts.spice.isolated_ngspice_testbench_validated!==true||counts.spice.full_receiver_spice_validated!==false||counts.spice.nominal_heater_sanity_spice_validated!==counts.heater_string_sanity_spice_validated)errors.push('SPICE readiness must distinguish sanity fixtures from full-receiver validation');
  return {ok:!errors.length,errors,benchmarkReady:false,blockers:r.open_items.length,gates:r.completion_gates.length};
 }
-const PT44_GAME_COMPLETION_V2 = Object.freeze({"schema":"PT44_GAME_COMPLETION_V2","version":"0.64.0","approved_scope_change":"User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.","historical_standard":"engineering/PT44_EC_Acceptance_V1.json","policy":"Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.","fidelity":"Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.","optional_research":["Full receiver SPICE parity","Exhaustive tube curve validation","Carrier stepping","Exact undocumented socket wiring, lead dress and winding parameters"],"supported_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_gameplay_v63.js","tests/test_gameplay_browser_v63.js",".github/workflows/pt44-gameplay.yml","tests/test_completion_v64.js","tests/test_completion_browser_v64.js","gameplay/PT44_Stock_Faults_V1.json","gameplay/PT44_Service_Scope_V1.json","gameplay/PT44_V2_Acceptance_Signature.json"],"packages":[{"id":"EC-01","title":"Source and presentation","status":"CLOSED","acceptance":"Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.","remaining":"None within the fixed V2 acceptance. Named 0.05 uF game variant, functional diode labels and oscillator assembly with unknown physical mapping explicitly retained; Service data and PT44_Service_Scope_V1.json."},{"id":"EC-02","title":"Component behavior","status":"CLOSED","acceptance":"All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.","remaining":"None within the fixed V2 acceptance. 352 compatible catalog placements, all component classes, missing/failed states and wrong-kind guards; shared testers and wound field assembly presentation."},{"id":"EC-03","title":"Power and operating states","status":"CLOSED","acceptance":"Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.","remaining":"None within the fixed V2 acceptance. Live warmup, series heaters, hot switch-off, retained checkout charge, discharge and damaging-fault cascade; AC/DC supply envelope."},{"id":"EC-04","title":"Playable audio chain","status":"CLOSED","acceptance":"Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.","remaining":"None within the fixed V2 acceptance. v0.63 audio acceptance retained; complete stock fault and real-shop replacement matrix in v0.64."},{"id":"EC-05","title":"IF, detector and AVC","status":"CLOSED","acceptance":"455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.","remaining":"None within the fixed V2 acceptance. 455 kHz selectivity, combined IF/detector failures, independent upstream tracer, timed AVC/loaded probing and manual three-control alignment recovery."},{"id":"EC-06","title":"RF and converter","status":"CLOSED","acceptance":"540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.","remaining":"None within the fixed V2 acceptance. v0.63 RF/converter acceptance retained; stock converter/oscillator repairs, wrong oscillator capacitor and full-band conversion regression."},{"id":"EC-07","title":"Service instruments","status":"CLOSED","acceptance":"Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.","remaining":"None within the fixed V2 acceptance. Shared tube/cap tester properties, pulled-part guard, every service-port load, meter range/polarity/live-ohms checks, generator/tracer and corrected reference conditions."},{"id":"EC-08","title":"Physical service workflow","status":"CLOSED","acceptance":"Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.","remaining":"None within the fixed V2 acceptance. Every supported slot has a named service location, camera-independent selector, highlight and DOM remove/install action; live/charged guards and keyed field assembly."},{"id":"EC-09","title":"End-to-end benchmark","status":"CLOSED","acceptance":"Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.","remaining":"None within the fixed V2 acceptance. All 20 stock faults through browser save/load, diagnosis, incorrect-repair checkout, part replacement and successful checkout; healthy reference, all-slot access and cascade repair."}],"benchmark_ready":true});
+const PT44_GAME_COMPLETION_V2 = Object.freeze({"schema":"PT44_GAME_COMPLETION_V2","version":"0.65.0","approved_scope_change":"User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.","historical_standard":"engineering/PT44_EC_Acceptance_V1.json","policy":"Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.","fidelity":"Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.","optional_research":["Full receiver SPICE parity","Exhaustive tube curve validation","Carrier stepping","Exact undocumented socket wiring, lead dress and winding parameters"],"supported_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_gameplay_v63.js","tests/test_gameplay_browser_v63.js",".github/workflows/pt44-gameplay.yml","tests/test_completion_v64.js","tests/test_completion_browser_v64.js","gameplay/PT44_Stock_Faults_V1.json","gameplay/PT44_Service_Scope_V1.json","gameplay/PT44_V2_Acceptance_Signature.json"],"packages":[{"id":"EC-01","title":"Source and presentation","status":"CLOSED","acceptance":"Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.","remaining":"None within the fixed V2 acceptance. Named 0.05 uF game variant, functional diode labels and oscillator assembly with unknown physical mapping explicitly retained; Service data and PT44_Service_Scope_V1.json."},{"id":"EC-02","title":"Component behavior","status":"CLOSED","acceptance":"All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.","remaining":"None within the fixed V2 acceptance. 352 compatible catalog placements, all component classes, missing/failed states and wrong-kind guards; shared testers and wound field assembly presentation."},{"id":"EC-03","title":"Power and operating states","status":"CLOSED","acceptance":"Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.","remaining":"None within the fixed V2 acceptance. Live warmup, series heaters, hot switch-off, retained checkout charge, discharge and damaging-fault cascade; AC/DC supply envelope."},{"id":"EC-04","title":"Playable audio chain","status":"CLOSED","acceptance":"Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.","remaining":"None within the fixed V2 acceptance. v0.63 audio acceptance retained; complete stock fault and real-shop replacement matrix in v0.64."},{"id":"EC-05","title":"IF, detector and AVC","status":"CLOSED","acceptance":"455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.","remaining":"None within the fixed V2 acceptance. 455 kHz selectivity, combined IF/detector failures, independent upstream tracer, timed AVC/loaded probing and manual three-control alignment recovery."},{"id":"EC-06","title":"RF and converter","status":"CLOSED","acceptance":"540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.","remaining":"None within the fixed V2 acceptance. v0.63 RF/converter acceptance retained; stock converter/oscillator repairs, wrong oscillator capacitor and full-band conversion regression."},{"id":"EC-07","title":"Service instruments","status":"CLOSED","acceptance":"Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.","remaining":"None within the fixed V2 acceptance. Shared tube/cap tester properties, pulled-part guard, every service-port load, meter range/polarity/live-ohms checks, generator/tracer and corrected reference conditions."},{"id":"EC-08","title":"Physical service workflow","status":"CLOSED","acceptance":"Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.","remaining":"None within the fixed V2 acceptance. Every supported slot has a named service location, camera-independent selector, highlight and DOM remove/install action; live/charged guards and keyed field assembly."},{"id":"EC-09","title":"End-to-end benchmark","status":"CLOSED","acceptance":"Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.","remaining":"None within the fixed V2 acceptance. All 20 stock faults through browser save/load, diagnosis, incorrect-repair checkout, part replacement and successful checkout; healthy reference, all-slot access and cascade repair."}],"benchmark_ready":true,"version_support":{"supported_ec_ids":["EC-07","EC-08","EC-09"],"newly_closed_ec_ids":[],"retained_closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_ui_browser_v65.js"],"scope":"Player UI and optional equipment usability; no receiver, damage, pricing or fixed acceptance changes."}});
 function pt44GameCompletionHTML(esc){
  const c=PT44_GAME_COMPLETION_V2;
  return `<h3>PT-44 game engineering completion · v${c.version}</h3><p><b>Closed: ${c.closed_ec_ids.join(', ')}.</b> Supported this release: ${c.supported_ec_ids.join(', ')}. ${c.benchmark_ready?'The first PT-44 is engineering complete under the fixed V2 game scope.':'The first PT-44 remains incomplete until all nine packages close.'}</p><p>User-approved behavioral scope: plausible service readings, consistent sound and symptoms, diagnosis and successful repair. Full circuit simulation is optional research. Original scientific V1 criteria remain in the repository as historical records; these closures use V2.</p><table class="sl-table"><thead><tr><th>Package</th><th>Status</th><th>Fixed acceptance</th><th>Remaining / evidence</th></tr></thead><tbody>${c.packages.map(x=>`<tr><td>${esc(x.id)} · ${esc(x.title)}</td><td>${esc(x.status)}</td><td>${esc(x.acceptance)}</td><td>${esc(x.remaining)}</td></tr>`).join('')}</tbody></table><p class="sl-footnote">Readings are game service approximations referenced to B−. Research benches below retain their original narrower scope and do not gate game completion.</p>`;
@@ -3801,7 +3807,7 @@ function renderFactoryLedger(box){
   const candidates = Object.fromEntries(Object.entries(PT44_FACTORY_SUBGRAPH.factory_part_register).map(([n,p])=>[n,p.game_slot||'—']));
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
-   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.64.0</div>
+   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.65.0</div>
    ${pt44GameCompletionHTML(escapeHTML)}
    <h2>Optional research · factory circuit transcription</h2>
    <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. Physical 3D routing remains illustrative. The playable receiver uses the separate behavioral V2 completion standard above.</p>
@@ -3863,12 +3869,15 @@ function renderFactoryLedger(box){
 }
 
 function renderViewTabs(){
-  const el=$('#viewTabs'); const v = B3.ok ? [['bench3d','3D bench'],['sch','Simplified model diagram'],['nets','Circuit map'],['factorytopo','Historical source audit'],['ledger','Factory ledger'],['factory','1941 factory data']] : [['top','Chassis · top'],['under','Chassis · underside'],['sch','Simplified model diagram'],['nets','Circuit map'],['factorytopo','Historical source audit'],['ledger','Factory ledger'],['factory','1941 factory data']];
-  if (B3.ok && (R.view==='top'||R.view==='under')) R.view='bench3d';
-  el.innerHTML = v.map(([k,n])=>`<button class="tab ${R.view===k?'on':''}" data-v="${k}">${n}</button>`).join('');
-  el.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ R.view=b.dataset.v; renderViewTabs(); renderViews(); });
+ const el=$('#viewTabs'),basic=B3.ok?[['bench3d','Bench'],['sch','Schematic']]:[['top','Chassis top'],['under','Underside'],['sch','Schematic']];
+ const views=ENGINEERING_MODE?[...basic,['nets','Circuit map'],['factorytopo','Historical source audit'],['ledger','Factory ledger'],['factory','1941 factory data']]:basic;
+ if(!views.some(([id])=>id===R.view))R.view=basic[0][0];
+ el.innerHTML=views.map(([id,label])=>`<button class="tab ${R.view===id?'on':''}" data-v="${id}">${label}</button>`).join('');
+ el.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{R.view=b.dataset.v;renderViewTabs();renderViews();});
 }
+
 function renderViews(){
+  if(!ENGINEERING_MODE&&['nets','factorytopo','ledger','factory'].includes(R.view))R.view=B3.ok?'bench3d':'top';
   const box=$('#viewBox'), job=benchJob(); if(!box||!job) return;
   box.className = 'view' + ((R.view==='sch'||R.view==='factory'||R.view==='nets'||R.view==='factorytopo'||R.view==='ledger')?' paper':'');
   box.style.background=''; box.style.color='';
@@ -3885,12 +3894,12 @@ function renderViews(){
   }
   if (R.view==='bench3d' && B3.ok){
     const cams=[['overview','Bench'],['top','Chassis top'],['under','Underside'],['speaker','Speaker'],['tray','Parts tray']];
-    box.innerHTML = `<div id="v3" class="v3"></div><div class="camrow">${cams.map(([k,n])=>`<button class="btn sm ${R.cam===k?'on':''}" data-cam="${k}">${n}</button>`).join('')}<button class="btn sm ${R.showTestPosts?'on':''}" id="bShowTestPosts" title="Virtual probe markers, not factory hardware">Probe markers ${R.showTestPosts?'on':'off'}</button><button class="btn sm ${R.sourceScope?'on':''}" id="bSourceScope" title="Show only source-traced electrical memberships. Physical wire routes are illustrative.">Source scope ${R.sourceScope?'on':'off'}</button></div><div class="v3hint">Drag to orbit · scroll/pinch to zoom · wires end on modeled solder contacts · tap a part to inspect it${R.cam==='under'?' · tap an exposed lug to probe, or turn on Probe markers':''}</div>`;
+    box.innerHTML = `<div id="v3" class="v3"></div><div class="camrow">${cams.map(([k,n])=>`<button class="btn sm ${R.cam===k?'on':''}" data-cam="${k}">${n}</button>`).join('')}<button class="btn sm ${R.showTestPosts?'on':''}" id="bShowTestPosts" title="Show the meter test points">Test points ${R.showTestPosts?'on':'off'}</button>${ENGINEERING_MODE?`<button class="btn sm ${R.sourceScope?'on':''}" id="bSourceScope" title="Show only source-traced electrical memberships. Physical wire routes are illustrative.">Source scope ${R.sourceScope?'on':'off'}</button>`:''}</div><div class="v3hint">Drag to rotate · scroll or pinch to zoom · select a part to inspect${R.cam==='under'?' · select a test point to probe':''}</div>`;
     B3.mount($('#v3')); B3.setJob(job); B3.sync(job.radio); B3.trace(R.traceNet); B3.select(R.sel&&R.sel.slot); B3.probe(R.tool==='meter'&&R.mode==='V'?R.probe:null); B3.showTestPosts(R.showTestPosts);
-    box.querySelector('#bShowTestPosts').onclick=()=>{ R.showTestPosts=!R.showTestPosts; B3.showTestPosts(R.showTestPosts); const btn=box.querySelector('#bShowTestPosts'); btn.textContent='Probe markers '+(R.showTestPosts?'on':'off'); btn.classList.toggle('on',R.showTestPosts); };
-    box.querySelector('#bSourceScope').onclick=()=>{ R.sourceScope=!R.sourceScope; B3.sourceScope(R.sourceScope); const btn=box.querySelector('#bSourceScope'); btn.textContent='Source scope '+(R.sourceScope?'on':'off');btn.classList.toggle('on',R.sourceScope); };
-    B3.sourceScope(!!R.sourceScope);
-    box.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{ R.cam=b.dataset.cam; B3.view(R.cam); box.querySelectorAll('[data-cam]').forEach(x=>x.classList.toggle('on',x===b)); const h=box.querySelector('.v3hint'); if(h) h.textContent='Drag to orbit · pinch or scroll to zoom · tap a part to inspect it'+(R.cam==='under'?' · tap an exposed lug to probe, or turn on Probe markers':''); });
+    box.querySelector('#bShowTestPosts').onclick=()=>{ R.showTestPosts=!R.showTestPosts; B3.showTestPosts(R.showTestPosts); const btn=box.querySelector('#bShowTestPosts'); btn.textContent='Test points '+(R.showTestPosts?'on':'off'); btn.classList.toggle('on',R.showTestPosts); };
+    if(ENGINEERING_MODE)box.querySelector('#bSourceScope').onclick=()=>{ R.sourceScope=!R.sourceScope; B3.sourceScope(R.sourceScope); const btn=box.querySelector('#bSourceScope'); btn.textContent='Source scope '+(R.sourceScope?'on':'off');btn.classList.toggle('on',R.sourceScope); };
+    B3.sourceScope(ENGINEERING_MODE&&!!R.sourceScope);
+    box.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{ R.cam=b.dataset.cam; B3.view(R.cam); box.querySelectorAll('[data-cam]').forEach(x=>x.classList.toggle('on',x===b)); const h=box.querySelector('.v3hint'); if(h) h.textContent='Drag to rotate · scroll or pinch to zoom · select a part to inspect'+(R.cam==='under'?' · select a test point to probe':''); });
     updateLive(); return;
   }
   box.innerHTML = R.view==='sch' ? schematicSVG(job.radio) : R.view==='top' ? chassisTopSVG(job.radio) : chassisUnderSVG(job.radio);
@@ -4138,17 +4147,18 @@ function chassisUnderSVG(r){
 
 // ---------- side panel: inspector, drawer, catalog, data ----------
 function renderSide(){
-  const tabs=[['insp','Inspector'],['audit','Wiring audit'],['drawer','Parts drawer'],['cat','Catalog'],['data','Service data']];
+  if(!ENGINEERING_MODE&&R.side==='audit')R.side='insp';
+  const tabs=[['insp','Inspect'],...(ENGINEERING_MODE?[['audit','Wiring audit']]:[]),['drawer','Parts'],['cat','Catalog'],['data','Readings']];
   $('#sideTabs').innerHTML = tabs.map(([k,n])=>`<button class="tab ${R.side===k?'on':''}" data-t="${k}">${n}</button>`).join('');
   $('#sideTabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ R.side=b.dataset.t; renderSide(); });
   const el=$('#sideBody');
-  if (R.side==='insp'){el.innerHTML=gamePartAccessHTML()+inspectorHTML();bindInspector();el.querySelector('#gamePartAccess').onchange=e=>{R.sel=e.target.value?{slot:e.target.value}:null;if(B3.ok)B3.select(e.target.value);renderSide();renderViews();};}
+  if (R.side==='insp'){el.innerHTML=gamePartAccessHTML()+inspectorHTML();bindInspector();const picker=el.querySelector('#gamePartAccess');if(picker)picker.onchange=e=>{R.sel=e.target.value?{slot:e.target.value}:null;if(B3.ok)B3.select(e.target.value);renderSide();renderViews();};}
   else if(R.side==='audit') el.innerHTML=auditHTML();
   else if (R.side==='drawer') el.innerHTML = drawerHTML(), bindDrawer();
   else if (R.side==='cat') el.innerHTML = catalogHTML(), bindCatalog();
   else el.innerHTML = dataHTML();
 }
-function gamePartAccessHTML(){return `<label>Service part <select id="gamePartAccess" style="width:100%;max-width:100%;display:block"><option value="">Choose a part / location</option>${Object.entries(SLOTS).map(([id,d])=>`<option value="${id}" ${R.sel?.slot===id?'selected':''}>${id} · ${d.name} · ${id==='R1'?'speaker field assembly':['R2','R3','R4','R5','R6','R7','C3','C4'].includes(id)?'underside':'chassis top'}</option>`).join('')}</select></label>`;}
+function gamePartAccessHTML(){if(!benchJob())return '';return `<label>Service part <select id="gamePartAccess" style="width:100%;max-width:100%;display:block"><option value="">Choose a part / location</option>${Object.entries(SLOTS).map(([id,d])=>`<option value="${id}" ${R.sel?.slot===id?'selected':''}>${id} · ${d.name} · ${id==='R1'?'speaker field assembly':['R2','R3','R4','R5','R6','R7','C3','C4'].includes(id)?'underside':'chassis top'}</option>`).join('')}</select></label>`;}
 function physNotes(p, slot){
   const n=[];
   if (!p) return n;
@@ -4225,7 +4235,7 @@ function drawerHTML(){
   const inv=Object.entries(S.inv).filter(([k,v])=>v>0).sort((a,b)=>a[0].localeCompare(b[0]));
   const groups={R:'Resistors',C:'Capacitors',TUBE:'Tubes',other:'Other parts'};
   let h='';
-  for (const [g,n] of Object.entries(groups)){ const items=inv.filter(([k])=>{ const kd=CATALOG[k].kind; return g==='other'?!['R','C','TUBE'].includes(kd):kd===g; });
+  for (const [g,n] of Object.entries(groups)){ const items=inv.filter(([k])=>{ const kd=CATALOG[k].kind;if(k==='R500-2')return g==='other'; return g==='other'?!['R','C','TUBE'].includes(kd):kd===g; });
     if(!items.length) continue; h+=`<div class="note" style="text-transform:uppercase;letter-spacing:.1em;font-size:11px;margin-top:8px">${n}</div><div class="list">${items.map(([k,v])=>`<div class="li"><span class="nm">${esc(skuName(k))}</span><span class="q">×${v}</span></div>`).join('')}</div>`; }
   if (!h) h='<div class="empty">The drawer is empty.</div>';
   h+=`<div class="note" style="text-transform:uppercase;letter-spacing:.1em;font-size:11px;margin-top:12px">Salvage drawer (used parts, untested)</div>`;
@@ -4239,15 +4249,16 @@ function bindDrawer(){ $('#sideBody').querySelectorAll('[data-sv]').forEach(b=>b
   if (a==='tube'){ R.tool='tube'; R.tubeTarget={loose:p}; renderTools(); }
   if (a==='x'){ S.salvage=S.salvage.filter(x=>x!==p); save(); renderSide(); } }); }
 function catalogHTML(){
-  const tabs=[['R','Resistors'],['C','Capacitors'],['T','Tubes & parts'],['E','Test equipment']];
+  if(!['R','C','T'].includes(R.catTab))R.catTab='R';
+  const tabs=[['R','Resistors'],['C','Capacitors'],['T','Tubes & parts'],];
   let h=`<div class="seg" style="margin-bottom:8px">${tabs.map(([k,n])=>`<button class="${R.catTab===k?'on':''}" data-ct="${k}">${n}</button>`).join('')}</div>`;
   h+=`<div class="note">Mail order arrives next morning. The parts jobber across town sells it today at 25% over list.</div>`;
   const line=k=>`<div class="li"><span class="nm">${esc(skuName(k))}</span><span class="q">${money(CATALOG[k].price)}</span><span class="q">${S.inv[k]?'have '+S.inv[k]:''}</span><button class="btn sm" data-buy="${k}">Order</button><button class="btn sm" data-rush="${k}">Today</button></div>`;
-  if (R.catTab==='R'){ const vals=[...new Set(Object.keys(CATALOG).filter(k=>CATALOG[k].kind==='R').map(k=>CATALOG[k].ohms))];
+  if (R.catTab==='R'){ const vals=[...new Set(Object.keys(CATALOG).filter(k=>CATALOG[k].kind==='R'&&k!=='R500-2').map(k=>CATALOG[k].ohms))];
     h+=`<div class="list" style="max-height:360px">${vals.map(v=>{ const ks=Object.keys(CATALOG).filter(k=>CATALOG[k].kind==='R'&&CATALOG[k].ohms===v).sort((a,b)=>CATALOG[a].W-CATALOG[b].W);
       return `<div class="li"><span class="nm mono">${fmtOhms(v)}</span>${ks.map(k=>`<button class="btn sm" data-buy="${k}" title="${money(CATALOG[k].price)} each">${fmtW(CATALOG[k].W)}${S.inv[k]?' ·'+S.inv[k]:''}</button>`).join('')}</div>`; }).join('')}</div><div class="note">Click a wattage to order one (arrives tomorrow). Prices: ¼ W 8¢, ½ W 12¢, 1 W 18¢, 2 W 26¢.</div>`; }
   else if (R.catTab==='C') h+=`<div class="list" style="max-height:360px">${Object.keys(CATALOG).filter(k=>CATALOG[k].kind==='C').map(line).join('')}</div>`;
-  else if (R.catTab==='T') h+=`<div class="list" style="max-height:360px">${Object.keys(CATALOG).filter(k=>!['R','C'].includes(CATALOG[k].kind)).map(line).join('')}</div>`;
+  else if (R.catTab==='T') h+=`<div class="list" style="max-height:360px">${Object.keys(CATALOG).filter(k=>(!['R','C'].includes(CATALOG[k].kind)||k==='R500-2')).map(line).join('')}</div>`;
   else h+=`<div class="stack">${Object.entries(EQUIPMENT).map(([k,e])=>`<div class="li" style="border:1px solid var(--line);border-radius:4px;align-items:flex-start"><div class="nm"><b>${e.name}</b><div class="note" style="margin:2px 0 0">${e.blurb}</div></div>${S.tools[k]?'<span class="q">Owned</span>':`<button class="btn pri sm" data-tool="${k}">${money(e.price)}</button>`}</div>`).join('')}</div>`;
   return h;
 }
@@ -4260,10 +4271,10 @@ let SERVICE=null;
 function dataHTML(){
   if (!SERVICE){ const r=newRadio(); for (const p of Object.values(r.slots)){ if(p.kind==='R') p.ohms=CATALOG[p.sku].ohms; if(p.kind==='TUBE') p.emis=1;if(p.kind==='C'){p.uF=CATALOG[p.sku].uF;p.leak0=p.ctype==='electrolytic'?4:1000;}if(CATALOG[p.sku].ohms)p.ohms=CATALOG[p.sku].ohms; } r.dial=880; const d=settle(r,{}); SERVICE=d; }
   const v=n=>SERVICE.V[NI[n]];
-  const reference=newRadio();for(const p of Object.values(reference.slots)){const c=CATALOG[p.sku];if(c.ohms)p.ohms=c.ohms;if(p.kind==='TUBE')p.emis=1;if(p.kind==='C'){p.uF=c.uF;p.leak0=p.ctype==='electrolytic'?4:1000;}}
-  const rows=Object.keys(TP_NAME).map(n=>{const d=settle(reference,{meter:{node:n,R:11e6}});return `<tr><td>${TP_NAME[n]}</td><td>${d.ports[n].toFixed(n==='G6'?1:0)} V</td></tr>`;}).join('');
-  return `<div class="note">Healthy game reference: 115 V AC, fully warm, tuned to 880 kHz, volume at 6, one 11 MΩ VTVM probe at a time, referenced to B− (separate from chassis). These are approximate game readings, not factory measurements.</div>
-  <p class="note" id="gameVariant">Game service variant: #8 uses the 0.05 µF schematic reference; the 0.1 µF parts-list value remains a historical alternative. Signal detector and AVC detector are functional diode labels, without an invented socket-pin assignment. Oscillator feedback is a functional assembly; the historical four-dot symbol remains unresolved as physical wiring. R1 is a wound speaker-field assembly, not a carbon resistor. This named variant uses declared AVC timing.</p>
+  const reference=newRadio(),vt=R.inst==='vtvm'&&S.tools.vtvm,inputR=vt?11e6:1000*R.range.vom;for(const p of Object.values(reference.slots)){const c=CATALOG[p.sku];if(c.ohms)p.ohms=c.ohms;if(p.kind==='TUBE')p.emis=1;if(p.kind==='C'){p.uF=c.uF;p.leak0=p.ctype==='electrolytic'?4:1000;}}
+  const rows=Object.keys(TP_NAME).map(n=>{const d=settle(reference,{meter:{node:n,R:inputR}});return `<tr><td>${TP_NAME[n]}</td><td>${d.ports[n].toFixed(n==='G6'?1:0)} V</td></tr>`;}).join('');
+  return `<div class="note">Normal readings · ${vt?'VTVM, 11 MΩ input':'VOM on the '+R.range.vom+' V range'}. Set warm, 115 V AC, tuned to 880 kHz, volume at 6. Black lead to B−, separate from chassis.</div>
+  <details class="ui-details ui-nested" id="sourceNotes"><summary>Reference notes</summary><p class="note" id="gameVariant">Game service variant: #8 uses the 0.05 µF schematic reference; the 0.1 µF parts-list value remains a historical alternative. Signal detector and AVC detector are functional diode labels, without an invented socket-pin assignment. Oscillator feedback is a functional assembly; the historical four-dot symbol remains unresolved as physical wiring. R1 is a wound speaker-field assembly, not a carbon resistor. This named variant uses declared AVC timing.</p></details>
   <table class="sd"><tr><th>Test point</th><th>Normal</th></tr>${rows}</table>
   <div class="note" style="margin-top:10px">Tube complement: 7A8 converter, 7B7 IF, 7C6 detector/AVC/1st audio, 50L6GT output, 35Z3 rectifier. Heaters in series across the line: 7 + 7 + 7 + 35 + 50 = 106 V nominal across the heaters. The factory line-resistance assembly (#30) accounts for additional line-voltage drop.</div>
   <div class="note">Caution: transformerless AC/DC receiver; isolation and stored-charge precautions are essential.</div>`;
@@ -4272,18 +4283,21 @@ function dataHTML(){
 // ---------- instruments ----------
 function gameServiceHTML(){
  const j=benchJob();if(!j)return '<p>Select a repair ticket.</p>';const r=j.radio,g=R.generator,a=r.alignment||{};
- return `<div class="stack"><b>PT-44 service setup</b><p class="note">Tune and peak by sound, tracer or AVC. Generator is 1 kHz modulated. IF injection enters after the converter; audio injection enters at the volume control. Readings use B−. Service ports describe behavior; they do not assert unresolved socket wiring.</p>
+ return `<div class="stack"><b>Signal generator &amp; alignment</b><p class="note">Use a test signal to follow the circuit or peak alignment. Start at 455 kHz for IF service.</p>
  <label><input id="gameGenOn" type="checkbox" ${g.enabled?'checked':''}> Signal generator on</label>
  <label>Injection <select id="gameGenPoint">${[['aerial','Aerial input'],['if','First IF input'],['audio','Volume input']].map(([k,n])=>`<option value="${k}" ${g.point===k?'selected':''}>${n}</option>`).join('')}</select></label>
  <label>Carrier (kHz) <input id="gameGenKhz" type="number" min="0.1" max="1600" step="0.1" value="${g.khz}"></label>
- <label>Signal level (mV, relative service scale) <input id="gameGenMv" type="number" min="0" max="50" step="0.1" value="${g.mv}"></label>
+ <label>Signal level (mV) <input id="gameGenMv" type="number" min="0" max="50" step="0.1" value="${g.mv}"></label>
+ <details class="ui-details ui-nested" id="gameAlignment" ${R.alignmentOpen?'open':''}><summary>Alignment adjustments</summary><div class="stack">
  ${['12A','12B','14A','4A','5'].map(k=>`<label>${k} ${['12A','12B','14A'].includes(k)?'IF center (kHz)':'trim offset'}<input data-game-align="${k}" type="range" min="${k.includes('A')&&k!=='4A'||k==='12B'?440:-30}" max="${['12A','12B','14A'].includes(k)?470:30}" step="0.5" value="${a[k]??(['12A','12B','14A'].includes(k)?455:0)}"><output>${a[k]??(['12A','12B','14A'].includes(k)?455:0)}</output></label>`).join('')}
+ </div></details><details class="ui-details ui-nested" id="gameSupply" ${R.supplyOpen?'open':''}><summary>Power supply settings</summary><div class="stack">
  <label>Supply (V) <input id="gameLineV" type="number" min="90" max="130" value="${r.lineV??115}"></label>
  <label>Supply type <select id="gameLineMode"><option ${r.lineMode!=='DC'?'selected':''}>AC</option><option ${r.lineMode==='DC'?'selected':''}>DC</option></select></label>
- <button class="btn" id="gameLoop">${r.loopConnected===false?'Reconnect':'Disconnect'} aerial loop</button><p class="note">Power off and discharge before changing the loop connection. Alignment and supply settings are saved with this radio. Checkout disables the generator.</p></div>`;
+ </div></details><button class="btn" id="gameLoop">${r.loopConnected===false?'Reconnect':'Disconnect'} aerial loop</button><p class="note">Switch off and discharge before changing the loop connection. Alignment is saved; checkout turns off the test signal.</p></div>`;
 }
 function bindGameService(){
  const r=benchJob().radio,g=R.generator,el=$('#toolBody');
+ el.querySelector('#gameAlignment').ontoggle=e=>{if(e.target.isConnected)R.alignmentOpen=e.target.open;};el.querySelector('#gameSupply').ontoggle=e=>{if(e.target.isConnected)R.supplyOpen=e.target.open;};
  const bind=(id,fn)=>el.querySelector(id).onchange=e=>{fn(e.target);save();};
  bind('#gameGenOn',x=>g.enabled=x.checked);bind('#gameGenPoint',x=>g.point=x.value);
  bind('#gameGenKhz',x=>{g.khz=clamp(Number(x.value)||455,.1,1600);x.value=g.khz;});
@@ -4293,19 +4307,24 @@ function bindGameService(){
  el.querySelector('#gameLoop').onclick=()=>{if(!canWork())return;r.loopConnected=r.loopConnected===false;benchLog(r.loopConnected?'Aerial loop reconnected.':'Aerial loop disconnected.');save();renderTools();};
 }
 
+function upgradeHTML(){return `<div class="stack"><div><b>Bench upgrades</b><p class="note">Your meter and tube tester cover the basics. These optional tools make diagnosis easier.</p></div>${Object.entries(EQUIPMENT).map(([id,e])=>`<div class="upgrade-card"><h3>${e.name}</h3><p class="note">${e.blurb}</p><div class="row"><span>${S.tools[id]?'Owned':money(e.price)}</span>${S.tools[id]?`<button class="btn sm" data-use-tool="${id}">Use tool</button>`:`<button class="btn pri sm" data-tool="${id}" ${S.cash<e.price?'disabled':''}>Buy</button>`}</div>${!S.tools[id]&&S.cash<e.price?`<div class="note">${money(e.price-S.cash)} more needed</div>`:''}</div>`).join('')}</div>`;}
+function bindUpgrades(){const el=$('#toolBody');el.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>buyTool(b.dataset.tool));el.querySelectorAll('[data-use-tool]').forEach(b=>b.onclick=()=>{const id=b.dataset.useTool;R.tool=id==='vtvm'?'meter':id==='capchk'?'cap':'trace';if(id==='vtvm')R.inst='vtvm';renderTools();});}
 function renderTools(){
+  if(!S.tools.vtvm&&R.inst==='vtvm')R.inst='vom';
   if (B3.ok) B3.probe(R.tool==='meter'&&R.mode==='V'?R.probe:null);
-  const tabs=[['meter','Meter',1],['service','Generator / alignment',1],['tube','Tube tester',1],['cap','Cap checker',S.tools.capchk],['trace','Signal tracer',S.tools.tracer]];
+  const tabs=[['meter','Meter',1],['tube','Tube tester',1],['service','Alignment',1],...(S.tools.capchk?[['cap','Cap checker',1]]:[]),...(S.tools.tracer?[['trace','Signal tracer',1]]:[]),['upgrades','Upgrades',1]];
+  if(R.tool==='cap'&&!S.tools.capchk||R.tool==='trace'&&!S.tools.tracer)R.tool='upgrades';
   $('#toolTabs').innerHTML = tabs.map(([k,n,own])=>`<button class="tab ${R.tool===k?'on':''} ${own?'':'locked'}" data-t="${k}">${n}${own?'':' 🔒'}</button>`).join('');
   $('#toolTabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ R.tool=b.dataset.t; renderTools(); renderViews(); });
   const el=$('#toolBody');
   if (R.tool==='meter') el.innerHTML=meterHTML(), bindMeter();
+  else if(R.tool==='upgrades')el.innerHTML=upgradeHTML(),bindUpgrades();
   else if (R.tool==='service') el.innerHTML=gameServiceHTML(), bindGameService();
   else if (R.tool==='tube') el.innerHTML=tubeHTML(), bindTube();
   else if (R.tool==='cap') el.innerHTML = S.tools.capchk? capHTML() : lockedHTML('capchk');
   else el.innerHTML = S.tools.tracer? tracerHTML() : lockedHTML('tracer');
   if (R.tool==='trace' && S.tools.tracer) bindTracer();
-  if (!S.tools[{cap:'capchk',trace:'tracer'}[R.tool]] && el.querySelector('[data-tool]')) el.querySelector('[data-tool]').onclick=()=>buyTool(el.querySelector('[data-tool]').dataset.tool);
+  if (['cap','trace'].includes(R.tool)&&!S.tools[{cap:'capchk',trace:'tracer'}[R.tool]] && el.querySelector('[data-tool]')) el.querySelector('[data-tool]').onclick=()=>buyTool(el.querySelector('[data-tool]').dataset.tool);
   renderMeterLive();
 }
 function lockedHTML(k){ const e=EQUIPMENT[k]; return `<div class="stack"><b>${e.name}</b><div class="note">${e.blurb}</div><div><button class="btn pri" data-tool="${k}">Buy for ${money(e.price)}</button></div></div>`; }
@@ -4317,20 +4336,20 @@ function meterHTML(){
   const target = R.mode==='V' ? (R.probe?TP_NAME[R.probe]:'not connected — click a ● test point on the schematic') :
      (!R.ohmTarget?'not connected — click a test point, or “Ohms across” on a part': R.ohmTarget.node? TP_NAME[R.ohmTarget.node]+' to B−' : R.ohmTarget.slot? 'across '+R.ohmTarget.slot : skuName(R.ohmTarget.loose.sku)+' (out of circuit)');
   return `<div class="stack">
-   <div class="row"><div class="seg"><button class="${!vt?'on':''}" data-inst="vom">VOM 1,000 Ω/V</button><button class="${vt?'on':''}" data-inst="vtvm" ${S.tools.vtvm?'':'disabled title="Buy a VTVM in the catalog"'}>VTVM${S.tools.vtvm?'':' 🔒'}</button></div></div>
+   <div class="row"><div class="seg"><button class="${!vt?'on':''}" data-inst="vom">VOM 1,000 Ω/V</button>${S.tools.vtvm?`<button class="${vt?'on':''}" data-inst="vtvm">VTVM</button>`:''}</div></div>
    <div class="row"><div class="seg"><button class="${R.mode==='V'?'on':''}" data-mode="V">DC volts</button><button class="${R.mode==='R'?'on':''}" data-mode="R">Ohms</button></div>
      <select id="rng" aria-label="Range">${(R.mode==='V'?vr:orng).map(x=>`<option value="${x}" ${x===cur?'selected':''}>${R.mode==='V'?x+' V':'R×'+(x>=1e6?'1M':x>=1000?x/1000+'k':x)}</option>`).join('')}</select>
      ${R.mode==='V'?`<button class="btn sm" id="pol">Polarity ${R.pol>0?'+':'−'}</button>`:''}</div>
-   ${R.mode==='V'?`<label>DC service port <select id="gameProbe"><option value="">Select red lead</option>${Object.keys(TP_NAME).map(n=>`<option value="${n}" ${R.probe===n?'selected':''}>${TP_NAME[n]}</option>`).join('')}</select></label>`:''}
+   ${R.mode==='V'?`<label>Test point <select id="gameProbe"><option value="">Select red lead</option>${Object.keys(TP_NAME).map(n=>`<option value="${n}" ${R.probe===n?'selected':''}>${TP_NAME[n]}</option>`).join('')}</select></label>`:''}
    <div class="meter"><svg viewBox="0 0 300 150" id="meterFace" role="img" aria-label="Meter face"></svg><div class="reading" id="meterRead">—</div></div>
-   <div class="note">Red lead: ${esc(target)}. Black lead on B− return; chassis is separate.</div>
+   <div class="note">Red lead: ${esc(target)}. Black lead: B− return (not chassis).</div>
   </div>`;
 }
 function bindMeter(){ const el=$('#toolBody');
   const gp=el.querySelector('#gameProbe');if(gp)gp.onchange=()=>{R.probe=gp.value||null;renderTools();};
-  el.querySelectorAll('[data-inst]').forEach(b=>b.onclick=()=>{ if(b.disabled) return; R.inst=b.dataset.inst; renderTools(); });
+  el.querySelectorAll('[data-inst]').forEach(b=>b.onclick=()=>{ if(b.disabled) return; R.inst=b.dataset.inst; renderTools();if(R.side==='data')renderSide(); });
   el.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{ R.mode=b.dataset.mode; renderTools(); renderViews(); });
-  $('#rng').onchange=e=>{ const v=+e.target.value; const vt=R.inst==='vtvm'; if(R.mode==='V') R.range[vt?'vtvm':'vom']=v; else R.range[vt?'ohvtvm':'ohvom']=v; renderMeterLive(); };
+  $('#rng').onchange=e=>{ const v=+e.target.value; const vt=R.inst==='vtvm'; if(R.mode==='V') R.range[vt?'vtvm':'vom']=v; else R.range[vt?'ohvtvm':'ohvom']=v; renderMeterLive();if(R.side==='data')renderSide(); };
   const pol=$('#pol'); if(pol) pol.onclick=()=>{ R.pol*=-1; renderTools(); };
 }
 function meterReading(){
@@ -4523,24 +4542,25 @@ function showCheckout(job, pass, results, v){
   </div>`);
   $('#mBack').onclick=closeModal; if (pass) $('#mBill').onclick=()=>bill(job);
 }
+function showWelcome(){modal(`<div class="ph">Your first repair</div><div class="pb stack"><p>A customer has brought in a Philco PT-44. Start with their repair order at the service counter.</p><ol><li>Switch on and listen.</li><li>Use the meter and tube tester to find the fault.</li><li>Switch off, discharge, replace the bad part, then run checkout.</li></ol><p class="note">Optional equipment is available under Upgrades. The Service manual is always available above.</p><button class="btn pri" id="mX">Open shop</button></div>`);$('#mX').onclick=closeModal;}
 function showManual(){
   modal(`<div class="ph">Service manual<span class="sp"></span><button class="btn sm" id="mX">Close</button></div><div class="pb manual">
-  <p>You run a one-bench radio shop in 1955. Every set on the counter is the same five-tube AC-DC superhet circuit with its own failed parts. The radio uses a shared behavioral service model: faults, controls, sound and meter readings follow the same cause and effect. Physical routing that is not documented remains illustrative. The 1941 factory-data tab contains verified historic references.</p>
+  <p>Run a one-bench radio shop in 1955. Listen to the customer, diagnose the fault and return a working set.</p>
   <h3>The job</h3><p>Put a repair order on the bench. Switch it on and listen. Diagnose with the meter and tube tester, unsolder bad parts, install replacements, then run the 10-minute checkout. A passing set goes home with the customer and you collect labor plus parts.</p>
-  <h3>Measuring</h3><p>In DC volts, click a ● test point on the schematic to put the red lead there. Compare against the Service data tab. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate reads lower while the VOM is attached. A VTVM reads them correctly.</p>
+  <h3>Measuring</h3><p>In DC volts, click a ● test point on the schematic to put the red lead there. Compare against Readings, which follows your selected meter and range. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate reads lower while the VOM is attached. The optional VTVM disturbs these circuits much less. Find it, the capacitor checker and the signal tracer under Upgrades.</p>
   <p>Ohms only works with the set off and the filter caps discharged. In-circuit readings include every parallel path. Pull a part to measure it alone.</p>
-  <h3>Generator and alignment</h3><p>Use the Generator / alignment tool for a 1 kHz modulated signal at the aerial, first IF input or volume control. Set 455 kHz for IF service. Peak the three IF controls manually, then check oscillator and aerial trims across the dial. The meter service-port menu includes AVC and screen supply, with B− as reference. These are game approximations; alignment and supply settings stay with this radio. Checkout turns the generator off.</p>
+  <h3>Generator and alignment</h3><p>Use Alignment for a 1 kHz modulated signal at the aerial, first IF input or volume control. Set 455 kHz for IF service. Peak the three IF controls manually, then check oscillator and aerial trims across the dial. The meter service-port menu includes AVC and screen supply, with B− as reference. Open Alignment adjustments when needed; settings stay with this radio. Checkout turns the generator off.</p>
   <h3>Safety and damage</h3><p>The set has no bleeder resistor, so B+ stays charged after switch-off. Discharge it before you unsolder. Parts that run past their ratings get hot and fail, during your testing or during checkout. A leaky coupling capacitor will cook the output tube and its cathode resistor again if you only replace the burned resistor. A quarter-watt resistor where a 2-watt one belongs will not last.</p>
   <h3>Substitutions</h3><p>Ordinary resistor and capacitor positions accept same-kind substitutions. The field-coil service assembly requires its matching replacement. The circuit decides whether your choice works. Watch voltage ratings on capacitors and wattage on resistors.</p>
   <h3>Business</h3><p>Rent is $1.75 a day. Mail-order parts arrive the next morning; the jobber sells today at 25% over list. If your parts bill runs over what the customer authorized, they pay only the authorized amount and grumble. Miss a due date and they take the set back, angry. Reputation brings harder jobs and more customers.</p>
-  <div class="row" style="margin-top:12px"><button class="btn warn sm" id="mReset">Start a new shop (erases this save)</button></div>
+  <details class="ui-details"><summary>Start over</summary><p>Erase this shop and begin again.</p><button class="btn warn sm" id="mReset">Start a new shop</button></details><p class="note">Version 0.65.0</p>
   </div>`);
   $('#mX').onclick=closeModal;
   $('#mReset').onclick=()=>confirmModal('Start over?','This erases your cash, tools, parts and customers.','Erase and restart',()=>{ R.power=false; R.warm=0; R.dc=null; R.sel=null; R.benchLog=[]; newGame(); save(); renderAll(); });
 }
 
 // ---------- boot ----------
-function renderAll(){ renderHeader(); renderTickets(); renderShopLog(); renderBench(); renderSide(); renderTools(); }
+function renderAll(){document.body.classList.toggle('engineering',ENGINEERING_MODE);document.body.classList.toggle('no-job',!benchJob()); renderHeader(); renderTickets(); renderShopLog(); renderBench(); renderSide(); renderTools(); }
 function boot(){
   calibrate();
   if (B3.ok){
@@ -4549,7 +4569,7 @@ function boot(){
       if (window.matchMedia('(max-width:800px)').matches) toast(`${slot} · ${SLOTS[slot].name} — details in the Inspector below`); };
     B3.onProbe = node=>{ R.tool='meter'; if (R.mode==='V') R.probe=node; else R.ohmTarget={node}; renderTools(); B3.probe(R.mode==='V'?node:null); };
   }
-  S = load(); if (!S){ newGame(); save(); setTimeout(showManual, 300); }
+  S = load(); if (!S){ newGame(); save(); setTimeout(showWelcome, 300); }
   $('#bManual').onclick=showManual;
   $('#bDay').onclick=()=>confirmModal(`Close up for ${dateStr(S.day)}?`, 'Rent is due, tomorrow\'s deliveries arrive in the morning, and new customers may come in. Sets past their due date go home unrepaired.', 'Close for the day', closeDay);
   renderAll();
