@@ -1,0 +1,247 @@
+{
+  "schema": "PT44_7A8_CHARACTERISTICS_V1",
+  "version": "0.62.0",
+  "scope": "Bounded average conversion characteristics at two separately published operating conditions. No cross-slice voltage interpolation, self-oscillation, receiver supply coupling or tracking.",
+  "sources": [
+    {
+      "id": "syl51",
+      "title": "Sylvania Technical Manual, 1951",
+      "url": "https://hallmanlabs.wordpress.com/wp-content/uploads/2022/09/d4b90-syl51.pdf",
+      "sha256": "c4135c69aa74c73f2e0e9103ae7032fa4bbc1773b08f866722b1af967b5623bc",
+      "pdf_pages": [
+        169,
+        170,
+        171
+      ],
+      "readings": "Manual approximate graph readings; training coordinates and withheld coordinates are distinct, but share the same printed curves. Not independent physical measurements."
+    },
+    {
+      "id": "syl47",
+      "title": "Sylvania 7A8 Technical Data, May 12 1947",
+      "url": "https://frank.pocnet.net/sheets/201/7/7A8.pdf",
+      "sha256": "a62567e29f323af6f3be91cabbf191211cb7bd78edf3eaddfd1a3559abc09601",
+      "pdf_pages": [
+        1,
+        2
+      ],
+      "notes": "The 250 V oscillator-anode entry is a supply applied through 20 kohm, not the electrode voltage. Typical operating data use 6.3 V heaters; the nominal ratings heading separately says 7.0 V. Neither changes the existing receiver heater model."
+    }
+  ],
+  "slices": {
+    "bias_100v": {
+      "label": "100 V plate/anode, 75 V screen · signal bias",
+      "axis_key": "bias_v",
+      "unit": "V",
+      "conditions": {
+        "heater_v": 6.3,
+        "plate_v": 100,
+        "oscillator_anode_v": 100,
+        "screen_v": 75,
+        "oscillator_grid_a": 0.0002,
+        "oscillator_grid_resistor_ohm": 50000
+      },
+      "axis": [
+        -20,
+        -16,
+        -12,
+        -8,
+        -6,
+        -4,
+        -2,
+        0
+      ],
+      "columns": {
+        "conversion_s": [
+          4.9999999999999996e-06,
+          1.6e-05,
+          3.2e-05,
+          7.5e-05,
+          0.00011999999999999999,
+          0.00023999999999999998,
+          0.00045,
+          0.00037
+        ],
+        "plate_a": [
+          4e-05,
+          0.00012,
+          0.00028000000000000003,
+          0.00057,
+          0.00085,
+          0.00135,
+          0.0022,
+          0.0032500000000000003
+        ],
+        "screen_a": [
+          0.00398,
+          0.00383,
+          0.00372,
+          0.00357,
+          0.0034,
+          0.003,
+          0.0025800000000000003,
+          0.0018000000000000002
+        ],
+        "oscillator_anode_a": [
+          0.0027,
+          0.0027,
+          0.0027,
+          0.0027,
+          0.00272,
+          0.00275,
+          0.00277,
+          0.0028
+        ]
+      },
+      "withheld": [
+        {
+          "x": -18,
+          "conversion_s": 9.999999999999999e-06,
+          "plate_a": 8e-05,
+          "screen_a": 0.0039
+        },
+        {
+          "x": -14,
+          "conversion_s": 2.3e-05,
+          "plate_a": 0.0002,
+          "screen_a": 0.00378
+        },
+        {
+          "x": -10,
+          "conversion_s": 4.8e-05,
+          "plate_a": 0.0004,
+          "screen_a": 0.00365
+        },
+        {
+          "x": -7,
+          "conversion_s": 8.999999999999999e-05,
+          "plate_a": 0.0007,
+          "screen_a": 0.0035
+        },
+        {
+          "x": -5,
+          "conversion_s": 0.000165,
+          "plate_a": 0.00107,
+          "screen_a": 0.0032
+        },
+        {
+          "x": -3,
+          "conversion_s": 0.00035,
+          "plate_a": 0.00175,
+          "screen_a": 0.0028
+        },
+        {
+          "x": -1,
+          "conversion_s": 0.00043,
+          "plate_a": 0.00275,
+          "screen_a": 0.0022500000000000003
+        }
+      ]
+    },
+    "drive_250v": {
+      "label": "250 V plate/supply, 100 V screen · oscillator drive",
+      "axis_key": "oscillator_grid_ua",
+      "unit": "µA",
+      "conditions": {
+        "heater_v": 6.3,
+        "plate_v": 250,
+        "oscillator_anode_supply_v": 250,
+        "oscillator_anode_series_ohm": 20000,
+        "screen_v": 100,
+        "bias_v": -3,
+        "oscillator_grid_resistor_ohm": 50000
+      },
+      "axis": [
+        100,
+        200,
+        400,
+        600,
+        800,
+        1000
+      ],
+      "columns": {
+        "conversion_s": [
+          0.00043,
+          0.0005099999999999999,
+          0.000545,
+          0.00053,
+          0.0005,
+          0.00046499999999999997
+        ]
+      },
+      "withheld": [
+        {
+          "x": 150,
+          "conversion_s": 0.00047999999999999996
+        },
+        {
+          "x": 300,
+          "conversion_s": 0.00054
+        },
+        {
+          "x": 500,
+          "conversion_s": 0.00054
+        },
+        {
+          "x": 700,
+          "conversion_s": 0.0005149999999999999
+        },
+        {
+          "x": 900,
+          "conversion_s": 0.00047999999999999996
+        }
+      ]
+    }
+  },
+  "typical_checks": [
+    {
+      "slice": "bias_100v",
+      "x": -3,
+      "conversion_s": 0.000375,
+      "plate_a": 0.0018,
+      "screen_a": 0.0027,
+      "oscillator_anode_a": 0.0028
+    },
+    {
+      "slice": "drive_250v",
+      "x": 400,
+      "conversion_s": 0.00055
+    }
+  ],
+  "tolerances": {
+    "withheld_relative": 0.04,
+    "conversion_floor_s": 1.5e-05,
+    "current_floor_a": 8e-05,
+    "typical_relative": 0.12
+  },
+  "defaults": {
+    "slice": "bias_100v",
+    "bias_v": -3,
+    "oscillator_grid_ua": 400,
+    "rf_hz": 1000000,
+    "lo_hz": 1455000,
+    "rf_peak_v": 0.005,
+    "modulation": 0.5,
+    "lo_enabled": true,
+    "samples_per_fast_cycle": 32
+  },
+  "fixture_contract": {
+    "duration_s": 0.002,
+    "audio_hz": 1000,
+    "signal": "RF grid voltage is imposed by an ideal source; LO is a normalized externally imposed clock, not an oscillator-grid voltage. Its amplitude is NOT inferred from mean oscillator-grid current.",
+    "conversion_law": "i_ac = 2 * Gc * v_rf(t) * cos(2*pi*f_lo*t); the factor two yields Gc * RF-peak at the difference-frequency component. A behavioral small-signal frequency translator, not instantaneous tube electron dynamics.",
+    "output": "Unloaded plate AC current only, with no IF network, output resistance or capacitance loading. Reference DC currents are separately labeled and only available on the 100 V bias slice with the stated excitation; disabled LO invalidates these DC references.",
+    "numerics": "Coherent 2 ms window, frequencies on a 1 kHz grid, trapezoidal Fourier projection from full-rate states; plots decimated independently."
+  },
+  "limits": [
+    "No unsupported extrapolation or interpolation between supply/drive slices.",
+    "No positive-grid, heater-dependent, stopped-oscillator DC, large-signal, plate/screen-voltage surface or source-loading model.",
+    "Manufacturer interelectrode capacitances and finite plate resistance are not stamped in this unloaded current fixture.",
+    "Existing coupled receiver converter substitutes remain unchanged.",
+    "No oscillator coupling resolution, aerial network, tuning/tracking, AVC feedback or full EC closure."
+  ],
+  "supported_ec_ids": [
+    "EC-02",
+    "EC-06"
+  ],
+  "closed_ec_ids": []
+}

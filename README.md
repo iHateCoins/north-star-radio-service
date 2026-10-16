@@ -1,52 +1,57 @@
-# North Star Radio Service — v0.61.0 idle receiver supply envelope
+# North Star Radio Service — v0.62.0 bounded 7A8 conversion reference
 
-The same 26-state IF/detector/audio/supply circuit now runs AC/DC electrical charging, ripple and discharge with **actual modeled 7B7 and audio currents**. This extends the brief hot-DC IF fixture to an idle receiver supply study; it does not inject a carrier. The remaining 7A8 plate/screen demand is still represented by explicit converter substitutes.
+The 7A8 is the remaining converter dependency for the receiver. This version adds an executable **manufacturer-characteristic reference** and a separately driven, unloaded small-signal conversion fixture. It prepares converter work without inventing a self-oscillating PT-44 circuit from the unresolved coupling symbol.
 
-The Factory ledger adds an **Idle receiver supply** panel with line/rectifier/instrument conditions, filter and tube faults, source removal, restoration, timed measurements, a rail-voltage plot and a matching SPICE export. Calculations run in a background worker.
+The Factory ledger gains a **7A8 conversion reference** panel for published-condition selection, signal bias, oscillator drive, imposed RF/LO frequencies, AM depth, omitted external clock, restoration and matching SPICE export. Existing coupled-receiver electrical models and converter substitute loads are unchanged.
 
 ## EC support and closure
 
-| EC supported | Evidence added in v0.61 | Full EC closed? |
+| EC supported | Concrete v0.62 evidence | Remaining for closure |
 |---|---|---|
-| **EC-03** | AC/DC charging, ripple and discharge with jointly solved IF/audio loads; line/reference sensitivity, faults and restoration. | No |
-| **EC-04** | Electrical speaker hum and filter-fault response under the same receiver/supply loading. | No |
-| **EC-07** | Explicit idle input, initialization, line/rectifier/probe settings, measurement windows, numerical bounds and curve extrapolation. | No |
+| **EC-02** | Two bounded 7A8 characteristic slices, 31 withheld graph-coordinate/typical-point checks and independently executed interpolation. | Full voltage/drive surfaces, loading and heater behavior; remaining tube/winding/audio/field/lamp correlation. |
+| **EC-06** | Separately driven small-signal difference/sum conversion, AM sidebands and bias/drive sensitivity. | Actual oscillator, aerial/RF input, loaded conversion, 540–1600 kHz tracking, alignment, AVC feedback and physical fault response. |
 
-All nine acceptance lists and six **NOT MET** completion gates remain unchanged. No full EC closes. Broader game development remains on hold.
+**Full ECs closed: none.** EC-06 is now in progress at the isolated component-fixture level. All nine acceptance lists and all six **NOT MET** completion gates remain unchanged. Broader game work remains on hold.
 
-## Conditions and limits
+## Source conditions and limits
 
-Capacitor voltages and inductor currents start at zero. Heater resistance and emission start at their nominal-hot assumptions and have no temperature evolution. This is **electrical storage charging, not cold thermal startup**. Switching off removes the source, while the assumed emission laws remain; heater cooling is not simulated.
+The Sylvania 1951 manual, PDF p. 170, supplies two separate curves:
 
-No synthetic detector voltage or injected IF current drives this fixture. The actual modeled 7B7, 7C6 and 50L6 currents load the shared supply. The 30 kΩ converter plate and 120 kΩ screen substitutes remain. Neither RF reception nor long-duration signal-driven AVC regulation is established. There is no acoustic speaker calibration.
+- **Signal-bias slice:** 100 V plate and oscillator anode, 75 V screen, 6.3 V heater, 0.2 mA oscillator-grid current and 50 kΩ oscillator-grid resistor; signal bias −20 to 0 V. Approximate average plate, screen, oscillator-anode currents and conversion conductance are tabulated.
+- **Oscillator-drive slice:** 250 V plate, 100 V screen, −3 V signal bias, 6.3 V heater, 250 V oscillator-anode supply through 20 kΩ and 50 kΩ oscillator-grid resistor; 100–1000 µA oscillator-grid current. Only conversion conductance is modeled on this slice.
 
-Backward Euler uses a default 1/48000 s step. Signal-node stopping tolerance is 20 pA, supply-node stopping allowance is 1 nA; accepted normalized residual remains below 10 nA. Half-step checks and comparison with the existing stricter 20 fA signal-node solver bound the reported supply behavior. This supply tolerance is separate from the tight sub-microvolt AVC release solver, which is unchanged.
+These are separate published test conditions, with no cross-slice voltage/drive interpolation. The middle 250 V bias graph on that page uses **45 V screen**, so it is not silently combined with the 100 V screen drive curve. The 250 V anode supply is not the electrode voltage. The 1947 Sylvania typical operating points provide additional comparisons. Its separate nominal 7.0 V heater rating does not change the 6.3 V curve conditions or the existing receiver heater model.
 
-The 10% reservoir-capacitance fault uses an eight-times finer 1/384000 s step to resolve narrow charging pulses against SPICE; its comparison tolerance is unchanged.
+Graph coordinates are approximate manual readings. Withheld coordinates use different positions on the same printed curves, not independent physical measurements. Typical-point and graph-reading tolerances are recorded explicitly. Unsupported extrapolation is rejected.
 
-Measurements use full-rate states over the final six mains periods; plots are decimated. Full-rate interpolated charging/discharge checkpoints are retained separately. Supply duration/step govern the run; the receiver parameter block retains inherited IF timing defaults that are unused with zero injection. All node voltages reference B-minus; no chassis bond is asserted. The switch-off fixture records the actual modeled discharge curve rather than imposing the older resistor-load decay time.
+The conversion law is the declared behavioral small-signal relation `i_ac = 2 Gc v_rf(t) cos(2π f_LO t)`. The factor two gives `Gc × RF peak` at the difference-frequency component. RF grid voltage is imposed by an ideal source; the LO is a normalized external clock. Its amplitude is not derived from average oscillator-grid current. A coherent 2 ms window measures the current spectrum; plots, if any, must not substitute for full-rate measurements.
 
-GE legacy and RCA reference selection follows the same shared circuits and exports. RCA checks remain limited to nominal heater conditions and 5–40 V forward drop. Extrapolated conducting steps are reported separately for the whole run and measurement window. Emission-scaled faults and unverified tube, transformer, field, heater and lamp parameters remain assumptions. No historical voltage label was used as a pass/fail target.
+This fixture does not stamp interelectrode capacitances, finite plate resistance, an aerial network or an IF output load. Reference mean currents apply only to the 100 V bias slice under its stated excitation. Omitting the external clock produces zero translated signal and **no DC current prediction**. It does not establish the physical stopped-oscillator currents or a dead-oscillator repair case.
+
+Selecting RF frequencies at 540, 1000 and 1600 kHz and manually setting LO = RF + 455 kHz verifies the frequency translator, **not receiver tracking**. Existing 30 kΩ plate/120 kΩ screen converter substitutes remain in the coupled receiver. No active 7A8 supply coupling, self-oscillation, source ambiguity resolution, converter AVC feedback or receiver completion is claimed.
+
+## Validation and reproduction
+
+- `engineering/PT44_7A8_Characteristics_V1.json`: source URLs/hashes, exact condition boundaries, training and withheld readings, tolerances and limitations.
+- `engineering/PT44_7A8_Validation_V1.json`: 31 source checks and 14 conversion scenarios, analytic Fourier targets, timestep refinement, domain guards and exact restoration.
+- `engineering/PT44_7A8_Spice_Validation_V1.json`: 405 curve-value comparisons and 12 independently executed conversion cases.
+- `engineering/PT44_7A8_Conversion_Reference_v62.cir`: matching default fixture deck.
+- `node tests/test_converter_v62.js --record`
+- `node tests/test_converter_spice_v62.js --ngspice --record`
+- `node tests/test_converter_workbench_v62.js`
+- `node tests/test_converter_browser_v62.js --browser`
+
+The new Chromium check exercises bias/drive selection, omitted clock, restoration, exact export and mobile layout. Existing source, supply, audio, detector, IF, alignment, rectifier and AVC checks remain in CI.
 
 ## Remaining work
 
 - **EC-01:** Physical diode pins, oscillator coupling interpretation and approved #8 resolution.
-- **EC-02:** Remaining tube/winding/audio/field/heater/lamp correlation, including rectifier extrapolation and thermal behavior.
-- **EC-03:** Actual converter currents; full receiver with RF operating; cold-heater/lamp/field behavior and broader supply envelope beyond the idle fixture.
-- **EC-04:** Audio/transformer/speaker parameter and frequency-envelope correlation; shop integration.
-- **EC-05:** Passband/trimmer/diode correlation, long-duration attack/steady AVC and converter feedback.
-- **EC-06:** RF/oscillator/converter tracking across 540–1600 kHz.
-- **EC-07/08:** RF/shop instruments, historical service conditions and serviceable chassis access/crosswalk.
+- **EC-02:** Full 7A8 and remaining tube/winding/audio/field/heater/lamp correlation.
+- **EC-03:** Active converter currents and RF-operating loads; remaining thermal supply envelope.
+- **EC-04:** Audio/transformer/speaker parameter and frequency correlation; shop integration.
+- **EC-05:** Actual passband/trimmer/diode correlation, long-duration attack/steady AVC and converter feedback.
+- **EC-06:** Actual oscillator/converter/RF network and loaded tracking/fault validation.
+- **EC-07/08:** RF/shop instruments, historical service conditions and serviceable chassis access.
 - **EC-09:** Full receiver baseline and complete diagnosis/replacement/alignment/checkout acceptance.
 
-## Evidence and reproduction
-
-- `engineering/PT44_Receiver_Power_Fixture_V1.json`: conditions, faults, numerical contract and limits.
-- `engineering/PT44_Receiver_Power_Validation_V1.json`: AC/DC, line/reference/probe sensitivity, faults/restoration, discharge and precision checks.
-- `engineering/PT44_Receiver_Power_Spice_Validation_V1.json`: independent adaptive Gear execution with zero electrical initial storage; waveform statistics and charging/discharge checkpoints.
-- `node tests/test_receiver_power_v61.js --record`
-- `node tests/test_receiver_power_spice_v61.js --ngspice --record`
-- `node tests/test_receiver_power_workbench_v61.js`
-- `node tests/test_receiver_power_browser_v61.js --browser`
-
-Existing source, power, audio, detector, IF, alignment, rectifier and AVC release regressions remain in CI. Watermark: **BUILD v0.61.0**.
+Watermark: **BUILD v0.62.0**.

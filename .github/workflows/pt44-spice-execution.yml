@@ -65,6 +65,9 @@ jobs:
       - name: Execute isolated cathode-bypass AC branch study
         run: node tests/test_output_bypass_v36.js --ngspice
 
+      - name: Cross-check 7A8 characteristic slices and separately driven conversion
+        run: node tests/test_converter_spice_v62.js --ngspice
+
       - name: Cross-check complete idle IF/audio/supply charging and discharge
         run: node tests/test_receiver_power_spice_v61.js --ngspice
 
@@ -88,3 +91,14 @@ jobs:
 
       - name: Cross-check one-second coupled AVC release continuation
         run: node tests/test_avc_release_spice_v59.js --ngspice
+
+      - name: Retain SPICE diagnostics after failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pt44-spice-failure-diagnostics
+          path: |
+            tmp/v59/spice/*.log
+            tmp/v59/spice/*.cir
+            tmp/v62/spice/*.log
+          retention-days: 7

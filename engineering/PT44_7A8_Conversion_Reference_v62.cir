@@ -1,0 +1,25 @@
+PT-44 v0.62 separately driven 7A8 characteristic reference
+* Isolated unloaded AC plate-current fixture; NOT a PT-44 receiver netlist.
+* All voltages are cathode-relative. No chassis/B-minus identity is asserted.
+* Published reference conditions {"heater_v":6.3,"plate_v":100,"oscillator_anode_v":100,"screen_v":75,"oscillator_grid_a":0.0002,"oscillator_grid_resistor_ohm":50000,"bias_v":-3}
+* LO is a normalized imposed clock; no oscillator-grid voltage or startup is solved.
+* DC reference currents are valid only for enabled excitation on the bias slice.
+.func C_conversion_s(x) {(x<-16?(0.0000049999999999999996+(x-(-20))*0.00000275):(x<-12?(0.000016+(x-(-16))*0.000004):(x<-8?(0.000032+(x-(-12))*0.000010749999999999999):(x<-6?(0.000075+(x-(-8))*0.000022499999999999998):(x<-4?(0.00011999999999999999+(x-(-6))*0.000059999999999999995):(x<-2?(0.00023999999999999998+(x-(-4))*0.000105):(x<0?(0.00045+(x-(-2))*-0.000039999999999999996):0.00037)))))))}
+.func C_plate_a(x) {(x<-16?(0.00004+(x-(-20))*0.000019999999999999998):(x<-12?(0.00012+(x-(-16))*0.00004000000000000001):(x<-8?(0.00028000000000000003+(x-(-12))*0.00007249999999999999):(x<-6?(0.00057+(x-(-8))*0.00014):(x<-4?(0.00085+(x-(-6))*0.00025000000000000006):(x<-2?(0.00135+(x-(-4))*0.00042500000000000003):(x<0?(0.0022+(x-(-2))*0.0005250000000000001):0.0032500000000000003)))))))}
+.func C_screen_a(x) {(x<-16?(0.00398+(x-(-20))*-0.00003749999999999999):(x<-12?(0.00383+(x-(-16))*-0.000027499999999999964):(x<-8?(0.00372+(x-(-12))*-0.0000375000000000001):(x<-6?(0.00357+(x-(-8))*-0.000085):(x<-4?(0.0034+(x-(-6))*-0.00019999999999999987):(x<-2?(0.003+(x-(-4))*-0.0002099999999999999):(x<0?(0.0025800000000000003+(x-(-2))*-0.00039000000000000005):0.0018000000000000002)))))))}
+.func C_oscillator_anode_a(x) {(x<-16?(0.0027+(x-(-20))*0):(x<-12?(0.0027+(x-(-16))*0):(x<-8?(0.0027+(x-(-12))*0):(x<-6?(0.0027+(x-(-8))*0.000010000000000000026):(x<-4?(0.00272+(x-(-6))*0.000014999999999999823):(x<-2?(0.00275+(x-(-4))*0.000010000000000000026):(x<0?(0.00277+(x-(-2))*0.00001500000000000004):0.0028)))))))}
+VX X 0 -3
+BRF RF 0 V={0.005*(1+0.5*cos(6283.185307179586*time))*cos(6283185.307179586*time)}
+BLO LO 0 V={1*cos(9142034.621946298*time)}
+BOUT 0 OUT I={2*C_conversion_s(V(X))*V(RF)*V(LO)}
+VSENSE OUT 0 0
+B_plate_a 0 REF_plate_a I={C_plate_a(V(X))}
+V_plate_a REF_plate_a 0 0
+B_screen_a 0 REF_screen_a I={C_screen_a(V(X))}
+V_screen_a REF_screen_a 0 0
+B_oscillator_anode_a 0 REF_oscillator_anode_a I={C_oscillator_anode_a(V(X))}
+V_oscillator_anode_a REF_oscillator_anode_a 0 0
+.options reltol=1e-9 abstol=1e-14
+.tran 2.147766323024055e-8 0.002 0 2.147766323024055e-8
+.print tran I(VSENSE)
+.end
