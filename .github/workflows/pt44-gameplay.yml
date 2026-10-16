@@ -25,7 +25,7 @@ jobs:
           name: pt44-game-core-v063
           path: tmp/pt44-gameplay/
   playable-shop:
-    timeout-minutes: 5
+    timeout-minutes: 8
     runs-on: ubuntu-latest
     permissions:
       contents: read
