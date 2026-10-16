@@ -1,6 +1,6 @@
 {
   "schema": "PT44_GAME_COMPLETION_V2",
-  "version": "0.64.0",
+  "version": "0.65.0",
   "approved_scope_change": "User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.",
   "historical_standard": "engineering/PT44_EC_Acceptance_V1.json",
   "policy": "Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.",
@@ -108,5 +108,28 @@
       "remaining": "None within the fixed V2 acceptance. All 20 stock faults through browser save/load, diagnosis, incorrect-repair checkout, part replacement and successful checkout; healthy reference, all-slot access and cascade repair."
     }
   ],
-  "benchmark_ready": true
+  "benchmark_ready": true,
+  "version_support": {
+    "supported_ec_ids": [
+      "EC-07",
+      "EC-08",
+      "EC-09"
+    ],
+    "newly_closed_ec_ids": [],
+    "retained_closed_ec_ids": [
+      "EC-01",
+      "EC-02",
+      "EC-03",
+      "EC-04",
+      "EC-05",
+      "EC-06",
+      "EC-07",
+      "EC-08",
+      "EC-09"
+    ],
+    "evidence": [
+      "tests/test_ui_browser_v65.js"
+    ],
+    "scope": "Player UI and optional equipment usability; no receiver, damage, pricing or fixed acceptance changes."
+  }
 }
