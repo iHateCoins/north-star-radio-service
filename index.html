@@ -1415,21 +1415,24 @@ const B3 = (function(){
     api._traySignature=null;api.sync(job.radio, true);api.syncTray(job.tray);
   };
   api.sync = function(radio, instant){
+    let changed=false;
     for (const id of Object.keys(PLACE)){
       const p=radio.slots[id], cur=slotObj[id], an=anchors[id];
       const sig = p ? p.pid+':'+(p.charred?1:0)+':'+((p.heat>2||p.leak0<0.3)?1:0) : null;
       if (cur && (!p || cur.sig!==sig)){
+        changed=true;
         const g=cur.g; delete slotObj[id]; untag(g);
         if (!p && !instant){ const y0=g.position.y; tween(0.45, t=>{ const e=ease(t); g.position.y=y0+e*1.6; g.scale.setScalar(1-e*0.6); }, ()=>an.a.remove(g)); }
         else an.a.remove(g);
       }
       if (p && !slotObj[id]){
+        changed=true;
         const g=buildFor(id,p); an.a.add(g); slotObj[id]={g,sig,pid:p.pid};
         if (!instant && (!cur || cur.pid!==p.pid)){ g.position.y=2; g.scale.setScalar(0.6); tween(0.5, t=>{ const e=ease(t); g.position.y=2*(1-e); g.scale.setScalar(0.6+0.4*e); }); }
       }
       an.ghost.visible = !p;
     }
-    rebuildUnderWiring();
+    if(changed||instant)rebuildUnderWiring();
     api.select(api._sel);
   };
   api._sel=null;
@@ -1517,7 +1520,7 @@ const B3 = (function(){
   // ---------- mount & loop ----------
   let host=null, running=false, last=performance.now(), smokeT=0;
   api.mount = function(el){ host=el; el.style.position='relative'; el.appendChild(canvas); el.appendChild(tip); resize(); if(!running){ running=true; requestAnimationFrame(loop); } };
-  function resize(){ if(!host) return; const w=host.clientWidth||600, h=host.clientHeight||380; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+  function resize(){ if(!host||!host.getClientRects().length) return; const w=host.clientWidth||600,h=host.clientHeight||380,dpr=renderer.getPixelRatio();if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();} }
   if (window.ResizeObserver) new ResizeObserver(resize).observe(document.body); window.addEventListener('resize', resize);
   applyCam();
   function loop(now){
@@ -4298,7 +4301,7 @@ function renderSide(){
   const back=el.querySelector('#backToBench');if(back)back.onclick=showPhysicalBench;renderSceneInspector();
 }
 function showPhysicalBench(){R.view=B3.ok?'bench3d':'top';renderViewTabs();renderViews();$('#viewBox')?.scrollIntoView({block:'center',behavior:'smooth'});}
-function renderSceneInspector(){const el=$('#sceneInspector');if(!el)return;el.hidden=ENGINEERING_MODE||!R.sel;if(el.hidden){el.innerHTML='';return;}el.innerHTML='<div class="row"><b>Selected component</b><span class="sp"></span><button class="btn sm" id="clearSelection">Done</button></div>'+inspectorHTML();bindInspector(el);$('#clearSelection').onclick=()=>{R.sel=null;B3.select(null);B3.selectTray?.(null);renderSceneInspector();};}
+function renderSceneInspector(){const el=$('#sceneInspector');if(!el)return;el.hidden=ENGINEERING_MODE||!R.sel;if(el.hidden){el.innerHTML='';return;}el.innerHTML='<div class="row"><b>Selected component</b><span class="sp"></span><button class="btn sm" id="clearSelection">Done</button></div>'+inspectorHTML();bindInspector(el);$('#clearSelection').onclick=()=>{R.sel=null;B3.select?.(null);B3.selectTray?.(null);renderSceneInspector();};}
 function selectBenchPart(slot){if(!SLOTS[slot])return;R.sel={slot};R.side='insp';B3.select(slot);if(B3.selectTray)B3.selectTray(null);renderSide();if(window.matchMedia('(max-width:800px)').matches)$('#sceneInspector')?.scrollIntoView({block:'nearest',behavior:'smooth'});}
 function selectBenchTray(pid){if(!benchJob()?.tray.some(p=>p.pid===pid))return;R.sel={tray:pid};R.side='insp';B3.select(null);B3.selectTray(pid);renderSide();if(window.matchMedia('(max-width:800px)').matches)$('#sceneInspector')?.scrollIntoView({block:'nearest',behavior:'smooth'});}
 function gamePartAccessHTML(){if(!ENGINEERING_MODE||!benchJob())return '';return `<label>Service part <select id="gamePartAccess" style="width:100%;max-width:100%;display:block"><option value="">Choose a part / location</option>${Object.entries(SLOTS).map(([id,d])=>`<option value="${id}" ${R.sel?.slot===id?'selected':''}>${id} · ${d.name} · ${id==='R1'?'speaker field assembly':['R2','R3','R4','R5','R6','R7','C3','C4'].includes(id)?'underside':'chassis top'}</option>`).join('')}</select></label>`;}
