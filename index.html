@@ -1394,9 +1394,12 @@ const B3 = (function(){
   const trayObjects=new Map();let selectedTray=null;
   api.syncTray=function(parts){
     const signature=parts.map(p=>p.pid+':'+!!p.charred).join(',');if(api._traySignature===signature)return;api._traySignature=signature;
-    for(const o of trayObjects.values()){untag(o);tray.remove(o);disposeGroup(o);}trayObjects.clear();
+    const ids=new Set(parts.map(p=>p.pid));
+    for(const [pid,g] of trayObjects)if(!ids.has(pid)){untag(g);tray.remove(g);disposeGroup(g);trayObjects.delete(pid);}
     parts.forEach((p,i)=>{const id=p.from||Object.keys(SLOTS).find(k=>SLOTS[k].nom===p.sku)||Object.keys(SLOTS).find(k=>SLOT_ACCEPTS[SLOTS[k].type]===p.kind);if(!id)return;
-      const g=buildFor(id,p);g.traverse(o=>{delete o.userData.slot;o.userData.tray=p.pid;});g.scale.setScalar(.5);const cols=4;g.position.set(-1.45+(i%cols)*.95,.15+Math.floor(i/12)*1.25,-.75+(Math.floor(i/cols)%3)*.75);tray.add(g);trayObjects.set(p.pid,g);
+      let g=trayObjects.get(p.pid);if(g&&g.userData.charred!==!!p.charred){untag(g);tray.remove(g);disposeGroup(g);trayObjects.delete(p.pid);g=null;}
+      if(!g){g=buildFor(id,p);g.traverse(o=>{delete o.userData.slot;o.userData.tray=p.pid;});g.userData.charred=!!p.charred;g.scale.setScalar(.5);tray.add(g);trayObjects.set(p.pid,g);}
+      g.position.set(-1.45+(i%4)*.95,.15+Math.floor(i/12)*1.25,-.75+(Math.floor(i/4)%3)*.75);
     });api.selectTray(selectedTray);
   };
   api.selectTray=function(pid){selectedTray=pid;for(const [id,g]of trayObjects)g.traverse(m=>{if(m.isMesh&&m.material?.emissive&&!m.material._live)m.material.emissive.setHex(id===pid?0x6a3a08:0);});};
@@ -1487,7 +1490,7 @@ const B3 = (function(){
   function hit(ev){ const r=canvas.getBoundingClientRect(); ndc.set(((ev.clientX-r.left)/r.width)*2-1, -((ev.clientY-r.top)/r.height)*2+1); ray.setFromCamera(ndc,camera);
     const hs=ray.intersectObjects(pickables.filter(o=>o.visible && isShown(o) && serviceFace(o)),false); return hs[0]||null; }
   function serviceFace(o){if(o.userData.tray)return true;if(o.userData.node)return api.flipped;
-    const id=o.userData.slot,an=anchors[id];if(!an)return true;const belongsUnder=under.getObjectById(o.id);return api.flipped?!!belongsUnder:!belongsUnder;
+    const id=o.userData.slot,an=anchors[id];if(!an)return true;let belongsUnder=false;for(let parent=o;parent;parent=parent.parent){if(parent===under){belongsUnder=true;break;}}return api.flipped?belongsUnder:!belongsUnder;
   }
   // Read-only projected geometry for input QA; it never changes selection.
   api.pickPoint=function(kind,id){scene.updateMatrixWorld(true);applyCam();camera.updateMatrixWorld(true);const r=canvas.getBoundingClientRect();
