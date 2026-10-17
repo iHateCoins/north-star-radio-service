@@ -1,6 +1,6 @@
 {
   "schema": "PT44_GAME_COMPLETION_V2",
-  "version": "0.68.0",
+  "version": "0.69.0",
   "approved_scope_change": "User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.",
   "historical_standard": "engineering/PT44_EC_Acceptance_V1.json",
   "policy": "Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.",
@@ -128,10 +128,9 @@
       "EC-09"
     ],
     "evidence": [
-      "tests/test_physical_browser_v68.js",
-      "tests/test_tutorial_browser_v66.js",
-      "tests/test_completion_browser_v64.js"
+      "tests/test_help_v69.js",
+      "tests/test_help_browser_v69.js"
     ],
-    "scope": "Physical component selection on the 3D chassis and tray; contextual service actions and physical meter posts; unchanged receiver, damage rules and fixed V2 acceptance."
+    "scope": "Player Help tab covering safe component tests, existing instrument results, cause and follow-on damage, optional upgrades and final checkout. Receiver behavior and fixed V2 acceptance unchanged."
   }
 }
