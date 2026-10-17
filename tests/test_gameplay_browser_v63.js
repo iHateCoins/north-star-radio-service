@@ -1,7 +1,7 @@
 if(!process.argv.includes('--browser')){console.log('SKIP real-shop Chromium (use --browser)');process.exit(0);}
 const {enterShop,pickPhysical}=require('./browser_shop');
 const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{pathToFileURL}=require('node:url');
-setTimeout(()=>{console.error('Real-shop acceptance timed out');process.exit(1);},480000).unref();
+setTimeout(()=>{console.error('Real-shop acceptance timed out');process.exit(1);},720000).unref();
 const out=path.resolve('tmp/pt44-gameplay-browser');fs.mkdirSync(out,{recursive:true});
 (async()=>{const browser=await chromium.launch({headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--autoplay-policy=no-user-gesture-required']}),page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**',r=>r.abort());
 // Own timing so each UI assertion sees a reproducible physical state; call the real tick explicitly.

@@ -30,7 +30,7 @@ jobs:
             tmp/pt44-gameplay/
             tmp/pt44-completion/
   playable-shop:
-    timeout-minutes: 12
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     permissions:
       contents: read

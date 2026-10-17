@@ -1,3 +1,4 @@
+const physicalMotion=new WeakMap();
 // Enter through the same title choices as players; older suites do not exercise coaching.
 async function enterShop(page,{tutorial=false}={}){
   if(await page.locator('#titleScreen').isVisible()){
@@ -8,7 +9,7 @@ async function enterShop(page,{tutorial=false}={}){
 }
 module.exports={enterShop};
 async function pickPhysical(page,kind,id,{touch=false}={}){
-  await page.emulateMedia({reducedMotion:touch?'no-preference':'reduce'});
+  const motion=touch?'no-preference':'reduce';if(physicalMotion.get(page)!==motion){await page.emulateMedia({reducedMotion:motion});physicalMotion.set(page,motion);}
   await page.locator('[data-v="bench3d"]').click();
   const cam=kind==='tray'?'tray':kind==='node'?'under':await page.evaluate(id=>id==='SP1'?'speaker':['R1','R2','R3','R4','R5','R6','R7','C3','C4'].includes(id)?'under':'top',id);
   await page.locator(`[data-cam="${cam}"]`).click();
