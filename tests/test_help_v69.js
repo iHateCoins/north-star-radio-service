@@ -1,0 +1,18 @@
+const assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs'),{html,scripts,m,healthy}=require('./gameplay_helpers_v63');
+const source=fs.readFileSync('gameplay/pt44_help_v69.js','utf8');
+assert(html.includes('// BEGIN PT44_HELP_V69\n'+source+'// END PT44_HELP_V69'));
+const tabs={innerHTML:'',querySelectorAll(){return ['insp','drawer','cat','data','help'].map(t=>({dataset:{t},set onclick(fn){this.click=fn;tabs[t]=this;}}));}};
+const body={innerHTML:'',querySelector(){return null;}};
+const nodes={'#sideTabs':tabs,'#sideBody':body};
+const c={console,URLSearchParams,location:{search:''},document:{addEventListener(){},querySelector:s=>nodes[s]||null},B3:{ok:false},localStorage:{getItem(){return null},setItem(){throw Error('Help must not save');}},setTimeout(){},clearTimeout(){}};
+vm.createContext(c);vm.runInContext(scripts[1],c);vm.runInContext(scripts[3].replace(/boot\(\);\s*$/,''),c);
+const run=s=>vm.runInContext(s,c);
+run("renderSceneInspector=()=>{};S={cash:40,tools:{},jobs:[],inv:{}};R.power=true;R.sel={slot:'C3'};R.probe='B1';R.side='help';renderSide();");
+assert(tabs.innerHTML.includes('data-t="help"'));const before=run('JSON.stringify({S,R})');
+for(let i=0;i<3;i++)tabs.help.click();
+assert.equal(run('JSON.stringify({S,R})'),before,'Help must preserve power, selection, probe, money and job state');
+const text=body.innerHTML;assert.equal((text.match(/<details /g)||[]).length,9);assert(!/<select|data-act=|data-buy=/.test(text));
+for(const id of Object.keys(m.SLOTS))assert(new RegExp('\\b'+id+'\\b').test(text),`missing component ${id}`);
+for(const phrase of ['Discharge B+','B− return, not chassis','parallel paths','SHORT/LEAKAGE','Capacitance OK alone','optional','10-minute checkout','follow-on','not a separate pin-by-pin','not a simulated wiper sweep'])assert(text.includes(phrase),phrase);
+const radio=healthy();assert.equal(m.partOhms(radio.slots.SP1),3.2);assert.equal(m.partOhms(radio.slots.L1),2.6);assert.equal(m.partOhms(radio.slots.VR1),500000);radio.slots.V2.heaterOk=false;assert.equal(m.pt44GameTubeTest(radio.slots.V2).heater,false);
+console.log('PASS Help: all 22 components, actual healthy readings/open heater, safe instructions, read-only tab navigation and embedded source');

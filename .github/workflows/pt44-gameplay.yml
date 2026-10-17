@@ -21,6 +21,7 @@ jobs:
       - run: node tests/test_completion_v64.js
       - run: node tests/test_tutorial_v66.js
       - run: node tests/test_title_v67.js
+      - run: node tests/test_help_v69.js
       - run: node tests/test_ec_reporting_v58.js
       - run: node tests/test_supply_avc_reconciliation_v53.js
       - uses: actions/upload-artifact@v4
@@ -122,3 +123,22 @@ jobs:
           name: pt44-physical-v068
           path: tmp/pt44-physical-v068/
           retention-days: 7
+
+  component-help:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright@1.62.1
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/test_help_browser_v69.js --browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pt44-help-v069
+          path: tmp/pt44-help-v069/
