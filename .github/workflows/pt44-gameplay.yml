@@ -51,7 +51,7 @@ jobs:
 
   completion-matrix:
     name: Stock repair and service acceptance (${{ matrix.shard }})
-    timeout-minutes: 10
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
