@@ -88,7 +88,7 @@
 .ui-details .log{border-top:none;padding:0}.upgrade-card{border:1px solid var(--line);border-radius:4px;padding:12px}.upgrade-card h3{font-size:15px;margin:0 0 5px}.upgrade-card .row{justify-content:space-between}.ui-nested{padding:10px 0}
 @media(max-width:800px){body.no-job .counter{order:-1}}
 </style></head><body>
-<title>North Star Radio Service — PT-44 v0.67.0</title><meta name="nsrs-build" content="v0.67.0">
+<title>North Star Radio Service — PT-44 v0.68.0</title><meta name="nsrs-build" content="v0.68.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;800&family=Libre+Franklin:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
@@ -250,7 +250,7 @@ table.sd th{color:var(--dim);font-weight:400}
     <div class="title-actions"><button class="btn pri" id="titleLoad" disabled>Load game</button><button class="btn" id="titleNew">New game</button></div>
     <p class="note" id="titleSaveInfo">Checking for a saved shop…</p>
     <p class="note">New games begin with a guided first repair. You can pause the tutorial at any time.</p>
-    <footer>Version 0.67.0 · Saves are stored in this browser.</footer>
+    <footer>Version 0.68.0 · Saves are stored in this browser.</footer>
   </div>
 </main>
 <div class="wrap" id="gameShell" hidden>
@@ -280,7 +280,7 @@ table.sd th{color:var(--dim);font-weight:400}
   </div>
 </div>
 <div id="modal"></div>
-<div class="build-watermark" aria-label="Current build version">BUILD v0.67.0<small>North Star Radio Service</small></div>
+<div class="build-watermark" aria-label="Current build version">BUILD v0.68.0<small>North Star Radio Service</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== North Star Radio Service — circuit engine =====
@@ -1110,7 +1110,7 @@ const B3 = (function(){
   // Removed v0.8's decorative speaker lead. A four-conductor loom (field + voice coil)
   // must be routed against Philco #26/#28/#27 before it can be shown as electrically true.
   // test points (underside)
-  const TPU = {B1:[600,172],B2:[470,300],P5:[480,104],K5:[575,200],G5:[540,250],P6:[395,104],G6:[318,250],PCV:[225,104],PIF:[310,104],KIF:[265,200],OSC:[125,215]};
+  const TPU = {AVC:[285,275],SCREEN:[360,200],B1:[600,172],B2:[470,300],P5:[480,104],K5:[575,200],G5:[540,250],P6:[395,104],G6:[318,250],PCV:[225,104],PIF:[310,104],KIF:[265,200],OSC:[125,215]};
   const tps={};
   for (const [n,[x,y]] of Object.entries(TPU)){ const [ux,uz]=U(x,y); const g=new THREE.Group();
     const lug=new THREE.Mesh(new THREE.CylinderGeometry(0.085,0.085,0.05,12),brass); lug.position.y=0.025; g.add(lug);
@@ -1391,9 +1391,21 @@ const B3 = (function(){
     else if (t==='R') g=resModel(p); else if (t==='C') g = (id==='C1'||id==='C2') ? elecModel(p) : paperCapModel(p);
     tagGroup(g,id); return g; }
 
+  const trayObjects=new Map();let selectedTray=null;
+  api.syncTray=function(parts){
+    const signature=parts.map(p=>p.pid+':'+!!p.charred).join(',');if(api._traySignature===signature)return;api._traySignature=signature;
+    const ids=new Set(parts.map(p=>p.pid));
+    for(const [pid,g] of trayObjects)if(!ids.has(pid)){untag(g);tray.remove(g);disposeGroup(g);trayObjects.delete(pid);}
+    parts.forEach((p,i)=>{const id=p.from||Object.keys(SLOTS).find(k=>SLOTS[k].nom===p.sku)||Object.keys(SLOTS).find(k=>SLOT_ACCEPTS[SLOTS[k].type]===p.kind);if(!id)return;
+      let g=trayObjects.get(p.pid);if(g&&g.userData.charred!==!!p.charred){untag(g);tray.remove(g);disposeGroup(g);trayObjects.delete(p.pid);g=null;}
+      if(!g){g=buildFor(id,p);g.traverse(o=>{delete o.userData.slot;o.userData.tray=p.pid;});g.userData.charred=!!p.charred;g.scale.setScalar(.5);tray.add(g);trayObjects.set(p.pid,g);}
+      g.position.set(-1.45+(i%4)*.95,.15+Math.floor(i/12)*1.25,-.75+(Math.floor(i/4)%3)*.75);
+    });api.selectTray(selectedTray);
+  };
+  api.selectTray=function(pid){selectedTray=pid;for(const [id,g]of trayObjects)g.traverse(m=>{if(m.isMesh&&m.material?.emissive&&!m.material._live)m.material.emissive.setHex(id===pid?0x6a3a08:0);});};
   // ---------- animation ----------
   const tweens=[]; const ease=t=>t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-  function tween(dur, fn, done){ tweens.push({t:0,dur,fn,done}); }
+  function tween(dur, fn, done){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){fn(1);if(done)done();}else tweens.push({t:0,dur,fn,done});}
   const smokes=[];
   function puff(worldPos){ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:smokeTex, transparent:true, depthWrite:false, opacity:0.7})); s.position.copy(worldPos); s.scale.set(0.5,0.5,0.5); s.userData.v=new THREE.Vector3((Math.random()-0.5)*0.3,0.9+Math.random()*0.4,(Math.random()-0.5)*0.3); s.userData.life=0; scene.add(s); smokes.push(s); }
 
@@ -1403,24 +1415,27 @@ const B3 = (function(){
     if (curJob===job.radio) return; curJob=job.radio;
     for (const id of Object.keys(slotObj)){ const o=slotObj[id]; untag(o.g); o.g.parent && o.g.parent.remove(o.g); delete slotObj[id]; }
     buildCabinet(job.cab||'');
-    api.sync(job.radio, true);
+    api._traySignature=null;api.sync(job.radio, true);api.syncTray(job.tray);
   };
   api.sync = function(radio, instant){
+    let changed=false;
     for (const id of Object.keys(PLACE)){
       const p=radio.slots[id], cur=slotObj[id], an=anchors[id];
       const sig = p ? p.pid+':'+(p.charred?1:0)+':'+((p.heat>2||p.leak0<0.3)?1:0) : null;
       if (cur && (!p || cur.sig!==sig)){
+        changed=true;
         const g=cur.g; delete slotObj[id]; untag(g);
         if (!p && !instant){ const y0=g.position.y; tween(0.45, t=>{ const e=ease(t); g.position.y=y0+e*1.6; g.scale.setScalar(1-e*0.6); }, ()=>an.a.remove(g)); }
         else an.a.remove(g);
       }
       if (p && !slotObj[id]){
+        changed=true;
         const g=buildFor(id,p); an.a.add(g); slotObj[id]={g,sig,pid:p.pid};
         if (!instant && (!cur || cur.pid!==p.pid)){ g.position.y=2; g.scale.setScalar(0.6); tween(0.5, t=>{ const e=ease(t); g.position.y=2*(1-e); g.scale.setScalar(0.6+0.4*e); }); }
       }
       an.ghost.visible = !p;
     }
-    rebuildUnderWiring();
+    if(changed||instant)rebuildUnderWiring();
     api.select(api._sel);
   };
   api._sel=null;
@@ -1443,7 +1458,7 @@ const B3 = (function(){
     const bstart=new THREE.Vector3(); jackB.getWorldPosition(bstart);
     const clip=new THREE.Vector3(); chassis.localToWorld(clip.set(-W/2+0.2, api.flipped?-0.6:-1.6, D/2));
     blackLead = hookupWorld([bstart, new THREE.Vector3(bstart.x+1,0.3,bstart.z+0.8), new THREE.Vector3(clip.x-1.2,0.6,clip.z+0.6), clip], 0x151515);
-    if (!probeNode || !api.flipped) return;
+    if (!probeNode || !api.flipped || !tps[probeNode]) return;
     const end=new THREE.Vector3(); tps[probeNode].ball.getWorldPosition(end);
     probeLead = hookupWorld([start, new THREE.Vector3(start.x+2,0.3,start.z+1), new THREE.Vector3((start.x+end.x)/2, end.y+2.5, end.z+2), end], 0xb3261e);
   }
@@ -1473,22 +1488,33 @@ const B3 = (function(){
   const pointers=new Map(); let downAt=null, moved=0, pinch0=null, hoverSlot=null;
   const tip=document.createElement('div'); tip.style.cssText='position:absolute;pointer-events:none;background:#1c231fe6;border:1px solid #4a584d;color:#ebe1c8;font:12px "Courier Prime",monospace;padding:3px 7px;border-radius:3px;white-space:nowrap;transform:translate(-50%,-140%);display:none;z-index:2';
   function hit(ev){ const r=canvas.getBoundingClientRect(); ndc.set(((ev.clientX-r.left)/r.width)*2-1, -((ev.clientY-r.top)/r.height)*2+1); ray.setFromCamera(ndc,camera);
-    const hs=ray.intersectObjects(pickables.filter(o=>o.visible && isShown(o)),false); return hs[0]||null; }
+    const hs=ray.intersectObjects(pickables.filter(o=>o.visible && isShown(o) && serviceFace(o)),false); return hs[0]||null; }
+  function serviceFace(o){if(o.userData.tray)return true;if(o.userData.node)return api.flipped;
+    const id=o.userData.slot,an=anchors[id];if(!an)return true;let belongsUnder=false;for(let parent=o;parent;parent=parent.parent){if(parent===under){belongsUnder=true;break;}}return api.flipped?belongsUnder:!belongsUnder;
+  }
+  // Read-only projected geometry for input QA; it never changes selection.
+  api.pickPoint=function(kind,id){scene.updateMatrixWorld(true);applyCam();camera.updateMatrixWorld(true);const r=canvas.getBoundingClientRect();
+    const meshes=pickables.filter(o=>o.userData[kind]===id&&o.visible&&isShown(o)&&serviceFace(o));
+    for(const m of meshes){const b=new THREE.Box3().setFromObject(m),ps=[];for(const x of [b.min.x,b.max.x])for(const y of [b.min.y,b.max.y])for(const z of [b.min.z,b.max.z])ps.push(new THREE.Vector3(x,y,z).project(camera));
+      const xs=ps.map(p=>(p.x+1)*r.width/2),ys=ps.map(p=>(1-p.y)*r.height/2);const left=Math.max(1,Math.min(...xs)),right=Math.min(r.width-1,Math.max(...xs)),top=Math.max(1,Math.min(...ys)),bottom=Math.min(r.height-1,Math.max(...ys));
+      for(const u of [.5,.25,.75,.1,.9])for(const v of [.5,.25,.75,.1,.9]){const x=r.left+left+(right-left)*u,y=r.top+top+(bottom-top)*v,h=hit({clientX:x,clientY:y});if(h?.object.userData[kind]===id)return {x,y};}
+    }return null;
+  };
   function isShown(o){ let p=o; while(p){ if(!p.visible) return false; p=p.parent; } return true; }
-  canvas.addEventListener('pointerdown', e=>{ canvas.setPointerCapture(e.pointerId); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY}); if(pointers.size===1){ downAt={x:e.clientX,y:e.clientY}; moved=0; } else { const [a,b]=[...pointers.values()]; pinch0={d:Math.hypot(a.x-b.x,a.y-b.y), dist:cam.dist}; } canvas.style.cursor='grabbing'; });
+  canvas.addEventListener('pointerdown', e=>{ canvas.setPointerCapture(e.pointerId); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY}); if(pointers.size===1){ downAt={x:e.clientX,y:e.clientY}; moved=0; } else { const [a,b]=[...pointers.values()]; moved=Infinity;pinch0={d:Math.hypot(a.x-b.x,a.y-b.y), dist:cam.dist}; } canvas.style.cursor='grabbing'; });
   canvas.addEventListener('pointermove', e=>{
     const prev=pointers.get(e.pointerId);
     if (prev){ const dx=e.clientX-prev.x, dy=e.clientY-prev.y; pointers.set(e.pointerId,{x:e.clientX,y:e.clientY}); moved+=Math.abs(dx)+Math.abs(dy);
       if (pointers.size===1){ cam.theta-=dx*0.006; cam.phi=Math.max(0.15,Math.min(1.45,cam.phi-dy*0.005)); }
       else if (pinch0){ const [a,b]=[...pointers.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y); cam.dist=Math.max(4,Math.min(40,pinch0.dist*pinch0.d/Math.max(d,1))); }
       tip.style.display='none'; return; }
-    if (e.pointerType==='mouse'){ const h=hit(e); const s=h&&(h.object.userData.slot||h.object.userData.node)||null;
+    if (e.pointerType==='mouse'){ const h=hit(e); const s=h&&(h.object.userData.slot||h.object.userData.node||h.object.userData.tray)||null;
       const sl=h&&h.object.userData.slot||null; if (sl!==hoverSlot){ hoverSlot=sl; api.select(api._sel); }
-      if (s){ const r=canvas.getBoundingClientRect(); tip.style.left=(e.clientX-r.left)+'px'; tip.style.top=(e.clientY-r.top)+'px'; tip.textContent = h.object.userData.slot ? `${s} · ${SLOTS[s].name}` : `Test point · ${api.tpName?api.tpName(s):s}`; tip.style.display='block'; canvas.style.cursor='pointer'; }
+      if (s){ const r=canvas.getBoundingClientRect(); tip.style.left=(e.clientX-r.left)+'px'; tip.style.top=(e.clientY-r.top)+'px'; tip.textContent = h.object.userData.tray ? `Removed part · tap to inspect` : h.object.userData.slot ? `${s} · ${SLOTS[s].name}` : `Test point · ${api.tpName?api.tpName(s):s}`; tip.style.display='block'; canvas.style.cursor='pointer'; }
       else { tip.style.display='none'; canvas.style.cursor='grab'; } }
   });
   function up(e){ pointers.delete(e.pointerId); if (pointers.size<2) pinch0=null; canvas.style.cursor='grab';
-    if (pointers.size===0 && downAt && moved<8){ const h=hit(e); if (h){ if (h.object.userData.node){ api.onProbe && api.onProbe(h.object.userData.node); } else if (h.object.userData.slot){ api.onPick && api.onPick(h.object.userData.slot); } } }
+    if (e.type==='pointerup' && pointers.size===0 && downAt && moved<8){ const h=hit(e); if (h){ if(h.object.userData.tray){api.onTray&&api.onTray(h.object.userData.tray);} else if (h.object.userData.node){ api.onProbe && api.onProbe(h.object.userData.node); } else if (h.object.userData.slot){ api.onPick && api.onPick(h.object.userData.slot); } } }
     if (pointers.size===0) downAt=null; }
   canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
   canvas.addEventListener('pointerleave', ()=>{ tip.style.display='none'; if (hoverSlot){ hoverSlot=null; api.select(api._sel);} });
@@ -1497,7 +1523,7 @@ const B3 = (function(){
   // ---------- mount & loop ----------
   let host=null, running=false, last=performance.now(), smokeT=0;
   api.mount = function(el){ host=el; el.style.position='relative'; el.appendChild(canvas); el.appendChild(tip); resize(); if(!running){ running=true; requestAnimationFrame(loop); } };
-  function resize(){ if(!host) return; const w=host.clientWidth||600, h=host.clientHeight||380; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+  function resize(){ if(!host||!host.getClientRects().length) return; const w=host.clientWidth||600,h=host.clientHeight||380,dpr=renderer.getPixelRatio();if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();} }
   if (window.ResizeObserver) new ResizeObserver(resize).observe(document.body); window.addEventListener('resize', resize);
   applyCam();
   function loop(now){
@@ -1615,9 +1641,9 @@ const FIRST_REPAIR_STEPS=[
   {title:'Read the repair order',text:'Select the first repair order at the Service counter. Note the complaint, parts allowance and due date. A symptom tells you where to start; it does not identify the failed part.',target:'#tickets',ready:()=>S.bench===S.tutorial.jobId},
   {title:'Confirm the symptoms',text:'Switch the radio ON with the round power button. Watch the dial and tube glow, and read the Speaker line (you can play muted). This set stays completely dark and silent. Its tube heaters form a series string: one open heater stops every tube from warming.',target:'#bPow',ready:()=>S.tutorial.evidence.observed},
   {title:'Make the set safe',text:'Switch OFF before pulling parts. If Discharge B+ appears, use it before working. This dead heater string normally leaves no B+ charge, so that button may not appear. On a working radio the filter capacitors can remain charged after switch-off.',target:'#bPow',ready:()=>S.tutorial.evidence.switchedOff&&!R.power&&!charged()},
-  {title:'Remove and test a tube',text:'Open Tube tester and choose an installed tube. The tester pulls it onto the bench tray before testing. Look for “heater open — no emission.” A good tube should be reinstalled at its original location before trying another. An open heater explains why the whole series string went dark.',target:'#tubeSel',ready:()=>S.tutorial.evidence.diagnosed},
+  {title:'Remove and test a tube',text:'Choose Chassis top on the 3D bench, then tap a tube. In its actions below the view, use Pull & test tube. Removed parts appear on the 3D Parts tray; tap one there to inspect or test it. Look for “heater open — no emission.” A good tube should be reinstalled at its original location before trying another. An open heater explains why the whole series string went dark.',target:'#viewBox',ready:()=>S.tutorial.evidence.diagnosed},
   {title:'Buy the matching replacement',text:'The failed tube is a 7B7. Open Catalog → Tubes & parts and find 7B7. Today buys one immediately for $2.13; Order costs $1.70 but arrives after you close for the day (rent is charged). Buy one, then wait for it to be in Parts. Match the tube type, not just the socket.',target:'[data-rush="T7B7"]',ready:()=>S.tutorial.evidence.bought&&S.inv.T7B7>0},
-  {title:'Install the replacement',text:'Open Inspect and select V2 · 7B7 IF amplifier. The old tube was removed for its test, leaving an empty socket. Choose 7B7 under Install from stock and press Install. Refit any other good tubes you tested from the tray. For soldered components, use Unsolder & remove first, then install the correctly rated part.',target:'#gamePartAccess',ready:()=>S.tutorial.evidence.installed&&!hasEmpty(tutorialJob().radio)},
+  {title:'Install the replacement',text:'On the 3D Chassis top, tap the empty V2 socket where the failed 7B7 was removed. The old tube was removed for its test, leaving an empty socket. Choose 7B7 under Install from stock and press Install. Refit any other good tubes you tested from the tray. For soldered components, use Unsolder & remove first, then install the correctly rated part.',target:'#viewBox',ready:()=>S.tutorial.evidence.installed&&!hasEmpty(tutorialJob().radio)},
   {title:'Listen to the repaired radio',text:'Switch ON, tune to 880 kc and set volume near 0.6. Allow about ten seconds for warm-up. The Speaker line should now name a station, and the tubes should glow. This before/after check tests your diagnosis; swapping a part alone is not proof of a repair.',target:'#dial',ready:()=>S.tutorial.evidence.listened},
   {title:'Run the service checkout',text:'Press Run checkout, then Start checkout. It checks three stations, hum, distortion, component ratings and a ten-minute run. Every row must pass. If anything fails, keep working from that evidence; checkout does not repair the set for you.',target:'#bChk',ready:()=>S.tutorial.evidence.checkout},
   {title:'Return the set and collect',text:'The checkout passed. In its report, choose Return set & collect to finish the job and receive labor plus parts. If you closed the report, run checkout again to reopen it. The old failed tube remains on the tray until the job closes; salvage is untested, so do not treat it as a good spare.',target:'#bChk',ready:()=>false}
@@ -1625,9 +1651,8 @@ const FIRST_REPAIR_STEPS=[
 function startFirstRepair(){const t=S.tutorial;if(!tutorialJob()||t.completed)return;t.active=true;save();closeModal();renderAll();$('#firstRepairGuide')?.scrollIntoView({block:'nearest'});}
 function showTutorialControl(){
   const t=S.tutorial,s=FIRST_REPAIR_STEPS[t.step];
-  if(t.step===3){R.tool='tube';renderTools();}
+  if(t.step===3||t.step===5){R.view=B3.ok?'bench3d':'top';R.cam='top';renderViewTabs();renderViews();if(B3.ok)B3.view('top');}
   if(t.step===4){R.side='cat';R.catTab='T';renderSide();}
-  if(t.step===5){R.side='insp';R.sel={slot:'V2'};renderSide();renderViews();}
   if(t.step===6){R.view=B3.ok?'bench3d':'top';renderBench();}
   const el=$(s.target);if(el){el.scrollIntoView({block:'center',behavior:'smooth'});el.focus({preventScroll:true});el.classList.add('tutorial-target');}
 }
@@ -1912,6 +1937,7 @@ function renderBench(){
   <div class="tabs" id="viewTabs"></div>
   <div class="pt44-trace" id="tracePanel"></div>
   <div class="view" id="viewBox"></div>
+  <div class="pb physical-inspector" id="sceneInspector" hidden></div>
   <div class="front" id="front"></div>
   <div class="hear" id="hear"></div>
   <details class="ui-details" id="benchNotes" ${R.notesOpen?'open':''}><summary>Bench notes</summary><div class="log" id="benchLog"></div></details>`;
@@ -2672,7 +2698,7 @@ function pt44EngineeringReadinessAudit(){
  if(counts.spice.isolated_ngspice_testbench_validated!==true||counts.spice.full_receiver_spice_validated!==false||counts.spice.nominal_heater_sanity_spice_validated!==counts.heater_string_sanity_spice_validated)errors.push('SPICE readiness must distinguish sanity fixtures from full-receiver validation');
  return {ok:!errors.length,errors,benchmarkReady:false,blockers:r.open_items.length,gates:r.completion_gates.length};
 }
-const PT44_GAME_COMPLETION_V2 = Object.freeze({"schema":"PT44_GAME_COMPLETION_V2","version":"0.67.0","approved_scope_change":"User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.","historical_standard":"engineering/PT44_EC_Acceptance_V1.json","policy":"Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.","fidelity":"Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.","optional_research":["Full receiver SPICE parity","Exhaustive tube curve validation","Carrier stepping","Exact undocumented socket wiring, lead dress and winding parameters"],"supported_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_gameplay_v63.js","tests/test_gameplay_browser_v63.js",".github/workflows/pt44-gameplay.yml","tests/test_completion_v64.js","tests/test_completion_browser_v64.js","gameplay/PT44_Stock_Faults_V1.json","gameplay/PT44_Service_Scope_V1.json","gameplay/PT44_V2_Acceptance_Signature.json"],"packages":[{"id":"EC-01","title":"Source and presentation","status":"CLOSED","acceptance":"Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.","remaining":"None within the fixed V2 acceptance. Named 0.05 uF game variant, functional diode labels and oscillator assembly with unknown physical mapping explicitly retained; Service data and PT44_Service_Scope_V1.json."},{"id":"EC-02","title":"Component behavior","status":"CLOSED","acceptance":"All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.","remaining":"None within the fixed V2 acceptance. 352 compatible catalog placements, all component classes, missing/failed states and wrong-kind guards; shared testers and wound field assembly presentation."},{"id":"EC-03","title":"Power and operating states","status":"CLOSED","acceptance":"Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.","remaining":"None within the fixed V2 acceptance. Live warmup, series heaters, hot switch-off, retained checkout charge, discharge and damaging-fault cascade; AC/DC supply envelope."},{"id":"EC-04","title":"Playable audio chain","status":"CLOSED","acceptance":"Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.","remaining":"None within the fixed V2 acceptance. v0.63 audio acceptance retained; complete stock fault and real-shop replacement matrix in v0.64."},{"id":"EC-05","title":"IF, detector and AVC","status":"CLOSED","acceptance":"455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.","remaining":"None within the fixed V2 acceptance. 455 kHz selectivity, combined IF/detector failures, independent upstream tracer, timed AVC/loaded probing and manual three-control alignment recovery."},{"id":"EC-06","title":"RF and converter","status":"CLOSED","acceptance":"540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.","remaining":"None within the fixed V2 acceptance. v0.63 RF/converter acceptance retained; stock converter/oscillator repairs, wrong oscillator capacitor and full-band conversion regression."},{"id":"EC-07","title":"Service instruments","status":"CLOSED","acceptance":"Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.","remaining":"None within the fixed V2 acceptance. Shared tube/cap tester properties, pulled-part guard, every service-port load, meter range/polarity/live-ohms checks, generator/tracer and corrected reference conditions."},{"id":"EC-08","title":"Physical service workflow","status":"CLOSED","acceptance":"Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.","remaining":"None within the fixed V2 acceptance. Every supported slot has a named service location, camera-independent selector, highlight and DOM remove/install action; live/charged guards and keyed field assembly."},{"id":"EC-09","title":"End-to-end benchmark","status":"CLOSED","acceptance":"Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.","remaining":"None within the fixed V2 acceptance. All 20 stock faults through browser save/load, diagnosis, incorrect-repair checkout, part replacement and successful checkout; healthy reference, all-slot access and cascade repair."}],"benchmark_ready":true,"version_support":{"supported_ec_ids":["EC-09"],"newly_closed_ec_ids":[],"retained_closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_title_v67.js","tests/test_title_browser_v67.js","tests/test_tutorial_browser_v66.js"],"scope":"Title screen, explicit save loading and automatic tutorial on new games; fixed V2 acceptance and receiver/damage logic unchanged."}});
+const PT44_GAME_COMPLETION_V2 = Object.freeze({"schema":"PT44_GAME_COMPLETION_V2","version":"0.68.0","approved_scope_change":"User explicitly approved symptom and cause/effect fidelity instead of electron-level simulation on 2026-10-15. V2 supersedes scientific V1 as the game completion standard.","historical_standard":"engineering/PT44_EC_Acceptance_V1.json","policy":"Keep EC-01 through EC-09 fixed. Close only against the criteria below with checked-in regression evidence and passing game CI. New fidelity work needs a separate explicit scope decision. A closed package is reopened only by a regression against these criteria.","fidelity":"Source-informed controls, plausible service readings, coherent symptoms and repeatable repair outcomes from one deterministic model. Readings are game approximations, not historical calibration.","optional_research":["Full receiver SPICE parity","Exhaustive tube curve validation","Carrier stepping","Exact undocumented socket wiring, lead dress and winding parameters"],"supported_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_gameplay_v63.js","tests/test_gameplay_browser_v63.js",".github/workflows/pt44-gameplay.yml","tests/test_completion_v64.js","tests/test_completion_browser_v64.js","gameplay/PT44_Stock_Faults_V1.json","gameplay/PT44_Service_Scope_V1.json","gameplay/PT44_V2_Acceptance_Signature.json"],"packages":[{"id":"EC-01","title":"Source and presentation","status":"CLOSED","acceptance":"Resolve the displayed #8 variant, diode labels and oscillator symbol without presenting unknown physical wiring as fact.","remaining":"None within the fixed V2 acceptance. Named 0.05 uF game variant, functional diode labels and oscillator assembly with unknown physical mapping explicitly retained; Service data and PT44_Service_Scope_V1.json."},{"id":"EC-02","title":"Component behavior","status":"CLOSED","acceptance":"All purchasable component classes have declared healthy, wrong-value, missing and failed behavior with bounded service parameters.","remaining":"None within the fixed V2 acceptance. 352 compatible catalog placements, all component classes, missing/failed states and wrong-kind guards; shared testers and wound field assembly presentation."},{"id":"EC-03","title":"Power and operating states","status":"CLOSED","acceptance":"Warmup, series-heater failure, AC/DC supply, residual charge and damaging faults behave consistently across tools and repair guards.","remaining":"None within the fixed V2 acceptance. Live warmup, series heaters, hot switch-off, retained checkout charge, discharge and damaging-fault cascade; AC/DC supply envelope."},{"id":"EC-04","title":"Playable audio chain","status":"CLOSED","acceptance":"Volume, audio tube, coupling, bias, transformer and speaker faults change sound, tracer and readings consistently; correct replacements restore checkout.","remaining":"None within the fixed V2 acceptance. v0.63 audio acceptance retained; complete stock fault and real-shop replacement matrix in v0.64."},{"id":"EC-05","title":"IF, detector and AVC","status":"CLOSED","acceptance":"455 kHz selectivity, three IF controls, detector strength, AVC attack/release and loaded probing support diagnosis and repeatable alignment recovery.","remaining":"None within the fixed V2 acceptance. 455 kHz selectivity, combined IF/detector failures, independent upstream tracer, timed AVC/loaded probing and manual three-control alignment recovery."},{"id":"EC-06","title":"RF and converter","status":"CLOSED","acceptance":"540\u20131600 kHz high-side tuning maintains the 455 kHz relationship; dead/weak converter, oscillator faults, loop loss and trim errors are diagnosable and recover through repair/alignment.","remaining":"None within the fixed V2 acceptance. v0.63 RF/converter acceptance retained; stock converter/oscillator repairs, wrong oscillator capacitor and full-band conversion regression."},{"id":"EC-07","title":"Service instruments","status":"CLOSED","acceptance":"Meters, generator, tracer and component testers agree on loaded service conditions, ranges, polarity and injection boundaries.","remaining":"None within the fixed V2 acceptance. Shared tube/cap tester properties, pulled-part guard, every service-port load, meter range/polarity/live-ohms checks, generator/tracer and corrected reference conditions."},{"id":"EC-08","title":"Physical service workflow","status":"CLOSED","acceptance":"Every supported repair has an understandable part/location, valid access and installation action; powered/charged work is guarded.","remaining":"None within the fixed V2 acceptance. Every supported slot has a named service location, camera-independent selector, highlight and DOM remove/install action; live/charged guards and keyed field assembly."},{"id":"EC-09","title":"End-to-end benchmark","status":"CLOSED","acceptance":"Healthy reference and every supported stock fault can be diagnosed, repaired and checked out through the saved playable workflow; incorrect repair fails.","remaining":"None within the fixed V2 acceptance. All 20 stock faults through browser save/load, diagnosis, incorrect-repair checkout, part replacement and successful checkout; healthy reference, all-slot access and cascade repair."}],"benchmark_ready":true,"version_support":{"supported_ec_ids":["EC-07","EC-08","EC-09"],"newly_closed_ec_ids":[],"retained_closed_ec_ids":["EC-01","EC-02","EC-03","EC-04","EC-05","EC-06","EC-07","EC-08","EC-09"],"evidence":["tests/test_physical_browser_v68.js","tests/test_tutorial_browser_v66.js","tests/test_completion_browser_v64.js"],"scope":"Physical component selection on the 3D chassis and tray; contextual service actions and physical meter posts; unchanged receiver, damage rules and fixed V2 acceptance."}});
 function pt44GameCompletionHTML(esc){
  const c=PT44_GAME_COMPLETION_V2;
  return `<h3>PT-44 game engineering completion · v${c.version}</h3><p><b>Closed: ${c.closed_ec_ids.join(', ')}.</b> Supported this release: ${c.supported_ec_ids.join(', ')}. ${c.benchmark_ready?'The first PT-44 is engineering complete under the fixed V2 game scope.':'The first PT-44 remains incomplete until all nine packages close.'}</p><p>User-approved behavioral scope: plausible service readings, consistent sound and symptoms, diagnosis and successful repair. Full circuit simulation is optional research. Original scientific V1 criteria remain in the repository as historical records; these closures use V2.</p><table class="sl-table"><thead><tr><th>Package</th><th>Status</th><th>Fixed acceptance</th><th>Remaining / evidence</th></tr></thead><tbody>${c.packages.map(x=>`<tr><td>${esc(x.id)} · ${esc(x.title)}</td><td>${esc(x.status)}</td><td>${esc(x.acceptance)}</td><td>${esc(x.remaining)}</td></tr>`).join('')}</tbody></table><p class="sl-footnote">Readings are game service approximations referenced to B−. Research benches below retain their original narrower scope and do not gate game completion.</p>`;
@@ -3925,7 +3951,7 @@ function renderFactoryLedger(box){
   const candidates = Object.fromEntries(Object.entries(PT44_FACTORY_SUBGRAPH.factory_part_register).map(([n,p])=>[n,p.game_slot||'—']));
   box.style.background='#ece2ca';box.style.color='#312a20';
   box.innerHTML=`<section class="source-ledger">
-   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.67.0</div>
+   <div class="sl-eyebrow">ENGINEERING NOTEBOOK · PT-44 · FACTORY DOCUMENT p. 38 · v0.68.0</div>
    ${pt44GameCompletionHTML(escapeHTML)}
    <h2>Optional research · factory circuit transcription</h2>
    <p>Every Philco-numbered part is represented as a distinct electrical device. <b>Only connections read from the factory sheet appear as traced;</b> other terminal definitions specify the device structure, not invented wiring. Physical 3D routing remains illustrative. The playable receiver uses the separate behavioral V2 completion standard above.</p>
@@ -4013,7 +4039,7 @@ function renderViews(){
   if (R.view==='bench3d' && B3.ok){
     const cams=[['overview','Bench'],['top','Chassis top'],['under','Underside'],['speaker','Speaker'],['tray','Parts tray']];
     box.innerHTML = `<div id="v3" class="v3"></div><div class="camrow">${cams.map(([k,n])=>`<button class="btn sm ${R.cam===k?'on':''}" data-cam="${k}">${n}</button>`).join('')}<button class="btn sm ${R.showTestPosts?'on':''}" id="bShowTestPosts" title="Show the meter test points">Test points ${R.showTestPosts?'on':'off'}</button>${ENGINEERING_MODE?`<button class="btn sm ${R.sourceScope?'on':''}" id="bSourceScope" title="Show only source-traced electrical memberships. Physical wire routes are illustrative.">Source scope ${R.sourceScope?'on':'off'}</button>`:''}</div><div class="v3hint">Drag to rotate · scroll or pinch to zoom · select a part to inspect${R.cam==='under'?' · select a test point to probe':''}</div>`;
-    B3.mount($('#v3')); B3.setJob(job); B3.sync(job.radio); B3.trace(R.traceNet); B3.select(R.sel&&R.sel.slot); B3.probe(R.tool==='meter'&&R.mode==='V'?R.probe:null); B3.showTestPosts(R.showTestPosts);
+    B3.mount($('#v3')); B3.setJob(job); B3.sync(job.radio);B3.syncTray(job.tray);B3.selectTray(R.sel?.tray); B3.trace(R.traceNet); B3.select(R.sel&&R.sel.slot); B3.probe(R.tool==='meter'&&R.mode==='V'?R.probe:null); B3.showTestPosts(R.showTestPosts);
     box.querySelector('#bShowTestPosts').onclick=()=>{ R.showTestPosts=!R.showTestPosts; B3.showTestPosts(R.showTestPosts); const btn=box.querySelector('#bShowTestPosts'); btn.textContent='Test points '+(R.showTestPosts?'on':'off'); btn.classList.toggle('on',R.showTestPosts); };
     if(ENGINEERING_MODE)box.querySelector('#bSourceScope').onclick=()=>{ R.sourceScope=!R.sourceScope; B3.sourceScope(R.sourceScope); const btn=box.querySelector('#bSourceScope'); btn.textContent='Source scope '+(R.sourceScope?'on':'off');btn.classList.toggle('on',R.sourceScope); };
     B3.sourceScope(ENGINEERING_MODE&&!!R.sourceScope);
@@ -4022,7 +4048,7 @@ function renderViews(){
   }
   box.innerHTML = R.view==='sch' ? schematicSVG(job.radio) : R.view==='top' ? chassisTopSVG(job.radio) : chassisUnderSVG(job.radio);
   box.querySelectorAll('[data-slot]').forEach(g=>{ const go=()=>{ R.sel={slot:g.dataset.slot}; R.side='insp'; renderViews(); renderSide(); if(R.tool==='tube' && SLOTS[g.dataset.slot].type==='TUBE'){ R.tubeTarget={slot:g.dataset.slot}; renderTools(); } };
-    g.onclick=e=>{ e.stopPropagation(); go(); }; g.onkeydown=e=>{ if(e.key==='Enter'){ go(); } }; });
+    g.onclick=e=>{e.stopPropagation();if(!ENGINEERING_MODE&&B3.ok&&R.view==='sch'){toast('Select this component on the 3D bench.');return;}go();}; g.onkeydown=e=>{ if(e.key==='Enter'&&(ENGINEERING_MODE||!B3.ok||R.view!=='sch')){go();} }; });
   box.querySelectorAll('[data-node]').forEach(c=>{ c.onclick=e=>{ e.stopPropagation(); R.tool='meter';
       if (R.mode==='V') R.probe=c.dataset.node; else R.ohmTarget={node:c.dataset.node}; renderTools(); renderViews(); }; });
   updateLive();
@@ -4270,13 +4296,18 @@ function renderSide(){
   $('#sideTabs').innerHTML = tabs.map(([k,n])=>`<button class="tab ${R.side===k?'on':''}" data-t="${k}">${n}</button>`).join('');
   $('#sideTabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ R.side=b.dataset.t; renderSide(); });
   const el=$('#sideBody');
-  if (R.side==='insp'){el.innerHTML=gamePartAccessHTML()+inspectorHTML();bindInspector();const picker=el.querySelector('#gamePartAccess');if(picker)picker.onchange=e=>{R.sel=e.target.value?{slot:e.target.value}:null;if(B3.ok)B3.select(e.target.value);renderSide();renderViews();};}
+  if (R.side==='insp'){el.innerHTML=ENGINEERING_MODE?gamePartAccessHTML()+inspectorHTML():`<p class="note">Tap a component, empty socket or removed part on the 3D bench. Its actions appear below the view.</p><button class="btn" id="backToBench">Go to bench</button>`;bindInspector();const picker=el.querySelector('#gamePartAccess');if(picker)picker.onchange=e=>{R.sel=e.target.value?{slot:e.target.value}:null;if(B3.ok)B3.select(e.target.value);renderSide();renderViews();};}
   else if(R.side==='audit') el.innerHTML=auditHTML();
   else if (R.side==='drawer') el.innerHTML = drawerHTML(), bindDrawer();
   else if (R.side==='cat') el.innerHTML = catalogHTML(), bindCatalog();
   else el.innerHTML = dataHTML();
+  const back=el.querySelector('#backToBench');if(back)back.onclick=showPhysicalBench;renderSceneInspector();
 }
-function gamePartAccessHTML(){if(!benchJob())return '';return `<label>Service part <select id="gamePartAccess" style="width:100%;max-width:100%;display:block"><option value="">Choose a part / location</option>${Object.entries(SLOTS).map(([id,d])=>`<option value="${id}" ${R.sel?.slot===id?'selected':''}>${id} · ${d.name} · ${id==='R1'?'speaker field assembly':['R2','R3','R4','R5','R6','R7','C3','C4'].includes(id)?'underside':'chassis top'}</option>`).join('')}</select></label>`;}
+function showPhysicalBench(){R.view=B3.ok?'bench3d':'top';renderViewTabs();renderViews();$('#viewBox')?.scrollIntoView({block:'center',behavior:'smooth'});}
+function renderSceneInspector(){const el=$('#sceneInspector');if(!el)return;el.hidden=ENGINEERING_MODE||!R.sel;if(el.hidden){el.innerHTML='';return;}el.innerHTML='<div class="row"><b>Selected component</b><span class="sp"></span><button class="btn sm" id="clearSelection">Done</button></div>'+inspectorHTML();bindInspector(el);$('#clearSelection').onclick=()=>{R.sel=null;B3.select?.(null);B3.selectTray?.(null);renderSceneInspector();};}
+function selectBenchPart(slot){if(!SLOTS[slot])return;R.sel={slot};R.side='insp';B3.select(slot);if(B3.selectTray)B3.selectTray(null);renderSide();if(window.matchMedia('(max-width:800px)').matches)$('#sceneInspector')?.scrollIntoView({block:'nearest',behavior:'smooth'});}
+function selectBenchTray(pid){if(!benchJob()?.tray.some(p=>p.pid===pid))return;R.sel={tray:pid};R.side='insp';B3.select(null);B3.selectTray(pid);renderSide();if(window.matchMedia('(max-width:800px)').matches)$('#sceneInspector')?.scrollIntoView({block:'nearest',behavior:'smooth'});}
+function gamePartAccessHTML(){if(!ENGINEERING_MODE||!benchJob())return '';return `<label>Service part <select id="gamePartAccess" style="width:100%;max-width:100%;display:block"><option value="">Choose a part / location</option>${Object.entries(SLOTS).map(([id,d])=>`<option value="${id}" ${R.sel?.slot===id?'selected':''}>${id} · ${d.name} · ${id==='R1'?'speaker field assembly':['R2','R3','R4','R5','R6','R7','C3','C4'].includes(id)?'underside':'chassis top'}</option>`).join('')}</select></label>`;}
 function physNotes(p, slot){
   const n=[];
   if (!p) return n;
@@ -4290,12 +4321,12 @@ function physNotes(p, slot){
 }
 function inspectorHTML(){
   const job=benchJob(); if(!job) return '<div class="empty">Put a set on the bench to inspect parts.</div>';
-  if (!R.sel) return `<div class="note">Click any part on the chassis or schematic. Tray parts appear below once you remove them.</div>${trayHTML(job)}`;
+  if (!R.sel) return `<div class="note">Tap a component on the 3D chassis to inspect it. Tray parts appear below once you remove them.</div>${trayHTML(job)}`;
   if (R.sel.tray){ const p=job.tray.find(x=>x.pid===R.sel.tray); if(!p){ R.sel=null; return inspectorHTML(); }
     const slot=p.from;
-    return `<div class="insp"><h3>${esc(skuName(p.sku))}</h3><div class="note">On the bench tray${slot?`, removed from ${slot}`:''}.</div>
+    return `<div class="insp"><h3>${esc(skuName(p.sku))}</h3><div class="note">On the bench tray${slot?`, removed from ${slot}`:''}. Tap its empty location on the radio to reinstall it.</div>
       <ul class="note" style="padding-left:18px;margin:6px 0">${physNotes(p).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
-      <div class="row">${slot&&!job.radio.slots[slot]?`<button class="btn" data-act="reinst">Reinstall at ${slot}</button>`:''}
+      <div class="row">${ENGINEERING_MODE&&slot&&!job.radio.slots[slot]?`<button class="btn" data-act="reinst">Reinstall at ${slot}</button>`:''}
       <button class="btn" data-act="ohm">Ohmmeter on it</button>
       ${p.kind==='C'?`<button class="btn" data-act="capchk">Capacitor checker</button>`:''}
       ${p.kind==='TUBE'?`<button class="btn" data-act="tube">Tube tester</button>`:''}
@@ -4324,11 +4355,12 @@ function inspectorHTML(){
   </div>${trayHTML(job)}`;
 }
 function trayHTML(job){
+  if(!ENGINEERING_MODE)return job.tray.length?'<p class="note">Removed parts are on the 3D Parts tray. Tap a part there to inspect or test it.</p>':'';
   if (!job.tray.length) return '';
   return `<div style="margin-top:12px"><div class="note" style="text-transform:uppercase;letter-spacing:.1em;font-size:11px">Bench tray</div><div class="list">${job.tray.map(p=>`<div class="li"><span class="nm">${esc(skuName(p.sku))}</span><span class="q">${p.from||''}</span><button class="btn sm" data-tray="${p.pid}">Select</button></div>`).join('')}</div></div>`;
 }
-function bindInspector(){
-  const el=$('#sideBody'), job=benchJob(); if(!job) return;
+function bindInspector(el=$('#sideBody')){
+  const job=benchJob(); if(!job) return;
   el.querySelectorAll('[data-tray]').forEach(b=>b.onclick=()=>{ R.sel={tray:+b.dataset.tray}; renderSide(); renderViews(); });
   el.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{
     const a=b.dataset.act;
@@ -4341,11 +4373,12 @@ function bindInspector(){
       if (a==='instL'){ const [from,pid]=$('#looseSel').value.split(':'); installLoose(id,+pid,from); }
     } else { const p=job.tray.find(x=>x.pid===R.sel.tray);
       if (a==='reinst') installLoose(p.from, p.pid, 'tray');
-      if (a==='ohm'){ R.tool='meter'; R.mode='R'; R.ohmTarget={loose:p}; renderTools(); }
+      if(a==='bench'&&benchJob()){S.salvage=S.salvage.filter(x=>x!==p);benchJob().tray.push(p);save();R.cam='tray';renderAll();showPhysicalBench();B3.view?.('tray');}
+  if (a==='ohm'){ R.tool='meter'; R.mode='R'; R.ohmTarget={loose:p}; renderTools(); }
       if (a==='capchk'){ R.tool='cap'; R.capTarget=p; renderTools(); }
       if (a==='tube'){ R.tool='tube'; R.tubeTarget={loose:p}; renderTools(); }
-      if (a==='salv'){ job.tray=job.tray.filter(x=>x!==p); delete p.from; S.salvage.push(p); R.sel=null; save(); renderSide(); }
-      if (a==='trash'){ job.tray=job.tray.filter(x=>x!==p); R.sel=null; save(); renderSide(); }
+      if (a==='salv'){ job.tray=job.tray.filter(x=>x!==p); delete p.from; S.salvage.push(p); R.sel=null; save(); renderAll(); }
+      if (a==='trash'){ job.tray=job.tray.filter(x=>x!==p); R.sel=null; save(); renderAll(); }
     }
   });
 }
@@ -4357,7 +4390,7 @@ function drawerHTML(){
     if(!items.length) continue; h+=`<div class="note" style="text-transform:uppercase;letter-spacing:.1em;font-size:11px;margin-top:8px">${n}</div><div class="list">${items.map(([k,v])=>`<div class="li"><span class="nm">${esc(skuName(k))}</span><span class="q">×${v}</span></div>`).join('')}</div>`; }
   if (!h) h='<div class="empty">The drawer is empty.</div>';
   h+=`<div class="note" style="text-transform:uppercase;letter-spacing:.1em;font-size:11px;margin-top:12px">Salvage drawer (used parts, untested)</div>`;
-  h+= S.salvage.length ? `<div class="list">${S.salvage.map(p=>`<div class="li"><span class="nm">${esc(skuName(p.sku))}</span><button class="btn sm" data-sv="${p.pid}" data-a="ohm">Ω</button>${p.kind==='C'&&S.tools.capchk?`<button class="btn sm" data-sv="${p.pid}" data-a="cap">Check</button>`:''}${p.kind==='TUBE'?`<button class="btn sm" data-sv="${p.pid}" data-a="tube">Test</button>`:''}<button class="btn sm warn" data-sv="${p.pid}" data-a="x" aria-label="Throw out">✕</button></div>`).join('')}</div>` : '<div class="note">Empty. Parts left on the tray when a job closes land here.</div>';
+  h+= S.salvage.length ? `<div class="list">${S.salvage.map(p=>`<div class="li"><span class="nm">${esc(skuName(p.sku))}</span>${ENGINEERING_MODE?`<button class="btn sm" data-sv="${p.pid}" data-a="ohm">Ω</button>${p.kind==='C'&&S.tools.capchk?`<button class="btn sm" data-sv="${p.pid}" data-a="cap">Check</button>`:''}${p.kind==='TUBE'?`<button class="btn sm" data-sv="${p.pid}" data-a="tube">Test</button>`:''}`:`<button class="btn sm" data-sv="${p.pid}" data-a="bench" ${benchJob()?'':'disabled'}>Put on tray</button>`}<button class="btn sm warn" data-sv="${p.pid}" data-a="x" aria-label="Throw out">✕</button></div>`).join('')}</div>` : '<div class="note">Empty. Parts left on the tray when a job closes land here.</div>';
   if (S.orders.length) h+=`<div class="note" style="margin-top:10px">On order, arriving tomorrow: ${S.orders.map(o=>o.qty+'× '+esc(skuName(o.sku))).join(', ')}</div>`;
   return h;
 }
@@ -4451,14 +4484,14 @@ function meterHTML(){
   const vr = vt?[1.5,5,15,50,150,500]:[2.5,10,50,250,500];
   const orng = [1,100,10000].concat(vt?[1e6]:[]);
   const cur = R.mode==='V' ? (vt?R.range.vtvm:R.range.vom) : (vt?R.range.ohvtvm:R.range.ohvom);
-  const target = R.mode==='V' ? (R.probe?TP_NAME[R.probe]:'not connected — click a ● test point on the schematic') :
+  const target = R.mode==='V' ? (R.probe?TP_NAME[R.probe]:'not connected — select Test points on the 3D underside') :
      (!R.ohmTarget?'not connected — click a test point, or “Ohms across” on a part': R.ohmTarget.node? TP_NAME[R.ohmTarget.node]+' to B−' : R.ohmTarget.slot? 'across '+R.ohmTarget.slot : skuName(R.ohmTarget.loose.sku)+' (out of circuit)');
   return `<div class="stack">
    <div class="row"><div class="seg"><button class="${!vt?'on':''}" data-inst="vom">VOM 1,000 Ω/V</button>${S.tools.vtvm?`<button class="${vt?'on':''}" data-inst="vtvm">VTVM</button>`:''}</div></div>
    <div class="row"><div class="seg"><button class="${R.mode==='V'?'on':''}" data-mode="V">DC volts</button><button class="${R.mode==='R'?'on':''}" data-mode="R">Ohms</button></div>
      <select id="rng" aria-label="Range">${(R.mode==='V'?vr:orng).map(x=>`<option value="${x}" ${x===cur?'selected':''}>${R.mode==='V'?x+' V':'R×'+(x>=1e6?'1M':x>=1000?x/1000+'k':x)}</option>`).join('')}</select>
      ${R.mode==='V'?`<button class="btn sm" id="pol">Polarity ${R.pol>0?'+':'−'}</button>`:''}</div>
-   ${R.mode==='V'?`<label>Test point <select id="gameProbe"><option value="">Select red lead</option>${Object.keys(TP_NAME).map(n=>`<option value="${n}" ${R.probe===n?'selected':''}>${TP_NAME[n]}</option>`).join('')}</select></label>`:''}
+   ${R.mode==='V'&&ENGINEERING_MODE?`<label>Test point <select id="gameProbe"><option value="">Select red lead</option>${Object.keys(TP_NAME).map(n=>`<option value="${n}" ${R.probe===n?'selected':''}>${TP_NAME[n]}</option>`).join('')}</select></label>`:''}
    <div class="meter"><svg viewBox="0 0 300 150" id="meterFace" role="img" aria-label="Meter face"></svg><div class="reading" id="meterRead">—</div></div>
    <div class="note">Red lead: ${esc(target)}. Black lead: B− return (not chassis).</div>
   </div>`;
@@ -4529,18 +4562,18 @@ function tubeHTML(){
   if (job) job.tray.filter(x=>x.kind==='TUBE').forEach(x=>opts.push([`loose:${x.pid}`, `${x.tube} on tray`]));
   S.salvage.filter(x=>x.kind==='TUBE').forEach(x=>opts.push([`salv:${x.pid}`, `${x.tube} from salvage`]));
   const selv = R.tubeTarget ? (R.tubeTarget.slot?'slot:'+R.tubeTarget.slot:(job&&job.tray.includes(R.tubeTarget.loose)?'loose:':'salv:')+R.tubeTarget.loose.pid) : '';
-  return `<div class="stack"><div class="row"><select id="tubeSel"><option value="">— choose a tube —</option>${opts.map(([v,n])=>`<option value="${v}" ${v===selv?'selected':''}>${esc(n)}</option>`).join('')}</select></div>
+  return `<div class="stack">${ENGINEERING_MODE?`<div class="row"><select id="tubeSel"><option value="">— choose a tube —</option>${opts.map(([v,n])=>`<option value="${v}" ${v===selv?'selected':''}>${esc(n)}</option>`).join('')}</select></div>`:`<div class="note">Select a tube on the 3D radio and use Pull &amp; test tube, or tap a removed tube on the Parts tray and use Tube tester.</div>`}
    <div class="meter"><svg viewBox="0 0 300 150" id="tubeFace" role="img" aria-label="Tube tester"></svg><div class="reading" id="tubeRead">Insert a tube</div></div>
   <div class="note">Pull the tube out before testing. Emission test at rated heater voltage. The neon lamp lights for heater-to-cathode leakage, interelectrode shorts, or gas.</div></div>`;
 }
-function bindTube(){ $('#tubeSel').onchange=e=>{ const [k,v]=e.target.value.split(':'); const job=benchJob();
+function bindTube(){if(!$('#tubeSel')){renderTubeLive();return;} $('#tubeSel').onchange=e=>{ const [k,v]=e.target.value.split(':'); const job=benchJob();
   if (!k){ R.tubeTarget=null; }
   else if (k==='slot'){ if(!canWork()){e.target.value='';return;}const p=job.radio.slots[v];removePart(v);R.tubeTarget={loose:p}; }
   else if (k==='loose') R.tubeTarget={loose:job.tray.find(x=>x.pid===+v)}; else R.tubeTarget={loose:S.salvage.find(x=>x.pid===+v)};
   renderTubeLive(); }; renderTubeLive(); }
 function renderTubeLive(){
   const face=$('#tubeFace'); if(!face) return;
-  let p=R.tubeTarget?.slot?null:tubeOf(R.tubeTarget);if(p&&R.power&&Object.values(benchJob()?.radio.slots||{}).includes(p)){R.tubeTarget=null;p=null;}
+  let p=R.tubeTarget?.slot?null:tubeOf(R.tubeTarget);if(p&&Object.values(benchJob()?.radio.slots||{}).includes(p)){R.tubeTarget=null;p=null;}
   if (R.tubeTarget && R.tubeTarget.slot && R.power){ R.tubeTarget=null; }
   const cx=150, cy=140, rr=105, a0=-Math.PI*0.8, a1=-Math.PI*0.2, ang=f=>a0+(a1-a0)*f;
   let s=`<rect x="4" y="4" width="292" height="142" rx="6" fill="#efe6cc"/>`;
@@ -4568,7 +4601,7 @@ function capHTML(){
     res = `<div class="sheet"><h4>${esc(skuName(p.sku))}</h4>
       <div class="ln"><span>Capacitance (bridge)</span><span>${result.capacitance<0.001?Math.round(result.capacitance*1e6)+' pF':result.capacitance<1?result.capacitance.toFixed(3)+' µF':result.capacitance.toFixed(1)+' µF'} <span class="${capOk?'pass':'fail'}">${capOk?'OK':'LOW'}</span></span></div>
       <div class="ln"><span>${result.currentLimited?'10 mA test limit reached; voltage collapsed':'Leakage at '+c.V+' V'}</span><span>${iu} <span class="${leakOk?'pass':'fail'}">${leakOk?'OK':'LEAKY'}</span></span></div></div>`; }
-  return `<div class="stack"><select id="capSel"><option value="">— choose a capacitor —</option>${opts.map(([v,n])=>`<option value="${v}" ${p&&p.pid===v?'selected':''}>${esc(n)}</option>`).join('')}</select>${res}</div>`;
+  return `<div class="stack">${ENGINEERING_MODE?`<select id="capSel"><option value="">— choose a capacitor —</option>${opts.map(([v,n])=>`<option value="${v}" ${p&&p.pid===v?'selected':''}>${esc(n)}</option>`).join('')}</select>`:'<p class="note">Tap a removed capacitor on the 3D Parts tray and choose Capacitor checker.</p>'}${res}</div>`;
 }
 const TRACE_PTS=[['conv','V1 plate · 455 kc IF'],['if','V2 plate · IF'],['det','Volume control wiper'],['a1','V3 plate · audio'],['g5','V4 grid'],['spk','Voice coil']];
 function tracerHTML(){ return `<div class="stack"><div class="note">Touch the probe to a stage and listen through the tracer's own speaker. The program should get stronger at each stage.</div><div class="bars" id="trBars"></div></div>`; }
@@ -4666,13 +4699,13 @@ function showManual(){
   <p>Run a one-bench radio shop in 1955. Listen to the customer, diagnose the fault and return a working set.</p>
   ${tutorialJob()&&!S.tutorial.completed?'<button class="btn pri" id="mGuide">Resume first-repair guide</button>':''}
   <h3>The job</h3><p>Put a repair order on the bench. Switch it on and listen. Diagnose with the meter and tube tester, unsolder bad parts, install replacements, then run the 10-minute checkout. A passing set goes home with the customer and you collect labor plus parts.</p>
-  <h3>Measuring</h3><p>In DC volts, click a ● test point on the schematic to put the red lead there. Compare against Readings, which follows your selected meter and range. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate reads lower while the VOM is attached. The optional VTVM disturbs these circuits much less. Find it, the capacitor checker and the signal tracer under Upgrades.</p>
+  <h3>Measuring</h3><p>In DC volts, choose Underside on the 3D bench, enable Test points, and tap a post to connect the red lead. Compare against Readings, which follows your selected meter and range. Your starting VOM draws 1,000 Ω per volt of range, so it pulls high-resistance points down: the 7C6 plate reads lower while the VOM is attached. The optional VTVM disturbs these circuits much less. Find it, the capacitor checker and the signal tracer under Upgrades.</p>
   <p>Ohms only works with the set off and the filter caps discharged. In-circuit readings include every parallel path. Pull a part to measure it alone.</p>
-  <h3>Generator and alignment</h3><p>Use Alignment for a 1 kHz modulated signal at the aerial, first IF input or volume control. Set 455 kHz for IF service. Peak the three IF controls manually, then check oscillator and aerial trims across the dial. The meter service-port menu includes AVC and screen supply, with B− as reference. Open Alignment adjustments when needed; settings stay with this radio. Checkout turns the generator off.</p>
+  <h3>Generator and alignment</h3><p>Use Alignment for a 1 kHz modulated signal at the aerial, first IF input or volume control. Set 455 kHz for IF service. Peak the three IF controls manually, then check oscillator and aerial trims across the dial. The 3D meter service posts include AVC and screen supply, with B− as reference. Open Alignment adjustments when needed; settings stay with this radio. Checkout turns the generator off.</p>
   <h3>Safety and damage</h3><p>The set has no bleeder resistor, so B+ stays charged after switch-off. Discharge it before you unsolder. Parts that run past their ratings get hot and fail, during your testing or during checkout. A leaky coupling capacitor will cook the output tube and its cathode resistor again if you only replace the burned resistor. A quarter-watt resistor where a 2-watt one belongs will not last.</p>
   <h3>Substitutions</h3><p>Ordinary resistor and capacitor positions accept same-kind substitutions. The field-coil service assembly requires its matching replacement. The circuit decides whether your choice works. Watch voltage ratings on capacitors and wattage on resistors.</p>
   <h3>Business</h3><p>Rent is $1.75 a day. Mail-order parts arrive the next morning; the jobber sells today at 25% over list. If your parts bill runs over what the customer authorized, they pay only the authorized amount and grumble. Miss a due date and they take the set back, angry. Reputation brings harder jobs and more customers.</p>
-  <p><button class="btn" id="mTitle">Return to title screen</button></p><p class="note">Version 0.67.0</p>
+  <p><button class="btn" id="mTitle">Return to title screen</button></p><p class="note">Version 0.68.0</p>
   </div>`);
   $('#mX').onclick=closeModal;
   if($('#mGuide'))$('#mGuide').onclick=startFirstRepair;
@@ -4685,8 +4718,7 @@ function boot(){
   calibrate();
   if (B3.ok){
     B3.tpName = n=>TP_NAME[n];
-    B3.onPick = slot=>{ R.sel={slot}; R.side='insp'; B3.select(slot); renderSide(); if (R.tool==='tube' && SLOTS[slot].type==='TUBE'){ R.tubeTarget={slot}; renderTools(); }
-      if (window.matchMedia('(max-width:800px)').matches) toast(`${slot} · ${SLOTS[slot].name} — details in the Inspector below`); };
+    B3.onPick=selectBenchPart;B3.onTray=selectBenchTray;
     B3.onProbe = node=>{ R.tool='meter'; if (R.mode==='V') R.probe=node; else R.ohmTarget={node}; renderTools(); B3.probe(R.mode==='V'?node:null); };
   }
   $('#bTitle').onclick=showTitleScreen;
