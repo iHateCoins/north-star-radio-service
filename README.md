@@ -1,6 +1,6 @@
 # North Star Radio Service — v0.68.0 physical bench interaction
 
-Player service begins with a component on the bench. Tap a part on the 3D chassis to open its actions directly below the view. Tap an empty socket or mounting location to fit a replacement from stock or the tray. Camera controls provide Chassis top, Underside, Speaker and Parts tray views.
+Player service begins with a component on the bench. Tap a part on the 3D chassis to open its actions directly below the view. Tap an empty socket or mounting location to fit a replacement from stock or the tray. Camera controls provide Chassis top, Underside, Speaker and Parts tray views. 3D transitions honor the browser’s reduced-motion preference.
 
 The global component selector and installed-tube tester menu are removed from the player UI. Removed parts are rendered as selectable 3D tray models; tapping one opens testing/disposal actions. Salvage can be moved onto the tray. Installed tubes cannot remain on a tester after being refitted. Stock/SKU choices and the parts catalog remain available after a physical destination has been selected.
 

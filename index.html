@@ -1405,7 +1405,7 @@ const B3 = (function(){
   api.selectTray=function(pid){selectedTray=pid;for(const [id,g]of trayObjects)g.traverse(m=>{if(m.isMesh&&m.material?.emissive&&!m.material._live)m.material.emissive.setHex(id===pid?0x6a3a08:0);});};
   // ---------- animation ----------
   const tweens=[]; const ease=t=>t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-  function tween(dur, fn, done){ tweens.push({t:0,dur,fn,done}); }
+  function tween(dur, fn, done){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){fn(1);if(done)done();}else tweens.push({t:0,dur,fn,done});}
   const smokes=[];
   function puff(worldPos){ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:smokeTex, transparent:true, depthWrite:false, opacity:0.7})); s.position.copy(worldPos); s.scale.set(0.5,0.5,0.5); s.userData.v=new THREE.Vector3((Math.random()-0.5)*0.3,0.9+Math.random()*0.4,(Math.random()-0.5)*0.3); s.userData.life=0; scene.add(s); smokes.push(s); }
 
