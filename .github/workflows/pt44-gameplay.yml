@@ -101,3 +101,24 @@ jobs:
             tmp/pt44-tutorial-v066/
             tmp/pt44-title-v067/
           retention-days: 7
+
+  physical-service:
+    name: Physical 3D service
+    timeout-minutes: 7
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright@1.62.1
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/test_physical_browser_v68.js --browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pt44-physical-v068
+          path: tmp/pt44-physical-v068/
+          retention-days: 7
